@@ -30,3 +30,17 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+.bmad-core
+
+# Build artifacts
+dist/
+build/
+coverage.html
+
+# Local configuration
+config.local.yml
+*.local
+
+# Tools directory
+bin/

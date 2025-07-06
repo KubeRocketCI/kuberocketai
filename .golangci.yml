@@ -1,0 +1,66 @@
+run:
+  timeout: 5m
+  tests: true
+
+linters-settings:
+  gofmt:
+    simplify: true
+  goimports:
+    local-prefixes: github.com/epam/kuberocketai
+  govet:
+    enable-all: true
+    disable:
+      - fieldalignment
+  staticcheck:
+    checks: ["all"]
+  gosimple:
+    checks: ["all"]
+  unused:
+    checks: ["all"]
+  misspell:
+    locale: US
+  gocyclo:
+    min-complexity: 15
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 3
+    min-occurrences: 3
+
+linters:
+  enable:
+    - gofmt
+    - goimports  # Standard import organization
+    - govet
+    - staticcheck
+    - gosimple
+    - unused
+    - misspell
+    - gocyclo
+    - dupl
+    - goconst
+    - errcheck
+    - ineffassign
+    - typecheck
+  disable: []
+
+issues:
+  exclude-use-default: false
+  exclude-dirs:
+    - vendor
+  exclude-files:
+    - ".*_test.go"
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - dupl
+        - goconst
+    - linters:
+        - staticcheck
+      text: "SA1019:"  # Ignore deprecation warnings for now
+
+output:
+  formats:
+    - format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
