@@ -20,6 +20,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/epam/kuberocketai/internal/assets"
 	"github.com/epam/kuberocketai/internal/cli"
 )
 
@@ -72,8 +73,41 @@ Examples:
 			output.PrintInfo(fmt.Sprintf("IDE integration: %s", ideFlag))
 		}
 
-		// Placeholder for actual installation logic
-		output.PrintWarning("This feature is coming soon!")
+		// Create installer
+		installer := assets.NewInstaller(".", GetEmbeddedAssets())
+
+		// Check if already installed
+		if installer.IsInstalled() {
+			output.PrintWarning("Framework already installed in current directory")
+			output.PrintInfo("Use 'krci-ai list agents' to see available agents")
+			return
+		}
+
+		// Install framework components
+		output.PrintInfo("Creating .krci-ai directory structure...")
+		if err := installer.Install(); err != nil {
+			errorHandler.HandleError(err, "Failed to install framework components")
+			return
+		}
+
+		// Validate installation
+		if err := installer.ValidateInstallation(); err != nil {
+			errorHandler.HandleError(err, "Installation validation failed")
+			return
+		}
+
+		// Success
+		output.PrintSuccess("Framework installation completed successfully!")
+		output.PrintInfo("Framework components installed to: " + installer.GetInstallationPath())
+
+		// Show next steps
+		output.PrintInfo("\nNext steps:")
+		output.PrintInfo("  • Run 'krci-ai list agents' to see available agents")
+		output.PrintInfo("  • Run 'krci-ai validate' to verify installation")
+
+		if ideFlag != "" {
+			output.PrintInfo(fmt.Sprintf("  • IDE integration (%s) will be configured", ideFlag))
+		}
 	},
 }
 

@@ -15,7 +15,16 @@ limitations under the License.
 */
 package main
 
-import "github.com/epam/kuberocketai/cmd/krci-ai/cmd"
+import (
+	"embed"
+
+	"github.com/epam/kuberocketai/cmd/krci-ai/cmd"
+)
+
+// EmbeddedAssets contains the framework assets embedded at build time
+//
+//go:embed assets/framework/core
+var EmbeddedAssets embed.FS
 
 // Build-time variables
 var (
@@ -27,5 +36,6 @@ var (
 
 func main() {
 	cmd.SetVersionInfo(version, commit, date, builtBy)
+	cmd.SetEmbeddedAssets(EmbeddedAssets)
 	cmd.Execute()
 }
