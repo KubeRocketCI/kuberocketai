@@ -1,0 +1,8 @@
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/KubeRocketCI/kuberocketai/refs/heads/main/cmd/krci-ai/assets/schemas/agent-schema.json": [
+      ".krci-ai/agents/*.yaml",
+      "assets/framework/core/agents/*.yaml"
+    ]
+  }
+}
