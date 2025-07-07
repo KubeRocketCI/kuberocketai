@@ -1,5 +1,10 @@
 name: Release
 
+# This workflow requires the following repository secrets:
+# - GPG_PRIVATE_KEY: GPG private key for signing artifacts
+# - PASSPHRASE: GPG key passphrase
+# - HOMEBREW_TAP_GITHUB_TOKEN: GitHub token for updating Homebrew tap
+
 on:
   push:
     tags:
@@ -27,12 +32,19 @@ jobs:
       - name: Run tests
         run: go test -v ./...
 
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
-          distribution: goreleaser
-          version: latest
+          version: "~> v2"
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_TAP_GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_GITHUB_TOKEN }}
+          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}

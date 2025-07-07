@@ -43,6 +43,29 @@ archives:
 checksum:
   name_template: 'checksums.txt'
 
+# signs the checksum file
+signs:
+  - cmd: gpg
+    artifacts: checksum
+    output: true
+    args:
+      - "--batch"
+      - "-u"
+      - "{{ .Env.GPG_FINGERPRINT }}"
+      - "--output"
+      - "${signature}"
+      - "--detach-sign"
+      - "${artifact}"
+
+# creates SBOMs of all archives and the source tarball using syft
+sboms:
+  - artifacts: archive
+  - id: source # Two different sbom configurations need two different IDs
+    artifacts: source
+
+source:
+  enabled: true
+
 snapshot:
   version_template: "{{ incpatch .Version }}-next"
 
