@@ -16,11 +16,15 @@ limitations under the License.
 package cmd
 
 import (
+	"embed"
 	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
 )
+
+// Global embedded assets
+var embeddedAssets embed.FS
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -52,6 +56,16 @@ func Execute() {
 func SetVersionInfo(version, commit, date, builtBy string) {
 	versionInfo := fmt.Sprintf("%s (commit: %s, built: %s, by: %s)", version, commit, date, builtBy)
 	rootCmd.Version = versionInfo
+}
+
+// SetEmbeddedAssets sets the embedded assets for use by commands
+func SetEmbeddedAssets(assets embed.FS) {
+	embeddedAssets = assets
+}
+
+// GetEmbeddedAssets returns the embedded assets
+func GetEmbeddedAssets() embed.FS {
+	return embeddedAssets
 }
 
 func init() {
