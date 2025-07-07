@@ -99,7 +99,7 @@ release:
 
     ### Homebrew (macOS)
     ```bash
-    brew tap KubeRocketCI/tap
+    brew tap KubeRocketCI/homebrew-tap
     brew install krci-ai
     ```
 

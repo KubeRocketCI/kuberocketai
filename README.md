@@ -68,14 +68,57 @@ graph TD
 
 ## Installation
 
-```bash
-# From releases (when available)
-curl -L https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai-$(uname -s)-$(uname -m) -o krci-ai
+### macOS - Homebrew (Recommended)
 
-# Build from source
+```bash
+# Add the KubeRocketCI tap
+brew tap KubeRocketCI/homebrew-tap
+
+# Install krci-ai
+brew install krci-ai
+```
+
+### Linux & Windows - Direct Download
+
+```bash
+# Download and extract latest release
+OS=$(uname -s)
+ARCH=$(uname -m)
+case $ARCH in
+    x86_64) ARCH="x86_64" ;;
+    aarch64|arm64) ARCH="arm64" ;;
+esac
+
+if [ "$OS" = "Linux" ]; then
+    curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_${ARCH}.tar.gz" | tar -xz
+elif [ "$OS" = "Darwin" ]; then
+    curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Darwin_${ARCH}.tar.gz" | tar -xz
+else
+    # Windows
+    curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Windows_x86_64.zip" -o krci-ai.zip
+    unzip krci-ai.zip
+fi
+
+chmod +x krci-ai
+sudo mv krci-ai /usr/local/bin/
+```
+
+### Build from Source
+
+```bash
 git clone https://github.com/KubeRocketCI/kuberocketai.git
 cd kuberocketai
 make build
+```
+
+### Update & Uninstall
+
+```bash
+# Update via Homebrew
+brew update && brew upgrade krci-ai
+
+# Uninstall via Homebrew
+brew uninstall krci-ai
 ```
 
 ## Usage
