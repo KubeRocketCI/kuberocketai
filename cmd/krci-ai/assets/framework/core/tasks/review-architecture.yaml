@@ -2,12 +2,12 @@ task: review-architecture
 description: Review and evaluate existing architecture against best practices and requirements
 instructions: |
   1. Analyze the provided architecture documentation and diagrams
-  2. Evaluate against architectural principles from {{ ref:assets/framework/core/data/architecture-principles.md }}
-  3. Assess design patterns usage from {{ ref:assets/framework/core/data/design-patterns.md }}
-  4. Review security implementation against {{ ref:assets/framework/core/data/security-framework.md }}
+  2. Evaluate against architectural principles from {{ ref:./krci-ai/data/architecture-principles.md }}
+  3. Assess design patterns usage from {{ ref:./krci-ai/data/design-patterns.md }}
+  4. Review security implementation against {{ ref:./krci-ai/data/security-framework.md }}
   5. Identify architectural strengths and areas for improvement
   6. Assess scalability, maintainability, and operational complexity
   7. Evaluate technology choices and their appropriateness
   8. Check for architectural anti-patterns and technical debt
-  9. Format review using {{ ref:assets/framework/core/templates/architecture-review.md }}
+  9. Format review using {{ ref:./krci-ai/templates/architecture-review.md }}
   10. Provide specific recommendations with implementation priorities

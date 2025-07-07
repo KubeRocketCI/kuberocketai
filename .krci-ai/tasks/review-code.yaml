@@ -4,6 +4,6 @@ instructions: |
   1. Check code style and consistency
   2. Verify functionality and logic correctness
   3. Assess test coverage and quality
-  4. Apply {{ ref:assets/framework/core/data/best-practices.md }} guidelines
+  4. Apply {{ ref:./krci-ai/data/best-practices.md }} guidelines
   5. Suggest specific improvements with rationale
-  6. Format review using {{ ref:assets/framework/core/templates/code-review.md }}
+  6. Format review using {{ ref:./krci-ai/templates/code-review.md }}

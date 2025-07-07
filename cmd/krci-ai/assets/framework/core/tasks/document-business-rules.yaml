@@ -7,9 +7,9 @@ instructions: |
   4. Establish rule hierarchy and dependencies between related rules
   5. Validate rules with business stakeholders and subject matter experts
   6. Ensure rules are testable, traceable, and maintainable
-  7. Apply analysis methodologies from {{ ref:assets/framework/core/data/analysis-methodologies.md }}
-  8. Use business frameworks from {{ ref:assets/framework/core/data/business-frameworks.md }}
-  9. Follow requirements standards from {{ ref:assets/framework/core/data/requirements-standards.md }}
-  10. Format business rules using {{ ref:assets/framework/core/templates/business-rules.md }}
+  7. Apply analysis methodologies from {{ ref:./krci-ai/data/analysis-methodologies.md }}
+  8. Use business frameworks from {{ ref:./krci-ai/data/business-frameworks.md }}
+  9. Follow requirements standards from {{ ref:./krci-ai/data/requirements-standards.md }}
+  10. Format business rules using {{ ref:./krci-ai/templates/business-rules.md }}
   11. Include business rule examples and exception handling scenarios
   12. Provide recommendations for rule implementation and management

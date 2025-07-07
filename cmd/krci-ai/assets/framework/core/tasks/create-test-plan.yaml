@@ -7,9 +7,9 @@ instructions: |
   4. Identify test environments, tools, and resources needed
   5. Determine test coverage requirements and risk-based testing priorities
   6. Define entry and exit criteria for testing phases
-  7. Apply testing standards from {{ ref:assets/framework/core/data/testing-standards.md }}
-  8. Consider quality metrics from {{ ref:assets/framework/core/data/quality-metrics.md }}
-  9. Use test methodologies from {{ ref:assets/framework/core/data/test-methodologies.md }}
-  10. Format the test plan using {{ ref:assets/framework/core/templates/test-plan.md }}
+  7. Apply testing standards from {{ ref:./krci-ai/data/testing-standards.md }}
+  8. Consider quality metrics from {{ ref:./krci-ai/data/quality-metrics.md }}
+  9. Use test methodologies from {{ ref:./krci-ai/data/test-methodologies.md }}
+  10. Format the test plan using {{ ref:./krci-ai/templates/test-plan.md }}
   11. Include test schedule, milestones, and deliverables
   12. Provide recommendations for test automation and continuous testing

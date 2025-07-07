@@ -7,9 +7,9 @@ instructions: |
   4. Assess impact on functionality and user experience
   5. Provide recommendations for defect resolution and prevention
   6. Track defect lifecycle and resolution status
-  7. Apply testing standards from {{ ref:assets/framework/core/data/testing-standards.md }}
-  8. Use quality metrics from {{ ref:assets/framework/core/data/quality-metrics.md }}
-  9. Follow test methodologies from {{ ref:assets/framework/core/data/test-methodologies.md }}
-  10. Format defect reports using {{ ref:assets/framework/core/templates/defect-report.md }}
+  7. Apply testing standards from {{ ref:./krci-ai/data/testing-standards.md }}
+  8. Use quality metrics from {{ ref:./krci-ai/data/quality-metrics.md }}
+  9. Follow test methodologies from {{ ref:./krci-ai/data/test-methodologies.md }}
+  10. Format defect reports using {{ ref:./krci-ai/templates/defect-report.md }}
   11. Include quality trends and metrics analysis
   12. Provide recommendations for quality improvements and process optimization

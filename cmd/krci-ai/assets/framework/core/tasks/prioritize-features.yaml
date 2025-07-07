@@ -7,9 +7,9 @@ instructions: |
   4. Evaluate strategic alignment with product vision and goals
   5. Consider resource constraints and timeline dependencies
   6. Apply multiple prioritization frameworks (MoSCoW, RICE, Value vs Effort)
-  7. Apply product principles from {{ ref:assets/framework/core/data/product-principles.md }}
-  8. Reference market constraints from {{ ref:assets/framework/core/data/market-data.md }}
-  9. Use established prioritization frameworks from {{ ref:assets/framework/core/data/prioritization-frameworks.md }}
-  10. Format prioritization using {{ ref:assets/framework/core/templates/feature-prioritization.md }}
+  7. Apply product principles from {{ ref:./krci-ai/data/product-principles.md }}
+  8. Reference market constraints from {{ ref:./krci-ai/data/market-data.md }}
+  9. Use established prioritization frameworks from {{ ref:./krci-ai/data/prioritization-frameworks.md }}
+  10. Format prioritization using {{ ref:./krci-ai/templates/feature-prioritization.md }}
   11. Include rationale for prioritization decisions
   12. Provide roadmap recommendations and release planning guidance

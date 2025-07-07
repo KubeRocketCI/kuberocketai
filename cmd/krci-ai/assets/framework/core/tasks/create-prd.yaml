@@ -7,9 +7,9 @@ instructions: |
   4. Identify target users and personas for the product
   5. Define functional requirements with clear acceptance criteria
   6. Specify non-functional requirements (performance, security, scalability)
-  7. Apply product principles from {{ ref:assets/framework/core/data/product-principles.md }}
-  8. Consider market constraints from {{ ref:assets/framework/core/data/market-data.md }}
-  9. Use prioritization frameworks from {{ ref:assets/framework/core/data/prioritization-frameworks.md }}
-  10. Format the PRD using {{ ref:assets/framework/core/templates/prd-template.md }}
+  7. Apply product principles from {{ ref:./krci-ai/data/product-principles.md }}
+  8. Consider market constraints from {{ ref:./krci-ai/data/market-data.md }}
+  9. Use prioritization frameworks from {{ ref:./krci-ai/data/prioritization-frameworks.md }}
+  10. Format the PRD using {{ ref:./krci-ai/templates/prd-template.md }}
   11. Include success metrics and validation criteria
   12. Provide recommendations for implementation approach and timeline

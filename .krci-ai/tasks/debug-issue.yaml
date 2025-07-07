@@ -2,7 +2,7 @@ task: debug-issue
 description: Debug and fix code issues
 instructions: |
   1. Reproduce the issue systematically
-  2. Analyze root cause using {{ ref:assets/framework/core/data/best-practices.md }}
+  2. Analyze root cause using {{ ref:./krci-ai/data/best-practices.md }}
   3. Implement fix following established patterns
   4. Verify solution thoroughly
-  5. Format findings using {{ ref:assets/framework/core/templates/debug-report.md }}
+  5. Format findings using {{ ref:./krci-ai/templates/debug-report.md }}
