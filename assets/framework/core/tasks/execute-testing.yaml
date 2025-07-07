@@ -1,0 +1,15 @@
+task: execute-testing
+description: Execute testing procedures and workflows systematically with comprehensive reporting
+instructions: |
+  1. Review test plan, test cases, and testing environment setup
+  2. Execute manual test cases following documented procedures
+  3. Run automated test suites and analyze results
+  4. Document test execution results with pass/fail status
+  5. Capture defects with detailed reproduction steps and evidence
+  6. Perform regression testing for critical functionality
+  7. Apply testing standards from {{ ref:assets/framework/core/data/testing-standards.md }}
+  8. Track quality metrics from {{ ref:assets/framework/core/data/quality-metrics.md }}
+  9. Follow test methodologies from {{ ref:assets/framework/core/data/test-methodologies.md }}
+  10. Format test results using {{ ref:assets/framework/core/templates/test-report.md }}
+  11. Include test coverage analysis and quality assessment
+  12. Provide recommendations for test process improvements
