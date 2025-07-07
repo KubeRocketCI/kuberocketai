@@ -1,0 +1,15 @@
+task: map-user-journeys
+description: Create comprehensive user journey maps and experience flows for business processes
+instructions: |
+  1. Identify user personas and their goals, needs, and pain points
+  2. Map current user journeys across all touchpoints and channels
+  3. Document user actions, emotions, and decision points at each stage
+  4. Identify friction points, gaps, and opportunities for improvement
+  5. Design optimal future state user experiences and journeys
+  6. Analyze cross-channel and multi-persona journey interactions
+  7. Apply analysis methodologies from {{ ref:assets/framework/core/data/analysis-methodologies.md }}
+  8. Use business frameworks from {{ ref:assets/framework/core/data/business-frameworks.md }}
+  9. Follow requirements standards from {{ ref:assets/framework/core/data/requirements-standards.md }}
+  10. Format user journeys using {{ ref:assets/framework/core/templates/user-journey.md }}
+  11. Include service blueprints and supporting process documentation
+  12. Provide recommendations for user experience optimization

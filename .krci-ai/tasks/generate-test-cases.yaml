@@ -1,0 +1,15 @@
+task: generate-test-cases
+description: Generate detailed test cases and test scenarios from requirements and user stories
+instructions: |
+  1. Review requirements, user stories, and acceptance criteria thoroughly
+  2. Identify positive, negative, and edge case scenarios to test
+  3. Design test cases covering functional and non-functional requirements
+  4. Create test data requirements and test environment specifications
+  5. Define test steps with clear preconditions and expected results
+  6. Include boundary value analysis and equivalence partitioning
+  7. Apply testing standards from {{ ref:assets/framework/core/data/testing-standards.md }}
+  8. Consider quality metrics from {{ ref:assets/framework/core/data/quality-metrics.md }}
+  9. Use test methodologies from {{ ref:assets/framework/core/data/test-methodologies.md }}
+  10. Format test cases using {{ ref:assets/framework/core/templates/test-cases.md }}
+  11. Include traceability matrix linking tests to requirements
+  12. Provide recommendations for test automation candidates
