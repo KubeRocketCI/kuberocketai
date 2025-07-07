@@ -7,9 +7,9 @@ instructions: |
   4. Prepare executive summary with key takeaways and decisions
   5. Include progress updates on goals, milestones, and deliverables
   6. Present risks, blockers, and mitigation strategies
-  7. Apply product principles from {{ ref:assets/framework/core/data/product-principles.md }}
-  8. Reference market context from {{ ref:assets/framework/core/data/market-data.md }}
-  9. Use prioritization frameworks from {{ ref:assets/framework/core/data/prioritization-frameworks.md }}
-  10. Format communication using {{ ref:assets/framework/core/templates/stakeholder-report.md }}
+  7. Apply product principles from {{ ref:./krci-ai/data/product-principles.md }}
+  8. Reference market context from {{ ref:./krci-ai/data/market-data.md }}
+  9. Use prioritization frameworks from {{ ref:./krci-ai/data/prioritization-frameworks.md }}
+  10. Format communication using {{ ref:./krci-ai/templates/stakeholder-report.md }}
   11. Include clear action items and next steps
   12. Provide recommendations for stakeholder engagement and alignment

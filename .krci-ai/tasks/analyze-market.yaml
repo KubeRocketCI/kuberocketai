@@ -7,9 +7,9 @@ instructions: |
   4. Evaluate market opportunities and threats (SWOT analysis)
   5. Analyze customer needs, pain points, and buying behavior
   6. Identify market gaps and differentiation opportunities
-  7. Apply product principles from {{ ref:assets/framework/core/data/product-principles.md }}
-  8. Reference market data constraints from {{ ref:assets/framework/core/data/market-data.md }}
-  9. Use prioritization frameworks from {{ ref:assets/framework/core/data/prioritization-frameworks.md }}
-  10. Format analysis using {{ ref:assets/framework/core/templates/market-analysis.md }}
+  7. Apply product principles from {{ ref:./krci-ai/data/product-principles.md }}
+  8. Reference market data constraints from {{ ref:./krci-ai/data/market-data.md }}
+  9. Use prioritization frameworks from {{ ref:./krci-ai/data/prioritization-frameworks.md }}
+  10. Format analysis using {{ ref:./krci-ai/templates/market-analysis.md }}
   11. Include actionable recommendations for product strategy
   12. Provide market entry and positioning recommendations
