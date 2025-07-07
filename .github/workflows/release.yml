@@ -4,6 +4,9 @@ name: Release
 # - GPG_PRIVATE_KEY: GPG private key for signing artifacts
 # - PASSPHRASE: GPG key passphrase
 # - HOMEBREW_TAP_GITHUB_TOKEN: GitHub token for updating Homebrew tap
+#
+# Tools installed:
+# - syft: For SBOM (Software Bill of Materials) generation
 
 on:
   push:
@@ -31,6 +34,9 @@ jobs:
 
       - name: Run tests
         run: go test -v ./...
+
+      - name: Install syft
+        uses: anchore/sbom-action/download-syft@v0.20.2
 
       - name: Import GPG key
         id: import_gpg
