@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://kuberocketai.com/schemas/agent.json",
+  "title": "KubeRocketAI Agent Schema",
+  "description": "Schema for validating KubeRocketAI agent",
+  "type": "object",
+  "properties": {
+    "agent": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+              "description": "Agent identifier in kebab-case format"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-v[0-9]+$",
+              "description": "Machine-readable unique identifier with version"
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+              "description": "Schema version using semantic versioning"
+            },
+            "description": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 150,
+              "description": "Brief description of agent's purpose (10-150 characters)"
+            },
+            "role": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 100,
+              "description": "Job title or professional function"
+            },
+            "goal": {
+              "type": "string",
+              "minLength": 10,
+              "maxLength": 200,
+              "description": "Ultimate objective or mission statement"
+            }
+          },
+          "required": ["name", "id", "version", "description", "role", "goal"],
+          "additionalProperties": false
+        },
+        "activation_prompt": {
+          "type": "string",
+          "minLength": 200,
+          "maxLength": 2000,
+          "description": "Detailed LLM context for persona embodiment (200-2000 characters)"
+        },
+        "principles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 200
+          },
+          "minItems": 3,
+          "maxItems": 10,
+          "description": "Behavioral guidelines and values (3-10 items)"
+        },
+        "commands": {
+          "type": "object",
+          "properties": {
+            "help": {
+              "type": "string",
+              "const": "Show available commands",
+              "description": "Required help command"
+            },
+            "chat": {
+              "type": "string",
+              "pattern": "^\\(Default\\).+",
+              "description": "Required default chat command"
+            }
+          },
+          "required": ["help", "chat"],
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*:.+",
+            "description": "Command mapping in format 'task-name: description'"
+          },
+          "description": "Available command mappings"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true,
+          "description": "Optional list of available task identifiers"
+        }
+      },
+      "required": [
+        "identity",
+        "activation_prompt",
+        "principles",
+        "commands"
+      ]
+    }
+  },
+  "required": ["agent"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "agent": {
+        "identity": {
+          "name": "architect",
+          "id": "architect-v1",
+          "version": "1.0.0",
+          "description": "Software architect specializing in system design and architecture guidance",
+          "role": "Senior Software Architect",
+          "goal": "Design scalable, secure, and maintainable system architectures"
+        },
+        "activation_prompt": "You are a senior software architect with deep expertise in distributed systems...",
+        "principles": [
+          "Always prioritize scalability and security as primary architectural concerns",
+          "Design for failure - assume components will fail and plan accordingly",
+          "Ask clarifying questions when requirements are unclear or incomplete"
+        ],
+        "commands": {
+          "help": "Show available commands",
+          "chat": "(Default) Architectural consultation and guidance",
+          "analyze": "analyze-requirements: Analyze and extract architectural requirements",
+          "design": "create-system-design: Create comprehensive system architecture design"
+        },
+        "tasks": [
+          "analyze-requirements",
+          "create-system-design",
+          "review-architecture"
+        ]
+      }
+    }
+  ]
+}
