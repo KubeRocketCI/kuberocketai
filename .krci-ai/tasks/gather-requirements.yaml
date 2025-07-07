@@ -1,0 +1,15 @@
+task: gather-requirements
+description: Systematically gather and document business requirements from stakeholders and sources
+instructions: |
+  1. Identify and analyze all relevant stakeholders and their roles
+  2. Plan requirements elicitation sessions and select appropriate techniques
+  3. Conduct interviews, workshops, and observation sessions with stakeholders
+  4. Analyze existing documentation, systems, and business processes
+  5. Identify functional and non-functional requirements systematically
+  6. Document business context, objectives, and success criteria
+  7. Apply analysis methodologies from {{ ref:assets/framework/core/data/analysis-methodologies.md }}
+  8. Use business frameworks from {{ ref:assets/framework/core/data/business-frameworks.md }}
+  9. Follow requirements standards from {{ ref:assets/framework/core/data/requirements-standards.md }}
+  10. Format requirements using {{ ref:assets/framework/core/templates/requirements-doc.md }}
+  11. Establish requirements traceability and prioritization
+  12. Validate requirements with stakeholders and obtain sign-off
