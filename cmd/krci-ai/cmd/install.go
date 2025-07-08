@@ -24,6 +24,12 @@ import (
 	"github.com/epam/kuberocketai/internal/cli"
 )
 
+const (
+	ideAll    = "all"
+	ideCursor = "cursor"
+	ideClaude = "claude"
+)
+
 // installCmd represents the install command
 var installCmd = &cobra.Command{
 	Use:   "install",
@@ -39,7 +45,11 @@ This command will set up the AI-as-Code framework by installing:
 Examples:
   krci-ai install                    # Install core framework components
   krci-ai install --ide=cursor       # Install with Cursor IDE integration
-  krci-ai install --ide=all          # Install with all IDE integrations`,
+  krci-ai install --ide=claude       # Install with Claude Code integration
+  krci-ai install --ide=all          # Install with all IDE integrations
+  krci-ai install --all              # Install core + all IDE integrations (shortcut)
+  krci-ai install --all --force      # Force install everything
+  krci-ai install --force            # Force install core components only`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create output and error handlers
 		output := cli.NewOutputHandler()
@@ -54,9 +64,27 @@ Examples:
 			errorHandler.HandleError(err, "Failed to read IDE flag")
 		}
 
+		// Get force flag
+		forceFlag, err := cmd.Flags().GetBool("force")
+		if err != nil {
+			errorHandler.HandleError(err, "Failed to read force flag")
+		}
+
+		// Get all flag
+		allFlag, err := cmd.Flags().GetBool("all")
+		if err != nil {
+			errorHandler.HandleError(err, "Failed to read all flag")
+		}
+
+		// If --all flag is set, override ide flag to "all"
+		if allFlag {
+			ideFlag = ideAll
+			output.PrintInfo("--all flag detected, installing core framework with all IDE integrations")
+		}
+
 		// Validate IDE flag value if provided
 		if ideFlag != "" {
-			validIDEs := []string{"cursor", "claude", "vscode", "windsurf", "all"}
+			validIDEs := []string{ideCursor, ideClaude, "vscode", "windsurf", ideAll}
 			isValid := false
 			for _, valid := range validIDEs {
 				if ideFlag == valid {
@@ -77,10 +105,16 @@ Examples:
 		installer := assets.NewInstaller(".", GetEmbeddedAssets())
 
 		// Check if already installed
-		if installer.IsInstalled() {
+		if installer.IsInstalled() && !forceFlag {
 			output.PrintWarning("Framework already installed in current directory")
-			output.PrintInfo("Use 'krci-ai list agents' to see available agents")
+			output.PrintInfo("If you want to proceed with installation, use the --force flag:")
+			output.PrintInfo("  krci-ai install --force")
 			return
+		}
+
+		// Show force installation message if forcing
+		if installer.IsInstalled() && forceFlag {
+			output.PrintWarning("Framework already installed - proceeding with forced installation")
 		}
 
 		// Install framework components
@@ -96,6 +130,25 @@ Examples:
 			return
 		}
 
+		// Handle IDE integration
+		if ideFlag == ideCursor || ideFlag == ideAll {
+			output.PrintInfo("Setting up Cursor IDE integration...")
+			if err := installer.InstallCursorIntegration(); err != nil {
+				errorHandler.HandleError(err, "Failed to install Cursor IDE integration")
+				return
+			}
+			output.PrintSuccess("Cursor IDE integration installed successfully!")
+		}
+
+		if ideFlag == ideClaude || ideFlag == ideAll {
+			output.PrintInfo("Setting up Claude Code integration...")
+			if err := installer.InstallClaudeIntegration(); err != nil {
+				errorHandler.HandleError(err, "Failed to install Claude Code integration")
+				return
+			}
+			output.PrintSuccess("Claude Code integration installed successfully!")
+		}
+
 		// Success
 		output.PrintSuccess("Framework installation completed successfully!")
 		output.PrintInfo("Framework components installed to: " + installer.GetInstallationPath())
@@ -105,8 +158,11 @@ Examples:
 		output.PrintInfo("  • Run 'krci-ai list agents' to see available agents")
 		output.PrintInfo("  • Run 'krci-ai validate' to verify installation")
 
-		if ideFlag != "" {
-			output.PrintInfo(fmt.Sprintf("  • IDE integration (%s) will be configured", ideFlag))
+		if ideFlag == ideCursor || ideFlag == ideAll {
+			output.PrintInfo("  • Cursor IDE rules installed to: .cursor/rules/")
+		}
+		if ideFlag == ideClaude || ideFlag == ideAll {
+			output.PrintInfo("  • Claude Code commands installed to: .claude/commands/")
 		}
 	},
 }
@@ -116,4 +172,10 @@ func init() {
 
 	// Add IDE integration flag
 	installCmd.Flags().StringP("ide", "i", "", "IDE integration (cursor, claude, vscode, windsurf, all)")
+
+	// Add force flag
+	installCmd.Flags().BoolP("force", "f", false, "Force installation even if framework is already installed")
+
+	// Add all flag
+	installCmd.Flags().BoolP("all", "a", false, "Install core framework with all IDE integrations (equivalent to --ide=all)")
 }
