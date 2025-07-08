@@ -5,7 +5,7 @@
 | Field                  | Value                       |
 |------------------------|-----------------------------|
 | Status                 | {{status}}                  |
-| Epic                   | {{epic}}                    |
+| Epic                   | {{epic_reference}}          |
 | Priority               | {{priority}}                |
 | Estimated Story Points | {{story_points}}            |
 | Jira                   | {{jira_ticket}}             |
