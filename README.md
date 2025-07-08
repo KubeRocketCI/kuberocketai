@@ -78,30 +78,20 @@ brew tap KubeRocketCI/homebrew-tap
 brew install krci-ai
 ```
 
-### Linux & Windows - Direct Download
+### Linux - Direct Download
 
 ```bash
 # Download and extract latest release
-OS=$(uname -s)
-ARCH=$(uname -m)
-case $ARCH in
-    x86_64) ARCH="x86_64" ;;
-    aarch64|arm64) ARCH="arm64" ;;
-esac
-
-if [ "$OS" = "Linux" ]; then
-    curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_${ARCH}.tar.gz" | tar -xz
-elif [ "$OS" = "Darwin" ]; then
-    curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Darwin_${ARCH}.tar.gz" | tar -xz
-else
-    # Windows
-    curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Windows_x86_64.zip" -o krci-ai.zip
-    unzip krci-ai.zip
-fi
-
+curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
 chmod +x krci-ai
 sudo mv krci-ai /usr/local/bin/
 ```
+
+### Windows - Direct Download
+
+1. Download the latest release: [krci-ai_Windows_x86_64.zip](https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Windows_x86_64.zip)
+2. Extract the zip file
+3. Add the `krci-ai.exe` to your PATH or move it to a directory in your PATH
 
 ### Build from Source
 
@@ -123,15 +113,41 @@ brew uninstall krci-ai
 
 ## Usage
 
+### Quick Start
+
 ```bash
-# Initialize framework in your project
-krci-ai init
+# Install framework with IDE integration
+krci-ai install --ide=cursor
 
-# Install SDLC agents
-krci-ai install --agents developer,architect,qa
+# List available agents
+krci-ai list agents
 
-# Validate configuration
-krci-ai validate
+# Install with all IDE integrations
+krci-ai install --all
+```
+
+### Common Use Cases
+
+**1. Setting up AI-as-Code in existing project:**
+
+```bash
+cd my-project
+krci-ai install --ide=claude --force
+krci-ai list agents -v
+```
+
+**2. Enterprise team setup with all IDE support:**
+
+```bash
+krci-ai install --all
+# Creates .krci-ai/, .cursor/rules/, .claude/commands/
+```
+
+**3. Discovering available agents after installation:**
+
+```bash
+krci-ai list agents
+# Shows: developer, architect, qa agents with roles
 ```
 
 ## Target Users
