@@ -98,7 +98,7 @@ brews:
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: "https://github.com/KubeRocketCI/kuberocketai"
-    description: "KubeRocketAI CLI - AI-as-Code framework for Kubernetes development"
+    description: "KubeRocketAI CLI - AI-as-Code framework for Your Product Development"
     license: "Apache-2.0"
     test: |
       system "#{bin}/krci-ai", "--version"

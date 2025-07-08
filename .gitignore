@@ -47,3 +47,6 @@ bin/
 
 # python virtual environment
 .venv/
+
+# Claude settings
+.claude/settings.local.json

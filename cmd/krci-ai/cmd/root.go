@@ -29,14 +29,14 @@ var embeddedAssets embed.FS
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "krci-ai",
-	Short: "KubeRocketAI CLI - AI-as-Code framework for Kubernetes development",
+	Short: "KubeRocketAI CLI - AI-as-Code framework for Your Product Development",
 	Long: `KubeRocketAI CLI is a command-line tool that provides an AI-as-Code framework
-for Kubernetes development. It allows you to manage AI agents, tasks, templates,
+for Your Product Development. It allows you to manage AI agents, tasks, templates,
 and data as version-controlled assets.
 
 With KubeRocketAI, you can:
 - Install and manage AI framework components
-- Work with AI agents for specific development roles
+- Work with AI agents for specific product development roles
 - Use templates for consistent output formatting
 - Integrate with popular IDEs and editors
 
