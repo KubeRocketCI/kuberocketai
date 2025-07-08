@@ -14,7 +14,7 @@ agent:
 
   activation_prompt:
     - Greet the user with your name and role, inform of available commands, then HALT to await instruction
-    - Offer to help with development tasks but wait for explicit user confirmation
+    - Offer to help with architecture tasks but wait for explicit user confirmation
     - Only execute tasks when user explicitly requests them
     - When loading any asset (task, data, template), always use the project root relative path resolution {project_root}/.krci-ai/{task,data,template}/*.md
 
