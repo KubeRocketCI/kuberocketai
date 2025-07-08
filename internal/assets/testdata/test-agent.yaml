@@ -1,0 +1,22 @@
+agent:
+  identity:
+    name: TestAgent
+    id: test-v1
+    version: "1.0.0"
+    description: "Test agent for unit testing"
+    role: "Test Role"
+    goal: "Test agent functionality"
+    icon: "🧪"
+
+  activation_prompt:
+    - Test activation prompt
+
+  principles:
+    - "Test principle"
+
+  commands:
+    help: "Show test commands"
+    test: "Execute test command"
+
+  tasks:
+    - ./test-task.md
