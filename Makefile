@@ -21,6 +21,7 @@ GO_LDFLAGS = -s -w \
 # Directories
 BUILD_DIR := dist
 BIN_DIR := bin
+DIST_DIR := dist
 
 # Tools - pinned to latest stable versions as of 2025-07-06
 GOLANGCI_LINT_VERSION ?= v1.64.8
@@ -40,7 +41,8 @@ all: fmt lint test build ## Run all quality checks and build
 .PHONY: build
 build: ## Build the CLI binary
 	@echo "Building $(APP_NAME) $(VERSION)..."
-	go build $(GO_BUILD_FLAGS) -ldflags "$(GO_LDFLAGS)" -o $(BIN_DIR)/$(APP_NAME) ./cmd/krci-ai
+	@mkdir -p $(DIST_DIR)
+	go build $(GO_BUILD_FLAGS) -ldflags "$(GO_LDFLAGS)" -o $(DIST_DIR)/$(APP_NAME) ./cmd/krci-ai
 
 .PHONY: build-all
 build-all: ## Build for all platforms
@@ -106,12 +108,12 @@ tidy: ## Tidy Go modules
 .PHONY: clean
 clean: ## Clean build artifacts
 	@echo "Cleaning build artifacts..."
-	rm -rf $(BUILD_DIR) $(BIN_DIR) coverage.out coverage.html
+	rm -rf $(DIST_DIR) $(BIN_DIR) coverage.out coverage.html
 
 .PHONY: install
 install: build ## Install the binary to GOPATH/bin
 	@echo "Installing $(APP_NAME) to GOPATH/bin..."
-	cp $(BIN_DIR)/$(APP_NAME) $(shell go env GOPATH)/bin/
+	cp $(DIST_DIR)/$(APP_NAME) $(shell go env GOPATH)/bin/
 
 .PHONY: release-snapshot
 release-snapshot: ## Build snapshot release
@@ -143,7 +145,7 @@ version: ## Show version information
 .PHONY: run
 run: build ## Build and run the CLI
 	@echo "Running $(APP_NAME)..."
-	./$(BIN_DIR)/$(APP_NAME)
+	./$(DIST_DIR)/$(APP_NAME)
 
 .PHONY: ci
 ci: deps fmt vet lint staticcheck test build ## Run CI pipeline locally

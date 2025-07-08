@@ -21,9 +21,9 @@ import (
 	"github.com/epam/kuberocketai/cmd/krci-ai/cmd"
 )
 
-// EmbeddedAssets contains the framework assets embedded at build time
+// EmbeddedAssets contains all assets embedded at build time
 //
-//go:embed assets/framework/core
+//go:embed assets
 var EmbeddedAssets embed.FS
 
 // Build-time variables
