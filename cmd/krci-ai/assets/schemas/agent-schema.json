@@ -13,8 +13,13 @@
           "properties": {
             "name": {
               "type": "string",
-              "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
-              "description": "Agent identifier in kebab-case format"
+              "pattern": "^[A-Z][a-zA-Z0-9 .'-]{1,49}$",
+              "description": "Friendly user name, e.g. 'Pole', 'John Doe', etc."
+            },
+            "icon": {
+              "type": "string",
+              "description": "Optional icon (emoji or short string)",
+              "maxLength": 4
             },
             "id": {
               "type": "string",
@@ -49,10 +54,15 @@
           "additionalProperties": false
         },
         "activation_prompt": {
-          "type": "string",
-          "minLength": 200,
-          "maxLength": 2000,
-          "description": "Detailed LLM context for persona embodiment (200-2000 characters)"
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 300
+          },
+          "minItems": 1,
+          "maxItems": 10,
+          "description": "Persona activation instructions (1-10 items, each 10-300 chars)"
         },
         "principles": {
           "type": "array",
@@ -67,34 +77,46 @@
         },
         "commands": {
           "type": "object",
+          "minProperties": 3,
+          "maxProperties": 20,
           "properties": {
             "help": {
               "type": "string",
-              "const": "Show available commands",
-              "description": "Required help command"
+              "minLength": 5,
+              "maxLength": 200,
+              "description": "Show available commands (required)"
             },
             "chat": {
               "type": "string",
-              "pattern": "^\\(Default\\).+",
-              "description": "Required default chat command"
+              "minLength": 5,
+              "maxLength": 200,
+              "description": "Default chat command (required)"
+            },
+            "exit": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 200,
+              "description": "Exit persona command (required)"
             }
           },
-          "required": ["help", "chat"],
+          "required": ["help", "chat", "exit"],
           "additionalProperties": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*:.+",
-            "description": "Command mapping in format 'task-name: description'"
+            "minLength": 5,
+            "maxLength": 200,
+            "description": "Command description (5-200 chars)"
           },
-          "description": "Available command mappings"
+          "description": "Available command mappings (up to 20, any human-readable keys)"
         },
         "tasks": {
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+            "pattern": "^\\./\\.krci-ai/tasks/[^/]+\\.md$",
+            "description": "Strict local path to .md file under ./.krci-ai/tasks/"
           },
           "uniqueItems": true,
-          "description": "Optional list of available task identifiers"
+          "description": "List of available task file paths (must match ./.krci-ai/tasks/*.md)"
         }
       },
       "required": [
