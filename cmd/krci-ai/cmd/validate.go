@@ -217,9 +217,15 @@ func (v *FrameworkValidator) validateAgents(frameworkDir string, results *Valida
 
 // validateAgentFile validates a single agent file
 func (v *FrameworkValidator) validateAgentFile(filePath string) ValidationResult {
+	// Convert absolute path to relative path from baseDir
+	relPath, err := filepath.Rel(v.baseDir, filePath)
+	if err != nil {
+		relPath = filePath // fallback to absolute path if conversion fails
+	}
+
 	result := ValidationResult{
 		Type:     "agent",
-		File:     filePath,
+		File:     relPath,
 		IsValid:  true,
 		Errors:   make([]string, 0),
 		Warnings: make([]string, 0),
@@ -269,9 +275,15 @@ func (v *FrameworkValidator) validateTasks(frameworkDir string, results *Validat
 
 // validateTaskFile validates a single task file
 func (v *FrameworkValidator) validateTaskFile(filePath string) ValidationResult {
+	// Convert absolute path to relative path from baseDir
+	relPath, err := filepath.Rel(v.baseDir, filePath)
+	if err != nil {
+		relPath = filePath // fallback to absolute path if conversion fails
+	}
+
 	result := ValidationResult{
 		Type:     "task",
-		File:     filePath,
+		File:     relPath,
 		IsValid:  true,
 		Errors:   make([]string, 0),
 		Warnings: make([]string, 0),
@@ -315,19 +327,16 @@ func displayValidationResults(results *ValidationResults) {
 		fmt.Println(strings.Repeat("-", 60))
 
 		for _, result := range results.Results {
-			// Get relative path for display
-			relPath, err := filepath.Rel(".", result.File)
-			if err != nil {
-				relPath = result.File
-			}
+			// File path is already relative to project directory
+			displayPath := result.File
 
 			// Display file status
 			if result.IsValid {
 				if verboseOutput {
-					_, _ = green.Printf("✅ %s: %s\n", strings.ToUpper(result.Type), relPath)
+					_, _ = green.Printf("✅ %s: %s\n", strings.ToUpper(result.Type), displayPath)
 				}
 			} else {
-				_, _ = red.Printf("❌ %s: %s\n", strings.ToUpper(result.Type), relPath)
+				_, _ = red.Printf("❌ %s: %s\n", strings.ToUpper(result.Type), displayPath)
 
 				// Display errors
 				for _, errorMsg := range result.Errors {

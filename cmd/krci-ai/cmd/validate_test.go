@@ -1,11 +1,11 @@
 package cmd
 
 import (
+	"github.com/epam/kuberocketai/internal/engine/processor"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
-	"github.com/epam/kuberocketai/internal/engine/processor"
 )
 
 // testFrameworkValidator creates a validator for testing using file-based schema
@@ -15,7 +15,7 @@ func testFrameworkValidator(baseDir string) (*FrameworkValidator, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return &FrameworkValidator{
 		baseDir:       baseDir,
 		yamlProcessor: yamlProcessor,
