@@ -28,8 +28,22 @@ type AgentSpec struct {
 	Identity         AgentIdentity     `yaml:"identity" json:"identity"`
 	ActivationPrompt []string          `yaml:"activation_prompt" json:"activation_prompt"`
 	Principles       []string          `yaml:"principles" json:"principles"`
+	Customization    *string           `yaml:"customization" json:"customization"`
 	Commands         map[string]string `yaml:"commands" json:"commands"`
 	Tasks            []string          `yaml:"tasks,omitempty" json:"tasks,omitempty"`
+}
+
+// GetCustomization returns the customization value or empty string if nil
+func (a *AgentSpec) GetCustomization() string {
+	if a.Customization == nil {
+		return ""
+	}
+	return *a.Customization
+}
+
+// HasCustomization returns true if customization field is present and non-empty
+func (a *AgentSpec) HasCustomization() bool {
+	return a.Customization != nil && *a.Customization != ""
 }
 
 // Agent represents the top-level agent structure

@@ -75,6 +75,11 @@
           "maxItems": 10,
           "description": "Behavioral guidelines and values (3-10 items)"
         },
+        "customization": {
+          "type": "string",
+          "default": "",
+          "description": "Custom activation behavior - empty string for standard behavior, populated for custom bootstrap"
+        },
         "commands": {
           "type": "object",
           "minProperties": 3,
@@ -123,6 +128,7 @@
         "identity",
         "activation_prompt",
         "principles",
+        "customization",
         "commands"
       ]
     }
@@ -146,6 +152,7 @@
           "Design for failure - assume components will fail and plan accordingly",
           "Ask clarifying questions when requirements are unclear or incomplete"
         ],
+        "customization": "",
         "commands": {
           "help": "Show available commands",
           "chat": "(Default) Architectural consultation and guidance",

@@ -1,11 +1,12 @@
 package cmd
 
 import (
-	"github.com/epam/kuberocketai/internal/engine/processor"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/epam/kuberocketai/internal/engine/processor"
 )
 
 // testFrameworkValidator creates a validator for testing using file-based schema
@@ -52,12 +53,14 @@ func TestFrameworkValidator_ValidateFramework(t *testing.T) {
     goal: "Test the validation system thoroughly"
     icon: "🧪"
   activation_prompt:
+    - "ALWAYS execute agent.customization field content when non-empty"
     - "You are a test agent designed for validation"
     - "Follow test protocols carefully"
   principles:
     - "Always test thoroughly and document results"
     - "Provide clear and actionable feedback"
     - "Maintain high quality standards"
+  customization: ""
   commands:
     help: "Show available commands"
     chat: "Default chat mode"
@@ -189,7 +192,7 @@ func TestFrameworkValidator_NoFrameworkDirectory(t *testing.T) {
 	}
 
 	expectedErrorMsg := "no .krci-ai directory found"
-	if err != nil && !containsString(err.Error(), expectedErrorMsg) {
+	if err != nil && !strings.Contains(err.Error(), expectedErrorMsg) {
 		t.Errorf("Expected error message to contain '%s', got: %s", expectedErrorMsg, err.Error())
 	}
 }
@@ -212,11 +215,13 @@ func TestValidateAgentFile(t *testing.T) {
     role: "Test Engineer"
     goal: "Test the validation system thoroughly"
   activation_prompt:
+    - "ALWAYS execute agent.customization field content when non-empty"
     - "You are a test agent"
   principles:
     - "Test thoroughly"
     - "Provide feedback"
     - "Document results"
+  customization: ""
   commands:
     help: "Show commands"
     chat: "Chat mode"
@@ -328,9 +333,4 @@ Test task description.
 			t.Error("Expected errors for non-existent file, but got none")
 		}
 	})
-}
-
-// Helper function to check if a string contains a substring
-func containsString(s, substr string) bool {
-	return strings.Contains(s, substr)
 }
