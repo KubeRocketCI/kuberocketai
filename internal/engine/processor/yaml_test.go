@@ -1,9 +1,15 @@
 package processor
 
 import (
+	"encoding/json"
 	"os"
 	"testing"
 )
+
+// stringPtr returns a pointer to the given string (helper for tests)
+func stringPtr(s string) *string {
+	return &s
+}
 
 func TestYAMLProcessor_ParseAgentFile(t *testing.T) {
 	// For testing, use the file-based constructor
@@ -30,6 +36,7 @@ func TestYAMLProcessor_ParseAgentFile(t *testing.T) {
     - "Always test thoroughly"
     - "Provide clear feedback"
     - "Document test results"
+  customization: ""
   commands:
     help: "Show available commands"
     chat: "Default chat mode"
@@ -126,6 +133,7 @@ func TestYAMLProcessor_ValidateAgent_WithSchema(t *testing.T) {
 					"Provide clear and actionable feedback to users",
 					"Maintain high quality standards throughout the testing process",
 				},
+				Customization: stringPtr(""),
 				Commands: map[string]string{
 					"help": "Show available commands",
 					"chat": "Default chat mode",
@@ -143,6 +151,92 @@ func TestYAMLProcessor_ValidateAgent_WithSchema(t *testing.T) {
 			for _, err := range errors {
 				t.Logf("Validation error: %s", err.Error())
 			}
+		}
+	})
+
+	// Test customization field validation with nil pointer (missing field)
+	t.Run("missing customization field with pointer - schema validation", func(t *testing.T) {
+		agent := &Agent{
+			Agent: AgentSpec{
+				Identity: AgentIdentity{
+					Name:        "Test Agent",
+					ID:          "test-agent-v1",
+					Version:     "1.0.0",
+					Description: "A test agent for validation testing with sufficient length",
+					Role:        "Test Engineer",
+					Goal:        "Test the validation system thoroughly with proper length",
+					Icon:        "🧪",
+				},
+				ActivationPrompt: []string{
+					"You are a test agent designed for validation testing",
+					"Follow test protocols carefully and thoroughly",
+				},
+				Principles: []string{
+					"Always test thoroughly and document results with sufficient detail",
+					"Provide clear and actionable feedback to users",
+					"Maintain high quality standards throughout the testing process",
+				},
+				Customization: nil, // Missing field represented as nil
+				Commands: map[string]string{
+					"help": "Show available commands",
+					"chat": "Default chat mode",
+					"exit": "Exit test mode",
+				},
+			},
+		}
+
+		errors := processor.ValidateAgent(agent, "test.yaml")
+		if len(errors) == 0 {
+			t.Error("Expected validation errors for nil customization field, but got none")
+		} else {
+			t.Logf("Validation correctly failed with %d errors", len(errors))
+			for _, err := range errors {
+				t.Logf("Error: %s", err.Error())
+			}
+		}
+	})
+
+	// Test customization field validation with raw JSON
+	t.Run("missing customization field - schema validation", func(t *testing.T) {
+		// Test with raw JSON data that truly omits the customization field
+		rawJSON := `{
+			"agent": {
+				"identity": {
+					"name": "Test Agent",
+					"id": "test-agent-v1",
+					"version": "1.0.0",
+					"description": "A test agent for validation testing with sufficient length",
+					"role": "Test Engineer",
+					"goal": "Test the validation system thoroughly with proper length",
+					"icon": "🧪"
+				},
+				"activation_prompt": [
+					"You are a test agent designed for validation testing",
+					"Follow test protocols carefully and thoroughly"
+				],
+				"principles": [
+					"Always test thoroughly and document results with sufficient detail",
+					"Provide clear and actionable feedback to users",
+					"Maintain high quality standards throughout the testing process"
+				],
+				"commands": {
+					"help": "Show available commands",
+					"chat": "Default chat mode",
+					"exit": "Exit test mode"
+				}
+			}
+		}`
+
+		var agentData any
+		if err := json.Unmarshal([]byte(rawJSON), &agentData); err != nil {
+			t.Fatalf("Failed to unmarshal test JSON: %v", err)
+		}
+
+		// Validate directly against schema
+		if err := processor.schema.Validate(agentData); err != nil {
+			t.Logf("Schema validation error (expected): %v", err)
+		} else {
+			t.Error("Expected schema validation to fail for missing customization field, but it passed")
 		}
 	})
 
@@ -164,6 +258,7 @@ func TestYAMLProcessor_ValidateAgent_WithSchema(t *testing.T) {
 				Principles: []string{
 					"Short", // Too short
 				},
+				Customization: stringPtr(""),
 				Commands: map[string]string{
 					"help": "Show available commands",
 					"chat": "Default chat mode",
