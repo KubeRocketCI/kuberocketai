@@ -130,7 +130,8 @@
         "principles",
         "customization",
         "commands"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "required": ["agent"],
