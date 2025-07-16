@@ -178,6 +178,29 @@ func (p *YAMLProcessor) ParseAgentFile(filePath string) (*Agent, error) {
 	return &agent, nil
 }
 
+// ParseAgentFileRaw parses a YAML agent file into a raw map to capture all fields
+func (p *YAMLProcessor) ParseAgentFileRaw(filePath string) (map[string]interface{}, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open agent file '%s': %w", filePath, err)
+	}
+	defer func() {
+		_ = file.Close()
+	}()
+
+	content, err := io.ReadAll(file)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read agent file '%s': %w", filePath, err)
+	}
+
+	var rawData map[string]interface{}
+	if err := yaml.Unmarshal(content, &rawData); err != nil {
+		return nil, fmt.Errorf("failed to parse YAML in file '%s': %w", filePath, err)
+	}
+
+	return rawData, nil
+}
+
 // ValidateAgent validates an agent against the JSON schema
 func (p *YAMLProcessor) ValidateAgent(agent *Agent, filePath string) []ValidationError {
 	var errors []ValidationError
@@ -207,8 +230,22 @@ func (p *YAMLProcessor) ValidateAgent(agent *Agent, filePath string) []Validatio
 		return errors
 	}
 
+	// Validate against schema using shared validation logic
+	return p.validateAgainstSchema(agentData, agent, filePath)
+}
+
+// ValidateAgentRaw validates raw agent data against the JSON schema
+func (p *YAMLProcessor) ValidateAgentRaw(rawData map[string]interface{}, filePath string) []ValidationError {
+	// Validate against schema using shared validation logic
+	return p.validateAgainstSchema(rawData, rawData, filePath)
+}
+
+// validateAgainstSchema performs schema validation with shared error handling
+func (p *YAMLProcessor) validateAgainstSchema(data any, originalValue any, filePath string) []ValidationError {
+	var errors []ValidationError
+
 	// Validate against schema
-	if err := p.schema.Validate(agentData); err != nil {
+	if err := p.schema.Validate(data); err != nil {
 		// Handle validation error - new library returns structured error
 		if validationErr, ok := err.(*jsonschema.ValidationError); ok {
 			errors = append(errors, ValidationError{
@@ -229,7 +266,7 @@ func (p *YAMLProcessor) ValidateAgent(agent *Agent, filePath string) []Validatio
 		} else {
 			errors = append(errors, ValidationError{
 				Field:   "agent",
-				Value:   agent,
+				Value:   originalValue,
 				Message: fmt.Sprintf("schema validation failed: %v", err),
 				File:    filePath,
 			})
@@ -241,11 +278,18 @@ func (p *YAMLProcessor) ValidateAgent(agent *Agent, filePath string) []Validatio
 
 // ProcessAndValidateAgent processes and validates an agent file
 func (p *YAMLProcessor) ProcessAndValidateAgent(filePath string) (*Agent, []ValidationError, error) {
+	// Parse the file into a structured agent for return
 	agent, err := p.ParseAgentFile(filePath)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	validationErrors := p.ValidateAgent(agent, filePath)
+	// Parse the file as raw data for validation (to capture all fields)
+	rawData, err := p.ParseAgentFileRaw(filePath)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	validationErrors := p.ValidateAgentRaw(rawData, filePath)
 	return agent, validationErrors, nil
 }
