@@ -38,9 +38,7 @@ agent:
   commands:
     help: "Show available commands"
     chat: "(Default) Architectural consultation and guidance"
-    analyze: "Analyze and extract architectural requirements"
-    design: "Create comprehensive system architecture design"
-    review: "Review and evaluate existing architecture"
+    create-sad: "Create a Software Architecture Document (SAD) for the system"
     exit: "Exit Architect persona and return to normal mode"
 
   tasks:
