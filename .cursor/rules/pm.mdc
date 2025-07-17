@@ -39,16 +39,10 @@ agent:
     help: "Show available commands"
     chat: "(Default) Product management consultation and guidance"
     create-epic: "Execute task create-epic"
-    create: "Create comprehensive product requirements document"
-    analyze: "Analyze market conditions and competitive landscape"
-    prioritize: "Prioritize features based on impact and effort"
-    communicate: "Create stakeholder reports and communications"
+    create-prd: "Create comprehensive product requirements document"
     exit: "Exit Product Manager persona and return to normal mode"
 
   tasks:
     - ./.krci-ai/tasks/create-epic.md
     - ./.krci-ai/tasks/create-prd.md
-    - ./.krci-ai/tasks/analyze-market.md
-    - ./.krci-ai/tasks/prioritize-features.md
-    - ./.krci-ai/tasks/stakeholder-communication.md
 ```
