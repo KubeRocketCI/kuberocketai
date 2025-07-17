@@ -1,9 +1,0 @@
-task: refactor-code
-description: Refactor existing code for better maintainability
-instructions: |
-  1. Identify code smells and improvement opportunities
-  2. Plan refactoring steps incrementally
-  3. Preserve functionality while improving code quality
-  4. Apply {{ ref:./krci-ai/data/coding-standards.md }} consistently
-  5. Verify behavior preservation through testing
-  6. Document changes using {{ ref:./krci-ai/templates/refactoring-guide.md }}
