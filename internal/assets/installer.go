@@ -279,7 +279,7 @@ func (i *Installer) ValidateInstallation() error {
 
 	// Check that tasks directory has files
 	tasksPath := i.GetTasksPath()
-	taskFiles, err := filepath.Glob(filepath.Join(tasksPath, "*.yaml"))
+	taskFiles, err := filepath.Glob(filepath.Join(tasksPath, "*.md"))
 	if err != nil {
 		return fmt.Errorf("failed to check task files: %w", err)
 	}
