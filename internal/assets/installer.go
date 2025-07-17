@@ -36,6 +36,7 @@ const (
 	embeddedPrefix    = "assets/framework/core"
 	cursorRulesDir    = ".cursor/rules"
 	claudeCommandsDir = ".claude/commands"
+	vscodeModesDir    = ".vscode/chatmodes"
 )
 
 // AgentData represents the parsed YAML structure for agent files
@@ -107,6 +108,36 @@ CRITICAL: Carefully read the YAML agent definition below. Immediately activate t
 
 `+"```yaml\n%s```\n",
 		agentName,
+		role,
+		string(yamlContent))
+}
+
+// VSCodeIntegration implements IDEIntegration for VS Code
+type VSCodeIntegration struct {
+	targetDir string
+}
+
+func (v *VSCodeIntegration) GetDirectoryPath() string {
+	return filepath.Join(v.targetDir, vscodeModesDir)
+}
+
+func (v *VSCodeIntegration) GetFileExtension() string {
+	return ".chatmode.md"
+}
+
+func (v *VSCodeIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
+	return fmt.Sprintf(`---
+description: Activate %s role for specialized development assistance
+tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']
+---
+
+# %s Agent Chat Mode
+
+CRITICAL: Carefully read the YAML agent definition below. Immediately activate the %s persona by following the activation instructions, and remain in this persona until you receive an explicit command to exit.
+
+`+"```yaml\n%s```\n",
+		role,
+		role,
 		role,
 		string(yamlContent))
 }
@@ -376,4 +407,10 @@ func (i *Installer) InstallCursorIntegration() error {
 func (i *Installer) InstallClaudeIntegration() error {
 	integration := &ClaudeIntegration{targetDir: i.targetDir}
 	return i.installIDEIntegration(integration, "Claude Code")
+}
+
+// InstallVSCodeIntegration creates .vscode/chatmodes directory and generates .chatmode.md files for agents
+func (i *Installer) InstallVSCodeIntegration() error {
+	integration := &VSCodeIntegration{targetDir: i.targetDir}
+	return i.installIDEIntegration(integration, "VS Code")
 }

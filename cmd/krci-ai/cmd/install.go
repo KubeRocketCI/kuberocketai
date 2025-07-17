@@ -28,6 +28,7 @@ const (
 	ideAll    = "all"
 	ideCursor = "cursor"
 	ideClaude = "claude"
+	ideVSCode = "vscode"
 )
 
 // installCmd represents the install command
@@ -84,7 +85,7 @@ Examples:
 
 		// Validate IDE flag value if provided
 		if ideFlag != "" {
-			validIDEs := []string{ideCursor, ideClaude, "vscode", "windsurf", ideAll}
+			validIDEs := []string{ideCursor, ideClaude, ideVSCode, "windsurf", ideAll}
 			isValid := false
 			for _, valid := range validIDEs {
 				if ideFlag == valid {
@@ -149,6 +150,15 @@ Examples:
 			output.PrintSuccess("Claude Code integration installed successfully!")
 		}
 
+		if ideFlag == ideVSCode || ideFlag == ideAll {
+			output.PrintInfo("Setting up VS Code integration...")
+			if err := installer.InstallVSCodeIntegration(); err != nil {
+				errorHandler.HandleError(err, "Failed to install VS Code integration")
+				return
+			}
+			output.PrintSuccess("VS Code integration installed successfully!")
+		}
+
 		// Success
 		output.PrintSuccess("Framework installation completed successfully!")
 		output.PrintInfo("Framework components installed to: " + installer.GetInstallationPath())
@@ -163,6 +173,9 @@ Examples:
 		}
 		if ideFlag == ideClaude || ideFlag == ideAll {
 			output.PrintInfo("  • Claude Code commands installed to: .claude/commands/")
+		}
+		if ideFlag == ideVSCode || ideFlag == ideAll {
+			output.PrintInfo("  • VS Code chat modes installed to: .vscode/chatmodes/")
 		}
 	},
 }

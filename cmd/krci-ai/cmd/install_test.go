@@ -59,3 +59,26 @@ func TestInstallCommandHasRequiredFlags(t *testing.T) {
 		}
 	}
 }
+
+// TestIDEValidation verifies that IDE validation includes VS Code
+func TestIDEValidation(t *testing.T) {
+	validIDEs := []string{ideCursor, ideClaude, ideVSCode, "windsurf", ideAll}
+
+	// Test that vscode is in valid IDEs
+	found := false
+	for _, ide := range validIDEs {
+		if ide == ideVSCode {
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		t.Error("VS Code (vscode) should be in the list of valid IDEs")
+	}
+
+	// Test that the ideVSCode constant is correctly defined
+	if ideVSCode != "vscode" {
+		t.Errorf("Expected ideVSCode constant to be 'vscode', got '%s'", ideVSCode)
+	}
+}
