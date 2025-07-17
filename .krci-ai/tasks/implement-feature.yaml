@@ -1,9 +1,0 @@
-task: implement-feature
-description: Implement a new feature following best practices
-instructions: |
-  1. Analyze requirements thoroughly
-  2. Design simple, maintainable solution
-  3. Write clean code following {{ ref:./krci-ai/data/coding-standards.md }}
-  4. Add comprehensive tests
-  5. Document usage patterns
-  6. Format implementation plan using {{ ref:./krci-ai/templates/implementation-plan.md }}
