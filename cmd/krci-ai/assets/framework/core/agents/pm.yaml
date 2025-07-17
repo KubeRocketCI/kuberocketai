@@ -37,6 +37,3 @@ agent:
   tasks:
     - ./.krci-ai/tasks/create-epic.md
     - ./.krci-ai/tasks/create-prd.md
-    - ./.krci-ai/tasks/analyze-market.md
-    - ./.krci-ai/tasks/prioritize-features.md
-    - ./.krci-ai/tasks/stakeholder-communication.md
