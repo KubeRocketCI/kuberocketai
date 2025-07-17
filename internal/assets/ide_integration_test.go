@@ -77,6 +77,19 @@ func TestInstallIDEIntegration(t *testing.T) {
 	if _, err := os.Stat(claudeFile); os.IsNotExist(err) {
 		t.Error("Claude .md file was not created")
 	}
+
+	// Test VS Code integration
+	vscodeIntegration := &VSCodeIntegration{targetDir: tempDir}
+	err = installer.installIDEIntegration(vscodeIntegration, "VS Code")
+	if err != nil {
+		t.Errorf("Failed to install VS Code integration: %v", err)
+	}
+
+	// Verify VS Code files were created
+	vscodeFile := filepath.Join(tempDir, vscodeModesDir, "test.chatmode.md")
+	if _, err := os.Stat(vscodeFile); os.IsNotExist(err) {
+		t.Error("VS Code .chatmode.md file was not created")
+	}
 }
 
 func TestInstallCursorIntegration(t *testing.T) {
@@ -191,6 +204,71 @@ func TestInstallClaudeIntegration(t *testing.T) {
 	}
 }
 
+func TestInstallVSCodeIntegration(t *testing.T) {
+	tempDir := t.TempDir()
+	installer := NewInstaller(tempDir, testIntegrationAssets)
+
+	// Create a minimal .krci-ai structure with test agent
+	krciPath := filepath.Join(tempDir, krciAIDir)
+	agentsPath := filepath.Join(krciPath, agentsDir)
+	err := os.MkdirAll(agentsPath, 0755)
+	if err != nil {
+		t.Fatalf("Failed to create agents directory: %v", err)
+	}
+
+	// Create a test agent file
+	testAgentContent := `agent:
+  identity:
+    role: "Software Developer"`
+
+	agentFile := filepath.Join(agentsPath, "dev.yaml")
+	err = os.WriteFile(agentFile, []byte(testAgentContent), 0644)
+	if err != nil {
+		t.Fatalf("Failed to create test agent file: %v", err)
+	}
+
+	// Test installation
+	err = installer.InstallVSCodeIntegration()
+	if err != nil {
+		t.Errorf("InstallVSCodeIntegration failed: %v", err)
+	}
+
+	// Verify directory was created
+	vscodeDir := filepath.Join(tempDir, vscodeModesDir)
+	if _, err := os.Stat(vscodeDir); os.IsNotExist(err) {
+		t.Error("VS Code chatmodes directory was not created")
+	}
+
+	// Verify .chatmode.md file was created
+	chatmodeFile := filepath.Join(vscodeDir, "dev.chatmode.md")
+	if _, err := os.Stat(chatmodeFile); os.IsNotExist(err) {
+		t.Error("VS Code .chatmode.md file was not created")
+	}
+
+	// Verify file content
+	content, err := os.ReadFile(chatmodeFile)
+	if err != nil {
+		t.Fatalf("Failed to read .chatmode.md file: %v", err)
+	}
+
+	contentStr := string(content)
+	if !contains(contentStr, "---") {
+		t.Error("Content missing front matter delimiters")
+	}
+	if !contains(contentStr, "description: Activate Software Developer role for specialized development assistance") {
+		t.Error("Content missing description in front matter")
+	}
+	if !contains(contentStr, "tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']") {
+		t.Error("Content missing tools in front matter")
+	}
+	if !contains(contentStr, "# Software Developer Agent Chat Mode") {
+		t.Error("Content missing agent chat mode header")
+	}
+	if !contains(contentStr, "Software Developer") {
+		t.Error("Content missing role")
+	}
+}
+
 func TestGenerateIDEFile(t *testing.T) {
 	tempDir := t.TempDir()
 	installer := NewInstaller(tempDir, testIntegrationAssets)
@@ -240,6 +318,24 @@ func TestGenerateIDEFile(t *testing.T) {
 	outputFile = filepath.Join(claudeIntegration.GetDirectoryPath(), "test.md")
 	if _, err := os.Stat(outputFile); os.IsNotExist(err) {
 		t.Error("IDE file was not created")
+	}
+
+	// Test with VS Code integration
+	vscodeIntegration := &VSCodeIntegration{targetDir: tempDir}
+	err = os.MkdirAll(vscodeIntegration.GetDirectoryPath(), 0755)
+	if err != nil {
+		t.Fatalf("Failed to create vscode directory: %v", err)
+	}
+
+	err = installer.generateIDEFile(agentFile, vscodeIntegration)
+	if err != nil {
+		t.Errorf("generateIDEFile failed for VS Code: %v", err)
+	}
+
+	// Verify file was created
+	outputFile = filepath.Join(vscodeIntegration.GetDirectoryPath(), "test.chatmode.md")
+	if _, err := os.Stat(outputFile); os.IsNotExist(err) {
+		t.Error("VS Code IDE file was not created")
 	}
 }
 

@@ -176,6 +176,45 @@ func TestClaudeIntegration(t *testing.T) {
 	}
 }
 
+func TestVSCodeIntegration(t *testing.T) {
+	tempDir := t.TempDir()
+	integration := &VSCodeIntegration{targetDir: tempDir}
+
+	expectedPath := filepath.Join(tempDir, vscodeModesDir)
+	if integration.GetDirectoryPath() != expectedPath {
+		t.Errorf("Expected directory path '%s', got '%s'", expectedPath, integration.GetDirectoryPath())
+	}
+
+	if integration.GetFileExtension() != ".chatmode.md" {
+		t.Errorf("Expected file extension '.chatmode.md', got '%s'", integration.GetFileExtension())
+	}
+
+	content := integration.GenerateContent("test", "Test Role", []byte("test: yaml"))
+	if content == "" {
+		t.Error("GenerateContent returned empty string")
+	}
+
+	// Check if content contains expected parts
+	if !contains(content, "---") {
+		t.Error("Content missing front matter delimiters")
+	}
+	if !contains(content, "description: Activate Test Role role for specialized development assistance") {
+		t.Error("Content missing description in front matter")
+	}
+	if !contains(content, "tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']") {
+		t.Error("Content missing tools in front matter")
+	}
+	if !contains(content, "# Test Role Agent Chat Mode") {
+		t.Error("Content missing agent chat mode header")
+	}
+	if !contains(content, "Test Role") {
+		t.Error("Content missing role")
+	}
+	if !contains(content, "test: yaml") {
+		t.Error("Content missing YAML content")
+	}
+}
+
 func TestValidateInstallationWithoutInstallation(t *testing.T) {
 	tempDir := t.TempDir()
 	installer := NewInstaller(tempDir, testAssets)
