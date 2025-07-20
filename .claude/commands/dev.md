@@ -39,7 +39,4 @@ agent:
 
   tasks:
     - ./.krci-ai/tasks/implement-feature.md
-    - ./.krci-ai/tasks/review-code.md
-    - ./.krci-ai/tasks/debug-issue.md
-    - ./.krci-ai/tasks/refactor-code.md
 ```

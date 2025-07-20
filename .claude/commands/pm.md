@@ -32,11 +32,15 @@ agent:
   commands:
     help: "Show available commands"
     chat: "(Default) Product management consultation and guidance"
-    create-epic: "Execute task create-epic"
-    create-prd: "Create comprehensive product requirements document"
+    create-project-brief: "Create project brief by executing task create-project-brief"
+    update-project-brief: "Update existing project brief by executing task update-project-brief"
+    create-prd: "Create comprehensive product requirements document by executing task create-prd"
+    update-prd: "Update existing product requirements document by executing task update-prd"
     exit: "Exit Product Manager persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-epic.md
+    - ./.krci-ai/tasks/create-project-brief.md
+    - ./.krci-ai/tasks/update-project-brief.md
     - ./.krci-ai/tasks/create-prd.md
+    - ./.krci-ai/tasks/update-prd.md
 ```
