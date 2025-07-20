@@ -32,9 +32,11 @@ agent:
   commands:
     help: "Show available commands with numbered options"
     chat: "(Default) Product owner consultation and story guidance"
+    create-epic: "Execute task create-epic"
     create-story: "Execute task create-story"
     exit: "Exit Product Owner persona and return to normal mode"
 
   tasks:
+    - ./.krci-ai/tasks/create-epic.md
     - ./.krci-ai/tasks/create-story.md
 ```
