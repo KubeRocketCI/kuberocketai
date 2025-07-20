@@ -185,7 +185,6 @@ Each bucket should map to an Epic following SDLC naming: {epic_number}-epic-{slu
 
 - **Dependencies**: Project Brief at `/docs/prd/project-brief.md` (EXACT path)
 - **Output Location**: This PRD MUST be saved as `/docs/prd/prd.md` (EXACT path)
-- **Registry Update**: Add artifact entry to `/docs/registry.json`
 - **Downstream Enablement**:
   - Epic creation in `/docs/epics/` using naming format `{epic_number}-epic-{slug}.md`
   - Architecture documents in `/docs/architecture/`
@@ -201,7 +200,6 @@ Supporting Documents Example:
 
 SDLC Framework Directory Structure:
 /docs/
-├── registry.json                 # Central artifact registry
 ├── prd/                          # Product vision & requirements
 │   ├── project-brief.md          # Project vision & strategy (INPUT)
 │   └── prd.md                    # Product requirements (THIS FILE)
@@ -224,7 +222,6 @@ Keep SDLC framework details minimal and in appendix to maintain focus on product
 ✅ Requirements grouped by use case for Epic creation
 ✅ SDLC framework compliance: exact file paths and naming conventions
 ✅ File saved exactly as /docs/prd/prd.md
-✅ Registry updated at /docs/registry.json
 ✅ Epic naming ready: {epic_number}-epic-{slug}.md format
 ✅ Story naming ready: {epic_number}.{story_number}.story.md format
 -->

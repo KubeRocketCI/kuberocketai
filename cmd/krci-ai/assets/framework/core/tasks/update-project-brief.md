@@ -6,7 +6,7 @@ Update existing Project Brief with new strategic information while maintaining q
 
 ## Prerequisites
 
-- [ ] **Existing Project Brief**: `/docs/prd/project-brief.md` must exist and be properly registered
+- [ ] **Existing Project Brief**: `/docs/prd/project-brief.md` must exist and be properly accessible
 - [ ] **Change Trigger**: Clear reason for update (strategic shifts, market changes, new insights, stakeholder feedback, resource changes)
 - [ ] **Impact Assessment**: Understanding of how changes affect dependent PRD and downstream artifacts
 
@@ -28,7 +28,6 @@ Update existing Project Brief with new strategic information while maintaining q
 
 7. **PRD Impact Analysis**: Determine if PRD needs updating based on Project Brief changes
 8. **Stakeholder Communication**: Notify key stakeholders of strategic changes and implications
-9. **Registry Update**: Update `/docs/registry.json` with new version information
 
 ## SDLC Framework Compliance
 
@@ -36,7 +35,6 @@ Update existing Project Brief with new strategic information while maintaining q
 
 - **Target File**: Update existing `/docs/prd/project-brief.md` (EXACT path)
 - **Template**: Use same [project-brief-template.md](/.krci-ai/templates/project-brief-template.md) structure
-- **Registry**: Update artifact version in `/docs/registry.json`
 
 ### Downstream Impact Management
 
@@ -59,7 +57,6 @@ Update existing Project Brief with new strategic information while maintaining q
 - [ ] **Length Maintained**: Document remains 2-3 pages maximum
 - [ ] **Strategic Coherence**: All sections maintain strategic alignment and business focus
 - [ ] **File Location**: Changes saved to `/docs/prd/project-brief.md`
-- [ ] **Registry Updated**: New version registered in `/docs/registry.json`
 - [ ] **Downstream Assessment**: PRD alignment evaluated and update plan created if needed
 
 ## Common Update Scenarios
@@ -118,7 +115,7 @@ Update existing Project Brief with new strategic information while maintaining q
 
 - **Mandatory File**: Update existing `/docs/prd/project-brief.md` only
 - **Template Consistency**: Maintain same project-brief-template.md structure
-- **Version Control**: Proper change documentation and registry updates
+- **Version Control**: Proper change documentation
 - **Strategic Gate**: Updated Project Brief approval required before PRD or Epic changes
 - **Foundation Role**: Ensure updated brief continues to enable strong PRD creation
 

@@ -6,7 +6,7 @@ Update existing PRD with new information while maintaining quality, stakeholder 
 
 ## Prerequisites
 
-- [ ] **Existing PRD**: `/docs/prd/prd.md` must exist and be properly registered
+- [ ] **Existing PRD**: `/docs/prd/prd.md` must exist and be properly accessible
 - [ ] **Change Trigger**: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
 - [ ] **Stakeholder Input**: Understanding of what specifically needs to change and why
 
@@ -27,8 +27,7 @@ Update existing PRD with new information while maintaining quality, stakeholder 
 ### Change Communication
 
 7. **Downstream Notification**: Communicate changes to Epic owners and development teams
-8. **Registry Update**: Update `/docs/registry.json` with new version information
-9. **Approval Process**: Obtain stakeholder sign-off on updated PRD
+8. **Approval Process**: Obtain stakeholder sign-off on updated PRD
 
 ## SDLC Framework Compliance
 
@@ -36,7 +35,6 @@ Update existing PRD with new information while maintaining quality, stakeholder 
 
 - **Target File**: Update existing `/docs/prd/prd.md` (EXACT path)
 - **Template**: Use same [prd-template.md](/.krci-ai/templates/prd-template.md) structure
-- **Registry**: Update artifact version in `/docs/registry.json`
 
 ### Downstream Impact Management
 
@@ -59,7 +57,6 @@ Update existing PRD with new information while maintaining quality, stakeholder 
 - [ ] **Length Maintained**: Document remains 6-8 pages maximum
 - [ ] **Best Practices**: User focus, P0/P1/P2 priorities, and measurable goals maintained
 - [ ] **File Location**: Changes saved to `/docs/prd/prd.md`
-- [ ] **Registry Updated**: New version registered in `/docs/registry.json`
 - [ ] **Change Communication**: Downstream teams notified of changes
 
 ## Common Update Scenarios
@@ -109,7 +106,7 @@ Update existing PRD with new information while maintaining quality, stakeholder 
 
 - **Mandatory File**: Update existing `/docs/prd/prd.md` only
 - **Template Consistency**: Maintain same prd-template.md structure
-- **Version Control**: Proper change documentation and registry updates
+- **Version Control**: Proper change documentation
 - **Quality Gate**: Updated PRD approval required before Epic/Story changes
 - **Communication**: Notify downstream teams of changes affecting their work
 
