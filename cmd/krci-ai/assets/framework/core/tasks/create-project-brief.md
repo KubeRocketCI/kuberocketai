@@ -62,7 +62,6 @@ The Project Brief is the **root artifact** in the SDLC framework that:
 ### File Structure Requirements
 
 - **Output Location**: `/docs/prd/project-brief.md` (EXACT path and filename)
-- **Registry Update**: Add artifact to `/docs/registry.json`
 - **Downstream Enable**: Enables PRD creation at `/docs/prd/prd.md`
 
 ### Strategic Foundation Role
@@ -94,7 +93,7 @@ Your Project Brief should enable PRD creation by:
 
 9. **Brief Creation**: Use [project-brief-template.md](/.krci-ai/templates/project-brief-template.md) structure
 10. **Length Check**: Ensure document is 2-3 pages maximum for focus
-11. **Framework Compliance**: Save to `/docs/prd/project-brief.md` and update registry
+11. **Framework Compliance**: Save to `/docs/prd/project-brief.md`
 
 ## Quality Validation
 
@@ -107,7 +106,6 @@ Your Project Brief should enable PRD creation by:
 - [ ] **Measurable Success**: Success metrics are specific and testable
 - [ ] **Realistic Constraints**: Constraints reflect actual limitations
 - [ ] **Risk Assessment**: Key risks identified with impact levels
-- [ ] **Registry Updated**: Artifact registered in `/docs/registry.json`
 
 ### Success Indicators
 
@@ -188,7 +186,6 @@ Ask stakeholders these key questions:
 ### SDLC Framework Compliance
 
 - **Mandatory Output**: Save Project Brief exactly to `/docs/prd/project-brief.md`
-- **Registry Update**: Add artifact entry to `/docs/registry.json`
 - **Quality Gate**: Project Brief approval required before PRD creation
 - **Template Use**: Follow project-brief-template.md structure exactly
 

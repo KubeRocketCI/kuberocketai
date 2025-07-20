@@ -72,7 +72,6 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 
 - **Input Required**: Project Brief at `/docs/prd/project-brief.md` (EXACT path)
 - **Output Location**: `/docs/prd/prd.md` (EXACT path and filename)
-- **Registry Update**: Add artifact to `/docs/registry.json`
 - **Directory Structure**: Follow SDLC framework exactly
 
 ### Downstream Enablement
@@ -88,7 +87,6 @@ Your PRD should enable Epic creation by:
 
 ```bash
 /docs/
-├── registry.json                 # Central artifact registry
 ├── prd/                          # Product vision & requirements
 │   ├── project-brief.md          # Project vision & strategy (INPUT)
 │   └── prd.md                    # Product requirements (OUTPUT)
@@ -123,7 +121,7 @@ Your PRD should enable Epic creation by:
 
 11. **Length Check**: Ensure document is 6-8 pages maximum
 12. **Epic Readiness**: Validate requirements can be grouped into logical Epics
-13. **Framework Compliance**: Save to `/docs/prd/prd.md` and update `/docs/registry.json`
+13. **Framework Compliance**: Save to `/docs/prd/prd.md`
 
 ## Quality Validation
 
@@ -136,7 +134,6 @@ Your PRD should enable Epic creation by:
 - [ ] **Measurable Goals**: Success criteria are specific and testable
 - [ ] **MVP Boundaries**: Clear distinction between P0 (required) and P1/P2 (nice-to-have)
 - [ ] **Epic Ready**: Requirements can be logically grouped for Epic creation following naming convention
-- [ ] **Registry Updated**: Artifact registered in `/docs/registry.json`
 
 ### Success Indicators
 
@@ -188,7 +185,6 @@ Ask stakeholders these key questions:
 
 - **Mandatory Input**: Validate `/docs/prd/project-brief.md` exists and is complete
 - **Mandatory Output**: Save PRD exactly to `/docs/prd/prd.md`
-- **Registry Update**: Add artifact entry to `/docs/registry.json`
 - **Quality Gate**: PRD approval required before Epic creation
 - **Downstream**: Enables `/docs/epics/` and `/docs/architecture/` creation
 
