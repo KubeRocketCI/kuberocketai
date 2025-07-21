@@ -36,7 +36,7 @@ const (
 	embeddedPrefix    = "assets/framework/core"
 	cursorRulesDir    = ".cursor/rules"
 	claudeCommandsDir = ".claude/commands"
-	vscodeModesDir    = ".vscode/chatmodes"
+	vscodeModesDir    = ".github/chatmodes"
 )
 
 // AgentData represents the parsed YAML structure for agent files
@@ -292,6 +292,21 @@ func (i *Installer) GetDataPath() string {
 	return filepath.Join(i.targetDir, krciAIDir, dataDir)
 }
 
+// GetCursorRulesPath returns the path to the Cursor rules directory
+func (i *Installer) GetCursorRulesPath() string {
+	return filepath.Join(i.targetDir, cursorRulesDir)
+}
+
+// GetClaudeCommandsPath returns the path to the Claude commands directory
+func (i *Installer) GetClaudeCommandsPath() string {
+	return filepath.Join(i.targetDir, claudeCommandsDir)
+}
+
+// GetVSCodeChatmodesPath returns the path to the VS Code chatmodes directory
+func (i *Installer) GetVSCodeChatmodesPath() string {
+	return filepath.Join(i.targetDir, vscodeModesDir)
+}
+
 // ValidateInstallation performs basic validation of the installation
 func (i *Installer) ValidateInstallation() error {
 	if !i.IsInstalled() {
@@ -409,7 +424,7 @@ func (i *Installer) InstallClaudeIntegration() error {
 	return i.installIDEIntegration(integration, "Claude Code")
 }
 
-// InstallVSCodeIntegration creates .vscode/chatmodes directory and generates .chatmode.md files for agents
+// InstallVSCodeIntegration creates .github/chatmodes directory and generates .chatmode.md files for agents
 func (i *Installer) InstallVSCodeIntegration() error {
 	integration := &VSCodeIntegration{targetDir: i.targetDir}
 	return i.installIDEIntegration(integration, "VS Code")

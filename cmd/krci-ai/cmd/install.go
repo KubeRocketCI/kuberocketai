@@ -169,13 +169,13 @@ Examples:
 		output.PrintInfo("  • Run 'krci-ai validate' to verify installation")
 
 		if ideFlag == ideCursor || ideFlag == ideAll {
-			output.PrintInfo("  • Cursor IDE rules installed to: .cursor/rules/")
+			output.PrintInfo("  • Cursor IDE rules installed to: " + installer.GetCursorRulesPath() + "/")
 		}
 		if ideFlag == ideClaude || ideFlag == ideAll {
-			output.PrintInfo("  • Claude Code commands installed to: .claude/commands/")
+			output.PrintInfo("  • Claude Code commands installed to: " + installer.GetClaudeCommandsPath() + "/")
 		}
 		if ideFlag == ideVSCode || ideFlag == ideAll {
-			output.PrintInfo("  • VS Code chat modes installed to: .vscode/chatmodes/")
+			output.PrintInfo("  • VS Code chat modes installed to: " + installer.GetVSCodeChatmodesPath() + "/")
 		}
 	},
 }
