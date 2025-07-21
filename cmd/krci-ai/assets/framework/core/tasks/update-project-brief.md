@@ -1,122 +1,103 @@
 # Task: Update Project Brief
 
-## Objective
+## Description
 
-Update existing Project Brief with new strategic information while maintaining quality, stakeholder alignment, and SDLC framework compliance. Focus on change impact assessment and downstream artifact management.
+Update an existing project brief with new information, scope changes, or refined understanding while maintaining strategic alignment and enabling downstream SDLC artifacts. Focus on change impact assessment and downstream artifact management to ensure existing PRD and Epic artifacts remain aligned with strategic changes.
+
+## Framework Context
+
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
 
 ## Prerequisites
 
-- [ ] **Existing Project Brief**: `/docs/prd/project-brief.md` must exist and be properly accessible
-- [ ] **Change Trigger**: Clear reason for update (strategic shifts, market changes, new insights, stakeholder feedback, resource changes)
-- [ ] **Impact Assessment**: Understanding of how changes affect dependent PRD and downstream artifacts
+- [ ] **Existing Project Brief**: `/docs/prd/project-brief.md` exists and is properly accessible
+- [ ] **Change trigger**: Clear reason for update (strategic shifts, market changes, new insights, stakeholder feedback, resource changes)
+- [ ] **Impact assessment**: Understanding of how changes affect dependent PRD and downstream artifacts
+- [ ] **Stakeholder buy-in**: Key stakeholders aware of planned strategic changes
 
-## Update Process
+## Instructions
 
-### Strategic Assessment
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change impact assessment
+2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
+3. **Format output**: Maintain [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
+4. **Assess downstream impact**: Identify which PRD and Epic artifacts need updates
 
-1. **Identify Change Scope**: What sections need updating? (Executive Summary, Problem, Opportunity, Users, Success Metrics, Constraints, Risks)
-2. **Business Impact**: How do changes affect product strategy and business case?
-3. **Downstream Impact**: How do changes affect existing PRD (`/docs/prd/prd.md`) and subsequent artifacts?
+## Output Format
 
-### Update Execution
+- **Location**: Updates existing `/docs/prd/project-brief.md` (EXACT path and filename)
+- **Length**: Maintain 2-3 pages maximum
+- **Impact Documentation**: Clear notes on what changed and downstream impact
+- **Downstream Updates**: List of PRD/Epic artifacts requiring updates
 
-4. **Section Updates**: Modify specific sections using [project-brief-template.md](/.krci-ai/templates/project-brief-template.md) structure
-5. **Strategic Alignment**: Ensure updates maintain strategic coherence and business focus
-6. **Quality Check**: Ensure updated Project Brief maintains 2-3 page limit and foundation quality
+## Success Criteria
 
-### Change Management
+- [ ] **File updated** at `/docs/prd/project-brief.md` reflects all changes
+- [ ] **Change documented** with clear record of what changed and why
+- [ ] **Downstream impact** identified which PRD/Epic artifacts need updates
+- [ ] **Quality maintained** document remains 2-3 pages maximum
+- [ ] **Strategic alignment** changes support overall product strategy
+- [ ] **Stakeholder communication** key stakeholders informed of strategic changes
 
-7. **PRD Impact Analysis**: Determine if PRD needs updating based on Project Brief changes
-8. **Stakeholder Communication**: Notify key stakeholders of strategic changes and implications
+## Execution Checklist
 
-## SDLC Framework Compliance
+### Assessment Phase
 
-### File Structure
+- [ ] **Change scope**: Identify which sections need updating (Executive Summary, Problem, Opportunity, Users, Success Metrics, Constraints, Risks)
+- [ ] **Business impact**: Analyze how changes affect product strategy and business case
+- [ ] **Downstream impact**: Evaluate how changes affect existing PRD (`/docs/prd/prd.md`) and subsequent artifacts
+- [ ] **Stakeholder validation**: Confirm changes with key stakeholders
 
-- **Target File**: Update existing `/docs/prd/project-brief.md` (EXACT path)
-- **Template**: Use same [project-brief-template.md](/.krci-ai/templates/project-brief-template.md) structure
+### Update Phase
 
-### Downstream Impact Management
+- [ ] **Section updates**: Modify specific sections using [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
+- [ ] **Strategic alignment**: Ensure updates maintain strategic coherence and business focus
+- [ ] **Quality check**: Verify updated Project Brief maintains 2-3 page limit and foundation quality
+- [ ] **Content validation**: Ensure all changes are properly integrated
 
-- **PRD Updates**: Assess if PRD sections need updating to maintain alignment
-- **Epic Impact**: Determine if existing Epics (`{epic_number}-epic-{slug}.md`) are affected
-- **Strategic Cascade**: Manage strategic changes flowing through entire SDLC chain
+### Change Management Phase
 
-## Quality Validation
+- [ ] **PRD impact analysis**: Determine if PRD needs updating based on Project Brief changes
+- [ ] **Epic impact review**: Assess if strategic changes affect Epic prioritization or scope
+- [ ] **Stakeholder communication**: Notify key stakeholders of strategic changes and implications
+- [ ] **Documentation**: Record change rationale and downstream impact plan
 
-### Pre-Update Checklist
+## Change Management Guidelines
 
-- [ ] **Change Justification**: Clear strategic reason for update documented
-- [ ] **Scope Defined**: Specific sections and changes identified with business rationale
-- [ ] **Impact Assessed**: Downstream effects on PRD and subsequent artifacts evaluated
-- [ ] **Stakeholders Informed**: Key business stakeholders aware of planned strategic changes
+### 🔄 **Common Update Scenarios:**
 
-### Post-Update Checklist
+1. **Market Changes**: Update Problem Statement with new market insights and competitive intelligence
+2. **Resource Changes**: Update Constraints with new budget, timeline, or team changes
+3. **User Insights**: Update Target Users with new research findings and behavior patterns
+4. **Risk Changes**: Update Key Risks with new market or technology threats
+5. **Business Context**: Update Executive Summary with new business priorities and strategic focus
 
-- [ ] **Template Compliance**: Updated sections follow project-brief-template.md structure
-- [ ] **Length Maintained**: Document remains 2-3 pages maximum
-- [ ] **Strategic Coherence**: All sections maintain strategic alignment and business focus
-- [ ] **File Location**: Changes saved to `/docs/prd/project-brief.md`
-- [ ] **Downstream Assessment**: PRD alignment evaluated and update plan created if needed
+### ✅ **Update Best Practices:**
 
-## Common Update Scenarios
+- **Strategic Focus**: Focus on strategic changes rather than tactical adjustments
+- **Foundation Strength**: Ensure changes strengthen rather than weaken the overall foundation
+- **Long-term View**: Consider long-term strategic implications beyond immediate changes
+- **Cascade Management**: Manage strategic changes flowing through entire SDLC chain
+- **Version Control**: Maintain proper change documentation and approval processes
 
-### Strategic Pivots
+### ❌ **Update Pitfalls to Avoid:**
 
-- Update Problem Statement with new market insights
-- Modify Opportunity with revised business case
-- Adjust Success Metrics based on new strategic priorities
-- Revise Target Users based on market research
+- Making changes without clear strategic justification
+- Updating without assessing downstream artifact impact
+- Expanding scope beyond strategic foundation changes
+- Missing stakeholder communication of strategic changes
+- Breaking template structure during updates
 
-### Resource Changes
-
-- Update Constraints with new budget, timeline, or team changes
-- Modify Success Metrics to reflect realistic resource availability
-- Adjust Key Risks based on new resource constraints
-
-### Market Intelligence
-
-- Update Problem Statement with competitive intelligence
-- Modify Opportunity with new market size or timing insights
-- Adjust Target Users with refined segmentation
-- Update Key Risks with new market or technology threats
-
-### Business Context Changes
-
-- Update Executive Summary with new business priorities
-- Modify Success Metrics with revised business objectives
-- Adjust Constraints with new compliance or regulatory requirements
-
-## LLM Agent Guidance
-
-### Strategic Change Questions
+### 🎯 **Strategic Questions to Ask:**
 
 - "What specific strategic changes are driving this update?"
 - "How do these changes affect our core business case and value proposition?"
 - "Which stakeholders need to approve these strategic changes?"
 - "How do these changes impact the existing PRD and development roadmap?"
+- "What downstream artifacts need updating to maintain alignment?"
 
-### Update Best Practices
+### 📋 **Downstream Impact Checklist:**
 
-- Maintain strategic foundation role for all downstream artifacts
-- Focus on strategic changes rather than tactical adjustments
-- Preserve business case coherence and value proposition clarity
-- Ensure changes strengthen rather than weaken the overall foundation
-- Consider long-term strategic implications beyond immediate changes
-
-### SDLC Impact Management
-
-- **PRD Cascade**: Determine which PRD sections need updating to maintain alignment
-- **Epic Review**: Assess if strategic changes affect Epic prioritization or scope
-- **Stakeholder Communication**: Ensure strategic changes are communicated across teams
-- **Quality Gate**: Updated Project Brief approval required before any dependent artifact changes
-
-### SDLC Framework Compliance
-
-- **Mandatory File**: Update existing `/docs/prd/project-brief.md` only
-- **Template Consistency**: Maintain same project-brief-template.md structure
-- **Version Control**: Proper change documentation
-- **Strategic Gate**: Updated Project Brief approval required before PRD or Epic changes
-- **Foundation Role**: Ensure updated brief continues to enable strong PRD creation
-
-**Remember**: Project Brief updates affect the entire SDLC chain. Focus on strategic foundation changes that strengthen the business case and provide better guidance for all downstream artifacts.
+- [ ] **PRD Alignment**: Assess if PRD sections need updating to maintain alignment
+- [ ] **Epic Review**: Check if strategic changes affect Epic prioritization or scope
+- [ ] **Architecture Impact**: Determine if strategic changes affect system requirements
+- [ ] **Timeline Impact**: Evaluate if changes affect project timeline or milestones

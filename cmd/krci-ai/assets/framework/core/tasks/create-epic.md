@@ -1,88 +1,98 @@
-# Task: create-epic
+# Task: Create Epic
 
-**Description:**
-Create clear epic with problem statement, goal, scope, and implementation approach
+## Description
+
+Create clear epic with problem statement, goal, scope, and implementation approach that breaks down PRD requirements into manageable high-level features. This epic enables Story creation and provides a clear feature grouping for development teams.
+
+## Framework Context
+
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
 
 ## Prerequisites
 
-- Clear understanding of what needs to be built
-- Basic user context identified
+- [ ] **Completed PRD**: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
+- [ ] **Epic priority identified**: Clear understanding of which PRD requirements this Epic addresses
+- [ ] **User context available**: Target users and use cases from PRD understood
+- [ ] **Epic scope defined**: Boundaries of what this Epic includes and excludes
 
-## Output Location
+## Instructions
 
-Create epic files in: `{project_root}/docs/epics/{epic_number}-epic-{slug}.md`
-
-## Process
-
-### Phase 1: Epic Foundation
-
-1. **Assign Epic Identity**
-   - Generate sequential epic number (check existing epics for next number)
-   - Create clear, descriptive title
-   - Generate descriptive slug from title (lowercase, hyphenated)
-
-2. **Define the Problem and Goal**
-   - Articulate what problem this epic solves
-   - Define clear goal for what we want to achieve
-   - Identify target users who will benefit
-
-### Phase 2: Define Scope
-
-3. **Establish What's Included**
-   - List main features and functionality in scope
-   - Be specific about what will be built
-
-4. **Define What's Not Included**
-   - Explicitly state what is out of scope
-   - Identify future considerations
-
-5. **Identify Dependencies**
-   - List other epics, features, or systems this depends on
-   - Mark as "None" if independent
-
-### Phase 3: Solution and Implementation
-
-6. **Describe Solution Approach**
-   - Outline high-level approach to solving the problem
-   - Keep it simple and clear
-
-7. **Create Acceptance Criteria**
-   - Define when this epic will be considered complete
-   - Make criteria testable and clear
-
-8. **Plan User Stories**
-   - Identify main user stories that will make up this epic
-   - Keep high-level, detailed stories come later
-
-### Phase 4: Implementation Planning
-
-9. **Create Implementation Plan**
-   - Break down into main phases or steps
-   - Include key milestones
-   - Keep it simple and actionable
-
-10. **Set Epic Status**
-    - Set initial status (Draft/Planning/In Progress/Done)
-    - Assign priority (Critical/High/Medium/Low)
-    - Set owner and rough timeline
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Epic dependencies and artifact flow
+2. **Apply prioritization**: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md)
+3. **Format output**: Use [epic.md](./.krci-ai/templates/epic.md) template with all variables populated
+4. **Ensure PRD traceability**: Reference specific BR/NFR requirements from PRD
 
 ## Output Format
 
-Use the epic template (`{project_root}/.krci-ai/templates/epic.md`) and populate ALL variables:
-
-- `{{epic_number}}`, `{{epic_title}}`, `{{status}}`, `{{priority}}`
-- `{{owner}}`, `{{timeline}}`
-- `{{problem_statement}}`, `{{goal}}`, `{{target_users}}`
-- `{{in_scope}}`, `{{out_of_scope}}`, `{{dependencies}}`
-- `{{solution_approach}}`, `{{acceptance_criteria}}`
-- `{{planned_stories}}`, `{{implementation_plan}}`
-- `{{implementation_results}}`
+- **Location**: `/docs/epics/{epic_number}-epic-{slug}.md` (EXACT naming pattern)
+- **Epic numbering**: Sequential number based on existing epics (check `/docs/epics/` folder)
+- **Slug format**: Lowercase, hyphenated description (e.g., "ide-integration", "core-engine")
+- **Downstream Enable**: Enables Story creation at `/docs/stories/`
 
 ## Success Criteria
 
-- Epic clearly describes the problem and solution
-- Scope is well-defined with clear boundaries
-- Implementation approach is practical and actionable
-- Acceptance criteria are clear and testable
-- User stories are identified at high level
-- Epic file created with descriptive name: `{project_root}/docs/epics/{epic_number}-epic-{slug}.md`
+- [ ] **File saved** to `/docs/epics/{epic_number}-epic-{slug}.md` with correct naming
+- [ ] **PRD traceability** clear connection to specific BR/NFR requirements
+- [ ] **Problem clarity** epic solves a specific user problem with defined scope
+- [ ] **Goal measurability** epic completion criteria are specific and testable
+- [ ] **Story readiness** epic provides enough detail for Story breakdown
+- [ ] **Template compliance** all template variables populated correctly
+
+## Execution Checklist
+
+### Discovery Phase
+
+- [ ] **PRD analysis**: Review BR/NFR requirements to identify Epic scope
+- [ ] **Epic numbering**: Check existing epics in `/docs/epics/` for next sequential number
+- [ ] **Problem definition**: Identify specific user problem this Epic addresses
+- [ ] **Scope boundaries**: Define what's included and excluded from this Epic
+
+### Planning Phase
+
+- [ ] **Goal definition**: Define clear, measurable Epic completion criteria
+- [ ] **User identification**: Specify target users from PRD who benefit from this Epic
+- [ ] **Dependencies mapping**: Identify other Epics, systems, or external dependencies
+- [ ] **Solution approach**: Define high-level implementation strategy
+
+### Documentation Phase
+
+- [ ] **Epic creation**: Use [epic.md](./.krci-ai/templates/epic.md) template structure
+- [ ] **Variable population**: Complete all template variables ({{epic_number}}, {{epic_title}}, etc.)
+- [ ] **Content validation**: Ensure problem, goal, scope, and approach are clearly defined
+- [ ] **File placement**: Save to exact location `/docs/epics/epic-{number}-{slug}.md`
+
+## Content Guidelines
+
+### 📋 **Epic Template Sections:**
+
+1. **Status Table**: Epic number, title, status, priority, owner, timeline
+2. **Overview**: Problem statement, goal, target users
+3. **Scope**: What's included, what's excluded, dependencies
+4. **Solution Approach**: High-level implementation strategy
+5. **Acceptance Criteria**: How to know when Epic is complete
+6. **User Stories**: Planned stories that will implement this Epic
+
+### ✅ **Quality Standards:**
+
+- **Problem-Focused**: Epic addresses a specific user problem from PRD
+- **Measurable Goal**: Epic completion criteria are specific and testable
+- **Clear Scope**: Boundaries are well-defined with included/excluded items
+- **PRD Traceable**: Clear connection to specific BR/NFR requirements
+- **Story-Ready**: Provides sufficient detail for Story creation
+
+### ❌ **Common Pitfalls to Avoid:**
+
+- Technical implementation details (leave for Stories and Architecture)
+- Vague problem statements without user context
+- Unmeasurable completion criteria
+- Missing PRD traceability to requirements
+- Scope too large for single Epic (consider Epic splitting)
+
+### 🎯 **Story Enablement:**
+
+This Epic should enable immediate Story creation by providing:
+
+- **Clear problem context** that Stories can address with specific features
+- **Defined user personas** that Stories can target with "As a user" scenarios
+- **Measurable outcomes** that become Story acceptance criteria
+- **Scope boundaries** that guide Story prioritization within the Epic

@@ -1,192 +1,98 @@
 # Task: Create Project Brief
 
-## Objective
+## Description
 
-Create a focused Project Brief that captures the essential foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. Enables PRD creation and strategic alignment.
+Create a comprehensive project brief defining the foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. This document serves as the **root artifact** in the SDLC framework that defines the essential foundation for all downstream artifacts, answers fundamental questions before solution development begins, and provides strategic context for PRD creation.
 
-## Project Brief Purpose
+## Framework Context
 
-The Project Brief is the **root artifact** in the SDLC framework that:
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
 
-- Defines the essential foundation for all downstream artifacts
-- Answers fundamental questions before solution development begins
-- Provides strategic context for PRD creation
-- Ensures stakeholder alignment on problem and opportunity
+## Prerequisites
 
-## Best Practice Structure (Keep to 2-3 pages maximum)
+- [ ] Business opportunity or problem identified
+- [ ] Initial stakeholder discussions completed
+- [ ] Market context and user insights available
+- [ ] Strategic goals and constraints understood
 
-### 1. Executive Summary
+## Instructions
 
-**Purpose**: Complete picture in 3-4 sentences
-**Include**: Problem + Solution approach + Expected outcome
-**Key**: Compelling overview that captures project essence
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for role responsibilities and artifact flow
+2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
+3. **Format output**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for consistent structure
 
-### 2. Problem Statement
+## Output Format
 
-**Focus**: Specific pain point with scope boundaries
-**Include**: Who has the problem + quantified impact
-**Avoid**: Solution-oriented language - focus on the pain
-
-### 3. Opportunity
-
-**Focus**: Quantified business value + high-level approach
-**Include**: Expected benefits + solution direction
-**Key**: Why this is worth doing now
-
-### 4. Target Users
-
-**Focus**: Specific user segments with usage patterns
-**Include**: Demographics + behavior patterns + volume
-**Key**: Be specific enough to guide solution design
-
-### 5. Success Metrics
-
-**Focus**: How we'll know we solved the problem
-**Include**: Specific timelines + measurable outcomes
-**Avoid**: Vague aspirational statements
-
-### 6. Constraints
-
-**Focus**: Resource, technical, and assumption factors
-**Include**: Budget + timeline + technical + team limitations
-**Key**: Realistic boundaries that limit solution options
-
-### 7. Key Risks
-
-**Focus**: Major threats with impact assessment
-**Include**: Risk level (HIGH/MEDIUM/LOW) + potential impact
-**Key**: Awareness of what could derail the project
-
-## SDLC Framework Integration
-
-### File Structure Requirements
-
-- **Output Location**: `/docs/prd/project-brief.md` (EXACT path and filename)
+- **Location**: `/docs/prd/project-brief.md` (EXACT path and filename)
+- **Length**: 2-3 pages maximum for executive consumption
 - **Downstream Enable**: Enables PRD creation at `/docs/prd/prd.md`
 
-### Strategic Foundation Role
+## Success Criteria
 
-Your Project Brief should enable PRD creation by:
+- [ ] **File saved** to `/docs/prd/project-brief.md`
+- [ ] **Length** is 2-3 pages maximum
+- [ ] **Problem** is specific and evidence-based
+- [ ] **Users** are clearly defined with usage patterns
+- [ ] **Success metrics** are specific and testable
+- [ ] **Constraints** reflect actual limitations
+- [ ] **Risks** identified with impact levels (HIGH/MEDIUM/LOW)
 
-- Clear problem definition that becomes PRD Problem/Opportunity section
-- Target user clarity that guides PRD user research and requirements
-- Success metrics that become PRD Goals/Measurable Outcomes
-- Constraints that inform PRD MVP scope and technical requirements
+## Execution Checklist
 
-## Execution Steps
+### Discovery Phase
 
-### Discovery
+- [ ] **Stakeholder interviews**: Understand business context and strategic priorities
+- [ ] **Problem validation**: Gather evidence that this problem is real and significant
+- [ ] **User research**: Identify who has this problem and how it impacts them
+- [ ] **Opportunity sizing**: Quantify business value and market opportunity
 
-1. **Stakeholder Interviews**: Understand business context and strategic priorities
-2. **Problem Validation**: Gather evidence that this problem is real and significant
-3. **User Research**: Identify who has this problem and how it impacts them
-4. **Opportunity Sizing**: Quantify business value and market opportunity
+### Analysis Phase
 
-### Analysis
+- [ ] **Problem definition**: Write specific problem statement with evidence
+- [ ] **User segmentation**: Define target users with demographics and usage patterns
+- [ ] **Success planning**: Define measurable outcomes with realistic timelines
+- [ ] **Constraint assessment**: Identify realistic limitations and assumptions
 
-5. **Problem Definition**: Write specific problem statement with evidence
-6. **User Segmentation**: Define target users with demographics and usage patterns
-7. **Success Planning**: Define measurable outcomes with realistic timelines
-8. **Constraint Assessment**: Identify realistic limitations and assumptions
+### Documentation Phase
 
-### Documentation
+- [ ] **Brief creation**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
+- [ ] **Content validation**: Ensure all required sections are completed
+- [ ] **Length verification**: Confirm document is 2-3 pages maximum
+- [ ] **File placement**: Save to exact location `/docs/prd/project-brief.md`
 
-9. **Brief Creation**: Use [project-brief-template.md](/.krci-ai/templates/project-brief-template.md) structure
-10. **Length Check**: Ensure document is 2-3 pages maximum for focus
-11. **Framework Compliance**: Save to `/docs/prd/project-brief.md`
+## Content Guidelines
 
-## Quality Validation
+### 📋 **7 Required Sections:**
 
-### Pre-Release Checklist
+1. **Executive Summary**: Complete picture in 3-4 sentences (Problem + Solution approach + Expected outcome)
+2. **Problem Statement**: Specific pain point with scope boundaries (Who has problem + quantified impact)
+3. **Opportunity**: Quantified business value + high-level approach (Expected benefits + solution direction)
+4. **Target Users**: Specific user segments with demographics + behavior patterns + volume
+5. **Success Metrics**: Measurable outcomes with specific timelines (How we'll know we solved the problem)
+6. **Constraints**: Resource, technical, and assumption factors (Budget + timeline + technical + team limitations)
+7. **Key Risks**: Major threats with impact assessment (Risk level + potential impact)
 
-- [ ] **File Location**: Saved exactly to `/docs/prd/project-brief.md`
-- [ ] **Length**: Document is 2-3 pages maximum
-- [ ] **Problem Clarity**: Problem statement is specific and evidence-based
-- [ ] **User Specificity**: Target users are clearly defined with usage patterns
-- [ ] **Measurable Success**: Success metrics are specific and testable
-- [ ] **Realistic Constraints**: Constraints reflect actual limitations
-- [ ] **Risk Assessment**: Key risks identified with impact levels
+### ✅ **Quality Standards:**
 
-### Success Indicators
+- **Problem Focus**: Use concrete user scenarios and quantified evidence
+- **User Specificity**: Be specific enough to guide solution design decisions
+- **Measurable Success**: Specific, testable outcomes with realistic timelines
+- **Realistic Constraints**: Honest about actual limitations and dependencies
+- **Evidence-Based**: Support statements with data, research, and metrics
 
-- Stakeholders can quickly understand why this project matters
-- Problem statement guides solution development without being prescriptive
-- Target users are specific enough to inform design decisions
-- Success metrics provide clear validation criteria
-- Constraints help teams make realistic scope decisions
-- Document enables immediate PRD creation
+### ❌ **Common Pitfalls to Avoid:**
 
-## Best Practices
+- Solution-oriented problem statements (focus on pain, not solutions)
+- Vague user descriptions (be specific about segments and usage)
+- Unmeasurable success metrics (avoid aspirational statements)
+- Unrealistic constraints (be honest about limitations)
+- Missing evidence (support with data and research)
 
-### Problem Definition Excellence
+### 🎯 **PRD Enablement:**
 
-- Start with user scenarios and pain points
-- Use quantified evidence (support tickets, user research, business metrics)
-- Define scope boundaries (what's included and excluded)
-- Avoid solution-oriented problem statements
+This Project Brief should enable immediate PRD creation by providing:
 
-### User Focus
-
-- Be specific about user segments and demographics
-- Include usage patterns and frequency
-- Quantify user base size and growth
-- Connect user needs to business value
-
-### Success Measurement
-
-- Define specific, measurable outcomes
-- Include realistic timelines for achievement
-- Focus on business and user value metrics
-- Avoid vanity metrics that don't drive decisions
-
-### Constraint Realism
-
-- Include all major limitations (budget, timeline, technical, team)
-- Document key assumptions that could change
-- Be honest about what's achievable
-- Consider external dependencies
-
-## Common Pitfalls to Avoid
-
-1. **Solution Creep**: Don't prescribe solutions - focus on problems and opportunities
-2. **Scope Inflation**: Keep focused on core problem rather than expanding
-3. **Vague Users**: Avoid generic user descriptions - be specific about segments
-4. **Unmeasurable Success**: Ensure all success metrics are concrete and testable
-5. **Unrealistic Constraints**: Be honest about actual limitations and assumptions
-6. **Missing Evidence**: Support problem statements with data and research
-7. **Framework Shortcuts**: Always use exact SDLC paths and naming conventions
-
-## LLM Agent Guidance
-
-### Discovery Questions
-
-Ask stakeholders these key questions:
-
-- "What specific evidence shows this problem exists and matters?"
-- "Who exactly has this problem and how does it impact their work/life?"
-- "What's the quantified business opportunity if we solve this?"
-- "What are the realistic constraints on time, budget, and resources?"
-- "What could go wrong that would prevent success?"
-
-### Writing Focus
-
-- Start with concrete user scenarios and pain points
-- Use specific data and metrics wherever possible
-- Quantify impact in business terms (cost, time, satisfaction)
-- Define clear boundaries on what's in and out of scope
-- Be realistic about what can be achieved with available resources
-
-### PRD Enablement
-
-- Problem definition should directly inform PRD Problem/Opportunity section
-- Target users should guide PRD user research and use case definition
-- Success metrics should become PRD Goals/Measurable Outcomes
-- Constraints should inform PRD MVP scope and technical assumptions
-
-### SDLC Framework Compliance
-
-- **Mandatory Output**: Save Project Brief exactly to `/docs/prd/project-brief.md`
-- **Quality Gate**: Project Brief approval required before PRD creation
-- **Template Use**: Follow project-brief-template.md structure exactly
-
-**Remember**: The Project Brief is the foundation for all downstream work. Spend time getting it right - a strong Project Brief makes PRD creation much easier and more focused.
+- Clear problem definition → PRD Problem/Opportunity section
+- Target user clarity → PRD user research and requirements
+- Success metrics → PRD Goals/Measurable Outcomes
+- Constraints → PRD MVP scope and technical requirements
