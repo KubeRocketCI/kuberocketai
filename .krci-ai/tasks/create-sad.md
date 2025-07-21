@@ -1,182 +1,133 @@
-# Task: Create Solution Architecture Document (SAD)
+# Task: Create Software Architecture Document (SAD)
 
 ## Description
 
-Create comprehensive Solution Architecture Document that bridges PRD requirements to Epic/Story implementation using enterprise architecture standards with SDLC integration.
+Create comprehensive system architecture documentation that translates PRD requirements and Epic features into technical design specifications for development teams. This SAD enables implementation guidance and provides technical foundation for all development work.
 
-## Input Dependencies
+## Framework Context
 
-- **Required**: PRD document with BR/NFR requirements defined
-- **Required**: Epic definitions and business context
-- **Optional**: Project Brief for strategic context
-- **Optional**: Existing baseline architecture documentation
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
+
+## Prerequisites
+
+- [ ] **Completed PRD**: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
+- [ ] **Epic definitions**: Epics available at `/docs/epics/` with business context and scope
+- [ ] **Architecture principles**: Understanding of organizational architecture standards
+- [ ] **Technology constraints**: Awareness of technology stack and platform limitations
 
 ## Instructions
 
-### Phase 1: Input Analysis
-
-1. **Parse PRD Requirements**
-   - Extract all Business Requirements (BR1, BR2, BR3...)
-   - Extract all Non-Functional Requirements (NFR1, NFR2, NFR3...)
-   - Identify constraints, assumptions, and success criteria
-
-2. **Analyze Epic Context**
-   - Understand high-level features and business objectives
-   - Note component breakdown requirements
-   - Identify Epic-to-Story guidance needs
-
-3. **Review Business Context**
-   - Project Brief objectives and success metrics
-   - Target users and stakeholder concerns
-   - Technology strategy and organizational constraints
-
-### Phase 2: Architecture Document Creation
-
-1. **Use Complete Template**
-   - Follow [SAD Template](./.krci-ai/templates/sad-template.md)
-   - Complete all 11 sections systematically
-   - Replace all template variables with project-specific content
-
-2. **Focus on SDLC Integration**
-   - **Section 2.4**: Create PRD Requirements Mapping table
-   - **Section 6.8**: Define Solution Strategy with technology decisions
-   - **Section 7.3**: Provide Epic Breakdown Guidance for development
-   - **Section 8.1**: Use ADR format for architectural decisions
-
-3. **Apply Quality Standards**
-   - Use C4 visual hierarchy approach for architectural views
-   - Address all quality attributes with implementation strategies
-   - Ensure comprehensive risk mitigation strategies
-   - Provide actionable development guidance
-
-### Phase 3: SDLC Integration Focus
-
-#### Critical Section 2.4: PRD Requirements Mapping
-
-- Create direct traceability table linking each BR/NFR to architectural components
-- Define implementation approach for each requirement
-- Ensure no PRD requirement is left unmapped
-
-#### Critical Section 6.8: Solution Strategy
-
-- Document architectural principles driving design decisions
-- Define technology stack with clear rationale and trade-offs
-- Establish architecture patterns with business justification
-
-#### Critical Section 7.3: Implementation Guidance
-
-- Create Epic Breakdown Guidance table mapping components to Epics
-- Define Story creation focus areas for each Epic
-- Establish development standards and API design guidelines
-- Align testing strategy with quality assurance approach
-
-#### Critical Section 8.1: Architectural Decisions
-
-- Use ADR format for all major architectural decisions
-- Include context, decision, consequences, and alternatives
-- Ensure decision rationale enables future maintenance
-
-### Phase 4: Quality Validation
-
-1. **Content Completeness Check**
-   - All 11 sections completed with relevant content
-   - No template variables remaining unfilled
-   - Professional tone and technical accuracy maintained
-
-2. **SDLC Integration Verification**
-   - PRD requirements fully traced to architectural components
-   - Epic breakdown guidance enables immediate Epic creation
-   - Development standards and API guidelines provided
-   - Quality assurance approach defined
-
-3. **C4 Visual Approach Validation**
-   - System Context diagram (C4 Level 1) included
-   - Container diagram (C4 Level 2) included
-   - Component diagrams (C4 Level 3) for major components
-   - Deployment view shows infrastructure mapping
-
-## Templates and References
-
-- **Primary Template**: [SAD Template](./.krci-ai/templates/sad-template.md)
-- **Supporting Templates**:
-  - [Architecture Decision Record](./.krci-ai/templates/architecture-decision-record.md)
-  - [Requirements Mapping](./.krci-ai/templates/requirements-mapping.md)
-- **Standards**: [SAD Standards](./.krci-ai/data/sad-standards.md)
-- **Guidelines**: [C4 Model Guidelines](./.krci-ai/data/c4-model-guidelines.md)
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for architecture documentation dependencies and quality gates
+2. **Apply design principles**: Use guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
+3. **Format output**: Use [sad-template.md](./.krci-ai/templates/sad-template.md) for comprehensive structure
+4. **Ensure traceability**: Map PRD requirements (BR/NFR) and Epic features to architectural components
 
 ## Output Format
 
-- **File Name**: `sad-v1.md` (increment version as needed)
-- **Location**: `docs/architecture/`
-- **Format**: Markdown following SAD template structure
-- **Content**: Complete architecture document ready for Epic/Story creation
+**Multi-File Architecture Documentation** - Create numbered section files in `/docs/architecture/` following the structure from [sad-template.md](./.krci-ai/templates/sad-template.md):
+
+### Core Architecture Sections (Required for All Projects)
+
+- [ ] **01-executive-summary.md** - Business context, architectural approach, success metrics
+- [ ] **02-introduction.md** - Definitions, scope, stakeholders, **PRD requirements mapping**
+- [ ] **06-target-architecture.md** - Target state C4 diagrams, quality attributes, solution strategy
+- [ ] **07-transition-migration.md** - Migration approach, roadmap, **Epic breakdown guidance**
+- [ ] **08-architectural-decisions.md** - ADR format decisions with context, alternatives, consequences
+
+### Extended Sections (Medium/Large Projects)
+
+- [ ] **03-context.md** - Technology strategy, business/data/infrastructure/application/security architecture
+- [ ] **04-requirements.md** - Business goals, functional requirements, NFRs, constraints, assumptions
+- [ ] **05-baseline-architecture.md** - Current state conceptual, logical, integration, physical views
+- [ ] **09-cross-cutting-concerns.md** - Security, scalability, observability, fault tolerance approaches
+- [ ] **10-quality-assurance.md** - Testing strategy, automation approach, quality metrics
+- [ ] **11-appendices.md** - Glossary, diagram index, reference materials
+
+**Project Sizing Guidelines:**
+
+- **Small Projects**: Use core 5-file structure (sections 1, 2, 6, 7, 8)
+- **Medium Projects**: Use 8-file structure (sections 1, 2, 3, 6, 7, 8, 9, 10)
+- **Large Projects**: Use full 11-file structure above
+
+**Template Reference**: Follow comprehensive structure and content guidelines from [sad-template.md](./.krci-ai/templates/sad-template.md)
 
 ## Success Criteria
 
-- [ ] Product Owner can create Epics directly from Section 7.3 guidance
-- [ ] Developers understand implementation approach from architecture
-- [ ] All major technology and design decisions have clear rationale
-- [ ] Quality attributes have specific implementation approaches
-- [ ] Clear traceability path: PRD → Architecture → Epic → Story
+- [ ] **Core sections completed** - Required architecture sections (01-executive-summary.md, 02-introduction.md, 06-target-architecture.md, 07-transition-migration.md, 08-architectural-decisions.md) created with project-specific content
+- [ ] **PRD traceability established** - Clear mapping from BR/NFR requirements to architectural components in 02-introduction.md
+- [ ] **Epic enablement provided** - Architecture guidance in 07-transition-migration.md enables Epic breakdown and Story creation
+- [ ] **Quality attributes addressed** - NFR requirements have specific implementation approaches in 06-target-architecture.md
+- [ ] **Technology decisions documented** - All major architectural decisions in 08-architectural-decisions.md using ADR format
+- [ ] **Professional quality maintained** - All sections follow template structure from [sad-template.md](./.krci-ai/templates/sad-template.md)
+- [ ] **Project-appropriate scope** - Section count matches project complexity (5 for small, 8 for medium, 11 for large projects)
 
-## Quality Gates
+## Execution Checklist
 
-- Architecture addresses all PRD requirements (BR and NFR)
-- SDLC integration sections (2.4, 6.8, 7.3, 8.1) completed
-- Professional architecture standards maintained
-- Epic/Story implementation guidance actionable
-- C4 visual hierarchy properly implemented
+### Discovery Phase
 
-## Common Pitfalls to Avoid
+- [ ] **PRD analysis**: Extract all BR/NFR requirements and identify architectural implications
+- [ ] **Epic review**: Understand business features and component breakdown needs
+- [ ] **Stakeholder requirements**: Identify architectural concerns from business stakeholders
+- [ ] **Technology constraints**: Review organizational standards and platform limitations
 
-❌ **DON'T:**
+### Architecture Design Phase
 
-- Leave any `{{variable}}` placeholders unfilled
-- Copy/paste generic content without project customization
-- Skip SDLC integration sections (2.4, 6.8, 7.3, 8.1)
-- Create duplicate content between sections
-- Use vague or non-specific language
-- Ignore PRD requirements traceability
+- [ ] **System context**: Define system boundaries and external interfaces
+- [ ] **Component architecture**: Design high-level system components and their interactions
+- [ ] **Quality attributes**: Address NFR requirements with specific architectural approaches
+- [ ] **Technology decisions**: Select technology stack aligned with requirements and standards
 
-✅ **DO:**
+### Documentation Phase
 
-- Customize all content to specific project context
-- Create direct PRD-to-architecture traceability
-- Provide actionable Epic/Story guidance
-- Use professional architecture terminology
-- Follow C4 visual hierarchy approach
-- Document decisions with clear rationale
+- [ ] **SAD creation**: Use [sad-template.md](./.krci-ai/templates/sad-template.md) structure
+- [ ] **Variable population**: Complete all template variables with project-specific content
+- [ ] **Requirements mapping**: Ensure every BR/NFR requirement is addressed in architecture
+- [ ] **Epic guidance**: Provide implementation guidance for Epic breakdown and Story creation
 
-## AI Agent Specific Instructions
+### Validation Phase
 
-### Variable Replacement Strategy
+- [ ] **Completeness check**: Verify all 11 sections are populated and professional
+- [ ] **Consistency validation**: Ensure architecture decisions align across all sections
+- [ ] **Traceability verification**: Confirm all PRD requirements map to architectural components
+- [ ] **Implementation readiness**: Validate architecture provides sufficient development guidance
 
-1. **System Context**: Extract system name, purpose, and scope from PRD
-2. **Requirements Analysis**: Map each BR/NFR to specific architectural decisions
-3. **Stakeholder Analysis**: Identify all stakeholders from Project Brief and PRD
-4. **Technology Strategy**: Align with organizational standards while meeting requirements
-5. **Epic Mapping**: Create actionable guidance for immediate Epic creation
+## Content Guidelines
 
-### Quality Validation Steps
+### 📋 **SAD Template Sections (11 Required):**
 
-1. **Traceability Check**: Every PRD requirement must appear in Section 2.4 mapping
-2. **Implementation Check**: Section 7.3 must enable immediate Epic creation
-3. **Decision Check**: All major decisions must follow ADR format in Section 8.1
-4. **Visual Check**: C4 diagrams must be included in Sections 6.1-6.2
-5. **Professional Check**: Enterprise architecture standards maintained throughout
+1. **Executive Summary**: Business-focused overview connecting architecture to business value
+2. **Introduction**: Foundation and context for architectural decisions
+3. **Context**: Business context, stakeholders, and external dependencies
+4. **Requirements**: Detailed BR/NFR requirements analysis and architectural implications
+5. **Baseline Architecture**: Current state and existing system components
+6. **Target Architecture**: Desired future state and new system design
+7. **Transition/Migration**: Implementation approach and migration strategy
+8. **Architectural Decisions**: Key technical decisions with rationale and alternatives
+9. **Cross-Cutting Concerns**: Security, logging, monitoring, and other system-wide concerns
+10. **Quality Assurance**: Testing strategy and quality validation approaches
+11. **Appendices**: Supporting documentation and reference materials
 
-## Expected Timeline
+### ✅ **Quality Standards:**
 
-- **Small Systems** (< 5 components): 2-4 hours
-- **Medium Systems** (5-15 components): 4-8 hours
-- **Large Systems** (15+ components): 8-16 hours
+- **Requirements Traceable**: Every BR/NFR requirement addressed in architecture
+- **Epic Enabling**: Architecture provides clear guidance for Epic implementation
+- **Professional Quality**: Document suitable for stakeholder review and development use
+- **Technology Aligned**: Architecture decisions align with organizational standards
+- **Implementation Ready**: Sufficient detail for development team implementation
 
-## Risk Mitigation
+### ❌ **Common Pitfalls to Avoid:**
 
-- **Scope Creep**: Use PRD as definitive requirement source
-- **Analysis Paralysis**: Focus on MVP architecture first, iterate later
-- **SDLC Disconnect**: Validate Epic guidance with Product Owner
-- **Technical Debt**: Address known constraints and technical limitations
-- **Stakeholder Alignment**: Validate architectural approach with key stakeholders
+- Leaving template variables unfilled ({{variable}} placeholders)
+- Missing requirements traceability from PRD to architecture
+- Over-engineering solutions beyond PRD/Epic requirements
+- Insufficient implementation guidance for development teams
+- Architectural decisions without clear rationale or alternatives
 
-This task creates professional, SDLC-integrated architecture documentation that drives successful product development.
+### 🎯 **Implementation Enablement:**
+
+This SAD should enable immediate development by providing:
+
+- **Clear component boundaries** that Epics and Stories can implement
+- **Technology guidance** that development teams can follow
+- **Quality requirements** that become Story acceptance criteria
+- **Implementation roadmap** that guides Epic sequencing and Story creation

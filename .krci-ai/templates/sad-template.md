@@ -685,25 +685,7 @@ graph TB
 
 ---
 
-## Template Usage Instructions
-
-### Variable Replacement Guide
-
-1. **System Identification**: Replace `{{system_name}}` with your specific system
-2. **SDLC Integration**: Pay special attention to sections 2.4, 6.8, 7.3, and 8.1
-3. **C4 Diagrams**: Include visual diagrams in sections 6.1-6.2
-4. **Quality Focus**: Complete all quality attribute implementation approaches
-
-### Validation Checklist
-
-- [ ] All PRD requirements mapped to architectural components
-- [ ] Epic breakdown guidance provided for each major component
-- [ ] C4 diagrams included for system context and container views
-- [ ] Architecture Decision Records follow ADR format
-- [ ] Quality attributes addressed with specific approaches
-- [ ] Risk mitigation strategies defined
-- [ ] Implementation roadmap includes SDLC artifact dependencies
-
----
-
-**This template provides the foundation for creating professional architecture documentation that seamlessly integrates with the SDLC framework while maintaining enterprise architecture standards.**
+**Document Status**: {{document_status}}
+**Version**: {{version}}
+**Last Updated**: {{last_updated}}
+**Next Review**: {{next_review}}

@@ -208,7 +208,6 @@ Risk Categories:
 
 **Dependencies**: None (root artifact)
 **Output Location**: This Project Brief MUST be saved as `/docs/prd/project-brief.md`
-**Registry Update**: Add artifact entry to `/docs/registry.json`
 **Downstream Enablement**: Enables PRD creation at `/docs/prd/prd.md`
 
 <!-- SDLC Framework Integration:
@@ -220,7 +219,6 @@ This Project Brief serves as the foundation for:
 
 Directory Structure:
 /docs/
-├── registry.json                 # Central artifact registry
 ├── prd/                          # Product vision & requirements
 │   ├── project-brief.md          # Project vision & strategy (THIS FILE)
 │   └── prd.md                    # Product requirements (ENABLED BY THIS)
@@ -242,6 +240,5 @@ Directory Structure:
 ✅ Constraints are realistic and comprehensive
 ✅ Key risks identified with impact assessment
 ✅ File saved exactly as /docs/prd/project-brief.md
-✅ Registry updated at /docs/registry.json
 ✅ Ready to enable PRD creation
 -->

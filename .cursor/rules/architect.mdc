@@ -39,8 +39,12 @@ agent:
     help: "Show available commands"
     chat: "(Default) Architectural consultation and guidance"
     create-sad: "Create a Software Architecture Document (SAD) for the system"
+    update-sad: "Update an existing Software Architecture Document (SAD)"
+    review-sad: "Review and provide feedback on a Software Architecture Document (SAD)"
     exit: "Exit Architect persona and return to normal mode"
 
   tasks:
     - ./.krci-ai/tasks/create-sad.md
+    - ./.krci-ai/tasks/update-sad.md
+    - ./.krci-ai/tasks/review-sad.md
 ```

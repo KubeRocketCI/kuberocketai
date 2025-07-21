@@ -1,100 +1,144 @@
-# Task: create-story
+# Task: Create Story
 
-**Description:**
-Create INVEST-compliant user story with clear acceptance criteria, implementation plan, and comprehensive QA checklist
+## Description
+
+Create user-focused requirements with implementation tasks and acceptance criteria that break down Epic features into actionable development work. This story provides specific user value and clear implementation guidance for development teams.
+
+## Framework Context
+
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
 
 ## Prerequisites
 
-- Epic context and requirements
-- Target user persona identified
-- Business value proposition clear
+- [ ] **Epic exists**: Target Epic is defined and available in `/docs/epics/`
+- [ ] **Epic context understood**: Epic problem, goal, and scope are clear
+- [ ] **User persona identified**: Target user from Epic is specified
+- [ ] **Story scope defined**: Specific functionality this Story will deliver
 
-## Epic Selection (HALT AFTER EACH STEP)
+## Instructions
 
-1. **Review Available Epics**: Check `{project_root}/docs/epics/` folder for existing epics (format: `{epic_number}-epic-{slug}.md`)
-2. **Epic Discovery** (if no epics available or unclear):
-   - Ask user to describe the broader feature/initiative this story supports
-   - Identify the business goal and user value theme
-   - Determine if this creates a new epic or fits existing product roadmap
-   - Suggest creating an epic first if none exists
-3. **Propose Target Epic**: Identify which epic this story belongs to based on requirements and discovery
-4. **Determine Epic Number**: Extract epic number from chosen epic filename (e.g., from `1-epic-ide-integration.md` get `1`)
-5. **HALT for Confirmation**: Present epic proposal and epic number to user and wait for confirmation before proceeding
-
-## Output Location
-
-Create story files in: `{project_root}/docs/stories/{epic_number}.{story_number}-story-{slug}.md`
-
-## Process (EXECUTE ONLY AFTER EPIC CONFIRMATION)
-
-### Phase 1: Story Foundation
-
-1. **Assign Story Identity**
-   - Generate sequential story number within epic (check existing stories for next number)
-   - Create clear, descriptive title following pattern: "{Action} {Feature} for {User}"
-   - Generate descriptive slug from title (lowercase, hyphenated)
-
-2. **Define User Story Core**
-   - Identify target persona from epic's target users
-   - Articulate user goal (what they want to achieve)
-   - Define business value (why it matters)
-   - Format as: "As a {persona}, I want {goal}, so that {business_value}"
-
-### Phase 2: Story Requirements
-
-3. **Establish Story Context**
-   - Set initial status (Draft/Ready for Development/In Progress)
-   - Create epic reference in format: "Epic {epic_number}: {epic_title}"
-   - Assign priority level (Critical/High/Medium/Low)
-   - Estimate story points (1, 2, 3, 5, 8, 13) using complexity assessment
-
-4. **Define Dependencies**
-   - List all prerequisite stories, features, or technical components
-   - Mark as "None" if independent
-
-### Phase 3: Story Details
-
-5. **Create Acceptance Criteria**
-   - Write specific, testable conditions using Given-When-Then format where applicable
-   - Ensure each criterion is measurable and covers happy path and edge cases
-
-6. **Develop Detailed Implementation Plan**
-   - Outline technical approach and architecture decisions
-   - List development steps in logical order
-   - Identify key components to modify/create
-   - Define integration points with existing systems
-   - Include code structure and key methods/functions
-
-### Phase 4: Quality Assurance
-
-7. **Design QA Checklist**
-   - Include functional testing scenarios
-   - Add non-functional requirements (performance, security, usability)
-   - Specify test data requirements and validation criteria
-
-8. **Complete Story Metadata**
-   - Add Jira ticket reference (or mark "TBD")
-   - Write comprehensive description with context and rationale
-   - Set implementation results placeholder
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story dependencies and naming conventions
+2. **Apply prioritization**: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md)
+3. **Format output**: Use [story.md](./.krci-ai/templates/story.md) template with proper naming
+4. **Ensure Epic traceability**: Reference parent Epic and map to specific Epic deliverables
 
 ## Output Format
 
-Use the story template (`{project_root}/.krci-ai/templates/story.md`) and populate ALL variables:
-
-- `{{story_number}}`, `{{story_title}}`, `{{status}}`
-- `{{epic_reference}}`, `{{priority}}`, `{{story_points}}`, `{{jira_ticket}}`
-- `{{dependencies}}`
-- `{{persona}}`, `{{goal}}`, `{{business_value}}`
-- `{{acceptance_criteria}}`, `{{description}}`
-- `{{implementation_plan}}`, `{{implementation_results}}`
-- `{{qa_checklist}}`
+- **Location**: `/docs/stories/{epic_number}.{story_number}.story.md` (EXACT naming pattern)
+- **Story numbering**: Sequential number within Epic (e.g., 1.1, 1.2, 1.3 for Epic 1)
+- **Epic reference**: Clear connection to parent Epic in format "Epic {number}: {title}"
+- **Downstream Enable**: Enables Code implementation and Testing
 
 ## Success Criteria
 
-- Story follows INVEST principles (Independent, Negotiable, Valuable, Estimable, Small, Testable)
-- All template variables populated with meaningful content
-- Acceptance criteria are clear and testable
-- Implementation plan provides detailed development guidance
-- QA checklist ensures comprehensive validation
-- Story file created with descriptive name: `{project_root}/docs/stories/{epic_number}.{story_number}-story-{slug}.md`
-- Epic properly referenced as "Epic {epic_number}: {epic_title}"
+- [ ] **File saved** to `/docs/stories/{epic_number}.{story_number}.story.md` with correct naming
+- [ ] **Epic traceability** clear connection to parent Epic and its goals
+- [ ] **User story format** follows "As a [user], I want [goal], so that [value]" structure
+- [ ] **Acceptance criteria** specific, testable conditions for completion
+- [ ] **Implementation ready** provides sufficient detail for development
+- [ ] **Template compliance** all template variables populated correctly
+
+## Execution Checklist
+
+### Discovery Phase
+
+- [ ] **Epic selection**: Identify target Epic from `/docs/epics/` folder
+- [ ] **Story numbering**: Check existing stories for next sequential number within Epic
+- [ ] **User persona**: Extract target user from Epic's user definitions
+- [ ] **Story scope**: Define specific functionality this Story delivers
+
+### Planning Phase
+
+- [ ] **User story definition**: Create "As a [user], I want [goal], so that [value]" statement
+- [ ] **Epic reference**: Create proper Epic reference format "Epic {number}: {title}"
+- [ ] **Story points estimation**: Estimate complexity (1, 2, 3, 5, 8, 13) using Epic context
+- [ ] **Dependencies identification**: Identify other Stories or systems this depends on
+
+### Requirements Phase
+
+- [ ] **Acceptance criteria**: Define specific, testable conditions for completion
+- [ ] **Implementation plan**: Outline key development tasks and approach
+- [ ] **QA checklist**: Define testing requirements and validation steps
+- [ ] **Business value validation**: Ensure Story delivers measurable user value
+
+### Documentation Phase
+
+- [ ] **Story creation**: Use [story.md](./.krci-ai/templates/story.md) template structure
+- [ ] **Variable population**: Complete all template variables ({{story_number}}, {{story_title}}, etc.)
+- [ ] **Content validation**: Ensure user story, acceptance criteria, and plan are complete
+- [ ] **File placement**: Save to exact location `/docs/stories/{epic_number}.{story_number}.story.md`
+
+### Epic Integration Phase
+
+- [ ] **Epic verification**: Confirm Epic exists at `/docs/epics/{epic_number}-epic-{slug}.md`
+- [ ] **User story creation**: Write user story format "As a... I want... so that..." aligned with Epic features
+- [ ] **Acceptance criteria**: Define specific, testable success criteria for Story validation
+- [ ] **Tasks/Subtasks plan**: Outline key development tasks and approach as checklist structure
+
+### Story Completion Phase
+
+- [ ] **Story file creation**: Save Story to exact location `/docs/stories/{epic_number}.{story_number}.story.md`
+- [ ] **Template compliance**: Use [story.md](./.krci-ai/templates/story.md) template with all required sections
+- [ ] **Content validation**: Ensure user story, acceptance criteria, and Tasks/Subtasks are complete
+
+### Story Creation Phase
+
+- [ ] **Story structure**: Create Story using [story.md](./.krci-ai/templates/story.md) template with structured Tasks/Subtasks section
+- [ ] **User story definition**: Write clear "As a... I want... so that..." format with persona, goal, and business value
+- [ ] **Acceptance criteria**: Define specific, testable criteria that validate Story completion
+- [ ] **Tasks/Subtasks planning**: Create checklist structure for systematic LLM execution
+
+### Tasks/Subtasks Development Phase
+
+- [ ] **Technical approach**: Define overall implementation approach and strategy
+- [ ] **Architecture references**: Include direct links to specific architecture sections needed
+- [ ] **Task breakdown**: Create main implementation Tasks with descriptions and file lists
+- [ ] **Subtask checklists**: Define detailed Subtasks as checkboxes for systematic LLM execution
+- [ ] **Testing plan**: Create testing checklist items to validate Story functionality
+
+## Content Guidelines
+
+### 📋 **Story Template Sections:**
+
+1. **Status Table**: Story number, title, status, Epic reference, priority, story points, Jira ticket
+2. **Dependencies**: Other Stories or systems this Story depends on
+3. **Story**: "As a [user], I want [goal], so that [value]" format
+4. **Acceptance Criteria**: Specific, testable conditions for completion
+5. **Description**: Detailed context and background for the Story
+6. **Implementation Plan**: Development approach and key tasks
+7. **Implementation Results**: Outcomes and deliverables (populated during development)
+8. **QA Checklist**: Testing requirements and validation steps
+
+### ✅ **Quality Standards:**
+
+- **User-Centered**: Story focuses on specific user value and outcomes
+- **INVEST Principles**: Independent, Negotiable, Valuable, Estimable, Small, Testable
+- **Epic Traceable**: Clear connection to parent Epic goals and scope
+- **Implementation Ready**: Sufficient detail for development without being prescriptive
+- **Testable**: Acceptance criteria are specific and verifiable
+
+### ❌ **Common Pitfalls to Avoid:**
+
+- Technical implementation details (leave flexibility for development)
+- Vague acceptance criteria that can't be tested
+- Stories too large for single sprint (consider Story splitting)
+- Missing Epic traceability and context
+- User stories that don't deliver measurable value
+
+### 🎯 **Implementation Enablement:**
+
+This Story should enable immediate development by providing:
+
+- **Clear user value** that developers can understand and implement
+- **Specific acceptance criteria** that define completion
+- **Implementation guidance** without being overly prescriptive
+- **Testing requirements** that enable quality validation
+
+### ✅ **Story Structure Elements:**
+
+1. **Status**: Status tracking and Epic reference
+2. **Dependencies**: Inter-story and external dependencies
+3. **Story**: User story in standard format
+4. **Acceptance Criteria**: Specific validation requirements
+5. **Description**: Additional context and details
+6. **Tasks/Subtasks**: Development checklist and approach
