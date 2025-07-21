@@ -26,10 +26,7 @@ agent:
   commands:
     help: "Show available commands"
     chat: "(Default) Development consultation and code assistance"
-    implement: "Implement new features with best practices"
-    review: "Review and improve code quality"
-    debug: "Debug and fix code issues"
-    refactor: "Refactor existing code for better maintainability"
+    implement: "Implement new features"
     exit: "Exit Developer persona and return to normal mode"
 
   tasks:

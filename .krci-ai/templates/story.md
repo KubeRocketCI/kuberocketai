@@ -28,9 +28,9 @@
 
 {{description}}
 
-## Implementation Plan
+## Tasks/Subtasks
 
-{{implementation_plan}}
+{{tasks_subtasks}}
 
 ## Implementation Results
 

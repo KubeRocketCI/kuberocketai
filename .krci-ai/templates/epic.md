@@ -48,11 +48,3 @@
 ## User Stories
 
 {{planned_stories}}
-
-## Implementation Plan
-
-{{implementation_plan}}
-
-## Results
-
-{{implementation_results}}
