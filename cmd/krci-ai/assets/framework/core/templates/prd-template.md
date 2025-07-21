@@ -123,105 +123,54 @@ AVOID vague statements like "improve user experience" or "increase engagement"
 
 ## 6. MVP/Functional Requirements
 
-<!-- Focus on required functionality, save the rest for appendix -->
-<!-- What's the "min-viable" set of functionality for target user adoption? -->
-<!-- Group by use case/user journey to enable Epic creation with SDLC naming: {epic_number}-epic-{slug}.md -->
+<!-- Critical: Focus on required functionality, save the rest for future phases -->
+<!-- Question: What's the "min-viable" set of functionality for target user adoption? -->
 
-### P0 Requirements (Must Have for MVP)
+### Business Requirements (BR)
 
-{{p0_requirements}}
+**BR1**: {{business_requirement_1}}
+**BR2**: {{business_requirement_2}}
+**BR3**: {{business_requirement_3}}
 
-### P1 Requirements (High Value, Important Additions)
+### Non-Functional Requirements (NFR)
 
-{{p1_requirements}}
-
-### P2 Requirements (Nice to Have)
-
-{{p2_requirements}}
+**NFR1**: {{system_requirement_1}}
+**NFR2**: {{system_requirement_2}}
+**NFR3**: {{system_requirement_3}}
 
 <!-- Template Guidance:
+
 Format: Focus on functionality, not implementation
 ✅ DO: "First-time user must accept privacy policy to use product"
 ✅ DO: "Product team can monitor and visualize user engagement"
 ✅ DO: Link to UX sketches for quick visualization
+✅ DO: Include priorities: [P0] [P1] [P2] where P0 = truly required for MVP
 ✅ DO: Bucket by use case/user journey for Epic creation
+✅ DO: Consider all critical user journeys (CUJs) - create, maintain, retire, navigate
+✅ DO: Limit to 3 phases/milestones maximum
 
 ❌ DON'T: Performance metrics unless required for adoption
 ❌ DON'T: Design details like "blue 'Continue' button"
 ❌ DON'T: Technical implementation specifics
 
-Priority Examples:
-P0: User can login using biometric authentication with <3 second response
-P1: User can view login history with timestamps and device info
-P2: Admin can configure password complexity requirements
+Business Requirements (BR) Examples:
+BR1 [P0]: User can login using biometric authentication with <3 second response
+BR2 [P1]: User can view login history with timestamps and device info
+BR3 [P2]: Admin can configure password complexity requirements
+
+Non-Functional Requirements (NFR) Examples:
+NFR1 [P0]: System supports 1000 concurrent users with <2 second response time
+NFR2 [P1]: System maintains 99.9% uptime during business hours
+NFR3 [P2]: System integrates with enterprise SSO solutions
 
 Use Case Buckets for Epic Creation:
-### Login & Authentication (Epic: 01-epic-login-authentication.md)
-- User completes biometric setup in <2 minutes
-- User authenticates using fingerprint/face recognition
-- System provides clear error messages for failed authentication
+### Epic 1: Authentication & Security
+- BR1: Biometric authentication implementation
+- NFR1: Performance and scalability requirements
 
-### Account Management (Epic: 02-epic-account-management.md)
-- User can view and manage connected devices
-- User can revoke access for specific devices
+### Epic 2: User Management
+- BR2: User history and account features
+- NFR2: System reliability requirements
 
 Each bucket should map to an Epic following SDLC naming: {epic_number}-epic-{slug}.md
--->
-
----
-
-## 7. Appendix
-
-<!-- Links to materials people will ask for -->
-<!-- These don't matter if you can't align on problem/solution first -->
-
-**Supporting Documents:**
-
-- {{supporting_doc_1}}
-- {{supporting_doc_2}}
-- {{supporting_doc_3}}
-
-**SDLC Framework Information:**
-
-- **Dependencies**: Project Brief at `/docs/prd/project-brief.md` (EXACT path)
-- **Output Location**: This PRD MUST be saved as `/docs/prd/prd.md` (EXACT path)
-- **Downstream Enablement**:
-  - Epic creation in `/docs/epics/` using naming format `{epic_number}-epic-{slug}.md`
-  - Architecture documents in `/docs/architecture/`
-  - User stories in `/docs/stories/` using format `{epic_number}.{story_number}.story.md`
-
-<!-- Template Guidance:
-Supporting Documents Example:
-- [Detailed UX flows and wireframes](link)
-- [Go-to-market strategy and pricing](link)
-- [Technical architecture decisions](link)
-- [User research and competitive analysis](link)
-- [Risk assessment and pre-mortem](link)
-
-SDLC Framework Directory Structure:
-/docs/
-├── prd/                          # Product vision & requirements
-│   ├── project-brief.md          # Project vision & strategy (INPUT)
-│   └── prd.md                    # Product requirements (THIS FILE)
-├── epics/                        # High-level features ({epic_number}-epic-{slug}.md)
-├── stories/                      # User stories ({epic_number}.{story_number}.story.md)
-├── architecture/                 # System design
-└── tests/                        # Quality validation
-
-Keep SDLC framework details minimal and in appendix to maintain focus on product requirements.
--->
-
----
-
-<!-- QUALITY CHECKLIST
-✅ Document is 6-8 pages maximum
-✅ Every requirement maps to user value
-✅ Problem statement avoids solution-oriented language
-✅ Success criteria are specific and testable
-✅ Clear MVP boundaries (P0 vs P1/P2)
-✅ Requirements grouped by use case for Epic creation
-✅ SDLC framework compliance: exact file paths and naming conventions
-✅ File saved exactly as /docs/prd/prd.md
-✅ Epic naming ready: {epic_number}-epic-{slug}.md format
-✅ Story naming ready: {epic_number}.{story_number}.story.md format
 -->

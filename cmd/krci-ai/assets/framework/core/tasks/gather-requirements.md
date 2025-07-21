@@ -1,187 +1,113 @@
-# Gather Requirements Task
+# Task: Gather Requirements
 
-## Overview
-This task provides a systematic approach to gathering, documenting, and validating business requirements through structured elicitation techniques and stakeholder engagement.
+## Description
 
-## Objectives
-- Identify and engage all relevant stakeholders
-- Elicit comprehensive functional and non-functional requirements
-- Document requirements with clear acceptance criteria
-- Validate requirements for completeness and accuracy
-- Establish traceability from business needs to solution requirements
+Systematically gather and analyze business requirements from stakeholders to enhance PRD with detailed workflows and acceptance criteria for Epic/Story creation. This task bridges stakeholder needs with technical implementation through structured elicitation techniques, ensuring all business requirements (BR) and system requirements (NFR) are comprehensively captured and documented for development guidance.
+
+## Framework Context
+
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
 
 ## Prerequisites
-- Stakeholder identification completed
-- Project scope and objectives defined
-- Access to business domain experts
-- Requirements documentation tools available
 
-## Methodology
+- [ ] **PRD foundation**: Initial PRD exists at `/docs/prd/prd.md` with basic business context
+- [ ] **Stakeholder access**: Identified stakeholders available for engagement sessions
+- [ ] **Analysis tools**: Requirements documentation tools and templates prepared
+- [ ] **Business context**: Project scope and objectives defined from Project Brief
 
-### Phase 1: Stakeholder Analysis
-1. **Identify Primary Stakeholders**
-   - Business sponsors and decision makers
-   - End users and user representatives
-   - Subject matter experts
-   - Process owners
-   - Compliance and audit representatives
+## Instructions
 
-2. **Stakeholder Mapping**
-   - Create stakeholder influence/interest matrix
-   - Define engagement strategy for each stakeholder group
-   - Schedule initial discovery sessions
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for requirements gathering dependencies and workflow
+2. **Apply analysis methodologies**: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
+3. **Format output**: Use [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) for documentation
+4. **Enhance PRD**: Refine existing PRD with detailed BR/NFR requirements and stakeholder insights
 
-### Phase 2: Requirements Elicitation
-1. **Preparation**
-   - Review existing documentation
-   - Prepare interview guides and questionnaires
-   - Set up collaborative workshops
+## Output Format
 
-2. **Elicitation Techniques**
-   - **Structured Interviews**: One-on-one sessions with key stakeholders
-   - **Focus Groups**: Collaborative sessions with user groups
-   - **Workshops**: Facilitated requirements gathering sessions
-   - **Observation**: Process observation and job shadowing
-   - **Document Analysis**: Review of existing processes and systems
-   - **Prototyping**: Visual mockups to elicit feedback
+**Enhanced Requirements Documentation** - Update existing PRD and create supporting documents:
 
-### Phase 3: Requirements Documentation
-1. **Functional Requirements**
-   - User stories with acceptance criteria
-   - Business rules and logic
-   - Process flows and workflows
-   - Data requirements and validation rules
-
-2. **Non-Functional Requirements**
-   - Performance requirements
-   - Security and compliance needs
-   - Usability and accessibility standards
-   - Scalability and availability requirements
-
-### Phase 4: Requirements Validation
-1. **Review and Confirmation**
-   - Stakeholder review sessions
-   - Requirements walkthrough meetings
-   - Prototype validation
-   - Acceptance criteria verification
-
-2. **Traceability Matrix**
-   - Link requirements to business objectives
-   - Map requirements to solution components
-   - Establish change impact analysis framework
-
-## Templates and Deliverables
-
-### Requirements Document Template
-```markdown
-## Requirement ID: REQ-[NUMBER]
-**Title**: [Requirement Name]
-**Type**: [Functional/Non-Functional]
-**Priority**: [High/Medium/Low]
-**Source**: [Stakeholder/Document]
-
-### Description
-[Clear, concise description of the requirement]
-
-### Business Justification
-[Why this requirement is needed from business perspective]
-
-### Acceptance Criteria
-- [ ] Criterion 1: [Specific, measurable condition]
-- [ ] Criterion 2: [Specific, measurable condition]
-- [ ] Criterion 3: [Specific, measurable condition]
-
-### Dependencies
-- [List dependent requirements or external factors]
-
-### Assumptions
-- [List key assumptions]
-
-### Constraints
-- [Technical, business, or regulatory constraints]
-
-### Test Conditions
-- [How this requirement will be validated]
-```
-
-### User Story Template
-```markdown
-## User Story: US-[NUMBER]
-**As a** [user role]
-**I want** [functionality]
-**So that** [business value/benefit]
-
-### Acceptance Criteria
-Given [initial context]
-When [action performed]
-Then [expected outcome]
-
-### Definition of Done
-- [ ] Acceptance criteria met
-- [ ] Code reviewed and tested
-- [ ] Documentation updated
-- [ ] Stakeholder approval received
-```
-
-### Interview Guide Template
-```markdown
-## Stakeholder Interview Guide
-
-### Participant Information
-- **Name**: [Stakeholder name]
-- **Role**: [Job title/role]
-- **Department**: [Organization unit]
-- **Date**: [Interview date]
-
-### Opening Questions
-1. Can you describe your current role and responsibilities?
-2. How do you interact with [system/process under analysis]?
-3. What are your main pain points with the current situation?
-
-### Process-Specific Questions
-1. Walk me through your typical workflow for [specific process]
-2. What information do you need to complete your tasks?
-3. What decisions do you make during this process?
-4. What are the business rules you follow?
-
-### Requirements Elicitation
-1. What would an ideal solution look like for you?
-2. What must the new system/process absolutely do?
-3. What would be nice to have but not essential?
-4. What should the system never do?
-
-### Closing Questions
-1. Who else should I speak with about this?
-2. What documentation should I review?
-3. Are there any upcoming changes that might affect these requirements?
-```
-
-## Quality Gates
-- [ ] All identified stakeholders engaged
-- [ ] Requirements documented with acceptance criteria
-- [ ] Business justification provided for each requirement
-- [ ] Requirements reviewed and approved by stakeholders
-- [ ] Traceability matrix completed
-- [ ] Requirements prioritized and categorized
+- [ ] **Updated `/docs/prd/prd.md`** - Enhanced with detailed BR/NFR requirements, acceptance criteria, and stakeholder insights
+- [ ] **Requirements traceability** - Clear mapping from business needs to solution requirements
+- [ ] **Stakeholder validation records** - Documented approval and sign-off from key stakeholders
+- [ ] **Epic enablement guidance** - Requirements structured to support Epic/Story breakdown
 
 ## Success Criteria
-- Comprehensive requirements coverage (functional and non-functional)
-- Clear, unambiguous requirement statements
-- Stakeholder consensus on requirement priorities
-- Established requirements baseline for solution design
-- Traceability from business needs to requirements established
 
-## Common Pitfalls to Avoid
-- Assuming stakeholder needs without validation
+- [ ] **PRD enhanced** - All gathered requirements integrated into PRD with BR/NFR format
+- [ ] **Stakeholder consensus** - All key stakeholders engaged and requirements validated
+- [ ] **Requirements completeness** - Functional and non-functional requirements comprehensively documented
+- [ ] **Acceptance criteria defined** - Clear, testable criteria provided for all requirements
+- [ ] **Epic readiness** - Requirements structured to enable Epic creation and Story breakdown
+- [ ] **Traceability established** - Clear links from business needs to solution requirements
+
+## Execution Checklist
+
+### Stakeholder Engagement Phase
+
+- [ ] **Stakeholder identification**: Map all relevant business stakeholders, decision makers, and subject matter experts
+- [ ] **Engagement strategy**: Define interview approaches, workshop plans, and collaboration methods
+- [ ] **Session scheduling**: Coordinate discovery sessions, interviews, and validation meetings
+- [ ] **Preparation materials**: Prepare interview guides, questionnaires, and elicitation templates
+
+### Requirements Elicitation Phase
+
+- [ ] **Structured interviews**: Conduct one-on-one sessions with key stakeholders using [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) format
+- [ ] **Collaborative workshops**: Facilitate group sessions for complex requirement areas
+- [ ] **Process observation**: Analyze current workflows and business processes for requirement insights
+- [ ] **Documentation review**: Examine existing policies, procedures, and system documentation
+
+### Requirements Documentation Phase
+
+- [ ] **BR/NFR categorization**: Organize requirements using Business Requirements (BR1, BR2...) and Non-Functional Requirements (NFR1, NFR2...) format
+- [ ] **Acceptance criteria definition**: Create specific, measurable criteria for each requirement
+- [ ] **Business justification**: Document rationale and business value for each requirement
+- [ ] **PRD integration**: Update `/docs/prd/prd.md` with enhanced requirements and stakeholder insights
+
+### Validation and Approval Phase
+
+- [ ] **Stakeholder review**: Present documented requirements to stakeholders for validation
+- [ ] **Requirements confirmation**: Obtain formal approval and sign-off from business stakeholders
+- [ ] **Traceability verification**: Ensure all business needs are addressed in solution requirements
+- [ ] **Epic preparation**: Structure requirements to enable immediate Epic creation and Story breakdown
+
+## Content Guidelines
+
+### 🎯 **Requirements Structure (BR/NFR Format):**
+
+#### **Business Requirements (BR):**
+
+- **BR1**: [Primary business capability requirement]
+- **BR2**: [Secondary business process requirement]
+- **BR3**: [Stakeholder workflow requirement]
+
+#### **Non-Functional Requirements (NFR):**
+
+- **NFR1**: [Performance/scalability requirement]
+- **NFR2**: [Security/compliance requirement]
+- **NFR3**: [Usability/accessibility requirement]
+
+### ✅ **Quality Standards:**
+
+- **Stakeholder Validated**: All requirements reviewed and approved by business stakeholders
+- **Acceptance Criteria**: Each requirement has specific, testable acceptance criteria
+- **Business Justified**: Clear business rationale and value provided for each requirement
+- **Epic Enabled**: Requirements structured to support Epic breakdown and Story creation
+- **Traceable**: Clear links from business needs to solution requirements established
+
+### ❌ **Common Pitfalls to Avoid:**
+
 - Documenting solutions instead of requirements
-- Missing non-functional requirements
-- Inadequate stakeholder engagement
-- Lack of requirements prioritization
-- Poor requirements traceability
+- Missing non-functional requirements (NFR)
+- Inadequate stakeholder engagement and validation
+- Ambiguous or untestable acceptance criteria
+- Poor requirements categorization and organization
+- Lack of business justification for requirements
 
-## Tools and Resources
-- Requirements management tools (e.g., Jira, Azure DevOps)
-- Collaboration platforms (e.g., Miro, Lucidchart)
-- Documentation templates and standards
-- Stakeholder communication channels
-- Process modeling tools 
+### 🎯 **Epic Enablement Focus:**
+
+This requirements gathering should enable immediate Epic creation by providing:
+
+- **Clear business capabilities** that translate into Epic features
+- **Acceptance criteria** that become Epic acceptance criteria and Story requirements
+- **Stakeholder insights** that inform Epic priorities and implementation sequencing
+- **Requirements traceability** that connects Epics back to business needs and stakeholder value

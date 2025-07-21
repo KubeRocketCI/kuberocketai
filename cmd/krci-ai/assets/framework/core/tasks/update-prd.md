@@ -1,113 +1,112 @@
-# Task: Update Product Requirements Document (PRD)
+# Task: Update Product Requirements Document
 
-## Objective
+## Description
 
-Update existing PRD with new information while maintaining quality, stakeholder alignment, and SDLC framework compliance. Focus on change impact assessment and downstream communication.
+Update an existing PRD with new requirements, scope changes, or refined business needs while maintaining traceability to Project Brief and enabling Epic/Story creation. Focus on change impact assessment and downstream communication to ensure existing Epics and Stories remain aligned with updated requirements.
+
+## Framework Context
+
+**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
 
 ## Prerequisites
 
-- [ ] **Existing PRD**: `/docs/prd/prd.md` must exist and be properly accessible
-- [ ] **Change Trigger**: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
-- [ ] **Stakeholder Input**: Understanding of what specifically needs to change and why
+- [ ] **Existing PRD**: `/docs/prd/prd.md` exists and is properly accessible
+- [ ] **Change trigger**: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
+- [ ] **Stakeholder input**: Understanding of what specifically needs to change and why
+- [ ] **Epic/Story review**: Current status of downstream artifacts
 
-## Update Process
+## Instructions
 
-### Change Assessment
+1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process
+2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
+3. **Format output**: Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure
+4. **Maintain traceability**: Update BR/NFR numbering and assess Epic/Story impact
 
-1. **Identify Change Scope**: What sections need updating? (Problem, Users, Solution, Goals, Requirements)
-2. **Impact Analysis**: How do changes affect existing Epics (`/docs/epics/`) and Stories (`/docs/stories/`)?
-3. **Stakeholder Review**: Who needs to approve these changes before implementation?
+## Output Format
 
-### Update Execution
+- **Location**: Updates existing `/docs/prd/prd.md` (EXACT path and filename)
+- **Length**: Maintain 6-8 pages maximum
+- **Requirements Format**: Maintain BR1, BR2, BR3... and NFR1, NFR2, NFR3... numbering with P0/P1/P2 priority indicators
+- **Impact Documentation**: Clear notes on what changed and Epic/Story impact
+- **Downstream Updates**: List of Epic/Story artifacts requiring updates
 
-4. **Section Updates**: Modify specific PRD sections using [prd-template.md](/.krci-ai/templates/prd-template.md) structure
-5. **Version Control**: Document changes in version history and maintain change log
-6. **Quality Check**: Ensure updated PRD maintains 6-8 page limit and best practices compliance
+## Success Criteria
 
-### Change Communication
+- [ ] **File updated** at `/docs/prd/prd.md` reflects all changes
+- [ ] **Requirements numbered** BR/NFR structure maintained with priority indicators for Epic mapping
+- [ ] **Change documented** clear record of what changed and why
+- [ ] **Downstream impact** identified which Epic/Story artifacts need updates
+- [ ] **Quality maintained** document remains 6-8 pages maximum
+- [ ] **Project Brief alignment** changes align with Project Brief updates (if any)
+- [ ] **Stakeholder approval** key stakeholders have approved requirement changes
 
-7. **Downstream Notification**: Communicate changes to Epic owners and development teams
-8. **Approval Process**: Obtain stakeholder sign-off on updated PRD
+## Execution Checklist
 
-## SDLC Framework Compliance
+### Assessment Phase
 
-### File Structure
+- [ ] **Change scope**: Identify which sections need updating (Problem/Opportunity, Target Users & Use Cases, Current Journeys/Landscape, Proposed Solution/Elevator Pitch, Goals/Measurable Outcomes, MVP/Functional Requirements)
+- [ ] **Impact analysis**: Evaluate how changes affect existing Epics (`/docs/epics/`) and Stories (`/docs/stories/`)
+- [ ] **Stakeholder review**: Confirm who needs to approve these changes before implementation
+- [ ] **Requirements mapping**: Understand which BR/NFR numbers and priorities are affected
 
-- **Target File**: Update existing `/docs/prd/prd.md` (EXACT path)
-- **Template**: Use same [prd-template.md](/.krci-ai/templates/prd-template.md) structure
+### Requirements Phase
 
-### Downstream Impact Management
+- [ ] **Business requirements**: Update BR1, BR2, BR3... with new business functionality needs
+- [ ] **Non-functional requirements**: Update NFR1, NFR2, NFR3... with new system behavior/performance needs
+- [ ] **Priority assessment**: Review and update P0/P1/P2 priority indicators as needed
+- [ ] **Epic mapping**: Ensure updated requirements can still map to logical Epic groupings
 
-- **Epic Updates**: Identify which Epics (`{epic_number}-epic-{slug}.md`) need updating
-- **Story Impact**: Assess if in-progress Stories (`{epic_number}.{story_number}.story.md`) are affected
-- **Architecture Review**: Determine if changes require Architecture document updates
+### Update Phase
 
-## Quality Validation
+- [ ] **Section updates**: Modify specific sections using [prd-template.md](./.krci-ai/templates/prd-template.md) structure
+- [ ] **Content integration**: Ensure changes are properly integrated without breaking flow
+- [ ] **Length verification**: Confirm document remains 6-8 pages maximum
+- [ ] **Quality validation**: Verify all changes maintain PRD quality standards
 
-### Pre-Update Checklist
+### Change Management Phase
 
-- [ ] **Change Justification**: Clear reason for update documented
-- [ ] **Scope Defined**: Specific sections and changes identified
-- [ ] **Impact Assessed**: Downstream effects on Epics/Stories evaluated
-- [ ] **Stakeholders Informed**: Key stakeholders aware of planned changes
+- [ ] **Epic impact assessment**: Determine which Epics (`{epic_number}-epic-{slug}.md`) need updating
+- [ ] **Story impact review**: Assess if in-progress Stories (`{epic_number}.{story_number}.story.md`) are affected
+- [ ] **Team communication**: Notify Epic owners and development teams of changes
+- [ ] **Documentation**: Record change rationale and downstream impact plan
 
-### Post-Update Checklist
+## Change Management Guidelines
 
-- [ ] **Template Compliance**: Updated sections follow prd-template.md structure
-- [ ] **Length Maintained**: Document remains 6-8 pages maximum
-- [ ] **Best Practices**: User focus, P0/P1/P2 priorities, and measurable goals maintained
-- [ ] **File Location**: Changes saved to `/docs/prd/prd.md`
-- [ ] **Change Communication**: Downstream teams notified of changes
+### 🔄 **Common Update Scenarios:**
 
-## Common Update Scenarios
+1. **Project Brief Changes**: Update Problem/Opportunity section to align with strategic changes
+2. **User Research**: Update Target Users & Use Cases with new insights and behavior patterns
+3. **Scope Changes**: Update MVP/Functional Requirements (BR/NFR) with new or modified functionality
+4. **Business Priorities**: Update Goals/Measurable Outcomes with revised objectives
+5. **Technical Constraints**: Update system requirements (NFR) and priorities based on technical discoveries
 
-### Business Priority Changes
+### ✅ **Update Best Practices:**
 
-- Update Goals/Measurable Outcomes (Section 5)
-- Adjust P0/P1/P2 priorities in Requirements (Section 6)
-- Modify timeline and implementation sequence
+- **Requirement Versioning**: Maintain clear versioning of BR/NFR numbers and priorities for Epic traceability
+- **Impact Assessment**: Always evaluate Epic/Story impact before implementing changes
+- **Stakeholder Alignment**: Ensure all requirement changes have proper stakeholder approval
+- **Documentation**: Maintain clear change history and rationale for all updates
+- **Quality Focus**: Keep user needs prioritized over technical implementation details
 
-### New User Research
+### ❌ **Update Pitfalls to Avoid:**
 
-- Refine Target Users & Use Cases (Section 2)
-- Update Problem/Opportunity with new evidence (Section 1)
-- Adjust functional requirements based on user feedback
+- Breaking existing BR/NFR numbering that Epics depend on
+- Making changes without assessing Epic/Story impact
+- Updating without proper stakeholder approval process
+- Expanding scope beyond 6-8 page limit during updates
+- Missing communication to downstream development teams
 
-### Technical Constraint Discovery
+### 🎯 **Impact Assessment Questions:**
 
-- Update Solution approach (Section 4)
-- Modify functional requirements for technical feasibility
-- Adjust MVP scope and priorities
+- "Which specific requirements (BR/NFR) and priorities need updating?"
+- "How do these changes affect existing Epic feature definitions?"
+- "Which in-progress Stories might be impacted by requirement changes?"
+- "What's the priority order for communicating changes to development teams?"
+- "Do any Epic completion criteria need updating based on PRD changes?"
 
-### Scope Changes
+### 📋 **Epic/Story Impact Checklist:**
 
-- Update Problem/Opportunity scope boundaries
-- Modify functional requirements and priorities
-- Adjust success metrics and goals
-
-## LLM Agent Guidance
-
-### Change Impact Questions
-
-- "What specific changes are needed and why?"
-- "Which existing Epics and Stories are affected by these changes?"
-- "How do these changes affect our success metrics and timeline?"
-- "Who are the key stakeholders that need to approve these changes?"
-
-### Update Best Practices
-
-- Maintain original PRD structure and quality standards
-- Focus on specific changes rather than comprehensive rewrite
-- Preserve user focus and business value orientation
-- Keep Epic enablement and SDLC framework compliance
-- Document all changes with clear rationale
-
-### SDLC Framework Compliance
-
-- **Mandatory File**: Update existing `/docs/prd/prd.md` only
-- **Template Consistency**: Maintain same prd-template.md structure
-- **Version Control**: Proper change documentation
-- **Quality Gate**: Updated PRD approval required before Epic/Story changes
-- **Communication**: Notify downstream teams of changes affecting their work
-
-**Remember**: PRD updates should be focused, well-justified, and minimize disruption to ongoing development while maintaining alignment on what to build and why.
+- [ ] **Epic alignment**: Verify updated requirements can still group into logical Epic themes
+- [ ] **Story compatibility**: Check if in-progress Stories remain valid with updated requirements
+- [ ] **Development communication**: Notify teams of requirement changes and timeline impact
+- [ ] **Completion criteria**: Update Epic/Story acceptance criteria if needed based on PRD changes
