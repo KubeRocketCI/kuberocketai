@@ -258,7 +258,7 @@ func TestInstallVSCodeIntegration(t *testing.T) {
 	if !contains(contentStr, "description: Activate Software Developer role for specialized development assistance") {
 		t.Error("Content missing description in front matter")
 	}
-	if !contains(contentStr, "tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']") {
+	if !contains(contentStr, "tools: "+GitHubToolsList) {
 		t.Error("Content missing tools in front matter")
 	}
 	if !contains(contentStr, "# Software Developer Agent Chat Mode") {
