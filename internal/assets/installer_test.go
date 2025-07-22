@@ -201,7 +201,7 @@ func TestVSCodeIntegration(t *testing.T) {
 	if !contains(content, "description: Activate Test Role role for specialized development assistance") {
 		t.Error("Content missing description in front matter")
 	}
-	if !contains(content, "tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']") {
+	if !contains(content, "tools: "+GitHubToolsList) {
 		t.Error("Content missing tools in front matter")
 	}
 	if !contains(content, "# Test Role Agent Chat Mode") {

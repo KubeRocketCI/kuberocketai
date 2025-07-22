@@ -37,6 +37,8 @@ const (
 	cursorRulesDir    = ".cursor/rules"
 	claudeCommandsDir = ".claude/commands"
 	vscodeModesDir    = ".github/chatmodes"
+	// GitHubToolsList defines the complete set of tools available for GitHub integration
+	GitHubToolsList = "['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']"
 )
 
 // AgentData represents the parsed YAML structure for agent files
@@ -128,7 +130,7 @@ func (v *VSCodeIntegration) GetFileExtension() string {
 func (v *VSCodeIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
 	return fmt.Sprintf(`---
 description: Activate %s role for specialized development assistance
-tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']
+tools: %s
 ---
 
 # %s Agent Chat Mode
@@ -137,6 +139,7 @@ CRITICAL: Carefully read the YAML agent definition below. Immediately activate t
 
 `+"```yaml\n%s```\n",
 		role,
+		GitHubToolsList,
 		role,
 		role,
 		string(yamlContent))
