@@ -4,10 +4,6 @@
 
 Update an existing project brief with new information, scope changes, or refined understanding while maintaining strategic alignment and enabling downstream SDLC artifacts. Focus on change impact assessment and downstream artifact management to ensure existing PRD and Epic artifacts remain aligned with strategic changes.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Existing Project Brief**: `/docs/prd/project-brief.md` exists and is properly accessible
@@ -61,43 +57,22 @@ Update an existing project brief with new information, scope changes, or refined
 - [ ] **Stakeholder communication**: Notify key stakeholders of strategic changes and implications
 - [ ] **Documentation**: Record change rationale and downstream impact plan
 
-## Change Management Guidelines
+## Content Guidelines
 
-### 🔄 **Common Update Scenarios:**
+### Quality Principles for LLM Self-Evaluation
 
-1. **Market Changes**: Update Problem Statement with new market insights and competitive intelligence
-2. **Resource Changes**: Update Constraints with new budget, timeline, or team changes
-3. **User Insights**: Update Target Users with new research findings and behavior patterns
-4. **Risk Changes**: Update Key Risks with new market or technology threats
-5. **Business Context**: Update Executive Summary with new business priorities and strategic focus
+- **Strategic Focus**: Focus on strategic foundation changes rather than tactical adjustments
+- **Foundation Strength**: Ensure changes strengthen rather than weaken the overall strategic foundation
+- **Cascade Management**: Assess how strategic changes flow through entire SDLC chain to downstream artifacts
+- **Long-term Alignment**: Consider long-term strategic implications beyond immediate tactical changes
 
-### ✅ **Update Best Practices:**
+### LLM Error Prevention Checklist
 
-- **Strategic Focus**: Focus on strategic changes rather than tactical adjustments
-- **Foundation Strength**: Ensure changes strengthen rather than weaken the overall foundation
-- **Long-term View**: Consider long-term strategic implications beyond immediate changes
-- **Cascade Management**: Manage strategic changes flowing through entire SDLC chain
-- **Version Control**: Maintain proper change documentation and approval processes
+- **Avoid**: Making changes without clear strategic justification and stakeholder approval
+- **Avoid**: Updating without assessing downstream PRD and Epic artifact impact
+- **Avoid**: Expanding scope beyond strategic foundation changes into tactical details
+- **Reference**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting consistency
 
-### ❌ **Update Pitfalls to Avoid:**
+### SDLC Integration Context
 
-- Making changes without clear strategic justification
-- Updating without assessing downstream artifact impact
-- Expanding scope beyond strategic foundation changes
-- Missing stakeholder communication of strategic changes
-- Breaking template structure during updates
-
-### 🎯 **Strategic Questions to Ask:**
-
-- "What specific strategic changes are driving this update?"
-- "How do these changes affect our core business case and value proposition?"
-- "Which stakeholders need to approve these strategic changes?"
-- "How do these changes impact the existing PRD and development roadmap?"
-- "What downstream artifacts need updating to maintain alignment?"
-
-### 📋 **Downstream Impact Checklist:**
-
-- [ ] **PRD Alignment**: Assess if PRD sections need updating to maintain alignment
-- [ ] **Epic Review**: Check if strategic changes affect Epic prioritization or scope
-- [ ] **Architecture Impact**: Determine if strategic changes affect system requirements
-- [ ] **Timeline Impact**: Evaluate if changes affect project timeline or milestones
+This update enables continued strategic alignment by managing strategic changes flowing through the entire SDLC chain, assessing PRD and Epic alignment impacts, ensuring stakeholder approval of strategic changes, and maintaining clear documentation of strategic change rationale and downstream artifact impact.

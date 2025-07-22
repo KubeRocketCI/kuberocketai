@@ -4,10 +4,6 @@
 
 Create a streamlined PRD that drives team alignment on what to build and why, following the proven 6-8 page structure focused on user needs and business value rather than technical specifications. This PRD enables Epic and Story creation while maintaining clear traceability from Project Brief through implementation.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Required**: Completed and approved Project Brief at `/docs/prd/project-brief.md`
@@ -71,36 +67,20 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 
 ## Content Guidelines
 
-### 📋 **6 Required Sections:**
+### Quality Principles for LLM Self-Evaluation
 
-1. **Problem/Opportunity**: Crisp definition of user/business problem being solved (from Project Brief)
-2. **Target Users & Use Cases**: Specific user segments with demographics and key usage scenarios
-3. **Current Journeys/Landscape** *(Optional)*: Context on current user workflows or competitive solutions
-4. **Proposed Solution/Elevator Pitch**: High-level solution approach and top 3 MVP value propositions
-5. **Goals/Measurable Outcomes**: Specific, measurable success criteria (from Project Brief)
-6. **MVP/Functional Requirements**: BR1, BR2, BR3... (business) and NFR1, NFR2, NFR3... (system) with P0/P1/P2 priorities
+- **User-Centered**: Always prioritize user needs over technical implementation details
+- **Evidence-Based**: Support all requirements with user research and business data
+- **Traceable**: Maintain clear connection from Project Brief → PRD → Epic creation
+- **Measurable**: Ensure all success metrics are specific, testable, and time-bound
 
-### ✅ **Quality Standards:**
+### LLM Error Prevention Checklist
 
-- **User-Centered**: Always prioritize user needs over technical implementation
-- **Evidence-Based**: Support requirements with user research and business data
-- **Traceable**: Clear connection from Project Brief problem to Epic-ready requirements
-- **Measurable**: All success metrics are specific and testable
-- **Actionable**: Requirements clear enough to enable Epic creation
+- **Avoid**: Technical implementation details (save for Architecture documents)
+- **Avoid**: Solution-oriented problem statements (focus on user pain points)
+- **Avoid**: Vague requirements that cannot map to Epic features
+- **Reference**: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting guidance and examples
 
-### ❌ **Common Pitfalls to Avoid:**
+### SDLC Integration Context
 
-- Technical implementation details (leave for Architecture documents)
-- Solution-oriented problem statements (focus on user pain)
-- Vague requirements without Epic groupings
-- Missing traceability to Project Brief
-- Requirements that can't be broken into Epics
-
-### 🎯 **Epic Enablement:**
-
-This PRD should enable immediate Epic creation by providing:
-
-- **Numbered requirements** (BR1, BR2, NFR1...) with priorities that Epics can reference
-- **Epic groupings** within requirements that map to Epic themes
-- **User workflows** that become Epic features
-- **Success metrics** that become Epic acceptance criteria
+This PRD enables immediate Epic creation by providing numbered requirements (BR1, BR2, NFR1...) with priorities that Epics can reference, requirement groupings that map to Epic themes, and success metrics that become Epic acceptance criteria.

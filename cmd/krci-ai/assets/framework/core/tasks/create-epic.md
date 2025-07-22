@@ -4,10 +4,6 @@
 
 Create clear epic with problem statement, goal, scope, and implementation approach that breaks down PRD requirements into manageable high-level features. This epic enables Story creation and provides a clear feature grouping for development teams.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Completed PRD**: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
@@ -63,36 +59,20 @@ Create clear epic with problem statement, goal, scope, and implementation approa
 
 ## Content Guidelines
 
-### 📋 **Epic Template Sections:**
+### Quality Principles for LLM Self-Evaluation
 
-1. **Status Table**: Epic number, title, status, priority, owner, timeline
-2. **Overview**: Problem statement, goal, target users
-3. **Scope**: What's included, what's excluded, dependencies
-4. **Solution Approach**: High-level implementation strategy
-5. **Acceptance Criteria**: How to know when Epic is complete
-6. **User Stories**: Planned stories that will implement this Epic
+- **Problem-Focused**: Epic addresses specific user problems from PRD with quantifiable impact
+- **Measurable Goal**: Epic completion criteria are specific, testable, and time-bound
+- **PRD Traceable**: Maintain clear connection to specific BR/NFR requirements from PRD
+- **Story-Ready**: Provide sufficient context and scope for immediate Story breakdown
 
-### ✅ **Quality Standards:**
+### LLM Error Prevention Checklist
 
-- **Problem-Focused**: Epic addresses a specific user problem from PRD
-- **Measurable Goal**: Epic completion criteria are specific and testable
-- **Clear Scope**: Boundaries are well-defined with included/excluded items
-- **PRD Traceable**: Clear connection to specific BR/NFR requirements
-- **Story-Ready**: Provides sufficient detail for Story creation
+- **Avoid**: Technical implementation details (save for Stories and Architecture documents)
+- **Avoid**: Vague problem statements without user context and quantifiable impact
+- **Avoid**: Unmeasurable completion criteria that cannot be validated
+- **Reference**: Use [epic.md](./.krci-ai/templates/epic.md) for all formatting guidance and examples
 
-### ❌ **Common Pitfalls to Avoid:**
+### SDLC Integration Context
 
-- Technical implementation details (leave for Stories and Architecture)
-- Vague problem statements without user context
-- Unmeasurable completion criteria
-- Missing PRD traceability to requirements
-- Scope too large for single Epic (consider Epic splitting)
-
-### 🎯 **Story Enablement:**
-
-This Epic should enable immediate Story creation by providing:
-
-- **Clear problem context** that Stories can address with specific features
-- **Defined user personas** that Stories can target with "As a user" scenarios
-- **Measurable outcomes** that become Story acceptance criteria
-- **Scope boundaries** that guide Story prioritization within the Epic
+This Epic enables immediate Story creation by providing clear problem context, defined user personas for "As a user" scenarios, measurable outcomes that become Story acceptance criteria, and scope boundaries that guide Story prioritization within the Epic.
