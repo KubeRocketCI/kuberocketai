@@ -50,6 +50,7 @@ Create user-focused requirements with implementation tasks and acceptance criter
 - [ ] **User story creation**: Write "As a [user], I want [goal], so that [value]" aligned with Epic features
 - [ ] **Story points estimation**: Estimate complexity (1, 2, 3, 5, 8, 13) using Epic context
 - [ ] **Business value validation**: Ensure Story delivers measurable user value
+- [ ] **Status format**: Use table format as defined in template (| Field | Value |)
 
 ### Requirements Specification
 
@@ -60,6 +61,7 @@ Create user-focused requirements with implementation tasks and acceptance criter
 ### Tasks/Subtasks Development
 
 - [ ] **Task breakdown**: Create main implementation Tasks with:
+  - **Acceptance Criteria mapping** (e.g., "Task 1: Implement Bundle Export Command (AC: 1)")
   - **Specific file paths** for inputs/outputs (e.g., `create file: /path/to/file.ext`)
   - **Command patterns** LLMs can execute (e.g., `run: command with args`)
   - **Dependencies** between tasks (e.g., "depends on Task X completion")
@@ -68,6 +70,7 @@ Create user-focused requirements with implementation tasks and acceptance criter
   - **Specific file/directory targets** with exact paths
   - **Success criteria** for each subtask (file exists, tests pass, output matches)
   - **Error recovery steps** if subtask fails
+- [ ] **Task formatting**: Use `**Task N: Description (AC: X, Y)**` format with bullet subtasks
 
 ### Quality Assurance Planning
 

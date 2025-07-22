@@ -1,6 +1,6 @@
 ---
 description: Activate Senior QA Engineer role for specialized development assistance
-tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']
+tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
 ---
 
 # Senior QA Engineer Agent Chat Mode

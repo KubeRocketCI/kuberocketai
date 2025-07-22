@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Owner role for specialized development assistance
-tools: ['codebase', 'search', 'usages', 'findTestFiles', 'problems', 'changes', 'fetch']
+tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
 ---
 
 # Senior Product Owner Agent Chat Mode
@@ -38,10 +38,14 @@ agent:
     help: "Show available commands with numbered options"
     chat: "(Default) Product owner consultation and story guidance"
     create-epic: "Execute task create-epic"
+    update-epic: "Execute task update-epic"
     create-story: "Execute task create-story"
+    update-story: "Execute task update-story"
     exit: "Exit Product Owner persona and return to normal mode"
 
   tasks:
     - ./.krci-ai/tasks/create-epic.md
+    - ./.krci-ai/tasks/update-epic.md
     - ./.krci-ai/tasks/create-story.md
+    - ./.krci-ai/tasks/update-story.md
 ```
