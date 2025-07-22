@@ -4,10 +4,6 @@
 
 Create a comprehensive project brief defining the foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. This document serves as the **root artifact** in the SDLC framework that defines the essential foundation for all downstream artifacts, answers fundamental questions before solution development begins, and provides strategic context for PRD creation.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] Business opportunity or problem identified
@@ -62,37 +58,20 @@ Create a comprehensive project brief defining the foundation for product develop
 
 ## Content Guidelines
 
-### 📋 **7 Required Sections:**
+### Quality Principles for LLM Self-Evaluation
 
-1. **Executive Summary**: Complete picture in 3-4 sentences (Problem + Solution approach + Expected outcome)
-2. **Problem Statement**: Specific pain point with scope boundaries (Who has problem + quantified impact)
-3. **Opportunity**: Quantified business value + high-level approach (Expected benefits + solution direction)
-4. **Target Users**: Specific user segments with demographics + behavior patterns + volume
-5. **Success Metrics**: Measurable outcomes with specific timelines (How we'll know we solved the problem)
-6. **Constraints**: Resource, technical, and assumption factors (Budget + timeline + technical + team limitations)
-7. **Key Risks**: Major threats with impact assessment (Risk level + potential impact)
+- **Problem Focus**: Use concrete user scenarios and quantified evidence, not solution-oriented statements
+- **User Specificity**: Define target users specifically enough to guide solution design decisions
+- **Measurable Success**: Create specific, testable outcomes with realistic timelines and evidence
+- **Evidence-Based**: Support all statements with data, research, and quantified metrics
 
-### ✅ **Quality Standards:**
+### LLM Error Prevention Checklist
 
-- **Problem Focus**: Use concrete user scenarios and quantified evidence
-- **User Specificity**: Be specific enough to guide solution design decisions
-- **Measurable Success**: Specific, testable outcomes with realistic timelines
-- **Realistic Constraints**: Honest about actual limitations and dependencies
-- **Evidence-Based**: Support statements with data, research, and metrics
+- **Avoid**: Solution-oriented problem statements (focus on user pain, not missing features)
+- **Avoid**: Vague user descriptions without usage patterns and demographics
+- **Avoid**: Unmeasurable success metrics or aspirational statements without evidence
+- **Reference**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting guidance and examples
 
-### ❌ **Common Pitfalls to Avoid:**
+### SDLC Integration Context
 
-- Solution-oriented problem statements (focus on pain, not solutions)
-- Vague user descriptions (be specific about segments and usage)
-- Unmeasurable success metrics (avoid aspirational statements)
-- Unrealistic constraints (be honest about limitations)
-- Missing evidence (support with data and research)
-
-### 🎯 **PRD Enablement:**
-
-This Project Brief should enable immediate PRD creation by providing:
-
-- Clear problem definition → PRD Problem/Opportunity section
-- Target user clarity → PRD user research and requirements
-- Success metrics → PRD Goals/Measurable Outcomes
-- Constraints → PRD MVP scope and technical requirements
+This Project Brief enables immediate PRD creation by providing clear problem definition for PRD Problem/Opportunity section, target user clarity for PRD user research and requirements, success metrics for PRD Goals/Measurable Outcomes, and constraints for PRD MVP scope and technical requirements.

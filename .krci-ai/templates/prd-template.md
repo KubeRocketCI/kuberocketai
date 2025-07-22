@@ -1,12 +1,5 @@
 # Product Requirements Document: {{product_name}}
 
-> **Target Length**: 6-8 pages maximum
-> **Framework**: PRD following proven best practices from industry leaders
-> **SDLC**: Enables Epic creation and Architecture documents
-> **File Location**: MUST be saved as `/docs/prd/prd.md` (exact path)
-
----
-
 ## 1. Problem/Opportunity
 
 <!-- Be crisp and clear about what user or business problem you're solving -->

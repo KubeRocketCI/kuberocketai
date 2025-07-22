@@ -4,10 +4,6 @@
 
 Update an existing PRD with new requirements, scope changes, or refined business needs while maintaining traceability to Project Brief and enabling Epic/Story creation. Focus on change impact assessment and downstream communication to ensure existing Epics and Stories remain aligned with updated requirements.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Existing PRD**: `/docs/prd/prd.md` exists and is properly accessible
@@ -70,43 +66,22 @@ Update an existing PRD with new requirements, scope changes, or refined business
 - [ ] **Team communication**: Notify Epic owners and development teams of changes
 - [ ] **Documentation**: Record change rationale and downstream impact plan
 
-## Change Management Guidelines
+## Content Guidelines
 
-### 🔄 **Common Update Scenarios:**
+### Quality Principles for LLM Self-Evaluation
 
-1. **Project Brief Changes**: Update Problem/Opportunity section to align with strategic changes
-2. **User Research**: Update Target Users & Use Cases with new insights and behavior patterns
-3. **Scope Changes**: Update MVP/Functional Requirements (BR/NFR) with new or modified functionality
-4. **Business Priorities**: Update Goals/Measurable Outcomes with revised objectives
-5. **Technical Constraints**: Update system requirements (NFR) and priorities based on technical discoveries
+- **Change Impact Focused**: Always assess Epic/Story impact before implementing PRD changes
+- **Requirement Versioning**: Maintain BR/NFR numbering and priority consistency for Epic traceability
+- **Stakeholder Aligned**: Ensure all requirement changes have proper approval before implementation
+- **Quality Preserved**: Keep updates within 6-8 page limit while maintaining user-centered focus
 
-### ✅ **Update Best Practices:**
+### LLM Error Prevention Checklist
 
-- **Requirement Versioning**: Maintain clear versioning of BR/NFR numbers and priorities for Epic traceability
-- **Impact Assessment**: Always evaluate Epic/Story impact before implementing changes
-- **Stakeholder Alignment**: Ensure all requirement changes have proper stakeholder approval
-- **Documentation**: Maintain clear change history and rationale for all updates
-- **Quality Focus**: Keep user needs prioritized over technical implementation details
+- **Avoid**: Breaking existing BR/NFR numbering that Epics depend on
+- **Avoid**: Making changes without assessing downstream Epic/Story impact
+- **Avoid**: Updating requirements without proper stakeholder approval process
+- **Reference**: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting consistency
 
-### ❌ **Update Pitfalls to Avoid:**
+### SDLC Integration Context
 
-- Breaking existing BR/NFR numbering that Epics depend on
-- Making changes without assessing Epic/Story impact
-- Updating without proper stakeholder approval process
-- Expanding scope beyond 6-8 page limit during updates
-- Missing communication to downstream development teams
-
-### 🎯 **Impact Assessment Questions:**
-
-- "Which specific requirements (BR/NFR) and priorities need updating?"
-- "How do these changes affect existing Epic feature definitions?"
-- "Which in-progress Stories might be impacted by requirement changes?"
-- "What's the priority order for communicating changes to development teams?"
-- "Do any Epic completion criteria need updating based on PRD changes?"
-
-### 📋 **Epic/Story Impact Checklist:**
-
-- [ ] **Epic alignment**: Verify updated requirements can still group into logical Epic themes
-- [ ] **Story compatibility**: Check if in-progress Stories remain valid with updated requirements
-- [ ] **Development communication**: Notify teams of requirement changes and timeline impact
-- [ ] **Completion criteria**: Update Epic/Story acceptance criteria if needed based on PRD changes
+This update enables continued Epic/Story development by maintaining requirement traceability, preserving BR/NFR numbering for Epic mapping, assessing which in-progress Stories need updates, and communicating changes to development teams with clear impact assessment and timeline considerations.
