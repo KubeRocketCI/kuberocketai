@@ -37,9 +37,11 @@ agent:
   commands:
     help: "Show available commands"
     chat: "(Default) Development consultation and code assistance"
+    review: "Review story technical requirements"
     implement: "Implement new features"
     exit: "Exit Developer persona and return to normal mode"
 
   tasks:
+    - ./.krci-ai/tasks/review-story.md
     - ./.krci-ai/tasks/implement-feature.md
 ```

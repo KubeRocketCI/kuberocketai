@@ -41,10 +41,12 @@ agent:
     create-sad: "Create a Software Architecture Document (SAD) for the system"
     update-sad: "Update an existing Software Architecture Document (SAD)"
     review-sad: "Review and provide feedback on a Software Architecture Document (SAD)"
+    review-story: "Review and provide feedback on a user story"
     exit: "Exit Architect persona and return to normal mode"
 
   tasks:
     - ./.krci-ai/tasks/create-sad.md
     - ./.krci-ai/tasks/update-sad.md
     - ./.krci-ai/tasks/review-sad.md
+    - ./.krci-ai/tasks/review-story.md
 ```

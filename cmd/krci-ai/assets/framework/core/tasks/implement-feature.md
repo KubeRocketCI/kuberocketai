@@ -2,113 +2,95 @@
 
 ## Description
 
-Implement Story requirements according to Architecture specifications and coding standards, ensuring quality and maintaining system consistency.
-
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
+Implement Story requirements according to Architecture specifications and coding standards, ensuring quality and maintaining system consistency. This task enables developers to systematically transform user stories into working code while maintaining Epic alignment and architectural compliance.
 
 ## Prerequisites
 
-- [ ] **Story available**: Specific Story exists in `/docs/stories/` with "Ready for Development" status
-- [ ] **Tasks/Subtasks defined**: Story contains Tasks/Subtasks section with implementation checklists
+- [ ] **Story ready**: Story has been reviewed and validated with complete Tasks/Subtasks
+- [ ] **Technical requirements clear**: All implementation details, file paths, and commands specified
 - [ ] **Development environment**: Project codebase access and development tools configured
-- [ ] **Coding standards**: Understanding of project coding standards and best practices
+- [ ] **Dependencies available**: Required libraries, tools, and systems accessible
 
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for implementation dependencies and handoff requirements
 2. **Apply coding standards**: Use guidelines from [coding-standards.md](./.krci-ai/data/coding-standards.md) and [best-practices.md](./.krci-ai/data/best-practices.md)
-3. **Format output**: Use [implementation-plan.md](./.krci-ai/templates/implementation-plan.md) for planning and [code-review.md](./.krci-ai/templates/code-review.md) for reviews
+3. **Document progress**: Update Story file with implementation progress and results
 4. **Ensure Story compliance**: Implement all Story acceptance criteria following Architecture specifications
+5. **Maintain Epic traceability**: Preserve Story's Epic alignment and contribute to Epic completion
+
+### Ready to Implement
+
+Assume story is ready with complete Tasks/Subtasks for step-by-step execution.
+
+## Implementation Approach
+
+### STEP-BY-STEP Implementation
+
+- **Execute Tasks/Subtasks sequentially** - Follow the story implementation roadmap systematically
+- **Check off completed subtasks** - Mark progress in the story file for transparency
+- **Validate each deliverable** - Run verification commands specified in subtasks
+- **Document outcomes** - Update Implementation Results with actual deliverables
+- **Complete acceptance criteria** - Ensure all story requirements are met with working code
+
+**If Story Incomplete:**
+
+- **Stop implementation** - do not proceed with incomplete specifications
+- **Use review-story task** - complete technical requirements first
+- **Resume when ready** - return to implementation once story is technically complete
 
 ## Output Format
 
-**Story Implementation** - Transform Story requirements into working code:
-
-- [ ] **Story status updates**: Status progression from "Ready for Development" → "In Progress" → "Done"
-- [ ] **Code implementation**: Working code that meets all Story acceptance criteria
-- [ ] **Test coverage**: Unit and integration tests validating Story requirements
-- [ ] **Implementation documentation**: Updated Story file with implementation details and results
+- **Location**: Working code implementation with updated Story file in `/docs/stories/`
+- **Story completion**: All empty sections populated with implementation details
+- **Progress tracking**: Real-time updates to Tasks/Subtasks completion status
+- **Quality documentation**: Completed QA Checklist and Implementation Results
 
 ## Success Criteria
 
 - [ ] **Story implemented completely** - All Story acceptance criteria met with working code
 - [ ] **Architecture compliant** - Implementation follows Architecture specifications and design patterns
 - [ ] **Quality validated** - Code passes all tests, meets coverage requirements, and follows coding standards
-- [ ] **Story updated** - Story file updated with implementation details and status progression
+- [ ] **Story updated** - Story file updated with implementation details, results, and completion status
 - [ ] **System integration** - New code integrates properly with existing system without regressions
 - [ ] **Documentation current** - Relevant documentation updated to reflect implementation changes
+- [ ] **Epic progress** - Implementation contributes to Epic completion and traceability maintained
 
 ## Execution Checklist
 
-### Story Selection and Preparation Phase
+### Setup
 
-- [ ] **Story identification**: Locate specific Story in `/docs/stories/{epic_number}.{story_number}.story.md` or present available Stories for selection
-- [ ] **Story validation**: Verify Story has "Ready for Development" status, clear acceptance criteria, and defined Tasks/Subtasks
-- [ ] **Tasks/Subtasks review**: Examine Story's Tasks/Subtasks section for implementation checklist
-- [ ] **Status update**: Change Story status to "In Progress" and add implementation start timestamp
+- [ ] **Locate story**: Find Story file in `/docs/stories/{epic_number}.{story_number}.story.md`
+- [ ] **Review Tasks/Subtasks**: Understand the implementation roadmap
 
-### Implementation Planning Phase
+### Execute Tasks/Subtasks
 
-- [ ] **Requirements analysis**: Parse Story acceptance criteria and identify all functional/non-functional requirements
-- [ ] **Checklist review**: Review Tasks/Subtasks section for systematic implementation guidance
-- [ ] **Task breakdown**: Follow existing Tasks/Subtasks checklist from Story
-- [ ] **Implementation approach**: Use Story's Tasks/Subtasks as implementation roadmap
+- [ ] **Update status to "In Progress"**: Mark story as implementation started
+- [ ] **Execute each subtask**: Work through Tasks/Subtasks sequentially, checking off completed items
+- [ ] **Run specified commands**: Execute all commands specified in subtasks (e.g., `create file: path/file.ext`)
+- [ ] **Validate deliverables**: Run verification commands specified in subtasks
 
-### Development Execution Phase
+### Complete Story
 
-- [ ] **Checklist execution**: Systematically execute each item from Story's Tasks/Subtasks section
-- [ ] **Code development**: Implement each Subtask following coding standards
-- [ ] **Progress tracking**: Check off completed Subtasks in Story file for transparency
-- [ ] **Quality assurance**: Run linting, formatting, and security checks per requirements
+- [ ] **Run QA Checklist**: Execute all testing commands specified in story QA section
+- [ ] **Verify acceptance criteria**: Confirm all acceptance criteria are met with working code
 
-### Validation and Completion Phase
+### Document Results
 
-- [ ] **Subtask completion verification**: Ensure all Subtasks in Story's Tasks/Subtasks section are checked off
-- [ ] **Acceptance criteria validation**: Test all Story acceptance criteria are met with working functionality
-- [ ] **Testing plan execution**: Complete all Testing Plan checklist items from Story
-- [ ] **Story completion**: Update Story status to "Done" with Implementation Results summary and completion timestamp
+- [ ] **Update Implementation Results**: Document actual deliverables and files created
+- [ ] **Update status to "Done"**: Mark story as complete with timestamp
 
-## Content Guidelines
+## Implementation Guidelines
 
-### 🎯 **Developer Focus Areas:**
+### Simple Execution Rules
 
-#### **Story Checklist Execution (Primary Focus):**
+- **Follow Tasks/Subtasks exactly** - Execute each step as specified in the story
+- **Check off completed items** - Mark progress in the story file
+- **Run all specified commands** - Execute commands exactly as written in subtasks
+- **Document actual results** - Record what was actually created in Implementation Results
 
-- **Tasks/Subtasks**: Execute each checklist item systematically from Story's Tasks/Subtasks section
-- **Architecture References**: Follow specific architecture sections linked in Story
-- **Testing Plan**: Complete all testing checklist items defined in Story
-- **Progress Tracking**: Check off Subtasks as completed for transparent progress
+### If Something Is Unclear
 
-#### **Tasks/Subtasks Structure (Story-Driven):**
-
-- **Approach**: Follow technical approach outlined in Story Tasks/Subtasks section
-- **Architecture References**: Use Story-provided links to specific architecture sections
-- **Tasks**: Execute main implementation tasks with their associated file lists
-- **Subtasks**: Complete detailed checklist items under each Task systematically
-
-### ✅ **Quality Standards:**
-
-- **Story Compliant**: All Story acceptance criteria implemented and validated
-- **Architecture Aligned**: Implementation follows Architecture specifications and design patterns
-- **Code Quality**: Meets coding standards, test coverage, and performance requirements
-- **System Integrated**: No regressions, proper integration with existing functionality
-- **Documented**: Story updated with implementation details and system documentation current
-
-### ❌ **Common Pitfalls to Avoid:**
-
-- Implementing features not defined in the Story acceptance criteria
-- Ignoring Architecture specifications and making independent design decisions
-- Insufficient testing or failing to validate all acceptance criteria
-- Breaking existing functionality or creating system integration issues
-- Poor code quality that doesn't meet project standards
-
-### 🎯 **Story-Architecture Integration:**
-
-This implementation should demonstrate proper SDLC role separation:
-
-- **Stories define WHAT** to implement (acceptance criteria, business functionality)
-- **Architecture defines HOW** to implement (design patterns, technology choices, component structure)
-- **Developer implements** Stories using Architecture guidance without defining business requirements
-- **Quality validation** ensures Story requirements met through Architecture-compliant implementation
+- **Stop implementation** - Do not guess or make assumptions
+- **Use review-story task** - Get technical details clarified first
+- **Resume when clear** - Continue once story has complete specifications
