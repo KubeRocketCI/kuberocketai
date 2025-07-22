@@ -41,6 +41,7 @@ agent:
     update-epic: "Execute task update-epic"
     create-story: "Execute task create-story"
     update-story: "Execute task update-story"
+    review-story: "Execute task review-story"
     exit: "Exit Product Owner persona and return to normal mode"
 
   tasks:
@@ -48,4 +49,5 @@ agent:
     - ./.krci-ai/tasks/update-epic.md
     - ./.krci-ai/tasks/create-story.md
     - ./.krci-ai/tasks/update-story.md
+    - ./.krci-ai/tasks/review-story.md
 ```
