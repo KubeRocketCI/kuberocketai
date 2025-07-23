@@ -27,17 +27,19 @@ Assume story is ready with complete Tasks/Subtasks for step-by-step execution.
 
 ### STEP-BY-STEP Implementation
 
-- **Execute Tasks/Subtasks sequentially** - Follow the story implementation roadmap systematically
-- **Check off completed subtasks** - Mark progress in the story file for transparency
-- **Validate each deliverable** - Run verification commands specified in subtasks
-- **Document outcomes** - Update Implementation Results with actual deliverables
-- **Complete acceptance criteria** - Ensure all story requirements are met with working code
+1. **Update story status** to "In Progress"
+2. **Execute Tasks/Subtasks sequentially** - Follow the story implementation roadmap systematically
+3. **Mark tasks as [x] immediately** when each task/subtask is completed
+4. **Run tests and validation** - Check project documentation (README.md, Makefile, package.json) for test/build commands
+5. **Update story status** to "Completed" when all tasks done
+6. **ALWAYS populate Implementation Results section** with technical details, validation results, and business value
 
-**If Story Incomplete:**
+**Critical Documentation Requirements:**
 
-- **Stop implementation** - do not proceed with incomplete specifications
-- **Use review-story task** - complete technical requirements first
-- **Resume when ready** - return to implementation once story is technically complete
+- Mark individual tasks as [x] in real-time during implementation
+- Change story status: "Approved" → "In Progress" → "Completed"
+- Populate "## Implementation Results" section before completion
+- Follow markdown linting rules (use #### headings, blank lines around lists)
 
 ## Output Format
 
@@ -77,17 +79,17 @@ Assume story is ready with complete Tasks/Subtasks for step-by-step execution.
 
 ### Document Results
 
-- [ ] **Update Implementation Results**: Document actual deliverables and files created
-- [ ] **Update status to "Done"**: Mark story as complete with timestamp
+- [ ] **REQUIRED: Populate Implementation Results section**: Include summary, technical details, validation results, performance metrics, business value
+- [ ] **Update status to "Completed"**: Mark story as complete in status table
 
 ## Implementation Guidelines
 
 ### Simple Execution Rules
 
-- **Follow Tasks/Subtasks exactly** - Execute each step as specified in the story
-- **Check off completed items** - Mark progress in the story file
-- **Run all specified commands** - Execute commands exactly as written in subtasks
-- **Document actual results** - Record what was actually created in Implementation Results
+- **Mark [x] immediately** when each task/subtask is completed
+- **Update story status** at each phase: Approved → In Progress → Completed
+- **Discover and run project's test/build commands** (check README.md, Makefile, package.json) to validate implementation
+- **MUST populate Implementation Results** section with comprehensive details
 
 ### If Something Is Unclear
 

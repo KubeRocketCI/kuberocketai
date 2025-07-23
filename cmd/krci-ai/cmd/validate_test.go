@@ -334,3 +334,209 @@ Test task description.
 		}
 	})
 }
+
+func TestValidateTaskPathLinks(t *testing.T) {
+	tempDir := t.TempDir()
+	validator, err := testFrameworkValidator(tempDir)
+	if err != nil {
+		t.Fatalf("Failed to create validator: %v", err)
+	}
+
+	// Create test directory structure
+	krciDir := filepath.Join(tempDir, ".krci-ai")
+	tasksDir := filepath.Join(krciDir, "tasks")
+	err = os.MkdirAll(tasksDir, 0755)
+	if err != nil {
+		t.Fatalf("Failed to create tasks directory: %v", err)
+	}
+
+	// Create a valid task file
+	validTaskFile := filepath.Join(tasksDir, "valid-task.md")
+	err = os.WriteFile(validTaskFile, []byte("# Valid Task\n\nThis is a valid task."), 0644)
+	if err != nil {
+		t.Fatalf("Failed to write valid task file: %v", err)
+	}
+
+	t.Run("agent with valid task references", func(t *testing.T) {
+		validAgentContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "A test agent for task validation"
+    role: "Test Engineer"
+    goal: "Test task path validation functionality"
+  activation_prompt:
+    - "Test agent for validation"
+  principles:
+    - "Test thoroughly"
+    - "Validate references"
+    - "Report clear errors"
+  customization: ""
+  commands:
+    help: "Show commands"
+    chat: "Chat mode"
+    exit: "Exit mode"
+  tasks:
+    - "./.krci-ai/tasks/valid-task.md"
+`
+
+		agentFile := filepath.Join(tempDir, "test-agent.yaml")
+		err := os.WriteFile(agentFile, []byte(validAgentContent), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write agent file: %v", err)
+		}
+
+		result := validator.validateAgentFile(agentFile)
+
+		if !result.IsValid {
+			t.Errorf("Expected valid result, but got invalid. Errors: %v", result.Errors)
+		}
+
+		if len(result.Errors) != 0 {
+			t.Errorf("Expected no errors, got: %v", result.Errors)
+		}
+	})
+
+	t.Run("agent with invalid task references", func(t *testing.T) {
+		invalidAgentContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "A test agent with invalid task references"
+    role: "Test Engineer"
+    goal: "Test task path validation functionality"
+  activation_prompt:
+    - "Test agent for validation"
+  principles:
+    - "Test thoroughly"
+    - "Validate references"
+    - "Report clear errors"
+  customization: ""
+  commands:
+    help: "Show commands"
+    chat: "Chat mode"
+    exit: "Exit mode"
+  tasks:
+    - "./.krci-ai/tasks/nonexistent-task.md"
+    - "./.krci-ai/tasks/another-missing.md"
+    - "./.krci-ai/tasks/valid-task.md"
+`
+
+		agentFile := filepath.Join(tempDir, "test-agent.yaml")
+		err := os.WriteFile(agentFile, []byte(invalidAgentContent), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write agent file: %v", err)
+		}
+
+		result := validator.validateAgentFile(agentFile)
+
+		if result.IsValid {
+			t.Error("Expected invalid result due to missing task references, but got valid")
+		}
+
+		if len(result.Errors) != 2 {
+			t.Errorf("Expected 2 errors for missing tasks, got: %d (%v)", len(result.Errors), result.Errors)
+		}
+
+		// Verify specific error messages
+		errorMessages := strings.Join(result.Errors, " ")
+		if !strings.Contains(errorMessages, "nonexistent-task.md") {
+			t.Error("Expected error message about nonexistent-task.md")
+		}
+		if !strings.Contains(errorMessages, "another-missing.md") {
+			t.Error("Expected error message about another-missing.md")
+		}
+	})
+
+	t.Run("agent with no task references", func(t *testing.T) {
+		noTasksAgentContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "A test agent with no task references"
+    role: "Test Engineer"
+    goal: "Test task path validation functionality"
+  activation_prompt:
+    - "Test agent for validation"
+  principles:
+    - "Test thoroughly"
+    - "Validate references"
+    - "Report clear errors"
+  customization: ""
+  commands:
+    help: "Show commands"
+    chat: "Chat mode"
+    exit: "Exit mode"
+`
+
+		agentFile := filepath.Join(tempDir, "test-agent.yaml")
+		err := os.WriteFile(agentFile, []byte(noTasksAgentContent), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write agent file: %v", err)
+		}
+
+		result := validator.validateAgentFile(agentFile)
+
+		if !result.IsValid {
+			t.Errorf("Expected valid result for agent with no tasks, but got invalid. Errors: %v", result.Errors)
+		}
+	})
+
+	t.Run("agent with non-markdown task reference", func(t *testing.T) {
+		// Create a non-markdown file
+		nonMarkdownFile := filepath.Join(tasksDir, "invalid-task.txt")
+		err := os.WriteFile(nonMarkdownFile, []byte("This is not markdown"), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write non-markdown file: %v", err)
+		}
+
+		nonMarkdownAgentContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "A test agent with non-markdown task reference"
+    role: "Test Engineer"
+    goal: "Test task path validation functionality"
+  activation_prompt:
+    - "Test agent for validation"
+  principles:
+    - "Test thoroughly"
+    - "Validate references"
+    - "Report clear errors"
+  customization: ""
+  commands:
+    help: "Show commands"
+    chat: "Chat mode"
+    exit: "Exit mode"
+  tasks:
+    - "./.krci-ai/tasks/invalid-task.txt"
+`
+
+		agentFile := filepath.Join(tempDir, "test-agent.yaml")
+		err = os.WriteFile(agentFile, []byte(nonMarkdownAgentContent), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write agent file: %v", err)
+		}
+
+		result := validator.validateAgentFile(agentFile)
+
+		if result.IsValid {
+			t.Error("Expected invalid result due to non-markdown task reference, but got valid")
+		}
+
+		// Expect multiple errors: schema validation + task path validation
+		if len(result.Errors) < 1 {
+			t.Errorf("Expected at least 1 error for non-markdown task, got: %d (%v)", len(result.Errors), result.Errors)
+		}
+
+		// Check that one of the errors is about markdown file requirement
+		errorMessages := strings.Join(result.Errors, " ")
+		if !strings.Contains(errorMessages, "must be a markdown file") {
+			t.Errorf("Expected error about markdown file requirement in: %v", result.Errors)
+		}
+	})
+}

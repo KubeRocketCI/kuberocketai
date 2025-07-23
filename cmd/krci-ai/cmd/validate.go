@@ -232,7 +232,7 @@ func (v *FrameworkValidator) validateAgentFile(filePath string) ValidationResult
 	}
 
 	// Parse and validate the agent
-	_, validationErrors, err := v.yamlProcessor.ProcessAndValidateAgent(filePath)
+	agent, validationErrors, err := v.yamlProcessor.ProcessAndValidateAgent(filePath)
 	if err != nil {
 		result.IsValid = false
 		result.Errors = append(result.Errors, fmt.Sprintf("Parse error: %s", err.Error()))
@@ -245,7 +245,63 @@ func (v *FrameworkValidator) validateAgentFile(filePath string) ValidationResult
 		result.Errors = append(result.Errors, validationError.Message)
 	}
 
+	// Validate task path links (only if agent parsing was successful)
+	if agent != nil {
+		taskPathErrors := v.validateTaskPathLinks(agent, v.baseDir)
+		for _, taskError := range taskPathErrors {
+			result.IsValid = false
+			result.Errors = append(result.Errors, taskError)
+		}
+	}
+
 	return result
+}
+
+// validateTaskPathLinks validates that all task references in an agent exist and are accessible
+func (v *FrameworkValidator) validateTaskPathLinks(agent *processor.Agent, baseDir string) []string {
+	var errors []string
+
+	// Check if agent has tasks defined
+	if len(agent.Agent.Tasks) == 0 {
+		return errors // No tasks to validate
+	}
+
+	for _, taskPath := range agent.Agent.Tasks {
+		// Convert relative task path to absolute path
+		// Task paths are expected to be in format "./.krci-ai/tasks/filename.md"
+		var absoluteTaskPath string
+
+		if strings.HasPrefix(taskPath, "./") {
+			// Remove the "./" prefix and join with baseDir
+			relativePath := strings.TrimPrefix(taskPath, "./")
+			absoluteTaskPath = filepath.Join(baseDir, relativePath)
+		} else if filepath.IsAbs(taskPath) {
+			absoluteTaskPath = taskPath
+		} else {
+			// Treat as relative to baseDir
+			absoluteTaskPath = filepath.Join(baseDir, taskPath)
+		}
+
+		// Check if the task file exists
+		if _, err := os.Stat(absoluteTaskPath); os.IsNotExist(err) {
+			errors = append(errors, fmt.Sprintf("Task reference not found: %s", taskPath))
+			continue
+		}
+
+		// Check if file is readable
+		if _, err := os.Open(absoluteTaskPath); err != nil {
+			errors = append(errors, fmt.Sprintf("Task reference not accessible: %s (%s)", taskPath, err.Error()))
+			continue
+		}
+
+		// Verify it's a markdown file
+		if !strings.HasSuffix(taskPath, ".md") {
+			errors = append(errors, fmt.Sprintf("Task reference must be a markdown file: %s", taskPath))
+			continue
+		}
+	}
+
+	return errors
 }
 
 // validateTasks validates task files (basic existence check)
