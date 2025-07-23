@@ -63,6 +63,15 @@ jobs:
           ./dist/krci-ai-linux-amd64 --version
           ./dist/krci-ai-linux-amd64 --help
 
+      - name: Install full framework with built binary
+        run: |
+          chmod +x dist/krci-ai-linux-amd64
+          ./dist/krci-ai-linux-amd64 install --all --force
+
+      - name: Run validation with built binary
+        run: |
+          ./dist/krci-ai-linux-amd64 validate
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
