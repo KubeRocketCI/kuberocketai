@@ -13,7 +13,7 @@
 <!-- Enables progress monitoring and PRD traceability validation -->
 
 <!-- Template Guidance:
-Status Options: Planning, In Progress, Implementation, Testing, Complete, Cancelled
+Status Options: Planning -> Approved -> In Progress -> Done -> Completed
 Priority Example: Critical, High, Medium, Low (align with PRD requirement priorities)
 Epic Owner Example: "Product Owner", "Tech Lead", "Development Team"
 Timeline Example: "Sprint 1-3 (6 weeks)", "Q1 2024", "March-April 2024"
