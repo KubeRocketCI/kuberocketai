@@ -74,25 +74,6 @@ Project Brief → PRD → Epics → Stories → Code → Tests → MVP
 4. **Code Review** → Enables testing
 5. **Test Validation** → Enables MVP delivery
 
-## Reference Patterns for Tasks
-
-**✅ CORRECT: Inline references in task instructions**
-
-```markdown
-## Instructions
-1. Follow SDLC workflow from [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md)
-2. Use template: [epic.md](./.krci-ai/templates/epic.md)
-3. Reference business frameworks: [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-```
-
-**❌ INCORRECT: Separate references section**
-
-```markdown
-## References
-- sdlc-framework.md
-- epic.md
-```
-
 ## Template Variables
 
 All templates use `{{variable_name}}` format for dynamic content:
