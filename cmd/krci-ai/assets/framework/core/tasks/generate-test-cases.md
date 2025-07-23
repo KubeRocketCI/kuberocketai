@@ -4,16 +4,24 @@
 
 Generate detailed test cases and scenarios based on test plan strategy and Story acceptance criteria, ensuring comprehensive coverage of functional and non-functional requirements. This task translates test plan scenarios into executable test cases with clear steps, expected results, and validation criteria that enable systematic testing execution and quality validation.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Test plan available**: Approved test plan exists with defined test scenarios and strategy
 - [ ] **Story clarity**: Stories with well-defined acceptance criteria available for test case generation
 - [ ] **Testing standards**: Understanding of test case writing standards from [testing-standards.md](./.krci-ai/data/testing-standards.md)
 - [ ] **Quality metrics**: Familiarity with test coverage requirements from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/testing-standards.md
+- ./.krci-ai/data/quality-metrics.md
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/test-methodologies.md
+- ./.krci-ai/templates/test-cases.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

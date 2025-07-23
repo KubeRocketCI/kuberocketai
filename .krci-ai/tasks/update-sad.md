@@ -4,16 +4,23 @@
 
 Update existing multi-file architecture documentation to reflect new requirements, Epic changes, or technical decisions while maintaining system consistency and development guidance. This update ensures architecture remains aligned with current PRD requirements and Epic implementations across all relevant architecture sections.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Existing architecture**: Current architecture files exist in `/docs/architecture/` directory following SAD appendix structure
 - [ ] **Change trigger**: Clear reason for update (PRD changes, Epic updates, technical constraints)
 - [ ] **Updated requirements**: New or modified BR/NFR requirements from PRD updates
 - [ ] **Impact scope**: Understanding of which architectural sections and components are affected
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/templates/sad-template.md
+- ./.krci-ai/data/architecture-principles.md
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/templates/architecture-review.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

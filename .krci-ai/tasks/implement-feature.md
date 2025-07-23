@@ -11,6 +11,16 @@ Implement Story requirements according to Architecture specifications and coding
 - [ ] **Development environment**: Project codebase access and development tools configured
 - [ ] **Dependencies available**: Required libraries, tools, and systems accessible
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/coding-standards.md
+- ./.krci-ai/data/best-practices.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for implementation dependencies and handoff requirements

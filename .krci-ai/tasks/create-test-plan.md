@@ -4,16 +4,24 @@
 
 Create comprehensive test plan and strategy for Stories and Epic features, ensuring quality coverage and risk-based testing approach. This task translates Story acceptance criteria and Epic business requirements into systematic testing strategy that validates functionality, performance, and compliance requirements while supporting development quality gates and release readiness.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Story/Epic available**: Stories with acceptance criteria or Epics with defined features exist for testing
 - [ ] **Requirements clarity**: Story acceptance criteria and Epic business requirements are well-defined
 - [ ] **Testing standards**: Understanding of testing methodologies and quality standards from [testing-strategy.md](./.krci-ai/data/testing-strategy.md)
 - [ ] **Quality metrics**: Familiarity with quality benchmarks from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/testing-strategy.md
+- ./.krci-ai/data/quality-metrics.md
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/test-methodologies.md
+- ./.krci-ai/templates/test-plan.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

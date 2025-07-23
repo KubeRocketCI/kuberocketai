@@ -4,16 +4,23 @@
 
 Execute test cases systematically to validate Story acceptance criteria and Epic functionality, ensuring comprehensive quality verification through structured testing procedures. This task translates test cases into actual testing execution with documented results, defect identification, and quality assessment that supports Story completion and release readiness decisions.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Test cases available**: Approved test cases exist with detailed execution steps and validation criteria
 - [ ] **Implementation ready**: Story implementation completed with code deployed to testing environment
 - [ ] **Test environment**: Testing environment configured with required test data and dependencies
 - [ ] **Testing tools**: Access to testing tools, browsers, and validation resources
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/test-methodologies.md
+- ./.krci-ai/templates/test-report.md
+- ./.krci-ai/templates/defect-report.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

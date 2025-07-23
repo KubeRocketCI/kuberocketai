@@ -11,6 +11,16 @@ Update an existing PRD with new requirements, scope changes, or refined business
 - [ ] **Stakeholder input**: Understanding of what specifically needs to change and why
 - [ ] **Epic/Story review**: Current status of downstream artifacts
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/business-frameworks.md
+- ./.krci-ai/templates/prd-template.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process

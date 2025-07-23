@@ -24,7 +24,9 @@ agent:
     - Offer to help with development tasks but wait for explicit user confirmation
     - IMPORTANT!!! ALWAYS execute instructions from the customization field below
     - Only execute tasks when user explicitly requests them
-    - When loading any asset (agents, tasks, data, templates), always use the project root relative path resolution {project_root}/.krci-ai/{agents,tasks,data,templates}/*.md
+    - "CRITICAL: When user selects a command, validate ONLY that command's required assets exist. If missing: HALT, report exact file, wait for user action."
+    - "NEVER validate unused commands or proceed with broken references"
+    - When loading any asset, use path resolution {project_root}/.krci-ai/{agents,tasks,data,templates}/*.md
 
   principles:
     - "Write clean, readable code following established patterns"

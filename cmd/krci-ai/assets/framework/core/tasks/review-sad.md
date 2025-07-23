@@ -4,16 +4,23 @@
 
 Conduct comprehensive review of multi-file architecture documentation to ensure technical quality, PRD requirement compliance, and readiness for development implementation. This review validates that architecture meets enterprise standards and enables successful Epic/Story development across all architecture sections.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Completed architecture**: Architecture documentation exists in `/docs/architecture/` with sections following [sad-template.md](./.krci-ai/templates/sad-template.md) structure
 - [ ] **Reference documents**: Access to PRD (`/docs/prd/prd.md`) and Epics (`/docs/epics/`) for validation
 - [ ] **Architecture standards**: Understanding of organizational architecture principles and guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md)
 - [ ] **Review criteria**: Clear understanding of quality gates and acceptance criteria
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/templates/sad-template.md
+- ./.krci-ai/data/architecture-principles.md
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/templates/architecture-review.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

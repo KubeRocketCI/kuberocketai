@@ -4,16 +4,22 @@
 
 Analyze current business processes and workflows to identify improvement opportunities and document process requirements that support PRD enhancement and Epic definition. This task bridges current state operations with future state system requirements, providing process insights that inform business requirements (BR) and system design decisions for Epic implementation and Story development.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **PRD foundation**: PRD exists at `/docs/prd/prd.md` with initial business context and objectives
 - [ ] **Process scope defined**: Business process boundaries and analysis objectives established
 - [ ] **Stakeholder access**: Process participants and process owners available for interviews
 - [ ] **Analysis tools**: Process mapping tools and performance measurement capabilities prepared
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/analysis-methodologies.md
+- ./.krci-ai/templates/process-map.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 
