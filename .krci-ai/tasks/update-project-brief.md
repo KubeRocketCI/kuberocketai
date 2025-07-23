@@ -11,6 +11,16 @@ Update an existing project brief with new information, scope changes, or refined
 - [ ] **Impact assessment**: Understanding of how changes affect dependent PRD and downstream artifacts
 - [ ] **Stakeholder buy-in**: Key stakeholders aware of planned strategic changes
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/business-frameworks.md
+- ./.krci-ai/templates/project-brief-template.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change impact assessment

@@ -11,6 +11,16 @@ Create user-focused requirements with implementation tasks and acceptance criter
 - [ ] **User persona identified**: Target user from Epic is specified
 - [ ] **Story scope defined**: Specific functionality this Story will deliver
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/prioritization-frameworks.md
+- ./.krci-ai/templates/story.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story dependencies and naming conventions

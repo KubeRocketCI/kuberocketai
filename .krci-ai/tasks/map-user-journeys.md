@@ -4,16 +4,22 @@
 
 Create comprehensive user journey maps that visualize user experiences and identify touchpoints, supporting PRD requirements and Epic feature definition with user-centric insights. This task translates user behaviors, emotions, and pain points into actionable requirements that inform business requirements (BR) and system design decisions, enabling user-focused Epic development and Story creation.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **PRD foundation**: PRD exists at `/docs/prd/prd.md` with basic user and business context
 - [ ] **User personas defined**: Customer segments or user types identified from requirements gathering
 - [ ] **Business process understanding**: Current user workflows and touchpoints mapped
 - [ ] **User research access**: Availability of user feedback, analytics data, and customer insights
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/analysis-methodologies.md
+- ./.krci-ai/templates/user-journey.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

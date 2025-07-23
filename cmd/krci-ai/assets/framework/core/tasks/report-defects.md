@@ -4,16 +4,22 @@
 
 Create comprehensive defect reports and quality assessments based on testing execution results, ensuring systematic documentation of issues and quality observations. This task translates testing findings into actionable defect reports with clear reproduction steps, impact assessment, and quality recommendations that enable development teams to address issues and stakeholders to make informed release decisions.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Test execution completed**: Testing execution finished with documented results and identified issues
 - [ ] **Testing evidence**: Screenshots, logs, and supporting documentation collected during test execution
 - [ ] **Quality standards**: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 - [ ] **Reporting tools**: Access to defect tracking system and reporting templates
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/quality-metrics.md
+- ./.krci-ai/templates/defect-report.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

@@ -11,6 +11,16 @@ Create a comprehensive project brief defining the foundation for product develop
 - [ ] Market context and user insights available
 - [ ] Strategic goals and constraints understood
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/business-frameworks.md
+- ./.krci-ai/templates/project-brief-template.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for role responsibilities and artifact flow

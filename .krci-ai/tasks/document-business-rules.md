@@ -4,16 +4,22 @@
 
 Systematically document business rules and constraints that govern system behavior, supporting PRD requirements and Epic implementation with clear business logic specifications. This task translates business policies, regulatory requirements, and operational constraints into structured rules that guide system design and development decisions, ensuring compliance and consistency in rule application across all Epic features.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **PRD foundation**: PRD exists at `/docs/prd/prd.md` with basic business and system requirements
 - [ ] **Business process understanding**: Current workflows and decision points identified
 - [ ] **Stakeholder access**: Subject matter experts and decision makers available for rule validation
 - [ ] **Regulatory context**: Compliance requirements and organizational policies understood
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/analysis-methodologies.md
+- ./.krci-ai/templates/business-rules.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

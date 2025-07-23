@@ -11,6 +11,16 @@ Update existing user story with new requirements, scope refinements, or implemen
 - [ ] **Impact assessment**: Understanding of how changes affect in-progress or completed Tasks/Subtasks
 - [ ] **Epic alignment**: Product Owner confirms updates maintain Epic goals and traceability
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/prioritization-frameworks.md
+- ./.krci-ai/templates/story.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story update dependencies and downstream impact

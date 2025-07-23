@@ -11,6 +11,16 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 - [ ] Stakeholder requirements gathered and prioritized
 - [ ] Technical feasibility assessment completed (if complex features)
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/business-frameworks.md
+- ./.krci-ai/templates/prd-template.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for PRD dependencies and quality gates

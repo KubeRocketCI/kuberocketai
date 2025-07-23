@@ -11,6 +11,16 @@ Create clear epic with problem statement, goal, scope, and implementation approa
 - [ ] **User context available**: Target users and use cases from PRD understood
 - [ ] **Epic scope defined**: Boundaries of what this Epic includes and excludes
 
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/prioritization-frameworks.md
+- ./.krci-ai/templates/epic.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Epic dependencies and artifact flow

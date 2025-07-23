@@ -4,16 +4,22 @@
 
 Systematically gather and analyze business requirements from stakeholders to enhance PRD with detailed workflows and acceptance criteria for Epic/Story creation. This task bridges stakeholder needs with technical implementation through structured elicitation techniques, ensuring all business requirements (BR) and system requirements (NFR) are comprehensively captured and documented for development guidance.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **PRD foundation**: Initial PRD exists at `/docs/prd/prd.md` with basic business context
 - [ ] **Stakeholder access**: Identified stakeholders available for engagement sessions
 - [ ] **Analysis tools**: Requirements documentation tools and templates prepared
 - [ ] **Business context**: Project scope and objectives defined from Project Brief
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/analysis-methodologies.md
+- ./.krci-ai/templates/requirements-doc.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 

@@ -4,16 +4,23 @@
 
 Create comprehensive system architecture documentation that translates PRD requirements and Epic features into technical design specifications for development teams. This SAD enables implementation guidance and provides technical foundation for all development work.
 
-## Framework Context
-
-**Reference**: [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) - See role responsibilities and artifact flow
-
 ## Prerequisites
 
 - [ ] **Completed PRD**: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
 - [ ] **Epic definitions**: Epics available at `/docs/epics/` with business context and scope
 - [ ] **Architecture principles**: Understanding of organizational architecture standards
 - [ ] **Technology constraints**: Awareness of technology stack and platform limitations
+
+### Reference Assets
+
+Dependencies:
+
+- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/architecture-principles.md
+- ./.krci-ai/data/design-patterns.md
+- ./.krci-ai/templates/sad-template.md
+
+Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
 ## Instructions
 
