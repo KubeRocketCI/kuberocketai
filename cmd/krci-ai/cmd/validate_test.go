@@ -107,12 +107,12 @@ Test task description.
 			t.Error("Expected valid results, but validation failed")
 		}
 
-		if results.TotalFiles != 2 {
-			t.Errorf("Expected 2 files, got: %d", results.TotalFiles)
+		if results.TotalFiles != 3 {
+			t.Errorf("Expected 3 validation results, got: %d", results.TotalFiles)
 		}
 
-		if results.ValidFiles != 2 {
-			t.Errorf("Expected 2 valid files, got: %d", results.ValidFiles)
+		if results.ValidFiles != 3 {
+			t.Errorf("Expected 3 valid validation results, got: %d", results.ValidFiles)
 		}
 
 		if results.InvalidFiles != 0 {
@@ -156,12 +156,12 @@ Test task description.
 			t.Error("Expected invalid results, but validation passed")
 		}
 
-		if results.TotalFiles != 3 {
-			t.Errorf("Expected 3 files, got: %d", results.TotalFiles)
+		if results.TotalFiles != 4 {
+			t.Errorf("Expected 4 validation results, got: %d", results.TotalFiles)
 		}
 
-		if results.ValidFiles != 2 {
-			t.Errorf("Expected 2 valid files, got: %d", results.ValidFiles)
+		if results.ValidFiles != 3 {
+			t.Errorf("Expected 3 valid validation results, got: %d", results.ValidFiles)
 		}
 
 		if results.InvalidFiles != 1 {

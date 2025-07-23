@@ -36,6 +36,8 @@ var validateCmd = &cobra.Command{
 This command validates:
 - Agent YAML files for schema compliance
 - Task path link validation in agent references
+- Template files structure and accessibility
+- Markdown links to framework files ([text](./.krci-ai/path/file.md))
 - Markdown format validation for task files
 - Cross-platform file accessibility
 
@@ -165,6 +167,16 @@ func (v *FrameworkValidator) ValidateFramework() (*ValidationResults, error) {
 	// Validate tasks (basic existence check for now)
 	if err := v.validateTasks(frameworkDir, results); err != nil {
 		return nil, fmt.Errorf("task validation failed: %w", err)
+	}
+
+	// Validate templates
+	if err := v.validateTemplates(frameworkDir, results); err != nil {
+		return nil, fmt.Errorf("template validation failed: %w", err)
+	}
+
+	// Validate internal framework links in all markdown files
+	if err := v.validateInternalLinks(frameworkDir, results); err != nil {
+		return nil, fmt.Errorf("internal link validation failed: %w", err)
 	}
 
 	// Calculate totals
@@ -369,6 +381,241 @@ func (v *FrameworkValidator) validateTaskFile(filePath string) ValidationResult 
 	return result
 }
 
+// validateTemplates validates all template files
+func (v *FrameworkValidator) validateTemplates(frameworkDir string, results *ValidationResults) error {
+	templatesDir := filepath.Join(frameworkDir, "templates")
+
+	// Check if templates directory exists
+	if _, err := os.Stat(templatesDir); os.IsNotExist(err) {
+		// No templates directory is not an error - might be a minimal setup
+		return nil
+	}
+
+	// Find all template files
+	templateFiles, err := filepath.Glob(filepath.Join(templatesDir, "*.md"))
+	if err != nil {
+		return fmt.Errorf("failed to find template files: %w", err)
+	}
+
+	// Validate each template file
+	for _, templateFile := range templateFiles {
+		result := v.validateTemplateFile(templateFile)
+		results.Results = append(results.Results, result)
+	}
+
+	return nil
+}
+
+// validateTemplateFile validates a single template file
+func (v *FrameworkValidator) validateTemplateFile(filePath string) ValidationResult {
+	// Convert absolute path to relative path from baseDir
+	relPath, err := filepath.Rel(v.baseDir, filePath)
+	if err != nil {
+		relPath = filePath // fallback to absolute path if conversion fails
+	}
+
+	result := ValidationResult{
+		Type:     "template",
+		File:     relPath,
+		IsValid:  true,
+		Errors:   make([]string, 0),
+		Warnings: make([]string, 0),
+	}
+
+	// Check if file exists and is readable
+	if _, statErr := os.Stat(filePath); os.IsNotExist(statErr) {
+		result.IsValid = false
+		result.Errors = append(result.Errors, "Template file does not exist")
+		return result
+	}
+
+	// Check if file has .md extension
+	if !strings.HasSuffix(filePath, ".md") {
+		result.IsValid = false
+		result.Errors = append(result.Errors, "Template file must have .md extension")
+		return result
+	}
+
+	// Try to read the file
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		result.IsValid = false
+		result.Errors = append(result.Errors, fmt.Sprintf("Cannot read template file: %s", err.Error()))
+		return result
+	}
+
+	// Validate template structure
+	v.validateTemplateStructure(filePath, string(content), &result)
+
+	return result
+}
+
+// validateTemplateStructure validates the structure and content of a template
+func (v *FrameworkValidator) validateTemplateStructure(filePath string, content string, result *ValidationResult) {
+	lines := strings.Split(content, "\n")
+
+	// Check for required template elements
+	hasTitle := false
+	hasContent := false
+	nonEmptyLines := 0
+
+	for lineNum, line := range lines {
+		trimmedLine := strings.TrimSpace(line)
+
+		if len(trimmedLine) > 0 {
+			nonEmptyLines++
+		}
+
+		// Check for title (first non-empty line should be heading)
+		if !hasTitle && len(trimmedLine) > 0 {
+			if strings.HasPrefix(trimmedLine, "#") {
+				hasTitle = true
+			} else if trimmedLine != "" {
+				result.Warnings = append(result.Warnings, fmt.Sprintf("Template should start with a heading (line %d)", lineNum+1))
+				hasTitle = true // Don't report multiple times
+			}
+		}
+
+		// Check for substantial content (non-heading lines with reasonable length)
+		if len(trimmedLine) > 20 && !strings.HasPrefix(trimmedLine, "#") {
+			hasContent = true
+		}
+	}
+
+	// Validate minimum content requirements
+	if nonEmptyLines < 3 {
+		result.Warnings = append(result.Warnings, "Template appears to have minimal content (less than 3 non-empty lines)")
+	}
+
+	if !hasContent {
+		result.Warnings = append(result.Warnings, "Template appears to lack substantial content")
+	}
+
+	// Check for template-specific patterns
+	contentStr := strings.ToLower(content)
+	if !strings.Contains(contentStr, "template") && !strings.Contains(contentStr, "example") {
+		result.Warnings = append(result.Warnings, "Template file may not contain template content or examples")
+	}
+}
+
+// validateInternalLinks validates internal framework links in all markdown files
+func (v *FrameworkValidator) validateInternalLinks(frameworkDir string, results *ValidationResults) error {
+	// Find all markdown files in the framework
+	var markdownFiles []string
+
+	// Check agents, tasks, templates, and data directories
+	dirs := []string{"agents", "tasks", "templates", "data"}
+
+	for _, dir := range dirs {
+		dirPath := filepath.Join(frameworkDir, dir)
+		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
+			continue // Skip non-existent directories
+		}
+
+		// Find markdown files in this directory
+		files, err := filepath.Glob(filepath.Join(dirPath, "*.md"))
+		if err != nil {
+			return fmt.Errorf("failed to find markdown files in %s: %w", dir, err)
+		}
+		markdownFiles = append(markdownFiles, files...)
+	}
+
+	// Validate internal links in each file
+	for _, markdownFile := range markdownFiles {
+		result := v.validateInternalLinksInFile(markdownFile, frameworkDir)
+		results.Results = append(results.Results, result)
+	}
+
+	return nil
+}
+
+// validateInternalLinksInFile validates internal framework links in a single markdown file
+func (v *FrameworkValidator) validateInternalLinksInFile(filePath string, frameworkDir string) ValidationResult {
+	// Convert absolute path to relative path from baseDir
+	relPath, err := filepath.Rel(v.baseDir, filePath)
+	if err != nil {
+		relPath = filePath // fallback to absolute path if conversion fails
+	}
+
+	result := ValidationResult{
+		Type:     "framework-links",
+		File:     relPath,
+		IsValid:  true,
+		Errors:   make([]string, 0),
+		Warnings: make([]string, 0),
+	}
+
+	// Read the file
+	content, err := os.ReadFile(filePath)
+	if err != nil {
+		result.IsValid = false
+		result.Errors = append(result.Errors, fmt.Sprintf("Cannot read file for link validation: %s", err.Error()))
+		return result
+	}
+
+	// Look for internal framework links
+	v.checkInternalFrameworkLinks(string(content), filePath, frameworkDir, &result)
+
+	return result
+}
+
+// checkInternalFrameworkLinks checks for internal framework references and validates they exist
+func (v *FrameworkValidator) checkInternalFrameworkLinks(content string, filePath string, frameworkDir string, result *ValidationResult) {
+	lines := strings.Split(content, "\n")
+
+	for lineNum, line := range lines {
+		// Only validate markdown links that reference internal framework paths
+		// Format: [text](./.krci-ai/path/to/file.md)
+		if strings.Contains(line, "](./.krci-ai/") {
+			v.validateMarkdownFrameworkLinks(line, lineNum+1, filePath, frameworkDir, result)
+		}
+	}
+}
+
+// validateMarkdownFrameworkLinks validates markdown links that reference internal framework paths
+func (v *FrameworkValidator) validateMarkdownFrameworkLinks(line string, lineNum int, filePath string, frameworkDir string, result *ValidationResult) {
+	// Parse markdown links with framework references: [text](./.krci-ai/path/to/file.md)
+	for i := 0; i < len(line); i++ {
+		if i < len(line)-4 && line[i:i+4] == "](./" {
+			// Found potential framework link start
+			start := i + 2 // Start after ](
+			end := start
+
+			// Find the closing )
+			for j := start; j < len(line); j++ {
+				if line[j] == ')' {
+					end = j
+					break
+				}
+			}
+
+			if end > start {
+				linkPath := line[start:end]
+
+				// Only validate links that start with ./.krci-ai/
+				if strings.HasPrefix(linkPath, "./.krci-ai/") {
+					// Convert to absolute path for checking
+					// Remove the "./" prefix and join with base directory
+					cleanPath := strings.TrimPrefix(linkPath, "./")
+					absolutePath := filepath.Join(v.baseDir, cleanPath)
+
+					// Check if the referenced file exists
+					if _, err := os.Stat(absolutePath); os.IsNotExist(err) {
+						result.IsValid = false
+						result.Errors = append(result.Errors, fmt.Sprintf("Markdown link to framework file not found (line %d): %s", lineNum, linkPath))
+						result.Errors = append(result.Errors, "💡 Note: Only validates markdown links [text](./.krci-ai/...), not direct path references")
+					} else {
+						// Optional: Validate that it's a valid framework file type
+						if !strings.HasSuffix(linkPath, ".md") && !strings.HasSuffix(linkPath, ".yaml") && !strings.HasSuffix(linkPath, ".yml") {
+							result.Warnings = append(result.Warnings, fmt.Sprintf("Framework link references non-standard file type (line %d): %s", lineNum, linkPath))
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 // displayValidationResults displays the validation results
 func displayValidationResults(results *ValidationResults) {
 	// Color setup
@@ -438,6 +685,10 @@ func displayValidationResults(results *ValidationResults) {
 		fmt.Printf("Total Warnings:  %d\n", results.TotalWarnings)
 	}
 
+	fmt.Println()
+
+	// Display validation scope information
+	fmt.Printf("Framework Link Scope: Validates markdown links [text](./.krci-ai/...) only\n")
 	fmt.Println()
 
 	// Display final status
