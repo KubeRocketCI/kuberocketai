@@ -269,6 +269,61 @@ func TestInstallVSCodeIntegration(t *testing.T) {
 	}
 }
 
+func TestInstallWindsurfIntegration(t *testing.T) {
+	tempDir := t.TempDir()
+	installer := NewInstaller(tempDir, testIntegrationAssets)
+
+	// Create a minimal .krci-ai structure with test agent
+	krciPath := filepath.Join(tempDir, krciAIDir)
+	agentsPath := filepath.Join(krciPath, agentsDir)
+	err := os.MkdirAll(agentsPath, 0755)
+	if err != nil {
+		t.Fatalf("Failed to create agents directory: %v", err)
+	}
+
+	// Create a test agent file
+	testAgentContent := `agent:
+  identity:
+    role: "Software Developer"`
+	agentFile := filepath.Join(agentsPath, "dev.yaml")
+	err = os.WriteFile(agentFile, []byte(testAgentContent), 0644)
+	if err != nil {
+		t.Fatalf("Failed to create test agent file: %v", err)
+	}
+
+	// Test installation
+	err = installer.InstallWindsurfIntegration()
+	if err != nil {
+		t.Errorf("InstallWindsurfIntegration failed: %v", err)
+	}
+
+	// Verify directory was created
+	windsurfDir := filepath.Join(tempDir, windsurfRulesDir)
+	if _, err := os.Stat(windsurfDir); os.IsNotExist(err) {
+		t.Error("Windsurf rules directory was not created")
+	}
+
+	// Verify .md file was created
+	mdFile := filepath.Join(windsurfDir, "dev.md")
+	if _, err := os.Stat(mdFile); os.IsNotExist(err) {
+		t.Error("dev.md file was not created")
+	}
+
+	// Verify file content
+	content, err := os.ReadFile(mdFile)
+	if err != nil {
+		t.Fatalf("Failed to read .md file: %v", err)
+	}
+
+	contentStr := string(content)
+	if !contains(contentStr, "# Software Developer Agent Rule") {
+		t.Error("Content missing agent rule header")
+	}
+	if !contains(contentStr, "Software Developer") {
+		t.Error("Content missing role")
+	}
+}
+
 func TestGenerateIDEFile(t *testing.T) {
 	tempDir := t.TempDir()
 	installer := NewInstaller(tempDir, testIntegrationAssets)

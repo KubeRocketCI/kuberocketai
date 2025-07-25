@@ -37,6 +37,9 @@ const (
 	cursorRulesDir    = ".cursor/rules"
 	claudeCommandsDir = ".claude/commands"
 	vscodeModesDir    = ".github/chatmodes"
+	windsurfRulesDir  = ".windsurf/rules"
+	// File extensions
+	mdExtension = ".md"
 	// GitHubToolsList defines the complete set of tools available for GitHub integration
 	GitHubToolsList = "['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']"
 )
@@ -100,7 +103,7 @@ func (c *ClaudeIntegration) GetDirectoryPath() string {
 }
 
 func (c *ClaudeIntegration) GetFileExtension() string {
-	return ".md"
+	return mdExtension
 }
 
 func (c *ClaudeIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
@@ -142,6 +145,33 @@ CRITICAL: Carefully read the YAML agent definition below. Immediately activate t
 		GitHubToolsList,
 		role,
 		role,
+		string(yamlContent))
+}
+
+// WindsurfIntegration implements IDEIntegration for Windsurf IDE
+type WindsurfIntegration struct {
+	targetDir string
+}
+
+func (w *WindsurfIntegration) GetDirectoryPath() string {
+	return filepath.Join(w.targetDir, windsurfRulesDir)
+}
+
+func (w *WindsurfIntegration) GetFileExtension() string {
+	return mdExtension
+}
+
+func (w *WindsurfIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
+	return fmt.Sprintf(`# %s Agent Rule
+
+Activate the %s persona by following the agent definition below. This rule provides specialized development assistance for %s-related tasks.
+
+## Agent Definition
+
+`+"```yaml\n%s```\n",
+		role,
+		role,
+		strings.ToLower(role),
 		string(yamlContent))
 }
 
@@ -310,6 +340,11 @@ func (i *Installer) GetVSCodeChatmodesPath() string {
 	return filepath.Join(i.targetDir, vscodeModesDir)
 }
 
+// GetWindsurfRulesPath returns the path to the Windsurf rules directory
+func (i *Installer) GetWindsurfRulesPath() string {
+	return filepath.Join(i.targetDir, windsurfRulesDir)
+}
+
 // ValidateInstallation performs basic validation of the installation
 func (i *Installer) ValidateInstallation() error {
 	if !i.IsInstalled() {
@@ -431,4 +466,10 @@ func (i *Installer) InstallClaudeIntegration() error {
 func (i *Installer) InstallVSCodeIntegration() error {
 	integration := &VSCodeIntegration{targetDir: i.targetDir}
 	return i.installIDEIntegration(integration, "VS Code")
+}
+
+// InstallWindsurfIntegration creates .windsurf/rules directory and generates .md files for agents
+func (i *Installer) InstallWindsurfIntegration() error {
+	integration := &WindsurfIntegration{targetDir: i.targetDir}
+	return i.installIDEIntegration(integration, "Windsurf IDE")
 }

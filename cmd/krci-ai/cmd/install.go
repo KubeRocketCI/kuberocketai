@@ -159,6 +159,15 @@ Examples:
 			output.PrintSuccess("VS Code integration installed successfully!")
 		}
 
+		if ideFlag == "windsurf" || ideFlag == ideAll {
+			output.PrintInfo("Setting up Windsurf IDE integration...")
+			if err := installer.InstallWindsurfIntegration(); err != nil {
+				errorHandler.HandleError(err, "Failed to install Windsurf IDE integration")
+				return
+			}
+			output.PrintSuccess("Windsurf IDE integration installed successfully!")
+		}
+
 		// Success
 		output.PrintSuccess("Framework installation completed successfully!")
 		output.PrintInfo("Framework components installed to: " + installer.GetInstallationPath())
@@ -176,6 +185,9 @@ Examples:
 		}
 		if ideFlag == ideVSCode || ideFlag == ideAll {
 			output.PrintInfo("  • VS Code chat modes installed to: " + installer.GetVSCodeChatmodesPath() + "/")
+		}
+		if ideFlag == "windsurf" || ideFlag == ideAll {
+			output.PrintInfo("  • Windsurf IDE rules installed to: " + installer.GetWindsurfRulesPath() + "/")
 		}
 	},
 }
