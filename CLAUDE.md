@@ -28,6 +28,31 @@ krci-ai list agents           # List available agents
 krci-ai validate             # Validate framework components
 ```
 
+## Framework Installation
+
+### First-Time Setup
+
+```bash
+# Build the CLI
+make build
+
+# Install framework locally
+./dist/krci-ai install --ide=cursor  # For Cursor IDE
+./dist/krci-ai install --ide=claude  # For Claude Code
+./dist/krci-ai install --all         # All IDE integrations
+
+# Verify installation
+./dist/krci-ai validate
+```
+
+### Directory Structure Created
+
+- `.krci-ai/agents/` - 6 role-based agent definitions
+- `.krci-ai/tasks/` - Common workflow templates
+- `.krci-ai/templates/` - Output formatting templates
+- `.krci-ai/data/` - Reference data and standards
+- `.cursor/rules/` - IDE-specific integration files (if --ide used)
+
 ## Architecture
 
 ### Core Structure
@@ -49,10 +74,13 @@ krci-ai validate             # Validate framework components
 - `agents/po.yaml` - Backlog management
 - `agents/qa.yaml` - Testing and quality assurance
 
-**Multi-IDE Integration**: Framework uses filesystem-based integration:
+**Multi-IDE Integration**: Complete polymorphic IDE integration system:
 
 - Cursor IDE: `.cursor/rules/*.mdc` files
-- Universal filesystem access for any IDE
+- Claude Code: `.claude/commands/*.md` files
+- VS Code: `.github/chatmodes/*.chatmode.md` files
+- Windsurf IDE: Support included
+- Universal: `--ide=all` installs all integrations
 
 **Template-Driven Output**: Consistent formatting across roles using embedded templates in `templates/` directory.
 
@@ -75,7 +103,9 @@ The YAML processing engine (`internal/engine/processor/`) handles:
 ## Key Files
 
 - `cmd/krci-ai/main.go` - Application entry point with asset embedding
-- `internal/assets/manager.go` - Asset discovery and installation logic
-- `internal/validation/validator.go` - Schema validation components
+- `cmd/krci-ai/cmd/install.go` - Complete install command implementation
+- `internal/assets/installer.go` - Asset installation and extraction logic
+- `internal/assets/discovery.go` - Agent discovery and YAML parsing
+- `internal/cli/output.go` - Colorized CLI output utilities
 - `Makefile` - Development workflow automation
 - `.goreleaser.yml` - Multi-platform release configuration
