@@ -215,6 +215,46 @@ func TestVSCodeIntegration(t *testing.T) {
 	}
 }
 
+func TestWindsurfIntegration(t *testing.T) {
+	tempDir := t.TempDir()
+	integration := &WindsurfIntegration{targetDir: tempDir}
+
+	expectedPath := filepath.Join(tempDir, windsurfRulesDir)
+	if integration.GetDirectoryPath() != expectedPath {
+		t.Errorf("Expected directory path '%s', got '%s'", expectedPath, integration.GetDirectoryPath())
+	}
+
+	if integration.GetFileExtension() != mdExtension {
+		t.Errorf("Expected file extension '%s', got '%s'", mdExtension, integration.GetFileExtension())
+	}
+
+	content := integration.GenerateContent("test", "Test Role", []byte("test: yaml"))
+	if content == "" {
+		t.Error("GenerateContent returned empty string")
+	}
+
+	// Check if content contains expected parts
+	if !contains(content, "# Test Role Agent Rule") {
+		t.Error("Content missing agent rule header")
+	}
+	if !contains(content, "Test Role") {
+		t.Error("Content missing role")
+	}
+	if !contains(content, "test: yaml") {
+		t.Error("Content missing YAML content")
+	}
+}
+
+func TestGetWindsurfRulesPath(t *testing.T) {
+	tempDir := t.TempDir()
+	installer := NewInstaller(tempDir, testAssets)
+
+	expectedPath := filepath.Join(tempDir, windsurfRulesDir)
+	if installer.GetWindsurfRulesPath() != expectedPath {
+		t.Errorf("Expected Windsurf rules path '%s', got '%s'", expectedPath, installer.GetWindsurfRulesPath())
+	}
+}
+
 func TestValidateInstallationWithoutInstallation(t *testing.T) {
 	tempDir := t.TempDir()
 	installer := NewInstaller(tempDir, testAssets)
