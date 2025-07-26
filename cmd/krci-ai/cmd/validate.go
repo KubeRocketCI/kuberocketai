@@ -494,7 +494,7 @@ func (v *FrameworkValidator) validateTemplateStructure(filePath string, content 
 	// Check for template-specific patterns
 	contentStr := strings.ToLower(content)
 	if !strings.Contains(contentStr, "template") && !strings.Contains(contentStr, "example") {
-		result.Warnings = append(result.Warnings, "Template file may not contain template content or examples")
+		result.Warnings = append(result.Warnings, "Template missing usage guidance - add 'template' or 'example' keyword")
 	}
 }
 
@@ -617,6 +617,37 @@ func (v *FrameworkValidator) validateMarkdownFrameworkLinks(line string, lineNum
 }
 
 // displayValidationResults displays the validation results
+func displayFileResult(result ValidationResult) {
+	green := color.New(color.FgGreen)
+	red := color.New(color.FgRed)
+	yellow := color.New(color.FgYellow)
+
+	displayPath := result.File
+
+	if result.IsValid {
+		if verboseOutput {
+			_, _ = green.Printf("✅ %s: %s\n", strings.ToUpper(result.Type), displayPath)
+
+			// Display warnings for valid files in verbose mode
+			for _, warning := range result.Warnings {
+				_, _ = yellow.Printf("   ⚠️  %s\n", warning)
+			}
+		}
+	} else {
+		_, _ = red.Printf("❌ %s: %s\n", strings.ToUpper(result.Type), displayPath)
+
+		// Display errors
+		for _, errorMsg := range result.Errors {
+			fmt.Printf("   🔸 %s\n", errorMsg)
+		}
+
+		// Display warnings
+		for _, warning := range result.Warnings {
+			_, _ = yellow.Printf("   ⚠️  %s\n", warning)
+		}
+	}
+}
+
 func displayValidationResults(results *ValidationResults) {
 	// Color setup
 	green := color.New(color.FgGreen)
@@ -630,27 +661,7 @@ func displayValidationResults(results *ValidationResults) {
 		fmt.Println(strings.Repeat("-", 60))
 
 		for _, result := range results.Results {
-			// File path is already relative to project directory
-			displayPath := result.File
-
-			// Display file status
-			if result.IsValid {
-				if verboseOutput {
-					_, _ = green.Printf("✅ %s: %s\n", strings.ToUpper(result.Type), displayPath)
-				}
-			} else {
-				_, _ = red.Printf("❌ %s: %s\n", strings.ToUpper(result.Type), displayPath)
-
-				// Display errors
-				for _, errorMsg := range result.Errors {
-					fmt.Printf("   🔸 %s\n", errorMsg)
-				}
-
-				// Display warnings
-				for _, warning := range result.Warnings {
-					_, _ = yellow.Printf("   ⚠️  %s\n", warning)
-				}
-			}
+			displayFileResult(result)
 		}
 		fmt.Println()
 	}
@@ -681,6 +692,9 @@ func displayValidationResults(results *ValidationResults) {
 
 	if results.TotalWarnings > 0 {
 		_, _ = yellow.Printf("Total Warnings:  %d\n", results.TotalWarnings)
+		if !verboseOutput {
+			fmt.Printf("💡 Use 'krci-ai validate -v' to see warning details\n")
+		}
 	} else {
 		fmt.Printf("Total Warnings:  %d\n", results.TotalWarnings)
 	}
