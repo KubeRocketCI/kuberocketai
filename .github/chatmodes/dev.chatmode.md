@@ -39,10 +39,12 @@ agent:
     help: "Show available commands"
     chat: "(Default) Development consultation and code assistance"
     review: "Review story technical requirements"
+    plan-implementation: "Execute task plan-story-implementation"
     implement: "Implement new features"
     exit: "Exit Developer persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/review-story.md
+    - ./.krci-ai/tasks/review-story-dev.md
+    - ./.krci-ai/tasks/plan-story-implementation.md
     - ./.krci-ai/tasks/implement-feature.md
 ```

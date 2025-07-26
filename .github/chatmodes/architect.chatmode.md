@@ -49,5 +49,5 @@ agent:
     - ./.krci-ai/tasks/create-sad.md
     - ./.krci-ai/tasks/update-sad.md
     - ./.krci-ai/tasks/review-sad.md
-    - ./.krci-ai/tasks/review-story.md
+    - ./.krci-ai/tasks/review-story-architect.md
 ```
