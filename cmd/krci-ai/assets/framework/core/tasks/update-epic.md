@@ -28,6 +28,7 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 3. **Apply change control**: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
 4. **Maintain format**: Keep [epic.md](./.krci-ai/templates/epic.md) template structure and populate new variables
 5. **Preserve traceability**: Maintain existing PRD references while adding new BR/NFR connections
+6. **Ensure agent-optimization**: Maintain enhanced template compliance during all updates
 
 ### Update Validation Process
 
@@ -42,9 +43,11 @@ Before applying any update:
 
 ### ALLOWED Updates (Safe Changes)
 
+**Note**: All updates must maintain agent-optimized template compliance (Goal format, Dependencies grouping, Acceptance Criteria commands)
+
 - **Add new Stories** to existing epic scope without changing completed work
-- **Expand acceptance criteria** with additional validation requirements
-- **Add new dependencies** that don't conflict with completed Stories
+- **Expand acceptance criteria** with additional validation requirements and commands
+- **Add new dependencies** that don't conflict with completed Stories (maintain Epic/System/External grouping)
 - **Clarify problem statement** with additional context or user research
 - **Extend timeline** for additional scope (with stakeholder approval)
 - **Add new target users** without removing existing personas
@@ -81,6 +84,12 @@ Before applying any update:
 - [ ] **Change justification** clear business rationale documented for updates
 - [ ] **Impact assessment** downstream Story effects identified and communicated
 - [ ] **Template compliance** all template variables updated correctly
+- [ ] **Agent-optimization maintained** epic preserves enhanced template structure after updates
+- [ ] **Lifecycle-appropriate content** epic content matches status (Planning/In-Progress/Complete)
+- [ ] **Goal format preserved** goal maintains "Enable X for Y% within Z timeline" pattern
+- [ ] **Dependencies structure intact** Epic/System/External grouping maintained with exact headers
+- [ ] **Acceptance criteria updated** validation commands reflect current implementation status
+- [ ] **Quality gates passed** all validation commands execute successfully post-update
 
 ## Execution Checklist
 
@@ -90,6 +99,9 @@ Before applying any update:
 - [ ] **Story analysis**: Review dependent Stories and their current implementation status
 - [ ] **Change scope**: Define exactly what needs updating and why
 - [ ] **Impact evaluation**: Assess how changes affect existing work and timeline
+- [ ] **Template compliance check**: Verify current epic follows agent-optimized template structure
+- [ ] **Content structure assessment**: Verify epic maintains agent-optimized template structure
+- [ ] **Validation command review**: Check if existing validation commands need updates
 
 ### Change Planning Phase
 
@@ -97,13 +109,21 @@ Before applying any update:
 - [ ] **Stakeholder validation**: Confirm updates with development team and product stakeholders
 - [ ] **Story impact**: Identify which Stories need corresponding updates
 - [ ] **Timeline adjustment**: Calculate any timeline changes from scope additions
+- [ ] **Template compliance planning**: Ensure updates maintain agent-optimized structure
+- [ ] **Template compliance planning**: Ensure updates maintain agent-optimized structure
+- [ ] **Validation command updates**: Identify validation commands that need modification
 
 ### Update Implementation Phase
 
 - [ ] **Version header**: Add update timestamp and change summary to epic file
 - [ ] **Content updates**: Apply approved changes using [epic.md](./.krci-ai/templates/epic.md) structure
+- [ ] **Template compliance maintenance**: Preserve Goal format, Dependencies grouping, Acceptance Criteria commands
+- [ ] **Template structure maintenance**: Preserve Goal format, Dependencies grouping, Acceptance Criteria
+- [ ] **Validation command updates**: Update validation methods and commands as needed
+- [ ] **Agent-optimization verification**: Ensure consistent structure for automated processing
 - [ ] **Change documentation**: Document what changed and why in epic comments
 - [ ] **Story synchronization**: Update affected Stories to maintain epic alignment
+- [ ] **Quality gates validation**: Run validation commands to verify template compliance post-update
 
 ## Content Guidelines
 
