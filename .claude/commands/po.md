@@ -46,5 +46,5 @@ agent:
     - ./.krci-ai/tasks/update-epic.md
     - ./.krci-ai/tasks/create-story.md
     - ./.krci-ai/tasks/update-story.md
-    - ./.krci-ai/tasks/review-story.md
+    - ./.krci-ai/tasks/review-story-po.md
 ```
