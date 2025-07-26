@@ -38,13 +38,13 @@ Format Structure:
 - Connect to PRD BR/NFR requirements
 - Avoid solution-oriented language
 
-✅ DO: Reference specific PRD requirements (BR1, BR2, NFR1...)
-✅ DO: Include quantifiable user impact
-✅ DO: Focus on user pain, not missing features
-✅ DO: Use evidence from PRD user research
-❌ DON'T: Describe what the system can't do
-❌ DON'T: Include solution details in problem statement
-❌ DON'T: Use vague terms like "users want better experience"
+DO: Reference specific PRD requirements (BR1, BR2, NFR1...)
+DO: Include quantifiable user impact
+DO: Focus on user pain, not missing features
+DO: Use evidence from PRD user research
+DON'T: Describe what the system can't do
+DON'T: Include solution details in problem statement
+DON'T: Use vague terms like "users want better experience"
 -->
 
 ### Goal
@@ -53,24 +53,27 @@ Format Structure:
 
 <!-- Specific, measurable outcome that defines Epic completion -->
 <!-- Must align with PRD success metrics and enable clear Story validation -->
+<!-- REQUIRED FORMAT: Enable [specific outcome] for [target %] of [user type] within [timeline] -->
 
 <!-- Template Guidance:
 Goal Example:
 "Enable seamless agent discovery and IDE integration for 90% of target users within 2 weeks of first use, reducing agent selection time from 15 minutes to under 30 seconds while maintaining enterprise security standards."
 
-Format Structure:
-- Define specific, measurable outcome
-- Include target user percentage or metrics
-- Set clear timeline expectations
-- Connect to PRD success criteria
+REQUIRED Format Structure:
+- MUST start with "Enable [specific outcome]"
+- MUST include target user percentage or metrics
+- MUST include specific timeline boundaries
+- MUST connect to PRD success criteria
+- MUST be measurable and testable
 
-✅ DO: Make goals specific and measurable
-✅ DO: Include target metrics from PRD
-✅ DO: Set realistic timeline boundaries
-✅ DO: Connect to PRD success criteria
-❌ DON'T: Use vague language like "improve user experience"
-❌ DON'T: Set unmeasurable goals
-❌ DON'T: Ignore PRD success metrics alignment
+DO: Use format "Enable X for Y% of [users] within Z [timeline]"
+DO: Include specific metrics from PRD (time, percentage, quantity)
+DO: Set realistic timeline boundaries with specific duration
+DO: Connect to PRD success criteria explicitly
+DON'T: Use vague language like "improve user experience"
+DON'T: Set unmeasurable goals or subjective outcomes
+DON'T: Ignore PRD success metrics alignment
+DON'T: Omit timeline or target percentage requirements
 -->
 
 ### Target Users
@@ -92,13 +95,13 @@ Format Structure:
 - Connect to PRD user segments
 - Enable Story persona development
 
-✅ DO: Use specific personas from PRD
-✅ DO: Include user percentages or priority levels
-✅ DO: Describe user context and responsibilities
-✅ DO: Enable clear Story "As a [user]" scenarios
-❌ DON'T: Use generic roles like "users" or "developers"
-❌ DON'T: Create new personas not in PRD
-❌ DON'T: Omit user context or responsibilities
+DO: Use specific personas from PRD
+DO: Include user percentages or priority levels
+DO: Describe user context and responsibilities
+DO: Enable clear Story "As a [user]" scenarios
+DON'T: Use generic roles like "users" or "developers"
+DON'T: Create new personas not in PRD
+DON'T: Omit user context or responsibilities
 -->
 
 ## Scope
@@ -123,13 +126,13 @@ Format Structure:
 - Focus on user-facing functionality
 - Enable clear Story mapping
 
-✅ DO: Reference specific PRD requirements (BR1, NFR2...)
-✅ DO: Number items for clear tracking
-✅ DO: Focus on user-facing functionality
-✅ DO: Include enough detail for Story creation
-❌ DON'T: Include technical implementation details
-❌ DON'T: List features without PRD traceability
-❌ DON'T: Use vague descriptions
+DO: Reference specific PRD requirements (BR1, NFR2...)
+DO: Number items for clear tracking
+DO: Focus on user-facing functionality
+DO: Include enough detail for Story creation
+DON'T: Include technical implementation details
+DON'T: List features without PRD traceability
+DON'T: Use vague descriptions
 -->
 
 ### What's Not Included
@@ -152,13 +155,13 @@ Format Structure:
 - Reference other Epics for deferred items
 - Set clear boundaries for Stories
 
-✅ DO: Clearly state what's excluded and why
-✅ DO: Reference future Epics for deferred items
-✅ DO: Explain reasoning for exclusions
-✅ DO: Set clear Story development boundaries
-❌ DON'T: Leave scope boundaries unclear
-❌ DON'T: Include items without rationale
-❌ DON'T: Create artificial limitations
+DO: Clearly state what's excluded and why
+DO: Reference future Epics for deferred items
+DO: Explain reasoning for exclusions
+DO: Set clear Story development boundaries
+DON'T: Leave scope boundaries unclear
+DON'T: Include items without rationale
+DON'T: Create artificial limitations
 -->
 
 ### Dependencies
@@ -167,6 +170,7 @@ Format Structure:
 
 <!-- Other Epics, systems, or external requirements this Epic needs -->
 <!-- Critical for Story sequencing and implementation planning -->
+<!-- REQUIRED STRUCTURE: Group by Epic Dependencies, System Dependencies, External Dependencies -->
 
 <!-- Template Guidance:
 Dependencies Example:
@@ -183,19 +187,20 @@ External Dependencies:
 - Design system components (UI framework)
 - Security compliance approval (enterprise deployment)"
 
-Format Structure:
-- Group by type: Epic, System, External
-- Include specific version requirements
-- Note approval or integration needs
-- Enable dependency validation
+REQUIRED Format Structure:
+- MUST group by type: Epic Dependencies, System Dependencies, External Dependencies
+- MUST include specific version requirements where applicable
+- MUST note approval processes or integration needs
+- MUST enable clear dependency validation and tracking
 
-✅ DO: Group dependencies by type
-✅ DO: Include specific version or requirement details
-✅ DO: Note approval processes or integration needs
-✅ DO: Enable clear dependency validation
-❌ DON'T: List vague dependencies without specifics
-❌ DON'T: Omit external approval processes
-❌ DON'T: Ignore system requirement details
+DO: Use exact section headers "Epic Dependencies:", "System Dependencies:", "External Dependencies:"
+DO: Include specific version or requirement details for each dependency
+DO: Note approval processes or integration needs explicitly
+DO: Enable clear dependency validation and tracking
+DON'T: List dependencies without proper grouping structure
+DON'T: Use vague dependencies without specifics or versions
+DON'T: Omit external approval processes or integration requirements
+DON'T: Ignore system requirement details or compatibility needs
 -->
 
 ## Solution Approach
@@ -225,13 +230,13 @@ Format Structure:
 - Enable Story technical context
 - Include integration patterns and service boundaries
 
-✅ DO: Provide architectural guidance for Stories
-✅ DO: Include integration patterns and service boundaries
-✅ DO: Focus on approach, not detailed implementation
-✅ DO: Enable technical context for Story development
-❌ DON'T: Include detailed code specifications
-❌ DON'T: Prescribe exact implementation details
-❌ DON'T: Ignore architectural considerations
+DO: Provide architectural guidance for Stories
+DO: Include integration patterns and service boundaries
+DO: Focus on approach, not detailed implementation
+DO: Enable technical context for Story development
+DON'T: Include detailed code specifications
+DON'T: Prescribe exact implementation details
+DON'T: Ignore architectural considerations
 -->
 
 ## Acceptance Criteria
@@ -240,6 +245,7 @@ Format Structure:
 
 <!-- Specific, testable conditions that define Epic completion -->
 <!-- Must include measurable outcomes and validation commands for Story verification -->
+<!-- REQUIRED: Each criterion MUST include validation method and verification command -->
 
 <!-- Template Guidance:
 Acceptance Criteria Example:
@@ -259,19 +265,22 @@ Acceptance Criteria Example:
    - Validation: Security scan passes with zero critical issues
    - Command: `security-scan --agents --threshold=critical`"
 
-Format Structure:
-- Number criteria for clear tracking and Story mapping
-- Include validation methods and verification commands
-- Define measurable success indicators
-- Enable automated testing where possible
+REQUIRED Format Structure:
+- MUST number criteria for clear tracking and Story mapping
+- MUST include validation method for each criterion
+- MUST include verification command for each criterion (where automatable)
+- MUST define measurable success indicators
+- MUST enable automated testing and verification where possible
 
-✅ DO: Include specific validation methods and commands
-✅ DO: Make criteria measurable and testable
-✅ DO: Number criteria for Story traceability
-✅ DO: Enable automated verification where possible
-❌ DON'T: Use subjective criteria like "works well"
-❌ DON'T: Omit validation or verification steps
-❌ DON'T: Create criteria that can't be tested
+DO: Include specific validation methods AND verification commands for each criterion
+DO: Make criteria measurable and testable with clear success indicators
+DO: Number criteria for Story traceability and tracking
+DO: Enable automated verification where possible (pytest, npm test, CLI commands)
+DO: Include both manual validation steps and automated command verification
+DON'T: Use subjective criteria like "works well" or "user-friendly"
+DON'T: Omit validation methods or verification steps
+DON'T: Create criteria that can't be tested or measured
+DON'T: Skip command verification for automatable criteria
 -->
 
 ## User Stories
@@ -280,6 +289,7 @@ Format Structure:
 
 <!-- Planned Stories that implement this Epic with clear breakdown -->
 <!-- Enables immediate Story creation with Epic context and traceability -->
+<!-- REQUIRED: Group by phases with clear dependencies and story numbering -->
 
 <!-- Template Guidance:
 User Stories Example:
@@ -308,18 +318,21 @@ User Stories Example:
   - Acceptance: Health dashboard shows agent status and metrics
   - Dependencies: All previous stories completed"
 
-Format Structure:
-- Group Stories by implementation phases/sprints
-- Include user persona, goal, and basic acceptance criteria
-- Note dependencies between Stories
-- Use consistent naming: {{epic_number}}.01, {{epic_number}}.02, etc.
+REQUIRED Format Structure:
+- MUST group Stories by implementation phases with clear phase headers
+- MUST include user persona, goal, and basic acceptance criteria for each story
+- MUST note dependencies between Stories and external requirements
+- MUST use consistent naming: {{epic_number}}.01, {{epic_number}}.02, etc.
+- MUST enable immediate Story creation with Epic context and traceability
 
-✅ DO: Group Stories by logical implementation phases
-✅ DO: Include user persona and basic acceptance criteria
-✅ DO: Note dependencies between Stories
-✅ DO: Use consistent Story numbering within Epic
-✅ DO: Enable immediate Story creation with this context
-❌ DON'T: Include detailed Story implementation in Epic
-❌ DON'T: Create Stories without clear user value
-❌ DON'T: Ignore dependencies or sequencing requirements
+DO: Group Stories by logical implementation phases with "**Phase X: Name**" headers
+DO: Include user persona ("As a [role]"), goal ("I want to"), and acceptance criteria
+DO: Note dependencies between Stories using "Dependencies: Story X.XX completion"
+DO: Use consistent Story numbering within Epic ({{epic_number}}.01, .02, etc.)
+DO: Enable immediate Story creation with sufficient context
+DON'T: List stories without phase grouping or logical sequence
+DON'T: Include detailed Story implementation details in Epic
+DON'T: Create Stories without clear user value or persona
+DON'T: Ignore dependencies or sequencing requirements between stories
+DON'T: Use inconsistent numbering or skip dependency notation
 -->
