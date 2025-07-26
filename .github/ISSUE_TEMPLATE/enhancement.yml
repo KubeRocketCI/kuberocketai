@@ -1,0 +1,130 @@
+name: 🔧 Enhancement
+description: Suggest an improvement to existing functionality
+title: "Enhancement: "
+labels:
+  - enhancement
+  - improvement
+  - triage
+assignees:
+  - SergK
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! This template is for enhancing existing features rather than adding completely new ones.
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current Functionality
+      description: Describe the existing feature or behavior that you want to improve
+      placeholder: "Currently, the `krci-ai validate` command..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: limitation
+    attributes:
+      label: Current Limitations
+      description: What are the specific limitations or pain points with the current implementation?
+      placeholder: "The current implementation has these issues..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Proposed Improvement
+      description: How would you like to see this functionality improved?
+      placeholder: "I suggest improving this by..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component needs enhancement?
+      options:
+        - CLI Commands
+        - Agent Definitions
+        - Validation System
+        - Template Engine
+        - IDE Integration
+        - Error Handling
+        - Performance
+        - User Experience
+        - Documentation
+        - Testing
+        - Build System
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact Level
+      description: How significant would this improvement be?
+      options:
+        - Low (Minor quality of life improvement)
+        - Medium (Noticeable improvement to user experience)
+        - High (Significant improvement to functionality)
+        - Critical (Major usability or performance improvement)
+    validations:
+      required: true
+
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Expected Benefits
+      description: What benefits would this improvement provide?
+      placeholder: |
+        - Improved performance by...
+        - Better user experience because...
+        - Reduced complexity...
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Implementation Examples
+      description: Show what the improved functionality would look like
+      placeholder: |
+        Current command:
+        ```bash
+        krci-ai validate -v
+        ```
+
+        Enhanced command:
+        ```bash
+        krci-ai validate -v --show-warnings
+        ```
+
+  - type: checkboxes
+    id: breaking
+    attributes:
+      label: Compatibility Considerations
+      description: Check any that apply to this enhancement
+      options:
+        - label: This would be a breaking change
+        - label: This requires new dependencies
+        - label: This affects configuration files
+        - label: This changes command line interface
+        - label: This maintains backward compatibility
+        - label: This improves existing APIs
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: Testing Considerations
+      description: How should this enhancement be tested?
+      placeholder: "This should be tested by..."
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other relevant information
+      placeholder: "Related issues, implementation ideas, constraints, etc."

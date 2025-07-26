@@ -1,0 +1,128 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with KubeRocketAI
+title: "Bug: "
+labels:
+  - bug
+  - triage
+assignees:
+  - SergK
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below with as much detail as possible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened and what you expected to happen...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the issue
+      placeholder: |
+        1. Run command `krci-ai ...`
+        2. Navigate to...
+        3. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+      placeholder: Describe the expected behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Describe what actually happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs/Output
+      description: Any relevant error messages or command output
+      placeholder: Paste error logs or command output here...
+      render: shell
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected?
+      options:
+        - CLI (krci-ai command)
+        - Agent Framework
+        - IDE Integration (Cursor/Claude/VS Code)
+        - Installation/Setup
+        - Validation System
+        - Templates
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: KubeRocketAI Version
+      description: What version of KubeRocketAI are you using?
+      placeholder: "v0.18.0 (run `krci-ai --version`)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What operating system are you using?
+      options:
+        - macOS
+        - Linux (Ubuntu)
+        - Linux (CentOS/RHEL)
+        - Linux (Other)
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: go-version
+    attributes:
+      label: Go Version
+      description: What version of Go are you using? (if building from source)
+      placeholder: "go1.24.4 (run `go version`)"
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this issue?
+      options:
+        - Low (Minor inconvenience)
+        - Medium (Affects functionality but workaround exists)
+        - High (Blocks important functionality)
+        - Critical (System unusable)
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any additional information that might be helpful
+      placeholder: Screenshots, related issues, workarounds, etc...

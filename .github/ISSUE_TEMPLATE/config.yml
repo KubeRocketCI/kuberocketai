@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-config.json
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/KubeRocketCI/kuberocketai/blob/main/README.md
+    about: Check the documentation for usage and installation guides
+  - name: 💬 Discussions
+    url: https://github.com/orgs/KubeRocketCI/discussions
+    about: Ask questions and discuss ideas with the community

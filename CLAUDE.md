@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 KubeRocketAI is an "AI-as-Code" framework providing a centralized golden library of AI agents for software development workflows. Built as a Go CLI application (`krci-ai`) that embeds framework assets and supports multi-IDE integration.
 
+**Repository**: [KubeRocketCI/kuberocketai](https://github.com/KubeRocketCI/kuberocketai)
+
 ## Development Commands
 
 ### Build and Testing

@@ -1,0 +1,124 @@
+name: ✨ Feature Request
+description: Suggest a new feature or improvement for KubeRocketAI
+title: "Feature: "
+labels:
+  - enhancement
+  - feature-request
+  - triage
+assignees:
+  - SergK
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! Please provide as much detail as possible about what you'd like to see.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Feature Summary
+      description: A brief, clear summary of the feature you're requesting
+      placeholder: "Add support for..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What's the current limitation?
+      placeholder: "Currently, users cannot... This makes it difficult to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your ideal solution in detail
+      placeholder: "I would like to be able to... This could work by..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Area
+      description: Which area of KubeRocketAI would this feature affect?
+      options:
+        - CLI Commands
+        - Agent Framework
+        - IDE Integration
+        - Templates System
+        - Validation System
+        - Installation/Setup
+        - Documentation
+        - Cross-platform Support
+        - Performance
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Low (Nice to have)
+        - Medium (Would improve workflow)
+        - High (Important for adoption)
+        - Critical (Blocking current use)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Have you considered any alternative solutions or workarounds?
+      placeholder: "I've tried... but it doesn't work because..."
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Usage Examples
+      description: Show how this feature would be used
+      placeholder: |
+        Command examples:
+        ```bash
+        krci-ai new-command --example
+        ```
+
+        Or workflow examples...
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: What would need to be true for this feature to be considered complete?
+      placeholder: |
+        - [ ] Users can...
+        - [ ] The system supports...
+        - [ ] Documentation includes...
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Impact Areas
+      description: Which areas might this feature impact? (Select all that apply)
+      options:
+        - label: Breaking changes (might affect existing users)
+        - label: New dependencies required
+        - label: Performance implications
+        - label: Security considerations
+        - label: Cross-platform compatibility
+        - label: Documentation updates needed
+        - label: Testing strategy required
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context, mockups, links, or examples
+      placeholder: Related GitHub issues, design mockups, competitor examples, etc.
