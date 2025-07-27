@@ -18,7 +18,7 @@ package main
 import (
 	"embed"
 
-	"github.com/epam/kuberocketai/cmd/krci-ai/cmd"
+	"github.com/KubeRocketCI/kuberocketai/cmd/krci-ai/cmd"
 )
 
 // EmbeddedAssets contains all assets embedded at build time

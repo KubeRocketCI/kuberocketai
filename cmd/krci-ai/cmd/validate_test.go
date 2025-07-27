@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/epam/kuberocketai/internal/engine/processor"
+	"github.com/KubeRocketCI/kuberocketai/internal/engine/processor"
 )
 
 // testFrameworkValidator creates a validator for testing using file-based schema

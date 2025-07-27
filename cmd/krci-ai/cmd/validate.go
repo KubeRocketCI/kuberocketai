@@ -20,11 +20,12 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 
-	"github.com/epam/kuberocketai/internal/engine/processor"
+	"github.com/KubeRocketCI/kuberocketai/internal/engine/processor"
+	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
 
 // validateCmd represents the validate command
@@ -73,30 +74,31 @@ func runValidate(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to get current working directory: %w", err)
 	}
 
-	if !quietOutput {
-		fmt.Printf("🔍 Validating framework components in: %s\n\n", currentDir)
+	startTime := time.Now()
+
+	// Initialize enhanced validation system
+	analyzer := validation.NewFrameworkAnalyzer(currentDir)
+
+	// Run optimized framework analysis with caching
+	issues, insights, err := analyzer.OptimizedAnalyzeFramework()
+	if err != nil {
+		return fmt.Errorf("framework analysis failed: %w", err)
 	}
 
-	// Initialize validation system
-	validator, err := NewFrameworkValidator(currentDir)
-	if err != nil {
-		return fmt.Errorf("failed to initialize validator: %w", err)
-	}
+	processTime := time.Since(startTime)
 
-	// Run validation
-	results, err := validator.ValidateFramework()
-	if err != nil {
-		return fmt.Errorf("validation failed: %w", err)
-	}
+	// Create validation report
+	report := validation.NewValidationReport(issues, insights, processTime)
 
 	// Display results
-	displayValidationResults(results)
-
-	// Exit with error code if validation failed
-	if !results.IsValid() {
-		os.Exit(1)
+	if !quietOutput {
+		fmt.Print(report.FormatReport(verboseOutput))
+	} else if !report.IsValid {
+		fmt.Printf("❌ Framework validation failed with %d critical issues\n", report.CriticalCount)
 	}
 
+	// Exit with appropriate error code
+	os.Exit(report.GetExitCode())
 	return nil
 }
 
@@ -616,102 +618,4 @@ func (v *FrameworkValidator) validateMarkdownFrameworkLinks(line string, lineNum
 	}
 }
 
-// displayValidationResults displays the validation results
-func displayFileResult(result ValidationResult) {
-	green := color.New(color.FgGreen)
-	red := color.New(color.FgRed)
-	yellow := color.New(color.FgYellow)
-
-	displayPath := result.File
-
-	if result.IsValid {
-		if verboseOutput {
-			_, _ = green.Printf("✅ %s: %s\n", strings.ToUpper(result.Type), displayPath)
-
-			// Display warnings for valid files in verbose mode
-			for _, warning := range result.Warnings {
-				_, _ = yellow.Printf("   ⚠️  %s\n", warning)
-			}
-		}
-	} else {
-		_, _ = red.Printf("❌ %s: %s\n", strings.ToUpper(result.Type), displayPath)
-
-		// Display errors
-		for _, errorMsg := range result.Errors {
-			fmt.Printf("   🔸 %s\n", errorMsg)
-		}
-
-		// Display warnings
-		for _, warning := range result.Warnings {
-			_, _ = yellow.Printf("   ⚠️  %s\n", warning)
-		}
-	}
-}
-
-func displayValidationResults(results *ValidationResults) {
-	// Color setup
-	green := color.New(color.FgGreen)
-	red := color.New(color.FgRed)
-	yellow := color.New(color.FgYellow)
-	bold := color.New(color.Bold)
-
-	// Display individual results if verbose or if there are errors
-	if verboseOutput || results.InvalidFiles > 0 {
-		fmt.Println("📋 Validation Results:")
-		fmt.Println(strings.Repeat("-", 60))
-
-		for _, result := range results.Results {
-			displayFileResult(result)
-		}
-		fmt.Println()
-	}
-
-	// Display summary
-	_, _ = bold.Println("📊 Validation Summary:")
-	fmt.Println(strings.Repeat("-", 40))
-
-	fmt.Printf("Total Files:     %d\n", results.TotalFiles)
-
-	if results.ValidFiles > 0 {
-		_, _ = green.Printf("Valid Files:     %d\n", results.ValidFiles)
-	} else {
-		fmt.Printf("Valid Files:     %d\n", results.ValidFiles)
-	}
-
-	if results.InvalidFiles > 0 {
-		_, _ = red.Printf("Invalid Files:   %d\n", results.InvalidFiles)
-	} else {
-		fmt.Printf("Invalid Files:   %d\n", results.InvalidFiles)
-	}
-
-	if results.TotalErrors > 0 {
-		_, _ = red.Printf("Total Errors:    %d\n", results.TotalErrors)
-	} else {
-		fmt.Printf("Total Errors:    %d\n", results.TotalErrors)
-	}
-
-	if results.TotalWarnings > 0 {
-		_, _ = yellow.Printf("Total Warnings:  %d\n", results.TotalWarnings)
-		if !verboseOutput {
-			fmt.Printf("💡 Use 'krci-ai validate -v' to see warning details\n")
-		}
-	} else {
-		fmt.Printf("Total Warnings:  %d\n", results.TotalWarnings)
-	}
-
-	fmt.Println()
-
-	// Display validation scope information
-	fmt.Printf("Framework Link Scope: Validates markdown links [text](./.krci-ai/...) only\n")
-	fmt.Println()
-
-	// Display final status
-	if results.IsValid() {
-		_, _ = green.Println("🎉 Framework validation completed successfully!")
-	} else {
-		_, _ = red.Println("❌ Framework validation failed!")
-		if !quietOutput {
-			fmt.Println("   Please fix the errors above and run validation again.")
-		}
-	}
-}
+// Legacy functions kept for backward compatibility but unused in enhanced validation
