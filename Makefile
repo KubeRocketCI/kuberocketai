@@ -130,6 +130,7 @@ release-test: ## Test release configuration
 changelog: $(BIN_DIR)/git-chglog ## Generate changelog
 	@echo "Generating changelog..."
 	$(BIN_DIR)/git-chglog -o CHANGELOG.md
+	cp CHANGELOG.md cmd/krci-ai/assets/changelog/CHANGELOG.md
 
 .PHONY: changelog-validate
 changelog-validate: $(BIN_DIR)/git-chglog ## Validate changelog is up-to-date
@@ -141,17 +142,6 @@ changelog-validate: $(BIN_DIR)/git-chglog ## Validate changelog is up-to-date
 		echo "❌ Changelog needs to be regenerated. Run 'make changelog' and commit the changes."; \
 		git diff CHANGELOG.md; \
 		exit 1; \
-	fi
-
-.PHONY: embed-changelog
-embed-changelog: ## Embed changelog in binary (for release builds)
-	@echo "Embedding changelog in binary..."
-	@mkdir -p cmd/krci-ai/assets/changelog
-	@if [ -f CHANGELOG.md ]; then \
-		cp CHANGELOG.md cmd/krci-ai/assets/changelog/CHANGELOG.md; \
-		echo "Changelog embedded successfully"; \
-	else \
-		echo "CHANGELOG.md not found. Run 'make changelog' first or this is a development build"; \
 	fi
 
 .PHONY: version
