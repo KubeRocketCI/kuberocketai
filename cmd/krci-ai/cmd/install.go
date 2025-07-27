@@ -20,8 +20,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/epam/kuberocketai/internal/assets"
-	"github.com/epam/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/assets"
+	"github.com/KubeRocketCI/kuberocketai/internal/cli"
 )
 
 const (

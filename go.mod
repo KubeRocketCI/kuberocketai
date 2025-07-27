@@ -1,4 +1,4 @@
-module github.com/epam/kuberocketai
+module github.com/KubeRocketCI/kuberocketai
 
 go 1.24.4
 
