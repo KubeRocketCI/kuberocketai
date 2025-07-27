@@ -6,6 +6,10 @@
 
 - Remove unused template
 
+### Features
+
+- **check-update:** add changelog generation, validation, and embedded display; add version/update commands
+
 
 <a name="v0.20.0"></a>
 
