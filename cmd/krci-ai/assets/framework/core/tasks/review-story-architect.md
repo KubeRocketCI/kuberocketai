@@ -17,8 +17,6 @@ Dependencies:
 
 - ./.krci-ai/templates/story.md
 - ./.krci-ai/data/common/sdlc-framework.md
-- System architecture documentation
-- Design patterns and technical standards documentation
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
@@ -32,10 +30,11 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Output Format
 
-- **Location**: Update existing story file with architectural validation and design guidance
-- **Architecture approval**: Document architect validation and design compliance approval
-- **Design enhancement**: Add architectural context and design pattern guidance
-- **Integration specification**: Clarify component boundaries and integration approaches
+- **Location**: Update existing story file with architectural validation
+- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- **Content Placement**: Architecture guidance in Description section, approval in Implementation Results
+- **Architecture Compliance**: Document system design alignment and integration approach validation
+- **Verification**: Story passes architect review with documented design approval
 
 ## Success Criteria
 

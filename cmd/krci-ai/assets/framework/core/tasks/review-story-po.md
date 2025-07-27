@@ -29,10 +29,11 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Output Format
 
-- **Location**: Update existing story file with business validation approval
-- **Business approval**: Document PO validation and approval for development
-- **Value clarification**: Add any business context needed for implementation
-- **Epic traceability**: Confirm story-epic alignment documentation
+- **Location**: Update existing story file with business validation
+- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- **Content Placement**: Business context in Description section, approval in Implementation Results
+- **Business Validation**: Document user value confirmation and Epic alignment verification
+- **Verification**: Story passes PO review with documented business approval
 
 ## Success Criteria
 

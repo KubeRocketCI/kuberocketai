@@ -69,9 +69,10 @@ Before applying any update:
 ## Output Format
 
 - **Location**: Update existing `/docs/stories/{epic_number}.{story_number}.story.md` file in place
-- **Version tracking**: Add update timestamp and change summary to file header
-- **Change log**: Document what was updated and rationale in story comments
-- **Task impact**: Note which Tasks/Subtasks are affected by changes
+- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- **Change Documentation**: Add timestamp to Status table, document changes in story comments
+- **Content Updates**: Modify appropriate sections based on change type (AC, Tasks, Description)
+- **Verification**: File maintains valid template structure with documented change history
 
 ## Success Criteria
 
