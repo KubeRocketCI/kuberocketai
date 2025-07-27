@@ -2,8 +2,23 @@
 
 ## [Unreleased]
 
+
+<a name="v0.21.2"></a>
+
+## [v0.21.2] - 2025-07-27
+
+### Features
+
+- **changelog:** enhance CLI output with compact formatting and visual improvements
+
+
+<a name="v0.21.1"></a>
+
+## [v0.21.1] - 2025-07-27
+
 ### Chores
 
+- Update changelog
 - Build changelog automatically for bundling
 
 ### Code Refactoring
@@ -429,7 +444,9 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.2...HEAD
+[v0.21.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.1...v0.21.2
+[v0.21.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.0...v0.21.1
 [v0.21.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.20.0...v0.21.0
 [v0.20.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.19.0...v0.20.0
 [v0.19.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.18.0...v0.19.0
