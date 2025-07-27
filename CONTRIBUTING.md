@@ -43,13 +43,75 @@ make build
 
 ## Commit Messages
 
-Use conventional commits:
+We use [Conventional Commits](https://www.conventionalcommits.org/) for automated changelog generation and semantic versioning.
+
+### Format
+
+```bash
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Types
 
 - `feat:` - New features
 - `fix:` - Bug fixes
 - `docs:` - Documentation changes
 - `test:` - Adding tests
 - `chore:` - Maintenance
+- `refactor:` - Code refactoring
+- `perf:` - Performance improvements
+- `ci:` - CI/CD changes
+
+### Examples
+
+```bash
+feat: add changelog generation command
+fix(cli): improve validate command warning display
+docs: update installation instructions
+chore: update dependencies to latest versions
+```
+
+### Breaking Changes
+
+For breaking changes, add `BREAKING CHANGE:` in the footer:
+
+```bash
+feat: change API endpoint structure
+
+BREAKING CHANGE: The /api/v1/users endpoint has been moved to /api/v2/users
+```
+
+### Complete Guide
+
+See [docs/CONVENTIONAL_COMMITS.md](./docs/CONVENTIONAL_COMMITS.md) for the complete conventional commits guide with detailed examples and best practices.
+
+## Changelog
+
+The changelog is automatically generated from conventional commit messages using git-chglog. **Do not manually edit CHANGELOG.md**.
+
+### Changelog Commands
+
+```bash
+# Generate changelog (requires git-chglog)
+make changelog
+
+# Validate changelog is up-to-date (used in CI)
+make changelog-validate
+
+# Install development tools (includes git-chglog)
+make tools
+```
+
+### Release Process
+
+1. Commits using conventional format are merged to main
+2. During release, `make changelog` generates CHANGELOG.md from commits
+3. Changelog is embedded in CLI binary for offline access
+4. Release is created with generated changelog content
 
 ## License
 

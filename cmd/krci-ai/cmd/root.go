@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/KubeRocketCI/kuberocketai/internal/version"
 	"github.com/spf13/cobra"
 )
 
@@ -53,9 +54,21 @@ func Execute() {
 }
 
 // SetVersionInfo sets the version information for the CLI
-func SetVersionInfo(version, commit, date, builtBy string) {
-	versionInfo := fmt.Sprintf("%s (commit: %s, built: %s, by: %s)", version, commit, date, builtBy)
+func SetVersionInfo(ver, commit, date, builtBy string) {
+	// Set version info in the version package
+	setVersionVars(ver, commit, date, builtBy)
+
+	// Set enhanced version info for rootCmd
+	versionInfo := fmt.Sprintf("%s (commit: %s, built: %s, by: %s)\nRun 'krci-ai check-updates' to check for newer versions", ver, commit, date, builtBy)
 	rootCmd.Version = versionInfo
+}
+
+// setVersionVars sets the version variables in the version package
+func setVersionVars(ver, commit, date, builtBy string) {
+	version.Version = ver
+	version.Commit = commit
+	version.Date = date
+	version.BuiltBy = builtBy
 }
 
 // SetEmbeddedAssets sets the embedded assets for use by commands
@@ -74,6 +87,12 @@ func init() {
 	// will be global for your application.
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.krci-ai.yaml)")
+
+	// Add version command
+	rootCmd.AddCommand(versionCmd)
+
+	// Add check-updates command
+	rootCmd.AddCommand(checkUpdatesCmd)
 
 	// Version flag is automatically handled by Cobra when Version is set
 }
