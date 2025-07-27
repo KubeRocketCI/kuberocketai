@@ -22,7 +22,15 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/fatih/color"
 	"gopkg.in/yaml.v3"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/validation"
+)
+
+const (
+	// DefaultAgentIcon is the placeholder icon used when an agent doesn't define an icon
+	DefaultAgentIcon = "🤖"
 )
 
 // AgentInfo represents basic information about an agent
@@ -31,7 +39,16 @@ type AgentInfo struct {
 	Description string `yaml:"description"`
 	Role        string `yaml:"role"`
 	Goal        string `yaml:"goal"`
+	Icon        string `yaml:"icon"`
 	FilePath    string `yaml:"-"` // Not from YAML, computed
+}
+
+// AgentDependencyInfo extends AgentInfo with dependency information
+type AgentDependencyInfo struct {
+	AgentInfo
+	Tasks     []string `json:"tasks"`
+	Templates []string `json:"templates"`
+	DataFiles []string `json:"data_files"`
 }
 
 // AgentIdentity represents the identity section of an agent YAML
@@ -42,6 +59,7 @@ type AgentIdentity struct {
 	Description string `yaml:"description"`
 	Role        string `yaml:"role"`
 	Goal        string `yaml:"goal"`
+	Icon        string `yaml:"icon"`
 }
 
 // Agent represents the structure of an agent YAML file
@@ -113,6 +131,7 @@ func (d *Discovery) parseAgentFile(filePath string) (*AgentInfo, error) {
 		Description: identity.Description,
 		Role:        identity.Role,
 		Goal:        identity.Goal,
+		Icon:        identity.Icon,
 	}
 
 	// Validate required fields
@@ -198,4 +217,432 @@ func (d *Discovery) ValidateAgentStructure(filePath string) error {
 	}
 
 	return nil
+}
+
+// DiscoverAgentsWithDependencies discovers and returns agents with their complete dependency information
+func (d *Discovery) DiscoverAgentsWithDependencies() ([]AgentDependencyInfo, error) {
+	if !d.installer.IsInstalled() {
+		return nil, fmt.Errorf("framework not installed in current directory - run 'krci-ai install'")
+	}
+
+	// Create validation analyzer for dependency resolution
+	analyzer := validation.NewFrameworkAnalyzer(d.installer.targetDir)
+
+	// Generate insights which include complete dependency relationships
+	_, insights, err := analyzer.AnalyzeFramework()
+	if err != nil {
+		return nil, fmt.Errorf("failed to analyze dependencies: %w", err)
+	}
+
+	// Get basic agent information
+	agents, err := d.DiscoverAgents()
+	if err != nil {
+		return nil, err
+	}
+
+	// Create map of agent relationships by agent name for quick lookup
+	relationshipMap := make(map[string]validation.ComponentRelationship)
+	for _, rel := range insights.Relationships {
+		relationshipMap[rel.Agent] = rel
+	}
+
+	// Build dependency info for each agent
+	var agentDeps []AgentDependencyInfo
+	for _, agent := range agents {
+		// Extract agent name from file path (remove .yaml extension)
+		agentFileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+
+		depInfo := AgentDependencyInfo{
+			AgentInfo: agent,
+			Tasks:     make([]string, 0),
+			Templates: make([]string, 0),
+			DataFiles: make([]string, 0),
+		}
+
+		// Look up dependency relationships
+		if rel, exists := relationshipMap[agentFileName]; exists {
+			depInfo.Tasks = rel.Tasks
+			depInfo.Templates = rel.Templates
+			depInfo.DataFiles = rel.DataFiles
+		}
+
+		agentDeps = append(agentDeps, depInfo)
+	}
+
+	return agentDeps, nil
+}
+
+// FormatAgentDependencyTable formats agent dependency information as a table
+func (d *Discovery) FormatAgentDependencyTable(agents []AgentDependencyInfo) string {
+	if len(agents) == 0 {
+		return "No agents found"
+	}
+
+	var result strings.Builder
+
+	for i, agent := range agents {
+		if i > 0 {
+			result.WriteString("\n") // Add spacing between agents
+		}
+
+		// Format agent header with icon and colors
+		agentTable := d.formatAgentTable(agent)
+		result.WriteString(agentTable)
+	}
+
+	return result.String()
+}
+
+// formatAgentTable creates a professional table for a single agent with colors and icons
+func (d *Discovery) formatAgentTable(agent AgentDependencyInfo) string {
+	var result strings.Builder
+
+	// Add agent header
+	d.addAgentHeader(&result, agent)
+
+	// If no tasks, show simple message
+	if len(agent.Tasks) == 0 {
+		magenta := color.New(color.FgMagenta).SprintFunc()
+		result.WriteString(fmt.Sprintf("   %s No tasks defined\n\n", magenta("ℹ️")))
+		return result.String()
+	}
+
+	// Add dependency table
+	d.addDependencyTable(&result, agent)
+
+	return result.String()
+}
+
+// addAgentHeader adds the agent header section to the result
+func (d *Discovery) addAgentHeader(result *strings.Builder, agent AgentDependencyInfo) {
+	// Create color functions
+	bold := color.New(color.Bold).SprintFunc()
+	cyan := color.New(color.FgCyan, color.Bold).SprintFunc()
+	yellow := color.New(color.FgYellow).SprintFunc()
+
+	// Agent header with icon and styling
+	icon := agent.Icon
+	if icon == "" {
+		icon = DefaultAgentIcon
+	}
+
+	// Calculate dynamic width and create header
+	agentLine := fmt.Sprintf("%s %s", icon, agent.Name)
+	descLine := fmt.Sprintf("Description: %s", agent.Description)
+	headerWidth := d.calculateHeaderWidth(agentLine, descLine)
+
+	// Create dynamic borders
+	topBorder := "┌" + strings.Repeat("─", headerWidth-2) + "┐"
+	bottomBorder := "└" + strings.Repeat("─", headerWidth-2) + "┘"
+
+	result.WriteString(fmt.Sprintf("\n%s\n", cyan(topBorder)))
+
+	// Add agent name line
+	d.addAgentNameLine(result, agentLine, headerWidth, bold, cyan)
+
+	// Add description lines
+	d.addDescriptionLines(result, descLine, headerWidth, cyan, yellow)
+
+	result.WriteString(fmt.Sprintf("%s\n\n", cyan(bottomBorder)))
+}
+
+// calculateHeaderWidth determines the optimal header width
+func (d *Discovery) calculateHeaderWidth(agentLine, descLine string) int {
+	headerWidth := 60
+	if len(agentLine) > headerWidth-4 {
+		headerWidth = len(agentLine) + 6
+	}
+	if len(descLine) > headerWidth-4 {
+		headerWidth = len(descLine) + 6
+	}
+	// Cap at reasonable maximum to avoid extremely wide tables
+	if headerWidth > 120 {
+		headerWidth = 120
+	}
+	return headerWidth
+}
+
+// addAgentNameLine adds the agent name line to the header
+func (d *Discovery) addAgentNameLine(result *strings.Builder, agentLine string, headerWidth int, bold, cyan func(...interface{}) string) {
+	namePadding := headerWidth - len(agentLine) - 4
+	if namePadding < 0 {
+		namePadding = 0
+	}
+	result.WriteString(fmt.Sprintf("%s %s%s %s\n",
+		cyan("│"),
+		bold(agentLine),
+		strings.Repeat(" ", namePadding),
+		cyan("│")))
+}
+
+// addDescriptionLines adds description lines with wrapping if needed
+func (d *Discovery) addDescriptionLines(result *strings.Builder, descLine string, headerWidth int, cyan, yellow func(...interface{}) string) {
+	if len(descLine) > headerWidth-4 {
+		// Wrap long descriptions
+		maxDescWidth := headerWidth - 4
+		wrappedDesc := d.wrapText(descLine, maxDescWidth)
+		for _, line := range strings.Split(wrappedDesc, "\n") {
+			descPadding := headerWidth - len(line) - 4
+			if descPadding < 0 {
+				descPadding = 0
+			}
+			result.WriteString(fmt.Sprintf("%s %s%s %s\n",
+				cyan("│"),
+				yellow(line),
+				strings.Repeat(" ", descPadding),
+				cyan("│")))
+		}
+	} else {
+		descPadding := headerWidth - len(descLine) - 4
+		if descPadding < 0 {
+			descPadding = 0
+		}
+		result.WriteString(fmt.Sprintf("%s %s%s %s\n",
+			cyan("│"),
+			yellow(descLine),
+			strings.Repeat(" ", descPadding),
+			cyan("│")))
+	}
+}
+
+// addDependencyTable adds the dependency table section
+func (d *Discovery) addDependencyTable(result *strings.Builder, agent AgentDependencyInfo) {
+	// Create color functions
+	bold := color.New(color.Bold).SprintFunc()
+	green := color.New(color.FgGreen).SprintFunc()
+	blue := color.New(color.FgBlue).SprintFunc()
+	magenta := color.New(color.FgMagenta).SprintFunc()
+
+	// Calculate column widths and dependencies
+	taskDependencies := d.getTaskDependenciesFromValidation(agent)
+	maxTaskWidth, maxTemplateWidth, maxDataWidth := d.calculateColumnWidths(agent, taskDependencies)
+
+	// Create table format
+	format := fmt.Sprintf("│ %%-%ds │ %%-%ds │ %%-%ds │\n",
+		maxTaskWidth, maxTemplateWidth, maxDataWidth)
+
+	// Add table header
+	d.addTableHeader(result, maxTaskWidth, maxTemplateWidth, maxDataWidth, bold, green, blue, magenta)
+
+	// Add table rows
+	d.addTableRows(result, agent, taskDependencies, format, maxTaskWidth, maxTemplateWidth, maxDataWidth)
+
+	// Add table footer
+	d.addTableFooter(result, maxTaskWidth, maxTemplateWidth, maxDataWidth)
+}
+
+// calculateColumnWidths determines optimal column widths for the table
+func (d *Discovery) calculateColumnWidths(agent AgentDependencyInfo, taskDependencies map[string]taskDependency) (int, int, int) {
+	maxTaskWidth := len("Task")
+	maxTemplateWidth := len("Templates")
+	maxDataWidth := len("Data")
+
+	for _, task := range agent.Tasks {
+		if len(task) > maxTaskWidth {
+			maxTaskWidth = len(task)
+		}
+
+		if deps, exists := taskDependencies[task]; exists {
+			for _, template := range deps.templates {
+				if len(template) > maxTemplateWidth {
+					maxTemplateWidth = len(template)
+				}
+			}
+			for _, dataFile := range deps.dataFiles {
+				if len(dataFile) > maxDataWidth {
+					maxDataWidth = len(dataFile)
+				}
+			}
+		}
+	}
+
+	// Set reasonable minimum and maximum column widths
+	maxTaskWidth = d.constrainWidth(maxTaskWidth, 20, 40)
+	maxTemplateWidth = d.constrainWidth(maxTemplateWidth, 25, 50)
+	maxDataWidth = d.constrainWidth(maxDataWidth, 25, 50)
+
+	return maxTaskWidth, maxTemplateWidth, maxDataWidth
+}
+
+// constrainWidth ensures width is within reasonable bounds
+func (d *Discovery) constrainWidth(width, min, max int) int {
+	if width < min {
+		return min
+	}
+	if width > max {
+		return max
+	}
+	return width
+}
+
+// addTableHeader adds the table header section
+func (d *Discovery) addTableHeader(result *strings.Builder, maxTaskWidth, maxTemplateWidth, maxDataWidth int, bold, green, blue, magenta func(...interface{}) string) {
+	format := fmt.Sprintf("│ %%-%ds │ %%-%ds │ %%-%ds │\n",
+		maxTaskWidth, maxTemplateWidth, maxDataWidth)
+
+	result.WriteString(fmt.Sprintf("┌%s┬%s┬%s┐\n",
+		strings.Repeat("─", maxTaskWidth+2),
+		strings.Repeat("─", maxTemplateWidth+2),
+		strings.Repeat("─", maxDataWidth+2)))
+
+	result.WriteString(fmt.Sprintf(format,
+		bold(green("Task")),
+		bold(blue("Templates")),
+		bold(magenta("Data"))))
+
+	result.WriteString(fmt.Sprintf("├%s┼%s┼%s┤\n",
+		strings.Repeat("─", maxTaskWidth+2),
+		strings.Repeat("─", maxTemplateWidth+2),
+		strings.Repeat("─", maxDataWidth+2)))
+}
+
+// addTableRows adds all table rows for tasks and dependencies
+func (d *Discovery) addTableRows(result *strings.Builder, agent AgentDependencyInfo, taskDependencies map[string]taskDependency, format string, maxTaskWidth, maxTemplateWidth, maxDataWidth int) {
+	for _, task := range agent.Tasks {
+		var templates []string
+		var dataFiles []string
+
+		if deps, exists := taskDependencies[task]; exists {
+			templates = deps.templates
+			dataFiles = deps.dataFiles
+		}
+
+		d.addTaskRows(result, task, templates, dataFiles, format, maxTaskWidth, maxTemplateWidth, maxDataWidth)
+	}
+}
+
+// addTaskRows adds rows for a single task and its dependencies
+func (d *Discovery) addTaskRows(result *strings.Builder, task string, templates, dataFiles []string, format string, maxTaskWidth, maxTemplateWidth, maxDataWidth int) {
+	maxRows := 1
+	if len(templates) > maxRows {
+		maxRows = len(templates)
+	}
+	if len(dataFiles) > maxRows {
+		maxRows = len(dataFiles)
+	}
+
+	for row := 0; row < maxRows; row++ {
+		taskDisplay := ""
+		templatesDisplay := "-"
+		dataDisplay := "-"
+
+		// Only show task name on the first row
+		if row == 0 {
+			taskDisplay = d.fitString(task, maxTaskWidth)
+		}
+
+		// Show template for this row
+		if row < len(templates) {
+			templatesDisplay = d.fitString(templates[row], maxTemplateWidth)
+		}
+
+		// Show data file for this row
+		if row < len(dataFiles) {
+			dataDisplay = d.fitString(dataFiles[row], maxDataWidth)
+		}
+
+		result.WriteString(fmt.Sprintf(format, taskDisplay, templatesDisplay, dataDisplay))
+	}
+}
+
+// addTableFooter adds the table footer
+func (d *Discovery) addTableFooter(result *strings.Builder, maxTaskWidth, maxTemplateWidth, maxDataWidth int) {
+	result.WriteString(fmt.Sprintf("└%s┴%s┴%s┘\n",
+		strings.Repeat("─", maxTaskWidth+2),
+		strings.Repeat("─", maxTemplateWidth+2),
+		strings.Repeat("─", maxDataWidth+2)))
+}
+
+// truncateString truncates a string to maxWidth with ellipsis if needed
+func (d *Discovery) truncateString(str string, maxWidth int) string {
+	if len(str) <= maxWidth {
+		return str
+	}
+	if maxWidth <= 3 {
+		return "..."
+	}
+	return str[:maxWidth-3] + "..."
+}
+
+// wrapText wraps text to fit within the specified width
+func (d *Discovery) wrapText(text string, width int) string {
+	if len(text) <= width {
+		return text
+	}
+
+	var result strings.Builder
+	words := strings.Fields(text)
+	var currentLine strings.Builder
+
+	for _, word := range words {
+		// If adding this word would exceed the width, start a new line
+		if currentLine.Len() > 0 && currentLine.Len()+len(word)+1 > width {
+			result.WriteString(currentLine.String())
+			result.WriteString("\n")
+			currentLine.Reset()
+		}
+
+		if currentLine.Len() > 0 {
+			currentLine.WriteString(" ")
+		}
+		currentLine.WriteString(word)
+	}
+
+	// Add the last line
+	if currentLine.Len() > 0 {
+		result.WriteString(currentLine.String())
+	}
+
+	return result.String()
+}
+
+// fitString fits a string within the specified width, using smart truncation when needed
+func (d *Discovery) fitString(str string, maxWidth int) string {
+	if len(str) <= maxWidth {
+		return str
+	}
+
+	// For file names, try to show the most relevant part (usually the end)
+	if strings.Contains(str, ".") {
+		// For files with extensions, keep the extension visible
+		if maxWidth <= 7 { // Not enough space for meaningful truncation
+			return d.truncateString(str, maxWidth)
+		}
+
+		// Show beginning + "..." + end to preserve both context and extension
+		prefixLen := (maxWidth - 3) / 2
+		suffixLen := maxWidth - 3 - prefixLen
+
+		if suffixLen > 0 && prefixLen > 0 {
+			return str[:prefixLen] + "..." + str[len(str)-suffixLen:]
+		}
+	}
+
+	// Default truncation for other strings
+	return d.truncateString(str, maxWidth)
+}
+
+// taskDependency holds template and data dependencies for a task
+type taskDependency struct {
+	templates []string
+	dataFiles []string
+}
+
+// getTaskDependenciesFromValidation uses the validation system to get task dependencies
+func (d *Discovery) getTaskDependenciesFromValidation(agent AgentDependencyInfo) map[string]taskDependency {
+	dependencies := make(map[string]taskDependency)
+
+	// Simply use the templates and data that are already provided by the validation system
+	// We'll create a single dependency entry that contains all templates and data for the agent
+	// Since we show tasks individually, we'll distribute them evenly or show all for each task
+
+	for _, task := range agent.Tasks {
+		taskFileName := filepath.Base(task)
+		dependencies[taskFileName] = taskDependency{
+			templates: agent.Templates,
+			dataFiles: agent.DataFiles,
+		}
+	}
+
+	return dependencies
 }

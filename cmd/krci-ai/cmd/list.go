@@ -41,7 +41,7 @@ Available subcommands:
 
 Examples:
   krci-ai list agents          # List all available agents
-  krci-ai list agents -v       # List agents with verbose output`,
+  krci-ai list agents -v       # List agents with dependency table showing tasks, templates, and data`,
 }
 
 // listAgentsCmd represents the list agents command
@@ -57,7 +57,7 @@ The agents are read from YAML files that were installed by the 'krci-ai install'
 
 Examples:
   krci-ai list agents          # List all agents
-  krci-ai list agents -v       # List agents with verbose output`,
+  krci-ai list agents -v       # List agents with dependency table showing tasks, templates, and data`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// Create output and error handlers
 		output := cli.NewOutputHandler()
@@ -98,16 +98,30 @@ Examples:
 		fmt.Println()
 
 		if verbose {
-			// Verbose output with detailed information
-			for _, agent := range agents {
-				fmt.Printf("Agent: %s\n", agent.Name)
-				fmt.Printf("  Role: %s\n", agent.Role)
-				fmt.Printf("  Description: %s\n", agent.Description)
-				if agent.Goal != "" {
-					fmt.Printf("  Goal: %s\n", agent.Goal)
-				}
-				fmt.Printf("  File: %s\n", agent.FilePath)
+			// Verbose output with dependency table
+			agentDeps, err := discovery.DiscoverAgentsWithDependencies()
+			if err != nil {
+				output.PrintWarning("Could not load dependency information, showing basic details only")
+				output.PrintError(fmt.Sprintf("Dependency error: %v", err))
 				fmt.Println()
+
+				// Fallback to basic information
+				for _, agent := range agents {
+					fmt.Printf("Agent: %s\n", agent.Name)
+					fmt.Printf("  Role: %s\n", agent.Role)
+					fmt.Printf("  Description: %s\n", agent.Description)
+					if agent.Goal != "" {
+						fmt.Printf("  Goal: %s\n", agent.Goal)
+					}
+					fmt.Printf("  File: %s\n", agent.FilePath)
+					fmt.Println()
+				}
+			} else {
+				// Show dependency table
+				output.PrintInfo("Agent Dependencies:")
+				fmt.Println()
+				table := discovery.FormatAgentDependencyTable(agentDeps)
+				fmt.Print(table)
 			}
 		} else {
 			// Simple table format
@@ -120,7 +134,7 @@ Examples:
 		}
 
 		fmt.Println()
-		output.PrintInfo("Use 'krci-ai list agents -v' for detailed information")
+		output.PrintInfo("Use 'krci-ai list agents -v' for dependency table showing tasks, templates, and data")
 	},
 }
 
