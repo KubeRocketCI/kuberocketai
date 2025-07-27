@@ -27,6 +27,7 @@ DIST_DIR := dist
 GOLANGCI_LINT_VERSION ?= v1.64.8
 GORELEASER_VERSION ?= v2.10.2
 STATICCHECK_VERSION ?= 2025.1.1
+GIT_CHGLOG_VERSION ?= v0.15.4
 
 # Cross-platform builds
 PLATFORMS := linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64
@@ -126,12 +127,31 @@ release-test: ## Test release configuration
 	goreleaser check
 
 .PHONY: changelog
-changelog: ## Generate changelog
+changelog: $(BIN_DIR)/git-chglog ## Generate changelog
 	@echo "Generating changelog..."
-	@if command -v git-chglog >/dev/null 2>&1; then \
-		git-chglog -o CHANGELOG.md; \
+	$(BIN_DIR)/git-chglog -o CHANGELOG.md
+
+.PHONY: changelog-validate
+changelog-validate: $(BIN_DIR)/git-chglog ## Validate changelog is up-to-date
+	@echo "Validating changelog is up-to-date..."
+	@$(MAKE) changelog
+	@if git diff --exit-code CHANGELOG.md >/dev/null 2>&1; then \
+		echo "✅ Changelog is up-to-date"; \
 	else \
-		echo "git-chglog not found. Install it with: go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest"; \
+		echo "❌ Changelog needs to be regenerated. Run 'make changelog' and commit the changes."; \
+		git diff CHANGELOG.md; \
+		exit 1; \
+	fi
+
+.PHONY: embed-changelog
+embed-changelog: ## Embed changelog in binary (for release builds)
+	@echo "Embedding changelog in binary..."
+	@mkdir -p cmd/krci-ai/assets/changelog
+	@if [ -f CHANGELOG.md ]; then \
+		cp CHANGELOG.md cmd/krci-ai/assets/changelog/CHANGELOG.md; \
+		echo "Changelog embedded successfully"; \
+	else \
+		echo "CHANGELOG.md not found. Run 'make changelog' first or this is a development build"; \
 	fi
 
 .PHONY: version
@@ -166,8 +186,12 @@ $(BIN_DIR)/staticcheck: $(BIN_DIR)
 	@echo "Installing staticcheck $(STATICCHECK_VERSION)..."
 	GOBIN=$(PWD)/$(BIN_DIR) go install honnef.co/go/tools/cmd/staticcheck@$(STATICCHECK_VERSION)
 
+$(BIN_DIR)/git-chglog: $(BIN_DIR)
+	@echo "Installing git-chglog $(GIT_CHGLOG_VERSION)..."
+	GOBIN=$(PWD)/$(BIN_DIR) go install github.com/git-chglog/git-chglog/cmd/git-chglog@$(GIT_CHGLOG_VERSION)
+
 .PHONY: tools
-tools: $(BIN_DIR)/golangci-lint $(BIN_DIR)/goreleaser $(BIN_DIR)/staticcheck ## Install all development tools
+tools: $(BIN_DIR)/golangci-lint $(BIN_DIR)/goreleaser $(BIN_DIR)/staticcheck $(BIN_DIR)/git-chglog ## Install all development tools
 
 .PHONY: check-tools
 check-tools: ## Check if required tools are installed
