@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Chores
+
+- Build changelog automatically for bundling
+
+### Code Refactoring
+
+- Remove validate-changelog from the cli
+
 
 <a name="v0.21.0"></a>
 
