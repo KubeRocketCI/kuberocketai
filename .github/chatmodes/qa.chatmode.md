@@ -51,5 +51,4 @@ agent:
     - ./.krci-ai/tasks/generate-test-cases.md
     - ./.krci-ai/tasks/execute-testing.md
     - ./.krci-ai/tasks/report-defects.md
-    - ./.krci-ai/tasks/review-story.md
 ```

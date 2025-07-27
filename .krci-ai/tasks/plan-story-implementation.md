@@ -17,8 +17,6 @@ Dependencies:
 
 - ./.krci-ai/templates/story.md
 - ./.krci-ai/data/common/sdlc-framework.md
-- Architecture documentation (project-specific)
-- Existing codebase structure and patterns
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
@@ -33,10 +31,11 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Output Format
 
-- **Location**: Update existing story file with enhanced implementation planning
-- **Enhanced Tasks/Subtasks**: Comprehensive technical implementation steps
-- **Implementation Documentation**: Detailed technical approach and specifications
-- **Validation Plan**: Complete testing and verification strategy
+- **Location**: Update existing story file with implementation planning enhancements
+- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- **Content Placement**: Technical details in Description section, enhanced tasks in Tasks/Subtasks section
+- **Implementation Ready**: Story contains specific file paths, commands, and technical specifications
+- **Verification**: Story enables autonomous development without additional technical consultation
 
 ## Success Criteria
 

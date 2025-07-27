@@ -17,8 +17,6 @@ Dependencies:
 
 - ./.krci-ai/templates/story.md
 - ./.krci-ai/data/common/sdlc-framework.md
-- Architecture documentation (project-specific)
-- Existing codebase structure and patterns
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
 
@@ -32,10 +30,11 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Output Format
 
-- **Location**: Update existing story file with enhanced technical implementation details
-- **Technical validation**: Document developer validation and technical readiness approval
-- **Implementation enhancement**: Add missing technical details for autonomous development
-- **Quality assurance**: Enhance testing and validation requirements
+- **Location**: Update existing story file with developer technical validation
+- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- **Content Placement**: Technical enhancements in Description section, validation in Implementation Results
+- **Developer Approval**: Document technical readiness and development feasibility assessment
+- **Verification**: Story passes developer review with documented technical approval
 
 ## Success Criteria
 
