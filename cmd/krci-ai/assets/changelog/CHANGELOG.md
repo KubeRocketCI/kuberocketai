@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Chores
+
+- Update changelog
+
+### Features
+
+- Extend 'list agents -v' command
+
 
 <a name="v0.21.2"></a>
 
