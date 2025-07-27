@@ -48,24 +48,31 @@ Examples:
 
 func init() {
 	checkUpdatesCmd.Flags().BoolP("changelog", "c", false, "Show embedded changelog")
+	checkUpdatesCmd.Flags().BoolP("verbose", "v", false, "Show verbose changelog (all details)")
 }
 
 func runCheckUpdates(cmd *cobra.Command, args []string) error {
 	showChangelog, _ := cmd.Flags().GetBool("changelog")
 
 	if showChangelog {
-		return displayOfflineChangelog()
+		return displayOfflineChangelog(cmd)
 	}
 
 	return checkOnlineUpdates()
 }
 
-func displayOfflineChangelog() error {
+func displayOfflineChangelog(cmd *cobra.Command) error {
+	verbose, _ := cmd.Flags().GetBool("verbose")
+
 	assets := GetEmbeddedAssets()
 	reader := changelog.NewReader(assets)
 
-	color.Cyan("📋 Changelog (Embedded)")
-	color.Cyan("========================")
+	if verbose {
+		color.Cyan("📋 Changelog (Embedded - Verbose)")
+	} else {
+		color.Cyan("📋 Changelog (Embedded - Compact)")
+	}
+	color.Cyan("==================================")
 	fmt.Println()
 
 	content, err := reader.ReadChangelog()
@@ -74,8 +81,14 @@ func displayOfflineChangelog() error {
 		fmt.Println()
 	}
 
-	// Format and display changelog
-	formatted, err := changelog.FormatChangelog(content)
+	// Format and display changelog based on verbose flag
+	var formatted string
+	if verbose {
+		formatted, err = changelog.FormatChangelogVerbose(content)
+	} else {
+		formatted, err = changelog.FormatChangelog(content)
+	}
+
 	if err != nil {
 		// Fallback to raw content if formatting fails
 		color.Yellow("⚠️  Could not format changelog, showing raw content:")
@@ -94,7 +107,11 @@ func displayOfflineChangelog() error {
 		color.Yellow("⚠️  Using fallback changelog - embedded version not available")
 	}
 
-	color.Cyan("💡 Tip: Run 'krci-ai check-updates' without --changelog to check for newer versions online")
+	if verbose {
+		color.Cyan("💡 Tip: Run without -v for compact view")
+	} else {
+		color.Cyan("💡 Tip: Add -v for detailed view or run 'krci-ai check-updates' for online updates")
+	}
 
 	return nil
 }
