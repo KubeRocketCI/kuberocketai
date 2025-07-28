@@ -23,6 +23,18 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
+### CRITICAL: MANDATORY USER CONSULTATION FIRST
+
+Before making ANY changes to the PRD, you MUST:
+
+1. **Ask the user** what specific updates they want to make to the PRD
+2. **Understand the trigger** for the changes (new requirements, stakeholder feedback, market changes, etc.)
+3. **Clarify scope** which sections need updating and why
+4. **Get approval** for the proposed changes before implementation
+5. **Wait for explicit confirmation** before proceeding with any edits
+
+### ONLY AFTER USER CONFIRMATION
+
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process
 2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. **Format output**: Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure
@@ -48,9 +60,18 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Execution Checklist
 
-### Assessment Phase
+### User Consultation Phase (MANDATORY FIRST STEP)
 
-- [ ] **Change scope**: Identify which sections need updating (Problem/Opportunity, Target Users & Use Cases, Current Journeys/Landscape, Proposed Solution/Elevator Pitch, Goals/Measurable Outcomes, MVP/Functional Requirements)
+- [ ] **User interview**: Ask user what specific changes they want to make to the PRD
+- [ ] **Change justification**: Understand why these changes are needed (stakeholder feedback, new requirements, market changes, etc.)
+- [ ] **Scope definition**: Clarify which PRD sections need updating and what specific content changes are required
+- [ ] **Impact discussion**: Explain potential impact on existing Epics and Stories to user
+- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
+- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+
+### Assessment Phase (ONLY AFTER USER APPROVAL)
+
+- [ ] **Change scope**: Identify which sections need updating based on user requirements
 - [ ] **Impact analysis**: Evaluate how changes affect existing Epics (`/docs/epics/`) and Stories (`/docs/stories/`)
 - [ ] **Stakeholder review**: Confirm who needs to approve these changes before implementation
 - [ ] **Requirements mapping**: Understand which BR/NFR numbers and priorities are affected
@@ -87,9 +108,12 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ### LLM Error Prevention Checklist
 
+- **NEVER**: Start making PRD changes without explicit user consultation and approval
+- **NEVER**: Assume what changes the user wants - always ask for specific requirements
 - **Avoid**: Breaking existing BR/NFR numbering that Epics depend on
 - **Avoid**: Making changes without assessing downstream Epic/Story impact
 - **Avoid**: Updating requirements without proper stakeholder approval process
+- **Always**: Wait for user confirmation before proceeding with any edits
 - **Reference**: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting consistency
 
 ### SDLC Integration Context
