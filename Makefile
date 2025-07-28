@@ -130,7 +130,6 @@ release-test: ## Test release configuration
 changelog: $(BIN_DIR)/git-chglog ## Generate changelog
 	@echo "Generating changelog..."
 	$(BIN_DIR)/git-chglog -o CHANGELOG.md
-	cp CHANGELOG.md cmd/krci-ai/assets/changelog/CHANGELOG.md
 
 .PHONY: changelog-validate
 changelog-validate: $(BIN_DIR)/git-chglog ## Validate changelog is up-to-date

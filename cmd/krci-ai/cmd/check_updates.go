@@ -18,7 +18,6 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/changelog"
 	"github.com/KubeRocketCI/kuberocketai/internal/update"
 	"github.com/KubeRocketCI/kuberocketai/internal/version"
 	"github.com/fatih/color"
@@ -31,89 +30,21 @@ var checkUpdatesCmd = &cobra.Command{
 	Short: "Check for CLI updates",
 	Long: `Check for available updates to the krci-ai CLI.
 
-This command performs two main functions:
-1. Online version checking: Queries GitHub API to detect available updates
-2. Offline changelog display: Shows embedded changelog from current CLI version
-
-The command requires network connectivity for version checking but can display
-the embedded changelog offline. If network connectivity fails, it provides
-a direct link to the GitHub releases page for manual checking.
+This command queries the GitHub API to detect available updates and displays
+release information. If network connectivity fails, it provides a direct 
+link to the GitHub releases page for manual checking.
 
 Examples:
-  krci-ai check-updates              # Check for updates online
-  krci-ai check-updates --changelog  # Show embedded changelog offline
-  krci-ai check-updates -c           # Short form for changelog`,
+  krci-ai check-updates              # Check for updates online`,
 	RunE: runCheckUpdates,
 }
 
 func init() {
-	checkUpdatesCmd.Flags().BoolP("changelog", "c", false, "Show embedded changelog")
-	checkUpdatesCmd.Flags().BoolP("verbose", "v", false, "Show verbose changelog (all details)")
+	// No flags needed - simple version checking only
 }
 
 func runCheckUpdates(cmd *cobra.Command, args []string) error {
-	showChangelog, _ := cmd.Flags().GetBool("changelog")
-
-	if showChangelog {
-		return displayOfflineChangelog(cmd)
-	}
-
 	return checkOnlineUpdates()
-}
-
-func displayOfflineChangelog(cmd *cobra.Command) error {
-	verbose, _ := cmd.Flags().GetBool("verbose")
-
-	assets := GetEmbeddedAssets()
-	reader := changelog.NewReader(assets)
-
-	if verbose {
-		color.Cyan("📋 Changelog (Embedded - Verbose)")
-	} else {
-		color.Cyan("📋 Changelog (Embedded - Compact)")
-	}
-	color.Cyan("==================================")
-	fmt.Println()
-
-	content, err := reader.ReadChangelog()
-	if err != nil {
-		color.Yellow("⚠️  Warning: %v", err)
-		fmt.Println()
-	}
-
-	// Format and display changelog based on verbose flag
-	var formatted string
-	if verbose {
-		formatted, err = changelog.FormatChangelogVerbose(content)
-	} else {
-		formatted, err = changelog.FormatChangelog(content)
-	}
-
-	if err != nil {
-		// Fallback to raw content if formatting fails
-		color.Yellow("⚠️  Could not format changelog, showing raw content:")
-		fmt.Println()
-		fmt.Println(content)
-		return nil
-	}
-
-	fmt.Println(formatted)
-
-	// Show status info
-	fmt.Println()
-	if reader.HasChangelog() {
-		color.Green("✅ Embedded changelog available")
-	} else {
-		color.Yellow("⚠️  Using fallback changelog - embedded version not available")
-	}
-
-	if verbose {
-		color.Cyan("💡 Tip: Run without -v for compact view")
-	} else {
-		color.Cyan("💡 Tip: Add -v for detailed view or run 'krci-ai check-updates' for online updates")
-	}
-
-	return nil
 }
 
 func checkOnlineUpdates() error {
@@ -163,9 +94,6 @@ func checkOnlineUpdates() error {
 		color.Green("✅ You are using the latest version!")
 		color.White("Latest version: %s", updateInfo.LatestVersion)
 	}
-
-	fmt.Println()
-	color.Cyan("💡 Tip: Run 'krci-ai check-updates --changelog' to see embedded changelog")
 
 	return nil
 }
