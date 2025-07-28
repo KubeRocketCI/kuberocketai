@@ -23,6 +23,18 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
+### CRITICAL: MANDATORY USER CONSULTATION FIRST
+
+Before making ANY changes to the Project Brief, you MUST:
+
+1. **Ask the user** what specific updates they want to make to the Project Brief
+2. **Understand the trigger** for the changes (strategic shifts, market changes, stakeholder feedback, resource changes, etc.)
+3. **Clarify scope** which sections need updating and why
+4. **Get approval** for the proposed changes before implementation
+5. **Wait for explicit confirmation** before proceeding with any edits
+
+### ONLY AFTER USER CONFIRMATION
+
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change impact assessment
 2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. **Format output**: Maintain [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
@@ -46,9 +58,18 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Execution Checklist
 
-### Assessment Phase
+### User Consultation Phase (MANDATORY FIRST STEP)
 
-- [ ] **Change scope**: Identify which sections need updating (Executive Summary, Problem, Opportunity, Users, Success Metrics, Constraints, Risks)
+- [ ] **User interview**: Ask user what specific changes they want to make to the Project Brief
+- [ ] **Change justification**: Understand why these changes are needed (strategic shifts, market changes, stakeholder feedback, resource changes, etc.)
+- [ ] **Scope definition**: Clarify which Project Brief sections need updating and what specific content changes are required
+- [ ] **Impact discussion**: Explain potential impact on existing PRD and downstream artifacts to user
+- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
+- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+
+### Assessment Phase (ONLY AFTER USER APPROVAL)
+
+- [ ] **Change scope**: Identify which sections need updating based on user requirements (Executive Summary, Problem, Opportunity, Users, Success Metrics, Constraints, Risks)
 - [ ] **Business impact**: Analyze how changes affect product strategy and business case
 - [ ] **Downstream impact**: Evaluate how changes affect existing PRD (`/docs/prd/prd.md`) and subsequent artifacts
 - [ ] **Stakeholder validation**: Confirm changes with key stakeholders
@@ -78,9 +99,12 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ### LLM Error Prevention Checklist
 
+- **NEVER**: Start making Project Brief changes without explicit user consultation and approval
+- **NEVER**: Assume what changes the user wants - always ask for specific requirements
 - **Avoid**: Making changes without clear strategic justification and stakeholder approval
 - **Avoid**: Updating without assessing downstream PRD and Epic artifact impact
 - **Avoid**: Expanding scope beyond strategic foundation changes into tactical details
+- **Always**: Wait for user confirmation before proceeding with any edits
 - **Reference**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting consistency
 
 ### SDLC Integration Context

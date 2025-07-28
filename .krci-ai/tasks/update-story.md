@@ -23,6 +23,18 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
+### CRITICAL: MANDATORY USER CONSULTATION FIRST
+
+Before making ANY changes to the Story, you MUST:
+
+1. **Ask the user** what specific updates they want to make to the Story
+2. **Understand the trigger** for the changes (new requirements, scope clarification, task feedback, etc.)
+3. **Clarify scope** which sections need updating and why
+4. **Get approval** for the proposed changes before implementation
+5. **Wait for explicit confirmation** before proceeding with any edits
+
+### ONLY AFTER USER CONFIRMATION
+
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story update dependencies and downstream impact
 2. **Assess current status**: Review story status and Tasks/Subtasks before making changes
 3. **Apply change control**: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
@@ -85,7 +97,16 @@ Before applying any update:
 
 ## Execution Checklist
 
-### Pre-Update Assessment
+### User Consultation Phase (MANDATORY FIRST STEP)
+
+- [ ] **User interview**: Ask user what specific changes they want to make to the Story
+- [ ] **Change justification**: Understand why these changes are needed (new requirements, scope clarification, task feedback, etc.)
+- [ ] **Scope definition**: Clarify which Story sections need updating and what specific content changes are required
+- [ ] **Impact discussion**: Explain potential impact on existing Tasks/Subtasks to user
+- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
+- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+
+### Pre-Update Assessment (ONLY AFTER USER APPROVAL)
 
 - [ ] **Status review**: Check story status (Pending, In Progress, Approved, Completed)
 - [ ] **Task analysis**: Review Tasks/Subtasks and their current implementation status
@@ -117,7 +138,10 @@ Before applying any update:
 
 ### LLM Error Prevention Checklist
 
+- **NEVER**: Start making Story changes without explicit user consultation and approval
+- **NEVER**: Assume what changes the user wants - always ask for specific requirements
 - **Avoid**: Removing Tasks/Subtasks that have completed implementation
 - **Avoid**: Changing story fundamentals (number, Epic reference) that break traceability
 - **Avoid**: Updates that make completed acceptance criteria irrelevant
+- **Always**: Wait for user confirmation before proceeding with any edits
 - **Reference**: Use change control principles to validate every update decision
