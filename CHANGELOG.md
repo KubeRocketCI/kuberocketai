@@ -2,6 +2,28 @@
 
 ## [Unreleased]
 
+### Features
+
+- Update task instrusction for 'update-' tasks
+
+
+<a name="v0.21.5"></a>
+
+## [v0.21.5] - 2025-07-28
+
+### Features
+
+- **pm:** Update tasks instructions for product manager
+
+
+<a name="v0.21.4"></a>
+
+## [v0.21.4] - 2025-07-28
+
+### Code Refactoring
+
+- Remove changelog from the baking
+
 
 <a name="v0.21.3"></a>
 
@@ -458,7 +480,9 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.3...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.5...HEAD
+[v0.21.5]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.4...v0.21.5
+[v0.21.4]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.3...v0.21.4
 [v0.21.3]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.2...v0.21.3
 [v0.21.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.1...v0.21.2
 [v0.21.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.0...v0.21.1
