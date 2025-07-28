@@ -2,8 +2,14 @@
 
 ## [Unreleased]
 
+
+<a name="v0.21.3"></a>
+
+## [v0.21.3] - 2025-07-27
+
 ### Chores
 
+- Update changelog
 - Update changelog
 
 ### Features
@@ -452,7 +458,8 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.2...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.3...HEAD
+[v0.21.3]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.2...v0.21.3
 [v0.21.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.1...v0.21.2
 [v0.21.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.0...v0.21.1
 [v0.21.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.20.0...v0.21.0
