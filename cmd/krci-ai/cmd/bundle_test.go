@@ -86,32 +86,113 @@ func TestBundleCommandFlags(t *testing.T) {
 
 func TestGenerateBundleFilename(t *testing.T) {
 	tests := []struct {
-		name         string
-		customOutput string
-		expected     string
+		name           string
+		customOutput   string
+		selectedAgents []string
+		expected       string
 	}{
 		{
-			name:         "default filename",
-			customOutput: "",
-			expected:     "all.md",
+			name:           "default filename with no agents",
+			customOutput:   "",
+			selectedAgents: nil,
+			expected:       "all.md",
 		},
 		{
-			name:         "custom filename with extension",
-			customOutput: "my-bundle.md",
-			expected:     "my-bundle.md",
+			name:           "custom filename with extension",
+			customOutput:   "my-bundle.md",
+			selectedAgents: []string{"pm", "architect"},
+			expected:       "my-bundle.md",
 		},
 		{
-			name:         "custom filename without extension",
-			customOutput: "my-bundle",
-			expected:     "my-bundle.md",
+			name:           "custom filename without extension",
+			customOutput:   "my-bundle",
+			selectedAgents: []string{"pm"},
+			expected:       "my-bundle.md",
+		},
+		{
+			name:           "single agent filename",
+			customOutput:   "",
+			selectedAgents: []string{"pm"},
+			expected:       "pm.md",
+		},
+		{
+			name:           "multiple agents alphabetically sorted",
+			customOutput:   "",
+			selectedAgents: []string{"pm", "architect", "dev"},
+			expected:       "architect-dev-pm.md",
+		},
+		{
+			name:           "agents case insensitive sorting",
+			customOutput:   "",
+			selectedAgents: []string{"PM", "Architect"},
+			expected:       "architect-pm.md",
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := generateBundleFilename(tt.customOutput)
+			result := generateBundleFilename(tt.customOutput, tt.selectedAgents)
 			if result != tt.expected {
-				t.Errorf("generateBundleFilename(%q) = %q, want %q", tt.customOutput, result, tt.expected)
+				t.Errorf("generateBundleFilename(%q, %v) = %q, want %q", tt.customOutput, tt.selectedAgents, result, tt.expected)
+			}
+		})
+	}
+}
+
+func TestParseAgentList(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    string
+		expected []string
+	}{
+		{
+			name:     "empty string",
+			input:    "",
+			expected: nil,
+		},
+		{
+			name:     "single agent",
+			input:    "pm",
+			expected: []string{"pm"},
+		},
+		{
+			name:     "comma separated",
+			input:    "pm,architect",
+			expected: []string{"pm", "architect"},
+		},
+		{
+			name:     "comma separated with spaces",
+			input:    "pm, architect, dev",
+			expected: []string{"pm", "architect", "dev"},
+		},
+		{
+			name:     "space separated",
+			input:    "pm architect dev",
+			expected: []string{"pm", "architect", "dev"},
+		},
+		{
+			name:     "mixed spaces and extra whitespace",
+			input:    "  pm   architect  ",
+			expected: []string{"pm", "architect"},
+		},
+		{
+			name:     "comma with empty parts",
+			input:    "pm,,architect,",
+			expected: []string{"pm", "architect"},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := ParseAgentList(tt.input)
+			if len(result) != len(tt.expected) {
+				t.Errorf("ParseAgentList(%q) returned %d items, want %d", tt.input, len(result), len(tt.expected))
+				return
+			}
+			for i, expected := range tt.expected {
+				if result[i] != expected {
+					t.Errorf("ParseAgentList(%q)[%d] = %q, want %q", tt.input, i, result[i], expected)
+				}
 			}
 		})
 	}
@@ -251,7 +332,7 @@ func TestGenerateBundleMarkdown(t *testing.T) {
 	}
 }
 
-func TestBundleCommandRequiresAllFlag(t *testing.T) {
+func TestBundleCommandRequiresAllOrAgentFlag(t *testing.T) {
 	// Create a temporary directory for testing
 	tempDir, err := os.MkdirTemp("", "bundle-test-*")
 	if err != nil {
@@ -280,9 +361,9 @@ func TestBundleCommandRequiresAllFlag(t *testing.T) {
 
 	err = runBundle(bundleCmd, []string{})
 	if err == nil {
-		t.Error("runBundle() should return error when --all flag is missing")
-	} else if !strings.Contains(err.Error(), "--all flag is required") {
-		t.Errorf("runBundle() error should mention --all flag requirement, got: %v", err)
+		t.Error("runBundle() should return error when neither --all nor --agent flag is provided")
+	} else if !strings.Contains(err.Error(), "either --all or --agent flag is required") {
+		t.Errorf("runBundle() error should mention --all or --agent flag requirement, got: %v", err)
 	}
 }
 
