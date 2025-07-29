@@ -23,6 +23,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
@@ -35,7 +36,7 @@ var bundleCmd = &cobra.Command{
 	Short: "Generate complete agent bundles for web chat tools",
 	Long: `Generate complete agent bundles for web chat tools (ChatGPT, Gemini Pro, Claude Web).
 
-This command creates a single markdown file containing all KubeRocketAI framework 
+This command creates a single markdown file containing all KubeRocketAI framework
 components optimized for web chat consumption. The bundle includes:
 - All 6 core SDLC agents (PM, Architect, Developer, QA, BA, PO) with complete definitions
 - All agent dependencies, tasks, and templates in consolidated format
@@ -45,9 +46,12 @@ components optimized for web chat consumption. The bundle includes:
 Examples:
   krci-ai bundle --all                           # Generate complete bundle at ./.krci-ai/bundle/all.md
   krci-ai bundle --agent pm,architect            # Generate targeted bundle with PM and Architect agents
+  krci-ai bundle --agent pm --task create-prd    # Generate minimal bundle for PM agent with create-prd task
   krci-ai bundle --agent pm --output pm.md       # Generate PM-only bundle with custom filename
   krci-ai bundle --agent "pm architect"          # Space-separated agent names
+  krci-ai bundle --agent pm --task update-prd --output custom.md  # Minimal bundle with custom filename
   krci-ai bundle --agent pm,architect --dry-run  # Show targeted bundle scope without generating files
+  krci-ai bundle --agent pm --task create-prd --dry-run  # Show minimal bundle scope without generating files
   krci-ai bundle --all --output my-framework.md  # Generate bundle with custom filename
   krci-ai bundle --all --dry-run                 # Show bundle scope without generating files
   krci-ai bundle --help                          # Show comprehensive usage information`,
@@ -60,6 +64,7 @@ var (
 	bundleDryRun bool
 	bundleOutput string
 	bundleAgents string
+	bundleTask   string
 )
 
 // BundleContent represents the aggregated content for bundle generation
@@ -84,6 +89,7 @@ func init() {
 	// Add flags
 	bundleCmd.Flags().BoolVar(&bundleAll, "all", false, "Generate complete bundle with all agents and dependencies")
 	bundleCmd.Flags().StringVar(&bundleAgents, "agent", "", "Generate targeted bundle with specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
+	bundleCmd.Flags().StringVar(&bundleTask, "task", "", "Generate minimal bundle with specific agent and task (requires --agent flag)")
 	bundleCmd.Flags().BoolVar(&bundleDryRun, "dry-run", false, "Show bundle scope without generating files")
 	bundleCmd.Flags().StringVar(&bundleOutput, "output", "", "Custom output filename (creates ./.krci-ai/bundle/filename)")
 }
@@ -165,13 +171,9 @@ func validateAgentNames(currentDir string, selectedAgents []string, output *cli.
 	return nil
 }
 
-// runBundle executes the bundle command
-func runBundle(cmd *cobra.Command, args []string) error {
-	// Create output and error handlers
-	output := cli.NewOutputHandler()
-	errorHandler := cli.NewErrorHandler()
-
-	// Validate flags - either --all or --agent must be specified
+// validateBundleFlags validates the bundle command flags for mutual exclusivity and requirements
+func validateBundleFlags(output *cli.OutputHandler) error {
+	// Validate flags - ensure mutual exclusivity and required combinations
 	if !bundleAll && bundleAgents == "" {
 		output.PrintError("Bundle generation requires either --all or --agent flag")
 		output.PrintInfo("Usage: krci-ai bundle --all  OR  krci-ai bundle --agent pm,architect")
@@ -182,6 +184,38 @@ func runBundle(cmd *cobra.Command, args []string) error {
 		output.PrintError("Cannot specify both --all and --agent flags")
 		output.PrintInfo("Use either --all for complete bundle OR --agent for targeted bundle")
 		return fmt.Errorf("cannot specify both --all and --agent flags")
+	}
+
+	if bundleAll && bundleTask != "" {
+		output.PrintError("Cannot specify both --all and --task flags")
+		output.PrintInfo("Use --task only with --agent for minimal single-task bundles")
+		return fmt.Errorf("cannot specify both --all and --task flags")
+	}
+
+	if bundleTask != "" && bundleAgents == "" {
+		output.PrintError("--task flag requires --agent flag")
+		output.PrintInfo("Usage: krci-ai bundle --agent pm --task create-prd")
+		return fmt.Errorf("--task flag requires --agent flag")
+	}
+
+	if bundleTask != "" && len(ParseAgentList(bundleAgents)) > 1 {
+		output.PrintError("--task flag requires exactly one agent")
+		output.PrintInfo("Usage: krci-ai bundle --agent pm --task create-prd (single agent only)")
+		return fmt.Errorf("--task flag requires exactly one agent")
+	}
+
+	return nil
+}
+
+// runBundle executes the bundle command
+func runBundle(cmd *cobra.Command, args []string) error {
+	// Create output and error handlers
+	output := cli.NewOutputHandler()
+	errorHandler := cli.NewErrorHandler()
+
+	// Validate flags
+	if err := validateBundleFlags(output); err != nil {
+		return err
 	}
 
 	// Get current working directory
@@ -224,13 +258,21 @@ func runBundle(cmd *cobra.Command, args []string) error {
 			return validateErr
 		}
 
-		output.PrintInfo(fmt.Sprintf("Selected agents: %s", strings.Join(selectedAgents, ", ")))
+		// If task is specified, validate agent-task combination
+		if bundleTask != "" {
+			if validateErr := ValidateAgentTaskCombination(currentDir, selectedAgents[0], bundleTask, output); validateErr != nil {
+				return validateErr
+			}
+			output.PrintInfo(fmt.Sprintf("Selected agent-task combination: %s - %s", selectedAgents[0], bundleTask))
+		} else {
+			output.PrintInfo(fmt.Sprintf("Selected agents: %s", strings.Join(selectedAgents, ", ")))
+		}
 	}
 
 	// Collect bundle content
 	output.PrintProgress("Discovering agents and dependencies...")
 
-	bundleContent, err := collectBundleContent(currentDir, selectedAgents)
+	bundleContent, err := collectBundleContent(currentDir, selectedAgents, bundleTask)
 	if err != nil {
 		errorHandler.HandleError(err, "Failed to collect bundle content")
 		return err
@@ -242,7 +284,7 @@ func runBundle(cmd *cobra.Command, args []string) error {
 	}
 
 	// Generate bundle filename
-	bundleFilename := generateBundleFilename(bundleOutput, selectedAgents)
+	bundleFilename := generateBundleFilename(bundleOutput, selectedAgents, bundleTask)
 	bundleDir := filepath.Join(currentDir, ".krci-ai", "bundle")
 	bundlePath := filepath.Join(bundleDir, bundleFilename)
 
@@ -296,6 +338,202 @@ func runFrameworkValidation(currentDir string) error {
 	return nil
 }
 
+// extractFileReference extracts a file reference from a line starting at a specific prefix
+func extractFileReference(line, prefix string) string {
+	start := strings.Index(line, prefix)
+	if start == -1 {
+		return ""
+	}
+
+	remaining := line[start+len(prefix):]
+	end := len(remaining)
+	for i, char := range remaining {
+		if char == ' ' || char == ')' || char == ']' || char == ',' {
+			end = i
+			break
+		}
+	}
+	return remaining[:end]
+}
+
+// getTaskDependencies analyzes a task file to extract its dependencies
+func getTaskDependencies(currentDir, taskName string) []string {
+	taskFilePath := filepath.Join(currentDir, ".krci-ai", "tasks", taskName+".md")
+	taskContent, err := os.ReadFile(taskFilePath)
+	if err != nil {
+		return []string{}
+	}
+
+	var dependencies []string
+	content := string(taskContent)
+
+	// Look for file references in the task content
+	lines := strings.Split(content, "\n")
+	for _, line := range lines {
+		// Find references to data files
+		if strings.Contains(line, "./.krci-ai/data/") {
+			dep := extractFileReference(line, "./.krci-ai/data/")
+			if dep != "" && !containsString(dependencies, dep) {
+				dependencies = append(dependencies, dep)
+			}
+		}
+
+		// Find references to template files
+		if strings.Contains(line, "./.krci-ai/templates/") {
+			dep := extractFileReference(line, "./.krci-ai/templates/")
+			if dep != "" && !containsString(dependencies, dep) {
+				dependencies = append(dependencies, dep)
+			}
+		}
+	}
+
+	return dependencies
+}
+
+// isReferencedByTask checks if a file path is referenced by the task dependencies
+func isReferencedByTask(filePath string, taskDeps []string) bool {
+	fileName := filepath.Base(filePath)
+	for _, dep := range taskDeps {
+		if strings.Contains(dep, fileName) || strings.Contains(filePath, dep) {
+			return true
+		}
+	}
+	// If no specific dependencies found, include common files
+	return len(taskDeps) == 0
+}
+
+// containsString checks if a string slice contains a specific string
+func containsString(slice []string, item string) bool {
+	for _, s := range slice {
+		if s == item {
+			return true
+		}
+	}
+	return false
+}
+
+// collectTemplatesAndData collects template and data files for an agent, optionally filtered by task
+func collectTemplatesAndData(currentDir string, agent assets.AgentDependencyInfo, taskName string, content *BundleContent) {
+	if taskName != "" {
+		// Get task-specific dependencies by parsing the task file content
+		taskDeps := getTaskDependencies(currentDir, taskName)
+
+		// Only include templates and data referenced by the specific task
+		for _, templatePath := range agent.Templates {
+			if isReferencedByTask(templatePath, taskDeps) {
+				fullTemplatePath := filepath.Join(currentDir, ".krci-ai", "templates", templatePath)
+				if templateContent, err := os.ReadFile(fullTemplatePath); err == nil {
+					relTemplatePath := filepath.Join("templates", templatePath)
+					content.Templates[relTemplatePath] = string(templateContent)
+				}
+			}
+		}
+
+		for _, dataPath := range agent.DataFiles {
+			if isReferencedByTask(dataPath, taskDeps) {
+				fullDataPath := filepath.Join(currentDir, ".krci-ai", "data", dataPath)
+				if dataContent, err := os.ReadFile(fullDataPath); err == nil {
+					relDataPath := filepath.Join("data", dataPath)
+					content.DataFiles[relDataPath] = string(dataContent)
+				}
+			}
+		}
+	} else {
+		// Include all templates and data for non-task-specific bundles
+		for _, templatePath := range agent.Templates {
+			fullTemplatePath := filepath.Join(currentDir, ".krci-ai", "templates", templatePath)
+			if templateContent, err := os.ReadFile(fullTemplatePath); err == nil {
+				relTemplatePath := filepath.Join("templates", templatePath)
+				content.Templates[relTemplatePath] = string(templateContent)
+			}
+		}
+
+		for _, dataPath := range agent.DataFiles {
+			fullDataPath := filepath.Join(currentDir, ".krci-ai", "data", dataPath)
+			if dataContent, err := os.ReadFile(fullDataPath); err == nil {
+				relDataPath := filepath.Join("data", dataPath)
+				content.DataFiles[relDataPath] = string(dataContent)
+			}
+		}
+	}
+}
+
+// ValidateAgentTaskCombination validates that the specified task exists for the specified agent
+func ValidateAgentTaskCombination(currentDir, agentName, taskName string, output *cli.OutputHandler) error {
+	// Create discovery service
+	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
+
+	// Get available agents with full info
+	agentInfos, err := discovery.DiscoverAgents()
+	if err != nil {
+		return fmt.Errorf("failed to discover available agents: %w", err)
+	}
+
+	// Find the specified agent
+	var selectedAgent *assets.AgentInfo
+	for _, agent := range agentInfos {
+		fileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+		if strings.EqualFold(agent.Name, agentName) || strings.EqualFold(fileName, agentName) {
+			selectedAgent = &agent
+			break
+		}
+	}
+
+	if selectedAgent == nil {
+		output.PrintError(fmt.Sprintf("Agent '%s' not found", agentName))
+		return fmt.Errorf("agent '%s' not found", agentName)
+	}
+
+	// Parse the agent YAML file to get tasks
+	agentContent, err := os.ReadFile(selectedAgent.FilePath)
+	if err != nil {
+		return fmt.Errorf("failed to read agent file %s: %w", selectedAgent.FilePath, err)
+	}
+
+	// Parse YAML structure to extract tasks
+	var agentYAML struct {
+		Agent struct {
+			Tasks []string `yaml:"tasks"`
+		} `yaml:"agent"`
+	}
+
+	if err := yaml.Unmarshal(agentContent, &agentYAML); err != nil {
+		return fmt.Errorf("failed to parse agent YAML: %w", err)
+	}
+
+	// Check if the specified task exists for this agent
+	taskFound := false
+	var availableTasks []string
+
+	for _, taskPath := range agentYAML.Agent.Tasks {
+		// Extract task name from path (e.g., "./.krci-ai/tasks/create-prd.md" -> "create-prd")
+		taskFileName := strings.TrimSuffix(filepath.Base(taskPath), ".md")
+		availableTasks = append(availableTasks, taskFileName)
+
+		if strings.EqualFold(taskFileName, taskName) {
+			taskFound = true
+		}
+	}
+
+	if !taskFound {
+		output.PrintError(fmt.Sprintf("Task '%s' not found for agent '%s'", taskName, agentName))
+		output.PrintInfo(fmt.Sprintf("Available tasks for %s:", selectedAgent.Name))
+		for _, task := range availableTasks {
+			output.PrintInfo(fmt.Sprintf("  • %s", task))
+		}
+		return fmt.Errorf("task '%s' not found for agent '%s'", taskName, agentName)
+	}
+
+	// Verify the task file actually exists
+	taskFilePath := filepath.Join(currentDir, ".krci-ai", "tasks", taskName+".md")
+	if _, err := os.Stat(taskFilePath); os.IsNotExist(err) {
+		output.PrintError(fmt.Sprintf("Task file '%s' does not exist", taskFilePath))
+		return fmt.Errorf("task file '%s' does not exist", taskFilePath)
+	}
+
+	return nil
+}
+
 // FilterAgentsByNames filters agents by their names (case-insensitive), supporting both full names and file names
 func FilterAgentsByNames(agentDeps []assets.AgentDependencyInfo, selectedAgents []string) []assets.AgentDependencyInfo {
 	if len(selectedAgents) == 0 {
@@ -323,8 +561,8 @@ func FilterAgentsByNames(agentDeps []assets.AgentDependencyInfo, selectedAgents 
 	return filtered
 }
 
-// collectBundleContent discovers and collects framework content, optionally filtered by agent names
-func collectBundleContent(currentDir string, selectedAgents []string) (*BundleContent, error) {
+// collectBundleContent discovers and collects framework content, optionally filtered by agent names and task
+func collectBundleContent(currentDir string, selectedAgents []string, taskName string) (*BundleContent, error) {
 	// Create discovery service
 	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
 
@@ -361,8 +599,16 @@ func collectBundleContent(currentDir string, selectedAgents []string) (*BundleCo
 			Role:     agent.Role,
 		})
 
-		// Collect task files
+		// Collect task files - filter by specific task if specified
 		for _, taskPath := range agent.Tasks {
+			// If a specific task is requested, only include that task
+			if taskName != "" {
+				taskFileName := strings.TrimSuffix(filepath.Base(taskPath), ".md")
+				if !strings.EqualFold(taskFileName, taskName) {
+					continue // Skip tasks that don't match the specified task
+				}
+			}
+
 			fullTaskPath := filepath.Join(currentDir, ".krci-ai", "tasks", taskPath)
 			if taskContent, err := os.ReadFile(fullTaskPath); err == nil {
 				relTaskPath := filepath.Join("tasks", taskPath)
@@ -370,23 +616,8 @@ func collectBundleContent(currentDir string, selectedAgents []string) (*BundleCo
 			}
 		}
 
-		// Collect template files
-		for _, templatePath := range agent.Templates {
-			fullTemplatePath := filepath.Join(currentDir, ".krci-ai", "templates", templatePath)
-			if templateContent, err := os.ReadFile(fullTemplatePath); err == nil {
-				relTemplatePath := filepath.Join("templates", templatePath)
-				content.Templates[relTemplatePath] = string(templateContent)
-			}
-		}
-
-		// Collect data files
-		for _, dataPath := range agent.DataFiles {
-			fullDataPath := filepath.Join(currentDir, ".krci-ai", "data", dataPath)
-			if dataContent, err := os.ReadFile(fullDataPath); err == nil {
-				relDataPath := filepath.Join("data", dataPath)
-				content.DataFiles[relDataPath] = string(dataContent)
-			}
-		}
+		// Collect template and data files using helper function
+		collectTemplatesAndData(currentDir, agent, taskName, content)
 	}
 
 	// Collect any additional templates and data files not referenced by agents
@@ -484,7 +715,7 @@ func showBundleScope(output *cli.OutputHandler, content *BundleContent) error {
 }
 
 // generateBundleFilename creates the bundle filename
-func generateBundleFilename(customOutput string, selectedAgents []string) string {
+func generateBundleFilename(customOutput string, selectedAgents []string, taskName string) string {
 	if customOutput != "" {
 		// Ensure .md extension
 		if !strings.HasSuffix(customOutput, ".md") {
@@ -493,9 +724,16 @@ func generateBundleFilename(customOutput string, selectedAgents []string) string
 		return customOutput
 	}
 
-	// Generate filename based on selected agents
+	// Generate filename based on selected agents and task
 	if len(selectedAgents) > 0 {
-		// Sort agent names alphabetically for consistent naming
+		// If both agent and task are specified, use agent-task pattern
+		if taskName != "" && len(selectedAgents) == 1 {
+			agentName := strings.ToLower(selectedAgents[0])
+			taskNameLower := strings.ToLower(taskName)
+			return fmt.Sprintf("%s-%s.md", agentName, taskNameLower)
+		}
+
+		// For multiple agents or agent-only bundles, use existing logic
 		sortedAgents := make([]string, len(selectedAgents))
 		copy(sortedAgents, selectedAgents)
 
