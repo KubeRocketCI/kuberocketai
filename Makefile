@@ -146,10 +146,10 @@ changelog-validate: $(BIN_DIR)/git-chglog ## Validate changelog is up-to-date
 .PHONY: update-readme-badge
 update-readme-badge: ## Update framework badge in README.md
 	@echo "Updating framework badge in README.md..."
-	@AGENTS=$$(find .krci-ai/agents -name "*.yaml" -o -name "*.yml" -o -name "*.md" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
-	TASKS=$$(find .krci-ai/tasks -name "*.md" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
-	TEMPLATES=$$(find .krci-ai/templates -name "*.md" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
-	DATA=$$(find .krci-ai/data -name "*.md" -o -name "*.json" -o -name "*.yaml" -o -name "*.yml" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
+	@AGENTS=$$(find assets/framework/core/agents -name "*.yaml" -o -name "*.yml" -o -name "*.md" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
+	TASKS=$$(find assets/framework/core/tasks -name "*.md" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
+	TEMPLATES=$$(find assets/framework/core/templates -name "*.md" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
+	DATA=$$(find assets/framework/core/data -name "*.md" -o -name "*.json" -o -name "*.yaml" -o -name "*.yml" 2>/dev/null | sort | uniq | wc -l | tr -d ' '); \
 	NEW_BADGE="[![Framework Overview](https://img.shields.io/badge/Framework-$${AGENTS}%20agents%20%7C%20$${TASKS}%20tasks%20%7C%20$${TEMPLATES}%20templates%20%7C%20$${DATA}%20data%20files-purple?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](.krci-ai)"; \
 	if [ -f README.md ]; then \
 		awk -v new_badge="$$NEW_BADGE" ' \
