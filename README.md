@@ -4,18 +4,58 @@ AI-as-Code framework for structuring AI-assisted software development. Define AI
 
 ## Problem
 
-Enterprise teams face critical challenges when scaling AI agents across development workflows:
+You've figured out how to make AI agents understand your project. You've crafted the perfect prompts, built context-aware agents, and your AI-generated code actually works. **Now what?**
 
-- **Fragmented AI Tool Ecosystem**: Different AI tools (web interfaces, Cursor, Claude Code, VS Code) have separate configurations and capabilities, creating inconsistent experiences
-- **Agent Portability Issues**: Agents work in one tool but can't be easily transferred or scaled across different codebases and team environments
-- **Lack of Centralized Management**: No enterprise-wide approach to manage, version, and distribute AI agents and their capabilities
-- **IDE-to-Web Context Gaps**: Agents available in web interfaces aren't accessible in IDEs, forcing developers to switch contexts
-- **No Version Control for AI Logic**: Changes to agent prompts, tools, and capabilities happen without proper review, versioning, or audit trails
-- **Enterprise Scaling Bottlenecks**: Difficult to quickly deploy proven agents across multiple projects and teams
+The real challenge isn't creating smart agents—it's **scaling that success** across your team, projects, and workflow.
+
+### What Happens When It Actually Works
+
+- **"How do I share this with my team?"** - You've spent weeks perfecting an agent configuration, but there's no clean way to distribute it beyond copy-pasting prompts in Slack
+- **"Which version was working?"** - Your agent setup evolved over time, but when something breaks, you can't roll back to the version that was working last week
+- **"I need this in my IDE, not just ChatGPT"** - Your perfect brainstorming agent lives in a web interface, but you need it integrated into your actual development workflow
+- **"Can we run this in CI?"** - Your agents work great for interactive development, but you need them for code review, documentation generation, and automated analysis
+- **"How do we maintain this across 10 repositories?"** - Each project needs slight variations, but managing separate configurations becomes a nightmare
+
+### The Scaling Problem
+
+- **No Distribution System**: Agents remain isolated to individuals or require manual sharing through ad-hoc methods
+- **Version Control Gap**: Agent configurations evolve without proper versioning, making it impossible to track what works and what doesn't
+- **Platform Lock-in**: Agents tied to specific tools can't be moved, adapted, or integrated into different parts of your workflow
+- **Maintenance Overhead**: As your agent library grows, keeping configurations synchronized across projects becomes unmanageable
+- **Quality Assurance**: No systematic way to validate that agents work correctly before deploying them across teams or into production workflows
+- **Context Fragmentation**: Web-based AI tools lose critical project context, forcing manual re-explanation of architecture, patterns, and organizational standards for each interaction
 
 ## Solution
 
-KubeRocketAI provides a **centralized golden library** of AI agents that can be version-controlled, reviewed, and deployed consistently across IDEs and projects. Agents are defined as simple Markdown files.
+KubeRocketAI brings the proven **"Infrastructure-as-Code" model to AI agent management**. Teams define agents in version-controlled Markdown files that integrate seamlessly with existing development workflows, enabling the same declarative approach developers expect from modern CI/CD pipelines.
+
+### Key Value Propositions
+
+1. **Agent-as-Code Distribution**: Version-control and share your proven agent configurations just like you do with Infrastructure-as-Code
+2. **Multi-Platform Injection**: Deploy the same agent definition to your IDE, CI pipeline, bundled for brainstorming, or wherever you need AI assistance
+3. **Built-in Validation**: Validate agent configurations and dependencies before deployment, ensuring consistent behavior across environments
+4. **Context-Preserving Bundling**: Package agents with full project context for web chat tools, maintaining architectural knowledge and organizational standards across platforms
+5. **Scalable Team Workflows**: Maintain agent libraries across multiple projects and repositories without configuration hell
+
+## Smart Context Bundling
+
+**Two deployment modes for different contexts:**
+
+### IDE Integration: Limited, Focused Context
+
+Deploy agents directly into your development environment with project-specific context optimized for coding tasks.
+
+### Web Chat: Full Context for Strategic Work
+
+Bundle agents with complete project assets for brainstorming and requirements elicitation in high-context models (ChatGPT, Claude, Gemini Pro).
+
+```bash
+# IDE: Focused development context
+krci-ai install --ide=cursor
+
+# Web Chat: Complete project context for strategic sessions
+krci-ai bundle --all --output brainstorm-context.md
+```
 
 ## High Level Project Diagram
 
@@ -48,23 +88,6 @@ graph TD
     style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5
     style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
 ```
-
-## Current Status
-
-**In Development** - Core CLI tool and agent framework are being implemented.
-
-### What's Available
-
-- Basic CLI structure (`krci-ai`)
-- Project documentation and architecture
-- CI/CD pipeline for releases
-
-### What's Planned
-
-- Agent playbook with SDLC role definitions
-- Two-tier validation system
-- IDE integration support
-- Multi-platform distribution
 
 ## Installation
 
@@ -119,6 +142,12 @@ brew uninstall krci-ai
 # Install framework with IDE integration
 krci-ai install --ide=cursor
 
+# Validate your agent configurations
+krci-ai validate --all
+
+# Create context-aware bundles for web chat tools
+krci-ai bundle --all --output project-context.md
+
 # List available agents
 krci-ai list agents
 
@@ -126,34 +155,36 @@ krci-ai list agents
 krci-ai install --all
 ```
 
-### Common Use Cases
+## Success Metrics
 
-**1. Setting up AI-as-Code in existing project:**
+KubeRocketAI succeeds when you can scale your AI workflow like you scale your infrastructure:
 
-```bash
-cd my-project
-krci-ai install --ide=claude --force
-krci-ai list agents -v
-```
+- **Agent Reusability**: Deploy proven configurations across multiple projects without manual setup
+- **Quality Assurance**: Validate agent configurations before deployment to catch issues early
+- **Version Control Integration**: Track what works, roll back when things break, collaborate on improvements
+- **Platform Flexibility**: Use the same agent definitions for IDE development, CI automation, and brainstorming sessions
 
-**2. Enterprise team setup with all IDE support:**
-
-```bash
-krci-ai install --all
-# Creates .krci-ai/, .cursor/rules/, .claude/commands/
-```
-
-**3. Discovering available agents after installation:**
-
-```bash
-krci-ai list agents
-# Shows: developer, architect, qa agents with roles
-```
+Our goal: Turn your AI agent expertise into scalable, maintainable infrastructure.
 
 ## Target Users
 
-- **Enterprise Development Teams**: Need transparent, auditable AI workflows
-- **Individual Developers**: Want lightweight, customizable AI framework
+### Teams That Have Figured Out AI, But Need to Scale It
+
+**You'll love this if you:**
+
+- Have created effective AI agents but struggle to share them across your team
+- Want to version-control your agent configurations just like you do with your infrastructure
+- Need validation and quality assurance for agents before deploying them across projects
+- Need the same agents working in multiple contexts: IDE, CI/CD, brainstorming, code review
+- Maintain multiple repositories and are tired of keeping agent configurations in sync
+- Have proven AI workflows but no systematic way to scale them across projects
+
+**Perfect for:**
+
+- **Senior AI Engineers**: Have mastered individual agent creation, now need enterprise-scale management
+- **DevOps-Minded Teams**: Want to apply Infrastructure-as-Code principles to AI agent management
+- **Multi-Project Teams**: Need consistent AI capabilities across different repositories and contexts
+- **AI-First Organizations**: Ready to systematize their AI workflows beyond individual experimentation
 
 ## Contributing
 
