@@ -44,6 +44,10 @@ components optimized for web chat consumption. The bundle includes:
 
 Examples:
   krci-ai bundle --all                           # Generate complete bundle at ./.krci-ai/bundle/all.md
+  krci-ai bundle --agent pm,architect            # Generate targeted bundle with PM and Architect agents
+  krci-ai bundle --agent pm --output pm.md       # Generate PM-only bundle with custom filename
+  krci-ai bundle --agent "pm architect"          # Space-separated agent names
+  krci-ai bundle --agent pm,architect --dry-run  # Show targeted bundle scope without generating files
   krci-ai bundle --all --output my-framework.md  # Generate bundle with custom filename
   krci-ai bundle --all --dry-run                 # Show bundle scope without generating files
   krci-ai bundle --help                          # Show comprehensive usage information`,
@@ -55,6 +59,7 @@ var (
 	bundleAll    bool
 	bundleDryRun bool
 	bundleOutput string
+	bundleAgents string
 )
 
 // BundleContent represents the aggregated content for bundle generation
@@ -78,8 +83,86 @@ func init() {
 
 	// Add flags
 	bundleCmd.Flags().BoolVar(&bundleAll, "all", false, "Generate complete bundle with all agents and dependencies")
+	bundleCmd.Flags().StringVar(&bundleAgents, "agent", "", "Generate targeted bundle with specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
 	bundleCmd.Flags().BoolVar(&bundleDryRun, "dry-run", false, "Show bundle scope without generating files")
 	bundleCmd.Flags().StringVar(&bundleOutput, "output", "", "Custom output filename (creates ./.krci-ai/bundle/filename)")
+}
+
+// ParseAgentList parses comma-separated or space-separated agent names
+func ParseAgentList(agentStr string) []string {
+	if agentStr == "" {
+		return nil
+	}
+
+	var agents []string
+
+	// First try comma-separated
+	if strings.Contains(agentStr, ",") {
+		parts := strings.Split(agentStr, ",")
+		for _, part := range parts {
+			agent := strings.TrimSpace(part)
+			if agent != "" {
+				agents = append(agents, agent)
+			}
+		}
+	} else {
+		// Space-separated
+		parts := strings.Fields(agentStr)
+		for _, part := range parts {
+			agents = append(agents, strings.TrimSpace(part))
+		}
+	}
+
+	return agents
+}
+
+// validateAgentNames validates that specified agent names exist in the framework
+func validateAgentNames(currentDir string, selectedAgents []string, output *cli.OutputHandler) error {
+	// Create discovery service
+	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
+
+	// Get available agents with full info
+	agentInfos, err := discovery.DiscoverAgents()
+	if err != nil {
+		return fmt.Errorf("failed to discover available agents: %w", err)
+	}
+
+	// Create map for quick lookup (case-insensitive) - support both full names and file names
+	agentMap := make(map[string]string)
+
+	for _, agent := range agentInfos {
+		// Add full agent name
+		fullNameLower := strings.ToLower(agent.Name)
+		agentMap[fullNameLower] = agent.Name
+
+		// Add file-based name (e.g., "pm" from "pm.yaml")
+		fileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+		fileNameLower := strings.ToLower(fileName)
+		agentMap[fileNameLower] = agent.Name
+	}
+
+	// Validate each selected agent
+	var invalidAgents []string
+
+	for _, selected := range selectedAgents {
+		selectedLower := strings.ToLower(selected)
+		if _, exists := agentMap[selectedLower]; !exists {
+			invalidAgents = append(invalidAgents, selected)
+		}
+	}
+
+	// Report invalid agents with suggestions
+	if len(invalidAgents) > 0 {
+		output.PrintError(fmt.Sprintf("Invalid agent names: %s", strings.Join(invalidAgents, ", ")))
+		output.PrintInfo("Available agent names (use either full name or short name):")
+		for _, agent := range agentInfos {
+			fileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+			output.PrintInfo(fmt.Sprintf("  • %s (short: %s)", agent.Name, fileName))
+		}
+		return fmt.Errorf("invalid agent names specified")
+	}
+
+	return nil
 }
 
 // runBundle executes the bundle command
@@ -88,11 +171,17 @@ func runBundle(cmd *cobra.Command, args []string) error {
 	output := cli.NewOutputHandler()
 	errorHandler := cli.NewErrorHandler()
 
-	// Validate flags
-	if !bundleAll {
-		output.PrintError("Bundle generation requires --all flag")
-		output.PrintInfo("Usage: krci-ai bundle --all")
-		return fmt.Errorf("--all flag is required")
+	// Validate flags - either --all or --agent must be specified
+	if !bundleAll && bundleAgents == "" {
+		output.PrintError("Bundle generation requires either --all or --agent flag")
+		output.PrintInfo("Usage: krci-ai bundle --all  OR  krci-ai bundle --agent pm,architect")
+		return fmt.Errorf("either --all or --agent flag is required")
+	}
+
+	if bundleAll && bundleAgents != "" {
+		output.PrintError("Cannot specify both --all and --agent flags")
+		output.PrintInfo("Use either --all for complete bundle OR --agent for targeted bundle")
+		return fmt.Errorf("cannot specify both --all and --agent flags")
 	}
 
 	// Get current working directory
@@ -121,10 +210,27 @@ func runBundle(cmd *cobra.Command, args []string) error {
 
 	output.PrintSuccess("Framework validation passed")
 
+	// Parse and validate agent selection if specified
+	var selectedAgents []string
+	if bundleAgents != "" {
+		selectedAgents = ParseAgentList(bundleAgents)
+		if len(selectedAgents) == 0 {
+			output.PrintError("No valid agents specified")
+			return fmt.Errorf("no valid agents specified")
+		}
+
+		// Validate agent names exist
+		if validateErr := validateAgentNames(currentDir, selectedAgents, output); validateErr != nil {
+			return validateErr
+		}
+
+		output.PrintInfo(fmt.Sprintf("Selected agents: %s", strings.Join(selectedAgents, ", ")))
+	}
+
 	// Collect bundle content
 	output.PrintProgress("Discovering agents and dependencies...")
 
-	bundleContent, err := collectBundleContent(currentDir)
+	bundleContent, err := collectBundleContent(currentDir, selectedAgents)
 	if err != nil {
 		errorHandler.HandleError(err, "Failed to collect bundle content")
 		return err
@@ -136,7 +242,7 @@ func runBundle(cmd *cobra.Command, args []string) error {
 	}
 
 	// Generate bundle filename
-	bundleFilename := generateBundleFilename(bundleOutput)
+	bundleFilename := generateBundleFilename(bundleOutput, selectedAgents)
 	bundleDir := filepath.Join(currentDir, ".krci-ai", "bundle")
 	bundlePath := filepath.Join(bundleDir, bundleFilename)
 
@@ -190,8 +296,35 @@ func runFrameworkValidation(currentDir string) error {
 	return nil
 }
 
-// collectBundleContent discovers and collects all framework content
-func collectBundleContent(currentDir string) (*BundleContent, error) {
+// FilterAgentsByNames filters agents by their names (case-insensitive), supporting both full names and file names
+func FilterAgentsByNames(agentDeps []assets.AgentDependencyInfo, selectedAgents []string) []assets.AgentDependencyInfo {
+	if len(selectedAgents) == 0 {
+		return agentDeps
+	}
+
+	// Create case-insensitive lookup map
+	selectedMap := make(map[string]bool)
+	for _, name := range selectedAgents {
+		selectedMap[strings.ToLower(name)] = true
+	}
+
+	var filtered []assets.AgentDependencyInfo
+	for _, agent := range agentDeps {
+		// Check both full name and file name
+		fullNameMatch := selectedMap[strings.ToLower(agent.Name)]
+		fileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+		fileNameMatch := selectedMap[strings.ToLower(fileName)]
+
+		if fullNameMatch || fileNameMatch {
+			filtered = append(filtered, agent)
+		}
+	}
+
+	return filtered
+}
+
+// collectBundleContent discovers and collects framework content, optionally filtered by agent names
+func collectBundleContent(currentDir string, selectedAgents []string) (*BundleContent, error) {
 	// Create discovery service
 	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
 
@@ -199,6 +332,11 @@ func collectBundleContent(currentDir string) (*BundleContent, error) {
 	agentDeps, err := discovery.DiscoverAgentsWithDependencies()
 	if err != nil {
 		return nil, fmt.Errorf("failed to discover agents: %w", err)
+	}
+
+	// Filter agents if specific agents are selected
+	if len(selectedAgents) > 0 {
+		agentDeps = FilterAgentsByNames(agentDeps, selectedAgents)
 	}
 
 	content := &BundleContent{
@@ -346,7 +484,7 @@ func showBundleScope(output *cli.OutputHandler, content *BundleContent) error {
 }
 
 // generateBundleFilename creates the bundle filename
-func generateBundleFilename(customOutput string) string {
+func generateBundleFilename(customOutput string, selectedAgents []string) string {
 	if customOutput != "" {
 		// Ensure .md extension
 		if !strings.HasSuffix(customOutput, ".md") {
@@ -354,6 +492,30 @@ func generateBundleFilename(customOutput string) string {
 		}
 		return customOutput
 	}
+
+	// Generate filename based on selected agents
+	if len(selectedAgents) > 0 {
+		// Sort agent names alphabetically for consistent naming
+		sortedAgents := make([]string, len(selectedAgents))
+		copy(sortedAgents, selectedAgents)
+
+		// Convert to lowercase for consistent filenames
+		for i, agent := range sortedAgents {
+			sortedAgents[i] = strings.ToLower(agent)
+		}
+
+		// Sort alphabetically
+		for i := 0; i < len(sortedAgents); i++ {
+			for j := i + 1; j < len(sortedAgents); j++ {
+				if sortedAgents[i] > sortedAgents[j] {
+					sortedAgents[i], sortedAgents[j] = sortedAgents[j], sortedAgents[i]
+				}
+			}
+		}
+
+		return strings.Join(sortedAgents, "-") + ".md"
+	}
+
 	return "all.md"
 }
 
