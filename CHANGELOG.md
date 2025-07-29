@@ -2,6 +2,40 @@
 
 ## [Unreleased]
 
+
+<a name="v0.23.0"></a>
+
+## [v0.23.0] - 2025-07-29
+
+### Documentation
+
+- Put path to actual framework components
+- Update README with badges
+- Update README with the current state
+
+### Features
+
+- add single agent-task bundle generation with --task flag
+
+
+<a name="v0.22.0"></a>
+
+## [v0.22.0] - 2025-07-29
+
+### Features
+
+- add targeted agent bundle selection with --agent flag
+- implement complete bundle generation with CLI command
+
+
+<a name="v0.21.6"></a>
+
+## [v0.21.6] - 2025-07-28
+
+### Chores
+
+- Update changelog
+
 ### Features
 
 - Update task instrusction for 'update-' tasks
@@ -480,7 +514,10 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.5...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.23.0...HEAD
+[v0.23.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.22.0...v0.23.0
+[v0.22.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.6...v0.22.0
+[v0.21.6]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.5...v0.21.6
 [v0.21.5]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.4...v0.21.5
 [v0.21.4]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.3...v0.21.4
 [v0.21.3]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.2...v0.21.3
