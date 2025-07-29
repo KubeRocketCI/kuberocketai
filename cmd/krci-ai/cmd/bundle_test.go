@@ -131,9 +131,9 @@ func TestGenerateBundleFilename(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := generateBundleFilename(tt.customOutput, tt.selectedAgents)
+			result := generateBundleFilename(tt.customOutput, tt.selectedAgents, "")
 			if result != tt.expected {
-				t.Errorf("generateBundleFilename(%q, %v) = %q, want %q", tt.customOutput, tt.selectedAgents, result, tt.expected)
+				t.Errorf("generateBundleFilename(%q, %v, %q) = %q, want %q", tt.customOutput, tt.selectedAgents, "", result, tt.expected)
 			}
 		})
 	}
