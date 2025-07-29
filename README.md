@@ -195,6 +195,14 @@ Our goal: Turn your AI agent expertise into scalable, maintainable infrastructur
 - **Multi-Project Teams**: Need consistent AI capabilities across different repositories and contexts
 - **AI-First Organizations**: Ready to systematize their AI workflows beyond individual experimentation
 
+## Documentation
+
+📚 **Complete documentation available at [/docs](/docs)**
+
+- **[Quick Start Guide](/docs/quick-start.md)** - Get running in 3 minutes
+- **[Core Concepts](/docs/concepts.md)** - Understand AI-as-Code principles
+- **[Architecture Overview](/docs/architecture.md)** - System design and components
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.

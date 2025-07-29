@@ -98,12 +98,6 @@ The changelog is automatically generated from conventional commit messages using
 ```bash
 # Generate changelog (requires git-chglog)
 make changelog
-
-# Validate changelog is up-to-date (used in CI)
-make changelog-validate
-
-# Install development tools (includes git-chglog)
-make tools
 ```
 
 ### Release Process
