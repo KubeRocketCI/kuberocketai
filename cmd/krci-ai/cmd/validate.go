@@ -318,20 +318,31 @@ func (v *FrameworkValidator) validateTaskPathLinks(agent *processor.Agent, baseD
 	return errors
 }
 
-// validateTasks validates task files (basic existence check)
+// validateTasks validates task files (basic existence check for both standard and local tasks)
 func (v *FrameworkValidator) validateTasks(frameworkDir string, results *ValidationResults) error {
-	tasksDir := filepath.Join(frameworkDir, "tasks")
+	// Validate standard tasks directory
+	if err := v.validateTasksInDirectory(frameworkDir, "tasks", results); err != nil {
+		return err
+	}
+
+	// Validate local tasks directory
+	return v.validateTasksInDirectory(frameworkDir, "local/tasks", results)
+}
+
+// validateTasksInDirectory validates task files in a specific directory
+func (v *FrameworkValidator) validateTasksInDirectory(frameworkDir, taskDir string, results *ValidationResults) error {
+	tasksPath := filepath.Join(frameworkDir, taskDir)
 
 	// Check if tasks directory exists
-	if _, err := os.Stat(tasksDir); os.IsNotExist(err) {
+	if _, err := os.Stat(tasksPath); os.IsNotExist(err) {
 		// No tasks directory is not an error - might be a minimal setup
 		return nil
 	}
 
 	// Find all task files
-	taskFiles, err := filepath.Glob(filepath.Join(tasksDir, "*.md"))
+	taskFiles, err := filepath.Glob(filepath.Join(tasksPath, "*.md"))
 	if err != nil {
-		return fmt.Errorf("failed to find task files: %w", err)
+		return fmt.Errorf("failed to find task files in %s: %w", taskDir, err)
 	}
 
 	// Validate each task file (basic check for now)
@@ -505,8 +516,8 @@ func (v *FrameworkValidator) validateInternalLinks(frameworkDir string, results 
 	// Find all markdown files in the framework
 	var markdownFiles []string
 
-	// Check agents, tasks, templates, and data directories
-	dirs := []string{"agents", "tasks", "templates", "data"}
+	// Check agents, tasks, templates, data, and local directories
+	dirs := []string{"agents", "tasks", "templates", "data", "local/tasks"}
 
 	for _, dir := range dirs {
 		dirPath := filepath.Join(frameworkDir, dir)

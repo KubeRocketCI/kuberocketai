@@ -501,18 +501,21 @@ func (d *Discovery) addTableRows(result *strings.Builder, agent AgentDependencyI
 	for _, task := range agent.Tasks {
 		var templates []string
 		var dataFiles []string
+		var fullPath string
 
-		if deps, exists := taskDependencies[task]; exists {
+		taskFileName := filepath.Base(task)
+		if deps, exists := taskDependencies[taskFileName]; exists {
 			templates = deps.templates
 			dataFiles = deps.dataFiles
+			fullPath = deps.fullPath
 		}
 
-		d.addTaskRows(result, task, templates, dataFiles, format, maxTaskWidth, maxTemplateWidth, maxDataWidth)
+		d.addTaskRows(result, taskFileName, fullPath, templates, dataFiles, format, maxTaskWidth, maxTemplateWidth, maxDataWidth)
 	}
 }
 
 // addTaskRows adds rows for a single task and its dependencies
-func (d *Discovery) addTaskRows(result *strings.Builder, task string, templates, dataFiles []string, format string, maxTaskWidth, maxTemplateWidth, maxDataWidth int) {
+func (d *Discovery) addTaskRows(result *strings.Builder, task string, fullPath string, templates, dataFiles []string, format string, maxTaskWidth, maxTemplateWidth, maxDataWidth int) {
 	maxRows := 1
 	if len(templates) > maxRows {
 		maxRows = len(templates)
@@ -528,7 +531,13 @@ func (d *Discovery) addTaskRows(result *strings.Builder, task string, templates,
 
 		// Only show task name on the first row
 		if row == 0 {
-			taskDisplay = d.fitString(task, maxTaskWidth)
+			// Use fullPath if available, otherwise fall back to task name
+			pathToUse := fullPath
+			if pathToUse == "" {
+				pathToUse = task
+			}
+			formattedTask := d.formatTaskDisplayName(pathToUse)
+			taskDisplay = d.fitString(formattedTask, maxTaskWidth)
 		}
 
 		// Show template for this row
@@ -626,6 +635,7 @@ func (d *Discovery) fitString(str string, maxWidth int) string {
 type taskDependency struct {
 	templates []string
 	dataFiles []string
+	fullPath  string // Store full path for local task detection
 }
 
 // getTaskDependenciesFromValidation uses the validation system to get task dependencies
@@ -641,8 +651,19 @@ func (d *Discovery) getTaskDependenciesFromValidation(agent AgentDependencyInfo)
 		dependencies[taskFileName] = taskDependency{
 			templates: agent.Templates,
 			dataFiles: agent.DataFiles,
+			fullPath:  task,
 		}
 	}
 
 	return dependencies
+}
+
+// formatTaskDisplayName formats task name with visual distinction for local tasks
+func (d *Discovery) formatTaskDisplayName(taskPath string) string {
+	taskName := filepath.Base(taskPath)
+	// Check multiple patterns for local task paths
+	if strings.Contains(taskPath, "/local/tasks/") || strings.Contains(taskPath, ".krci-ai/local/tasks/") {
+		return "📁 " + taskName // Local task indicator
+	}
+	return taskName
 }
