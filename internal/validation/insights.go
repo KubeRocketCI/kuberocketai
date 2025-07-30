@@ -41,10 +41,11 @@ type ComponentCounts struct {
 
 // ComponentRelationship represents agent → task → template/data flows
 type ComponentRelationship struct {
-	Agent     string   `json:"agent"`
-	Tasks     []string `json:"tasks"`
-	Templates []string `json:"templates"`
-	DataFiles []string `json:"data_files"`
+	Agent      string   `json:"agent"`
+	Tasks      []string `json:"tasks"`
+	LocalTasks []string `json:"local_tasks"` // Local tasks from .krci-ai/local/tasks/
+	Templates  []string `json:"templates"`
+	DataFiles  []string `json:"data_files"`
 }
 
 // UsageStatistics provides insights about component usage patterns
@@ -93,14 +94,24 @@ func (a *FrameworkAnalyzer) countComponents(frameworkDir string, counts *Compone
 		counts.Agents = len(agentFiles)
 	}
 
-	// Count tasks
+	// Count tasks (both standard and local)
 	tasksDir := filepath.Join(frameworkDir, "tasks")
 	if _, err := os.Stat(tasksDir); err == nil {
 		taskFiles, err := filepath.Glob(filepath.Join(tasksDir, "*.md"))
 		if err != nil {
 			return err
 		}
-		counts.Tasks = len(taskFiles)
+		counts.Tasks += len(taskFiles)
+	}
+
+	// Count local tasks
+	localTasksDir := filepath.Join(frameworkDir, "local", "tasks")
+	if _, err := os.Stat(localTasksDir); err == nil {
+		localTaskFiles, err := filepath.Glob(filepath.Join(localTasksDir, "*.md"))
+		if err != nil {
+			return err
+		}
+		counts.Tasks += len(localTaskFiles)
 	}
 
 	// Count templates
@@ -142,10 +153,11 @@ func (a *FrameworkAnalyzer) analyzeRelationships(frameworkDir string, insights *
 		agentName := strings.TrimSuffix(filepath.Base(agentFile), filepath.Ext(agentFile))
 
 		relationship := ComponentRelationship{
-			Agent:     agentName,
-			Tasks:     make([]string, 0),
-			Templates: make([]string, 0),
-			DataFiles: make([]string, 0),
+			Agent:      agentName,
+			Tasks:      make([]string, 0),
+			LocalTasks: make([]string, 0),
+			Templates:  make([]string, 0),
+			DataFiles:  make([]string, 0),
 		}
 
 		// Get tasks referenced by this agent
@@ -156,7 +168,13 @@ func (a *FrameworkAnalyzer) analyzeRelationships(frameworkDir string, insights *
 
 		for _, taskRef := range taskRefs {
 			taskName := filepath.Base(taskRef)
-			relationship.Tasks = append(relationship.Tasks, taskName)
+
+			// Categorize as local or standard task
+			if strings.Contains(taskRef, "/local/tasks/") {
+				relationship.LocalTasks = append(relationship.LocalTasks, taskName)
+			} else {
+				relationship.Tasks = append(relationship.Tasks, taskName)
+			}
 
 			// For each task, find what templates/data it references
 			cleanPath := strings.TrimPrefix(taskRef, "./")
@@ -201,7 +219,7 @@ func (a *FrameworkAnalyzer) getTaskReferences(taskFile string) ([]string, []stri
 }
 
 // generateUsageStatistics analyzes usage patterns to identify most/least used components
-func (a *FrameworkAnalyzer) generateUsageStatistics(frameworkDir string, insights *FrameworkInsights) error {
+func (a *FrameworkAnalyzer) generateUsageStatistics(_ string, insights *FrameworkInsights) error {
 	templateUsage := make(map[string]int)
 	dataUsage := make(map[string]int)
 
@@ -273,10 +291,16 @@ func (insights *FrameworkInsights) FormatInsights() string {
 		result.WriteString("\n💡 FRAMEWORK INSIGHTS:\n")
 
 		for _, rel := range insights.Relationships {
-			if len(rel.Tasks) > 0 {
+			totalTasks := len(rel.Tasks) + len(rel.LocalTasks)
+			if totalTasks > 0 {
 				templateCount := len(rel.Templates)
-				result.WriteString(fmt.Sprintf("   • %s → %d tasks → %d templates\n",
-					rel.Agent, len(rel.Tasks), templateCount))
+				if len(rel.LocalTasks) > 0 {
+					result.WriteString(fmt.Sprintf("   • %s → %d tasks (including %d local) → %d templates\n",
+						rel.Agent, totalTasks, len(rel.LocalTasks), templateCount))
+				} else {
+					result.WriteString(fmt.Sprintf("   • %s → %d tasks → %d templates\n",
+						rel.Agent, totalTasks, templateCount))
+				}
 			}
 		}
 

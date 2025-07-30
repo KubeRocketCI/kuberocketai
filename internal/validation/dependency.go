@@ -157,10 +157,10 @@ func (a *FrameworkAnalyzer) extractYAMLTasks(filePath string) ([]string, error) 
 		return nil, err
 	}
 
-	// Filter for .krci-ai task references
+	// Filter for .krci-ai task references (both standard and local)
 	var tasks []string
 	for _, task := range agent.Agent.Tasks {
-		if strings.HasPrefix(task, "./.krci-ai/tasks/") {
+		if strings.HasPrefix(task, "./.krci-ai/tasks/") || strings.HasPrefix(task, "./.krci-ai/local/tasks/") {
 			tasks = append(tasks, task)
 		}
 	}
@@ -209,11 +209,26 @@ func (a *FrameworkAnalyzer) scanAgentReferences(frameworkDir string, referencedF
 	})
 }
 
-// scanTaskReferences scans task files for template/data references
+// scanTaskReferences scans task files for template/data references (both standard and local tasks)
 //
 //nolint:dupl // Similar structure but different purpose than scanAgentReferences
 func (a *FrameworkAnalyzer) scanTaskReferences(frameworkDir string, referencedFiles map[string]bool) error {
-	return a.processDirectoryFiles(frameworkDir, "tasks", "*.md", func(file string) ([]string, error) {
+	// Scan standard tasks directory
+	if err := a.processDirectoryFiles(frameworkDir, "tasks", "*.md", func(file string) ([]string, error) {
+		return a.extractMarkdownLinks(file)
+	}, func(ref string) {
+		cleanPath := strings.TrimPrefix(ref, "./")
+		absolutePath := filepath.Join(a.baseDir, cleanPath)
+		if _, err := os.Stat(absolutePath); err == nil {
+			relPath, _ := filepath.Rel(a.baseDir, absolutePath)
+			referencedFiles[relPath] = true
+		}
+	}); err != nil {
+		return err
+	}
+
+	// Scan local tasks directory
+	return a.processDirectoryFiles(frameworkDir, "local/tasks", "*.md", func(file string) ([]string, error) {
 		return a.extractMarkdownLinks(file)
 	}, func(ref string) {
 		cleanPath := strings.TrimPrefix(ref, "./")
@@ -258,11 +273,22 @@ func (a *FrameworkAnalyzer) buildAgentTaskDependencies(frameworkDir string, depe
 	return nil
 }
 
-// buildTaskTemplateDependencies builds task → template/data dependencies for dependency graph
+// buildTaskTemplateDependencies builds task → template/data dependencies for dependency graph (both standard and local tasks)
 //
 //nolint:dupl // Similar structure but different purpose than buildAgentTaskDependencies
 func (a *FrameworkAnalyzer) buildTaskTemplateDependencies(frameworkDir string, dependencyGraph map[string][]string) error {
-	dir := filepath.Join(frameworkDir, "tasks")
+	// Process standard tasks directory
+	if err := a.processTaskDependenciesInDirectory(frameworkDir, "tasks", dependencyGraph); err != nil {
+		return err
+	}
+
+	// Process local tasks directory
+	return a.processTaskDependenciesInDirectory(frameworkDir, "local/tasks", dependencyGraph)
+}
+
+// processTaskDependenciesInDirectory processes task dependencies in a specific directory
+func (a *FrameworkAnalyzer) processTaskDependenciesInDirectory(frameworkDir, taskDir string, dependencyGraph map[string][]string) error {
+	dir := filepath.Join(frameworkDir, taskDir)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		return nil
 	}

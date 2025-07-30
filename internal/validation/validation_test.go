@@ -243,3 +243,227 @@ func setupTestFramework(t *testing.T) string {
 
 	return tempDir
 }
+
+// setupTestFrameworkWithLocalTasks creates a test framework structure including local tasks
+func setupTestFrameworkWithLocalTasks(t *testing.T) string {
+	tempDir := setupTestFramework(t)
+	frameworkDir := filepath.Join(tempDir, ".krci-ai")
+
+	// Create local tasks directory structure
+	localTasksDir := filepath.Join(frameworkDir, "local", "tasks")
+	if err := os.MkdirAll(localTasksDir, 0755); err != nil {
+		t.Fatalf("Failed to create local tasks directory: %v", err)
+	}
+
+	// Create a local task file
+	localTaskFile := filepath.Join(localTasksDir, "local-task.md")
+	if err := os.WriteFile(localTaskFile, []byte("# Local Task\nLocal task content."), 0644); err != nil {
+		t.Fatalf("Failed to create local task file: %v", err)
+	}
+
+	// Create an agent with both standard and local tasks
+	agentFile := filepath.Join(frameworkDir, "agents", "test-agent.yaml")
+	agentContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: test-v1
+    version: "1.0.0"
+    description: "Test agent for local tasks"
+    role: "Test Role"
+    goal: "Test goal"
+  tasks:
+    - ./.krci-ai/tasks/existing-task.md
+    - ./.krci-ai/local/tasks/local-task.md
+`
+	if err := os.WriteFile(agentFile, []byte(agentContent), 0644); err != nil {
+		t.Fatalf("Failed to create agent file: %v", err)
+	}
+
+	return tempDir
+}
+
+func TestComponentRelationshipLocalTasks(t *testing.T) {
+	tempDir := setupTestFrameworkWithLocalTasks(t)
+	defer os.RemoveAll(tempDir)
+
+	analyzer := NewFrameworkAnalyzer(tempDir)
+	issues, insights, err := analyzer.AnalyzeFramework()
+
+	if err != nil {
+		t.Fatalf("Framework analysis failed: %v", err)
+	}
+
+	if len(issues) > 0 {
+		t.Logf("Validation issues found:")
+		for _, issue := range issues {
+			t.Logf("  - %s: %s (file: %s)", issue.Type, issue.Message, issue.File)
+		}
+		// Allow certain validation issues that are expected in test setup
+		criticalIssues := 0
+		for _, issue := range issues {
+			if issue.Severity == SeverityCritical {
+				criticalIssues++
+			}
+		}
+		if criticalIssues > 0 {
+			t.Errorf("Expected no critical validation issues, got %d", criticalIssues)
+		}
+	}
+
+	// Verify insights structure
+	if insights == nil {
+		t.Fatal("Expected insights to be generated")
+	}
+
+	// Find the test agent relationship
+	var testAgentRel *ComponentRelationship
+	for i := range insights.Relationships {
+		if insights.Relationships[i].Agent == "test-agent" {
+			testAgentRel = &insights.Relationships[i]
+			break
+		}
+	}
+
+	if testAgentRel == nil {
+		t.Fatal("Expected to find test-agent relationship")
+	}
+
+	// Verify task categorization
+	if len(testAgentRel.Tasks) != 1 {
+		t.Errorf("Expected 1 standard task, got %d", len(testAgentRel.Tasks))
+	}
+
+	if len(testAgentRel.LocalTasks) != 1 {
+		t.Errorf("Expected 1 local task, got %d", len(testAgentRel.LocalTasks))
+	}
+
+	if len(testAgentRel.Tasks) > 0 && testAgentRel.Tasks[0] != "existing-task.md" {
+		t.Errorf("Expected standard task 'existing-task.md', got '%s'", testAgentRel.Tasks[0])
+	}
+
+	if len(testAgentRel.LocalTasks) > 0 && testAgentRel.LocalTasks[0] != "local-task.md" {
+		t.Errorf("Expected local task 'local-task.md', got '%s'", testAgentRel.LocalTasks[0])
+	}
+}
+
+func TestFormatInsightsWithLocalTasks(t *testing.T) {
+	tempDir := setupTestFrameworkWithLocalTasks(t)
+	defer os.RemoveAll(tempDir)
+
+	analyzer := NewFrameworkAnalyzer(tempDir)
+	_, insights, err := analyzer.AnalyzeFramework()
+
+	if err != nil {
+		t.Fatalf("Framework analysis failed: %v", err)
+	}
+
+	if insights == nil {
+		t.Fatal("Expected insights to be generated")
+	}
+
+	// Test formatting
+	formatted := insights.FormatInsights()
+
+	// Should contain local task indication
+	if !strings.Contains(formatted, "including 1 local") {
+		t.Errorf("Expected formatted insights to show local task count, got: %s", formatted)
+	}
+
+	// Should show correct total task count
+	if !strings.Contains(formatted, "test-agent → 2 tasks (including 1 local)") {
+		t.Errorf("Expected formatted insights to show correct task breakdown, got: %s", formatted)
+	}
+}
+
+func TestFormatInsightsWithoutLocalTasks(t *testing.T) {
+	tempDir := setupTestFramework(t)
+	defer os.RemoveAll(tempDir)
+
+	// Create an agent with only standard tasks
+	frameworkDir := filepath.Join(tempDir, ".krci-ai")
+	agentFile := filepath.Join(frameworkDir, "agents", "standard-agent.yaml")
+	agentContent := `agent:
+  identity:
+    name: "Standard Agent"
+    id: standard-v1
+    version: "1.0.0"
+    description: "Test agent without local tasks"
+    role: "Standard Role"
+    goal: "Standard goal"
+  tasks:
+    - ./.krci-ai/tasks/existing-task.md
+`
+	if err := os.WriteFile(agentFile, []byte(agentContent), 0644); err != nil {
+		t.Fatalf("Failed to create agent file: %v", err)
+	}
+
+	analyzer := NewFrameworkAnalyzer(tempDir)
+	_, insights, err := analyzer.AnalyzeFramework()
+
+	if err != nil {
+		t.Fatalf("Framework analysis failed: %v", err)
+	}
+
+	if insights == nil {
+		t.Fatal("Expected insights to be generated")
+	}
+
+	// Test formatting
+	formatted := insights.FormatInsights()
+
+	// Should NOT contain local task indication
+	if strings.Contains(formatted, "including") {
+		t.Errorf("Expected formatted insights to NOT show local task indication for standard-only agent, got: %s", formatted)
+	}
+
+	// Should show standard format
+	if !strings.Contains(formatted, "standard-agent → 1 tasks →") {
+		t.Errorf("Expected formatted insights to show standard format, got: %s", formatted)
+	}
+}
+
+func TestMixedAgentsInsightsFormatting(t *testing.T) {
+	tempDir := setupTestFrameworkWithLocalTasks(t)
+	defer os.RemoveAll(tempDir)
+
+	// Add another agent with only standard tasks
+	frameworkDir := filepath.Join(tempDir, ".krci-ai")
+	agentFile := filepath.Join(frameworkDir, "agents", "standard-agent.yaml")
+	agentContent := `agent:
+  identity:
+    name: "Standard Agent"
+    id: standard-v1
+    version: "1.0.0"
+    description: "Test agent without local tasks"
+    role: "Standard Role"
+    goal: "Standard goal"
+  tasks:
+    - ./.krci-ai/tasks/existing-task.md
+`
+	if err := os.WriteFile(agentFile, []byte(agentContent), 0644); err != nil {
+		t.Fatalf("Failed to create agent file: %v", err)
+	}
+
+	analyzer := NewFrameworkAnalyzer(tempDir)
+	_, insights, err := analyzer.AnalyzeFramework()
+
+	if err != nil {
+		t.Fatalf("Framework analysis failed: %v", err)
+	}
+
+	if insights == nil {
+		t.Fatal("Expected insights to be generated")
+	}
+
+	// Test formatting shows different formats for different agents
+	formatted := insights.FormatInsights()
+
+	// Should contain both formats
+	if !strings.Contains(formatted, "test-agent → 2 tasks (including 1 local)") {
+		t.Errorf("Expected formatted insights to show local task breakdown for test-agent, got: %s", formatted)
+	}
+
+	if !strings.Contains(formatted, "standard-agent → 1 tasks →") && !strings.Contains(formatted, "including") {
+		t.Errorf("Expected formatted insights to show standard format for standard-agent, got: %s", formatted)
+	}
+}
