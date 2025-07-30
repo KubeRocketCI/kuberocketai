@@ -203,3 +203,271 @@ func TestVersionComparisonEdgeCases(t *testing.T) {
 		})
 	}
 }
+
+func TestVersionInfoString(t *testing.T) {
+	info := VersionInfo{
+		Version:   "v1.2.3",
+		Commit:    "abc123def",
+		Date:      "2025-07-30",
+		BuiltBy:   "goreleaser",
+		Framework: "v1.0.0",
+		GoVersion: "go1.21.5",
+		Platform:  "linux/amd64",
+	}
+
+	result := info.String()
+	expected := "krci-ai version v1.2.3\nCommit: abc123def\nBuilt: 2025-07-30 by goreleaser\nFramework: v1.0.0\nGo: go1.21.5\nPlatform: linux/amd64"
+
+	if result != expected {
+		t.Errorf("VersionInfo.String() = %q, want %q", result, expected)
+	}
+
+	// Test with empty values
+	emptyInfo := VersionInfo{}
+	emptyResult := emptyInfo.String()
+	expectedEmpty := "krci-ai version \nCommit: \nBuilt:  by \nFramework: \nGo: \nPlatform: "
+
+	if emptyResult != expectedEmpty {
+		t.Errorf("VersionInfo.String() with empty values = %q, want %q", emptyResult, expectedEmpty)
+	}
+}
+
+func TestValidateCompatibility(t *testing.T) {
+	tests := []struct {
+		name             string
+		cliVersion       string
+		frameworkVersion string
+		wantErr          bool
+		errorContains    string
+	}{
+		{
+			name:             "compatible versions - exact match",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "1.0.0",
+			wantErr:          false,
+		},
+		{
+			name:             "compatible versions - within matrix",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "1.0.1",
+			wantErr:          false,
+		},
+		{
+			name:             "compatible versions - 1.1.0 with 1.0.0",
+			cliVersion:       "1.1.0",
+			frameworkVersion: "1.0.0",
+			wantErr:          false,
+		},
+		{
+			name:             "incompatible versions",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "2.0.0",
+			wantErr:          true,
+			errorContains:    "not compatible",
+		},
+		{
+			name:             "invalid CLI version",
+			cliVersion:       "invalid",
+			frameworkVersion: "1.0.0",
+			wantErr:          true,
+			errorContains:    "invalid CLI version",
+		},
+		{
+			name:             "invalid framework version",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "invalid",
+			wantErr:          true,
+			errorContains:    "invalid framework version",
+		},
+		{
+			name:             "CLI version not in compatibility matrix",
+			cliVersion:       "3.0.0",
+			frameworkVersion: "1.0.0",
+			wantErr:          true,
+			errorContains:    "no compatibility information",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := ValidateCompatibility(tt.cliVersion, tt.frameworkVersion)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ValidateCompatibility() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if tt.wantErr && tt.errorContains != "" {
+				if err == nil || !contains(err.Error(), tt.errorContains) {
+					t.Errorf("ValidateCompatibility() error = %v, want error containing %q", err, tt.errorContains)
+				}
+			}
+		})
+	}
+}
+
+func TestGetCompatibilityMatrix(t *testing.T) {
+	matrix := GetCompatibilityMatrix()
+
+	// Should not be empty
+	if len(matrix) == 0 {
+		t.Error("GetCompatibilityMatrix() should not return empty matrix")
+	}
+
+	// Should contain expected CLI versions
+	expectedVersions := []string{"1.0.0", "1.1.0", "1.2.0", "2.0.0"}
+	for _, version := range expectedVersions {
+		if _, exists := matrix[version]; !exists {
+			t.Errorf("GetCompatibilityMatrix() should contain version %s", version)
+		}
+	}
+
+	// Should return a copy (modifying returned matrix should not affect original)
+	originalLen := len(matrix["1.0.0"])
+	matrix["1.0.0"] = append(matrix["1.0.0"], "test-version")
+
+	// Get a fresh copy
+	freshMatrix := GetCompatibilityMatrix()
+	if len(freshMatrix["1.0.0"]) != originalLen {
+		t.Error("GetCompatibilityMatrix() should return a copy, not the original matrix")
+	}
+
+	// Test modification of returned matrix doesn't affect original
+	delete(matrix, "1.0.0")
+	freshMatrix2 := GetCompatibilityMatrix()
+	if _, exists := freshMatrix2["1.0.0"]; !exists {
+		t.Error("Modifying returned matrix should not affect the original")
+	}
+}
+
+func TestGetCompatibleFrameworkVersions(t *testing.T) {
+	tests := []struct {
+		name       string
+		cliVersion string
+		wantLen    int
+		wantErr    bool
+		wantFirst  string
+	}{
+		{
+			name:       "valid CLI version 1.0.0",
+			cliVersion: "1.0.0",
+			wantLen:    3,
+			wantErr:    false,
+			wantFirst:  "1.0.0",
+		},
+		{
+			name:       "valid CLI version 1.1.0",
+			cliVersion: "1.1.0",
+			wantLen:    5,
+			wantErr:    false,
+			wantFirst:  "1.0.0",
+		},
+		{
+			name:       "valid CLI version 2.0.0",
+			cliVersion: "2.0.0",
+			wantLen:    3,
+			wantErr:    false,
+			wantFirst:  "2.0.0",
+		},
+		{
+			name:       "invalid CLI version",
+			cliVersion: "invalid",
+			wantLen:    0,
+			wantErr:    true,
+		},
+		{
+			name:       "unknown CLI version",
+			cliVersion: "5.0.0",
+			wantLen:    0,
+			wantErr:    true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := GetCompatibleFrameworkVersions(tt.cliVersion)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("GetCompatibleFrameworkVersions() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !tt.wantErr {
+				if len(got) != tt.wantLen {
+					t.Errorf("GetCompatibleFrameworkVersions() returned %d versions, want %d", len(got), tt.wantLen)
+				}
+				if len(got) > 0 && got[0] != tt.wantFirst {
+					t.Errorf("GetCompatibleFrameworkVersions() first version = %s, want %s", got[0], tt.wantFirst)
+				}
+
+				// Test that modifying returned slice doesn't affect original
+				if len(got) > 0 {
+					originalFirst := got[0]
+					got[0] = "modified"
+					fresh, _ := GetCompatibleFrameworkVersions(tt.cliVersion)
+					if fresh[0] != originalFirst {
+						t.Error("GetCompatibleFrameworkVersions() should return a copy")
+					}
+				}
+			}
+		})
+	}
+}
+
+func TestIsFrameworkVersionCompatible(t *testing.T) {
+	tests := []struct {
+		name             string
+		cliVersion       string
+		frameworkVersion string
+		want             bool
+	}{
+		{
+			name:             "compatible versions",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "1.0.1",
+			want:             true,
+		},
+		{
+			name:             "incompatible versions",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "2.0.0",
+			want:             false,
+		},
+		{
+			name:             "invalid CLI version",
+			cliVersion:       "invalid",
+			frameworkVersion: "1.0.0",
+			want:             false,
+		},
+		{
+			name:             "invalid framework version",
+			cliVersion:       "1.0.0",
+			frameworkVersion: "invalid",
+			want:             false,
+		},
+		{
+			name:             "unknown CLI version",
+			cliVersion:       "99.0.0",
+			frameworkVersion: "1.0.0",
+			want:             false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := IsFrameworkVersionCompatible(tt.cliVersion, tt.frameworkVersion)
+			if got != tt.want {
+				t.Errorf("IsFrameworkVersionCompatible() = %t, want %t", got, tt.want)
+			}
+		})
+	}
+}
+
+// Helper function for string contains check
+func contains(s, substr string) bool {
+	if len(substr) == 0 {
+		return true
+	}
+	for i := 0; i <= len(s)-len(substr); i++ {
+		if s[i:i+len(substr)] == substr {
+			return true
+		}
+	}
+	return false
+}
