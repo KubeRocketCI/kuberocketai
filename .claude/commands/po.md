@@ -39,6 +39,7 @@ agent:
     create-story: "Execute task create-story"
     update-story: "Execute task update-story"
     review-story: "Execute task review-story"
+    create-github-issues: "Execute task create-github-issues"
     exit: "Exit Product Owner persona and return to normal mode"
 
   tasks:
@@ -47,4 +48,5 @@ agent:
     - ./.krci-ai/tasks/create-story.md
     - ./.krci-ai/tasks/update-story.md
     - ./.krci-ai/tasks/review-story-po.md
+    - ./.krci-ai/local/tasks/create-github-issues.md
 ```
