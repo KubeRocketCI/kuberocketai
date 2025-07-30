@@ -30,11 +30,11 @@
 
 ## Key Benefits
 
-✅ **Project Context Awareness** - AI agents understand your architecture, standards, and dependencies  
-✅ **Multi-Platform Deployment** - Same agents work in IDE, CI/CD, and web chat tools  
-✅ **Team Scalability** - Version-control and share agent configurations like infrastructure  
-✅ **Quality Assurance** - Built-in validation for agent configurations  
-✅ **Offline Operation** - Complete framework embedded in CLI, no network dependencies  
+✅ **Project Context Awareness** - AI agents understand your architecture, standards, and dependencies
+✅ **Multi-Platform Deployment** - Same agents work in IDE, CI/CD, and web chat tools
+✅ **Team Scalability** - Version-control and share agent configurations like infrastructure
+✅ **Quality Assurance** - Built-in validation for agent configurations
+✅ **Offline Operation** - Complete framework embedded in CLI, no network dependencies
 
 ## Framework Overview
 
@@ -70,7 +70,7 @@ krci-ai bundle --all --output brainstorm.md    # Strategic discussions
 brew tap KubeRocketCI/homebrew-tap
 brew install krci-ai
 
-# Linux - Direct Download  
+# Linux - Direct Download
 curl -L "https://github.com/KubeRocketCI/kuberocketai/releases/latest/download/krci-ai_Linux_x86_64.tar.gz" | tar -xz
 
 # Windows - Download from releases
@@ -101,8 +101,8 @@ krci-ai version
 
 ## Navigation Guide
 
-**New to KubeRocketAI?** → Start with [Quick Start](quick-start.md)  
-**Need to understand the value prop?** → Read [Core Concepts](concepts.md)  
-**Want technical details?** → Check [Architecture](architecture.md)  
+**New to KubeRocketAI?** → Start with [Quick Start](quick-start.md)
+**Need to understand the value prop?** → Read [Core Concepts](concepts.md)
+**Want technical details?** → Check [Architecture](architecture.md)
 
 **Questions?** Check our [GitHub Issues](https://github.com/KubeRocketCI/kuberocketai/issues) or create a new one.
