@@ -134,7 +134,14 @@ func (a *FrameworkAnalyzer) detectCriticalIssues(frameworkDir string) ([]Validat
 	}
 	issues = append(issues, archViolations...)
 
-	// 4. Detect invalid file formats
+	// 4. Detect local directory violations
+	localDirViolations, err := a.detectLocalDirectoryViolations(frameworkDir)
+	if err != nil {
+		return nil, err
+	}
+	issues = append(issues, localDirViolations...)
+
+	// 5. Detect invalid file formats
 	formatIssues, err := a.detectFormatIssues(frameworkDir)
 	if err != nil {
 		return nil, err
@@ -299,6 +306,46 @@ func (a *FrameworkAnalyzer) detectArchitectureViolations(frameworkDir string) ([
 	return issues, nil
 }
 
+// detectLocalDirectoryViolations detects invalid local directory structure
+func (a *FrameworkAnalyzer) detectLocalDirectoryViolations(frameworkDir string) ([]ValidationIssue, error) {
+	var issues []ValidationIssue
+
+	localDir := filepath.Join(frameworkDir, "local")
+	if _, err := os.Stat(localDir); os.IsNotExist(err) {
+		// No local directory, no violations
+		return issues, nil
+	}
+
+	// Check if local directory exists and get its contents
+	entries, err := os.ReadDir(localDir)
+	if err != nil {
+		return nil, err
+	}
+
+	// Allowed directories in .krci-ai/local/
+	allowedDirs := map[string]bool{
+		"tasks":     true,
+		"templates": true,
+		"data":      true,
+	}
+
+	for _, entry := range entries {
+		if !allowedDirs[entry.Name()] {
+			relFile, _ := filepath.Rel(a.baseDir, filepath.Join(localDir, entry.Name()))
+			issues = append(issues, ValidationIssue{
+				Type:        "local_directory_violation",
+				Severity:    SeverityCritical,
+				File:        relFile,
+				Line:        0,
+				Message:     fmt.Sprintf("Invalid directory '%s' in .krci-ai/local/ - only 'tasks', 'templates', and 'data' are allowed", entry.Name()),
+				FixGuidance: "Remove invalid directory or move contents to allowed directories (tasks/, templates/, data/)",
+			})
+		}
+	}
+
+	return issues, nil
+}
+
 // detectFormatIssues detects invalid file formats
 func (a *FrameworkAnalyzer) detectFormatIssues(frameworkDir string) ([]ValidationIssue, error) {
 	var issues []ValidationIssue
@@ -361,7 +408,23 @@ func (a *FrameworkAnalyzer) findMarkdownFiles(frameworkDir string) ([]string, er
 	var files []string
 	dirs := []string{"agents", "tasks", "templates", "data"}
 
+	// Include global directories
 	for _, dir := range dirs {
+		dirPath := filepath.Join(frameworkDir, dir)
+		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
+			continue
+		}
+
+		dirFiles, err := filepath.Glob(filepath.Join(dirPath, "*.md"))
+		if err != nil {
+			return nil, err
+		}
+		files = append(files, dirFiles...)
+	}
+
+	// Include local directories
+	localDirs := []string{"local/tasks", "local/templates", "local/data"}
+	for _, dir := range localDirs {
 		dirPath := filepath.Join(frameworkDir, dir)
 		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
 			continue
