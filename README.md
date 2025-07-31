@@ -2,6 +2,8 @@
 
 [![Latest Release](https://img.shields.io/github/v/release/KubeRocketCI/kuberocketai?style=flat-square&logo=github&color=blue)](https://github.com/KubeRocketCI/kuberocketai/releases/latest)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/KubeRocketCI/kuberocketai/ci.yml?branch=main&style=flat-square&logo=github-actions&label=CI)](https://github.com/KubeRocketCI/kuberocketai/actions/workflows/ci.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kuberocketci_kuberocketai&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kuberocketci_kuberocketai)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kuberocketci_kuberocketai&metric=coverage)](https://sonarcloud.io/summary/new_code?id=kuberocketci_kuberocketai)
 [![Go Report Card](https://goreportcard.com/badge/github.com/KubeRocketCI/kuberocketai?style=flat-square)](https://goreportcard.com/report/github.com/KubeRocketCI/kuberocketai)
 [![License](https://img.shields.io/github/license/KubeRocketCI/kuberocketai?style=flat-square&color=green)](LICENSE)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/KubeRocketCI/kuberocketai?style=flat-square&logo=go)](go.mod)

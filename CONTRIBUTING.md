@@ -107,6 +107,19 @@ make changelog
 3. Changelog is embedded in CLI binary for offline access
 4. Release is created with generated changelog content
 
+## Quality Assurance
+
+### SonarCloud Integration
+
+The project uses [SonarCloud](https://sonarcloud.io/project/overview?id=kuberocketci_kuberocketai) for continuous code quality analysis:
+
+- **Quality Gate**: Automatic analysis of code quality, security vulnerabilities, and technical debt
+- **Coverage Reports**: Go test coverage is automatically uploaded and tracked
+- **Configuration**: See `sonar-project.properties` for SonarCloud configuration
+- **Badges**: Quality gate status and coverage are displayed in README.md
+
+The SonarCloud analysis runs automatically on every push to main/develop branches and pull requests.
+
 ## License
 
 By contributing, you agree to license your work under Apache-2.0.
