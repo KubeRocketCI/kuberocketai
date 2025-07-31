@@ -78,9 +78,9 @@ func TestCheckForUpdates(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with older version
-	updateInfo, err := checker.CheckForUpdates("v1.0.0")
-	if err != nil {
-		t.Fatalf("CheckForUpdates failed: %v", err)
+	updateInfo := checker.CheckForUpdates("v1.0.0")
+	if updateInfo.Error != "" {
+		t.Fatalf("CheckForUpdates failed: %v", updateInfo.Error)
 	}
 
 	if !updateInfo.IsUpdateAvailable {
@@ -120,9 +120,9 @@ func TestCheckForUpdatesNoUpdate(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with same version
-	updateInfo, err := checker.CheckForUpdates("v1.0.0")
-	if err != nil {
-		t.Fatalf("CheckForUpdates failed: %v", err)
+	updateInfo := checker.CheckForUpdates("v1.0.0")
+	if updateInfo.Error != "" {
+		t.Fatalf("CheckForUpdates failed: %v", updateInfo.Error)
 	}
 
 	if updateInfo.IsUpdateAvailable {
@@ -154,9 +154,9 @@ func TestCheckForUpdatesNewerLocal(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with newer local version
-	updateInfo, err := checker.CheckForUpdates("v2.0.0")
-	if err != nil {
-		t.Fatalf("CheckForUpdates failed: %v", err)
+	updateInfo := checker.CheckForUpdates("v2.0.0")
+	if updateInfo.Error != "" {
+		t.Fatalf("CheckForUpdates failed: %v", updateInfo.Error)
 	}
 
 	if updateInfo.IsUpdateAvailable {
@@ -176,10 +176,7 @@ func TestCheckForUpdatesError(t *testing.T) {
 	client.BaseURL = server.URL
 	checker := NewCheckerWithClient(client, "test", "repo")
 
-	updateInfo, err := checker.CheckForUpdates("v1.0.0")
-	if err != nil {
-		t.Fatalf("CheckForUpdates should not return error, got: %v", err)
-	}
+	updateInfo := checker.CheckForUpdates("v1.0.0")
 
 	if updateInfo.Error == "" {
 		t.Error("Expected error message in updateInfo when server returns 500")
@@ -206,10 +203,7 @@ func TestCheckForUpdatesInvalidVersion(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with invalid version format
-	updateInfo, err := checker.CheckForUpdates("invalid-version")
-	if err != nil {
-		t.Fatalf("CheckForUpdates should not return error, got: %v", err)
-	}
+	updateInfo := checker.CheckForUpdates("invalid-version")
 
 	if updateInfo.Error == "" {
 		t.Error("Expected error message in updateInfo for invalid version format")
@@ -289,9 +283,9 @@ func TestCheckForUpdatesWithRetrySuccess(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with successful first attempt
-	updateInfo, err := checker.CheckForUpdatesWithRetry("v1.0.0", 3)
-	if err != nil {
-		t.Fatalf("CheckForUpdatesWithRetry failed: %v", err)
+	updateInfo := checker.CheckForUpdatesWithRetry("v1.0.0", 3)
+	if updateInfo.Error != "" {
+		t.Fatalf("CheckForUpdatesWithRetry failed: %v", updateInfo.Error)
 	}
 
 	if !updateInfo.IsUpdateAvailable {
@@ -321,13 +315,8 @@ func TestCheckForUpdatesWithRetryAllFail(t *testing.T) {
 
 	// Test retry mechanism
 	startTime := time.Now()
-	updateInfo, err := checker.CheckForUpdatesWithRetry("v1.0.0", 2)
+	updateInfo := checker.CheckForUpdatesWithRetry("v1.0.0", 2)
 	elapsed := time.Since(startTime)
-
-	// Should not return an error, but updateInfo should contain error
-	if err != nil {
-		t.Fatalf("CheckForUpdatesWithRetry should not return error, got: %v", err)
-	}
 
 	if updateInfo.Error == "" {
 		t.Error("Expected error message in updateInfo when all retries fail")
@@ -372,9 +361,9 @@ func TestCheckForUpdatesWithRetrySucceedAfterFailure(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test retry succeeding after failures
-	updateInfo, err := checker.CheckForUpdatesWithRetry("v1.0.0", 3)
-	if err != nil {
-		t.Fatalf("CheckForUpdatesWithRetry failed: %v", err)
+	updateInfo := checker.CheckForUpdatesWithRetry("v1.0.0", 3)
+	if updateInfo.Error != "" {
+		t.Fatalf("CheckForUpdatesWithRetry failed: %v", updateInfo.Error)
 	}
 
 	if !updateInfo.IsUpdateAvailable {
@@ -411,10 +400,7 @@ func TestCheckForUpdatesPrerelease(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with prerelease version (should be skipped)
-	updateInfo, err := checker.CheckForUpdates("v1.0.0")
-	if err != nil {
-		t.Fatalf("CheckForUpdates failed: %v", err)
-	}
+	updateInfo := checker.CheckForUpdates("v1.0.0")
 
 	if updateInfo.IsUpdateAvailable {
 		t.Error("Expected no update to be available when latest release is prerelease")
@@ -446,10 +432,7 @@ func TestCheckForUpdatesDraft(t *testing.T) {
 	checker := NewCheckerWithClient(client, "test", "repo")
 
 	// Test with draft version (should be skipped)
-	updateInfo, err := checker.CheckForUpdates("v1.0.0")
-	if err != nil {
-		t.Fatalf("CheckForUpdates failed: %v", err)
-	}
+	updateInfo := checker.CheckForUpdates("v1.0.0")
 
 	if updateInfo.IsUpdateAvailable {
 		t.Error("Expected no update to be available when latest release is draft")

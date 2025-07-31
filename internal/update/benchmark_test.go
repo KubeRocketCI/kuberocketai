@@ -62,7 +62,7 @@ func BenchmarkCheckForUpdates(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, _ = checker.CheckForUpdates("v1.0.0")
+		_ = checker.CheckForUpdates("v1.0.0")
 	}
 }
 
@@ -87,7 +87,7 @@ func BenchmarkCheckForUpdatesWithRetry(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, _ = checker.CheckForUpdatesWithRetry("v1.0.0", 2)
+		_ = checker.CheckForUpdatesWithRetry("v1.0.0", 2)
 	}
 }
 
@@ -138,7 +138,7 @@ func BenchmarkCheckForUpdatesMemory(b *testing.B) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		updateInfo, _ := checker.CheckForUpdates("v1.0.0")
+		updateInfo := checker.CheckForUpdates("v1.0.0")
 		_ = updateInfo
 	}
 }
@@ -165,7 +165,7 @@ func BenchmarkConcurrentUpdateChecking(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			_, _ = checker.CheckForUpdates("v1.0.0")
+			_ = checker.CheckForUpdates("v1.0.0")
 		}
 	})
 }
@@ -202,7 +202,7 @@ func BenchmarkVersionComparisons(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		version := versions[i%len(versions)]
-		_, _ = checker.CheckForUpdates(version)
+		_ = checker.CheckForUpdates(version)
 	}
 }
 
@@ -221,6 +221,6 @@ func BenchmarkErrorHandling(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		_, _ = checker.CheckForUpdates("v1.0.0")
+		_ = checker.CheckForUpdates("v1.0.0")
 	}
 }
