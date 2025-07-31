@@ -2,6 +2,47 @@
 
 ## [Unreleased]
 
+### Tests
+
+- add SonarCloud scan
+- Increase coverage for the internal packages
+- Add tests for the version package
+
+
+<a name="v0.24.1"></a>
+
+## [v0.24.1] - 2025-07-31
+
+### Chores
+
+- Add local task for the PO role for all IDEs
+
+### Features
+
+- add local task breakdown in validation framework insights
+
+
+<a name="v0.24.0"></a>
+
+## [v0.24.0] - 2025-07-30
+
+### Bug Fixes
+
+- Fix markdown formating
+
+### Chores
+
+- **bundle:** Bundle agents for WebChat usage
+
+### Documentation
+
+- add comprehensive user-focused documentation
+
+### Features
+
+- add GitHub issue creation workflow to PO agent
+- implement local component override system
+
 
 <a name="v0.23.0"></a>
 
@@ -514,7 +555,9 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.23.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.1...HEAD
+[v0.24.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.0...v0.24.1
+[v0.24.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.23.0...v0.24.0
 [v0.23.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.22.0...v0.23.0
 [v0.22.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.6...v0.22.0
 [v0.21.6]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.21.5...v0.21.6
