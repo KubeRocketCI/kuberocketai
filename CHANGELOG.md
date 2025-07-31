@@ -2,8 +2,24 @@
 
 ## [Unreleased]
 
+
+<a name="v0.25.0"></a>
+
+## [v0.25.0] - 2025-07-31
+
+### Code Refactoring
+
+- fix unparam linter warnings by removing unused parameters
+- **pm:** remove epic/story creation from PM tasks
+
+### Documentation
+
+- Update description and changelog
+
 ### Tests
 
+- Add unit tests for bundling capabilities
+- Add test for different packages
 - add SonarCloud scan
 - Increase coverage for the internal packages
 - Add tests for the version package
@@ -555,7 +571,8 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.1...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.0...HEAD
+[v0.25.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.1...v0.25.0
 [v0.24.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.0...v0.24.1
 [v0.24.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.23.0...v0.24.0
 [v0.23.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.22.0...v0.23.0
