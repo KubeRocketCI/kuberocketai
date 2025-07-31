@@ -268,3 +268,194 @@ func TestUpdateInfoStruct(t *testing.T) {
 		t.Errorf("Expected FallbackURL https://github.com/test/repo/releases, got %s", updateInfo.FallbackURL)
 	}
 }
+
+func TestCheckForUpdatesWithRetrySuccess(t *testing.T) {
+	// Create test server
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		release := github.Release{
+			TagName:     "v2.0.0",
+			PublishedAt: time.Date(2025, 7, 27, 10, 0, 0, 0, time.UTC),
+			HTMLURL:     "https://github.com/test/repo/releases/tag/v2.0.0",
+			Body:        "New version available",
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(release)
+	}))
+	defer server.Close()
+
+	client := github.NewClient()
+	client.BaseURL = server.URL
+	checker := NewCheckerWithClient(client, "test", "repo")
+
+	// Test with successful first attempt
+	updateInfo, err := checker.CheckForUpdatesWithRetry("v1.0.0", 3)
+	if err != nil {
+		t.Fatalf("CheckForUpdatesWithRetry failed: %v", err)
+	}
+
+	if !updateInfo.IsUpdateAvailable {
+		t.Error("Expected update to be available")
+	}
+
+	if updateInfo.LatestVersion != "2.0.0" {
+		t.Errorf("Expected latest version 2.0.0, got %s", updateInfo.LatestVersion)
+	}
+
+	if updateInfo.Error != "" {
+		t.Errorf("Expected no error, got: %s", updateInfo.Error)
+	}
+}
+
+func TestCheckForUpdatesWithRetryAllFail(t *testing.T) {
+	// Create test server that always returns error
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("Server Error"))
+	}))
+	defer server.Close()
+
+	client := github.NewClient()
+	client.BaseURL = server.URL
+	checker := NewCheckerWithClient(client, "test", "repo")
+
+	// Test retry mechanism
+	startTime := time.Now()
+	updateInfo, err := checker.CheckForUpdatesWithRetry("v1.0.0", 2)
+	elapsed := time.Since(startTime)
+
+	// Should not return an error, but updateInfo should contain error
+	if err != nil {
+		t.Fatalf("CheckForUpdatesWithRetry should not return error, got: %v", err)
+	}
+
+	if updateInfo.Error == "" {
+		t.Error("Expected error message in updateInfo when all retries fail")
+	}
+
+	// Should have waited for retries (at least 1 second for first retry + 2 seconds for second retry)
+	if elapsed < 3*time.Second {
+		t.Errorf("Expected to wait at least 3 seconds for retries, but took %v", elapsed)
+	}
+
+	if updateInfo.FallbackURL == "" {
+		t.Error("Expected fallback URL to be set when all retries fail")
+	}
+}
+
+func TestCheckForUpdatesWithRetrySucceedAfterFailure(t *testing.T) {
+	attempts := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		attempts++
+		if attempts <= 2 {
+			// Fail first two attempts
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("Server Error"))
+			return
+		}
+
+		// Succeed on third attempt
+		release := github.Release{
+			TagName:     "v2.0.0",
+			PublishedAt: time.Date(2025, 7, 27, 10, 0, 0, 0, time.UTC),
+			HTMLURL:     "https://github.com/test/repo/releases/tag/v2.0.0",
+			Body:        "New version available",
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(release)
+	}))
+	defer server.Close()
+
+	client := github.NewClient()
+	client.BaseURL = server.URL
+	checker := NewCheckerWithClient(client, "test", "repo")
+
+	// Test retry succeeding after failures
+	updateInfo, err := checker.CheckForUpdatesWithRetry("v1.0.0", 3)
+	if err != nil {
+		t.Fatalf("CheckForUpdatesWithRetry failed: %v", err)
+	}
+
+	if !updateInfo.IsUpdateAvailable {
+		t.Error("Expected update to be available")
+	}
+
+	if updateInfo.Error != "" {
+		t.Errorf("Expected no error after successful retry, got: %s", updateInfo.Error)
+	}
+
+	if attempts != 3 {
+		t.Errorf("Expected 3 attempts, got %d", attempts)
+	}
+}
+
+func TestCheckForUpdatesPrerelease(t *testing.T) {
+	// Create test server that returns a prerelease
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		release := github.Release{
+			TagName:     "v2.0.0-beta.1",
+			PublishedAt: time.Date(2025, 7, 27, 10, 0, 0, 0, time.UTC),
+			HTMLURL:     "https://github.com/test/repo/releases/tag/v2.0.0-beta.1",
+			Body:        "Beta release",
+			Prerelease:  true, // This is a prerelease
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(release)
+	}))
+	defer server.Close()
+
+	client := github.NewClient()
+	client.BaseURL = server.URL
+	checker := NewCheckerWithClient(client, "test", "repo")
+
+	// Test with prerelease version (should be skipped)
+	updateInfo, err := checker.CheckForUpdates("v1.0.0")
+	if err != nil {
+		t.Fatalf("CheckForUpdates failed: %v", err)
+	}
+
+	if updateInfo.IsUpdateAvailable {
+		t.Error("Expected no update to be available when latest release is prerelease")
+	}
+
+	if updateInfo.Error == "" {
+		t.Error("Expected error message about prerelease")
+	}
+}
+
+func TestCheckForUpdatesDraft(t *testing.T) {
+	// Create test server that returns a draft
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		release := github.Release{
+			TagName:     "v2.0.0",
+			PublishedAt: time.Date(2025, 7, 27, 10, 0, 0, 0, time.UTC),
+			HTMLURL:     "https://github.com/test/repo/releases/tag/v2.0.0",
+			Body:        "Draft release",
+			Draft:       true, // This is a draft
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(release)
+	}))
+	defer server.Close()
+
+	client := github.NewClient()
+	client.BaseURL = server.URL
+	checker := NewCheckerWithClient(client, "test", "repo")
+
+	// Test with draft version (should be skipped)
+	updateInfo, err := checker.CheckForUpdates("v1.0.0")
+	if err != nil {
+		t.Fatalf("CheckForUpdates failed: %v", err)
+	}
+
+	if updateInfo.IsUpdateAvailable {
+		t.Error("Expected no update to be available when latest release is draft")
+	}
+
+	if updateInfo.Error == "" {
+		t.Error("Expected error message about draft release")
+	}
+}
