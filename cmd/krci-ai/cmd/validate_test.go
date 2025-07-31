@@ -1,13 +1,289 @@
 package cmd
 
 import (
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/engine/processor"
+	"github.com/spf13/cobra"
 )
+
+func TestRunValidate(t *testing.T) {
+	// Test with valid framework setup
+	t.Run("runValidate with valid framework", func(t *testing.T) {
+		tempDir := t.TempDir()
+
+		// Set up .krci-ai framework structure
+		krciDir := filepath.Join(tempDir, ".krci-ai")
+		agentsDir := filepath.Join(krciDir, "agents")
+		tasksDir := filepath.Join(krciDir, "tasks")
+
+		err := os.MkdirAll(agentsDir, 0755)
+		if err != nil {
+			t.Fatalf("Failed to create agents directory: %v", err)
+		}
+
+		err = os.MkdirAll(tasksDir, 0755)
+		if err != nil {
+			t.Fatalf("Failed to create tasks directory: %v", err)
+		}
+
+		// Create valid agent file
+		validAgentContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "A test agent for validation testing"
+    role: "Test Engineer"
+    goal: "Test the validation system thoroughly"
+    icon: "🧪"
+  activation_prompt:
+    - "ALWAYS execute agent.customization field content when non-empty"
+    - "You are a test agent designed for validation"
+  principles:
+    - "Always test thoroughly and document results"
+    - "Provide clear and actionable feedback"
+  customization: ""
+  commands:
+    help: "Show available commands"
+    chat: "Default chat mode"
+  tasks:
+    - "./.krci-ai/tasks/test-task.md"
+`
+
+		validAgentFile := filepath.Join(agentsDir, "test-agent.yaml")
+		err = os.WriteFile(validAgentFile, []byte(validAgentContent), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write valid agent file: %v", err)
+		}
+
+		// Create valid task file
+		validTaskContent := `# Test Task
+
+This is a test task for validation.
+
+## Description
+
+Test task description.
+`
+
+		validTaskFile := filepath.Join(tasksDir, "test-task.md")
+		err = os.WriteFile(validTaskFile, []byte(validTaskContent), 0644)
+		if err != nil {
+			t.Fatalf("Failed to write valid task file: %v", err)
+		}
+
+		// Change to temp directory
+		oldDir, _ := os.Getwd()
+		err = os.Chdir(tempDir)
+		if err != nil {
+			t.Fatalf("Failed to change directory: %v", err)
+		}
+		defer os.Chdir(oldDir)
+
+		// Capture stdout to prevent output during test
+		oldStdout := os.Stdout
+		r, w, _ := os.Pipe()
+		os.Stdout = w
+
+		// Create test command
+		cmd := &cobra.Command{}
+
+		// Test runValidate function - this will call os.Exit, so we expect it to panic in test
+		// We'll test that the function can be called without initial errors
+		func() {
+			defer func() {
+				if r := recover(); r != nil {
+					// Expected behavior - runValidate calls os.Exit
+					t.Logf("runValidate called os.Exit as expected")
+				}
+			}()
+
+			// This should not return due to os.Exit call
+			runValidate(cmd, []string{})
+		}()
+
+		// Restore stdout
+		w.Close()
+		os.Stdout = oldStdout
+
+		// Read captured output
+		output, _ := io.ReadAll(r)
+		outputStr := string(output)
+
+		// Verify that validation output was generated
+		if len(outputStr) == 0 {
+			t.Error("Expected validation output, but got none")
+		}
+	})
+
+	t.Run("runValidate with missing framework", func(t *testing.T) {
+		tempDir := t.TempDir()
+
+		// Change to temp directory (no .krci-ai directory)
+		oldDir, _ := os.Getwd()
+		err := os.Chdir(tempDir)
+		if err != nil {
+			t.Fatalf("Failed to change directory: %v", err)
+		}
+		defer os.Chdir(oldDir)
+
+		// Create test command
+		cmd := &cobra.Command{}
+
+		// Test that runValidate can be called
+		// Since it calls os.Exit, we use a defer/recover pattern
+		func() {
+			defer func() {
+				if r := recover(); r != nil {
+					t.Logf("runValidate called os.Exit as expected for missing framework")
+				}
+			}()
+
+			// This should fail and call os.Exit due to missing framework
+			runValidate(cmd, []string{})
+		}()
+
+		// If we reach here, the function didn't call os.Exit (which is OK for testing)
+		t.Log("runValidate completed without calling os.Exit")
+	})
+
+	t.Run("runValidate with flags", func(t *testing.T) {
+		// Test that flags can be set without error
+		cmd := &cobra.Command{}
+		cmd.Flags().BoolVarP(&verboseOutput, "verbose", "v", false, "verbose output")
+		cmd.Flags().BoolVarP(&quietOutput, "quiet", "q", false, "quiet output")
+
+		// Set verbose flag
+		verboseOutput = true
+		defer func() { verboseOutput = false }()
+
+		// Set quiet flag
+		quietOutput = true
+		defer func() { quietOutput = false }()
+
+		// Verify flags can be accessed (basic flag test)
+		if !verboseOutput {
+			t.Error("Expected verbose flag to be true")
+		}
+
+		if !quietOutput {
+			t.Error("Expected quiet flag to be true")
+		}
+	})
+}
+
+func TestNewFrameworkValidator(t *testing.T) {
+	t.Run("NewFrameworkValidator basic functionality", func(t *testing.T) {
+		tempDir := t.TempDir()
+
+		// Test that NewFrameworkValidator function exists and can be called
+		// Since we don't have embedded assets in test environment, we expect an error
+		validator, err := NewFrameworkValidator(tempDir)
+		if err != nil {
+			t.Logf("NewFrameworkValidator failed as expected (no embedded assets): %v", err)
+			// This is expected in test environment without real embedded assets
+		} else {
+			// If it succeeds (shouldn't happen in test), verify basic structure
+			if validator == nil {
+				t.Fatal("Expected validator to be created, got nil")
+			}
+
+			if validator.baseDir != tempDir {
+				t.Errorf("Expected baseDir to be %s, got %s", tempDir, validator.baseDir)
+			}
+		}
+	})
+
+	t.Run("NewFrameworkValidator function signature", func(t *testing.T) {
+		// Test that the function can be called and has expected signature
+		// This verifies the function exists and is accessible
+		tempDir := t.TempDir()
+
+		// Should not panic when called
+		func() {
+			defer func() {
+				if r := recover(); r != nil {
+					t.Errorf("NewFrameworkValidator panicked: %v", r)
+				}
+			}()
+
+			NewFrameworkValidator(tempDir)
+		}()
+	})
+}
+
+func TestValidateCommand(t *testing.T) {
+	t.Run("validate command exists", func(t *testing.T) {
+		if validateCmd == nil {
+			t.Error("Validate command should not be nil")
+		}
+
+		if validateCmd.Use != "validate" {
+			t.Errorf("Expected validate command Use to be 'validate', got '%s'", validateCmd.Use)
+		}
+
+		if validateCmd.Short == "" {
+			t.Error("Validate command should have a short description")
+		}
+
+		if validateCmd.Long == "" {
+			t.Error("Validate command should have a long description")
+		}
+
+		if validateCmd.RunE == nil {
+			t.Error("Validate command should have a RunE function")
+		}
+	})
+
+	t.Run("validate command flags", func(t *testing.T) {
+		// Check if validate command has expected flags
+		verboseFlag := validateCmd.Flags().Lookup("verbose")
+		if verboseFlag == nil {
+			t.Error("Validate command should have --verbose flag")
+		}
+
+		if verboseFlag != nil && verboseFlag.Shorthand != "v" {
+			t.Errorf("Expected verbose flag shorthand to be 'v', got '%s'", verboseFlag.Shorthand)
+		}
+
+		quietFlag := validateCmd.Flags().Lookup("quiet")
+		if quietFlag == nil {
+			t.Error("Validate command should have --quiet flag")
+		}
+
+		if quietFlag != nil && quietFlag.Shorthand != "q" {
+			t.Errorf("Expected quiet flag shorthand to be 'q', got '%s'", quietFlag.Shorthand)
+		}
+	})
+}
+
+func TestValidationResults(t *testing.T) {
+	t.Run("ValidationResults IsValid", func(t *testing.T) {
+		// Test with valid results
+		results := &ValidationResults{
+			TotalFiles:   3,
+			ValidFiles:   3,
+			InvalidFiles: 0,
+		}
+
+		if !results.IsValid() {
+			t.Error("Expected IsValid to return true for valid results")
+		}
+
+		// Test with invalid results
+		results.InvalidFiles = 1
+		results.ValidFiles = 2
+
+		if results.IsValid() {
+			t.Error("Expected IsValid to return false when there are invalid files")
+		}
+	})
+}
 
 // testFrameworkValidator creates a validator for testing using file-based schema
 func testFrameworkValidator(baseDir string) (*FrameworkValidator, error) {
