@@ -31,7 +31,7 @@ var checkUpdatesCmd = &cobra.Command{
 	Long: `Check for available updates to the krci-ai CLI.
 
 This command queries the GitHub API to detect available updates and displays
-release information. If network connectivity fails, it provides a direct 
+release information. If network connectivity fails, it provides a direct
 link to the GitHub releases page for manual checking.
 
 Examples:
@@ -60,10 +60,7 @@ func checkOnlineUpdates() error {
 	checker := update.NewChecker()
 
 	// Check for updates with retry
-	updateInfo, err := checker.CheckForUpdatesWithRetry(currentVersion, 2)
-	if err != nil {
-		return fmt.Errorf("failed to check for updates: %w", err)
-	}
+	updateInfo := checker.CheckForUpdatesWithRetry(currentVersion, 2)
 
 	// Display results
 	if updateInfo.Error != "" {

@@ -59,7 +59,7 @@ type UpdateInfo struct {
 }
 
 // CheckForUpdates checks for available updates
-func (c *Checker) CheckForUpdates(currentVersion string) (*UpdateInfo, error) {
+func (c *Checker) CheckForUpdates(currentVersion string) *UpdateInfo {
 	updateInfo := &UpdateInfo{
 		CurrentVersion: currentVersion,
 		FallbackURL:    github.GetReleasesURL(c.owner, c.repo),
@@ -69,13 +69,13 @@ func (c *Checker) CheckForUpdates(currentVersion string) (*UpdateInfo, error) {
 	release, err := c.githubClient.GetLatestRelease(c.owner, c.repo)
 	if err != nil {
 		updateInfo.Error = fmt.Sprintf("Failed to fetch latest release: %v", err)
-		return updateInfo, nil // Return with error info, don't fail completely
+		return updateInfo // Return with error info, don't fail completely
 	}
 
 	// Skip draft and prerelease versions
 	if !release.IsStable() {
 		updateInfo.Error = "Latest release is not stable (draft or prerelease)"
-		return updateInfo, nil
+		return updateInfo
 	}
 
 	updateInfo.LatestVersion = release.GetVersion()
@@ -85,24 +85,21 @@ func (c *Checker) CheckForUpdates(currentVersion string) (*UpdateInfo, error) {
 	isNewer, err := version.CompareVersions(currentVersion, updateInfo.LatestVersion)
 	if err != nil {
 		updateInfo.Error = fmt.Sprintf("Failed to compare versions: %v", err)
-		return updateInfo, nil
+		return updateInfo
 	}
 
 	updateInfo.IsUpdateAvailable = isNewer
-	return updateInfo, nil
+	return updateInfo
 }
 
 // CheckForUpdatesWithRetry checks for updates with retry logic
-func (c *Checker) CheckForUpdatesWithRetry(currentVersion string, retries int) (*UpdateInfo, error) {
-	var lastErr error
-
+func (c *Checker) CheckForUpdatesWithRetry(currentVersion string, retries int) *UpdateInfo {
 	for attempt := 0; attempt <= retries; attempt++ {
-		updateInfo, err := c.CheckForUpdates(currentVersion)
-		if err == nil && updateInfo.Error == "" {
-			return updateInfo, nil
+		updateInfo := c.CheckForUpdates(currentVersion)
+		if updateInfo.Error == "" {
+			return updateInfo
 		}
 
-		lastErr = err
 		if attempt < retries {
 			// Wait before retrying
 			time.Sleep(time.Duration(attempt+1) * time.Second)
@@ -112,9 +109,9 @@ func (c *Checker) CheckForUpdatesWithRetry(currentVersion string, retries int) (
 	// If all retries failed, return info with fallback
 	updateInfo := &UpdateInfo{
 		CurrentVersion: currentVersion,
-		Error:          fmt.Sprintf("All retry attempts failed. Last error: %v", lastErr),
+		Error:          "All retry attempts failed",
 		FallbackURL:    github.GetReleasesURL(c.owner, c.repo),
 	}
 
-	return updateInfo, nil
+	return updateInfo
 }

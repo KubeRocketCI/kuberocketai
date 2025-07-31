@@ -464,7 +464,7 @@ func (v *FrameworkValidator) validateTemplateFile(filePath string) ValidationRes
 }
 
 // validateTemplateStructure validates the structure and content of a template
-func (v *FrameworkValidator) validateTemplateStructure(filePath string, content string, result *ValidationResult) {
+func (v *FrameworkValidator) validateTemplateStructure(_ string, content string, result *ValidationResult) {
 	lines := strings.Split(content, "\n")
 
 	// Check for required template elements
@@ -535,7 +535,7 @@ func (v *FrameworkValidator) validateInternalLinks(frameworkDir string, results 
 
 	// Validate internal links in each file
 	for _, markdownFile := range markdownFiles {
-		result := v.validateInternalLinksInFile(markdownFile, frameworkDir)
+		result := v.validateInternalLinksInFile(markdownFile)
 		results.Results = append(results.Results, result)
 	}
 
@@ -543,7 +543,7 @@ func (v *FrameworkValidator) validateInternalLinks(frameworkDir string, results 
 }
 
 // validateInternalLinksInFile validates internal framework links in a single markdown file
-func (v *FrameworkValidator) validateInternalLinksInFile(filePath string, frameworkDir string) ValidationResult {
+func (v *FrameworkValidator) validateInternalLinksInFile(filePath string) ValidationResult {
 	// Convert absolute path to relative path from baseDir
 	relPath, err := filepath.Rel(v.baseDir, filePath)
 	if err != nil {
@@ -567,26 +567,26 @@ func (v *FrameworkValidator) validateInternalLinksInFile(filePath string, framew
 	}
 
 	// Look for internal framework links
-	v.checkInternalFrameworkLinks(string(content), filePath, frameworkDir, &result)
+	v.checkInternalFrameworkLinks(string(content), &result)
 
 	return result
 }
 
 // checkInternalFrameworkLinks checks for internal framework references and validates they exist
-func (v *FrameworkValidator) checkInternalFrameworkLinks(content string, filePath string, frameworkDir string, result *ValidationResult) {
+func (v *FrameworkValidator) checkInternalFrameworkLinks(content string, result *ValidationResult) {
 	lines := strings.Split(content, "\n")
 
 	for lineNum, line := range lines {
 		// Only validate markdown links that reference internal framework paths
 		// Format: [text](./.krci-ai/path/to/file.md)
 		if strings.Contains(line, "](./.krci-ai/") {
-			v.validateMarkdownFrameworkLinks(line, lineNum+1, filePath, frameworkDir, result)
+			v.validateMarkdownFrameworkLinks(line, lineNum+1, result)
 		}
 	}
 }
 
 // validateMarkdownFrameworkLinks validates markdown links that reference internal framework paths
-func (v *FrameworkValidator) validateMarkdownFrameworkLinks(line string, lineNum int, filePath string, frameworkDir string, result *ValidationResult) {
+func (v *FrameworkValidator) validateMarkdownFrameworkLinks(line string, lineNum int, result *ValidationResult) {
 	// Parse markdown links with framework references: [text](./.krci-ai/path/to/file.md)
 	for i := 0; i < len(line); i++ {
 		if i < len(line)-4 && line[i:i+4] == "](./" {

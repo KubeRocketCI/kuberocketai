@@ -75,9 +75,7 @@ func (a *FrameworkAnalyzer) generateFrameworkInsights(frameworkDir string) (*Fra
 	}
 
 	// Step 3: Generate usage statistics
-	if err := a.generateUsageStatistics(frameworkDir, insights); err != nil {
-		return nil, err
-	}
+	a.generateUsageStatistics(insights)
 
 	return insights, nil
 }
@@ -219,7 +217,7 @@ func (a *FrameworkAnalyzer) getTaskReferences(taskFile string) ([]string, []stri
 }
 
 // generateUsageStatistics analyzes usage patterns to identify most/least used components
-func (a *FrameworkAnalyzer) generateUsageStatistics(_ string, insights *FrameworkInsights) error {
+func (a *FrameworkAnalyzer) generateUsageStatistics(insights *FrameworkInsights) {
 	templateUsage := make(map[string]int)
 	dataUsage := make(map[string]int)
 
@@ -254,8 +252,6 @@ func (a *FrameworkAnalyzer) generateUsageStatistics(_ string, insights *Framewor
 			insights.UsageStatistics.DataUsageCount = count
 		}
 	}
-
-	return nil
 }
 
 // removeDuplicates removes duplicate strings from a slice

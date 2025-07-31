@@ -17,6 +17,11 @@ linters-settings:
     checks: ["all"]
   unused:
     checks: ["all"]
+  unparam:
+    # Check for unused function parameters
+    check-exported: true
+    # Report functions where parameters are always nil/empty
+    algo: cha
   misspell:
     locale: US
   gocyclo:
@@ -42,6 +47,7 @@ linters:
     - errcheck
     - ineffassign
     - typecheck
+    - unparam      # Detects unused function parameters
   disable: []
 
 issues:
@@ -58,9 +64,3 @@ issues:
     - linters:
         - staticcheck
       text: "SA1019:"  # Ignore deprecation warnings for now
-
-output:
-  formats:
-    - format: colored-line-number
-  print-issued-lines: true
-  print-linter-name: true
