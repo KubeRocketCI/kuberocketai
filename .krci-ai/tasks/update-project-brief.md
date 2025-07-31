@@ -38,20 +38,20 @@ Before making ANY changes to the Project Brief, you MUST:
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change impact assessment
 2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. **Format output**: Maintain [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
-4. **Assess downstream impact**: Identify which PRD and Epic artifacts need updates
+4. **Assess downstream impact**: Identify which PRD artifacts need updates
 
 ## Output Format
 
 - **Location**: Updates existing `/docs/prd/project-brief.md` (EXACT path and filename)
 - **Length**: Maintain 2-3 pages maximum
 - **Impact Documentation**: Clear notes on what changed and downstream impact
-- **Downstream Updates**: List of PRD/Epic artifacts requiring updates
+- **Downstream Updates**: List of PRD artifacts requiring updates
 
 ## Success Criteria
 
 - [ ] **File updated** at `/docs/prd/project-brief.md` reflects all changes
 - [ ] **Change documented** with clear record of what changed and why
-- [ ] **Downstream impact** identified which PRD/Epic artifacts need updates
+- [ ] **Downstream impact** identified which PRD artifacts need updates
 - [ ] **Quality maintained** document remains 2-3 pages maximum
 - [ ] **Strategic alignment** changes support overall product strategy
 - [ ] **Stakeholder communication** key stakeholders informed of strategic changes
@@ -63,7 +63,7 @@ Before making ANY changes to the Project Brief, you MUST:
 - [ ] **User interview**: Ask user what specific changes they want to make to the Project Brief
 - [ ] **Change justification**: Understand why these changes are needed (strategic shifts, market changes, stakeholder feedback, resource changes, etc.)
 - [ ] **Scope definition**: Clarify which Project Brief sections need updating and what specific content changes are required
-- [ ] **Impact discussion**: Explain potential impact on existing PRD and downstream artifacts to user
+- [ ] **Impact discussion**: Explain potential impact on existing PRD artifacts to user
 - [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
 - [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
 
@@ -71,7 +71,7 @@ Before making ANY changes to the Project Brief, you MUST:
 
 - [ ] **Change scope**: Identify which sections need updating based on user requirements (Executive Summary, Problem, Opportunity, Users, Success Metrics, Constraints, Risks)
 - [ ] **Business impact**: Analyze how changes affect product strategy and business case
-- [ ] **Downstream impact**: Evaluate how changes affect existing PRD (`/docs/prd/prd.md`) and subsequent artifacts
+- [ ] **Downstream impact**: Evaluate how changes affect existing PRD (`/docs/prd/prd.md`) artifacts
 - [ ] **Stakeholder validation**: Confirm changes with key stakeholders
 
 ### Update Phase
@@ -84,7 +84,6 @@ Before making ANY changes to the Project Brief, you MUST:
 ### Change Management Phase
 
 - [ ] **PRD impact analysis**: Determine if PRD needs updating based on Project Brief changes
-- [ ] **Epic impact review**: Assess if strategic changes affect Epic prioritization or scope
 - [ ] **Stakeholder communication**: Notify key stakeholders of strategic changes and implications
 - [ ] **Documentation**: Record change rationale and downstream impact plan
 
@@ -94,7 +93,7 @@ Before making ANY changes to the Project Brief, you MUST:
 
 - **Strategic Focus**: Focus on strategic foundation changes rather than tactical adjustments
 - **Foundation Strength**: Ensure changes strengthen rather than weaken the overall strategic foundation
-- **Cascade Management**: Assess how strategic changes flow through entire SDLC chain to downstream artifacts
+- **Cascade Management**: Assess how strategic changes flow through PRD requirements
 - **Long-term Alignment**: Consider long-term strategic implications beyond immediate tactical changes
 
 ### LLM Error Prevention Checklist
@@ -102,11 +101,11 @@ Before making ANY changes to the Project Brief, you MUST:
 - **NEVER**: Start making Project Brief changes without explicit user consultation and approval
 - **NEVER**: Assume what changes the user wants - always ask for specific requirements
 - **Avoid**: Making changes without clear strategic justification and stakeholder approval
-- **Avoid**: Updating without assessing downstream PRD and Epic artifact impact
+- **Avoid**: Updating without assessing downstream PRD impact
 - **Avoid**: Expanding scope beyond strategic foundation changes into tactical details
 - **Always**: Wait for user confirmation before proceeding with any edits
 - **Reference**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting consistency
 
 ### SDLC Integration Context
 
-This update enables continued strategic alignment by managing strategic changes flowing through the entire SDLC chain, assessing PRD and Epic alignment impacts, ensuring stakeholder approval of strategic changes, and maintaining clear documentation of strategic change rationale and downstream artifact impact.
+This update enables continued strategic alignment by managing strategic changes flowing through PRD requirements, ensuring stakeholder approval of strategic changes, and maintaining clear documentation of strategic change rationale and downstream PRD impact.
