@@ -16,6 +16,7 @@ limitations under the License.
 package assets
 
 import (
+	"embed"
 	"os"
 	"path/filepath"
 	"strings"
@@ -328,5 +329,185 @@ func TestFormatAgentTableWithoutIcon(t *testing.T) {
 	// Verify agent name is included
 	if !strings.Contains(table, "Test Agent") {
 		t.Error("Table should contain the agent name")
+	}
+}
+
+func TestGetAgentByName(t *testing.T) {
+	frameworkDir := setupTestFramework(t)
+	defer os.RemoveAll(frameworkDir)
+
+	var testAssets embed.FS
+	discovery := NewDiscovery(frameworkDir, testAssets)
+
+	// Test getting existing agent (setupTestFramework creates "Test Agent")
+	agent, err := discovery.GetAgentByName("Test Agent")
+	if err != nil {
+		t.Fatalf("Expected to find 'Test Agent', got error: %v", err)
+	}
+	if agent.Name != "Test Agent" {
+		t.Errorf("Expected agent name 'Test Agent', got: %s", agent.Name)
+	}
+
+	// Test getting non-existent agent
+	_, err = discovery.GetAgentByName("nonexistent")
+	if err == nil {
+		t.Error("Expected error for non-existent agent")
+	}
+	if !strings.Contains(err.Error(), "not found") {
+		t.Errorf("Expected 'not found' error, got: %v", err)
+	}
+}
+
+func TestListAvailableAgents(t *testing.T) {
+	frameworkDir := setupTestFramework(t)
+	defer os.RemoveAll(frameworkDir)
+
+	var testAssets embed.FS
+	discovery := NewDiscovery(frameworkDir, testAssets)
+
+	agents, err := discovery.ListAvailableAgents()
+	if err != nil {
+		t.Fatalf("Failed to list agents: %v", err)
+	}
+
+	// Should have at least the test agent we created
+	if len(agents) < 1 {
+		t.Errorf("Expected at least 1 agent, got %d", len(agents))
+	}
+
+	// Check that "Test Agent" is present
+	found := false
+	for _, agent := range agents {
+		if agent == "Test Agent" {
+			found = true
+			break
+		}
+	}
+	if !found {
+		t.Errorf("Expected to find 'Test Agent' in list: %v", agents)
+	}
+}
+
+func TestFormatAgentSummary(t *testing.T) {
+	var testAssets embed.FS
+	discovery := NewDiscovery("", testAssets)
+
+	agent := AgentInfo{
+		Name:        "test-agent",
+		Role:        "Test Role",
+		Description: "Test Description",
+		FilePath:    "/path/to/test-agent.yaml",
+	}
+
+	summary := discovery.FormatAgentSummary(agent)
+
+	// Should contain the key information
+	if !strings.Contains(summary, "test-agent") {
+		t.Errorf("Expected summary to contain agent name, got: %s", summary)
+	}
+	if !strings.Contains(summary, "Test Role") {
+		t.Errorf("Expected summary to contain role, got: %s", summary)
+	}
+	if !strings.Contains(summary, "Test Description") {
+		t.Errorf("Expected summary to contain description, got: %s", summary)
+	}
+}
+
+func TestValidateAgentStructure(t *testing.T) {
+	tempDir := t.TempDir()
+	var testAssets embed.FS
+	discovery := NewDiscovery(tempDir, testAssets)
+
+	// Test with valid YAML (more complete structure)
+	validFile := filepath.Join(tempDir, "valid.yaml")
+	validContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "Test agent for validation"
+    role: "Test Role"
+    goal: "Test goal"
+  activation_prompt:
+    - "Test prompt"
+  principles:
+    - "Test principle"
+  commands:
+    help: "Show help"
+  tasks: []
+`
+	if err := os.WriteFile(validFile, []byte(validContent), 0644); err != nil {
+		t.Fatalf("Failed to create valid test file: %v", err)
+	}
+
+	err := discovery.ValidateAgentStructure(validFile)
+	if err != nil {
+		t.Errorf("Expected valid agent structure to pass validation, got: %v", err)
+	}
+
+	// Test with invalid YAML
+	invalidFile := filepath.Join(tempDir, "invalid.yaml")
+	invalidContent := `invalid yaml content {{{ not proper`
+	if err := os.WriteFile(invalidFile, []byte(invalidContent), 0644); err != nil {
+		t.Fatalf("Failed to create invalid test file: %v", err)
+	}
+
+	err = discovery.ValidateAgentStructure(invalidFile)
+	if err == nil {
+		t.Error("Expected invalid YAML to fail validation")
+	}
+
+	// Test with non-existent file
+	err = discovery.ValidateAgentStructure("/nonexistent/file.yaml")
+	if err == nil {
+		t.Error("Expected non-existent file to fail validation")
+	}
+}
+
+func TestTruncateString(t *testing.T) {
+	var testAssets embed.FS
+	discovery := NewDiscovery("", testAssets)
+
+	tests := []struct {
+		input    string
+		maxLen   int
+		expected string
+	}{
+		{"short", 10, "short"},
+		{"this is a very long string", 10, "this is..."},
+		{"exact length", 12, "exact length"},
+		{"", 5, ""},
+	}
+
+	for _, test := range tests {
+		result := discovery.truncateString(test.input, test.maxLen)
+		if result != test.expected {
+			t.Errorf("truncateString(%q, %d) = %q, expected %q",
+				test.input, test.maxLen, result, test.expected)
+		}
+	}
+}
+
+func TestWrapText(t *testing.T) {
+	var testAssets embed.FS
+	discovery := NewDiscovery("", testAssets)
+
+	tests := []struct {
+		input    string
+		width    int
+		expected string
+	}{
+		{"short", 10, "short"},
+		{"this is a longer text that should wrap", 10, "this is a\nlonger\ntext that\nshould\nwrap"},
+		{"", 5, ""},
+		{"exact length", 12, "exact length"},
+	}
+
+	for _, test := range tests {
+		result := discovery.wrapText(test.input, test.width)
+		if result != test.expected {
+			t.Errorf("wrapText(%q, %d) = %q, expected %q",
+				test.input, test.width, result, test.expected)
+		}
 	}
 }
