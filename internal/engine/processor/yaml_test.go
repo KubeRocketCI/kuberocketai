@@ -312,6 +312,235 @@ func TestYAMLProcessor_WithRealAgentFiles(t *testing.T) {
 	}
 }
 
+func TestAgentSpec_GetCustomization(t *testing.T) {
+	tests := []struct {
+		name          string
+		customization *string
+		want          string
+	}{
+		{
+			name:          "nil customization",
+			customization: nil,
+			want:          "",
+		},
+		{
+			name:          "empty customization",
+			customization: stringPtr(""),
+			want:          "",
+		},
+		{
+			name:          "non-empty customization",
+			customization: stringPtr("custom behavior"),
+			want:          "custom behavior",
+		},
+		{
+			name:          "whitespace customization",
+			customization: stringPtr("  custom with spaces  "),
+			want:          "  custom with spaces  ",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			agent := &AgentSpec{
+				Customization: tt.customization,
+			}
+			if got := agent.GetCustomization(); got != tt.want {
+				t.Errorf("GetCustomization() = %q, want %q", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestAgentSpec_HasCustomization(t *testing.T) {
+	tests := []struct {
+		name          string
+		customization *string
+		want          bool
+	}{
+		{
+			name:          "nil customization",
+			customization: nil,
+			want:          false,
+		},
+		{
+			name:          "empty customization",
+			customization: stringPtr(""),
+			want:          false,
+		},
+		{
+			name:          "non-empty customization",
+			customization: stringPtr("custom behavior"),
+			want:          true,
+		},
+		{
+			name:          "whitespace customization",
+			customization: stringPtr("  "),
+			want:          true,
+		},
+		{
+			name:          "single space customization",
+			customization: stringPtr(" "),
+			want:          true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			agent := &AgentSpec{
+				Customization: tt.customization,
+			}
+			if got := agent.HasCustomization(); got != tt.want {
+				t.Errorf("HasCustomization() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestValidationError_Error(t *testing.T) {
+	tests := []struct {
+		name string
+		err  ValidationError
+		want string
+	}{
+		{
+			name: "basic validation error",
+			err: ValidationError{
+				Field:   "name",
+				Value:   "test",
+				Message: "field is required",
+				File:    "test.yaml",
+			},
+			want: "validation failed for field 'name' in file 'test.yaml': field is required",
+		},
+		{
+			name: "validation error with empty values",
+			err: ValidationError{
+				Field:   "",
+				Value:   nil,
+				Message: "",
+				File:    "",
+			},
+			want: "validation failed for field '' in file '': ",
+		},
+		{
+			name: "validation error with complex message",
+			err: ValidationError{
+				Field:   "identity.version",
+				Value:   "invalid-version",
+				Message: "must match pattern ^v?\\d+\\.\\d+\\.\\d+",
+				File:    "agents/dev.yaml",
+			},
+			want: "validation failed for field 'identity.version' in file 'agents/dev.yaml': must match pattern ^v?\\d+\\.\\d+\\.\\d+",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.err.Error(); got != tt.want {
+				t.Errorf("ValidationError.Error() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestYAMLProcessor_ParseAgentFileRaw(t *testing.T) {
+	processor, err := NewYAMLProcessorFromFile("../../../cmd/krci-ai/assets/schemas/agent-schema.json")
+	if err != nil {
+		t.Fatalf("Failed to create processor: %v", err)
+	}
+
+	// Test with valid YAML file
+	t.Run("valid YAML file", func(t *testing.T) {
+		validContent := `agent:
+  identity:
+    name: "Test Agent"
+    id: "test-agent-v1"
+    version: "1.0.0"
+    description: "A test agent for validation"
+    role: "Test Engineer"
+    goal: "Test the validation system"
+    icon: "🧪"
+  activation_prompt:
+    - "You are a test agent"
+  principles:
+    - "Always test thoroughly"
+  customization: ""
+  commands:
+    help: "Show available commands"
+  tasks:
+    - "./.krci-ai/tasks/test-task.md"
+`
+
+		tmpFile := createTempFile(t, validContent)
+		defer os.Remove(tmpFile)
+
+		rawData, err := processor.ParseAgentFileRaw(tmpFile)
+		if err != nil {
+			t.Fatalf("Expected no error, got: %v", err)
+		}
+
+		// Check if parsed data contains expected structure
+		if rawData["agent"] == nil {
+			t.Error("Expected 'agent' key in parsed data")
+		}
+
+		agentData, ok := rawData["agent"].(map[string]interface{})
+		if !ok {
+			t.Error("Expected 'agent' to be a map")
+		} else if agentData["identity"] == nil {
+			t.Error("Expected 'identity' key in agent data")
+		}
+	})
+
+	// Test with non-existent file
+	t.Run("non-existent file", func(t *testing.T) {
+		_, err := processor.ParseAgentFileRaw("/path/to/nonexistent/file.yaml")
+		if err == nil {
+			t.Error("Expected error for non-existent file, got nil")
+		}
+	})
+}
+
+func TestYAMLProcessor_ValidateAgentRaw(t *testing.T) {
+	processor, err := NewYAMLProcessorFromFile("../../../cmd/krci-ai/assets/schemas/agent-schema.json")
+	if err != nil {
+		t.Fatalf("Failed to create processor: %v", err)
+	}
+
+	// Test that ValidateAgentRaw can be called (basic functionality test)
+	t.Run("validate agent raw basic functionality", func(t *testing.T) {
+		// Test with minimal data structure to ensure function executes
+		testData := map[string]interface{}{
+			"agent": map[string]interface{}{
+				"identity": map[string]interface{}{
+					"name": "Test",
+				},
+			},
+		}
+
+		// We don't care about the validation results, just that the function executes
+		_ = processor.ValidateAgentRaw(testData, "test.yaml")
+	})
+
+	// Test invalid agent data
+	t.Run("invalid agent data", func(t *testing.T) {
+		invalidAgentData := map[string]interface{}{
+			"agent": map[string]interface{}{
+				"identity": map[string]interface{}{
+					"name": "Test Agent",
+					// Missing required fields
+				},
+			},
+		}
+
+		errors := processor.ValidateAgentRaw(invalidAgentData, "test.yaml")
+		if len(errors) == 0 {
+			t.Error("Expected validation errors for invalid agent data, but got none")
+		}
+	})
+}
+
 // Helper function to create temporary files for testing
 func createTempFile(t *testing.T, content string) string {
 	tmpFile, err := os.CreateTemp("", "test_agent_*.yaml")

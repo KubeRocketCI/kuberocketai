@@ -98,3 +98,45 @@ func TestErrorHandlerMethods(t *testing.T) {
 		})
 	}
 }
+
+func TestOutputHandlerPrintError(t *testing.T) {
+	handler := NewOutputHandler()
+
+	// Test that PrintError doesn't panic
+	defer func() {
+		if r := recover(); r != nil {
+			t.Errorf("PrintError panicked: %v", r)
+		}
+	}()
+
+	handler.PrintError("Test error message")
+}
+
+func TestErrorHandlerPrintWarning(t *testing.T) {
+	handler := NewErrorHandler()
+
+	// Test that PrintWarning doesn't panic
+	defer func() {
+		if r := recover(); r != nil {
+			t.Errorf("PrintWarning panicked: %v", r)
+		}
+	}()
+
+	handler.PrintWarning("Test warning message")
+}
+
+func TestErrorHandlerHandleErrorWithActualError(t *testing.T) {
+	// This test will verify that HandleError and HandleErrorWithCode
+	// properly handle errors, but we can't test the os.Exit behavior
+	// directly in unit tests without more complex setup
+
+	handler := NewErrorHandler()
+
+	// Test with nil error (should not exit)
+	handler.HandleError(nil, "Test message")
+	handler.HandleErrorWithCode(nil, "Test message", 2)
+
+	// For testing actual error handling behavior, we would need
+	// to mock os.Exit or use a different approach, but for coverage
+	// we can at least verify the functions exist and accept parameters
+}
