@@ -1,4 +1,4 @@
-# KubeRocketAI
+# KubeRocketAI: AI-as-Code Framework That Simply Works On Any Platform
 
 [![Latest Release](https://img.shields.io/github/v/release/KubeRocketCI/kuberocketai?style=flat-square&logo=github&color=blue)](https://github.com/KubeRocketCI/kuberocketai/releases/latest)
 [![CI Status](https://img.shields.io/github/actions/workflow/status/KubeRocketCI/kuberocketai/ci.yml?branch=main&style=flat-square&logo=github-actions&label=CI)](https://github.com/KubeRocketCI/kuberocketai/actions/workflows/ci.yml)
