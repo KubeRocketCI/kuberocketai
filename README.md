@@ -38,7 +38,7 @@ The real challenge isn't creating smart agents—it's **scaling that success** a
 
 KubeRocketAI brings the proven **"Infrastructure-as-Code" model to AI agent management**. Teams define agents in version-controlled Markdown files that integrate seamlessly with existing development workflows, enabling the same declarative approach developers expect from modern CI/CD pipelines.
 
-## Video Overview
+### Video Overview
 
 For a practical case study on product development with project-specific AI agent customization, see:
 
