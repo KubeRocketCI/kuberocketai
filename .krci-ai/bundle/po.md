@@ -1,6 +1,6 @@
 # KubeRocketAI Framework Bundle
 
-**Generated:** 2025-07-29 18:22:04 EEST
+**Generated:** 2025-08-05 19:10:33 EEST
 **Purpose:** Complete framework bundle for web chat tools (ChatGPT, Claude Web, Gemini Pro)
 
 ## Usage Instructions
@@ -62,6 +62,7 @@ agent:
     create-story: "Execute task create-story"
     update-story: "Execute task update-story"
     review-story: "Execute task review-story"
+    create-github-issues: "Execute task create-github-issues"
     exit: "Exit Product Owner persona and return to normal mode"
 
   tasks:
@@ -70,6 +71,7 @@ agent:
     - ./.krci-ai/tasks/create-story.md
     - ./.krci-ai/tasks/update-story.md
     - ./.krci-ai/tasks/review-story-po.md
+    - ./.krci-ai/local/tasks/create-github-issues.md
 
 ==== END FILE ====
 
@@ -736,193 +738,6 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 # Shared Templates
 
-==== FILE: templates/test-cases.md ====
-# Test Cases: {{project_name}}
-
-## Test Suite Overview
-
-{{test_suite_overview}}
-
-## Test Case Summary
-
-### Total Test Cases
-
-{{total_test_cases}}
-
-### Test Categories
-
-{{test_categories}}
-
-### Coverage Analysis
-
-{{coverage_analysis}}
-
-## Functional Test Cases
-
-### Module: {{module_name}}
-
-#### Test Case ID: {{test_case_id}}
-
-**Title:** {{test_case_title}}
-
-**Description:** {{test_case_description}}
-
-**Prerequisites:** {{prerequisites}}
-
-**Test Data:** {{test_data}}
-
-**Test Steps:**
-{{test_steps}}
-
-**Expected Results:**
-{{expected_results}}
-
-**Actual Results:**
-{{actual_results}}
-
-**Pass/Fail Status:**
-{{pass_fail_status}}
-
-**Priority:** {{priority}}
-
-**Severity:** {{severity}}
-
-**Execution Time:** {{execution_time}}
-
-**Automation Candidate:** {{automation_candidate}}
-
-## Non-Functional Test Cases
-
-### Performance Test Cases
-
-{{performance_test_cases}}
-
-### Security Test Cases
-
-{{security_test_cases}}
-
-### Usability Test Cases
-
-{{usability_test_cases}}
-
-### Compatibility Test Cases
-
-{{compatibility_test_cases}}
-
-## Edge Cases and Boundary Tests
-
-### Boundary Value Analysis
-
-{{boundary_value_analysis}}
-
-### Edge Cases
-
-{{edge_cases}}
-
-### Error Handling Tests
-
-{{error_handling_tests}}
-
-## Negative Test Cases
-
-### Invalid Input Tests
-
-{{invalid_input_tests}}
-
-### System Limit Tests
-
-{{system_limit_tests}}
-
-### Failure Scenario Tests
-
-{{failure_scenario_tests}}
-
-## Test Data Requirements
-
-### Test Data Sets
-
-{{test_data_sets}}
-
-### Data Generation Strategy
-
-{{data_generation_strategy}}
-
-### Data Privacy Considerations
-
-{{data_privacy_considerations}}
-
-## Traceability Matrix
-
-### Requirements Coverage
-
-{{requirements_coverage}}
-
-### User Story Mapping
-
-{{user_story_mapping}}
-
-### Acceptance Criteria Mapping
-
-{{acceptance_criteria_mapping}}
-
-## Automation Recommendations
-
-### Automation Candidates
-
-{{automation_candidates}}
-
-### Manual Testing Requirements
-
-{{manual_testing_requirements}}
-
-### Automation Framework
-
-{{automation_framework}}
-
-## Test Environment Setup
-
-### Environment Configuration
-
-{{environment_configuration}}
-
-### Setup Instructions
-
-{{setup_instructions}}
-
-### Reset Procedures
-
-{{reset_procedures}}
-
-## Test Execution Notes
-
-### Special Instructions
-
-{{special_instructions}}
-
-### Known Issues
-
-{{known_issues}}
-
-### Workarounds
-
-{{workarounds}}
-
-## Review and Approval
-
-### Test Case Review
-
-{{test_case_review}}
-
-### Approval Status
-
-{{approval_status}}
-
-### Review Comments
-
-{{review_comments}}
-
-==== END FILE ====
-
 ==== FILE: templates/test-plan.md ====
 # Test Plan: {{project_name}}
 
@@ -1112,568 +927,310 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ==== END FILE ====
 
-==== FILE: templates/test-report.md ====
-# Test Execution Report: {{project_name}}
+==== FILE: templates/user-journey.md ====
+# User Journey Map: {{journey_name}}
 
-## Executive Summary
+## Journey Overview
 
-{{executive_summary}}
+{{journey_overview}}
 
-## Test Execution Overview
+## User Persona
 
-### Testing Period
+### Primary Persona
 
-{{testing_period}}
+{{primary_persona}}
 
-### Test Scope Covered
+### Persona Goals
 
-{{test_scope_covered}}
+{{persona_goals}}
 
-### Testing Team
+### Persona Needs
 
-{{testing_team}}
+{{persona_needs}}
 
-## Test Results Summary
+### Persona Pain Points
 
-### Overall Test Results
+{{persona_pain_points}}
 
-{{overall_test_results}}
+### Persona Characteristics
 
-### Test Cases Executed
+{{persona_characteristics}}
 
-{{test_cases_executed}}
+## Journey Context
 
-### Pass Rate
+### Journey Scope
 
-{{pass_rate}}
+{{journey_scope}}
 
-### Failure Rate
+### Journey Trigger
 
-{{failure_rate}}
+{{journey_trigger}}
 
-### Test Coverage Achieved
+### Journey Objective
 
-{{test_coverage_achieved}}
+{{journey_objective}}
 
-## Detailed Test Results
+### Success Definition
 
-### Functional Testing Results
+{{success_definition}}
 
-{{functional_testing_results}}
+## Current State Journey
 
-### Non-Functional Testing Results
+### Journey Phases
 
-{{non_functional_testing_results}}
+{{journey_phases}}
 
-### Integration Testing Results
+### Touchpoints
 
-{{integration_testing_results}}
+{{touchpoints}}
 
-### System Testing Results
+### User Actions
 
-{{system_testing_results}}
+{{user_actions}}
 
-## Test Metrics
+### User Thoughts
 
-### Execution Metrics
+{{user_thoughts}}
 
-{{execution_metrics}}
+### User Emotions
 
-### Quality Metrics
+{{user_emotions}}
 
-{{quality_metrics}}
+### Pain Points
 
-### Performance Metrics
+{{pain_points}}
 
-{{performance_metrics}}
+### Opportunities
 
-### Coverage Metrics
+{{opportunities}}
 
-{{coverage_metrics}}
+## Journey Timeline
 
-## Defect Summary
+### Pre-Journey Stage
 
-### Total Defects Found
+{{pre_journey_stage}}
 
-{{total_defects_found}}
+### Journey Initiation
 
-### Defects by Severity
+{{journey_initiation}}
 
-{{defects_by_severity}}
+### Journey Progression
 
-### Defects by Priority
+{{journey_progression}}
 
-{{defects_by_priority}}
+### Journey Completion
 
-### Defects by Category
+{{journey_completion}}
 
-{{defects_by_category}}
+### Post-Journey Stage
 
-### Defect Resolution Status
+{{post_journey_stage}}
 
-{{defect_resolution_status}}
+## Channel Analysis
 
-## Test Environment
+### Digital Channels
 
-### Environment Configuration
+{{digital_channels}}
 
-{{environment_configuration}}
+### Physical Channels
 
-### Environment Issues
+{{physical_channels}}
 
-{{environment_issues}}
+### Human Channels
 
-### Environment Availability
+{{human_channels}}
 
-{{environment_availability}}
+### Cross-Channel Experience
 
-## Test Data
+{{cross_channel_experience}}
 
-### Test Data Used
+## Emotion Mapping
 
-{{test_data_used}}
+### Emotional Highs
 
-### Data Quality Issues
+{{emotional_highs}}
 
-{{data_quality_issues}}
+### Emotional Lows
 
-### Data Generation Results
+{{emotional_lows}}
 
-{{data_generation_results}}
+### Emotional Drivers
 
-## Automation Results
+{{emotional_drivers}}
 
-### Automated Test Execution
+### Satisfaction Points
 
-{{automated_test_execution}}
+{{satisfaction_points}}
 
-### Automation Coverage
+### Frustration Points
 
-{{automation_coverage}}
+{{frustration_points}}
 
-### Automation Issues
+## Supporting Evidence
 
-{{automation_issues}}
+### Research Data
 
-### Automation Recommendations
+{{research_data}}
 
-{{automation_recommendations}}
+### User Feedback
 
-## Risk Assessment
+{{user_feedback}}
 
-### Testing Risks Encountered
+### Analytics Data
 
-{{testing_risks_encountered}}
+{{analytics_data}}
 
-### Risk Mitigation Effectiveness
+### Observational Data
 
-{{risk_mitigation_effectiveness}}
+{{observational_data}}
 
-### Outstanding Risks
+## Journey Metrics
 
-{{outstanding_risks}}
+### Quantitative Metrics
 
-## Quality Assessment
+{{quantitative_metrics}}
 
-### Software Quality Level
+### Qualitative Metrics
 
-{{software_quality_level}}
+{{qualitative_metrics}}
 
-### Readiness for Release
+### Conversion Metrics
 
-{{readiness_for_release}}
+{{conversion_metrics}}
 
-### Quality Trends
+### Satisfaction Metrics
 
-{{quality_trends}}
+{{satisfaction_metrics}}
 
-## Lessons Learned
+## Future State Journey
 
-### What Went Well
+### Improved Journey Flow
 
-{{what_went_well}}
+{{improved_journey_flow}}
 
-### Areas for Improvement
+### Enhanced Touchpoints
 
-{{areas_for_improvement}}
+{{enhanced_touchpoints}}
 
-### Process Improvements
+### Reduced Friction
 
-{{process_improvements}}
+{{reduced_friction}}
+
+### Added Value
+
+{{added_value}}
+
+### Optimized Experience
+
+{{optimized_experience}}
+
+## Service Blueprint
+
+### Frontstage Actions
+
+{{frontstage_actions}}
+
+### Backstage Actions
+
+{{backstage_actions}}
+
+### Support Processes
+
+{{support_processes}}
+
+### Technology Enablers
+
+{{technology_enablers}}
+
+## Journey Orchestration
+
+### Moment of Truth
+
+{{moment_of_truth}}
+
+### Critical Journey Points
+
+{{critical_journey_points}}
+
+### Handoff Points
+
+{{handoff_points}}
+
+### Recovery Strategies
+
+{{recovery_strategies}}
+
+## Implementation Roadmap
+
+### Quick Wins
+
+{{quick_wins}}
+
+### Short-term Improvements
+
+{{short_term_improvements}}
+
+### Long-term Vision
+
+{{long_term_vision}}
+
+### Resource Requirements
+
+{{resource_requirements}}
+
+## Stakeholder Impact
+
+### Internal Stakeholders
+
+{{internal_stakeholders}}
+
+### External Partners
+
+{{external_partners}}
+
+### Cross-functional Teams
+
+{{cross_functional_teams}}
+
+### Change Requirements
+
+{{change_requirements}}
 
 ## Recommendations
 
-### Release Recommendation
+### Experience Improvements
 
-{{release_recommendation}}
+{{experience_improvements}}
 
-### Outstanding Actions
+### Process Changes
 
-{{outstanding_actions}}
+{{process_changes}}
 
-### Future Testing Strategy
+### Technology Solutions
 
-{{future_testing_strategy}}
+{{technology_solutions}}
+
+### Organizational Changes
+
+{{organizational_changes}}
 
 ## Appendices
 
-### Detailed Test Results
+### Journey Maps
 
-{{detailed_test_results}}
+{{journey_maps}}
 
-### Defect Details
+### Persona Details
 
-{{defect_details}}
+{{persona_details}}
 
-### Test Artifacts
+### Research Findings
 
-{{test_artifacts}}
+{{research_findings}}
 
-### Sign-off
+### Supporting Data
 
-{{sign_off}}
-
-==== END FILE ====
-
-==== FILE: templates/epic.md ====
-# Epic {{epic_number}}: {{epic_title}}
-
-## Status
-
-| Field                | Value                    |
-|----------------------|--------------------------|
-| Status               | {{status}}               |
-| Priority             | {{priority}}            |
-| Epic Owner           | {{owner}}               |
-| Timeline             | {{timeline}}            |
-
-<!-- Epic tracking and SDLC integration -->
-<!-- Enables progress monitoring and PRD traceability validation -->
-
-<!-- Template Guidance:
-Status Options: Planning -> Approved -> In Progress -> Done -> Completed
-Priority Example: Critical, High, Medium, Low (align with PRD requirement priorities)
-Epic Owner Example: "Product Owner", "Tech Lead", "Development Team"
-Timeline Example: "Sprint 1-3 (6 weeks)", "Q1 2024", "March-April 2024"
--->
-
-## Overview
-
-### Problem Statement
-
-{{problem_statement}}
-
-<!-- Clear, specific user problem this Epic solves from PRD analysis -->
-<!-- Must trace back to PRD business requirements and user pain points -->
-
-<!-- Template Guidance:
-Problem Statement Example:
-"Users struggle with agent discovery and IDE integration, leading to fragmented workflows and reduced productivity. Current manual agent selection requires deep technical knowledge, creating adoption barriers for 70% of target users."
-
-Format Structure:
-- Start with specific user pain point from PRD
-- Include quantifiable impact or evidence
-- Connect to PRD BR/NFR requirements
-- Avoid solution-oriented language
-
-DO: Reference specific PRD requirements (BR1, BR2, NFR1...)
-DO: Include quantifiable user impact
-DO: Focus on user pain, not missing features
-DO: Use evidence from PRD user research
-DON'T: Describe what the system can't do
-DON'T: Include solution details in problem statement
-DON'T: Use vague terms like "users want better experience"
--->
-
-### Goal
-
-{{goal}}
-
-<!-- Specific, measurable outcome that defines Epic completion -->
-<!-- Must align with PRD success metrics and enable clear Story validation -->
-<!-- REQUIRED FORMAT: Enable [specific outcome] for [target %] of [user type] within [timeline] -->
-
-<!-- Template Guidance:
-Goal Example:
-"Enable seamless agent discovery and IDE integration for 90% of target users within 2 weeks of first use, reducing agent selection time from 15 minutes to under 30 seconds while maintaining enterprise security standards."
-
-REQUIRED Format Structure:
-- MUST start with "Enable [specific outcome]"
-- MUST include target user percentage or metrics
-- MUST include specific timeline boundaries
-- MUST connect to PRD success criteria
-- MUST be measurable and testable
-
-DO: Use format "Enable X for Y% of [users] within Z [timeline]"
-DO: Include specific metrics from PRD (time, percentage, quantity)
-DO: Set realistic timeline boundaries with specific duration
-DO: Connect to PRD success criteria explicitly
-DON'T: Use vague language like "improve user experience"
-DON'T: Set unmeasurable goals or subjective outcomes
-DON'T: Ignore PRD success metrics alignment
-DON'T: Omit timeline or target percentage requirements
--->
-
-### Target Users
-
-{{target_users}}
-
-<!-- Specific user personas from PRD who benefit from this Epic -->
-<!-- Must align with PRD user segments and enable Story "As a user" scenarios -->
-
-<!-- Template Guidance:
-Target Users Example:
-"Primary: Software Architects (60%) - designing system components and integration patterns
-Secondary: Development Leads (30%) - implementing architectural decisions in code
-Tertiary: Product Managers (10%) - validating technical feasibility and scope"
-
-Format Structure:
-- List primary, secondary, tertiary users with percentages
-- Include specific roles and responsibilities
-- Connect to PRD user segments
-- Enable Story persona development
-
-DO: Use specific personas from PRD
-DO: Include user percentages or priority levels
-DO: Describe user context and responsibilities
-DO: Enable clear Story "As a [user]" scenarios
-DON'T: Use generic roles like "users" or "developers"
-DON'T: Create new personas not in PRD
-DON'T: Omit user context or responsibilities
--->
-
-## Scope
-
-### What's Included
-
-{{in_scope}}
-
-<!-- Specific features and functionality this Epic delivers -->
-<!-- Must map to PRD requirements and enable Story breakdown -->
-
-<!-- Template Guidance:
-What's Included Example:
-"1. Agent discovery UI with search and filter capabilities (BR2, BR3)
-2. IDE integration framework for Cursor, VS Code, and JetBrains (NFR1)
-3. Authentication and security layer for enterprise environments (NFR2)
-4. Basic agent validation and health checking (BR4)"
-
-Format Structure:
-- Number items for clear tracking
-- Reference specific PRD requirements in parentheses
-- Focus on user-facing functionality
-- Enable clear Story mapping
-
-DO: Reference specific PRD requirements (BR1, NFR2...)
-DO: Number items for clear tracking
-DO: Focus on user-facing functionality
-DO: Include enough detail for Story creation
-DON'T: Include technical implementation details
-DON'T: List features without PRD traceability
-DON'T: Use vague descriptions
--->
-
-### What's Not Included
-
-{{out_of_scope}}
-
-<!-- Clear boundaries of what this Epic excludes -->
-<!-- Prevents scope creep and guides Story prioritization -->
-
-<!-- Template Guidance:
-What's Not Included Example:
-"1. Advanced analytics and usage monitoring (deferred to Epic 3)
-2. Custom agent development frameworks (out of MVP scope)
-3. Multi-language support beyond English (future roadmap item)
-4. Legacy IDE support (VS 2019, Eclipse) - minimum viable platform focus"
-
-Format Structure:
-- Number excluded items for clarity
-- Explain reasoning (deferred, out of scope, future)
-- Reference other Epics for deferred items
-- Set clear boundaries for Stories
-
-DO: Clearly state what's excluded and why
-DO: Reference future Epics for deferred items
-DO: Explain reasoning for exclusions
-DO: Set clear Story development boundaries
-DON'T: Leave scope boundaries unclear
-DON'T: Include items without rationale
-DON'T: Create artificial limitations
--->
-
-### Dependencies
-
-{{dependencies}}
-
-<!-- Other Epics, systems, or external requirements this Epic needs -->
-<!-- Critical for Story sequencing and implementation planning -->
-<!-- REQUIRED STRUCTURE: Group by Epic Dependencies, System Dependencies, External Dependencies -->
-
-<!-- Template Guidance:
-Dependencies Example:
-"Epic Dependencies:
-- Epic 1: KubeRocketAI Baseline (foundation infrastructure)
-- Epic 2: Core Engine (agent processing capabilities)
-
-System Dependencies:
-- Python 3.8+ runtime environment
-- IDE extension APIs (Cursor, VS Code, JetBrains)
-- Enterprise authentication systems (SSO integration)
-
-External Dependencies:
-- Design system components (UI framework)
-- Security compliance approval (enterprise deployment)"
-
-REQUIRED Format Structure:
-- MUST group by type: Epic Dependencies, System Dependencies, External Dependencies
-- MUST include specific version requirements where applicable
-- MUST note approval processes or integration needs
-- MUST enable clear dependency validation and tracking
-
-DO: Use exact section headers "Epic Dependencies:", "System Dependencies:", "External Dependencies:"
-DO: Include specific version or requirement details for each dependency
-DO: Note approval processes or integration needs explicitly
-DO: Enable clear dependency validation and tracking
-DON'T: List dependencies without proper grouping structure
-DON'T: Use vague dependencies without specifics or versions
-DON'T: Omit external approval processes or integration requirements
-DON'T: Ignore system requirement details or compatibility needs
--->
-
-## Solution Approach
-
-{{solution_approach}}
-
-<!-- High-level implementation strategy and architectural direction -->
-<!-- Guides Story creation without prescribing technical details -->
-
-<!-- Template Guidance:
-Solution Approach Example:
-"Implementation Strategy:
-1. Modular UI framework with progressive enhancement for cross-IDE compatibility
-2. Plugin architecture enabling independent IDE integration development
-3. Centralized authentication service with configurable enterprise adapters
-4. Agent validation pipeline with health monitoring and error recovery
-
-Technical Approach:
-- Frontend: React-based components for consistent IDE integration
-- Backend: Python microservices with REST API interfaces
-- Security: OAuth 2.0 with enterprise SSO federation
-- Deployment: Containerized services with Kubernetes orchestration"
-
-Format Structure:
-- Separate implementation and technical approaches
-- Focus on architectural decisions, not detailed implementation
-- Enable Story technical context
-- Include integration patterns and service boundaries
-
-DO: Provide architectural guidance for Stories
-DO: Include integration patterns and service boundaries
-DO: Focus on approach, not detailed implementation
-DO: Enable technical context for Story development
-DON'T: Include detailed code specifications
-DON'T: Prescribe exact implementation details
-DON'T: Ignore architectural considerations
--->
-
-## Acceptance Criteria
-
-{{acceptance_criteria}}
-
-<!-- Specific, testable conditions that define Epic completion -->
-<!-- Must include measurable outcomes and validation commands for Story verification -->
-<!-- REQUIRED: Each criterion MUST include validation method and verification command -->
-
-<!-- Template Guidance:
-Acceptance Criteria Example:
-"1. User can discover and select agents through IDE interface within 30 seconds
-   - Validation: Time user workflows from agent search to selection
-   - Command: `pytest tests/integration/agent_discovery_test.py`
-
-2. IDE integration works across Cursor, VS Code, JetBrains with consistent UX
-   - Validation: Cross-platform testing demonstrates feature parity
-   - Command: `npm run test:integration -- --platform=all`
-
-3. Enterprise authentication integrates with existing SSO systems
-   - Validation: SSO login flow completes without manual intervention
-   - Command: `python tests/auth/sso_integration_test.py`
-
-4. Agent validation prevents malformed or insecure agent usage
-   - Validation: Security scan passes with zero critical issues
-   - Command: `security-scan --agents --threshold=critical`"
-
-REQUIRED Format Structure:
-- MUST number criteria for clear tracking and Story mapping
-- MUST include validation method for each criterion
-- MUST include verification command for each criterion (where automatable)
-- MUST define measurable success indicators
-- MUST enable automated testing and verification where possible
-
-DO: Include specific validation methods AND verification commands for each criterion
-DO: Make criteria measurable and testable with clear success indicators
-DO: Number criteria for Story traceability and tracking
-DO: Enable automated verification where possible (pytest, npm test, CLI commands)
-DO: Include both manual validation steps and automated command verification
-DON'T: Use subjective criteria like "works well" or "user-friendly"
-DON'T: Omit validation methods or verification steps
-DON'T: Create criteria that can't be tested or measured
-DON'T: Skip command verification for automatable criteria
--->
-
-## User Stories
-
-{{planned_stories}}
-
-<!-- Planned Stories that implement this Epic with clear breakdown -->
-<!-- Enables immediate Story creation with Epic context and traceability -->
-<!-- REQUIRED: Group by phases with clear dependencies and story numbering -->
-
-<!-- Template Guidance:
-User Stories Example:
-"Planned Stories for Implementation:
-
-**Phase 1: Foundation (Sprint 1)**
-- Story {{epic_number}}.01: Agent Discovery Interface
-  - As a Software Architect, I want to search and filter available agents
-  - Acceptance: Search returns relevant agents within 3 seconds
-  - Dependencies: Epic 1 baseline infrastructure
-
-- Story {{epic_number}}.02: Basic IDE Integration
-  - As a Development Lead, I want to activate agents within my IDE
-  - Acceptance: Agent activation works in Cursor and VS Code
-  - Dependencies: Story {{epic_number}}.01 completion
-
-**Phase 2: Enhancement (Sprint 2)**
-- Story {{epic_number}}.03: Enterprise Authentication
-  - As a Product Manager, I want secure agent access with SSO
-  - Acceptance: SSO login integrates with existing enterprise systems
-  - Dependencies: Security compliance approval
-
-**Phase 3: Validation (Sprint 3)**
-- Story {{epic_number}}.04: Agent Health Monitoring
-  - As a Software Architect, I want to validate agent security and performance
-  - Acceptance: Health dashboard shows agent status and metrics
-  - Dependencies: All previous stories completed"
-
-REQUIRED Format Structure:
-- MUST group Stories by implementation phases with clear phase headers
-- MUST include user persona, goal, and basic acceptance criteria for each story
-- MUST note dependencies between Stories and external requirements
-- MUST use consistent naming: {{epic_number}}.01, {{epic_number}}.02, etc.
-- MUST enable immediate Story creation with Epic context and traceability
-
-DO: Group Stories by logical implementation phases with "**Phase X: Name**" headers
-DO: Include user persona ("As a [role]"), goal ("I want to"), and acceptance criteria
-DO: Note dependencies between Stories using "Dependencies: Story X.XX completion"
-DO: Use consistent Story numbering within Epic ({{epic_number}}.01, .02, etc.)
-DO: Enable immediate Story creation with sufficient context
-DON'T: List stories without phase grouping or logical sequence
-DON'T: Include detailed Story implementation details in Epic
-DON'T: Create Stories without clear user value or persona
-DON'T: Ignore dependencies or sequencing requirements between stories
-DON'T: Use inconsistent numbering or skip dependency notation
--->
+{{supporting_data}}
 
 ==== END FILE ====
 
@@ -1910,320 +1467,100 @@ Format Structure:
 
 ==== END FILE ====
 
-==== FILE: templates/business-rules.md ====
-# Business Rules Documentation: {{project_name}}
+==== FILE: templates/architecture-review.md ====
+# Architecture Review: {{system_name}}
 
-## Document Overview
+## Review Summary
 
-{{document_overview}}
+{{review_summary}}
 
-## Business Rules Summary
+## Architecture Assessment
 
-### Total Rules Defined
+### Overall Rating
 
-{{total_rules_defined}}
+{{overall_rating}}
 
-### Rule Categories
+### Architecture Strengths
 
-{{rule_categories}}
+{{architecture_strengths}}
 
-### Priority Classification
+### Areas for Improvement
 
-{{priority_classification}}
+{{improvement_areas}}
 
-### Scope Coverage
+## Detailed Analysis
 
-{{scope_coverage}}
+### Component Design Review
 
-## Business Context
+{{component_design_review}}
 
-### Business Domain
+### Data Architecture Review
 
-{{business_domain}}
+{{data_architecture_review}}
 
-### Process Context
+### Security Architecture Review
 
-{{process_context}}
+{{security_architecture_review}}
 
-### Stakeholder Requirements
+### Scalability Assessment
 
-{{stakeholder_requirements}}
+{{scalability_assessment}}
 
-### Regulatory Context
+### Performance Analysis
 
-{{regulatory_context}}
+{{performance_analysis}}
 
-## Rule Categories
+### Maintainability Review
 
-### Business Logic Rules
+{{maintainability_review}}
 
-{{business_logic_rules}}
+## Anti-Patterns Identified
 
-### Validation Rules
+{{antipatterns_found}}
 
-{{validation_rules}}
+## Technical Debt Assessment
 
-### Calculation Rules
+{{technical_debt}}
 
-{{calculation_rules}}
+## Compliance Review
 
-### Constraint Rules
+{{compliance_assessment}}
 
-{{constraint_rules}}
+## Risk Analysis
 
-### Authorization Rules
+### High Priority Risks
 
-{{authorization_rules}}
+{{high_priority_risks}}
 
-### Workflow Rules
+### Medium Priority Risks
 
-{{workflow_rules}}
+{{medium_priority_risks}}
 
-## Detailed Business Rules
+### Low Priority Risks
 
-### Rule ID: {{rule_id}}
+{{low_priority_risks}}
 
-**Rule Name:** {{rule_name}}
+## Recommendations
 
-**Rule Description:** {{rule_description}}
+### Immediate Actions (Priority 1)
 
-**Rule Type:** {{rule_type}}
+{{immediate_actions}}
 
-**Priority:** {{rule_priority}}
+### Short-term Improvements (Priority 2)
 
-**Business Justification:** {{business_justification}}
+{{short_term_improvements}}
 
-**Rule Statement:** {{rule_statement}}
+### Long-term Enhancements (Priority 3)
 
-**Conditions:** {{rule_conditions}}
+{{long_term_enhancements}}
 
-**Actions/Outcomes:** {{rule_actions}}
+## Implementation Roadmap
 
-**Exceptions:** {{rule_exceptions}}
+{{implementation_roadmap}}
 
-**Examples:** {{rule_examples}}
+## Review Conclusions
 
-**Source Authority:** {{source_authority}}
-
-**Effective Date:** {{effective_date}}
-
-**Review Date:** {{review_date}}
-
-## Rule Relationships
-
-### Rule Dependencies
-
-{{rule_dependencies}}
-
-### Rule Conflicts
-
-{{rule_conflicts}}
-
-### Rule Hierarchies
-
-{{rule_hierarchies}}
-
-### Cross-Reference Matrix
-
-{{cross_reference_matrix}}
-
-## Implementation Specifications
-
-### System Implementation
-
-{{system_implementation}}
-
-### Data Requirements
-
-{{data_requirements}}
-
-### Process Integration
-
-{{process_integration}}
-
-### Technology Considerations
-
-{{technology_considerations}}
-
-## Rule Validation
-
-### Validation Criteria
-
-{{validation_criteria}}
-
-### Test Scenarios
-
-{{test_scenarios}}
-
-### Acceptance Criteria
-
-{{acceptance_criteria}}
-
-### Verification Methods
-
-{{verification_methods}}
-
-## Exception Handling
-
-### Exception Types
-
-{{exception_types}}
-
-### Exception Processes
-
-{{exception_processes}}
-
-### Escalation Procedures
-
-{{escalation_procedures}}
-
-### Override Authorities
-
-{{override_authorities}}
-
-## Compliance and Governance
-
-### Regulatory Compliance
-
-{{regulatory_compliance}}
-
-### Audit Requirements
-
-{{audit_requirements}}
-
-### Documentation Standards
-
-{{documentation_standards}}
-
-### Change Control
-
-{{change_control}}
-
-## Maintenance and Updates
-
-### Review Schedule
-
-{{review_schedule}}
-
-### Update Procedures
-
-{{update_procedures}}
-
-### Version Control
-
-{{version_control}}
-
-### Stakeholder Approval
-
-{{stakeholder_approval}}
-
-## Impact Analysis
-
-### Business Impact
-
-{{business_impact}}
-
-### System Impact
-
-{{system_impact}}
-
-### Process Impact
-
-{{process_impact}}
-
-### User Impact
-
-{{user_impact}}
-
-## Training and Communication
-
-### Training Requirements
-
-{{training_requirements}}
-
-### Communication Plan
-
-{{communication_plan}}
-
-### Documentation Distribution
-
-{{documentation_distribution}}
-
-### Support Resources
-
-{{support_resources}}
-
-## Quality Assurance
-
-### Rule Quality Criteria
-
-{{rule_quality_criteria}}
-
-### Consistency Checks
-
-{{consistency_checks}}
-
-### Completeness Verification
-
-{{completeness_verification}}
-
-### Accuracy Validation
-
-{{accuracy_validation}}
-
-## Metrics and Monitoring
-
-### Rule Performance Metrics
-
-{{rule_performance_metrics}}
-
-### Compliance Metrics
-
-{{compliance_metrics}}
-
-### Exception Metrics
-
-{{exception_metrics}}
-
-### Review Metrics
-
-{{review_metrics}}
-
-## Risk Management
-
-### Rule-Related Risks
-
-{{rule_related_risks}}
-
-### Mitigation Strategies
-
-{{mitigation_strategies}}
-
-### Risk Monitoring
-
-{{risk_monitoring}}
-
-### Contingency Plans
-
-{{contingency_plans}}
-
-## Appendices
-
-### Rule Repository
-
-{{rule_repository}}
-
-### Supporting Documentation
-
-{{supporting_documentation}}
-
-### Stakeholder Sign-off
-
-{{stakeholder_signoff}}
-
-### Glossary
-
-{{glossary}}
+{{review_conclusions}}
 
 ==== END FILE ====
 
@@ -2484,259 +1821,251 @@ Format Structure:
 
 ==== END FILE ====
 
-==== FILE: templates/requirements-doc.md ====
-# Business Requirements Document: {{project_name}}
+==== FILE: templates/project-brief-template.md ====
+# Project Brief: {{project_name}}
+
+> **Target Length**: 2-3 pages maximum
+> **Framework**: Root artifact in SDLC framework
+> **File Location**: MUST be saved as `/docs/prd/project-brief.md` (exact path)
+
+---
 
 ## Executive Summary
 
 {{executive_summary}}
 
-## Business Context
+<!-- Template Guidance:
+Write a compelling 3-4 sentence overview combining problem, solution approach, and expected outcome.
 
-### Business Objectives
+Example: "Our SaaS platform experiences 2,500 password-related support tickets monthly, consuming 15% of support resources and frustrating users. We will implement biometric authentication and social login options to reduce password dependency, targeting 80% reduction in support tickets and $50K annual savings. This 3-month initiative serves 10,000+ monthly active users and requires Auth0 integration with a $25K budget."
 
-{{business_objectives}}
+Key Elements:
+- What problem are we solving? (specific and quantified)
+- How will we solve it? (high-level approach)
+- What's the expected outcome? (business value)
+- What's the scope? (timeline, users, constraints)
+-->
 
-### Project Scope
+---
 
-{{project_scope}}
+## Problem Statement
 
-### Success Criteria
+{{problem_statement}}
 
-{{success_criteria}}
+<!-- Template Guidance:
+Define the specific pain point driving this project with clear scope boundaries.
 
-### Assumptions and Constraints
+Example: "Users frequently forget passwords leading to 15% of support tickets and account lockouts (2,500/month). Focus on authentication workflow only, excluding password policy management or user registration processes."
 
-{{assumptions_constraints}}
+Best Practices:
+- Start with user scenarios, not business needs
+- Use concrete numbers and evidence
+- Define what's included and excluded
+- Avoid solution-oriented language
+- Focus on pain points and their impact
 
-## Stakeholder Analysis
+Evidence to Include:
+- Support ticket volumes
+- User research findings
+- Productivity impact data
+- Cost of current workarounds
+-->
 
-### Primary Stakeholders
+---
 
-{{primary_stakeholders}}
+## Opportunity
 
-### Secondary Stakeholders
+{{opportunity}}
 
-{{secondary_stakeholders}}
+<!-- Template Guidance:
+Quantified business value plus high-level solution approach.
 
-### Stakeholder Needs
+Example: "Reducing password-related support tickets by 80% would save $50K annually and improve user satisfaction scores by 25%. Implement biometric authentication and social login options to reduce password dependency."
 
-{{stakeholder_needs}}
+Key Elements:
+- Business value (cost savings, revenue, efficiency)
+- User value (time savings, satisfaction, productivity)
+- Market opportunity (competitive advantage, growth)
+- High-level solution direction (not detailed implementation)
 
-### Communication Plan
+Quantification Examples:
+- Cost reduction: "$50K annual savings"
+- Time savings: "15 minutes per user per month"
+- Satisfaction: "25% improvement in user satisfaction"
+- Efficiency: "80% reduction in support tickets"
+-->
 
-{{communication_plan}}
+---
 
-## Current State Analysis
+## Target Users
 
-### Business Problem
+{{target_users}}
 
-{{business_problem}}
+<!-- Template Guidance:
+Specific user segments who have this problem with usage patterns and demographics.
 
-### Current Process
+Example: "SaaS platform users (10,000+ monthly active users) who access the platform 3+ times per week. Primary segment: business professionals aged 25-45 accessing from mobile devices (60%) and desktop (40%)."
 
-{{current_process}}
+Include:
+- User volume and growth trends
+- Demographics (age, role, industry)
+- Usage patterns (frequency, device, context)
+- Segment prioritization (primary vs secondary)
+- Geographic distribution if relevant
 
-### Pain Points
+User Segment Examples:
+- "10,000+ monthly active users"
+- "Business professionals aged 25-45"
+- "Mobile-first users (60% mobile, 40% desktop)"
+- "Access platform 3+ times weekly"
+- "Located primarily in North America and Europe"
+-->
 
-{{pain_points}}
+---
 
-### Root Cause Analysis
+## Success Metrics
 
-{{root_cause_analysis}}
+{{success_metrics}}
 
-## Future State Vision
+<!-- Template Guidance:
+How we'll measure if we've solved the problem with specific timelines.
 
-### Desired Outcomes
+Example: "Reduce password-related support tickets by 80% within 3 months, maintain 99.9% uptime, achieve 70% user adoption of new auth methods within 6 months, improve login success rate from 85% to 95%."
 
-{{desired_outcomes}}
+Success Criteria Format:
+- Specific: Exactly what will be measured
+- Measurable: Numbers, percentages, timelines
+- Achievable: Realistic given constraints
+- Relevant: Directly tied to problem and opportunity
+- Time-bound: Clear deadlines
 
-### Future Process
+Metric Categories:
+- Problem Resolution: "80% reduction in support tickets"
+- User Adoption: "70% user adoption within 6 months"
+- Quality: "99.9% uptime maintained"
+- User Experience: "Login success rate 85% → 95%"
+- Business Impact: "$50K annual cost savings"
+-->
 
-{{future_process}}
-
-### Benefits Realization
-
-{{benefits_realization}}
-
-### Value Proposition
-
-{{value_proposition}}
-
-## Functional Requirements
-
-### Core Functionality
-
-{{core_functionality}}
-
-### User Stories
-
-{{user_stories}}
-
-### Use Cases
-
-{{use_cases}}
-
-### Business Rules
-
-{{business_rules}}
-
-### Data Requirements
-
-{{data_requirements}}
-
-### Integration Requirements
-
-{{integration_requirements}}
-
-## Non-Functional Requirements
-
-### Performance Requirements
-
-{{performance_requirements}}
-
-### Security Requirements
-
-{{security_requirements}}
-
-### Usability Requirements
-
-{{usability_requirements}}
-
-### Scalability Requirements
-
-{{scalability_requirements}}
-
-### Compliance Requirements
-
-{{compliance_requirements}}
-
-### Availability Requirements
-
-{{availability_requirements}}
-
-## User Experience Requirements
-
-### User Personas
-
-{{user_personas}}
-
-### User Interface Requirements
-
-{{ui_requirements}}
-
-### Accessibility Requirements
-
-{{accessibility_requirements}}
-
-### User Journey Requirements
-
-{{user_journey_requirements}}
-
-## Technical Considerations
-
-### Technical Constraints
-
-{{technical_constraints}}
-
-### System Integration
-
-{{system_integration}}
-
-### Data Migration
-
-{{data_migration}}
-
-### Infrastructure Requirements
-
-{{infrastructure_requirements}}
-
-## Implementation Planning
-
-### Implementation Approach
-
-{{implementation_approach}}
-
-### Phasing Strategy
-
-{{phasing_strategy}}
-
-### Resource Requirements
-
-{{resource_requirements}}
-
-### Timeline and Milestones
-
-{{timeline_milestones}}
-
-## Risk Analysis
-
-### Business Risks
-
-{{business_risks}}
-
-### Technical Risks
-
-{{technical_risks}}
-
-### Project Risks
-
-{{project_risks}}
-
-### Risk Mitigation
-
-{{risk_mitigation}}
-
-## Acceptance Criteria
-
-### Functional Acceptance
-
-{{functional_acceptance}}
-
-### Performance Acceptance
-
-{{performance_acceptance}}
-
-### User Acceptance
-
-{{user_acceptance}}
-
-### Business Acceptance
-
-{{business_acceptance}}
-
-## Traceability Matrix
-
-### Requirements Traceability
-
-{{requirements_traceability}}
-
-### Test Coverage
-
-{{test_coverage}}
-
-### Change History
-
-{{change_history}}
-
-## Appendices
-
-### Supporting Documentation
-
-{{supporting_documentation}}
-
-### Glossary
-
-{{glossary}}
-
-### References
-
-{{references}}
-
-### Sign-off
-
-{{sign_off}}
-
+---
+
+## Constraints
+
+{{constraints}}
+
+<!-- Template Guidance:
+Resource, technical, and assumption factors that limit the solution.
+
+Example: "Must integrate with existing Auth0 setup, 3-month timeline, $25K budget, maximum 2 developers assigned. Assumes current mobile app architecture supports biometric APIs and users have compatible devices."
+
+Constraint Categories:
+
+### Resource Constraints:
+- Budget: "$25K maximum budget"
+- Timeline: "3-month delivery deadline"
+- Team: "Maximum 2 developers available"
+- Skills: "No iOS development expertise on team"
+
+### Technical Constraints:
+- Integration: "Must integrate with existing Auth0"
+- Architecture: "Cannot modify core database schema"
+- Performance: "Must maintain current response times"
+- Security: "Must meet enterprise security standards"
+
+### Business Constraints:
+- Compliance: "Must maintain SOC 2 compliance"
+- User Impact: "Zero downtime deployment required"
+- Support: "Cannot increase support complexity"
+- Branding: "Must align with current UI/UX standards"
+
+### Key Assumptions:
+- "Users have biometric-capable devices"
+- "Auth0 API will remain stable"
+- "No major iOS/Android changes during development"
+-->
+
+---
+
+## Key Risks
+
+{{key_risks}}
+
+<!-- Template Guidance:
+Major risks that could derail the project with impact assessment.
+
+Example: "User adoption resistance (HIGH): Users may prefer familiar passwords. Auth0 API changes (MEDIUM): Potential breaking changes during integration. Biometric compatibility (MEDIUM): Older devices may not support all features. Timeline risk (HIGH): Integration complexity may exceed estimates."
+
+Risk Assessment Format:
+[Risk Name] ([Impact Level]): [Description and potential impact]
+
+Impact Levels:
+- HIGH: Could significantly delay or derail project
+- MEDIUM: Could cause delays or require scope changes
+- LOW: Minor impact, manageable workarounds available
+
+Risk Categories:
+
+### User Adoption Risks:
+- "User resistance to change (HIGH)"
+- "Learning curve for new features (MEDIUM)"
+- "Device compatibility issues (MEDIUM)"
+
+### Technical Risks:
+- "Integration complexity (HIGH)"
+- "Third-party API changes (MEDIUM)"
+- "Performance impact (LOW)"
+
+### Business Risks:
+- "Timeline overrun (HIGH)"
+- "Budget overrun (MEDIUM)"
+- "Resource unavailability (MEDIUM)"
+
+### Market Risks:
+- "Competitive response (LOW)"
+- "Regulatory changes (MEDIUM)"
+- "Technology shifts (LOW)"
+-->
+
+---
+
+## SDLC Framework Information
+
+**Dependencies**: None (root artifact)
+**Output Location**: This Project Brief MUST be saved as `/docs/prd/project-brief.md`
+**Downstream Enablement**: Enables PRD creation at `/docs/prd/prd.md`
+
+<!-- SDLC Framework Integration:
+This Project Brief serves as the foundation for:
+- PRD Problem/Opportunity section
+- PRD Target Users & Use Cases
+- PRD Goals/Measurable Outcomes
+- PRD scope and constraint definition
+
+Directory Structure:
+/docs/
+├── prd/                          # Product vision & requirements
+│   ├── project-brief.md          # Project vision & strategy (THIS FILE)
+│   └── prd.md                    # Product requirements (ENABLED BY THIS)
+├── epics/                        # High-level features
+├── stories/                      # User stories
+├── architecture/                 # System design
+└── tests/                        # Quality validation
+-->
+
+---
+
+<!-- QUALITY CHECKLIST
+✅ Document is 2-3 pages maximum
+✅ Executive summary captures complete project essence
+✅ Problem statement is specific and evidence-based
+✅ Opportunity is quantified with business value
+✅ Target users are specific with usage patterns
+✅ Success metrics are measurable with timelines
+✅ Constraints are realistic and comprehensive
+✅ Key risks identified with impact assessment
+✅ File saved exactly as /docs/prd/project-brief.md
+✅ Ready to enable PRD creation
+-->
 ==== END FILE ====
 
 ==== FILE: templates/sad-template.md ====
@@ -3434,407 +2763,885 @@ graph TB
 
 ==== END FILE ====
 
-==== FILE: templates/user-journey.md ====
-# User Journey Map: {{journey_name}}
+==== FILE: templates/test-report.md ====
+# Test Execution Report: {{project_name}}
 
-## Journey Overview
+## Executive Summary
 
-{{journey_overview}}
+{{executive_summary}}
 
-## User Persona
+## Test Execution Overview
 
-### Primary Persona
+### Testing Period
 
-{{primary_persona}}
+{{testing_period}}
 
-### Persona Goals
+### Test Scope Covered
 
-{{persona_goals}}
+{{test_scope_covered}}
 
-### Persona Needs
+### Testing Team
 
-{{persona_needs}}
+{{testing_team}}
 
-### Persona Pain Points
+## Test Results Summary
 
-{{persona_pain_points}}
+### Overall Test Results
 
-### Persona Characteristics
+{{overall_test_results}}
 
-{{persona_characteristics}}
+### Test Cases Executed
 
-## Journey Context
+{{test_cases_executed}}
 
-### Journey Scope
+### Pass Rate
 
-{{journey_scope}}
+{{pass_rate}}
 
-### Journey Trigger
+### Failure Rate
 
-{{journey_trigger}}
+{{failure_rate}}
 
-### Journey Objective
+### Test Coverage Achieved
 
-{{journey_objective}}
+{{test_coverage_achieved}}
 
-### Success Definition
+## Detailed Test Results
 
-{{success_definition}}
+### Functional Testing Results
 
-## Current State Journey
+{{functional_testing_results}}
 
-### Journey Phases
+### Non-Functional Testing Results
 
-{{journey_phases}}
+{{non_functional_testing_results}}
 
-### Touchpoints
+### Integration Testing Results
 
-{{touchpoints}}
+{{integration_testing_results}}
 
-### User Actions
+### System Testing Results
 
-{{user_actions}}
+{{system_testing_results}}
 
-### User Thoughts
+## Test Metrics
 
-{{user_thoughts}}
+### Execution Metrics
 
-### User Emotions
+{{execution_metrics}}
 
-{{user_emotions}}
+### Quality Metrics
 
-### Pain Points
+{{quality_metrics}}
 
-{{pain_points}}
+### Performance Metrics
 
-### Opportunities
+{{performance_metrics}}
 
-{{opportunities}}
+### Coverage Metrics
 
-## Journey Timeline
+{{coverage_metrics}}
 
-### Pre-Journey Stage
+## Defect Summary
 
-{{pre_journey_stage}}
+### Total Defects Found
 
-### Journey Initiation
+{{total_defects_found}}
 
-{{journey_initiation}}
+### Defects by Severity
 
-### Journey Progression
+{{defects_by_severity}}
 
-{{journey_progression}}
+### Defects by Priority
 
-### Journey Completion
+{{defects_by_priority}}
 
-{{journey_completion}}
+### Defects by Category
 
-### Post-Journey Stage
+{{defects_by_category}}
 
-{{post_journey_stage}}
+### Defect Resolution Status
 
-## Channel Analysis
+{{defect_resolution_status}}
 
-### Digital Channels
+## Test Environment
 
-{{digital_channels}}
+### Environment Configuration
 
-### Physical Channels
+{{environment_configuration}}
 
-{{physical_channels}}
+### Environment Issues
 
-### Human Channels
+{{environment_issues}}
 
-{{human_channels}}
+### Environment Availability
 
-### Cross-Channel Experience
+{{environment_availability}}
 
-{{cross_channel_experience}}
+## Test Data
 
-## Emotion Mapping
+### Test Data Used
 
-### Emotional Highs
+{{test_data_used}}
 
-{{emotional_highs}}
+### Data Quality Issues
 
-### Emotional Lows
+{{data_quality_issues}}
 
-{{emotional_lows}}
+### Data Generation Results
 
-### Emotional Drivers
+{{data_generation_results}}
 
-{{emotional_drivers}}
+## Automation Results
 
-### Satisfaction Points
+### Automated Test Execution
 
-{{satisfaction_points}}
+{{automated_test_execution}}
 
-### Frustration Points
+### Automation Coverage
 
-{{frustration_points}}
+{{automation_coverage}}
 
-## Supporting Evidence
+### Automation Issues
 
-### Research Data
+{{automation_issues}}
 
-{{research_data}}
+### Automation Recommendations
 
-### User Feedback
+{{automation_recommendations}}
 
-{{user_feedback}}
+## Risk Assessment
 
-### Analytics Data
+### Testing Risks Encountered
 
-{{analytics_data}}
+{{testing_risks_encountered}}
 
-### Observational Data
+### Risk Mitigation Effectiveness
 
-{{observational_data}}
+{{risk_mitigation_effectiveness}}
 
-## Journey Metrics
+### Outstanding Risks
 
-### Quantitative Metrics
+{{outstanding_risks}}
 
-{{quantitative_metrics}}
+## Quality Assessment
 
-### Qualitative Metrics
+### Software Quality Level
 
-{{qualitative_metrics}}
+{{software_quality_level}}
 
-### Conversion Metrics
+### Readiness for Release
 
-{{conversion_metrics}}
+{{readiness_for_release}}
 
-### Satisfaction Metrics
+### Quality Trends
 
-{{satisfaction_metrics}}
+{{quality_trends}}
 
-## Future State Journey
+## Lessons Learned
 
-### Improved Journey Flow
+### What Went Well
 
-{{improved_journey_flow}}
-
-### Enhanced Touchpoints
-
-{{enhanced_touchpoints}}
-
-### Reduced Friction
-
-{{reduced_friction}}
-
-### Added Value
-
-{{added_value}}
-
-### Optimized Experience
-
-{{optimized_experience}}
-
-## Service Blueprint
-
-### Frontstage Actions
-
-{{frontstage_actions}}
-
-### Backstage Actions
-
-{{backstage_actions}}
-
-### Support Processes
-
-{{support_processes}}
-
-### Technology Enablers
-
-{{technology_enablers}}
-
-## Journey Orchestration
-
-### Moment of Truth
-
-{{moment_of_truth}}
-
-### Critical Journey Points
-
-{{critical_journey_points}}
-
-### Handoff Points
-
-{{handoff_points}}
-
-### Recovery Strategies
-
-{{recovery_strategies}}
-
-## Implementation Roadmap
-
-### Quick Wins
-
-{{quick_wins}}
-
-### Short-term Improvements
-
-{{short_term_improvements}}
-
-### Long-term Vision
-
-{{long_term_vision}}
-
-### Resource Requirements
-
-{{resource_requirements}}
-
-## Stakeholder Impact
-
-### Internal Stakeholders
-
-{{internal_stakeholders}}
-
-### External Partners
-
-{{external_partners}}
-
-### Cross-functional Teams
-
-{{cross_functional_teams}}
-
-### Change Requirements
-
-{{change_requirements}}
-
-## Recommendations
-
-### Experience Improvements
-
-{{experience_improvements}}
-
-### Process Changes
-
-{{process_changes}}
-
-### Technology Solutions
-
-{{technology_solutions}}
-
-### Organizational Changes
-
-{{organizational_changes}}
-
-## Appendices
-
-### Journey Maps
-
-{{journey_maps}}
-
-### Persona Details
-
-{{persona_details}}
-
-### Research Findings
-
-{{research_findings}}
-
-### Supporting Data
-
-{{supporting_data}}
-
-==== END FILE ====
-
-==== FILE: templates/architecture-review.md ====
-# Architecture Review: {{system_name}}
-
-## Review Summary
-
-{{review_summary}}
-
-## Architecture Assessment
-
-### Overall Rating
-
-{{overall_rating}}
-
-### Architecture Strengths
-
-{{architecture_strengths}}
+{{what_went_well}}
 
 ### Areas for Improvement
 
-{{improvement_areas}}
+{{areas_for_improvement}}
 
-## Detailed Analysis
+### Process Improvements
 
-### Component Design Review
-
-{{component_design_review}}
-
-### Data Architecture Review
-
-{{data_architecture_review}}
-
-### Security Architecture Review
-
-{{security_architecture_review}}
-
-### Scalability Assessment
-
-{{scalability_assessment}}
-
-### Performance Analysis
-
-{{performance_analysis}}
-
-### Maintainability Review
-
-{{maintainability_review}}
-
-## Anti-Patterns Identified
-
-{{antipatterns_found}}
-
-## Technical Debt Assessment
-
-{{technical_debt}}
-
-## Compliance Review
-
-{{compliance_assessment}}
-
-## Risk Analysis
-
-### High Priority Risks
-
-{{high_priority_risks}}
-
-### Medium Priority Risks
-
-{{medium_priority_risks}}
-
-### Low Priority Risks
-
-{{low_priority_risks}}
+{{process_improvements}}
 
 ## Recommendations
 
-### Immediate Actions (Priority 1)
+### Release Recommendation
 
-{{immediate_actions}}
+{{release_recommendation}}
 
-### Short-term Improvements (Priority 2)
+### Outstanding Actions
 
-{{short_term_improvements}}
+{{outstanding_actions}}
 
-### Long-term Enhancements (Priority 3)
+### Future Testing Strategy
 
-{{long_term_enhancements}}
+{{future_testing_strategy}}
 
-## Implementation Roadmap
+## Appendices
 
-{{implementation_roadmap}}
+### Detailed Test Results
 
-## Review Conclusions
+{{detailed_test_results}}
 
-{{review_conclusions}}
+### Defect Details
+
+{{defect_details}}
+
+### Test Artifacts
+
+{{test_artifacts}}
+
+### Sign-off
+
+{{sign_off}}
+
+==== END FILE ====
+
+==== FILE: templates/epic.md ====
+# Epic {{epic_number}}: {{epic_title}}
+
+## Status
+
+| Field                | Value                    |
+|----------------------|--------------------------|
+| Status               | {{status}}               |
+| Priority             | {{priority}}            |
+| Epic Owner           | {{owner}}               |
+| Timeline             | {{timeline}}            |
+
+<!-- Epic tracking and SDLC integration -->
+<!-- Enables progress monitoring and PRD traceability validation -->
+
+<!-- Template Guidance:
+Status Options: Planning -> Approved -> In Progress -> Done -> Completed
+Priority Example: Critical, High, Medium, Low (align with PRD requirement priorities)
+Epic Owner Example: "Product Owner", "Tech Lead", "Development Team"
+Timeline Example: "Sprint 1-3 (6 weeks)", "Q1 2024", "March-April 2024"
+-->
+
+## Overview
+
+### Problem Statement
+
+{{problem_statement}}
+
+<!-- Clear, specific user problem this Epic solves from PRD analysis -->
+<!-- Must trace back to PRD business requirements and user pain points -->
+
+<!-- Template Guidance:
+Problem Statement Example:
+"Users struggle with agent discovery and IDE integration, leading to fragmented workflows and reduced productivity. Current manual agent selection requires deep technical knowledge, creating adoption barriers for 70% of target users."
+
+Format Structure:
+- Start with specific user pain point from PRD
+- Include quantifiable impact or evidence
+- Connect to PRD BR/NFR requirements
+- Avoid solution-oriented language
+
+DO: Reference specific PRD requirements (BR1, BR2, NFR1...)
+DO: Include quantifiable user impact
+DO: Focus on user pain, not missing features
+DO: Use evidence from PRD user research
+DON'T: Describe what the system can't do
+DON'T: Include solution details in problem statement
+DON'T: Use vague terms like "users want better experience"
+-->
+
+### Goal
+
+{{goal}}
+
+<!-- Specific, measurable outcome that defines Epic completion -->
+<!-- Must align with PRD success metrics and enable clear Story validation -->
+<!-- REQUIRED FORMAT: Enable [specific outcome] for [target %] of [user type] within [timeline] -->
+
+<!-- Template Guidance:
+Goal Example:
+"Enable seamless agent discovery and IDE integration for 90% of target users within 2 weeks of first use, reducing agent selection time from 15 minutes to under 30 seconds while maintaining enterprise security standards."
+
+REQUIRED Format Structure:
+- MUST start with "Enable [specific outcome]"
+- MUST include target user percentage or metrics
+- MUST include specific timeline boundaries
+- MUST connect to PRD success criteria
+- MUST be measurable and testable
+
+DO: Use format "Enable X for Y% of [users] within Z [timeline]"
+DO: Include specific metrics from PRD (time, percentage, quantity)
+DO: Set realistic timeline boundaries with specific duration
+DO: Connect to PRD success criteria explicitly
+DON'T: Use vague language like "improve user experience"
+DON'T: Set unmeasurable goals or subjective outcomes
+DON'T: Ignore PRD success metrics alignment
+DON'T: Omit timeline or target percentage requirements
+-->
+
+### Target Users
+
+{{target_users}}
+
+<!-- Specific user personas from PRD who benefit from this Epic -->
+<!-- Must align with PRD user segments and enable Story "As a user" scenarios -->
+
+<!-- Template Guidance:
+Target Users Example:
+"Primary: Software Architects (60%) - designing system components and integration patterns
+Secondary: Development Leads (30%) - implementing architectural decisions in code
+Tertiary: Product Managers (10%) - validating technical feasibility and scope"
+
+Format Structure:
+- List primary, secondary, tertiary users with percentages
+- Include specific roles and responsibilities
+- Connect to PRD user segments
+- Enable Story persona development
+
+DO: Use specific personas from PRD
+DO: Include user percentages or priority levels
+DO: Describe user context and responsibilities
+DO: Enable clear Story "As a [user]" scenarios
+DON'T: Use generic roles like "users" or "developers"
+DON'T: Create new personas not in PRD
+DON'T: Omit user context or responsibilities
+-->
+
+## Scope
+
+### What's Included
+
+{{in_scope}}
+
+<!-- Specific features and functionality this Epic delivers -->
+<!-- Must map to PRD requirements and enable Story breakdown -->
+
+<!-- Template Guidance:
+What's Included Example:
+"1. Agent discovery UI with search and filter capabilities (BR2, BR3)
+2. IDE integration framework for Cursor, VS Code, and JetBrains (NFR1)
+3. Authentication and security layer for enterprise environments (NFR2)
+4. Basic agent validation and health checking (BR4)"
+
+Format Structure:
+- Number items for clear tracking
+- Reference specific PRD requirements in parentheses
+- Focus on user-facing functionality
+- Enable clear Story mapping
+
+DO: Reference specific PRD requirements (BR1, NFR2...)
+DO: Number items for clear tracking
+DO: Focus on user-facing functionality
+DO: Include enough detail for Story creation
+DON'T: Include technical implementation details
+DON'T: List features without PRD traceability
+DON'T: Use vague descriptions
+-->
+
+### What's Not Included
+
+{{out_of_scope}}
+
+<!-- Clear boundaries of what this Epic excludes -->
+<!-- Prevents scope creep and guides Story prioritization -->
+
+<!-- Template Guidance:
+What's Not Included Example:
+"1. Advanced analytics and usage monitoring (deferred to Epic 3)
+2. Custom agent development frameworks (out of MVP scope)
+3. Multi-language support beyond English (future roadmap item)
+4. Legacy IDE support (VS 2019, Eclipse) - minimum viable platform focus"
+
+Format Structure:
+- Number excluded items for clarity
+- Explain reasoning (deferred, out of scope, future)
+- Reference other Epics for deferred items
+- Set clear boundaries for Stories
+
+DO: Clearly state what's excluded and why
+DO: Reference future Epics for deferred items
+DO: Explain reasoning for exclusions
+DO: Set clear Story development boundaries
+DON'T: Leave scope boundaries unclear
+DON'T: Include items without rationale
+DON'T: Create artificial limitations
+-->
+
+### Dependencies
+
+{{dependencies}}
+
+<!-- Other Epics, systems, or external requirements this Epic needs -->
+<!-- Critical for Story sequencing and implementation planning -->
+<!-- REQUIRED STRUCTURE: Group by Epic Dependencies, System Dependencies, External Dependencies -->
+
+<!-- Template Guidance:
+Dependencies Example:
+"Epic Dependencies:
+- Epic 1: KubeRocketAI Baseline (foundation infrastructure)
+- Epic 2: Core Engine (agent processing capabilities)
+
+System Dependencies:
+- Python 3.8+ runtime environment
+- IDE extension APIs (Cursor, VS Code, JetBrains)
+- Enterprise authentication systems (SSO integration)
+
+External Dependencies:
+- Design system components (UI framework)
+- Security compliance approval (enterprise deployment)"
+
+REQUIRED Format Structure:
+- MUST group by type: Epic Dependencies, System Dependencies, External Dependencies
+- MUST include specific version requirements where applicable
+- MUST note approval processes or integration needs
+- MUST enable clear dependency validation and tracking
+
+DO: Use exact section headers "Epic Dependencies:", "System Dependencies:", "External Dependencies:"
+DO: Include specific version or requirement details for each dependency
+DO: Note approval processes or integration needs explicitly
+DO: Enable clear dependency validation and tracking
+DON'T: List dependencies without proper grouping structure
+DON'T: Use vague dependencies without specifics or versions
+DON'T: Omit external approval processes or integration requirements
+DON'T: Ignore system requirement details or compatibility needs
+-->
+
+## Solution Approach
+
+{{solution_approach}}
+
+<!-- High-level implementation strategy and architectural direction -->
+<!-- Guides Story creation without prescribing technical details -->
+
+<!-- Template Guidance:
+Solution Approach Example:
+"Implementation Strategy:
+1. Modular UI framework with progressive enhancement for cross-IDE compatibility
+2. Plugin architecture enabling independent IDE integration development
+3. Centralized authentication service with configurable enterprise adapters
+4. Agent validation pipeline with health monitoring and error recovery
+
+Technical Approach:
+- Frontend: React-based components for consistent IDE integration
+- Backend: Python microservices with REST API interfaces
+- Security: OAuth 2.0 with enterprise SSO federation
+- Deployment: Containerized services with Kubernetes orchestration"
+
+Format Structure:
+- Separate implementation and technical approaches
+- Focus on architectural decisions, not detailed implementation
+- Enable Story technical context
+- Include integration patterns and service boundaries
+
+DO: Provide architectural guidance for Stories
+DO: Include integration patterns and service boundaries
+DO: Focus on approach, not detailed implementation
+DO: Enable technical context for Story development
+DON'T: Include detailed code specifications
+DON'T: Prescribe exact implementation details
+DON'T: Ignore architectural considerations
+-->
+
+## Acceptance Criteria
+
+{{acceptance_criteria}}
+
+<!-- Specific, testable conditions that define Epic completion -->
+<!-- Must include measurable outcomes and validation commands for Story verification -->
+<!-- REQUIRED: Each criterion MUST include validation method and verification command -->
+
+<!-- Template Guidance:
+Acceptance Criteria Example:
+"1. User can discover and select agents through IDE interface within 30 seconds
+   - Validation: Time user workflows from agent search to selection
+   - Command: `pytest tests/integration/agent_discovery_test.py`
+
+2. IDE integration works across Cursor, VS Code, JetBrains with consistent UX
+   - Validation: Cross-platform testing demonstrates feature parity
+   - Command: `npm run test:integration -- --platform=all`
+
+3. Enterprise authentication integrates with existing SSO systems
+   - Validation: SSO login flow completes without manual intervention
+   - Command: `python tests/auth/sso_integration_test.py`
+
+4. Agent validation prevents malformed or insecure agent usage
+   - Validation: Security scan passes with zero critical issues
+   - Command: `security-scan --agents --threshold=critical`"
+
+REQUIRED Format Structure:
+- MUST number criteria for clear tracking and Story mapping
+- MUST include validation method for each criterion
+- MUST include verification command for each criterion (where automatable)
+- MUST define measurable success indicators
+- MUST enable automated testing and verification where possible
+
+DO: Include specific validation methods AND verification commands for each criterion
+DO: Make criteria measurable and testable with clear success indicators
+DO: Number criteria for Story traceability and tracking
+DO: Enable automated verification where possible (pytest, npm test, CLI commands)
+DO: Include both manual validation steps and automated command verification
+DON'T: Use subjective criteria like "works well" or "user-friendly"
+DON'T: Omit validation methods or verification steps
+DON'T: Create criteria that can't be tested or measured
+DON'T: Skip command verification for automatable criteria
+-->
+
+## User Stories
+
+{{planned_stories}}
+
+<!-- Planned Stories that implement this Epic with clear breakdown -->
+<!-- Enables immediate Story creation with Epic context and traceability -->
+<!-- REQUIRED: Group by phases with clear dependencies and story numbering -->
+
+<!-- Template Guidance:
+User Stories Example:
+"Planned Stories for Implementation:
+
+**Phase 1: Foundation (Sprint 1)**
+- Story {{epic_number}}.01: Agent Discovery Interface
+  - As a Software Architect, I want to search and filter available agents
+  - Acceptance: Search returns relevant agents within 3 seconds
+  - Dependencies: Epic 1 baseline infrastructure
+
+- Story {{epic_number}}.02: Basic IDE Integration
+  - As a Development Lead, I want to activate agents within my IDE
+  - Acceptance: Agent activation works in Cursor and VS Code
+  - Dependencies: Story {{epic_number}}.01 completion
+
+**Phase 2: Enhancement (Sprint 2)**
+- Story {{epic_number}}.03: Enterprise Authentication
+  - As a Product Manager, I want secure agent access with SSO
+  - Acceptance: SSO login integrates with existing enterprise systems
+  - Dependencies: Security compliance approval
+
+**Phase 3: Validation (Sprint 3)**
+- Story {{epic_number}}.04: Agent Health Monitoring
+  - As a Software Architect, I want to validate agent security and performance
+  - Acceptance: Health dashboard shows agent status and metrics
+  - Dependencies: All previous stories completed"
+
+REQUIRED Format Structure:
+- MUST group Stories by implementation phases with clear phase headers
+- MUST include user persona, goal, and basic acceptance criteria for each story
+- MUST note dependencies between Stories and external requirements
+- MUST use consistent naming: {{epic_number}}.01, {{epic_number}}.02, etc.
+- MUST enable immediate Story creation with Epic context and traceability
+
+DO: Group Stories by logical implementation phases with "**Phase X: Name**" headers
+DO: Include user persona ("As a [role]"), goal ("I want to"), and acceptance criteria
+DO: Note dependencies between Stories using "Dependencies: Story X.XX completion"
+DO: Use consistent Story numbering within Epic ({{epic_number}}.01, .02, etc.)
+DO: Enable immediate Story creation with sufficient context
+DON'T: List stories without phase grouping or logical sequence
+DON'T: Include detailed Story implementation details in Epic
+DON'T: Create Stories without clear user value or persona
+DON'T: Ignore dependencies or sequencing requirements between stories
+DON'T: Use inconsistent numbering or skip dependency notation
+-->
+
+==== END FILE ====
+
+==== FILE: templates/business-rules.md ====
+# Business Rules Documentation: {{project_name}}
+
+## Document Overview
+
+{{document_overview}}
+
+## Business Rules Summary
+
+### Total Rules Defined
+
+{{total_rules_defined}}
+
+### Rule Categories
+
+{{rule_categories}}
+
+### Priority Classification
+
+{{priority_classification}}
+
+### Scope Coverage
+
+{{scope_coverage}}
+
+## Business Context
+
+### Business Domain
+
+{{business_domain}}
+
+### Process Context
+
+{{process_context}}
+
+### Stakeholder Requirements
+
+{{stakeholder_requirements}}
+
+### Regulatory Context
+
+{{regulatory_context}}
+
+## Rule Categories
+
+### Business Logic Rules
+
+{{business_logic_rules}}
+
+### Validation Rules
+
+{{validation_rules}}
+
+### Calculation Rules
+
+{{calculation_rules}}
+
+### Constraint Rules
+
+{{constraint_rules}}
+
+### Authorization Rules
+
+{{authorization_rules}}
+
+### Workflow Rules
+
+{{workflow_rules}}
+
+## Detailed Business Rules
+
+### Rule ID: {{rule_id}}
+
+**Rule Name:** {{rule_name}}
+
+**Rule Description:** {{rule_description}}
+
+**Rule Type:** {{rule_type}}
+
+**Priority:** {{rule_priority}}
+
+**Business Justification:** {{business_justification}}
+
+**Rule Statement:** {{rule_statement}}
+
+**Conditions:** {{rule_conditions}}
+
+**Actions/Outcomes:** {{rule_actions}}
+
+**Exceptions:** {{rule_exceptions}}
+
+**Examples:** {{rule_examples}}
+
+**Source Authority:** {{source_authority}}
+
+**Effective Date:** {{effective_date}}
+
+**Review Date:** {{review_date}}
+
+## Rule Relationships
+
+### Rule Dependencies
+
+{{rule_dependencies}}
+
+### Rule Conflicts
+
+{{rule_conflicts}}
+
+### Rule Hierarchies
+
+{{rule_hierarchies}}
+
+### Cross-Reference Matrix
+
+{{cross_reference_matrix}}
+
+## Implementation Specifications
+
+### System Implementation
+
+{{system_implementation}}
+
+### Data Requirements
+
+{{data_requirements}}
+
+### Process Integration
+
+{{process_integration}}
+
+### Technology Considerations
+
+{{technology_considerations}}
+
+## Rule Validation
+
+### Validation Criteria
+
+{{validation_criteria}}
+
+### Test Scenarios
+
+{{test_scenarios}}
+
+### Acceptance Criteria
+
+{{acceptance_criteria}}
+
+### Verification Methods
+
+{{verification_methods}}
+
+## Exception Handling
+
+### Exception Types
+
+{{exception_types}}
+
+### Exception Processes
+
+{{exception_processes}}
+
+### Escalation Procedures
+
+{{escalation_procedures}}
+
+### Override Authorities
+
+{{override_authorities}}
+
+## Compliance and Governance
+
+### Regulatory Compliance
+
+{{regulatory_compliance}}
+
+### Audit Requirements
+
+{{audit_requirements}}
+
+### Documentation Standards
+
+{{documentation_standards}}
+
+### Change Control
+
+{{change_control}}
+
+## Maintenance and Updates
+
+### Review Schedule
+
+{{review_schedule}}
+
+### Update Procedures
+
+{{update_procedures}}
+
+### Version Control
+
+{{version_control}}
+
+### Stakeholder Approval
+
+{{stakeholder_approval}}
+
+## Impact Analysis
+
+### Business Impact
+
+{{business_impact}}
+
+### System Impact
+
+{{system_impact}}
+
+### Process Impact
+
+{{process_impact}}
+
+### User Impact
+
+{{user_impact}}
+
+## Training and Communication
+
+### Training Requirements
+
+{{training_requirements}}
+
+### Communication Plan
+
+{{communication_plan}}
+
+### Documentation Distribution
+
+{{documentation_distribution}}
+
+### Support Resources
+
+{{support_resources}}
+
+## Quality Assurance
+
+### Rule Quality Criteria
+
+{{rule_quality_criteria}}
+
+### Consistency Checks
+
+{{consistency_checks}}
+
+### Completeness Verification
+
+{{completeness_verification}}
+
+### Accuracy Validation
+
+{{accuracy_validation}}
+
+## Metrics and Monitoring
+
+### Rule Performance Metrics
+
+{{rule_performance_metrics}}
+
+### Compliance Metrics
+
+{{compliance_metrics}}
+
+### Exception Metrics
+
+{{exception_metrics}}
+
+### Review Metrics
+
+{{review_metrics}}
+
+## Risk Management
+
+### Rule-Related Risks
+
+{{rule_related_risks}}
+
+### Mitigation Strategies
+
+{{mitigation_strategies}}
+
+### Risk Monitoring
+
+{{risk_monitoring}}
+
+### Contingency Plans
+
+{{contingency_plans}}
+
+## Appendices
+
+### Rule Repository
+
+{{rule_repository}}
+
+### Supporting Documentation
+
+{{supporting_documentation}}
+
+### Stakeholder Sign-off
+
+{{stakeholder_signoff}}
+
+### Glossary
+
+{{glossary}}
 
 ==== END FILE ====
 
@@ -4280,254 +4087,1105 @@ Each bucket should map to an Epic following SDLC naming: {epic_number}-epic-{slu
 
 ==== END FILE ====
 
-==== FILE: templates/project-brief-template.md ====
-# Project Brief: {{project_name}}
-
-> **Target Length**: 2-3 pages maximum
-> **Framework**: Root artifact in SDLC framework
-> **File Location**: MUST be saved as `/docs/prd/project-brief.md` (exact path)
-
----
+==== FILE: templates/requirements-doc.md ====
+# Business Requirements Document: {{project_name}}
 
 ## Executive Summary
 
 {{executive_summary}}
 
-<!-- Template Guidance:
-Write a compelling 3-4 sentence overview combining problem, solution approach, and expected outcome.
+## Business Context
 
-Example: "Our SaaS platform experiences 2,500 password-related support tickets monthly, consuming 15% of support resources and frustrating users. We will implement biometric authentication and social login options to reduce password dependency, targeting 80% reduction in support tickets and $50K annual savings. This 3-month initiative serves 10,000+ monthly active users and requires Auth0 integration with a $25K budget."
+### Business Objectives
 
-Key Elements:
-- What problem are we solving? (specific and quantified)
-- How will we solve it? (high-level approach)
-- What's the expected outcome? (business value)
-- What's the scope? (timeline, users, constraints)
--->
+{{business_objectives}}
 
----
+### Project Scope
 
-## Problem Statement
+{{project_scope}}
 
-{{problem_statement}}
+### Success Criteria
 
-<!-- Template Guidance:
-Define the specific pain point driving this project with clear scope boundaries.
+{{success_criteria}}
 
-Example: "Users frequently forget passwords leading to 15% of support tickets and account lockouts (2,500/month). Focus on authentication workflow only, excluding password policy management or user registration processes."
+### Assumptions and Constraints
 
-Best Practices:
-- Start with user scenarios, not business needs
-- Use concrete numbers and evidence
-- Define what's included and excluded
-- Avoid solution-oriented language
-- Focus on pain points and their impact
+{{assumptions_constraints}}
 
-Evidence to Include:
-- Support ticket volumes
-- User research findings
-- Productivity impact data
-- Cost of current workarounds
--->
+## Stakeholder Analysis
 
----
+### Primary Stakeholders
 
-## Opportunity
+{{primary_stakeholders}}
 
-{{opportunity}}
+### Secondary Stakeholders
 
-<!-- Template Guidance:
-Quantified business value plus high-level solution approach.
+{{secondary_stakeholders}}
 
-Example: "Reducing password-related support tickets by 80% would save $50K annually and improve user satisfaction scores by 25%. Implement biometric authentication and social login options to reduce password dependency."
+### Stakeholder Needs
 
-Key Elements:
-- Business value (cost savings, revenue, efficiency)
-- User value (time savings, satisfaction, productivity)
-- Market opportunity (competitive advantage, growth)
-- High-level solution direction (not detailed implementation)
+{{stakeholder_needs}}
 
-Quantification Examples:
-- Cost reduction: "$50K annual savings"
-- Time savings: "15 minutes per user per month"
-- Satisfaction: "25% improvement in user satisfaction"
-- Efficiency: "80% reduction in support tickets"
--->
+### Communication Plan
 
----
+{{communication_plan}}
 
-## Target Users
+## Current State Analysis
 
-{{target_users}}
+### Business Problem
 
-<!-- Template Guidance:
-Specific user segments who have this problem with usage patterns and demographics.
+{{business_problem}}
 
-Example: "SaaS platform users (10,000+ monthly active users) who access the platform 3+ times per week. Primary segment: business professionals aged 25-45 accessing from mobile devices (60%) and desktop (40%)."
+### Current Process
 
-Include:
-- User volume and growth trends
-- Demographics (age, role, industry)
-- Usage patterns (frequency, device, context)
-- Segment prioritization (primary vs secondary)
-- Geographic distribution if relevant
+{{current_process}}
 
-User Segment Examples:
-- "10,000+ monthly active users"
-- "Business professionals aged 25-45"
-- "Mobile-first users (60% mobile, 40% desktop)"
-- "Access platform 3+ times weekly"
-- "Located primarily in North America and Europe"
--->
+### Pain Points
 
----
+{{pain_points}}
 
-## Success Metrics
+### Root Cause Analysis
 
-{{success_metrics}}
+{{root_cause_analysis}}
 
-<!-- Template Guidance:
-How we'll measure if we've solved the problem with specific timelines.
+## Future State Vision
 
-Example: "Reduce password-related support tickets by 80% within 3 months, maintain 99.9% uptime, achieve 70% user adoption of new auth methods within 6 months, improve login success rate from 85% to 95%."
+### Desired Outcomes
 
-Success Criteria Format:
-- Specific: Exactly what will be measured
-- Measurable: Numbers, percentages, timelines
-- Achievable: Realistic given constraints
-- Relevant: Directly tied to problem and opportunity
-- Time-bound: Clear deadlines
+{{desired_outcomes}}
 
-Metric Categories:
-- Problem Resolution: "80% reduction in support tickets"
-- User Adoption: "70% user adoption within 6 months"
-- Quality: "99.9% uptime maintained"
-- User Experience: "Login success rate 85% → 95%"
-- Business Impact: "$50K annual cost savings"
--->
+### Future Process
 
----
+{{future_process}}
 
-## Constraints
+### Benefits Realization
 
-{{constraints}}
+{{benefits_realization}}
 
-<!-- Template Guidance:
-Resource, technical, and assumption factors that limit the solution.
+### Value Proposition
 
-Example: "Must integrate with existing Auth0 setup, 3-month timeline, $25K budget, maximum 2 developers assigned. Assumes current mobile app architecture supports biometric APIs and users have compatible devices."
+{{value_proposition}}
 
-Constraint Categories:
+## Functional Requirements
 
-### Resource Constraints:
-- Budget: "$25K maximum budget"
-- Timeline: "3-month delivery deadline"
-- Team: "Maximum 2 developers available"
-- Skills: "No iOS development expertise on team"
+### Core Functionality
 
-### Technical Constraints:
-- Integration: "Must integrate with existing Auth0"
-- Architecture: "Cannot modify core database schema"
-- Performance: "Must maintain current response times"
-- Security: "Must meet enterprise security standards"
+{{core_functionality}}
 
-### Business Constraints:
-- Compliance: "Must maintain SOC 2 compliance"
-- User Impact: "Zero downtime deployment required"
-- Support: "Cannot increase support complexity"
-- Branding: "Must align with current UI/UX standards"
+### User Stories
 
-### Key Assumptions:
-- "Users have biometric-capable devices"
-- "Auth0 API will remain stable"
-- "No major iOS/Android changes during development"
--->
+{{user_stories}}
 
----
+### Use Cases
 
-## Key Risks
+{{use_cases}}
 
-{{key_risks}}
+### Business Rules
 
-<!-- Template Guidance:
-Major risks that could derail the project with impact assessment.
+{{business_rules}}
 
-Example: "User adoption resistance (HIGH): Users may prefer familiar passwords. Auth0 API changes (MEDIUM): Potential breaking changes during integration. Biometric compatibility (MEDIUM): Older devices may not support all features. Timeline risk (HIGH): Integration complexity may exceed estimates."
+### Data Requirements
 
-Risk Assessment Format:
-[Risk Name] ([Impact Level]): [Description and potential impact]
+{{data_requirements}}
 
-Impact Levels:
-- HIGH: Could significantly delay or derail project
-- MEDIUM: Could cause delays or require scope changes
-- LOW: Minor impact, manageable workarounds available
+### Integration Requirements
 
-Risk Categories:
+{{integration_requirements}}
 
-### User Adoption Risks:
-- "User resistance to change (HIGH)"
-- "Learning curve for new features (MEDIUM)"
-- "Device compatibility issues (MEDIUM)"
+## Non-Functional Requirements
 
-### Technical Risks:
-- "Integration complexity (HIGH)"
-- "Third-party API changes (MEDIUM)"
-- "Performance impact (LOW)"
+### Performance Requirements
 
-### Business Risks:
-- "Timeline overrun (HIGH)"
-- "Budget overrun (MEDIUM)"
-- "Resource unavailability (MEDIUM)"
+{{performance_requirements}}
 
-### Market Risks:
-- "Competitive response (LOW)"
-- "Regulatory changes (MEDIUM)"
-- "Technology shifts (LOW)"
--->
+### Security Requirements
 
----
+{{security_requirements}}
 
-## SDLC Framework Information
+### Usability Requirements
 
-**Dependencies**: None (root artifact)
-**Output Location**: This Project Brief MUST be saved as `/docs/prd/project-brief.md`
-**Downstream Enablement**: Enables PRD creation at `/docs/prd/prd.md`
+{{usability_requirements}}
 
-<!-- SDLC Framework Integration:
-This Project Brief serves as the foundation for:
-- PRD Problem/Opportunity section
-- PRD Target Users & Use Cases
-- PRD Goals/Measurable Outcomes
-- PRD scope and constraint definition
+### Scalability Requirements
 
-Directory Structure:
-/docs/
-├── prd/                          # Product vision & requirements
-│   ├── project-brief.md          # Project vision & strategy (THIS FILE)
-│   └── prd.md                    # Product requirements (ENABLED BY THIS)
-├── epics/                        # High-level features
-├── stories/                      # User stories
-├── architecture/                 # System design
-└── tests/                        # Quality validation
--->
+{{scalability_requirements}}
 
----
+### Compliance Requirements
 
-<!-- QUALITY CHECKLIST
-✅ Document is 2-3 pages maximum
-✅ Executive summary captures complete project essence
-✅ Problem statement is specific and evidence-based
-✅ Opportunity is quantified with business value
-✅ Target users are specific with usage patterns
-✅ Success metrics are measurable with timelines
-✅ Constraints are realistic and comprehensive
-✅ Key risks identified with impact assessment
-✅ File saved exactly as /docs/prd/project-brief.md
-✅ Ready to enable PRD creation
--->
+{{compliance_requirements}}
+
+### Availability Requirements
+
+{{availability_requirements}}
+
+## User Experience Requirements
+
+### User Personas
+
+{{user_personas}}
+
+### User Interface Requirements
+
+{{ui_requirements}}
+
+### Accessibility Requirements
+
+{{accessibility_requirements}}
+
+### User Journey Requirements
+
+{{user_journey_requirements}}
+
+## Technical Considerations
+
+### Technical Constraints
+
+{{technical_constraints}}
+
+### System Integration
+
+{{system_integration}}
+
+### Data Migration
+
+{{data_migration}}
+
+### Infrastructure Requirements
+
+{{infrastructure_requirements}}
+
+## Implementation Planning
+
+### Implementation Approach
+
+{{implementation_approach}}
+
+### Phasing Strategy
+
+{{phasing_strategy}}
+
+### Resource Requirements
+
+{{resource_requirements}}
+
+### Timeline and Milestones
+
+{{timeline_milestones}}
+
+## Risk Analysis
+
+### Business Risks
+
+{{business_risks}}
+
+### Technical Risks
+
+{{technical_risks}}
+
+### Project Risks
+
+{{project_risks}}
+
+### Risk Mitigation
+
+{{risk_mitigation}}
+
+## Acceptance Criteria
+
+### Functional Acceptance
+
+{{functional_acceptance}}
+
+### Performance Acceptance
+
+{{performance_acceptance}}
+
+### User Acceptance
+
+{{user_acceptance}}
+
+### Business Acceptance
+
+{{business_acceptance}}
+
+## Traceability Matrix
+
+### Requirements Traceability
+
+{{requirements_traceability}}
+
+### Test Coverage
+
+{{test_coverage}}
+
+### Change History
+
+{{change_history}}
+
+## Appendices
+
+### Supporting Documentation
+
+{{supporting_documentation}}
+
+### Glossary
+
+{{glossary}}
+
+### References
+
+{{references}}
+
+### Sign-off
+
+{{sign_off}}
+
+==== END FILE ====
+
+==== FILE: templates/test-cases.md ====
+# Test Cases: {{project_name}}
+
+## Test Suite Overview
+
+{{test_suite_overview}}
+
+## Test Case Summary
+
+### Total Test Cases
+
+{{total_test_cases}}
+
+### Test Categories
+
+{{test_categories}}
+
+### Coverage Analysis
+
+{{coverage_analysis}}
+
+## Functional Test Cases
+
+### Module: {{module_name}}
+
+#### Test Case ID: {{test_case_id}}
+
+**Title:** {{test_case_title}}
+
+**Description:** {{test_case_description}}
+
+**Prerequisites:** {{prerequisites}}
+
+**Test Data:** {{test_data}}
+
+**Test Steps:**
+{{test_steps}}
+
+**Expected Results:**
+{{expected_results}}
+
+**Actual Results:**
+{{actual_results}}
+
+**Pass/Fail Status:**
+{{pass_fail_status}}
+
+**Priority:** {{priority}}
+
+**Severity:** {{severity}}
+
+**Execution Time:** {{execution_time}}
+
+**Automation Candidate:** {{automation_candidate}}
+
+## Non-Functional Test Cases
+
+### Performance Test Cases
+
+{{performance_test_cases}}
+
+### Security Test Cases
+
+{{security_test_cases}}
+
+### Usability Test Cases
+
+{{usability_test_cases}}
+
+### Compatibility Test Cases
+
+{{compatibility_test_cases}}
+
+## Edge Cases and Boundary Tests
+
+### Boundary Value Analysis
+
+{{boundary_value_analysis}}
+
+### Edge Cases
+
+{{edge_cases}}
+
+### Error Handling Tests
+
+{{error_handling_tests}}
+
+## Negative Test Cases
+
+### Invalid Input Tests
+
+{{invalid_input_tests}}
+
+### System Limit Tests
+
+{{system_limit_tests}}
+
+### Failure Scenario Tests
+
+{{failure_scenario_tests}}
+
+## Test Data Requirements
+
+### Test Data Sets
+
+{{test_data_sets}}
+
+### Data Generation Strategy
+
+{{data_generation_strategy}}
+
+### Data Privacy Considerations
+
+{{data_privacy_considerations}}
+
+## Traceability Matrix
+
+### Requirements Coverage
+
+{{requirements_coverage}}
+
+### User Story Mapping
+
+{{user_story_mapping}}
+
+### Acceptance Criteria Mapping
+
+{{acceptance_criteria_mapping}}
+
+## Automation Recommendations
+
+### Automation Candidates
+
+{{automation_candidates}}
+
+### Manual Testing Requirements
+
+{{manual_testing_requirements}}
+
+### Automation Framework
+
+{{automation_framework}}
+
+## Test Environment Setup
+
+### Environment Configuration
+
+{{environment_configuration}}
+
+### Setup Instructions
+
+{{setup_instructions}}
+
+### Reset Procedures
+
+{{reset_procedures}}
+
+## Test Execution Notes
+
+### Special Instructions
+
+{{special_instructions}}
+
+### Known Issues
+
+{{known_issues}}
+
+### Workarounds
+
+{{workarounds}}
+
+## Review and Approval
+
+### Test Case Review
+
+{{test_case_review}}
+
+### Approval Status
+
+{{approval_status}}
+
+### Review Comments
+
+{{review_comments}}
+
 ==== END FILE ====
 
 # Reference Data
+
+==== FILE: data/design-patterns.md ====
+# Design Patterns for Architecture
+
+## Architectural Patterns
+
+### Microservices Pattern
+
+Decompose applications into small, independent services.
+
+- **When to use**: Large, complex applications with multiple teams
+- **Benefits**: Independent deployment, technology diversity, fault isolation
+- **Considerations**: Network latency, data consistency, operational complexity
+
+### Event-Driven Architecture
+
+Use events to trigger and communicate between decoupled services.
+
+- **When to use**: Real-time processing, loose coupling requirements
+- **Benefits**: Scalability, flexibility, real-time responsiveness
+- **Considerations**: Event ordering, eventual consistency
+
+### API Gateway Pattern
+
+Centralize cross-cutting concerns for microservices.
+
+- **When to use**: Multiple client types, microservices architecture
+- **Benefits**: Unified entry point, security, rate limiting
+- **Considerations**: Single point of failure, performance bottleneck
+
+### CQRS (Command Query Responsibility Segregation)
+
+Separate read and write operations for better performance.
+
+- **When to use**: High-read vs high-write workloads
+- **Benefits**: Optimized read/write models, scalability
+- **Considerations**: Complexity, eventual consistency
+
+## Integration Patterns
+
+### Circuit Breaker
+
+Prevent cascading failures in distributed systems.
+
+- **Implementation**: Monitor failure rates, open circuit on threshold
+- **Benefits**: System stability, graceful degradation
+- **Tools**: Hystrix, Resilience4j
+
+### Bulkhead
+
+Isolate resources to prevent total system failure.
+
+- **Implementation**: Separate thread pools, connection pools
+- **Benefits**: Fault isolation, resource protection
+
+### Retry with Exponential Backoff
+
+Handle transient failures gracefully.
+
+- **Implementation**: Exponential delays between retries
+- **Benefits**: Improved reliability, reduced system load
+
+## Data Patterns
+
+### Database per Service
+
+Each microservice owns its data exclusively.
+
+- **Benefits**: Service independence, technology flexibility
+- **Considerations**: Data consistency, query complexity
+
+### Saga Pattern
+
+Manage distributed transactions across services.
+
+- **Types**: Choreography-based, Orchestration-based
+- **Benefits**: Data consistency without distributed transactions
+
+### Event Sourcing
+
+Store events instead of current state.
+
+- **Benefits**: Complete audit trail, temporal queries
+- **Considerations**: Storage overhead, complexity
+
+## Security Patterns
+
+### Zero Trust Architecture
+
+Never trust, always verify approach to security.
+
+- **Principles**: Verify identity, least privilege, assume breach
+- **Implementation**: Multi-factor authentication, micro-segmentation
+
+### OAuth 2.0 / OpenID Connect
+
+Standard patterns for authentication and authorization.
+
+- **Use cases**: API access, single sign-on, third-party integration
+
+## Performance Patterns
+
+### Caching Strategies
+
+- **Cache-Aside**: Application manages cache
+- **Write-Through**: Write to cache and database simultaneously
+- **Write-Behind**: Write to cache first, database later
+
+### Load Balancing
+
+- **Round Robin**: Distribute requests evenly
+- **Least Connections**: Route to server with fewest active connections
+- **Weighted**: Route based on server capacity
+
+==== END FILE ====
+
+==== FILE: data/test-methodologies.md ====
+# Test Methodologies and Technical Framework
+
+## Testing Methodologies
+
+### Agile Testing Methodology
+
+Testing approach aligned with agile development practices.
+
+- **Continuous Testing**: Integrate testing throughout development cycles
+- **Sprint-based Testing**: Plan and execute testing within sprint cycles
+- **Collaborative Testing**: Close collaboration between testers and developers
+- **Adaptive Planning**: Adjust testing approach based on sprint outcomes
+
+### Risk-Based Testing
+
+Focus testing efforts based on risk assessment and impact analysis.
+
+- **Risk Identification**: Systematic identification of potential risks
+- **Risk Assessment**: Evaluate probability and impact of identified risks
+- **Risk Prioritization**: Prioritize testing based on risk levels
+- **Risk Mitigation**: Design tests to address highest priority risks
+
+### Behavior-Driven Development (BDD)
+
+Testing methodology focused on business behavior specification.
+
+- **Given-When-Then**: Structure test scenarios using BDD format
+- **Collaboration**: Involve business stakeholders in test definition
+- **Living Documentation**: Tests serve as executable documentation
+- **Automation**: Automate BDD scenarios for continuous validation
+
+### Test-Driven Development (TDD)
+
+Development approach where tests are written before implementation.
+
+- **Red-Green-Refactor**: TDD cycle of failing test, implementation, refactoring
+- **Unit Test Focus**: Emphasis on comprehensive unit test coverage
+- **Design Validation**: Tests validate design decisions and implementation
+- **Continuous Feedback**: Immediate feedback on code quality and functionality
+
+## Test Design Techniques
+
+### Black Box Testing Techniques
+
+Testing based on functional specifications without knowledge of internal structure.
+
+- **Equivalence Partitioning**: Divide input space into equivalent classes
+- **Boundary Value Analysis**: Test at boundaries of input domains
+- **Decision Table Testing**: Test combinations of input conditions
+- **State Transition Testing**: Test system behavior across state changes
+
+### White Box Testing Techniques
+
+Testing based on internal code structure and implementation.
+
+- **Statement Coverage**: Ensure all code statements are executed
+- **Branch Coverage**: Test all decision branches in code
+- **Path Coverage**: Test all possible execution paths
+- **Condition Coverage**: Test all Boolean sub-expressions
+
+### Gray Box Testing Techniques
+
+Combination of black box and white box testing approaches.
+
+- **Matrix Testing**: Combine functional and structural testing
+- **Penetration Testing**: Security testing with partial system knowledge
+- **Pattern Testing**: Testing based on common failure patterns
+- **Hybrid Approach**: Mix functional and structural testing techniques
+
+## Test Levels and Types
+
+### Unit Testing
+
+Testing individual components or modules in isolation.
+
+- **Component Isolation**: Test individual units independently
+- **Mock Dependencies**: Use mocks and stubs for external dependencies
+- **Test Automation**: Automate unit tests for continuous execution
+- **Code Quality**: Validate code quality and maintainability
+
+### Integration Testing
+
+Testing interactions between integrated components or systems.
+
+- **Big Bang Integration**: Test all components together at once
+- **Incremental Integration**: Gradually integrate and test components
+- **API Testing**: Test application programming interfaces
+- **Data Integration**: Test data flow between integrated systems
+
+### System Testing
+
+Testing complete integrated system against specified requirements.
+
+- **End-to-End Testing**: Test complete business workflows
+- **System Integration**: Test system-to-system interactions
+- **Environment Testing**: Test in production-like environments
+- **Performance Testing**: Validate system performance characteristics
+
+### Acceptance Testing
+
+Validate system meets business requirements and user expectations.
+
+- **User Acceptance Testing**: Business users validate system functionality
+- **Business Acceptance Testing**: Validate business process support
+- **Alpha/Beta Testing**: Pre-release testing with limited user groups
+- **Contract Acceptance**: Formal acceptance against contractual requirements
+
+## Test Automation Framework
+
+### Automation Strategy
+
+Systematic approach to test automation implementation.
+
+- **Automation Pyramid**: Balance unit, integration, and UI automation
+- **ROI Analysis**: Evaluate return on investment for automation
+- **Tool Selection**: Choose appropriate automation tools and frameworks
+- **Maintenance Strategy**: Plan for test automation maintenance
+
+### Automation Architecture
+
+Design robust and scalable automation frameworks.
+
+- **Modular Design**: Create reusable and maintainable test components
+- **Data-Driven Testing**: Separate test logic from test data
+- **Keyword-Driven Testing**: Abstract test actions into reusable keywords
+- **Hybrid Framework**: Combine multiple automation approaches
+
+### Continuous Integration Testing
+
+Integrate automated testing into CI/CD pipelines.
+
+- **Pipeline Integration**: Embed tests in deployment pipelines
+- **Parallel Execution**: Run tests in parallel for faster feedback
+- **Environment Management**: Manage test environments in CI/CD
+- **Reporting Integration**: Integrate test results with CI/CD reporting
+
+## Performance Testing Methodology
+
+### Performance Test Types
+
+Different types of performance testing for various objectives.
+
+- **Load Testing**: Test system behavior under expected load
+- **Stress Testing**: Test system behavior beyond normal capacity
+- **Volume Testing**: Test system with large amounts of data
+- **Spike Testing**: Test system response to sudden load increases
+
+### Performance Test Process
+
+Systematic approach to performance testing execution.
+
+- **Requirements Analysis**: Define performance requirements and objectives
+- **Test Planning**: Plan performance test approach and scenarios
+- **Test Environment**: Set up realistic performance test environment
+- **Test Execution**: Execute performance tests and collect data
+- **Results Analysis**: Analyze performance data and identify bottlenecks
+
+## Security Testing Methodology
+
+### Security Test Approach
+
+Comprehensive approach to security testing and validation.
+
+- **Threat Modeling**: Identify potential security threats and vulnerabilities
+- **Security Test Planning**: Plan security tests based on threat analysis
+- **Penetration Testing**: Simulate real-world security attacks
+- **Vulnerability Assessment**: Systematic identification of security weaknesses
+
+### Security Testing Types
+
+Different types of security testing for comprehensive coverage.
+
+- **Authentication Testing**: Validate user authentication mechanisms
+- **Authorization Testing**: Test access control and permission systems
+- **Data Protection Testing**: Validate data encryption and protection
+- **Input Validation Testing**: Test input sanitization and validation
+
+==== END FILE ====
+
+==== FILE: data/best-practices.md ====
+# Best Practices
+
+## Development
+
+- Start with simplest solution
+- Refactor regularly
+- Use version control effectively
+
+## Code Quality
+
+- Follow SOLID principles
+- Minimize dependencies
+- Write self-documenting code
+
+## Collaboration
+
+- Review code thoroughly
+- Share knowledge
+- Communicate changes clearly
+
+==== END FILE ====
+
+==== FILE: data/common/sdlc-framework.md ====
+# SDLC Framework Quick Reference
+
+**Purpose**: This framework enables AI agents to collaborate in software development through structured, filesystem-based artifacts. Agents reference this document to understand their role, dependencies, and where to find required templates and standards.
+
+## Framework Principles
+
+- **Filesystem-First**: All artifacts stored as markdown files, no APIs
+- **Agent Discovery**: Agents find artifacts through organized directory structure
+- **Natural Language**: Human-readable artifacts that agents can process
+- **Clear Dependencies**: Each artifact builds on previous work
+- **Inline References**: Use `[filename](path/to/file)` markdown links for all references
+
+## Role Responsibilities
+
+| Role | Outputs | Dependencies |
+|------|---------|--------------|
+| **Product Manager** | Project Brief, PRD, Roadmap | None (root artifacts) |
+| **Product Owner** | Epics, Stories | PRD |
+| **Business Analyst** | Refined PRD, Workflows | PRD, Stakeholder inputs |
+| **Architect** | Architecture Documents | PRD, Epics |
+| **Developer** | Code, Implementation | Stories, Architecture |
+| **QA Engineer** | Test Results, Quality Reports | Stories, Code |
+
+## Artifact Flow
+
+```text
+Project Brief → PRD → Epics → Stories → Code → Tests → MVP
+                  ↓
+              Architecture ← → Code
+```
+
+**Dependency Rules:**
+
+- **Project Brief**: No dependencies (root artifact)
+- **PRD**: Requires Project Brief approval
+- **Epic**: Requires PRD completion, references specific BR/NFR requirements
+- **Story**: Requires Epic definition, maps to implementation tasks
+- **Architecture**: Requires PRD + Epic context for technical design
+- **Code**: Requires Stories + Architecture for implementation guidance
+- **Tests**: Requires Stories + Code for validation
+
+## Directory Structure
+
+```bash
+{project_root}/
+├── docs/                           # All SDLC artifacts
+│   ├── prd/                        # PM: Project Brief, PRD, Roadmap
+│   │   ├── project-brief.md        # Vision & strategy
+│   │   ├── prd.md                  # Business requirements (BR1, BR2...), system requirements (NFR1, NFR2...)
+│   │   └── roadmap.md              # Implementation timeline
+│   ├── epics/                      # PO: High-level features
+│   │   └── {epic_number}-epic-{slug}.md    # e.g., 01-epic-user-authentication.md
+│   ├── stories/                    # PO: User requirements with tasks
+│   │   └── {epic_number}.{story_number}.story.md    # e.g., 01.01.story.md
+│   ├── architecture/               # Architect: System design
+│   │   ├── adr/                    # Architecture Decision Records
+│   │   ├── 01-introduction.md      # System overview
+│   │   ├── 02-high-level-architecture.md
+│   │   └── [other numbered sections]
+│   └── tests/                      # QA: Quality validation
+│       └── test-results-{story}.md
+└── .krci-ai/                       # Framework assets
+    ├── agents/                     # WHO: Role definitions
+    ├── tasks/                      # WHAT: Procedural workflows
+    ├── templates/                  # HOW: Output formatting
+    └── data/                       # REFERENCE: Standards & guidelines
+```
+
+## Quality Gates
+
+1. **Project Brief Approval** → Enables PRD creation
+2. **PRD Approval** → Enables Epic/Architecture creation
+3. **Architecture Review** → Enables implementation
+4. **Code Review** → Enables testing
+5. **Test Validation** → Enables MVP delivery
+
+## Template Variables
+
+All templates use `{{variable_name}}` format for dynamic content:
+
+- **Required fields**: Must be populated, no empty `{{}}` allowed
+- **Dependencies**: Reference parent artifacts (Epic references PRD requirements)
+- **Traceability**: Link requirements to implementation (BR1, NFR2, etc.)
+
+## Success Flow
+
+**Idea** → **PM (Brief+PRD)** → **PO (Epics+Stories)** → **Architect (Design)** → **Developer (Code)** → **QA (Tests)** → **MVP**
+
+## Framework Implementation
+
+**Agent Structure**: Each role has dedicated agent with commands mapping to tasks
+**Task Structure**: Procedural workflows with inline template/data references
+**Template Structure**: Markdown files with `{{variables}}` for dynamic content
+**Data Structure**: Standards, principles, and technical specifications
+
+==== END FILE ====
+
+==== FILE: data/quality-metrics.md ====
+# Quality Metrics and Measurement Framework
+
+## Core Quality Metrics
+
+### Test Coverage Metrics
+
+Measure the extent of testing performed across different dimensions.
+
+- **Code Coverage**: Percentage of code executed by tests
+- **Requirements Coverage**: Percentage of requirements tested
+- **Functional Coverage**: Percentage of features tested
+- **Branch Coverage**: Percentage of code branches tested
+
+### Defect Metrics
+
+Track defect patterns and resolution effectiveness.
+
+- **Defect Density**: Number of defects per size unit (KLOC, function points)
+- **Defect Detection Rate**: Defects found during testing vs production
+- **Defect Resolution Time**: Average time to resolve defects
+- **Defect Escape Rate**: Defects found in production vs total defects
+
+### Test Execution Metrics
+
+Monitor testing progress and efficiency.
+
+- **Test Execution Rate**: Percentage of planned tests executed
+- **Test Pass Rate**: Percentage of tests passing successfully
+- **Test Automation Rate**: Percentage of tests automated
+- **Test Execution Time**: Time required for test execution
+
+### Quality Trend Metrics
+
+Track quality improvements over time.
+
+- **Quality Index**: Composite score of multiple quality factors
+- **Customer Satisfaction**: User feedback and satisfaction scores
+- **System Reliability**: Mean time between failures (MTBF)
+- **Performance Trends**: Response times and throughput metrics
+
+## Test Planning Metrics
+
+### Test Estimation Accuracy
+
+Measure accuracy of test planning and estimation.
+
+- **Effort Estimation Variance**: Actual vs estimated testing effort
+- **Schedule Adherence**: Actual vs planned testing schedule
+- **Resource Utilization**: Actual vs planned resource allocation
+- **Scope Change Impact**: Impact of requirement changes on testing
+
+### Test Environment Metrics
+
+Track test environment availability and effectiveness.
+
+- **Environment Availability**: Percentage of time environments are available
+- **Environment Stability**: Number of environment-related issues
+- **Environment Setup Time**: Time required to set up test environments
+- **Environment Utilization**: Usage patterns of test environments
+
+## Process Quality Metrics
+
+### Testing Process Effectiveness
+
+Measure the effectiveness of testing processes.
+
+- **Review Effectiveness**: Defects found in reviews vs testing
+- **Test Case Quality**: Test case effectiveness in finding defects
+- **Process Compliance**: Adherence to defined testing processes
+- **Knowledge Transfer**: Team knowledge sharing and retention
+
+### Continuous Improvement Metrics
+
+Track process improvement initiatives.
+
+- **Process Improvement ROI**: Return on investment of improvements
+- **Training Effectiveness**: Impact of training on quality metrics
+- **Tool Adoption Rate**: Adoption of new testing tools and techniques
+- **Best Practice Implementation**: Implementation of industry best practices
+
+## Risk and Quality Assessment
+
+### Risk Metrics
+
+Quantify and track project risks related to quality.
+
+- **Risk Exposure**: Probability and impact of identified risks
+- **Risk Mitigation Effectiveness**: Success of risk mitigation strategies
+- **Quality Risk Index**: Composite score of quality-related risks
+- **Compliance Risk**: Risk of non-compliance with standards
+
+### Quality Gates
+
+Define measurable criteria for quality gates.
+
+- **Entry Criteria Compliance**: Readiness for testing phases
+- **Exit Criteria Achievement**: Completion criteria for testing phases
+- **Quality Threshold Compliance**: Adherence to minimum quality standards
+- **Release Readiness**: Quality criteria for software release
+
+## Reporting and Communication
+
+### Quality Dashboards
+
+Visual representation of key quality metrics.
+
+- **Real-time Quality Status**: Current state of key quality indicators
+- **Trend Analysis**: Historical trends and patterns
+- **Comparative Analysis**: Performance against benchmarks and targets
+- **Predictive Analytics**: Forecasting based on current trends
+
+### Stakeholder Reporting
+
+Metrics tailored for different stakeholder groups.
+
+- **Executive Summary**: High-level quality status for leadership
+- **Project Team Metrics**: Detailed metrics for project teams
+- **Development Team Feedback**: Metrics relevant to developers
+- **Customer Quality Reports**: Quality metrics for external customers
+
+## Metric Collection and Analysis
+
+### Data Collection Strategy
+
+Systematic approach to collecting quality data.
+
+- **Automated Data Collection**: Tools and systems for metric automation
+- **Manual Data Collection**: Processes for manual metric gathering
+- **Data Validation**: Ensuring accuracy and reliability of metrics
+- **Data Storage and Retention**: Managing quality data over time
+
+### Analysis and Insights
+
+Converting metrics into actionable insights.
+
+- **Statistical Analysis**: Statistical methods for metric analysis
+- **Root Cause Analysis**: Identifying underlying causes of quality issues
+- **Correlation Analysis**: Understanding relationships between metrics
+- **Predictive Modeling**: Using metrics for quality prediction
+
+==== END FILE ====
+
+==== FILE: data/testing-standards.md ====
+# Testing Standards and Quality Principles
+
+## Core Testing Principles
+
+### 1. Risk-Based Testing
+
+Focus testing efforts on areas with highest risk and impact.
+
+- Prioritize testing based on risk assessment and business impact
+- Identify critical functionality and high-risk areas first
+- Allocate testing resources based on risk analysis
+- Continuously reassess and adjust testing priorities
+
+### 2. Comprehensive Test Coverage
+
+Ensure thorough testing across all dimensions of the application.
+
+- Cover functional, non-functional, and integration requirements
+- Include positive, negative, and edge case scenarios
+- Test all user journeys and critical business workflows
+- Validate system behavior under various conditions
+
+### 3. Early and Continuous Testing
+
+Integrate testing throughout the development lifecycle.
+
+- Start testing activities during requirements phase
+- Implement continuous testing in CI/CD pipelines
+- Perform testing at multiple levels (unit, integration, system)
+- Provide rapid feedback to development teams
+
+### 4. Test Automation Strategy
+
+Balance manual and automated testing for optimal efficiency.
+
+- Automate repetitive and regression-prone test cases
+- Focus manual testing on exploratory and usability scenarios
+- Maintain automated test suites for reliable execution
+- Design tests for maintainability and scalability
+
+### 5. Quality-First Mindset
+
+Embed quality considerations into all development activities.
+
+- Shift-left quality practices to prevent defects
+- Collaborate with development teams on quality standards
+- Establish quality gates and acceptance criteria
+- Promote quality awareness across the organization
+
+### 6. Evidence-Based Quality Assessment
+
+Base quality decisions on measurable data and metrics.
+
+- Track and analyze quality metrics consistently
+- Use data to identify trends and improvement opportunities
+- Provide objective quality assessments and recommendations
+- Document quality evidence for stakeholder communication
+
+### 7. Continuous Improvement
+
+Regularly enhance testing processes and practices.
+
+- Conduct retrospectives to identify improvement areas
+- Learn from defects and testing experiences
+- Adopt new testing tools and methodologies
+- Share knowledge and best practices across teams
+
+### 8. User-Centric Testing
+
+Validate software from the end user's perspective.
+
+- Design tests based on real user scenarios and workflows
+- Include accessibility and usability testing
+- Validate user experience across different devices and browsers
+- Gather and incorporate user feedback in testing strategy
+
+### 9. Clear Communication
+
+Maintain transparent communication about quality status.
+
+- Provide clear and actionable defect reports
+- Communicate quality risks and mitigation strategies
+- Report testing progress and results regularly
+- Ensure stakeholders understand quality implications
+
+### 10. Collaborative Approach
+
+Work effectively with cross-functional teams.
+
+- Partner with developers, product managers, and stakeholders
+- Participate in requirement reviews and design discussions
+- Share testing expertise and quality insights
+- Build strong relationships to facilitate quality culture
+
+==== END FILE ====
 
 ==== FILE: data/testing-strategy.md ====
 # Testing Strategy
@@ -4900,330 +5558,6 @@ Design for change and adaptation over time.
 
 ==== END FILE ====
 
-==== FILE: data/coding-standards.md ====
-# Coding Standards
-
-## Code Style
-
-- Use consistent indentation
-- Follow language conventions
-- Keep functions small and focused
-
-## Quality
-
-- Write clear, readable code
-- Add meaningful comments
-- Handle errors properly
-
-## Testing
-
-- Write unit tests
-- Test edge cases
-- Maintain test coverage
-
-==== END FILE ====
-
-==== FILE: data/common/sdlc-framework.md ====
-# SDLC Framework Quick Reference
-
-**Purpose**: This framework enables AI agents to collaborate in software development through structured, filesystem-based artifacts. Agents reference this document to understand their role, dependencies, and where to find required templates and standards.
-
-## Framework Principles
-
-- **Filesystem-First**: All artifacts stored as markdown files, no APIs
-- **Agent Discovery**: Agents find artifacts through organized directory structure
-- **Natural Language**: Human-readable artifacts that agents can process
-- **Clear Dependencies**: Each artifact builds on previous work
-- **Inline References**: Use `[filename](path/to/file)` markdown links for all references
-
-## Role Responsibilities
-
-| Role | Outputs | Dependencies |
-|------|---------|--------------|
-| **Product Manager** | Project Brief, PRD, Roadmap | None (root artifacts) |
-| **Product Owner** | Epics, Stories | PRD |
-| **Business Analyst** | Refined PRD, Workflows | PRD, Stakeholder inputs |
-| **Architect** | Architecture Documents | PRD, Epics |
-| **Developer** | Code, Implementation | Stories, Architecture |
-| **QA Engineer** | Test Results, Quality Reports | Stories, Code |
-
-## Artifact Flow
-
-```text
-Project Brief → PRD → Epics → Stories → Code → Tests → MVP
-                  ↓
-              Architecture ← → Code
-```
-
-**Dependency Rules:**
-
-- **Project Brief**: No dependencies (root artifact)
-- **PRD**: Requires Project Brief approval
-- **Epic**: Requires PRD completion, references specific BR/NFR requirements
-- **Story**: Requires Epic definition, maps to implementation tasks
-- **Architecture**: Requires PRD + Epic context for technical design
-- **Code**: Requires Stories + Architecture for implementation guidance
-- **Tests**: Requires Stories + Code for validation
-
-## Directory Structure
-
-```bash
-{project_root}/
-├── docs/                           # All SDLC artifacts
-│   ├── prd/                        # PM: Project Brief, PRD, Roadmap
-│   │   ├── project-brief.md        # Vision & strategy
-│   │   ├── prd.md                  # Business requirements (BR1, BR2...), system requirements (NFR1, NFR2...)
-│   │   └── roadmap.md              # Implementation timeline
-│   ├── epics/                      # PO: High-level features
-│   │   └── {epic_number}-epic-{slug}.md    # e.g., 01-epic-user-authentication.md
-│   ├── stories/                    # PO: User requirements with tasks
-│   │   └── {epic_number}.{story_number}.story.md    # e.g., 01.01.story.md
-│   ├── architecture/               # Architect: System design
-│   │   ├── adr/                    # Architecture Decision Records
-│   │   ├── 01-introduction.md      # System overview
-│   │   ├── 02-high-level-architecture.md
-│   │   └── [other numbered sections]
-│   └── tests/                      # QA: Quality validation
-│       └── test-results-{story}.md
-└── .krci-ai/                       # Framework assets
-    ├── agents/                     # WHO: Role definitions
-    ├── tasks/                      # WHAT: Procedural workflows
-    ├── templates/                  # HOW: Output formatting
-    └── data/                       # REFERENCE: Standards & guidelines
-```
-
-## Quality Gates
-
-1. **Project Brief Approval** → Enables PRD creation
-2. **PRD Approval** → Enables Epic/Architecture creation
-3. **Architecture Review** → Enables implementation
-4. **Code Review** → Enables testing
-5. **Test Validation** → Enables MVP delivery
-
-## Template Variables
-
-All templates use `{{variable_name}}` format for dynamic content:
-
-- **Required fields**: Must be populated, no empty `{{}}` allowed
-- **Dependencies**: Reference parent artifacts (Epic references PRD requirements)
-- **Traceability**: Link requirements to implementation (BR1, NFR2, etc.)
-
-## Success Flow
-
-**Idea** → **PM (Brief+PRD)** → **PO (Epics+Stories)** → **Architect (Design)** → **Developer (Code)** → **QA (Tests)** → **MVP**
-
-## Framework Implementation
-
-**Agent Structure**: Each role has dedicated agent with commands mapping to tasks
-**Task Structure**: Procedural workflows with inline template/data references
-**Template Structure**: Markdown files with `{{variables}}` for dynamic content
-**Data Structure**: Standards, principles, and technical specifications
-
-==== END FILE ====
-
-==== FILE: data/test-methodologies.md ====
-# Test Methodologies and Technical Framework
-
-## Testing Methodologies
-
-### Agile Testing Methodology
-
-Testing approach aligned with agile development practices.
-
-- **Continuous Testing**: Integrate testing throughout development cycles
-- **Sprint-based Testing**: Plan and execute testing within sprint cycles
-- **Collaborative Testing**: Close collaboration between testers and developers
-- **Adaptive Planning**: Adjust testing approach based on sprint outcomes
-
-### Risk-Based Testing
-
-Focus testing efforts based on risk assessment and impact analysis.
-
-- **Risk Identification**: Systematic identification of potential risks
-- **Risk Assessment**: Evaluate probability and impact of identified risks
-- **Risk Prioritization**: Prioritize testing based on risk levels
-- **Risk Mitigation**: Design tests to address highest priority risks
-
-### Behavior-Driven Development (BDD)
-
-Testing methodology focused on business behavior specification.
-
-- **Given-When-Then**: Structure test scenarios using BDD format
-- **Collaboration**: Involve business stakeholders in test definition
-- **Living Documentation**: Tests serve as executable documentation
-- **Automation**: Automate BDD scenarios for continuous validation
-
-### Test-Driven Development (TDD)
-
-Development approach where tests are written before implementation.
-
-- **Red-Green-Refactor**: TDD cycle of failing test, implementation, refactoring
-- **Unit Test Focus**: Emphasis on comprehensive unit test coverage
-- **Design Validation**: Tests validate design decisions and implementation
-- **Continuous Feedback**: Immediate feedback on code quality and functionality
-
-## Test Design Techniques
-
-### Black Box Testing Techniques
-
-Testing based on functional specifications without knowledge of internal structure.
-
-- **Equivalence Partitioning**: Divide input space into equivalent classes
-- **Boundary Value Analysis**: Test at boundaries of input domains
-- **Decision Table Testing**: Test combinations of input conditions
-- **State Transition Testing**: Test system behavior across state changes
-
-### White Box Testing Techniques
-
-Testing based on internal code structure and implementation.
-
-- **Statement Coverage**: Ensure all code statements are executed
-- **Branch Coverage**: Test all decision branches in code
-- **Path Coverage**: Test all possible execution paths
-- **Condition Coverage**: Test all Boolean sub-expressions
-
-### Gray Box Testing Techniques
-
-Combination of black box and white box testing approaches.
-
-- **Matrix Testing**: Combine functional and structural testing
-- **Penetration Testing**: Security testing with partial system knowledge
-- **Pattern Testing**: Testing based on common failure patterns
-- **Hybrid Approach**: Mix functional and structural testing techniques
-
-## Test Levels and Types
-
-### Unit Testing
-
-Testing individual components or modules in isolation.
-
-- **Component Isolation**: Test individual units independently
-- **Mock Dependencies**: Use mocks and stubs for external dependencies
-- **Test Automation**: Automate unit tests for continuous execution
-- **Code Quality**: Validate code quality and maintainability
-
-### Integration Testing
-
-Testing interactions between integrated components or systems.
-
-- **Big Bang Integration**: Test all components together at once
-- **Incremental Integration**: Gradually integrate and test components
-- **API Testing**: Test application programming interfaces
-- **Data Integration**: Test data flow between integrated systems
-
-### System Testing
-
-Testing complete integrated system against specified requirements.
-
-- **End-to-End Testing**: Test complete business workflows
-- **System Integration**: Test system-to-system interactions
-- **Environment Testing**: Test in production-like environments
-- **Performance Testing**: Validate system performance characteristics
-
-### Acceptance Testing
-
-Validate system meets business requirements and user expectations.
-
-- **User Acceptance Testing**: Business users validate system functionality
-- **Business Acceptance Testing**: Validate business process support
-- **Alpha/Beta Testing**: Pre-release testing with limited user groups
-- **Contract Acceptance**: Formal acceptance against contractual requirements
-
-## Test Automation Framework
-
-### Automation Strategy
-
-Systematic approach to test automation implementation.
-
-- **Automation Pyramid**: Balance unit, integration, and UI automation
-- **ROI Analysis**: Evaluate return on investment for automation
-- **Tool Selection**: Choose appropriate automation tools and frameworks
-- **Maintenance Strategy**: Plan for test automation maintenance
-
-### Automation Architecture
-
-Design robust and scalable automation frameworks.
-
-- **Modular Design**: Create reusable and maintainable test components
-- **Data-Driven Testing**: Separate test logic from test data
-- **Keyword-Driven Testing**: Abstract test actions into reusable keywords
-- **Hybrid Framework**: Combine multiple automation approaches
-
-### Continuous Integration Testing
-
-Integrate automated testing into CI/CD pipelines.
-
-- **Pipeline Integration**: Embed tests in deployment pipelines
-- **Parallel Execution**: Run tests in parallel for faster feedback
-- **Environment Management**: Manage test environments in CI/CD
-- **Reporting Integration**: Integrate test results with CI/CD reporting
-
-## Performance Testing Methodology
-
-### Performance Test Types
-
-Different types of performance testing for various objectives.
-
-- **Load Testing**: Test system behavior under expected load
-- **Stress Testing**: Test system behavior beyond normal capacity
-- **Volume Testing**: Test system with large amounts of data
-- **Spike Testing**: Test system response to sudden load increases
-
-### Performance Test Process
-
-Systematic approach to performance testing execution.
-
-- **Requirements Analysis**: Define performance requirements and objectives
-- **Test Planning**: Plan performance test approach and scenarios
-- **Test Environment**: Set up realistic performance test environment
-- **Test Execution**: Execute performance tests and collect data
-- **Results Analysis**: Analyze performance data and identify bottlenecks
-
-## Security Testing Methodology
-
-### Security Test Approach
-
-Comprehensive approach to security testing and validation.
-
-- **Threat Modeling**: Identify potential security threats and vulnerabilities
-- **Security Test Planning**: Plan security tests based on threat analysis
-- **Penetration Testing**: Simulate real-world security attacks
-- **Vulnerability Assessment**: Systematic identification of security weaknesses
-
-### Security Testing Types
-
-Different types of security testing for comprehensive coverage.
-
-- **Authentication Testing**: Validate user authentication mechanisms
-- **Authorization Testing**: Test access control and permission systems
-- **Data Protection Testing**: Validate data encryption and protection
-- **Input Validation Testing**: Test input sanitization and validation
-
-==== END FILE ====
-
-==== FILE: data/best-practices.md ====
-# Best Practices
-
-## Development
-
-- Start with simplest solution
-- Refactor regularly
-- Use version control effectively
-
-## Code Quality
-
-- Follow SOLID principles
-- Minimize dependencies
-- Write self-documenting code
-
-## Collaboration
-
-- Review code thoroughly
-- Share knowledge
-- Communicate changes clearly
-
-==== END FILE ====
-
 ==== FILE: data/business-frameworks.md ====
 # Business Analysis Frameworks and Models
 
@@ -5401,358 +5735,26 @@ Framework for designing and testing value propositions.
 
 ==== END FILE ====
 
-==== FILE: data/design-patterns.md ====
-# Design Patterns for Architecture
+==== FILE: data/coding-standards.md ====
+# Coding Standards
 
-## Architectural Patterns
+## Code Style
 
-### Microservices Pattern
+- Use consistent indentation
+- Follow language conventions
+- Keep functions small and focused
 
-Decompose applications into small, independent services.
+## Quality
 
-- **When to use**: Large, complex applications with multiple teams
-- **Benefits**: Independent deployment, technology diversity, fault isolation
-- **Considerations**: Network latency, data consistency, operational complexity
+- Write clear, readable code
+- Add meaningful comments
+- Handle errors properly
 
-### Event-Driven Architecture
+## Testing
 
-Use events to trigger and communicate between decoupled services.
-
-- **When to use**: Real-time processing, loose coupling requirements
-- **Benefits**: Scalability, flexibility, real-time responsiveness
-- **Considerations**: Event ordering, eventual consistency
-
-### API Gateway Pattern
-
-Centralize cross-cutting concerns for microservices.
-
-- **When to use**: Multiple client types, microservices architecture
-- **Benefits**: Unified entry point, security, rate limiting
-- **Considerations**: Single point of failure, performance bottleneck
-
-### CQRS (Command Query Responsibility Segregation)
-
-Separate read and write operations for better performance.
-
-- **When to use**: High-read vs high-write workloads
-- **Benefits**: Optimized read/write models, scalability
-- **Considerations**: Complexity, eventual consistency
-
-## Integration Patterns
-
-### Circuit Breaker
-
-Prevent cascading failures in distributed systems.
-
-- **Implementation**: Monitor failure rates, open circuit on threshold
-- **Benefits**: System stability, graceful degradation
-- **Tools**: Hystrix, Resilience4j
-
-### Bulkhead
-
-Isolate resources to prevent total system failure.
-
-- **Implementation**: Separate thread pools, connection pools
-- **Benefits**: Fault isolation, resource protection
-
-### Retry with Exponential Backoff
-
-Handle transient failures gracefully.
-
-- **Implementation**: Exponential delays between retries
-- **Benefits**: Improved reliability, reduced system load
-
-## Data Patterns
-
-### Database per Service
-
-Each microservice owns its data exclusively.
-
-- **Benefits**: Service independence, technology flexibility
-- **Considerations**: Data consistency, query complexity
-
-### Saga Pattern
-
-Manage distributed transactions across services.
-
-- **Types**: Choreography-based, Orchestration-based
-- **Benefits**: Data consistency without distributed transactions
-
-### Event Sourcing
-
-Store events instead of current state.
-
-- **Benefits**: Complete audit trail, temporal queries
-- **Considerations**: Storage overhead, complexity
-
-## Security Patterns
-
-### Zero Trust Architecture
-
-Never trust, always verify approach to security.
-
-- **Principles**: Verify identity, least privilege, assume breach
-- **Implementation**: Multi-factor authentication, micro-segmentation
-
-### OAuth 2.0 / OpenID Connect
-
-Standard patterns for authentication and authorization.
-
-- **Use cases**: API access, single sign-on, third-party integration
-
-## Performance Patterns
-
-### Caching Strategies
-
-- **Cache-Aside**: Application manages cache
-- **Write-Through**: Write to cache and database simultaneously
-- **Write-Behind**: Write to cache first, database later
-
-### Load Balancing
-
-- **Round Robin**: Distribute requests evenly
-- **Least Connections**: Route to server with fewest active connections
-- **Weighted**: Route based on server capacity
-
-==== END FILE ====
-
-==== FILE: data/quality-metrics.md ====
-# Quality Metrics and Measurement Framework
-
-## Core Quality Metrics
-
-### Test Coverage Metrics
-
-Measure the extent of testing performed across different dimensions.
-
-- **Code Coverage**: Percentage of code executed by tests
-- **Requirements Coverage**: Percentage of requirements tested
-- **Functional Coverage**: Percentage of features tested
-- **Branch Coverage**: Percentage of code branches tested
-
-### Defect Metrics
-
-Track defect patterns and resolution effectiveness.
-
-- **Defect Density**: Number of defects per size unit (KLOC, function points)
-- **Defect Detection Rate**: Defects found during testing vs production
-- **Defect Resolution Time**: Average time to resolve defects
-- **Defect Escape Rate**: Defects found in production vs total defects
-
-### Test Execution Metrics
-
-Monitor testing progress and efficiency.
-
-- **Test Execution Rate**: Percentage of planned tests executed
-- **Test Pass Rate**: Percentage of tests passing successfully
-- **Test Automation Rate**: Percentage of tests automated
-- **Test Execution Time**: Time required for test execution
-
-### Quality Trend Metrics
-
-Track quality improvements over time.
-
-- **Quality Index**: Composite score of multiple quality factors
-- **Customer Satisfaction**: User feedback and satisfaction scores
-- **System Reliability**: Mean time between failures (MTBF)
-- **Performance Trends**: Response times and throughput metrics
-
-## Test Planning Metrics
-
-### Test Estimation Accuracy
-
-Measure accuracy of test planning and estimation.
-
-- **Effort Estimation Variance**: Actual vs estimated testing effort
-- **Schedule Adherence**: Actual vs planned testing schedule
-- **Resource Utilization**: Actual vs planned resource allocation
-- **Scope Change Impact**: Impact of requirement changes on testing
-
-### Test Environment Metrics
-
-Track test environment availability and effectiveness.
-
-- **Environment Availability**: Percentage of time environments are available
-- **Environment Stability**: Number of environment-related issues
-- **Environment Setup Time**: Time required to set up test environments
-- **Environment Utilization**: Usage patterns of test environments
-
-## Process Quality Metrics
-
-### Testing Process Effectiveness
-
-Measure the effectiveness of testing processes.
-
-- **Review Effectiveness**: Defects found in reviews vs testing
-- **Test Case Quality**: Test case effectiveness in finding defects
-- **Process Compliance**: Adherence to defined testing processes
-- **Knowledge Transfer**: Team knowledge sharing and retention
-
-### Continuous Improvement Metrics
-
-Track process improvement initiatives.
-
-- **Process Improvement ROI**: Return on investment of improvements
-- **Training Effectiveness**: Impact of training on quality metrics
-- **Tool Adoption Rate**: Adoption of new testing tools and techniques
-- **Best Practice Implementation**: Implementation of industry best practices
-
-## Risk and Quality Assessment
-
-### Risk Metrics
-
-Quantify and track project risks related to quality.
-
-- **Risk Exposure**: Probability and impact of identified risks
-- **Risk Mitigation Effectiveness**: Success of risk mitigation strategies
-- **Quality Risk Index**: Composite score of quality-related risks
-- **Compliance Risk**: Risk of non-compliance with standards
-
-### Quality Gates
-
-Define measurable criteria for quality gates.
-
-- **Entry Criteria Compliance**: Readiness for testing phases
-- **Exit Criteria Achievement**: Completion criteria for testing phases
-- **Quality Threshold Compliance**: Adherence to minimum quality standards
-- **Release Readiness**: Quality criteria for software release
-
-## Reporting and Communication
-
-### Quality Dashboards
-
-Visual representation of key quality metrics.
-
-- **Real-time Quality Status**: Current state of key quality indicators
-- **Trend Analysis**: Historical trends and patterns
-- **Comparative Analysis**: Performance against benchmarks and targets
-- **Predictive Analytics**: Forecasting based on current trends
-
-### Stakeholder Reporting
-
-Metrics tailored for different stakeholder groups.
-
-- **Executive Summary**: High-level quality status for leadership
-- **Project Team Metrics**: Detailed metrics for project teams
-- **Development Team Feedback**: Metrics relevant to developers
-- **Customer Quality Reports**: Quality metrics for external customers
-
-## Metric Collection and Analysis
-
-### Data Collection Strategy
-
-Systematic approach to collecting quality data.
-
-- **Automated Data Collection**: Tools and systems for metric automation
-- **Manual Data Collection**: Processes for manual metric gathering
-- **Data Validation**: Ensuring accuracy and reliability of metrics
-- **Data Storage and Retention**: Managing quality data over time
-
-### Analysis and Insights
-
-Converting metrics into actionable insights.
-
-- **Statistical Analysis**: Statistical methods for metric analysis
-- **Root Cause Analysis**: Identifying underlying causes of quality issues
-- **Correlation Analysis**: Understanding relationships between metrics
-- **Predictive Modeling**: Using metrics for quality prediction
-
-==== END FILE ====
-
-==== FILE: data/testing-standards.md ====
-# Testing Standards and Quality Principles
-
-## Core Testing Principles
-
-### 1. Risk-Based Testing
-
-Focus testing efforts on areas with highest risk and impact.
-
-- Prioritize testing based on risk assessment and business impact
-- Identify critical functionality and high-risk areas first
-- Allocate testing resources based on risk analysis
-- Continuously reassess and adjust testing priorities
-
-### 2. Comprehensive Test Coverage
-
-Ensure thorough testing across all dimensions of the application.
-
-- Cover functional, non-functional, and integration requirements
-- Include positive, negative, and edge case scenarios
-- Test all user journeys and critical business workflows
-- Validate system behavior under various conditions
-
-### 3. Early and Continuous Testing
-
-Integrate testing throughout the development lifecycle.
-
-- Start testing activities during requirements phase
-- Implement continuous testing in CI/CD pipelines
-- Perform testing at multiple levels (unit, integration, system)
-- Provide rapid feedback to development teams
-
-### 4. Test Automation Strategy
-
-Balance manual and automated testing for optimal efficiency.
-
-- Automate repetitive and regression-prone test cases
-- Focus manual testing on exploratory and usability scenarios
-- Maintain automated test suites for reliable execution
-- Design tests for maintainability and scalability
-
-### 5. Quality-First Mindset
-
-Embed quality considerations into all development activities.
-
-- Shift-left quality practices to prevent defects
-- Collaborate with development teams on quality standards
-- Establish quality gates and acceptance criteria
-- Promote quality awareness across the organization
-
-### 6. Evidence-Based Quality Assessment
-
-Base quality decisions on measurable data and metrics.
-
-- Track and analyze quality metrics consistently
-- Use data to identify trends and improvement opportunities
-- Provide objective quality assessments and recommendations
-- Document quality evidence for stakeholder communication
-
-### 7. Continuous Improvement
-
-Regularly enhance testing processes and practices.
-
-- Conduct retrospectives to identify improvement areas
-- Learn from defects and testing experiences
-- Adopt new testing tools and methodologies
-- Share knowledge and best practices across teams
-
-### 8. User-Centric Testing
-
-Validate software from the end user's perspective.
-
-- Design tests based on real user scenarios and workflows
-- Include accessibility and usability testing
-- Validate user experience across different devices and browsers
-- Gather and incorporate user feedback in testing strategy
-
-### 9. Clear Communication
-
-Maintain transparent communication about quality status.
-
-- Provide clear and actionable defect reports
-- Communicate quality risks and mitigation strategies
-- Report testing progress and results regularly
-- Ensure stakeholders understand quality implications
-
-### 10. Collaborative Approach
-
-Work effectively with cross-functional teams.
-
-- Partner with developers, product managers, and stakeholders
-- Participate in requirement reviews and design discussions
-- Share testing expertise and quality insights
-- Build strong relationships to facilitate quality culture
+- Write unit tests
+- Test edge cases
+- Maintain test coverage
 
 ==== END FILE ====
 
