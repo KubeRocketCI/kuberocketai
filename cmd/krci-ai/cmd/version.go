@@ -19,9 +19,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/version"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/version"
 )
 
 // versionCmd represents the version command

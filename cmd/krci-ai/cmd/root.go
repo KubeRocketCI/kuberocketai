@@ -20,8 +20,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/version"
 	"github.com/spf13/cobra"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/version"
 )
 
 // Global embedded assets
