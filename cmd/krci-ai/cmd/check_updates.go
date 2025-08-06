@@ -18,10 +18,11 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/update"
-	"github.com/KubeRocketCI/kuberocketai/internal/version"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/update"
+	"github.com/KubeRocketCI/kuberocketai/internal/version"
 )
 
 // checkUpdatesCmd represents the check-updates command

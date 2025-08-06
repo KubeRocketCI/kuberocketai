@@ -6,7 +6,7 @@ linters-settings:
   gofmt:
     simplify: true
   goimports:
-    local-prefixes: github.com/epam/kuberocketai
+    local-prefixes: github.com/KubeRocketCI/kuberocketai
   govet:
     enable-all: true
     disable:

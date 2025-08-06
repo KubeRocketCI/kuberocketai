@@ -18,7 +18,7 @@ Status Options: Draft -> Approved -> In Progress -> Done -> Completed
 Epic Reference Example: "Epic 1 - KubeRocketAI Baseline"
 Priority Example: Critical, High, Medium, Low
 Story Points Example: 1, 2, 3, 5, 8, 13 (Fibonacci scale - estimate complexity)
-Jira Example: "[EPMDEDP-15497](https://jiraeu.epam.com/browse/EPMDEDP-15497)"
+Jira Example: "[EPMDEDP-15497](https://jira.example.com/browse/EPMDEDP-15497)"
 -->
 
 ## Dependencies
