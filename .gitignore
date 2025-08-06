@@ -31,8 +31,6 @@ go.work.sum
 # .idea/
 # .vscode/
 
-.bmad-core
-
 # Build artifacts
 dist/
 build/

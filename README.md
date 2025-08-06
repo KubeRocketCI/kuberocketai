@@ -183,6 +183,10 @@ KubeRocketAI succeeds when you can scale your AI workflow like you scale your in
 
 Our goal: Turn your AI agent expertise into scalable, maintainable infrastructure.
 
+## Inspiration & Related Work
+
+KubeRocketAI builds upon the excellent work of several innovative frameworks that enhance AI-powered development workflows. We're particularly inspired by [Awesome Claude](https://github.com/hesreallyhim/awesome-claude-code), which curates powerful commands and workflows for Claude Code productivity. The [BMAD method](https://github.com/bmadcode/BMAD-METHOD) contributes robust agile AI-driven development practices with impressive context management through sharding and delegation. [Claude Flow](https://github.com/ruvnet/claude-flow) pioneered multi-agent orchestration with specialized development modes like Architect and Coder. [SuperClaude](https://github.com/NomenAK/SuperClaude) demonstrates advanced persona specialization and Git-based memory features.
+
 ## Target Users
 
 ### Teams That Have Figured Out AI, But Need to Scale It
