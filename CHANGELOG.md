@@ -2,16 +2,24 @@
 
 ## [Unreleased]
 
+
+<a name="v0.25.2"></a>
+
+## [v0.25.2] - 2025-08-06
+
 ### Bug Fixes
 
 - Update krci-ai with correct tasks definition for PO/PM
 
 ### Chores
 
+- Populate project with the stories
+- Add artifacts to the repository
 - Update bundled agents from the latest krci-ai version
 
 ### Documentation
 
+- Update related works section
 - Fix title level for video
 - Add link to the youtube demo
 - Update title of the repository
@@ -598,7 +606,8 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.1...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.2...HEAD
+[v0.25.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.1...v0.25.2
 [v0.25.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.0...v0.25.1
 [v0.25.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.1...v0.25.0
 [v0.24.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.0...v0.24.1
