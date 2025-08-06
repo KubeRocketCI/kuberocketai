@@ -1,50 +1,47 @@
 # KubeRocketAI Stories
 
-## Story Index
+High-level table of contents for all project stories organized by epic and current status.
 
-### Epic 1: KubeRocketAI Baseline
+## Epic 1: KubeRocketAI Baseline ✅ Complete
 
-- **Story 01.01**: [Architect Agent Definition](01.01.story.md) - Create architect agent with system design capabilities
-- **Story 01.02**: [Developer Agent Definition](01.02.story.md) - Create developer agent for coding assistance
-- **Story 01.03**: [Product Manager Agent Definition](01.03.story.md) - Create PM agent for product management
-- **Story 01.04**: [QA Agent Definition](01.04.story.md) - Create QA agent for testing and quality assurance
-- **Story 01.05**: [Business Analyst Agent Definition](01.05.story.md) - Create BA agent for business analysis
-- **Story 01.06**: [Basic CLI + Homebrew Publication](01.06.story.md) - CLI tool with core commands (5 pts)
-- **Story 01.07**: [Dogfooding Environment](01.07.story.md) - Use framework to develop itself (5 pts)
-- **Story 01.08**: [Epic 1 Documentation Consolidation](01.08.story.md) - Essential framework introduction and asset creation guide (2 pts)
-- **Story 01.09**: [Agent Customization Field Implementation](01.09.story.md) - Implement customization field in krci-ai tool (2 pts)
+- **01.01**: [Architect Agent Definition](01.01.story.md) ✅
+- **01.02**: [Developer Agent Definition](01.02.story.md) ✅
+- **01.03**: [Product Manager Agent Definition](01.03.story.md) ✅
+- **01.04**: [QA Agent Definition](01.04.story.md) ✅
+- **01.05**: [Business Analyst Agent Definition](01.05.story.md) ✅
+- **01.06**: [Basic CLI + Homebrew Publication](01.06.story.md) ✅
+- **01.07**: [Dogfooding Environment](01.07.story.md) ✅
+- **01.08**: [Epic 1 Documentation Consolidation](01.08.story.md) ✅
+- **01.09**: [Agent Customization Field Implementation](01.09.story.md) ✅
 
-### Epic 2: Core Engine (Week 2-3)
+## Epic 2: Core Engine ✅ Complete
 
-- **Story 02.01**: [Asset Processing Engine](02.01.story.md) - Agent YAML schema validation and task path validation
-- **Story 02.02**: [Validation System](02.02.story.md) - Template and content validation with parameter definition checking
-- **Story 02.03**: [Agent Prompt Engineering for Self-Validation](02.03.story.md) - (Former 2.4)
-- **Story 02.04**: [Advanced Dependency Graph Validation System](02.04.story.md) - (Former 2.5)
+- **02.01**: [Asset Processing Engine](02.01.story.md) ✅
+- **02.02**: [Validation System](02.02.story.md) ✅
+- **02.03**: [Agent Prompt Engineering for Self-Validation](02.03.story.md) ✅
+- **02.04**: [Internal Link Validation and Dependency Analysis](02.04.story.md) ✅
 
-### Epic 3: Install Command and Update Management (Week 4)
+## Epic 3: Install Command and Update Management ✅ Complete
 
-- **Story 03.01**: [Basic Install Command Implementation](03.01.story.md) - Offline framework installation with embedded assets
-- **Story 03.02**: [Version Management and Update Detection](03.02.story.md) - Bundle-based update workflow
+- **03.01**: [Basic Install Command Implementation](03.01.story.md) ✅
+- **03.02**: [Version Management and Update Detection](03.02.story.md) ✅
 
-### Epic 4: IDE Integration (Week 5)
+## Epic 4: IDE Integration ✅ Complete
 
-- **Story 04.01**: [Cursor IDE Configuration and Integration](04.01.story.md) - Extend install command for Cursor-specific configurations and @agent syntax
-- **Story 04.02**: [Claude Code IDE Configuration and Integration](04.02.story.md) - Extend install command for Claude Code-specific configurations and /agent syntax
-- **Story 04.03**: [Windsurf IDE Configuration and Integration](04.03.story.md) - Extend install command for Windsurf-specific configurations and @agent syntax
-- **Story 04.04**: [Visual Studio Code + GitHub Copilot Integration](04.04.story.md) - Extend install command for VSCode and GitHub Copilot Chat integration
-- **Story 04.05**: [IDE Integration Testing and Validation](04.05.story.md) - Testing framework for cross-IDE validation and end-to-end scenarios
+- **04.01**: [Cursor IDE Configuration and Integration](04.01.story.md) ✅
+- **04.02**: [Claude Code IDE Configuration and Integration](04.02.story.md) ✅
+- **04.03**: [Windsurf IDE Configuration and Integration](04.03.story.md) ✅
+- **04.04**: [GitHub Copilot Integration](04.04.story.md) ✅
 
-### Epic 5: Enhancement & Polish (Week 6-7)
+## Epic 5: Bundle Management ✅ Complete
 
-- Story 05.01: [Coming Soon] - Advanced CLI features and automation
-- Story 05.02: [Coming Soon] - Performance optimization and monitoring
-- Story 05.03: [Coming Soon] - Community preparation and documentation
+- **05.01**: [Complete Bundle Generation with CLI](05.01.story.md) ✅
+- **05.02**: [Targeted Agent Bundle Selection](05.02.story.md) ✅
+- **05.03**: [Single Agent-Task Bundle Creation](05.03.story.md) ✅
 
-### Epic 6: Calibration & Launch (Week 8)
+## Epic 6: Local Agent Components ✅ Complete
 
-- Story 06.01: [Coming Soon] - Final validation and testing
-- Story 06.02: [Coming Soon] - Launch preparation and marketing
-- Story 06.03: [Coming Soon] - Post-launch monitoring and support
+- **06.01**: [Local Component Override System](06.01.story.md) ✅
 
 ## Story Guidelines
 
