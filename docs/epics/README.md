@@ -13,13 +13,18 @@ This directory contains the epic definitions for the KubeRocketAI project, organ
 | [Epic 5: Bundle Management](epic-5-bundle-management.md) | Phase 5 | Week 6 | ✅ **COMPLETE** | Bundle Management | Web platform integration |
 | [Epic 6: Local Agent Components](epic-6-local-agent-components.md) | Phase 6 | 3 Days | ✅ **COMPLETE** | Local Components | Project-specific customization |
 | [Epic 7: Token Management](epic-7-token-management.md) | Phase 7 | 1 Week | ⏸️ **NOT STARTED** | Token Management | Context limit analysis |
+| [Epic 8: Selective Installation](epic-8-selective-installation.md) | Phase 8 | 1 Week | 🚧 **IN PROGRESS** | Selective Installation | Granular agent installation |
 
 ## Current Status Summary
 
-**Completed Epics (6/7):**
+**Completed Epics (6/8):**
 
 - Epic 1-6: Full foundation through local customization capabilities
 - All core functionality delivered including CLI, validation, installation, IDE integration, bundling, and local components
+
+**In Progress:**
+
+- Epic 8: Selective Installation (In Progress) - Granular agent installation capabilities following bundle command patterns
 
 **Pending:**
 
@@ -35,4 +40,5 @@ graph LR
     E4 --> E5[Epic 5<br/>Bundle Management<br/>✅ COMPLETE]
     E5 --> E6[Epic 6<br/>Local Components<br/>✅ COMPLETE]
     E6 --> E7[Epic 7<br/>Token Management<br/>⏸️ NOT STARTED]
+    E3 --> E8[Epic 8<br/>Selective Installation<br/>🚧 IN PROGRESS]
 ```

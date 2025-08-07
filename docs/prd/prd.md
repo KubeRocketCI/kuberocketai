@@ -173,6 +173,16 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 **BR12 [P0]**: User can view detailed token breakdown showing agent definition size, task dependencies, data/template contributions, and bundled output estimation to understand asset composition and optimize for specific AI platform requirements
 
+#### Selective Installation (Epic 8 - Selective Installation)
+
+**BR13 [P0]**: User can install specific agents and their associated assets using `krci-ai install --agent <agent-name>` command (e.g., `krci-ai install --agent developer`) which downloads only the selected agent definition, its tasks, templates, and data dependencies to `.krci-ai/` directory structure
+
+**BR14 [P0]**: User can install multiple specific agents using `krci-ai install --agents pm,architect,developer` command following the same flag patterns as bundling, creating selective framework installation with only requested agents and their dependencies
+
+**BR15 [P0]**: User can install specific agent with targeted tasks using `krci-ai install --agent pm --task create-prd,update-prd` command, installing only the agent definition and specified tasks with their templates and data dependencies. Do not allow to mix multiple agents and multiple tasks.
+
+**BR16 [P0]**: User can combine selective installation with IDE integration using `krci-ai install --agent developer --ide cursor` or `krci-ai install --agents pm,architect --all` (for all supported IDEs), providing granular control over both agent scope and IDE configuration
+
 ### Non-Functional Requirements (NFR)
 
 #### Performance & Reliability (Epic 2 - Core Engine)
@@ -238,6 +248,13 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 - Multi-platform token analysis and context limit awareness
 - Dependency-based token breakdown and optimization guidance
 
+**Epic 8 (Selective Installation)**: BR13, BR14, BR15, BR16
+
+- Selective agent installation with granular scope control
+- Multi-agent installation using comma-separated lists
+- Task-specific installation with dependency resolution
+- IDE integration for selective installations
+
 **Epic 6 (Local Agent Components)**: BR9, NFR6
 
 - Local component discovery and priority handling
@@ -246,7 +263,7 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 #### Post-MVP Enhancements (P2+ Requirements)
 
-**Epic 8 (Advanced Features)**: BR8
+**Epic 9 (Advanced Features)**: BR8
 
 - Advanced bundle customization and optimization
 - Enhanced web chat context limit management
