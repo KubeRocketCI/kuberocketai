@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Owner role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['codebase', 'usages', 'problems', 'changes', 'terminalLastCommand', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'editFiles', 'search', 'runCommands', 'create_issue', 'get_issue', 'list_issues', 'search_issues', 'update_issue']
 ---
 
 # Senior Product Owner Agent Chat Mode
