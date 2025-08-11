@@ -19,7 +19,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 )
 
 // Client represents a GitHub API client
@@ -30,14 +29,26 @@ type Client struct {
 }
 
 // NewClient creates a new GitHub API client
-func NewClient() *Client {
+func NewClient() *Client { return NewDefaultClient() }
+
+// NewDefaultClient returns a client configured with defaults from config.go
+func NewDefaultClient() *Client {
 	return &Client{
-		BaseURL: "https://api.github.com",
-		HTTPClient: &http.Client{
-			Timeout: 10 * time.Second,
-		},
-		UserAgent: "krci-ai/v1.0.0",
+		BaseURL:    DefaultBaseURL,
+		HTTPClient: &http.Client{Timeout: DefaultTimeout},
+		UserAgent:  DefaultUserAgent,
 	}
+}
+
+// NewClientWith allows constructing a client with custom parameters
+func NewClientWith(baseURL, userAgent string, httpClient *http.Client) *Client {
+	c := &Client{BaseURL: baseURL, UserAgent: userAgent}
+	if httpClient != nil {
+		c.HTTPClient = httpClient
+	} else {
+		c.HTTPClient = &http.Client{Timeout: DefaultTimeout}
+	}
+	return c
 }
 
 // GetLatestRelease fetches the latest release for a repository

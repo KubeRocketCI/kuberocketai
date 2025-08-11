@@ -13,33 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package validation
 
-import (
-	"embed"
-	"os"
-
-	"github.com/KubeRocketCI/kuberocketai/cmd/krci-ai/cmd"
-)
-
-// EmbeddedAssets contains all assets embedded at build time
-//
-//go:embed assets
-var EmbeddedAssets embed.FS
-
-// Build-time variables
-var (
-	version = "dev"
-	commit  = "none"
-	date    = "unknown"
-	builtBy = "unknown"
-)
-
-func main() {
-	cmd.SetVersionInfo(version, commit, date, builtBy)
-	cmd.SetEmbeddedAssets(EmbeddedAssets)
-	// Execute and exit centrally on error
-	if err := cmd.Execute(); err != nil {
-		os.Exit(1)
-	}
+// FrameworkScanner abstracts analyzer behavior for commands
+type FrameworkScanner interface {
+	OptimizedAnalyzeFramework() ([]ValidationIssue, *FrameworkInsights, error)
 }

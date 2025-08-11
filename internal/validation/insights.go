@@ -19,8 +19,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"sort"
 	"strings"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 // FrameworkInsights provides component statistics and relationship analysis
@@ -186,8 +187,8 @@ func (a *FrameworkAnalyzer) analyzeRelationships(frameworkDir string, insights *
 		}
 
 		// Remove duplicates
-		relationship.Templates = a.removeDuplicates(relationship.Templates)
-		relationship.DataFiles = a.removeDuplicates(relationship.DataFiles)
+		relationship.Templates = utils.DeduplicateStrings(relationship.Templates)
+		relationship.DataFiles = utils.DeduplicateStrings(relationship.DataFiles)
 
 		insights.Relationships = append(insights.Relationships, relationship)
 	}
@@ -254,20 +255,9 @@ func (a *FrameworkAnalyzer) generateUsageStatistics(insights *FrameworkInsights)
 	}
 }
 
-// removeDuplicates removes duplicate strings from a slice
+// removeDuplicates is kept for backward compatibility. Delegates to utils.
 func (a *FrameworkAnalyzer) removeDuplicates(slice []string) []string {
-	keys := make(map[string]bool)
-	var result []string
-
-	for _, item := range slice {
-		if !keys[item] {
-			keys[item] = true
-			result = append(result, item)
-		}
-	}
-
-	sort.Strings(result)
-	return result
+	return utils.DeduplicateStrings(slice)
 }
 
 // FormatInsights formats the insights for display

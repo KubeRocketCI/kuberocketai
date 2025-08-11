@@ -97,8 +97,10 @@ func runValidate(cmd *cobra.Command, args []string) error {
 		fmt.Printf("❌ Framework validation failed with %d critical issues\n", report.CriticalCount)
 	}
 
-	// Exit with appropriate error code
-	os.Exit(report.GetExitCode())
+	// Return error for critical issues. Cobra root will handle exit.
+	if report.HasCritical {
+		return fmt.Errorf("validation failed with %d critical issues", report.CriticalCount)
+	}
 	return nil
 }
 

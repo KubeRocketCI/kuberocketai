@@ -22,6 +22,7 @@ import (
 	"testing"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 func TestBundleCommandExists(t *testing.T) {
@@ -938,7 +939,7 @@ func TestContainsString(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := containsString(tt.slice, tt.item)
+			result := utils.ContainsString(tt.slice, tt.item)
 			if result != tt.expected {
 				t.Errorf("containsString(%v, %q) = %v, want %v", tt.slice, tt.item, result, tt.expected)
 			}

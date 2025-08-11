@@ -18,50 +18,36 @@ package cli
 import (
 	"fmt"
 
-	"github.com/fatih/color"
+	"github.com/KubeRocketCI/kuberocketai/internal/cli/style"
 )
 
 // OutputHandler provides colorized output functions for CLI commands
-type OutputHandler struct {
-	green  func(a ...interface{}) string
-	blue   func(a ...interface{}) string
-	cyan   func(a ...interface{}) string
-	yellow func(a ...interface{}) string
-	red    func(a ...interface{}) string
-}
+type OutputHandler struct{}
 
 // NewOutputHandler creates a new output handler with color support
-func NewOutputHandler() *OutputHandler {
-	return &OutputHandler{
-		green:  color.New(color.FgGreen).SprintFunc(),
-		blue:   color.New(color.FgBlue).SprintFunc(),
-		cyan:   color.New(color.FgCyan).SprintFunc(),
-		yellow: color.New(color.FgYellow).SprintFunc(),
-		red:    color.New(color.FgRed).SprintFunc(),
-	}
-}
+func NewOutputHandler() *OutputHandler { return &OutputHandler{} }
 
 // PrintSuccess prints a success message with green color
 func (o *OutputHandler) PrintSuccess(message string) {
-	fmt.Printf("%s %s\n", o.green("✅"), message)
+	fmt.Printf("%s %s\n", style.Success("✅"), message)
 }
 
 // PrintInfo prints an info message with blue color
 func (o *OutputHandler) PrintInfo(message string) {
-	fmt.Printf("%s %s\n", o.blue("ℹ️"), message)
+	fmt.Printf("%s %s\n", style.Info("ℹ️"), message)
 }
 
 // PrintProgress prints a progress message with cyan color
 func (o *OutputHandler) PrintProgress(message string) {
-	fmt.Printf("%s %s\n", o.cyan("🔄"), message)
+	fmt.Printf("%s %s\n", style.Progress("🔄"), message)
 }
 
 // PrintWarning prints a warning message with yellow color
 func (o *OutputHandler) PrintWarning(message string) {
-	fmt.Printf("%s %s\n", o.yellow("⚠️"), message)
+	fmt.Printf("%s %s\n", style.Warn("⚠️"), message)
 }
 
 // PrintError prints an error message with red color
 func (o *OutputHandler) PrintError(message string) {
-	fmt.Printf("%s %s\n", o.red("❌"), message)
+	fmt.Printf("%s %s\n", style.Error("❌"), message)
 }
