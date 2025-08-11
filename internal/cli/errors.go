@@ -19,27 +19,19 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fatih/color"
+	"github.com/KubeRocketCI/kuberocketai/internal/cli/style"
 )
 
 // ErrorHandler provides colorized error handling for CLI commands
-type ErrorHandler struct {
-	red    func(a ...interface{}) string
-	yellow func(a ...interface{}) string
-}
+type ErrorHandler struct{}
 
 // NewErrorHandler creates a new error handler with color support
-func NewErrorHandler() *ErrorHandler {
-	return &ErrorHandler{
-		red:    color.New(color.FgRed).SprintFunc(),
-		yellow: color.New(color.FgYellow).SprintFunc(),
-	}
-}
+func NewErrorHandler() *ErrorHandler { return &ErrorHandler{} }
 
 // HandleError prints a colorized error message and exits with code 1
 func (e *ErrorHandler) HandleError(err error, message string) {
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s %s: %v\n", e.red("❌"), message, err)
+		fmt.Fprintf(os.Stderr, "%s %s: %v\n", style.Error("❌"), message, err)
 		os.Exit(1)
 	}
 }
@@ -47,17 +39,17 @@ func (e *ErrorHandler) HandleError(err error, message string) {
 // HandleErrorWithCode prints a colorized error message and exits with specified code
 func (e *ErrorHandler) HandleErrorWithCode(err error, message string, code int) {
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s %s: %v\n", e.red("❌"), message, err)
+		fmt.Fprintf(os.Stderr, "%s %s: %v\n", style.Error("❌"), message, err)
 		os.Exit(code)
 	}
 }
 
 // PrintWarning prints a colorized warning message
 func (e *ErrorHandler) PrintWarning(message string) {
-	fmt.Printf("%s %s\n", e.yellow("⚠️"), message)
+	fmt.Printf("%s %s\n", style.Warn("⚠️"), message)
 }
 
 // PrintError prints a colorized error message without exiting
 func (e *ErrorHandler) PrintError(message string) {
-	fmt.Fprintf(os.Stderr, "%s %s\n", e.red("❌"), message)
+	fmt.Fprintf(os.Stderr, "%s %s\n", style.Error("❌"), message)
 }

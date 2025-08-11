@@ -18,6 +18,8 @@ package version
 import (
 	"runtime"
 	"testing"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 )
 
 func TestParseVersion(t *testing.T) {
@@ -296,7 +298,7 @@ func TestValidateCompatibility(t *testing.T) {
 				return
 			}
 			if tt.wantErr && tt.errorContains != "" {
-				if err == nil || !contains(err.Error(), tt.errorContains) {
+				if err == nil || !testutil.ContainsSubstr(err.Error(), tt.errorContains) {
 					t.Errorf("ValidateCompatibility() error = %v, want error containing %q", err, tt.errorContains)
 				}
 			}
@@ -457,17 +459,4 @@ func TestIsFrameworkVersionCompatible(t *testing.T) {
 			}
 		})
 	}
-}
-
-// Helper function for string contains check
-func contains(s, substr string) bool {
-	if len(substr) == 0 {
-		return true
-	}
-	for i := 0; i <= len(s)-len(substr); i++ {
-		if s[i:i+len(substr)] == substr {
-			return true
-		}
-	}
-	return false
 }

@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 )
 
 //go:embed testdata/*
@@ -140,10 +142,10 @@ func TestInstallCursorIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !contains(contentStr, "Dev Agent Activation") {
+	if !testutil.ContainsSubstr(contentStr, "Dev Agent Activation") {
 		t.Error("Content missing agent activation header")
 	}
-	if !contains(contentStr, "Senior Developer") {
+	if !testutil.ContainsSubstr(contentStr, "Senior Developer") {
 		t.Error("Content missing role")
 	}
 }
@@ -196,10 +198,10 @@ func TestInstallClaudeIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !contains(contentStr, "# /po Command") {
+	if !testutil.ContainsSubstr(contentStr, "# /po Command") {
 		t.Error("Content missing command header")
 	}
-	if !contains(contentStr, "Product Owner") {
+	if !testutil.ContainsSubstr(contentStr, "Product Owner") {
 		t.Error("Content missing role")
 	}
 }
@@ -252,19 +254,19 @@ func TestInstallVSCodeIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !contains(contentStr, "---") {
+	if !testutil.ContainsSubstr(contentStr, "---") {
 		t.Error("Content missing front matter delimiters")
 	}
-	if !contains(contentStr, "description: Activate Software Developer role for specialized development assistance") {
+	if !testutil.ContainsSubstr(contentStr, "description: Activate Software Developer role for specialized development assistance") {
 		t.Error("Content missing description in front matter")
 	}
-	if !contains(contentStr, "tools: "+GitHubToolsList) {
+	if !testutil.ContainsSubstr(contentStr, "tools: "+GitHubToolsList) {
 		t.Error("Content missing tools in front matter")
 	}
-	if !contains(contentStr, "# Software Developer Agent Chat Mode") {
+	if !testutil.ContainsSubstr(contentStr, "# Software Developer Agent Chat Mode") {
 		t.Error("Content missing agent chat mode header")
 	}
-	if !contains(contentStr, "Software Developer") {
+	if !testutil.ContainsSubstr(contentStr, "Software Developer") {
 		t.Error("Content missing role")
 	}
 }
@@ -316,10 +318,10 @@ func TestInstallWindsurfIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !contains(contentStr, "# Software Developer Agent Rule") {
+	if !testutil.ContainsSubstr(contentStr, "# Software Developer Agent Rule") {
 		t.Error("Content missing agent rule header")
 	}
-	if !contains(contentStr, "Software Developer") {
+	if !testutil.ContainsSubstr(contentStr, "Software Developer") {
 		t.Error("Content missing role")
 	}
 }

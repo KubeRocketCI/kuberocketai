@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 )
 
 //go:embed testdata/*
@@ -135,13 +137,13 @@ func TestCursorIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !contains(content, "# Test Agent Activation") {
+	if !testutil.ContainsSubstr(content, "# Test Agent Activation") {
 		t.Error("Content missing agent activation header")
 	}
-	if !contains(content, "Test Role") {
+	if !testutil.ContainsSubstr(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !contains(content, "test: yaml") {
+	if !testutil.ContainsSubstr(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -165,13 +167,13 @@ func TestClaudeIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !contains(content, "# /test Command") {
+	if !testutil.ContainsSubstr(content, "# /test Command") {
 		t.Error("Content missing command header")
 	}
-	if !contains(content, "Test Role") {
+	if !testutil.ContainsSubstr(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !contains(content, "test: yaml") {
+	if !testutil.ContainsSubstr(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -195,22 +197,22 @@ func TestVSCodeIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !contains(content, "---") {
+	if !testutil.ContainsSubstr(content, "---") {
 		t.Error("Content missing front matter delimiters")
 	}
-	if !contains(content, "description: Activate Test Role role for specialized development assistance") {
+	if !testutil.ContainsSubstr(content, "description: Activate Test Role role for specialized development assistance") {
 		t.Error("Content missing description in front matter")
 	}
-	if !contains(content, "tools: "+GitHubToolsList) {
+	if !testutil.ContainsSubstr(content, "tools: "+GitHubToolsList) {
 		t.Error("Content missing tools in front matter")
 	}
-	if !contains(content, "# Test Role Agent Chat Mode") {
+	if !testutil.ContainsSubstr(content, "# Test Role Agent Chat Mode") {
 		t.Error("Content missing agent chat mode header")
 	}
-	if !contains(content, "Test Role") {
+	if !testutil.ContainsSubstr(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !contains(content, "test: yaml") {
+	if !testutil.ContainsSubstr(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -234,13 +236,13 @@ func TestWindsurfIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !contains(content, "# Test Role Agent Rule") {
+	if !testutil.ContainsSubstr(content, "# Test Role Agent Rule") {
 		t.Error("Content missing agent rule header")
 	}
-	if !contains(content, "Test Role") {
+	if !testutil.ContainsSubstr(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !contains(content, "test: yaml") {
+	if !testutil.ContainsSubstr(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -591,19 +593,4 @@ func TestGetIDEPaths(t *testing.T) {
 			}
 		})
 	}
-}
-
-// Helper function to check if a string contains a substring
-func contains(s, substr string) bool {
-	return len(s) >= len(substr) && (s == substr || len(substr) == 0 ||
-		(len(s) > len(substr) && containsHelper(s, substr)))
-}
-
-func containsHelper(s, substr string) bool {
-	for i := 0; i <= len(s)-len(substr); i++ {
-		if s[i:i+len(substr)] == substr {
-			return true
-		}
-	}
-	return false
 }

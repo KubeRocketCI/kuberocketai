@@ -3,6 +3,7 @@ package cmd
 import (
 	"testing"
 
+	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 	"github.com/spf13/cobra"
 )
 
@@ -107,14 +108,14 @@ func TestInstallCommandFlags(t *testing.T) {
 				// Test force flag
 				if forceFlag, err := cmd.Flags().GetBool("force"); err != nil {
 					t.Errorf("Failed to get force flag: %v", err)
-				} else if contains(tt.args, "--force") && !forceFlag {
+				} else if testutil.ContainsArg(tt.args, "--force") && !forceFlag {
 					t.Errorf("Expected force flag to be true")
 				}
 
 				// Test all flag
 				if allFlag, err := cmd.Flags().GetBool("all"); err != nil {
 					t.Errorf("Failed to get all flag: %v", err)
-				} else if contains(tt.args, "--all") && !allFlag {
+				} else if testutil.ContainsArg(tt.args, "--all") && !allFlag {
 					t.Errorf("Expected all flag to be true")
 				}
 			}
@@ -133,14 +134,4 @@ func TestInstallCommandConstants(t *testing.T) {
 	if ideClaude != "claude" {
 		t.Errorf("Expected ideClaude to be 'claude', got '%s'", ideClaude)
 	}
-}
-
-// Helper function to check if a slice contains a string
-func contains(slice []string, item string) bool {
-	for _, s := range slice {
-		if s == item {
-			return true
-		}
-	}
-	return false
 }

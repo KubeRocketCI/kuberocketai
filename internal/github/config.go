@@ -13,33 +13,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package main
+package github
 
-import (
-	"embed"
-	"os"
+import "time"
 
-	"github.com/KubeRocketCI/kuberocketai/cmd/krci-ai/cmd"
-)
+const DefaultBaseURL = "https://api.github.com"
+const DefaultUserAgent = "krci-ai/v1.0.0"
 
-// EmbeddedAssets contains all assets embedded at build time
-//
-//go:embed assets
-var EmbeddedAssets embed.FS
-
-// Build-time variables
-var (
-	version = "dev"
-	commit  = "none"
-	date    = "unknown"
-	builtBy = "unknown"
-)
-
-func main() {
-	cmd.SetVersionInfo(version, commit, date, builtBy)
-	cmd.SetEmbeddedAssets(EmbeddedAssets)
-	// Execute and exit centrally on error
-	if err := cmd.Execute(); err != nil {
-		os.Exit(1)
-	}
-}
+var DefaultTimeout = 10 * time.Second

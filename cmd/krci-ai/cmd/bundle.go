@@ -27,6 +27,7 @@ import (
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
 
@@ -411,7 +412,7 @@ func getTaskDependencies(currentDir, taskName string) []string {
 		// Find references to data files
 		if strings.Contains(line, "./"+krciAIDir+"/data/") {
 			dep := extractFileReference(line, "./"+krciAIDir+"/data/")
-			if dep != "" && !containsString(dependencies, dep) {
+			if dep != "" && !utils.ContainsString(dependencies, dep) {
 				dependencies = append(dependencies, dep)
 			}
 		}
@@ -419,7 +420,7 @@ func getTaskDependencies(currentDir, taskName string) []string {
 		// Find references to template files
 		if strings.Contains(line, "./"+krciAIDir+"/templates/") {
 			dep := extractFileReference(line, "./"+krciAIDir+"/templates/")
-			if dep != "" && !containsString(dependencies, dep) {
+			if dep != "" && !utils.ContainsString(dependencies, dep) {
 				dependencies = append(dependencies, dep)
 			}
 		}
@@ -438,16 +439,6 @@ func isReferencedByTask(filePath string, taskDeps []string) bool {
 	}
 	// If no specific dependencies found, include common files
 	return len(taskDeps) == 0
-}
-
-// containsString checks if a string slice contains a specific string
-func containsString(slice []string, item string) bool {
-	for _, s := range slice {
-		if s == item {
-			return true
-		}
-	}
-	return false
 }
 
 // collectTemplatesAndData collects template and data files for an agent, optionally filtered by task
