@@ -21,6 +21,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 func TestNewFrameworkAnalyzer(t *testing.T) {
@@ -1031,11 +1033,10 @@ More content here.`
 }
 
 func TestRemoveDuplicates(t *testing.T) {
-	analyzer := NewFrameworkAnalyzer("")
 
 	// Test with duplicates
 	input := []string{"a", "b", "a", "c", "b", "d"}
-	result := analyzer.removeDuplicates(input)
+	result := utils.DeduplicateStrings(input)
 
 	expected := []string{"a", "b", "c", "d"}
 	if len(result) != len(expected) {
@@ -1057,14 +1058,14 @@ func TestRemoveDuplicates(t *testing.T) {
 	}
 
 	// Test with empty slice
-	emptyResult := analyzer.removeDuplicates([]string{})
+	emptyResult := utils.DeduplicateStrings([]string{})
 	if len(emptyResult) != 0 {
 		t.Error("Expected empty result for empty input")
 	}
 
 	// Test with no duplicates
 	noDupInput := []string{"x", "y", "z"}
-	noDupResult := analyzer.removeDuplicates(noDupInput)
+	noDupResult := utils.DeduplicateStrings(noDupInput)
 	if len(noDupResult) != 3 {
 		t.Errorf("Expected 3 items, got %d", len(noDupResult))
 	}

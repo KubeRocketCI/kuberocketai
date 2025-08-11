@@ -255,10 +255,7 @@ func (a *FrameworkAnalyzer) generateUsageStatistics(insights *FrameworkInsights)
 	}
 }
 
-// removeDuplicates is kept for backward compatibility. Delegates to utils.
-func (a *FrameworkAnalyzer) removeDuplicates(slice []string) []string {
-	return utils.DeduplicateStrings(slice)
-}
+// removeDuplicates removed; use utils.DeduplicateStrings directly.
 
 // FormatInsights formats the insights for display
 func (insights *FrameworkInsights) FormatInsights() string {
