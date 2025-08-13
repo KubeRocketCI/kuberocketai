@@ -17,9 +17,8 @@ package version
 
 import (
 	"runtime"
+	"strings"
 	"testing"
-
-	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 )
 
 func TestParseVersion(t *testing.T) {
@@ -298,7 +297,7 @@ func TestValidateCompatibility(t *testing.T) {
 				return
 			}
 			if tt.wantErr && tt.errorContains != "" {
-				if err == nil || !testutil.ContainsSubstr(err.Error(), tt.errorContains) {
+				if err == nil || !strings.Contains(err.Error(), tt.errorContains) {
 					t.Errorf("ValidateCompatibility() error = %v, want error containing %q", err, tt.errorContains)
 				}
 			}

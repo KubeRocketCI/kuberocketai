@@ -1,0 +1,5 @@
+name: Test Agent
+description: A test agent for unit testing
+role: tester
+goal: Test the token calculation functionality
+icon: 🧪

@@ -16,44 +16,21 @@ limitations under the License.
 package utils
 
 import (
-	"sort"
+	"slices"
 	"strings"
 )
-
-// ContainsString returns true when target is present in the slice (case-sensitive)
-func ContainsString(slice []string, target string) bool {
-	for _, s := range slice {
-		if s == target {
-			return true
-		}
-	}
-	return false
-}
 
 // DeduplicateStrings returns a new slice with unique values in stable order, sorted alphabetically
 // The function also returns values sorted for deterministic output when order is not important.
 func DeduplicateStrings(values []string) []string {
-	seen := make(map[string]bool)
-	result := make([]string, 0, len(values))
-	for _, v := range values {
-		if !seen[v] {
-			seen[v] = true
-			result = append(result, v)
-		}
-	}
-	// Keep deterministic order by sorting alphabetically. If caller needs stable
-	// input order, they should avoid relying on sort and pass already-ordered input.
-	// Using strings.Compare for clarity.
-	sort.Strings(result)
-	return result
+	slices.Sort(values)
+
+	return slices.Compact(values)
 }
 
 // EqualFoldInSlice returns true if the candidate matches any element in slice, case-insensitively
 func EqualFoldInSlice(slice []string, candidate string) bool {
-	for _, s := range slice {
-		if strings.EqualFold(s, candidate) {
-			return true
-		}
-	}
-	return false
+	return slices.ContainsFunc(slice, func(s string) bool {
+		return strings.EqualFold(s, candidate)
+	})
 }

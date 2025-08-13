@@ -394,6 +394,7 @@ func TestFormatAgentSummary(t *testing.T) {
 
 	agent := AgentInfo{
 		Name:        "test-agent",
+		ShortName:   "test-agent",
 		Role:        "Test Role",
 		Description: "Test Description",
 		FilePath:    "/path/to/test-agent.yaml",

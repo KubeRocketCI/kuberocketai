@@ -4,9 +4,8 @@ import (
 	"embed"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
-
-	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 )
 
 //go:embed testdata/*
@@ -17,7 +16,7 @@ func TestInstallIDEIntegration(t *testing.T) {
 	installer := NewInstaller(tempDir, testIntegrationAssets)
 
 	// Create a minimal .krci-ai structure with test agent
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := filepath.Join(krciPath, agentsDir)
 	err := os.MkdirAll(agentsPath, 0755)
 	if err != nil {
@@ -99,7 +98,7 @@ func TestInstallCursorIntegration(t *testing.T) {
 	installer := NewInstaller(tempDir, testIntegrationAssets)
 
 	// Create a minimal .krci-ai structure with test agent
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := filepath.Join(krciPath, agentsDir)
 	err := os.MkdirAll(agentsPath, 0755)
 	if err != nil {
@@ -142,10 +141,10 @@ func TestInstallCursorIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !testutil.ContainsSubstr(contentStr, "Dev Agent Activation") {
+	if !strings.Contains(contentStr, "Dev Agent Activation") {
 		t.Error("Content missing agent activation header")
 	}
-	if !testutil.ContainsSubstr(contentStr, "Senior Developer") {
+	if !strings.Contains(contentStr, "Senior Developer") {
 		t.Error("Content missing role")
 	}
 }
@@ -155,7 +154,7 @@ func TestInstallClaudeIntegration(t *testing.T) {
 	installer := NewInstaller(tempDir, testIntegrationAssets)
 
 	// Create a minimal .krci-ai structure with test agent
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := filepath.Join(krciPath, agentsDir)
 	err := os.MkdirAll(agentsPath, 0755)
 	if err != nil {
@@ -198,10 +197,10 @@ func TestInstallClaudeIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !testutil.ContainsSubstr(contentStr, "# /po Command") {
+	if !strings.Contains(contentStr, "# /po Command") {
 		t.Error("Content missing command header")
 	}
-	if !testutil.ContainsSubstr(contentStr, "Product Owner") {
+	if !strings.Contains(contentStr, "Product Owner") {
 		t.Error("Content missing role")
 	}
 }
@@ -211,7 +210,7 @@ func TestInstallVSCodeIntegration(t *testing.T) {
 	installer := NewInstaller(tempDir, testIntegrationAssets)
 
 	// Create a minimal .krci-ai structure with test agent
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := filepath.Join(krciPath, agentsDir)
 	err := os.MkdirAll(agentsPath, 0755)
 	if err != nil {
@@ -254,19 +253,19 @@ func TestInstallVSCodeIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !testutil.ContainsSubstr(contentStr, "---") {
+	if !strings.Contains(contentStr, "---") {
 		t.Error("Content missing front matter delimiters")
 	}
-	if !testutil.ContainsSubstr(contentStr, "description: Activate Software Developer role for specialized development assistance") {
+	if !strings.Contains(contentStr, "description: Activate Software Developer role for specialized development assistance") {
 		t.Error("Content missing description in front matter")
 	}
-	if !testutil.ContainsSubstr(contentStr, "tools: "+GitHubToolsList) {
+	if !strings.Contains(contentStr, "tools: "+GitHubToolsList) {
 		t.Error("Content missing tools in front matter")
 	}
-	if !testutil.ContainsSubstr(contentStr, "# Software Developer Agent Chat Mode") {
+	if !strings.Contains(contentStr, "# Software Developer Agent Chat Mode") {
 		t.Error("Content missing agent chat mode header")
 	}
-	if !testutil.ContainsSubstr(contentStr, "Software Developer") {
+	if !strings.Contains(contentStr, "Software Developer") {
 		t.Error("Content missing role")
 	}
 }
@@ -276,7 +275,7 @@ func TestInstallWindsurfIntegration(t *testing.T) {
 	installer := NewInstaller(tempDir, testIntegrationAssets)
 
 	// Create a minimal .krci-ai structure with test agent
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := filepath.Join(krciPath, agentsDir)
 	err := os.MkdirAll(agentsPath, 0755)
 	if err != nil {
@@ -318,10 +317,10 @@ func TestInstallWindsurfIntegration(t *testing.T) {
 	}
 
 	contentStr := string(content)
-	if !testutil.ContainsSubstr(contentStr, "# Software Developer Agent Rule") {
+	if !strings.Contains(contentStr, "# Software Developer Agent Rule") {
 		t.Error("Content missing agent rule header")
 	}
-	if !testutil.ContainsSubstr(contentStr, "Software Developer") {
+	if !strings.Contains(contentStr, "Software Developer") {
 		t.Error("Content missing role")
 	}
 }
