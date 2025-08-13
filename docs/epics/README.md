@@ -41,4 +41,13 @@ graph LR
     E5 --> E6[Epic 6<br/>Local Components<br/>✅ COMPLETE]
     E6 --> E7[Epic 7<br/>Token Management<br/>⏸️ NOT STARTED]
     E3 --> E8[Epic 8<br/>Selective Installation<br/>🚧 IN PROGRESS]
+
+    style E1 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
+    style E2 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
+    style E3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
+    style E4 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
+    style E5 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
+    style E6 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
+    style E7 fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#111
+    style E8 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
 ```

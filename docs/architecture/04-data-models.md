@@ -908,9 +908,22 @@ graph TB
 
     VG & VH & QA --> |ensures| LLM
 
-    style CLI fill:#e3f2fd
-    style LLM fill:#fff3e0
-    style QA fill:#e8f5e8
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style SV1 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style SV2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style SV3 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style SV4 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style VR fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+
+    style LLM fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style RV1 fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#111
+    style RV2 fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#111
+    style RV3 fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#111
+    style ER fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#111
+
+    style VG fill:#e0f7fa,stroke:#00796b,stroke-width:2px,color:#111
+    style VH fill:#ffe0b2,stroke:#f57c00,stroke-width:2px,color:#111
+    style QA fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
 ```
 
 #### Validation Architecture
@@ -1059,10 +1072,14 @@ flowchart TD
     L3 -.->|Use Cases| UC3[Professional Documentation<br/>Consistent Reporting<br/>Brand Compliance]
     L4 -.->|Use Cases| UC4[Expert Systems<br/>Domain Knowledge<br/>Enterprise Solutions]
 
-    style L1 fill:#e1f5fe
-    style L2 fill:#f3e5f5
-    style L3 fill:#e8f5e8
-    style L4 fill:#fff3e0
+    style L1 fill:#e1f5fe,stroke:#1976d2,stroke-width:2px,color:#111
+    style L2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style L3 fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style L4 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style UC1 fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style UC2 fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style UC3 fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style UC4 fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
 ```
 
 #### Level 1: Agent-Only (Conversational)
