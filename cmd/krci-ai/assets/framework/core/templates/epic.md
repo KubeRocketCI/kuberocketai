@@ -8,6 +8,7 @@
 | Priority             | {{priority}}            |
 | Epic Owner           | {{owner}}               |
 | Timeline             | {{timeline}}            |
+| Epic Key/Link        | {{epic_key}}            |
 
 <!-- Epic tracking and SDLC integration -->
 <!-- Enables progress monitoring and PRD traceability validation -->
@@ -16,7 +17,7 @@
 Status Options: Planning -> Approved -> In Progress -> Done -> Completed
 Priority Example: Critical, High, Medium, Low (align with PRD requirement priorities)
 Epic Owner Example: "Product Owner", "Tech Lead", "Development Team"
-Timeline Example: "Sprint 1-3 (6 weeks)", "Q1 2024", "March-April 2024"
+Timeline Example: "Sprint 1-3 (6 weeks)", "Q1 2025", "March-April 2025"
 -->
 
 ## Overview
@@ -25,55 +26,56 @@ Timeline Example: "Sprint 1-3 (6 weeks)", "Q1 2024", "March-April 2024"
 
 {{problem_statement}}
 
-<!-- Clear, specific user problem this Epic solves from PRD analysis -->
+<!-- Clear, specific user or business problem this Epic solves from PRD analysis -->
 <!-- Must trace back to PRD business requirements and user pain points -->
 
 <!-- Template Guidance:
 Problem Statement Example:
-"Users struggle with agent discovery and IDE integration, leading to fragmented workflows and reduced productivity. Current manual agent selection requires deep technical knowledge, creating adoption barriers for 70% of target users."
+"Users struggle to activate and use agents consistently across supported IDEs, causing rework and reduced productivity. Inconsistent activation flows generate support tickets and block onboarding."
 
 Format Structure:
 - Start with specific user pain point from PRD
-- Include quantifiable impact or evidence
+- Include quantifiable impact or evidence (if already available)
 - Connect to PRD BR/NFR requirements
 - Avoid solution-oriented language
 
-DO: Reference specific PRD requirements (BR1, BR2, NFR1...)
-DO: Include quantifiable user impact
-DO: Focus on user pain, not missing features
-DO: Use evidence from PRD user research
-DON'T: Describe what the system can't do
-DON'T: Include solution details in problem statement
-DON'T: Use vague terms like "users want better experience"
+DO:
+- Tie the problem to concrete PRD BR/NFR references
+- Use user-centric language and observable effects
+- Include evidence or impact where available
+
+DON'T:
+- Prescribe solutions or technical designs here
+- Use vague terms without context (e.g., "better", "faster")
+- Omit explicit traceability to PRD
 -->
 
 ### Goal
 
 {{goal}}
 
-<!-- Specific, measurable outcome that defines Epic completion -->
-<!-- Must align with PRD success metrics and enable clear Story validation -->
-<!-- REQUIRED FORMAT: Enable [specific outcome] for [target %] of [user type] within [timeline] -->
+<!-- Capability delivered statement that defines Epic completion -->
+<!-- Be outcome-focused and verifiable immediately after implementation in a controlled environment -->
+<!-- Optional: add success indicators ONLY if they can be verified post-implementation without third-party analytics or unavailable data -->
 
 <!-- Template Guidance:
-Goal Example:
-"Enable seamless agent discovery and IDE integration for 90% of target users within 2 weeks of first use, reducing agent selection time from 15 minutes to under 30 seconds while maintaining enterprise security standards."
+Goal Examples (choose one style appropriate for your context):
+- "Deliver a consistent agent activation capability across target IDEs with a single, predictable user flow."
+- "Provide single sign-on capability across portal and tools using an internal IDP/test stub for validation."
 
-REQUIRED Format Structure:
-- MUST start with "Enable [specific outcome]"
-- MUST include target user percentage or metrics
-- MUST include specific timeline boundaries
-- MUST connect to PRD success criteria
-- MUST be measurable and testable
+Notes:
+- You may optionally link to OKRs if they are already active and verifiable during/after the release.
+- Avoid speculative future metrics and long-horizon targets that cannot be checked immediately after delivery.
 
-DO: Use format "Enable X for Y% of [users] within Z [timeline]"
-DO: Include specific metrics from PRD (time, percentage, quantity)
-DO: Set realistic timeline boundaries with specific duration
-DO: Connect to PRD success criteria explicitly
-DON'T: Use vague language like "improve user experience"
-DON'T: Set unmeasurable goals or subjective outcomes
-DON'T: Ignore PRD success metrics alignment
-DON'T: Omit timeline or target percentage requirements
+DO:
+- State the capability in plain language (outcome, not implementation)
+- Include near-term indicators only if verifiable post-implementation
+- Align with the Problem Statement and PRD scope
+
+DON'T:
+- Force %/timeline when measurement isn’t feasible yet
+- Embed tool-specific testing details
+- Drift into story-level scope
 -->
 
 ### Target Users
@@ -85,23 +87,23 @@ DON'T: Omit timeline or target percentage requirements
 
 <!-- Template Guidance:
 Target Users Example:
-"Primary: Software Architects (60%) - designing system components and integration patterns
-Secondary: Development Leads (30%) - implementing architectural decisions in code
-Tertiary: Product Managers (10%) - validating technical feasibility and scope"
+"Primary: Software Engineers and Architects – installing and activating agents in supported IDEs
+Secondary: QA Engineers – validating agent behavior across environments
+Tertiary: Product Managers – tracking readiness for release"
 
 Format Structure:
-- List primary, secondary, tertiary users with percentages
-- Include specific roles and responsibilities
-- Connect to PRD user segments
-- Enable Story persona development
+- List primary, secondary, tertiary users and their context
+- Connect to PRD user segments and persona definitions
 
-DO: Use specific personas from PRD
-DO: Include user percentages or priority levels
-DO: Describe user context and responsibilities
-DO: Enable clear Story "As a [user]" scenarios
-DON'T: Use generic roles like "users" or "developers"
-DON'T: Create new personas not in PRD
-DON'T: Omit user context or responsibilities
+DO:
+- Use PRD-defined personas and segments
+- Provide enough context for story persona scenarios
+- Keep the list focused on actual beneficiaries
+
+DON'T:
+- Invent new roles not present in PRD
+- Use generic labels like "users" or "developers" without context
+- Omit the user context and responsibilities
 -->
 
 ## Scope
@@ -115,53 +117,48 @@ DON'T: Omit user context or responsibilities
 
 <!-- Template Guidance:
 What's Included Example:
-"1. Agent discovery UI with search and filter capabilities (BR2, BR3)
-2. IDE integration framework for Cursor, VS Code, and JetBrains (NFR1)
-3. Authentication and security layer for enterprise environments (NFR2)
-4. Basic agent validation and health checking (BR4)"
+"1. Unified activation flow across Cursor, VS Code, and JetBrains IDEs (BR2, BR3)
+2. Session continuity within a workday across integrated tools (BR5)
+3. Basic error handling and user messaging for failed activations (NFR-UX1)
+4. Local test IDP/stubs or mocks where external dependencies would otherwise be required (NFR-TEST1)"
 
 Format Structure:
 - Number items for clear tracking
 - Reference specific PRD requirements in parentheses
-- Focus on user-facing functionality
-- Enable clear Story mapping
+- Focus on user-facing functionality and immediately testable outcomes
 
-DO: Reference specific PRD requirements (BR1, NFR2...)
-DO: Number items for clear tracking
-DO: Focus on user-facing functionality
-DO: Include enough detail for Story creation
-DON'T: Include technical implementation details
-DON'T: List features without PRD traceability
-DON'T: Use vague descriptions
+DO:
+- Keep items independently verifiable after implementation
+- Reference BR/NFR for each included capability
+- Prefer outcomes over implementation detail
+
+DON'T:
+- Include low-level design or non-essential technical tasks
+- Add third-party dependencies that block local validation
+- Blur boundaries with "What’s Not Included"
 -->
 
 ### What's Not Included
 
 {{out_of_scope}}
 
-<!-- Clear boundaries of what this Epic excludes -->
-<!-- Prevents scope creep and guides Story prioritization -->
+<!-- Clear boundaries of what this Epic excludes to prevent scope creep -->
 
 <!-- Template Guidance:
 What's Not Included Example:
-"1. Advanced analytics and usage monitoring (deferred to Epic 3)
-2. Custom agent development frameworks (out of MVP scope)
-3. Multi-language support beyond English (future roadmap item)
-4. Legacy IDE support (VS 2019, Eclipse) - minimum viable platform focus"
+"1. Production analytics dashboards for adoption metrics (handled in separate analytics Epic)
+2. Advanced SSO federation across multiple enterprise providers (future roadmap)
+3. Legacy IDE support beyond current LTS versions (deferred)"
 
-Format Structure:
-- Number excluded items for clarity
-- Explain reasoning (deferred, out of scope, future)
-- Reference other Epics for deferred items
-- Set clear boundaries for Stories
+DO:
+- Explain rationale (deferred, out of scope, future epic)
+- Point to related epics when applicable
+- Protect the MVP boundary
 
-DO: Clearly state what's excluded and why
-DO: Reference future Epics for deferred items
-DO: Explain reasoning for exclusions
-DO: Set clear Story development boundaries
-DON'T: Leave scope boundaries unclear
-DON'T: Include items without rationale
-DON'T: Create artificial limitations
+DON'T:
+- List ambiguous exclusions without justification
+- Duplicate items that already appear in scope
+- Use exclusions to mask undecided scope
 -->
 
 ### Dependencies
@@ -169,38 +166,30 @@ DON'T: Create artificial limitations
 {{dependencies}}
 
 <!-- Other Epics, systems, or external requirements this Epic needs -->
-<!-- Critical for Story sequencing and implementation planning -->
-<!-- REQUIRED STRUCTURE: Group by Epic Dependencies, System Dependencies, External Dependencies -->
+<!-- Design acceptance criteria so they can be verified without reliance on third-party services; if unavoidable, specify stubs/mocks -->
 
 <!-- Template Guidance:
-Dependencies Example:
+Dependencies Example (grouping encouraged but not mandated):
 "Epic Dependencies:
-- Epic 1: KubeRocketAI Baseline (foundation infrastructure)
-- Epic 2: Core Engine (agent processing capabilities)
+- Epic 1: Baseline infrastructure
+- Epic 2: Core engine enhancements
 
-System Dependencies:
-- Python 3.8+ runtime environment
-- IDE extension APIs (Cursor, VS Code, JetBrains)
-- Enterprise authentication systems (SSO integration)
+System/Test Dependencies:
+- Local IDP stub for SSO validation
+- Supported IDE versions (latest stable) available in CI/staging
 
-External Dependencies:
-- Design system components (UI framework)
-- Security compliance approval (enterprise deployment)"
+External Dependencies (if any):
+- Security review sign-off (if policy requires before release)"
 
-REQUIRED Format Structure:
-- MUST group by type: Epic Dependencies, System Dependencies, External Dependencies
-- MUST include specific version requirements where applicable
-- MUST note approval processes or integration needs
-- MUST enable clear dependency validation and tracking
+DO:
+- Call out stubs/mocks to avoid third-party blockers
+- Specify versions/constraints that affect validation
+- Separate epic/system/external dependencies for clarity
 
-DO: Use exact section headers "Epic Dependencies:", "System Dependencies:", "External Dependencies:"
-DO: Include specific version or requirement details for each dependency
-DO: Note approval processes or integration needs explicitly
-DO: Enable clear dependency validation and tracking
-DON'T: List dependencies without proper grouping structure
-DON'T: Use vague dependencies without specifics or versions
-DON'T: Omit external approval processes or integration requirements
-DON'T: Ignore system requirement details or compatibility needs
+DON'T:
+- Depend on production-only services for acceptance
+- Leave approvals/integration needs implicit
+- Use vague placeholders (e.g., "some SSO")
 -->
 
 ## Solution Approach
@@ -208,131 +197,135 @@ DON'T: Ignore system requirement details or compatibility needs
 {{solution_approach}}
 
 <!-- High-level implementation strategy and architectural direction -->
-<!-- Guides Story creation without prescribing technical details -->
+<!-- Guides Story creation without prescribing detailed implementation -->
 
 <!-- Template Guidance:
-Solution Approach Example:
-"Implementation Strategy:
-1. Modular UI framework with progressive enhancement for cross-IDE compatibility
-2. Plugin architecture enabling independent IDE integration development
-3. Centralized authentication service with configurable enterprise adapters
-4. Agent validation pipeline with health monitoring and error recovery
+Keep this section at architectural and capability level:
+- Key integration points and boundaries
+- Feature flags/toggles for safe rollout
+- Use of stubs or test doubles to decouple from third-party services during validation
 
-Technical Approach:
-- Frontend: React-based components for consistent IDE integration
-- Backend: Python microservices with REST API interfaces
-- Security: OAuth 2.0 with enterprise SSO federation
-- Deployment: Containerized services with Kubernetes orchestration"
+DO:
+- Describe integration boundaries and toggles for safe rollout
+- Prefer approaches enabling immediate post-implementation verification
+- Note key risks and how validation addresses them
 
-Format Structure:
-- Separate implementation and technical approaches
-- Focus on architectural decisions, not detailed implementation
-- Enable Story technical context
-- Include integration patterns and service boundaries
+DON'T:
+- Specify tool commands or low-level implementation detail
+- Overconstrain design choices prematurely
+- Ignore rollout/operational considerations
+-->
 
-DO: Provide architectural guidance for Stories
-DO: Include integration patterns and service boundaries
-DO: Focus on approach, not detailed implementation
-DO: Enable technical context for Story development
-DON'T: Include detailed code specifications
-DON'T: Prescribe exact implementation details
-DON'T: Ignore architectural considerations
+## Risks & Assumptions
+
+{{risks_and_assumptions}}
+
+<!-- Key uncertainties that may impact delivery or validation; distinct from Solution Approach -->
+<!-- Capture assumptions that, if false, would invalidate scope or acceptance -->
+
+<!-- Template Guidance:
+Risks & Assumptions Examples:
+- Risk: Supported IDE API changes could break activation flow near release
+- Risk: Security approval needed before enabling cross-tool session persistence
+- Assumption: Local IDP stub is available for SSO validation
+- Assumption: Feature flags can be toggled per environment
+
+DO:
+- State risks with potential impact and a mitigation idea
+- Make assumptions explicit and testable
+- Keep items tied to epic scope and acceptance
+
+DON'T:
+- Duplicate dependencies; reference them if needed
+- List generic project risks unrelated to acceptance
+- Leave critical assumptions implicit
 -->
 
 ## Acceptance Criteria
 
 {{acceptance_criteria}}
 
-<!-- Specific, testable conditions that define Epic completion -->
-<!-- Must include measurable outcomes and validation commands for Story verification -->
-<!-- REQUIRED: Each criterion MUST include validation method and verification command -->
+<!-- Epic-level, outcome-focused, and immediately verifiable post-implementation -->
+<!-- Do NOT prescribe verification commands or specific tools -->
+<!-- Avoid dependence on third-party services; if required, define local stubs/mocks -->
+
+<!-- Required Structure for each criterion:
+1. Scenario: Brief user/system flow to validate
+2. Expected Behavior: Clear, observable outcome
+3. Measurement/Method: How we confirm now (manual steps, UI/API observation, logs), without prescribing tools/commands
+4. Preconditions/Assumptions: Feature flags, environment, stubs/mocks, test users
+5. Guardrails: Quality constraints (e.g., no P0/P1 defects in core flow; basic performance/security thresholds)
+6. Deferred (non-blocking): Optional indicator that cannot be immediately verified (use sparingly)
+-->
+<!-- Note: "Deferred (non-blocking)" items do not gate epic closure. Track them in analytics/ops epics or release notes. -->
 
 <!-- Template Guidance:
-Acceptance Criteria Example:
-"1. User can discover and select agents through IDE interface within 30 seconds
-   - Validation: Time user workflows from agent search to selection
-   - Command: `pytest tests/integration/agent_discovery_test.py`
+Acceptance Criteria Example (Epic-level, scenario-based, no third-party dependency):
+"1. Cross-IDE agent activation consistency
+   - Scenario: User activates a selected agent in Cursor, VS Code, and JetBrains using the unified flow
+   - Expected Behavior: Activation completes successfully with consistent steps and end state across IDEs
+   - Measurement/Method: Perform activation in staging across supported IDEs; verify final activated state and absence of additional prompts
+   - Preconditions/Assumptions: Supported IDE versions installed; feature flag 'unifiedActivation' enabled
+   - Guardrails: No P0/P1 defects in activation core path; added startup latency <= 200ms
+   - Traceability: BR2, BR3
 
-2. IDE integration works across Cursor, VS Code, JetBrains with consistent UX
-   - Validation: Cross-platform testing demonstrates feature parity
-   - Command: `npm run test:integration -- --platform=all`
+2. Session continuity within a workday
+   - Scenario: User logs in using SSO, switches between tools during the day without re-authentication
+   - Expected Behavior: Session persists across tools; no additional credential prompts within policy window
+   - Measurement/Method: Repeat access across tools within configured TTL; observe uninterrupted access and valid session tokens
+   - Preconditions/Assumptions: Local session store enabled; policy TTL configured for staging
+   - Guardrails: Logout invalidates access across tools within 60 seconds; no partial-auth states
+   - Deferred (non-blocking): Track adoption rate post-release (handled by analytics Epic)
+   - Traceability: BR5, NFR-SEC
 
-3. Enterprise authentication integrates with existing SSO systems
-   - Validation: SSO login flow completes without manual intervention
-   - Command: `python tests/auth/sso_integration_test.py`
+3. Error handling and recovery
+   - Scenario: Activation fails due to a simulated dependency outage (via stub/mocking)
+   - Expected Behavior: User sees a clear, actionable message; retry succeeds once dependency is restored
+   - Measurement/Method: Toggle failure in stub; verify UX message, no corrupted state, successful retry
+   - Preconditions/Assumptions: Failure modes controllable via test stub; feature flag 'activationRetry' enabled
+   - Guardrails: No data loss; no unhandled exceptions in logs
+   - Traceability: NFR-UX1, NFR-REL"
 
-4. Agent validation prevents malformed or insecure agent usage
-   - Validation: Security scan passes with zero critical issues
-   - Command: `security-scan --agents --threshold=critical`"
+DO:
+- Number criteria for tracking and story mapping
+- Keep outcomes measurable/observable now, without requiring external analytics
+- Use stubs/mocks to validate flows when real third-party services are unavailable
 
-REQUIRED Format Structure:
-- MUST number criteria for clear tracking and Story mapping
-- MUST include validation method for each criterion
-- MUST include verification command for each criterion (where automatable)
-- MUST define measurable success indicators
-- MUST enable automated testing and verification where possible
-
-DO: Include specific validation methods AND verification commands for each criterion
-DO: Make criteria measurable and testable with clear success indicators
-DO: Number criteria for Story traceability and tracking
-DO: Enable automated verification where possible (pytest, npm test, CLI commands)
-DO: Include both manual validation steps and automated command verification
-DON'T: Use subjective criteria like "works well" or "user-friendly"
-DON'T: Omit validation methods or verification steps
-DON'T: Create criteria that can't be tested or measured
-DON'T: Skip command verification for automatable criteria
+DON'T:
+- Include command-level verification (e.g., CLI, pytest, npm commands)
+- Rely on long-horizon metrics or OKRs that cannot be verified immediately after delivery
+- Use subjective language like "works well" or "user-friendly" without observable outcomes
 -->
 
 ## User Stories
 
 {{planned_stories}}
 
-<!-- Planned Stories that implement this Epic with clear breakdown -->
-<!-- Enables immediate Story creation with Epic context and traceability -->
-<!-- REQUIRED: Group by phases with clear dependencies and story numbering -->
+<!-- Planned Stories that implement this Epic with clear breakdown and traceability -->
 
 <!-- Template Guidance:
-User Stories Example:
-"Planned Stories for Implementation:
+Recommended Structure:
+- Group stories by phases or slices that deliver incremental user value
+- Use consistent numbering within the Epic (e.g., {{epic_number}}.01, {{epic_number}}.02, ...)
+- Each story should include persona, goal, and minimal acceptance criteria
 
-**Phase 1: Foundation (Sprint 1)**
-- Story {{epic_number}}.01: Agent Discovery Interface
-  - As a Software Architect, I want to search and filter available agents
-  - Acceptance: Search returns relevant agents within 3 seconds
-  - Dependencies: Epic 1 baseline infrastructure
+DO:
+- Keep stories INVEST and traceable to epic criteria
+- Include dependencies only when necessary and explicit
+- Ensure each story yields observable value
 
-- Story {{epic_number}}.02: Basic IDE Integration
-  - As a Development Lead, I want to activate agents within my IDE
-  - Acceptance: Agent activation works in Cursor and VS Code
-  - Dependencies: Story {{epic_number}}.01 completion
+DON'T:
+- Mix multiple personas/goals in one story
+- Leave stories without acceptance criteria
+- Skip numbering or phase grouping without reason
 
-**Phase 2: Enhancement (Sprint 2)**
-- Story {{epic_number}}.03: Enterprise Authentication
-  - As a Product Manager, I want secure agent access with SSO
-  - Acceptance: SSO login integrates with existing enterprise systems
-  - Dependencies: Security compliance approval
+Example:
+"Phase 1: Foundation
+- Story {{epic_number}}.01: Unified activation flow – Cursor
+  - As a Software Engineer, I want to activate an agent in Cursor, so that I can use it without extra setup
+- Story {{epic_number}}.02: Unified activation flow – VS Code
 
-**Phase 3: Validation (Sprint 3)**
-- Story {{epic_number}}.04: Agent Health Monitoring
-  - As a Software Architect, I want to validate agent security and performance
-  - Acceptance: Health dashboard shows agent status and metrics
-  - Dependencies: All previous stories completed"
-
-REQUIRED Format Structure:
-- MUST group Stories by implementation phases with clear phase headers
-- MUST include user persona, goal, and basic acceptance criteria for each story
-- MUST note dependencies between Stories and external requirements
-- MUST use consistent naming: {{epic_number}}.01, {{epic_number}}.02, etc.
-- MUST enable immediate Story creation with Epic context and traceability
-
-DO: Group Stories by logical implementation phases with "**Phase X: Name**" headers
-DO: Include user persona ("As a [role]"), goal ("I want to"), and acceptance criteria
-DO: Note dependencies between Stories using "Dependencies: Story X.XX completion"
-DO: Use consistent Story numbering within Epic ({{epic_number}}.01, .02, etc.)
-DO: Enable immediate Story creation with sufficient context
-DON'T: List stories without phase grouping or logical sequence
-DON'T: Include detailed Story implementation details in Epic
-DON'T: Create Stories without clear user value or persona
-DON'T: Ignore dependencies or sequencing requirements between stories
-DON'T: Use inconsistent numbering or skip dependency notation
--->
+Phase 2: Parity
+- Story {{epic_number}}.03: Unified activation flow – JetBrains
+- Story {{epic_number}}.04: Session continuity (intra-day)"
+ -->
