@@ -80,17 +80,12 @@ This diagram illustrates the AI-as-Code approach for AI agents, showing how Kube
 
 ```mermaid
 graph TD
-    subgraph "Local Developer Environment"
-        Developer["👨‍💻 Developer<br/>Uses existing tools"]
-        CLI["🛠️ krci-ai CLI<br/>📦 Embedded Framework Assets<br/>🔧 AI-as-Code Management"]
-        IDE["🎨 AI-Powered IDE<br/>Native Integration<br/>(No plugins required)"]
-        LocalFramework["📁 ./krci-ai/<br/>🔗 Declarative AI Agents<br/>📋 Extracted + Local"]
-        TargetProject["💻 Target Project<br/>🔀 Git Repository"]
-    end
-
-    subgraph "Internet/Cloud (Post-MVP)"
-        GoldenRepo["🏢 Golden Source<br/>🔗 Git Repository<br/>🤖 AI-as-Code<br/>🔮 Future Enhancement"]
-    end
+    Developer["👨‍💻 Developer<br/>Uses existing tools"]
+    CLI["🛠️ krci-ai CLI<br/>📦 Embedded Framework Assets<br/>🔧 AI-as-Code Management"]
+    IDE["🎨 AI-Powered IDE<br/>Native Integration<br/>(No plugins required)"]
+    LocalFramework["📁 ./krci-ai/<br/>🔗 Declarative AI Agents<br/>📋 Extracted + Local"]
+    TargetProject["💻 Target Project<br/>🔀 Git Repository"]
+    GoldenRepo["🏢 Golden Source<br/>🔗 Git Repository<br/>🤖 AI-as-Code<br/>🔮 Future Enhancement"]
 
     Developer --> CLI
     Developer --> IDE
@@ -100,10 +95,12 @@ graph TD
     GoldenRepo -.->|"🔮 Post-MVP: Remote updates<br/>Community contributions"| CLI
     TargetProject -.->|"🔄 Future: Contribute back<br/>Local customizations"| GoldenRepo
 
-    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5
-    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5,color:#111
+    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style Developer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style TargetProject fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111
 ```
 
 ## Installation

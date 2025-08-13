@@ -58,12 +58,15 @@ graph TB
     IDE --> User
 
     %% Styling
-    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style CORE fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style STORAGE fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
-    style VALIDATION fill:#e0f2f1,stroke:#00796b,stroke-width:2px
-    style INTEGRATION fill:#fff9c4,stroke:#f57f17,stroke-width:2px,stroke-dasharray: 5 5
-    style UTILITIES fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style CORE fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style STORAGE fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style VALIDATION fill:#e0f2f1,stroke:#00796b,stroke-width:2px,color:#111
+    style INTEGRATION fill:#fff9c4,stroke:#f57f17,stroke-width:2px,stroke-dasharray: 5 5,color:#111
+    style UTILITIES fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#111
+    style User fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style FileSystem fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style IDE fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
 ```
 
 Component Responsibility is defined as follows:
@@ -99,12 +102,15 @@ graph LR
     C --> H
     E --> I
 
-    style A fill:#e3f2fd,stroke:#1976d2
-    style B fill:#fff3e0,stroke:#f57c00
-    style C fill:#e8f5e8,stroke:#388e3c
-    style D fill:#e0f2f1,stroke:#00796b
-    style E fill:#fff9c4,stroke:#f57f17
-    style F fill:#ffebee,stroke:#d32f2f
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style B fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style C fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style D fill:#e0f2f1,stroke:#00796b,stroke-width:2px,color:#111
+    style E fill:#fff9c4,stroke:#f57f17,stroke-width:2px,color:#111
+    style F fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#111
+    style G fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style H fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style I fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
 ```
 
 ---

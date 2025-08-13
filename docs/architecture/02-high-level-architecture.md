@@ -40,10 +40,12 @@ graph TD
     GoldenRepo -.->|"🔮 Post-MVP: Remote updates<br/>Community contributions"| CLI
     TargetProject -.->|"🔄 Future: Contribute back<br/>Local customizations"| GoldenRepo
 
-    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5
-    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style Developer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style TargetProject fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111
+    style GoldenRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray:5 5,color:#111
 ```
 
 ### Detailed Architecture Diagram
@@ -130,12 +132,25 @@ graph TB
     Templates --> Level3
     Data --> Level4
 
-    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style CentralRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray: 5 5
-    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
-    style StaticVal fill:#ffebee,stroke:#d32f2f,stroke-width:2px
-    style RuntimeVal fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style CentralRepo fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray:5 5,color:#111
+    style LocalFramework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style StaticVal fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#111
+    style RuntimeVal fill:#e0f2f1,stroke:#00796b,stroke-width:2px,color:#111
+    style Agents fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style Tasks fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style Templates fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style Data fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style ProjectCode fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#111
+    style LLMExecution fill:#e0f7fa,stroke:#00796b,stroke-width:2px,color:#111
+    style Level1 fill:#e1f5fe,stroke:#1976d2,stroke-width:2px,color:#111
+    style Level2 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style Level3 fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#111
+    style Level4 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style HealthRepo fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style FinanceRepo fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
+    style CustomRepo fill:#f3f3f3,stroke:#555555,stroke-width:1px,color:#111
 ```
 
 **Key Architectural Elements:**
