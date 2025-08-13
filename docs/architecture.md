@@ -19,9 +19,10 @@ graph TD
     IDE -->|"📖 Read configurations<br/>Native filesystem access"| Framework
     Framework --> Project
 
-    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
-    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px
-    style Framework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style CLI fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#111
+    style IDE fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#111
+    style Framework fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#111
+    style Project fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#111
 ```
 
 **Key Design Principles:**
@@ -153,6 +154,15 @@ graph TD
 
     Code --> MVP[🎉 MVP Delivered]
     Test --> MVP
+
+    style Brief fill:#f0e68c,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style PRD   fill:#f3e5f5,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style Epic  fill:#e8f5e8,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style Story fill:#fff3e0,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style Arch  fill:#e0f2f1,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style Code  fill:#f1f8e9,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style Test  fill:#fff9c4,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
+    style MVP   fill:#ffebee,stroke:#2b2b2b,stroke-width:1.4px,color:#111,font-size:13px
 ```
 
 **Artifact Dependencies:**

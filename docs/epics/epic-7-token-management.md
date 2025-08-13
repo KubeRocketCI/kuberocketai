@@ -28,9 +28,9 @@ Primary: Agile Team Members (100%) - managing agent configurations and bundle de
 ### What's Included
 
 1. Token calculation engine with platform-specific tokenization algorithms (BR10, NFR7, NFR8, NFR9)
-2. Real-time token analysis during validation and bundling workflows (BR11)
+2. Real-time token analysis during validation and bundling workflows (BR11) (Out of mvp scope)
 3. Detailed dependency breakdown showing agent, task, template, and data contributions (BR12)
-4. Context limit warnings and optimization recommendations for major AI platforms (BR11)
+4. Context limit warnings and optimization recommendations for major AI platforms (BR11) (Out of mvp scope)
 5. CLI commands for token analysis with granular scope options (`--task`, `--agent`, `--all`) (BR10)
 6. Integration with existing validation and bundling commands for seamless token awareness (BR11)
 
@@ -88,15 +88,15 @@ Technical Approach:
    - Validation: All CLI options return appropriate token breakdowns
    - Command: `krci-ai tokens --agent pm && krci-ai tokens --all`
 
-4. Validation and bundling commands include automatic token size reporting and warnings
-   - Validation: Token information appears in command output with context limit warnings
-   - Command: `krci-ai validate && krci-ai bundle --all | grep -E "Token|Warning"`
+4. Validation and bundling commands include automatic token size reporting and warnings 
+   - Validation: Token information appears in command output with context limit warnings `krci-ai validate | grep -E "Token|Warning"` (Out of mvp scope)
+   - Bundle: `krci-ai bundle --all | grep -E "Token|Warning"`
 
 5. Detailed dependency breakdown shows contribution from agents, tasks, templates, and data
    - Validation: Token breakdown identifies specific asset contributions
    - Command: `krci-ai tokens --all`
 
-6. Platform-specific context limit warnings for GPT-4, Claude, and Gemini Pro
+6. Platform-specific context limit warnings for GPT-4, Claude, and Gemini Pro (Calculate for GPT-4, other platforms out of mvp scope)
    - Validation: Warnings appear when approaching platform-specific limits
    - Command: `krci-ai tokens --model gpt4 --warn-threshold 0.8`
 
@@ -111,7 +111,7 @@ Planned Stories for Implementation:
   - Acceptance: Token calculation works for individual agents within 1 second with CLI support for GPT-4 model (`krci-ai tokens --agent pm`, `krci-ai tokens --all`)
   - Dependencies: Epic 2 dependency tracking infrastructure
 
-- Story 7.02: Platform-Specific Tokenization (Multi-Platform)
+- Story 7.02: Platform-Specific Tokenization (Multi-Platform) (Out of mvp scope)
   - As a Software Architect, I want accurate token estimates for Claude and Gemini platforms beyond GPT-4
   - Acceptance: Token calculations match actual platform consumption within 10% variance for all major platforms
   - Dependencies: Story 7.01 completion
@@ -120,7 +120,7 @@ Planned Stories for Implementation:
 
 - Story 7.03: Bundle Integration and Optimization
   - As a Developer, I want token analysis integrated with bundle creation
-  - Acceptance: Bundle commands include token reporting and context limit warnings
+  - Acceptance: Bundle commands include token reporting and context limit warnings(Out of mvp scope)
   - Dependencies: Epic 5 bundle management, Story 7.01
 
 - Story 7.04: Validation Workflow Integration

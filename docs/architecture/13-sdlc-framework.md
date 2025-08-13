@@ -62,15 +62,15 @@ graph TD
     Code --> MVP[🎉 MVP Delivered]
     Test --> MVP
 
-    style Idea fill:#e1f5fe
-    style Brief fill:#f0e68c
-    style PRD fill:#f3e5f5
-    style Epic fill:#e8f5e8
-    style Story fill:#fff3e0
-    style Arch fill:#e0f2f1
-    style Code fill:#f1f8e9
-    style Test fill:#fff9c4
-    style MVP fill:#ffebee
+    style Idea fill:#e1f5fe,stroke:#333,color:#000
+    style Brief fill:#f0e68c,stroke:#333,color:#000
+    style PRD fill:#f3e5f5,stroke:#333,color:#000
+    style Epic fill:#e8f5e8,stroke:#333,color:#000
+    style Story fill:#fff3e0,stroke:#333,color:#000
+    style Arch fill:#e0f2f1,stroke:#333,color:#000
+    style Code fill:#f1f8e9,stroke:#333,color:#000
+    style Test fill:#fff9c4,stroke:#333,color:#000
+    style MVP fill:#ffebee,stroke:#333,color:#000
 ```
 
 Artifact Dependencies Explained:
