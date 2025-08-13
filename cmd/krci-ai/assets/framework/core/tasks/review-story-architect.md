@@ -26,7 +26,7 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 2. **Review component boundaries**: Verify proposed components have clear responsibilities and interfaces
 3. **Assess integration patterns**: Validate integration approach follows established architectural patterns
 4. **Check performance implications**: Evaluate performance, scalability, and resource considerations
-5. **Verify compliance standards**: Ensure approach meets security, compliance, and technical standards
+5. **Verify compliance standards**: Ensure approach meets security, compliance, and technical standards; confirm AC include appropriate guardrails and that Verification Method/Evidence are adequate where commands aren't feasible
 
 ## Output Format
 

@@ -24,7 +24,7 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 1. **Validate technical completeness**: Ensure story has sufficient detail for autonomous implementation
 2. **Review task/subtask specificity**: Verify implementation steps are atomic, executable, and well-defined
-3. **Check technical specifications**: Validate libraries, file paths, commands, and dependencies are complete
+3. **Check technical specifications**: Validate libraries, file paths, verification methods/commands, and dependencies are complete
 4. **Assess implementation feasibility**: Confirm technical approach is viable and follows project standards
 5. **Verify validation completeness**: Ensure testing and verification steps are comprehensive and executable
 
@@ -51,13 +51,13 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 - [ ] **Library specifications**: All required libraries include specific versions (e.g., `gopkg.in/yaml.v3 v3.0.1`)
 - [ ] **File path precision**: Exact file paths specified for all inputs and outputs (`/path/to/file.ext`)
-- [ ] **Command executability**: All commands are specific and executable without modification
+- [ ] **Verification executability**: Verification methods/commands are specific and executable without modification
 - [ ] **Dependency clarity**: Technical dependencies clearly specified and available
 
 ### Task/Subtask Implementation Review
 
 - [ ] **Atomic verification**: Each subtask represents single, executable action
-- [ ] **Command completeness**: Every subtask includes specific commands and validation steps
+- [ ] **Verification completeness**: Every subtask includes specific verification method/steps and success indicators
 - [ ] **File target specificity**: Each task specifies exact files to create, modify, or validate
 - [ ] **Validation integration**: Each subtask includes verification commands and success indicators
 
@@ -78,7 +78,7 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 ### Quality Assurance Validation
 
 - [ ] **Testing completeness**: QA checklist includes comprehensive testing requirements
-- [ ] **Verification commands**: Specific commands provided for validating implementation
+- [ ] **Verification method**: Clear verification method provided (automated | semi-automated | manual) with commands where applicable
 - [ ] **Success criteria**: Clear, measurable criteria for implementation completion
 - [ ] **Error handling**: Testing includes error scenarios and edge cases
 

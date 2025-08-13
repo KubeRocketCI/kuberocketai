@@ -85,9 +85,9 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ### Quality Assurance Planning
 
-- [ ] **QA checklist**: Define testing requirements with specific verification commands
+- [ ] **QA checklist**: Define testing requirements with clear verification steps/commands and expected outputs
 - [ ] **Validation plan**: Create testing checklist with:
-  - **Verification commands** LLMs can run
+  - **Verification methods** LLMs can run (commands where applicable)
   - **Expected outputs** and success indicators
   - **Rollback steps** if testing fails
 
