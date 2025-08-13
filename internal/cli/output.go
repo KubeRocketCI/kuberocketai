@@ -51,3 +51,48 @@ func (o *OutputHandler) PrintWarning(message string) {
 func (o *OutputHandler) PrintError(message string) {
 	fmt.Printf("%s %s\n", style.Error("❌"), message)
 }
+
+// PrintBold prints text in bold
+func (o *OutputHandler) PrintBold(message string) {
+	fmt.Println(style.Bold(message))
+}
+
+// Bold returns text formatted in bold
+func (o *OutputHandler) Bold(text string) string {
+	return style.Bold(text)
+}
+
+// PrintCyan prints text in cyan color
+func (o *OutputHandler) PrintCyan(text string) string {
+	return style.Cyan(text)
+}
+
+// PrintYellow prints text in yellow color
+func (o *OutputHandler) PrintYellow(text string) string {
+	return style.Yellow(text)
+}
+
+// PrintMagenta prints text in magenta color
+func (o *OutputHandler) PrintMagenta(text string) string {
+	return style.Magenta(text)
+}
+
+// PrintBlue prints text in blue color
+func (o *OutputHandler) PrintBlue(text string) string {
+	return style.Blue(text)
+}
+
+// PrintGreenBold prints text in green bold
+func (o *OutputHandler) PrintGreenBold(text string) string {
+	return style.GreenBold(text)
+}
+
+// Printf provides formatted printing with style support
+func (o *OutputHandler) Printf(format string, args ...interface{}) {
+	fmt.Printf(format, args...)
+}
+
+// Newline prints a newline character
+func (o *OutputHandler) Newline() {
+	fmt.Println()
+}

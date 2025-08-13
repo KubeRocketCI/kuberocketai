@@ -27,11 +27,11 @@ import (
 )
 
 const (
-	krciAIDir         = ".krci-ai"
+	KrciAIDir         = ".krci-ai"
 	agentsDir         = "agents"
-	tasksDir          = "tasks"
-	templatesDir      = "templates"
-	dataDir           = "data"
+	TasksDir          = "tasks"
+	TemplatesDir      = "templates"
+	DataDir           = "data"
 	configDir         = "config"
 	embeddedPrefix    = "assets/framework/core"
 	cursorRulesDir    = ".cursor/rules"
@@ -194,7 +194,7 @@ func NewInstaller(targetDir string, embeddedAssets embed.FS) *Installer {
 
 // Install installs framework assets to the target directory
 func (i *Installer) Install() error {
-	krciPath := filepath.Join(i.targetDir, krciAIDir)
+	krciPath := filepath.Join(i.targetDir, KrciAIDir)
 
 	// Create main .krci-ai directory
 	if err := i.createDirectory(krciPath); err != nil {
@@ -202,7 +202,7 @@ func (i *Installer) Install() error {
 	}
 
 	// Create subdirectories
-	subdirs := []string{agentsDir, tasksDir, templatesDir, dataDir, configDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir, configDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		if err := i.createDirectory(dirPath); err != nil {
@@ -281,7 +281,7 @@ func (i *Installer) copyEmbeddedFile(embeddedPath, targetPath string) error {
 
 // IsInstalled checks if the framework is properly installed in the target directory
 func (i *Installer) IsInstalled() bool {
-	krciPath := filepath.Join(i.targetDir, krciAIDir)
+	krciPath := filepath.Join(i.targetDir, KrciAIDir)
 
 	// Check if main directory exists
 	if _, err := os.Stat(krciPath); os.IsNotExist(err) {
@@ -289,7 +289,7 @@ func (i *Installer) IsInstalled() bool {
 	}
 
 	// Check if required subdirectories exist
-	requiredDirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
+	requiredDirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, dir := range requiredDirs {
 		dirPath := filepath.Join(krciPath, dir)
 		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
@@ -302,27 +302,27 @@ func (i *Installer) IsInstalled() bool {
 
 // GetInstallationPath returns the full path to the .krci-ai directory
 func (i *Installer) GetInstallationPath() string {
-	return filepath.Join(i.targetDir, krciAIDir)
+	return filepath.Join(i.targetDir, KrciAIDir)
 }
 
 // GetAgentsPath returns the path to the agents directory
 func (i *Installer) GetAgentsPath() string {
-	return filepath.Join(i.targetDir, krciAIDir, agentsDir)
+	return filepath.Join(i.targetDir, KrciAIDir, agentsDir)
 }
 
 // GetTasksPath returns the path to the tasks directory
 func (i *Installer) GetTasksPath() string {
-	return filepath.Join(i.targetDir, krciAIDir, tasksDir)
+	return filepath.Join(i.targetDir, KrciAIDir, TasksDir)
 }
 
 // GetTemplatesPath returns the path to the templates directory
 func (i *Installer) GetTemplatesPath() string {
-	return filepath.Join(i.targetDir, krciAIDir, templatesDir)
+	return filepath.Join(i.targetDir, KrciAIDir, TemplatesDir)
 }
 
 // GetDataPath returns the path to the data directory
 func (i *Installer) GetDataPath() string {
-	return filepath.Join(i.targetDir, krciAIDir, dataDir)
+	return filepath.Join(i.targetDir, KrciAIDir, DataDir)
 }
 
 // GetCursorRulesPath returns the path to the Cursor rules directory

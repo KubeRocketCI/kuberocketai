@@ -41,6 +41,7 @@ type AgentInfo struct {
 	Goal        string `yaml:"goal"`
 	Icon        string `yaml:"icon"`
 	FilePath    string `yaml:"-"` // Not from YAML, computed
+	ShortName   string `yaml:"-"` // Not from YAML, computed
 }
 
 // AgentDependencyInfo extends AgentInfo with dependency information
@@ -105,7 +106,10 @@ func (d *Discovery) DiscoverAgents() ([]AgentInfo, error) {
 			fmt.Fprintf(os.Stderr, "Warning: failed to parse agent file %s: %v\n", file, err)
 			continue
 		}
+
 		agentInfo.FilePath = file
+		agentInfo.ShortName = strings.TrimSuffix(filepath.Base(file), ".yaml")
+
 		agents = append(agents, *agentInfo)
 	}
 
@@ -161,6 +165,22 @@ func (d *Discovery) GetAgentByName(name string) (*AgentInfo, error) {
 	return nil, fmt.Errorf("agent '%s' not found", name)
 }
 
+// GetAgentByShortName returns information about a specific agent by short name
+func (d *Discovery) GetAgentByShortName(shortName string) (*AgentInfo, error) {
+	agents, err := d.DiscoverAgents()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, agent := range agents {
+		if agent.ShortName == shortName {
+			return &agent, nil
+		}
+	}
+
+	return nil, fmt.Errorf("agent '%s' not found", shortName)
+}
+
 // ListAvailableAgents returns a simple list of agent names
 func (d *Discovery) ListAvailableAgents() ([]string, error) {
 	agents, err := d.DiscoverAgents()
@@ -178,8 +198,7 @@ func (d *Discovery) ListAvailableAgents() ([]string, error) {
 
 // FormatAgentSummary returns a formatted string summarizing agent information
 func (d *Discovery) FormatAgentSummary(agent AgentInfo) string {
-	fileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
-	return fmt.Sprintf("%-15s | %-25s | %s", fileName, agent.Role, agent.Description)
+	return fmt.Sprintf("%-15s | %-25s | %s", agent.ShortName, agent.Role, agent.Description)
 }
 
 // ValidateAgentStructure performs basic validation of agent file structure
@@ -270,6 +289,21 @@ func (d *Discovery) DiscoverAgentsWithDependencies() ([]AgentDependencyInfo, err
 	}
 
 	return agentDeps, nil
+}
+
+func (d *Discovery) DiscoverAgentWithDependencies(shortName string) (AgentDependencyInfo, error) {
+	agents, err := d.DiscoverAgentsWithDependencies()
+	if err != nil {
+		return AgentDependencyInfo{}, err
+	}
+
+	for _, agent := range agents {
+		if agent.ShortName == shortName {
+			return agent, nil
+		}
+	}
+
+	return AgentDependencyInfo{}, fmt.Errorf("agent '%s' not found", shortName)
 }
 
 // FormatAgentDependencyTable formats agent dependency information as a table

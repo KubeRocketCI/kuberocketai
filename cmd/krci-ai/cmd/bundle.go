@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"time"
 
@@ -27,7 +28,6 @@ import (
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
-	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
 
@@ -412,7 +412,7 @@ func getTaskDependencies(currentDir, taskName string) []string {
 		// Find references to data files
 		if strings.Contains(line, "./"+krciAIDir+"/data/") {
 			dep := extractFileReference(line, "./"+krciAIDir+"/data/")
-			if dep != "" && !utils.ContainsString(dependencies, dep) {
+			if dep != "" && !slices.Contains(dependencies, dep) {
 				dependencies = append(dependencies, dep)
 			}
 		}
@@ -420,7 +420,7 @@ func getTaskDependencies(currentDir, taskName string) []string {
 		// Find references to template files
 		if strings.Contains(line, "./"+krciAIDir+"/templates/") {
 			dep := extractFileReference(line, "./"+krciAIDir+"/templates/")
-			if dep != "" && !utils.ContainsString(dependencies, dep) {
+			if dep != "" && !slices.Contains(dependencies, dep) {
 				dependencies = append(dependencies, dep)
 			}
 		}

@@ -1,27 +1,8 @@
 package utils
 
-import "testing"
-
-func TestContainsString(t *testing.T) {
-	tests := []struct {
-		name   string
-		slice  []string
-		target string
-		want   bool
-	}{
-		{"present", []string{"a", "b", "c"}, "b", true},
-		{"absent", []string{"a", "b", "c"}, "d", false},
-		{"empty slice", nil, "a", false},
-		{"empty target", []string{""}, "", true},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := ContainsString(tt.slice, tt.target); got != tt.want {
-				t.Errorf("ContainsString() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+import (
+	"testing"
+)
 
 func TestDeduplicateStrings(t *testing.T) {
 	tests := []struct {

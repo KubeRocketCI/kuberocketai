@@ -4,9 +4,8 @@ import (
 	"embed"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
-
-	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 )
 
 //go:embed testdata/*
@@ -31,7 +30,7 @@ func TestNewInstallerWithEmptyDir(t *testing.T) {
 
 func TestGetInstallationPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
-	expected := filepath.Join("test", krciAIDir)
+	expected := filepath.Join("test", KrciAIDir)
 	if installer.GetInstallationPath() != expected {
 		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetInstallationPath())
 	}
@@ -39,7 +38,7 @@ func TestGetInstallationPath(t *testing.T) {
 
 func TestGetAgentsPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
-	expected := filepath.Join("test", krciAIDir, agentsDir)
+	expected := filepath.Join("test", KrciAIDir, agentsDir)
 	if installer.GetAgentsPath() != expected {
 		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetAgentsPath())
 	}
@@ -47,7 +46,7 @@ func TestGetAgentsPath(t *testing.T) {
 
 func TestGetTasksPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
-	expected := filepath.Join("test", krciAIDir, tasksDir)
+	expected := filepath.Join("test", KrciAIDir, TasksDir)
 	if installer.GetTasksPath() != expected {
 		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetTasksPath())
 	}
@@ -55,7 +54,7 @@ func TestGetTasksPath(t *testing.T) {
 
 func TestGetTemplatesPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
-	expected := filepath.Join("test", krciAIDir, templatesDir)
+	expected := filepath.Join("test", KrciAIDir, TemplatesDir)
 	if installer.GetTemplatesPath() != expected {
 		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetTemplatesPath())
 	}
@@ -63,7 +62,7 @@ func TestGetTemplatesPath(t *testing.T) {
 
 func TestGetDataPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
-	expected := filepath.Join("test", krciAIDir, dataDir)
+	expected := filepath.Join("test", KrciAIDir, DataDir)
 	if installer.GetDataPath() != expected {
 		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetDataPath())
 	}
@@ -83,8 +82,8 @@ func TestIsInstalledWhenInstalled(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Create the required directories
-	krciPath := filepath.Join(tempDir, krciAIDir)
-	requiredDirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
+	krciPath := filepath.Join(tempDir, KrciAIDir)
+	requiredDirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 
 	err := os.MkdirAll(krciPath, 0755)
 	if err != nil {
@@ -137,13 +136,13 @@ func TestCursorIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !testutil.ContainsSubstr(content, "# Test Agent Activation") {
+	if !strings.Contains(content, "# Test Agent Activation") {
 		t.Error("Content missing agent activation header")
 	}
-	if !testutil.ContainsSubstr(content, "Test Role") {
+	if !strings.Contains(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !testutil.ContainsSubstr(content, "test: yaml") {
+	if !strings.Contains(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -167,13 +166,13 @@ func TestClaudeIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !testutil.ContainsSubstr(content, "# /test Command") {
+	if !strings.Contains(content, "# /test Command") {
 		t.Error("Content missing command header")
 	}
-	if !testutil.ContainsSubstr(content, "Test Role") {
+	if !strings.Contains(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !testutil.ContainsSubstr(content, "test: yaml") {
+	if !strings.Contains(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -197,22 +196,22 @@ func TestVSCodeIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !testutil.ContainsSubstr(content, "---") {
+	if !strings.Contains(content, "---") {
 		t.Error("Content missing front matter delimiters")
 	}
-	if !testutil.ContainsSubstr(content, "description: Activate Test Role role for specialized development assistance") {
+	if !strings.Contains(content, "description: Activate Test Role role for specialized development assistance") {
 		t.Error("Content missing description in front matter")
 	}
-	if !testutil.ContainsSubstr(content, "tools: "+GitHubToolsList) {
+	if !strings.Contains(content, "tools: "+GitHubToolsList) {
 		t.Error("Content missing tools in front matter")
 	}
-	if !testutil.ContainsSubstr(content, "# Test Role Agent Chat Mode") {
+	if !strings.Contains(content, "# Test Role Agent Chat Mode") {
 		t.Error("Content missing agent chat mode header")
 	}
-	if !testutil.ContainsSubstr(content, "Test Role") {
+	if !strings.Contains(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !testutil.ContainsSubstr(content, "test: yaml") {
+	if !strings.Contains(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -236,13 +235,13 @@ func TestWindsurfIntegration(t *testing.T) {
 	}
 
 	// Check if content contains expected parts
-	if !testutil.ContainsSubstr(content, "# Test Role Agent Rule") {
+	if !strings.Contains(content, "# Test Role Agent Rule") {
 		t.Error("Content missing agent rule header")
 	}
-	if !testutil.ContainsSubstr(content, "Test Role") {
+	if !strings.Contains(content, "Test Role") {
 		t.Error("Content missing role")
 	}
-	if !testutil.ContainsSubstr(content, "test: yaml") {
+	if !strings.Contains(content, "test: yaml") {
 		t.Error("Content missing YAML content")
 	}
 }
@@ -274,7 +273,7 @@ func TestInstall(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Mock the install process by manually creating directories
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 
 	// Create main .krci-ai directory
 	err := installer.createDirectory(krciPath)
@@ -283,7 +282,7 @@ func TestInstall(t *testing.T) {
 	}
 
 	// Create subdirectories
-	subdirs := []string{agentsDir, tasksDir, templatesDir, dataDir, configDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir, configDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		err := installer.createDirectory(dirPath)
@@ -316,7 +315,7 @@ func TestInstallInExistingDirectory(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Create directory first
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	err := os.MkdirAll(krciPath, 0755)
 	if err != nil {
 		t.Fatalf("Failed to create directory: %v", err)
@@ -334,7 +333,7 @@ func TestCopyEmbeddedAssets(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Create base directory
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	err := os.MkdirAll(krciPath, 0755)
 	if err != nil {
 		t.Fatalf("Failed to create base directory: %v", err)
@@ -400,7 +399,7 @@ func TestListInstalledAgents(t *testing.T) {
 	}
 
 	// Set up manual installation (without embedded assets)
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := installer.GetAgentsPath()
 	err = os.MkdirAll(agentsPath, 0755)
 	if err != nil {
@@ -408,7 +407,7 @@ func TestListInstalledAgents(t *testing.T) {
 	}
 
 	// Create required subdirectories for IsInstalled check
-	subdirs := []string{tasksDir, templatesDir, dataDir}
+	subdirs := []string{TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		err := os.MkdirAll(dirPath, 0755)
@@ -462,12 +461,12 @@ func TestValidateInstallationComplete(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Set up manual installation (without embedded assets)
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := installer.GetAgentsPath()
 	tasksPath := installer.GetTasksPath()
 
 	// Create required directories
-	subdirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		err := os.MkdirAll(dirPath, 0755)
@@ -506,11 +505,11 @@ func TestValidateInstallationMissingAgents(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Set up installation without agents
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	tasksPath := installer.GetTasksPath()
 
 	// Create required directories
-	subdirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		err := os.MkdirAll(dirPath, 0755)
@@ -538,11 +537,11 @@ func TestValidateInstallationMissingTasks(t *testing.T) {
 	installer := NewInstaller(tempDir, testAssets)
 
 	// Set up installation without tasks
-	krciPath := filepath.Join(tempDir, krciAIDir)
+	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := installer.GetAgentsPath()
 
 	// Create required directories
-	subdirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		err := os.MkdirAll(dirPath, 0755)

@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"slices"
 	"testing"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/testutil"
 	"github.com/spf13/cobra"
 )
 
@@ -108,14 +108,14 @@ func TestInstallCommandFlags(t *testing.T) {
 				// Test force flag
 				if forceFlag, err := cmd.Flags().GetBool("force"); err != nil {
 					t.Errorf("Failed to get force flag: %v", err)
-				} else if testutil.ContainsArg(tt.args, "--force") && !forceFlag {
+				} else if slices.Contains(tt.args, "--force") && !forceFlag {
 					t.Errorf("Expected force flag to be true")
 				}
 
 				// Test all flag
 				if allFlag, err := cmd.Flags().GetBool("all"); err != nil {
 					t.Errorf("Failed to get all flag: %v", err)
-				} else if testutil.ContainsArg(tt.args, "--all") && !allFlag {
+				} else if slices.Contains(tt.args, "--all") && !allFlag {
 					t.Errorf("Expected all flag to be true")
 				}
 			}
