@@ -650,8 +650,11 @@ func collectBundleContent(currentDir string, selectedAgents []string, taskName s
 	}
 
 	// Collect any additional templates and data files not referenced by agents
-	if err := collectAdditionalFiles(currentDir, content); err != nil {
-		return nil, fmt.Errorf("failed to collect additional files: %w", err)
+	// Only do this for --all bundles, not for targeted agent bundles
+	if len(selectedAgents) == 0 {
+		if err := collectAdditionalFiles(currentDir, content); err != nil {
+			return nil, fmt.Errorf("failed to collect additional files: %w", err)
+		}
 	}
 
 	return content, nil
