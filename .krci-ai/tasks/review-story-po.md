@@ -23,7 +23,7 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 1. **Validate business requirements**: Ensure story delivers clear user value aligned with Epic goals
 2. **Check story format**: Verify proper "As a/I want/so that" structure with clear user benefit
-3. **Review acceptance criteria**: Validate criteria are testable, specific, and business-focused
+3. **Review acceptance criteria**: Validate criteria are testable, specific, and business-focused; allow Verification Method (manual/semi-automated) with required Evidence when commands aren't feasible
 4. **Confirm epic alignment**: Ensure story supports parent Epic objectives and user outcomes
 5. **Assess user value**: Validate story provides measurable business value to target users
 
