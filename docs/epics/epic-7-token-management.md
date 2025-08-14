@@ -28,11 +28,9 @@ Primary: Agile Team Members (100%) - managing agent configurations and bundle de
 ### What's Included
 
 1. Token calculation engine with platform-specific tokenization algorithms (BR10, NFR7, NFR8, NFR9)
-2. Real-time token analysis during validation and bundling workflows (BR11)
-3. Detailed dependency breakdown showing agent, task, template, and data contributions (BR12)
-4. Context limit warnings and optimization recommendations for major AI platforms (BR11)
-5. CLI commands for token analysis with granular scope options (`--task`, `--agent`, `--all`) (BR10)
-6. Integration with existing validation and bundling commands for seamless token awareness (BR11)
+2. Detailed dependency breakdown showing agent, task, template, and data contributions (BR12)
+3. CLI commands for token analysis with granular scope options (`--task`, `--agent`, `--all`) (BR10)
+4. Integration with bundle creation commands for token awareness
 
 ### What's Not Included
 
@@ -88,21 +86,17 @@ Technical Approach:
    - Validation: All CLI options return appropriate token breakdowns
    - Command: `krci-ai tokens --agent pm && krci-ai tokens --all`
 
-4. Validation and bundling commands include automatic token size reporting and warnings
-   - Validation: Token information appears in command output with context limit warnings
-   - Command: `krci-ai validate && krci-ai bundle --all | grep -E "Token|Warning"`
+4. Bundling commands include automatic token size reporting
+   - Bundle: `krci-ai bundle --all | grep -E "Token"`
 
 5. Detailed dependency breakdown shows contribution from agents, tasks, templates, and data
    - Validation: Token breakdown identifies specific asset contributions
    - Command: `krci-ai tokens --all`
 
-6. Platform-specific context limit warnings for GPT-4, Claude, and Gemini Pro
-   - Validation: Warnings appear when approaching platform-specific limits
-   - Command: `krci-ai tokens --model gpt4 --warn-threshold 0.8`
 
 ## User Stories
 
-Planned Stories for Implementation:
+MVP Stories for Implementation:
 
 ### Phase 1: Foundation (Sprint 4)
 
@@ -111,26 +105,15 @@ Planned Stories for Implementation:
   - Acceptance: Token calculation works for individual agents within 1 second with CLI support for GPT-4 model (`krci-ai tokens --agent pm`, `krci-ai tokens --all`)
   - Dependencies: Epic 2 dependency tracking infrastructure
 
-- Story 7.02: Platform-Specific Tokenization (Multi-Platform)
-  - As a Software Architect, I want accurate token estimates for Claude and Gemini platforms beyond GPT-4
-  - Acceptance: Token calculations match actual platform consumption within 10% variance for all major platforms
-  - Dependencies: Story 7.01 completion
+### Phase 2: Advanced Analytics (Sprint 4)
 
-### Phase 2: Bundle Integration (Sprint 4)
-
-- Story 7.03: Bundle Integration and Optimization
-  - As a Developer, I want token analysis integrated with bundle creation
-  - Acceptance: Bundle commands include token reporting and context limit warnings
-  - Dependencies: Epic 5 bundle management, Story 7.01
-
-- Story 7.04: Validation Workflow Integration
-  - As a DevOps Engineer, I want token information included in validation workflows
-  - Acceptance: Validation commands automatically report token usage and warnings
-  - Dependencies: Epic 2 validation engine, Story 7.01
-
-  ### Phase 3: Advanced Analytics (Sprint 5)
-
-- Story 7.05: Dependency Breakdown Analysis
+- Story 7.02: Dependency Breakdown Analysis
   - As a Software Architect, I want detailed token breakdown by asset type and dependency
   - Acceptance: Token breakdown shows agent, task, template, and data contributions
   - Dependencies: Story 7.01 completion
+
+### Phase 3: Bundle Integration (Sprint 4)
+
+- Story 7.03: Bundle Integration and Optimization
+  - As a Developer, I want token analysis integrated with bundle creation
+  - Dependencies: Epic 5 bundle management, Story 7.01
