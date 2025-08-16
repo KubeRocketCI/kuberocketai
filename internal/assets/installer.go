@@ -34,8 +34,8 @@ const (
 	DataDir           = "data"
 	configDir         = "config"
 	embeddedPrefix    = "assets/framework/core"
-	cursorRulesDir    = ".cursor/rules"
-	claudeCommandsDir = ".claude/commands"
+	cursorRulesDir    = ".cursor/rules/krci-ai"
+	claudeCommandsDir = ".claude/commands/krci-ai"
 	vscodeModesDir    = ".github/chatmodes"
 	windsurfRulesDir  = ".windsurf/rules"
 	// File extensions
