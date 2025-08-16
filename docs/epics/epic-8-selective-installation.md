@@ -4,7 +4,7 @@
 
 | Field      | Value                |
 |------------|----------------------|
-| Status     | Planning             |
+| Status     | Planning (Updated)   |
 | Priority   | P0 (Critical)        |
 | Epic Owner | Development Team     |
 | Timeline   | 1 week               |
@@ -17,7 +17,7 @@ Users must install the entire KubeRocketAI framework even when they only need sp
 
 ### Goal
 
-Enable selective agent installation for 90% of target users within 30 seconds of decision-making, reducing initial setup time from 2-3 minutes to under 30 seconds while maintaining 100% compatibility with existing validation, bundling, and IDE integration workflows.
+Deliver selective agent installation capability enabling users to install specific agents without framework bloat while maintaining full compatibility with existing validation, bundling, and IDE integration workflows.
 
 ### Target Users
 
@@ -30,7 +30,7 @@ Tertiary: System Administrators (10%) - deploying controlled agent configuration
 ### What's Included
 
 1. Single agent installation with dependency resolution (`krci-ai install --agent developer`) (BR13)
-2. Multi-agent installation using comma-separated lists (`krci-ai install --agents pm,architect,developer`) (BR14)
+2. Multi-agent installation using comma-separated lists (`krci-ai install --agent pm,architect,developer`) (BR14)
 3. Task-specific installation with agent context (`krci-ai install --agent pm --task create-prd,update-prd`) (BR15)
 4. IDE integration for selective installations (`krci-ai install --agent developer --ide cursor`) (BR16)
 
@@ -78,39 +78,52 @@ Technical Approach:
 
 ## Acceptance Criteria
 
-1. Single agent installation completes successfully with dependency resolution (BR13)
-   - Validation: `krci-ai install --agent developer` creates only developer agent and required dependencies
-   - Command: `test -f .krci-ai/agents/developer.md && test $(ls .krci-ai/agents/ | wc -l) -eq 1`
+1. Single agent installation with dependency resolution
+   - Scenario: User installs specific agent using selective installation command
+   - Expected Behavior: Only requested agent and its required dependencies are installed in .krci-ai directory structure
+   - Measurement/Method: Verify installed agents match request exactly; check dependency files exist; confirm no extra agents installed
+   - Preconditions/Assumptions: CLI available; target directory writable; framework assets embedded
+   - Guardrails: Installation completes without errors; no partial states; maintains directory structure consistency
+   - Traceability: BR13
 
-2. Multi-agent installation using comma-separated syntax matches bundle patterns (BR14)
-   - Validation: `krci-ai install --agents pm,architect,developer` installs exactly 3 specified agents
-   - Command: `krci-ai install --agents pm,architect,developer && test $(ls .krci-ai/agents/ | wc -l) -eq 3`
+2. Multi-agent installation using comma-separated syntax
+   - Scenario: User installs multiple specific agents in single command using comma-separated list
+   - Expected Behavior: Exactly specified agents and their dependencies installed; no additional agents added
+   - Measurement/Method: Count installed agents matches request; verify each requested agent present; confirm dependency resolution
+   - Preconditions/Assumptions: Multiple valid agent names provided; sufficient disk space; no conflicting installations
+   - Guardrails: All requested agents installed successfully or rollback on failure; no orphaned dependencies
+   - Traceability: BR14
 
-3. Task-specific installation filters correctly without mixing multiple agents (BR15)
-   - Validation: `krci-ai install --agent pm --task create-prd,update-prd` installs only specified tasks
-   - Command: `test -f .krci-ai/tasks/create-prd.md && test -f .krci-ai/tasks/update-prd.md`
+3. Task-specific installation filtering
+   - Scenario: User installs agent with specific tasks subset to customize functionality
+   - Expected Behavior: Agent installed with only specified tasks; related dependencies resolved; unused tasks excluded
+   - Measurement/Method: Verify task files match specification; check agent remains functional; confirm no unused task files present
+   - Preconditions/Assumptions: Valid task names for target agent; tasks compatible with agent version
+   - Guardrails: Agent functionality preserved; task dependencies intact; no broken references
+   - Traceability: BR15
 
-4. IDE integration works seamlessly with selective installations (BR16)
-   - Validation: Selective installation with IDE flag configures only installed agents
-   - Command: `krci-ai install --agent developer --ide cursor && cursor --list-agents | grep -c developer`
+4. IDE integration compatibility
+   - Scenario: User performs selective installation with IDE integration flag to configure development environment
+   - Expected Behavior: IDE configuration reflects only installed agents; integration works seamlessly; no missing agent references
+   - Measurement/Method: Check IDE shows correct agent list; verify agent activation works; confirm no error messages
+   - Preconditions/Assumptions: Supported IDE installed; integration feature available; valid agent-IDE combinations
+   - Guardrails: IDE remains stable; agent functionality preserved; configuration reversible
+   - Traceability: BR16
 
 ## User Stories
 
 Planned Stories for Implementation:
 
-### Phase 1: Complete Selective Installation (Sprint 4)
+### Phase 1: Core Selective Installation (Sprint 4)
 
-- Story 8.01: Single and Multi-Agent Installation
-  - As an Enterprise Development Lead, I want to install specific agents using `krci-ai install --agent developer` or `krci-ai install --agents pm,architect,developer`
-  - Acceptance: Installation completes successfully with only specified agents and dependencies, supporting both single and multiple agent selection
+- Story 8.01: Selective Agent Installation Core
+  - As an Enterprise Development Lead, I want to install specific agents individually or in groups, so that I can customize my team's framework setup without unnecessary bloat
+  - Acceptance: Single agent installation (`--agent developer`) and multi-agent installation (`--agent pm,architect,developer`) work correctly with dependency resolution
+  - Value: Reduces setup time and resource usage for teams needing specific agent workflows
   - Dependencies: Epic 1 baseline infrastructure and Epic 2 validation engine
 
-- Story 8.02: Task-Specific Installation
-  - As a Focused Developer, I want to install specific tasks using `krci-ai install --agent pm --task create-prd,update-prd`
-  - Acceptance: Only specified tasks and their dependencies installed correctly
-  - Dependencies: Story 8.01 completion and task dependency mapping
-
-- Story 8.03: IDE Integration for Selective Installation
-  - As an Enterprise Development Lead, I want selective installations to work with IDE integration
-  - Acceptance: `krci-ai install --agent developer --ide cursor` configures IDE correctly
-  - Dependencies: Epic 4 IDE integration and Story 8.01 completion
+- Story 8.02: Advanced Selective Installation
+  - As a Focused Developer, I want to install agents with specific tasks and IDE integration, so that I can have a precisely configured development environment
+  - Acceptance: Task-specific installation (`--agent pm --task create-prd,update-prd`) and IDE integration (`--agent developer --ide cursor`) function seamlessly
+  - Value: Enables specialized workflows and development environment optimization
+  - Dependencies: Story 8.01 completion, Epic 4 IDE integration capabilities, and task dependency mapping
