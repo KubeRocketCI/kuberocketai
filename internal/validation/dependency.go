@@ -45,13 +45,19 @@ func (a *FrameworkAnalyzer) detectOrphanedFiles(frameworkDir string) ([]Validati
 
 	dataDir := filepath.Join(frameworkDir, "data")
 	if _, err := os.Stat(dataDir); err == nil {
-		dataFiles, err := filepath.Glob(filepath.Join(dataDir, "*.*"))
+		// Recursively find all data files including subdirectories
+		err := filepath.Walk(dataDir, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if !info.IsDir() && (strings.HasSuffix(info.Name(), ".md") || strings.HasSuffix(info.Name(), ".txt")) {
+				relPath, _ := filepath.Rel(a.baseDir, path)
+				allFiles[relPath] = false
+			}
+			return nil
+		})
 		if err != nil {
 			return nil, err
-		}
-		for _, file := range dataFiles {
-			relPath, _ := filepath.Rel(a.baseDir, file)
-			allFiles[relPath] = false
 		}
 	}
 

@@ -32,7 +32,7 @@ import (
 // DiscoveryInterface defines the interface for asset discovery operations
 type DiscoveryInterface interface {
 	DiscoverAgentWithDependencies(shortName string) (assets.AgentDependencyInfo, error)
-	DiscoverAgentsWithDependencies() ([]assets.AgentDependencyInfo, error)
+	DiscoverAgentsWithDependencies(agentNames ...string) ([]assets.AgentDependencyInfo, error)
 	GetAgentByShortName(shortName string) (*assets.AgentInfo, error)
 }
 

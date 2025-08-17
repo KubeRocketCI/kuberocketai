@@ -27,20 +27,27 @@ import (
 )
 
 const (
-	KrciAIDir         = ".krci-ai"
-	agentsDir         = "agents"
-	TasksDir          = "tasks"
-	TemplatesDir      = "templates"
-	DataDir           = "data"
-	configDir         = "config"
-	embeddedPrefix    = "assets/framework/core"
+	// Main framework directory structure
+	KrciAIDir    = ".krci-ai"
+	DataDir      = "data"
+	TasksDir     = "tasks"
+	TemplatesDir = "templates"
+
+	// Internal directory structure (unexported)
+	agentsDir      = "agents"
+	configDir      = "config"
+	embeddedPrefix = "assets/framework/core"
+
+	// IDE integration directories
 	cursorRulesDir    = ".cursor/rules/krci-ai"
 	claudeCommandsDir = ".claude/commands/krci-ai"
 	vscodeModesDir    = ".github/chatmodes"
 	windsurfRulesDir  = ".windsurf/rules"
+
 	// File extensions
 	mdExtension = ".md"
-	// GitHubToolsList defines the complete set of tools available for GitHub integration
+
+	// GitHub tools configuration
 	GitHubToolsList = "['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']"
 )
 
@@ -472,4 +479,129 @@ func (i *Installer) InstallVSCodeIntegration() error {
 func (i *Installer) InstallWindsurfIntegration() error {
 	integration := &WindsurfIntegration{targetDir: i.targetDir}
 	return i.installIDEIntegration(integration, "Windsurf IDE")
+}
+
+// InstallSelective installs only specified agents and their dependencies using existing bundle logic
+func (i *Installer) InstallSelective(agentNames []string) error {
+	// Create embedded source and discovery following SOLID principles
+	embeddedSource := NewEmbeddedSource(i.embeddedAssets)
+	discovery := NewDiscoveryWithSource(i.targetDir, i.embeddedAssets, embeddedSource)
+
+	// Validate agent names using unified validation
+	if err := discovery.ValidateEmbeddedAgentNames(i.embeddedAssets, agentNames); err != nil {
+		return fmt.Errorf("agent validation failed: %w", err)
+	}
+
+	// Get dependencies using unified discovery method
+	agentDeps, err := discovery.DiscoverAgentsWithDependencies(agentNames...)
+	if err != nil {
+		return fmt.Errorf("dependency analysis failed: %w", err)
+	}
+
+	// Use simplified installation approach
+	return i.installWithFilter(agentDeps)
+}
+
+// installWithFilter installs assets with optional filtering for selective installation
+func (i *Installer) installWithFilter(agentDeps []AgentDependencyInfo) error {
+	krciPath := filepath.Join(i.targetDir, KrciAIDir)
+
+	// Create main .krci-ai directory
+	if err := i.createDirectory(krciPath); err != nil {
+		return fmt.Errorf("failed to create .krci-ai directory: %w", err)
+	}
+
+	// Create subdirectories
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir, configDir}
+	for _, subdir := range subdirs {
+		dirPath := filepath.Join(krciPath, subdir)
+		if err := i.createDirectory(dirPath); err != nil {
+			return fmt.Errorf("failed to create %s directory: %w", subdir, err)
+		}
+	}
+
+	// Install filtered assets
+	return i.installFilteredAssets(krciPath, agentDeps)
+}
+
+// installFilteredAssets installs only the specified agents and their dependencies
+func (i *Installer) installFilteredAssets(krciPath string, agentDeps []AgentDependencyInfo) error {
+	// Track all files that need to be copied to avoid duplicates
+	filesToCopy := make(map[string]bool)
+
+	// Add agent files using constants
+	for _, agent := range agentDeps {
+		agentPath := fmt.Sprintf("%s/%s/%s.yaml", embeddedPrefix, agentsDir, agent.ShortName)
+		filesToCopy[agentPath] = true
+	}
+
+	// Add task files using constants (no local tasks for embedded assets)
+	for _, agent := range agentDeps {
+		for _, task := range agent.Tasks {
+			taskPath := fmt.Sprintf("%s/%s/%s", embeddedPrefix, TasksDir, task)
+			filesToCopy[taskPath] = true
+		}
+	}
+
+	// Add template files using constants
+	for _, agent := range agentDeps {
+		for _, template := range agent.Templates {
+			templatePath := fmt.Sprintf("%s/%s/%s", embeddedPrefix, TemplatesDir, template)
+			filesToCopy[templatePath] = true
+		}
+	}
+
+	// Add data files using constants
+	for _, agent := range agentDeps {
+		for _, dataFile := range agent.DataFiles {
+			dataPath := fmt.Sprintf("%s/%s/%s", embeddedPrefix, DataDir, dataFile)
+			filesToCopy[dataPath] = true
+		}
+	}
+
+	// Copy all required files using unified copy method
+	for embeddedPath := range filesToCopy {
+		if err := i.copyAssetFile(embeddedPath, krciPath); err != nil {
+			return fmt.Errorf("failed to copy %s: %w", embeddedPath, err)
+		}
+	}
+
+	return nil
+}
+
+// copyAssetFile copies a file from embedded assets to target directory
+func (i *Installer) copyAssetFile(embeddedPath, krciPath string) error {
+	// Check if file exists in embedded assets
+	if _, err := i.embeddedAssets.Open(embeddedPath); err != nil {
+		// File doesn't exist, skip silently (might be optional dependency)
+		return nil
+	}
+
+	// Get relative path from embedded prefix using constant
+	relPath, err := filepath.Rel(embeddedPrefix, embeddedPath)
+	if err != nil {
+		return fmt.Errorf("failed to get relative path for %s: %w", embeddedPath, err)
+	}
+
+	// Target path in the .krci-ai directory
+	targetPath := filepath.Join(krciPath, relPath)
+
+	// Read embedded file
+	data, err := i.embeddedAssets.ReadFile(embeddedPath)
+	if err != nil {
+		return fmt.Errorf("failed to read embedded file %s: %w", embeddedPath, err)
+	}
+
+	// Ensure target directory exists
+	targetDir := filepath.Dir(targetPath)
+	if err := i.createDirectory(targetDir); err != nil {
+		return fmt.Errorf("failed to create target directory %s: %w", targetDir, err)
+	}
+
+	// Write file to target
+	if err := os.WriteFile(targetPath, data, 0644); err != nil {
+		return fmt.Errorf("failed to write file %s: %w", targetPath, err)
+	}
+
+	return nil
 }

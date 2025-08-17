@@ -48,7 +48,7 @@ func (m *MockDiscovery) DiscoverAgents() ([]assets.AgentInfo, error) {
 	return m.agents, nil
 }
 
-func (m *MockDiscovery) DiscoverAgentsWithDependencies() ([]assets.AgentDependencyInfo, error) {
+func (m *MockDiscovery) DiscoverAgentsWithDependencies(agentNames ...string) ([]assets.AgentDependencyInfo, error) {
 	if m.discoverError != nil {
 		return nil, m.discoverError
 	}
