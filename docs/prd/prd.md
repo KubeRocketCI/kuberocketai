@@ -179,9 +179,7 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 **BR14 [P0]**: User can install multiple specific agents using `krci-ai install --agents pm,architect,developer` command following the same flag patterns as bundling, creating selective framework installation with only requested agents and their dependencies
 
-**BR15 [P0]**: User can install specific agent with targeted tasks using `krci-ai install --agent pm --task create-prd,update-prd` command, installing only the agent definition and specified tasks with their templates and data dependencies. Do not allow to mix multiple agents and multiple tasks.
-
-**BR16 [P0]**: User can combine selective installation with IDE integration using `krci-ai install --agent developer --ide cursor` or `krci-ai install --agents pm,architect --all` (for all supported IDEs), providing granular control over both agent scope and IDE configuration
+**BR15 [P0]**: User can combine selective installation with IDE integration using `krci-ai install --agent developer --ide cursor` or `krci-ai install --agents pm,architect --all` (for all supported IDEs), providing granular control over both agent scope and IDE configuration
 
 ### Non-Functional Requirements (NFR)
 
@@ -241,6 +239,12 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 - Web chat tool integration and optimization
 - Flexible bundling options and dependency resolution
 
+**Epic 6 (Local Agent Components)**: BR9, NFR6
+
+- Local component discovery and priority handling
+- Project-specific agent customization capabilities
+- `.krci-ai/local/` directory structure and management
+
 **Epic 7 (Token Management)**: BR10, BR11, BR12, NFR7, NFR8, NFR9
 
 - Token calculation and size estimation capabilities
@@ -248,18 +252,11 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 - Multi-platform token analysis and context limit awareness
 - Dependency-based token breakdown and optimization guidance
 
-**Epic 8 (Selective Installation)**: BR13, BR14, BR15, BR16
+**Epic 8 (Selective Installation)**: BR13, BR14, BR15
 
 - Selective agent installation with granular scope control
 - Multi-agent installation using comma-separated lists
-- Task-specific installation with dependency resolution
 - IDE integration for selective installations
-
-**Epic 6 (Local Agent Components)**: BR9, NFR6
-
-- Local component discovery and priority handling
-- Project-specific agent customization capabilities
-- `.krci-ai/local/` directory structure and management
 
 #### Post-MVP Enhancements (P2+ Requirements)
 
