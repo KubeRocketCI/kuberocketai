@@ -4,7 +4,7 @@
 
 | Field      | Value                |
 |------------|----------------------|
-| Status     | Planning (Updated)   |
+| Status     | Done                 |
 | Priority   | P0 (Critical)        |
 | Epic Owner | Development Team     |
 | Timeline   | 1 week               |
@@ -31,14 +31,14 @@ Tertiary: System Administrators (10%) - deploying controlled agent configuration
 
 1. Single agent installation with dependency resolution (`krci-ai install --agent developer`) (BR13)
 2. Multi-agent installation using comma-separated lists (`krci-ai install --agent pm,architect,developer`) (BR14)
-3. Task-specific installation with agent context (`krci-ai install --agent pm --task create-prd,update-prd`) (BR15)
-4. IDE integration for selective installations (`krci-ai install --agent developer --ide cursor`) (BR16)
+3. IDE integration for selective installations (`krci-ai install --agent developer --ide cursor`) (BR15)
 
 ### What's Not Included
 
-1. Dynamic agent discovery from remote repositories (deferred to Epic 9)
-2. Custom agent creation during installation (out of MVP scope)
-3. Selective uninstallation or update capabilities (future roadmap item)
+1. Task-specific installation filtering (removed from scope)
+2. Dynamic agent discovery from remote repositories (deferred to Epic 9)
+3. Custom agent creation during installation (out of MVP scope)
+4. Selective uninstallation or update capabilities (future roadmap item)
 
 ### Dependencies
 
@@ -71,7 +71,7 @@ Implementation Strategy:
 
 Technical Approach:
 
-- CLI Extension: Enhance `cmd/krci-ai/cmd/install.go` with `--agent`, `--task` flags
+- CLI Extension: Enhance `cmd/krci-ai/cmd/install.go` with `--agent` flag
 - Dependency Engine: Leverage existing bundle dependency resolution for asset selection
 - Asset Management: Use embedded resource system for offline selective installation
 - Validation: Ensure selective installations pass all existing validation and bundling tests
@@ -94,36 +94,22 @@ Technical Approach:
    - Guardrails: All requested agents installed successfully or rollback on failure; no orphaned dependencies
    - Traceability: BR14
 
-3. Task-specific installation filtering
-   - Scenario: User installs agent with specific tasks subset to customize functionality
-   - Expected Behavior: Agent installed with only specified tasks; related dependencies resolved; unused tasks excluded
-   - Measurement/Method: Verify task files match specification; check agent remains functional; confirm no unused task files present
-   - Preconditions/Assumptions: Valid task names for target agent; tasks compatible with agent version
-   - Guardrails: Agent functionality preserved; task dependencies intact; no broken references
-   - Traceability: BR15
-
-4. IDE integration compatibility
+3. IDE integration compatibility
    - Scenario: User performs selective installation with IDE integration flag to configure development environment
    - Expected Behavior: IDE configuration reflects only installed agents; integration works seamlessly; no missing agent references
    - Measurement/Method: Check IDE shows correct agent list; verify agent activation works; confirm no error messages
    - Preconditions/Assumptions: Supported IDE installed; integration feature available; valid agent-IDE combinations
    - Guardrails: IDE remains stable; agent functionality preserved; configuration reversible
-   - Traceability: BR16
+   - Traceability: BR15
 
 ## User Stories
 
-Planned Stories for Implementation:
+Implementation Status:
 
-### Phase 1: Core Selective Installation (Sprint 4)
+### Phase 1: Selective Installation Implementation (Sprint 4)
 
-- Story 8.01: Selective Agent Installation Core
+- **Story 8.01:** ✅ **COMPLETED** - Selective Agent Installation Core
   - As an Enterprise Development Lead, I want to install specific agents individually or in groups, so that I can customize my team's framework setup without unnecessary bloat
-  - Acceptance: Single agent installation (`--agent developer`) and multi-agent installation (`--agent pm,architect,developer`) work correctly with dependency resolution
+  - Acceptance: Single agent installation (`--agent developer`) and multi-agent installation (`--agent pm,architect,developer`) work correctly with dependency resolution and IDE integration
   - Value: Reduces setup time and resource usage for teams needing specific agent workflows
   - Dependencies: Epic 1 baseline infrastructure and Epic 2 validation engine
-
-- Story 8.02: Advanced Selective Installation
-  - As a Focused Developer, I want to install agents with specific tasks and IDE integration, so that I can have a precisely configured development environment
-  - Acceptance: Task-specific installation (`--agent pm --task create-prd,update-prd`) and IDE integration (`--agent developer --ide cursor`) function seamlessly
-  - Value: Enables specialized workflows and development environment optimization
-  - Dependencies: Story 8.01 completion, Epic 4 IDE integration capabilities, and task dependency mapping
