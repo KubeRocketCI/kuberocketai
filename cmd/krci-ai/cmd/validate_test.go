@@ -1,3 +1,18 @@
+/*
+Copyright © 2025 KubeRocketAI Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package cmd
 
 import (
@@ -7,8 +22,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/engine/processor"
 	"github.com/spf13/cobra"
+	"github.com/stretchr/testify/require"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/engine/processor"
 )
 
 func TestRunValidate(t *testing.T) {
@@ -22,14 +39,10 @@ func TestRunValidate(t *testing.T) {
 		tasksDir := filepath.Join(krciDir, "tasks")
 
 		err := os.MkdirAll(agentsDir, 0755)
-		if err != nil {
-			t.Fatalf("Failed to create agents directory: %v", err)
-		}
+		require.NoError(t, err, "Should be able to create agents directory")
 
 		err = os.MkdirAll(tasksDir, 0755)
-		if err != nil {
-			t.Fatalf("Failed to create tasks directory: %v", err)
-		}
+		require.NoError(t, err, "Should be able to create tasks directory")
 
 		// Create valid agent file
 		validAgentContent := `agent:
@@ -57,9 +70,7 @@ func TestRunValidate(t *testing.T) {
 
 		validAgentFile := filepath.Join(agentsDir, "test-agent.yaml")
 		err = os.WriteFile(validAgentFile, []byte(validAgentContent), 0644)
-		if err != nil {
-			t.Fatalf("Failed to write valid agent file: %v", err)
-		}
+		require.NoError(t, err, "Should be able to write valid agent file")
 
 		// Create valid task file
 		validTaskContent := `# Test Task
@@ -73,16 +84,12 @@ Test task description.
 
 		validTaskFile := filepath.Join(tasksDir, "test-task.md")
 		err = os.WriteFile(validTaskFile, []byte(validTaskContent), 0644)
-		if err != nil {
-			t.Fatalf("Failed to write valid task file: %v", err)
-		}
+		require.NoError(t, err, "Should be able to write valid task file")
 
 		// Change to temp directory
 		oldDir, _ := os.Getwd()
 		err = os.Chdir(tempDir)
-		if err != nil {
-			t.Fatalf("Failed to change directory: %v", err)
-		}
+		require.NoError(t, err, "Should be able to change directory")
 		defer os.Chdir(oldDir)
 
 		// Capture stdout to prevent output during test
@@ -189,9 +196,7 @@ func TestNewFrameworkValidator(t *testing.T) {
 			// This is expected in test environment without real embedded assets
 		} else {
 			// If it succeeds (shouldn't happen in test), verify basic structure
-			if validator == nil {
-				t.Fatal("Expected validator to be created, got nil")
-			}
+			require.NotNil(t, validator, "Validator should be created")
 
 			if validator.baseDir != tempDir {
 				t.Errorf("Expected baseDir to be %s, got %s", tempDir, validator.baseDir)

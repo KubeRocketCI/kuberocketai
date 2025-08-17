@@ -1,3 +1,18 @@
+/*
+Copyright © 2025 KubeRocketAI Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package cmd
 
 import (
@@ -5,6 +20,8 @@ import (
 	"testing"
 
 	"github.com/spf13/cobra"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestInstallCommandFlags(t *testing.T) {
@@ -90,33 +107,36 @@ func TestInstallCommandFlags(t *testing.T) {
 			// Test flag parsing
 			err := cmd.ParseFlags(tt.args)
 
-			if tt.expectError && err == nil {
-				t.Errorf("Expected error for test '%s' but got none", tt.name)
-			} else if !tt.expectError && err != nil {
-				t.Errorf("Unexpected error for test '%s': %v", tt.name, err)
+			if tt.expectError {
+				assert.Error(t, err, "Expected error for test '%s'", tt.name)
+			} else {
+				assert.NoError(t, err, "Unexpected error for test '%s'", tt.name)
 			}
 
 			// Test flag values if parsing succeeded
 			if err == nil {
 				// Test IDE flag
-				if ideFlag, err := cmd.Flags().GetString("ide"); err != nil {
-					t.Errorf("Failed to get IDE flag: %v", err)
-				} else if tt.args[0] == "--ide=cursor" && ideFlag != "cursor" {
-					t.Errorf("Expected IDE flag to be 'cursor', got '%s'", ideFlag)
+				ideFlag, flagErr := cmd.Flags().GetString("ide")
+				require.NoError(t, flagErr, "Should be able to get IDE flag")
+
+				if len(tt.args) > 0 && tt.args[0] == "--ide=cursor" {
+					assert.Equal(t, "cursor", ideFlag, "IDE flag should be set to cursor")
 				}
 
 				// Test force flag
-				if forceFlag, err := cmd.Flags().GetBool("force"); err != nil {
-					t.Errorf("Failed to get force flag: %v", err)
-				} else if slices.Contains(tt.args, "--force") && !forceFlag {
-					t.Errorf("Expected force flag to be true")
+				forceFlag, flagErr := cmd.Flags().GetBool("force")
+				require.NoError(t, flagErr, "Should be able to get force flag")
+
+				if slices.Contains(tt.args, "--force") {
+					assert.True(t, forceFlag, "Force flag should be true when --force is provided")
 				}
 
 				// Test all flag
-				if allFlag, err := cmd.Flags().GetBool("all"); err != nil {
-					t.Errorf("Failed to get all flag: %v", err)
-				} else if slices.Contains(tt.args, "--all") && !allFlag {
-					t.Errorf("Expected all flag to be true")
+				allFlag, flagErr := cmd.Flags().GetBool("all")
+				require.NoError(t, flagErr, "Should be able to get all flag")
+
+				if slices.Contains(tt.args, "--all") {
+					assert.True(t, allFlag, "All flag should be true when --all is provided")
 				}
 			}
 		})
@@ -125,13 +145,7 @@ func TestInstallCommandFlags(t *testing.T) {
 
 func TestInstallCommandConstants(t *testing.T) {
 	// Test that our constants are defined correctly
-	if ideAll != "all" {
-		t.Errorf("Expected ideAll to be 'all', got '%s'", ideAll)
-	}
-	if ideCursor != "cursor" {
-		t.Errorf("Expected ideCursor to be 'cursor', got '%s'", ideCursor)
-	}
-	if ideClaude != "claude" {
-		t.Errorf("Expected ideClaude to be 'claude', got '%s'", ideClaude)
-	}
+	assert.Equal(t, "all", ideAll, "ideAll constant should be 'all'")
+	assert.Equal(t, "cursor", ideCursor, "ideCursor constant should be 'cursor'")
+	assert.Equal(t, "claude", ideClaude, "ideClaude constant should be 'claude'")
 }
