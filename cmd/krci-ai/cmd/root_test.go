@@ -24,19 +24,16 @@ import (
 	"testing"
 
 	"github.com/spf13/cobra"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestSetVersionInfo(t *testing.T) {
 	// Test version info setting
 	SetVersionInfo("1.0.0", "abcd123", "2025-01-01", "test-builder")
 
-	if rootCmd.Version == "" {
-		t.Error("Expected version to be set on root command")
-	}
-
-	if !strings.Contains(rootCmd.Version, "1.0.0") {
-		t.Error("Expected version string to contain version number")
-	}
+	assert.NotEmpty(t, rootCmd.Version, "Version should be set on root command")
+	assert.Contains(t, rootCmd.Version, "1.0.0", "Version string should contain version number")
 }
 
 func TestSetAndGetEmbeddedAssets(t *testing.T) {
@@ -59,17 +56,9 @@ func TestSetAndGetEmbeddedAssets(t *testing.T) {
 
 func TestRootCommandStructure(t *testing.T) {
 	// Test that root command has correct basic structure
-	if rootCmd.Use != "krci-ai" {
-		t.Errorf("Expected command use 'krci-ai', got: %s", rootCmd.Use)
-	}
-
-	if rootCmd.Short == "" {
-		t.Error("Expected short description to be set")
-	}
-
-	if rootCmd.Long == "" {
-		t.Error("Expected long description to be set")
-	}
+	assert.Equal(t, "krci-ai", rootCmd.Use, "Command use should be 'krci-ai'")
+	assert.NotEmpty(t, rootCmd.Short, "Short description should be set")
+	assert.NotEmpty(t, rootCmd.Long, "Long description should be set")
 }
 
 func TestVersionCommand(t *testing.T) {
@@ -77,26 +66,17 @@ func TestVersionCommand(t *testing.T) {
 	SetVersionInfo("test-version", "test-commit", "test-date", "test-builder")
 
 	// Test version command basic structure
-	if versionCmd.Use != "version" {
-		t.Errorf("Expected version command use 'version', got: %s", versionCmd.Use)
-	}
+	assert.Equal(t, "version", versionCmd.Use, "Version command use should be 'version'")
 
 	// Test that version command has the output flag
 	flag := versionCmd.Flags().Lookup("output")
-	if flag == nil {
-		t.Error("Expected version command to have --output flag")
-	}
+	require.NotNil(t, flag, "Version command should have --output flag")
 }
 
 func TestCheckUpdatesCommand(t *testing.T) {
 	// Test check-updates command basic structure
-	if checkUpdatesCmd.Use != "check-updates" {
-		t.Errorf("Expected check-updates command use 'check-updates', got: %s", checkUpdatesCmd.Use)
-	}
-
-	if checkUpdatesCmd.Short == "" {
-		t.Error("Expected check-updates command to have short description")
-	}
+	assert.Equal(t, "check-updates", checkUpdatesCmd.Use, "Check-updates command use should be 'check-updates'")
+	assert.NotEmpty(t, checkUpdatesCmd.Short, "Check-updates command should have short description")
 }
 
 func TestExecuteWithoutPanic(t *testing.T) {
@@ -153,7 +133,7 @@ func TestVersionCommandOutput(t *testing.T) {
 		// without panicking (actual functionality is tested in integration tests)
 		defer func() {
 			if r := recover(); r != nil {
-				t.Errorf("outputDefault panicked: %v", r)
+				assert.Fail(t, "outputDefault should not panic", "Panic occurred: %v", r)
 			}
 		}()
 

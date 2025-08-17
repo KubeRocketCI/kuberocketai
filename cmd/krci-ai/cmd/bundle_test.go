@@ -22,29 +22,17 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
 )
 
 func TestBundleCommandExists(t *testing.T) {
-	if bundleCmd == nil {
-		t.Fatal("bundleCmd is nil")
-	}
-
-	if bundleCmd.Use != "bundle" {
-		t.Errorf("Expected command name 'bundle', got '%s'", bundleCmd.Use)
-	}
-
-	if bundleCmd.Short == "" {
-		t.Error("Command short description is empty")
-	}
-
-	if bundleCmd.Long == "" {
-		t.Error("Command long description is empty")
-	}
-
-	if bundleCmd.RunE == nil {
-		t.Error("Command RunE function is nil")
-	}
+	require.NotNil(t, bundleCmd, "bundleCmd should not be nil")
+	require.Equal(t, "bundle", bundleCmd.Use, "Command name should be 'bundle'")
+	require.NotEmpty(t, bundleCmd.Short, "Command short description should not be empty")
+	require.NotEmpty(t, bundleCmd.Long, "Command long description should not be empty")
+	require.NotNil(t, bundleCmd.RunE, "Command RunE function should not be nil")
 }
 
 func TestBundleCommandRegistered(t *testing.T) {

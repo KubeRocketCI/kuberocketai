@@ -1,8 +1,26 @@
+/*
+Copyright © 2025 KubeRocketAI Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"testing"
+
+	"github.com/spf13/cobra"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestRunVersion(t *testing.T) {
@@ -13,31 +31,24 @@ func TestRunVersion(t *testing.T) {
 		cmd.Flags().String("output", "", "Output format")
 
 		err := runVersion(cmd, []string{})
-		if err != nil {
-			t.Errorf("runVersion failed: %v", err)
-		}
+		assert.NoError(t, err, "runVersion should not return error")
 	})
 
 	t.Run("runVersion with JSON output", func(t *testing.T) {
 		cmd := &cobra.Command{}
 		cmd.Flags().String("output", "json", "Output format")
-		cmd.Flags().Set("output", "json")
 
-		err := runVersion(cmd, []string{})
-		if err != nil {
-			t.Errorf("runVersion with JSON failed: %v", err)
-		}
+		err := cmd.Flags().Set("output", "json")
+		require.NoError(t, err, "Should be able to set output flag to json")
+
+		err = runVersion(cmd, []string{})
+		assert.NoError(t, err, "runVersion with JSON output should not return error")
 	})
 }
 
 func TestVersionCommandStructure(t *testing.T) {
 	t.Run("version command exists", func(t *testing.T) {
-		if versionCmd == nil {
-			t.Error("Version command should not be nil")
-		}
-
-		if versionCmd.Use != "version" {
-			t.Errorf("Expected version command Use to be version, got %s", versionCmd.Use)
-		}
+		require.NotNil(t, versionCmd, "Version command should not be nil")
+		assert.Equal(t, "version", versionCmd.Use, "Version command Use should be 'version'")
 	})
 }
