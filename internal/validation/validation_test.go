@@ -16,13 +16,23 @@ limitations under the License.
 package validation
 
 import (
+	"context"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+	"testing/fstest"
 	"time"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/utils"
+)
+
+// Test constants for embedded paths
+const (
+	testEmbeddedPrefix = "assets/framework/core"
+	testAgentsPath     = testEmbeddedPrefix + "/agents"
+	testTasksPath      = testEmbeddedPrefix + "/tasks"
 )
 
 func TestNewFrameworkAnalyzer(t *testing.T) {
@@ -1068,5 +1078,230 @@ func TestRemoveDuplicates(t *testing.T) {
 	noDupResult := utils.DeduplicateStrings(noDupInput)
 	if len(noDupResult) != 3 {
 		t.Errorf("Expected 3 items, got %d", len(noDupResult))
+	}
+}
+
+// TestBuildAgentRelationship tests the buildAgentRelationship method
+func TestBuildAgentRelationship(t *testing.T) {
+	analyzer := NewFrameworkAnalyzer("/test/path")
+
+	// Create a mock embedded filesystem with test agent
+	testFS := fstest.MapFS{
+		testAgentsPath + "/test-agent.yaml": &fstest.MapFile{
+			Data: []byte(`
+agent:
+  tasks:
+    - ./.krci-ai/tasks/task1.md
+    - ./.krci-ai/local/tasks/local-task.md
+    - ./.krci-ai/tasks/task2.md
+`),
+		},
+		testTasksPath + "/task1.md": &fstest.MapFile{
+			Data: []byte(`# Task 1
+[Template](./.krci-ai/templates/template1.md)
+[Data](./.krci-ai/data/data1.md)
+`),
+		},
+		testTasksPath + "/task2.md": &fstest.MapFile{
+			Data: []byte(`# Task 2
+[Template](./.krci-ai/templates/template2.md)
+`),
+		},
+	}
+
+	// Test successful relationship building
+	relationship, err := analyzer.buildAgentRelationship(fs.FS(testFS), "test-agent")
+	if err != nil {
+		t.Fatalf("Unexpected error building relationship: %v", err)
+	}
+	if relationship == nil {
+		t.Fatal("Expected relationship to be built, got nil")
+	}
+
+	if relationship.Agent != "test-agent" {
+		t.Errorf("Expected agent name 'test-agent', got '%s'", relationship.Agent)
+	}
+
+	if len(relationship.Tasks) != 2 {
+		t.Errorf("Expected 2 tasks, got %d", len(relationship.Tasks))
+	}
+
+	if len(relationship.LocalTasks) != 1 {
+		t.Errorf("Expected 1 local task, got %d", len(relationship.LocalTasks))
+	}
+
+	// Test with non-existent agent - should return error
+	nilRelationship, err := analyzer.buildAgentRelationship(fs.FS(testFS), "non-existent")
+	if err == nil {
+		t.Error("Expected error for non-existent agent")
+	}
+	if nilRelationship != nil {
+		t.Error("Expected nil relationship for non-existent agent")
+	}
+}
+
+// TestProcessAgentTasks tests the processAgentTasks method
+func TestProcessAgentTasks(t *testing.T) {
+	analyzer := NewFrameworkAnalyzer("/test/path")
+
+	testFS := fstest.MapFS{
+		testTasksPath + "/standard-task.md": &fstest.MapFile{
+			Data: []byte(`# Standard Task`),
+		},
+	}
+
+	taskRefs := []string{
+		"./.krci-ai/tasks/standard-task.md",
+		"./.krci-ai/local/tasks/local-task.md",
+	}
+
+	relationship := ComponentRelationship{
+		Agent:      "test-agent",
+		Tasks:      make([]string, 0),
+		LocalTasks: make([]string, 0),
+		Templates:  make([]string, 0),
+		DataFiles:  make([]string, 0),
+	}
+
+	err := analyzer.processAgentTasks(fs.FS(testFS), taskRefs, &relationship)
+	if err != nil {
+		t.Fatalf("Unexpected error processing agent tasks: %v", err)
+	}
+
+	if len(relationship.Tasks) != 1 {
+		t.Errorf("Expected 1 standard task, got %d", len(relationship.Tasks))
+	}
+
+	if len(relationship.LocalTasks) != 1 {
+		t.Errorf("Expected 1 local task, got %d", len(relationship.LocalTasks))
+	}
+
+	if relationship.Tasks[0] != "standard-task.md" {
+		t.Errorf("Expected 'standard-task.md', got '%s'", relationship.Tasks[0])
+	}
+
+	if relationship.LocalTasks[0] != "local-task.md" {
+		t.Errorf("Expected 'local-task.md', got '%s'", relationship.LocalTasks[0])
+	}
+}
+
+// TestAddTaskDependencies tests the addTaskDependencies method
+func TestAddTaskDependencies(t *testing.T) {
+	analyzer := NewFrameworkAnalyzer("/test/path")
+
+	testFS := fstest.MapFS{
+		testTasksPath + "/task-with-deps.md": &fstest.MapFile{
+			Data: []byte(`# Task with Dependencies
+[Template Reference](./.krci-ai/templates/template1.md)
+[Data Reference](./.krci-ai/data/subfolder/data1.md)
+[Another Template](./.krci-ai/templates/template2.md)
+`),
+		},
+	}
+
+	relationship := ComponentRelationship{
+		Agent:      "test-agent",
+		Tasks:      make([]string, 0),
+		LocalTasks: make([]string, 0),
+		Templates:  make([]string, 0),
+		DataFiles:  make([]string, 0),
+	}
+
+	err := analyzer.addTaskDependencies(fs.FS(testFS), "./.krci-ai/tasks/task-with-deps.md", &relationship)
+	if err != nil {
+		t.Fatalf("Unexpected error adding task dependencies: %v", err)
+	}
+
+	if len(relationship.Templates) != 2 {
+		t.Errorf("Expected 2 templates, got %d", len(relationship.Templates))
+	}
+
+	if len(relationship.DataFiles) != 1 {
+		t.Errorf("Expected 1 data file, got %d", len(relationship.DataFiles))
+	}
+
+	// Check that template paths are correctly parsed
+	expectedTemplates := []string{"template1.md", "template2.md"}
+	for _, expected := range expectedTemplates {
+		found := false
+		for _, actual := range relationship.Templates {
+			if actual == expected {
+				found = true
+				break
+			}
+		}
+		if !found {
+			t.Errorf("Expected template '%s' not found in %v", expected, relationship.Templates)
+		}
+	}
+
+	// Check that data file paths preserve subdirectory structure
+	if relationship.DataFiles[0] != "subfolder/data1.md" {
+		t.Errorf("Expected 'subfolder/data1.md', got '%s'", relationship.DataFiles[0])
+	}
+}
+
+// TestAnalyzeEmbeddedRelationships tests the main embedded relationships analysis method
+func TestAnalyzeEmbeddedRelationships(t *testing.T) {
+	analyzer := NewFrameworkAnalyzer("/test/path")
+
+	testFS := fstest.MapFS{
+		testAgentsPath + "/agent1.yaml": &fstest.MapFile{
+			Data: []byte(`
+agent:
+  tasks:
+    - ./.krci-ai/tasks/task1.md
+`),
+		},
+		testAgentsPath + "/agent2.yaml": &fstest.MapFile{
+			Data: []byte(`
+agent:
+  tasks:
+    - ./.krci-ai/tasks/task2.md
+`),
+		},
+		testTasksPath + "/task1.md": &fstest.MapFile{
+			Data: []byte(`# Task 1`),
+		},
+		testTasksPath + "/task2.md": &fstest.MapFile{
+			Data: []byte(`# Task 2`),
+		},
+	}
+
+	insights := &FrameworkInsights{
+		ComponentCounts: ComponentCounts{},
+		Relationships:   make([]ComponentRelationship, 0),
+		UsageStatistics: UsageStatistics{},
+	}
+
+	agentNames := []string{"agent1", "agent2", "non-existent"}
+
+	ctx := context.Background()
+	err := analyzer.analyzeEmbeddedRelationships(ctx, fs.FS(testFS), agentNames, insights)
+	if err != nil {
+		t.Fatalf("Unexpected error analyzing embedded relationships: %v", err)
+	}
+
+	// Should only have 2 relationships (non-existent agent skipped)
+	if len(insights.Relationships) != 2 {
+		t.Errorf("Expected 2 relationships, got %d", len(insights.Relationships))
+	}
+
+	// Check that both agents are present
+	agentFound := make(map[string]bool)
+	for _, rel := range insights.Relationships {
+		agentFound[rel.Agent] = true
+	}
+
+	if !agentFound["agent1"] {
+		t.Error("agent1 not found in relationships")
+	}
+
+	if !agentFound["agent2"] {
+		t.Error("agent2 not found in relationships")
+	}
+
+	if agentFound["non-existent"] {
+		t.Error("non-existent agent should not be in relationships")
 	}
 }

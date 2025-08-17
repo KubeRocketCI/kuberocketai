@@ -186,7 +186,7 @@ func (a *FrameworkAnalyzer) analyzeRelationships(frameworkDir string, insights *
 			}
 		}
 
-		// Remove duplicates
+		// Remove duplicates using utils package
 		relationship.Templates = utils.DeduplicateStrings(relationship.Templates)
 		relationship.DataFiles = utils.DeduplicateStrings(relationship.DataFiles)
 

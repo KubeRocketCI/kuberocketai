@@ -16,7 +16,9 @@ limitations under the License.
 package validation
 
 import (
+	"context"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -24,6 +26,28 @@ import (
 	"time"
 
 	"gopkg.in/yaml.v3"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
+)
+
+// Directory constants to avoid hardcoded paths
+const (
+	agentsDir      = "agents"
+	tasksDir       = "tasks"
+	templatesDir   = "templates"
+	dataDir        = "data"
+	localDir       = "local"
+	embeddedPrefix = "assets/framework/core"
+)
+
+// Path pattern constants
+const (
+	agentFilePattern     = "%s/%s/%s.yaml"
+	taskReferencePrefix  = "./.krci-ai/"
+	localTasksPrefix     = "./.krci-ai/local/tasks/"
+	standardTasksPrefix  = "./.krci-ai/tasks/"
+	templatesLinkPattern = "/templates/"
+	dataLinkPattern      = "/data/"
 )
 
 // Severity levels for validation issues
@@ -406,7 +430,7 @@ func (a *FrameworkAnalyzer) detectWarningIssues(frameworkDir string) ([]Validati
 // findMarkdownFiles finds all markdown files in the framework
 func (a *FrameworkAnalyzer) findMarkdownFiles(frameworkDir string) ([]string, error) {
 	var files []string
-	dirs := []string{"agents", "tasks", "templates", "data"}
+	dirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
 
 	// Include global directories
 	for _, dir := range dirs {
@@ -415,11 +439,19 @@ func (a *FrameworkAnalyzer) findMarkdownFiles(frameworkDir string) ([]string, er
 			continue
 		}
 
-		dirFiles, err := filepath.Glob(filepath.Join(dirPath, "*.md"))
+		// Recursively find all markdown files including subdirectories
+		err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") {
+				files = append(files, path)
+			}
+			return nil
+		})
 		if err != nil {
 			return nil, err
 		}
-		files = append(files, dirFiles...)
 	}
 
 	// Include local directories
@@ -438,4 +470,318 @@ func (a *FrameworkAnalyzer) findMarkdownFiles(frameworkDir string) ([]string, er
 	}
 
 	return files, nil
+}
+
+// AnalyzeEmbeddedDependencies implements EmbeddedAssetAnalyzer interface
+func (a *FrameworkAnalyzer) AnalyzeEmbeddedDependencies(ctx context.Context, embeddedAssets fs.FS, agentNames []string) (*FrameworkInsights, error) {
+	insights := &FrameworkInsights{
+		ComponentCounts: ComponentCounts{},
+		Relationships:   make([]ComponentRelationship, 0),
+		UsageStatistics: UsageStatistics{},
+	}
+
+	// Step 1: Count embedded components
+	if err := a.countEmbeddedComponents(embeddedAssets, &insights.ComponentCounts); err != nil {
+		return nil, err
+	}
+
+	// Step 2: Analyze relationships for selected agents
+	if err := a.analyzeEmbeddedRelationships(ctx, embeddedAssets, agentNames, insights); err != nil {
+		return nil, fmt.Errorf("analyzing embedded relationships: %w", err)
+	}
+
+	// Step 3: Generate usage statistics
+	a.generateUsageStatistics(insights)
+
+	return insights, nil
+}
+
+// countEmbeddedComponents counts components in embedded filesystem
+func (a *FrameworkAnalyzer) countEmbeddedComponents(embeddedAssets fs.FS, counts *ComponentCounts) error {
+	// Count agents
+	agentFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+agentsDir+"/*.y*ml")
+	if err != nil {
+		return err
+	}
+	counts.Agents = len(agentFiles)
+
+	// Count tasks (both standard and local)
+	taskFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+tasksDir+"/*.md")
+	if err != nil {
+		return err
+	}
+	counts.Tasks = len(taskFiles)
+
+	localTaskFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/local/"+tasksDir+"/*.md")
+	if err == nil {
+		counts.Tasks += len(localTaskFiles)
+	}
+
+	// Count templates
+	templateFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+templatesDir+"/*.md")
+	if err != nil {
+		return err
+	}
+	counts.Templates = len(templateFiles)
+
+	// Count data files recursively including subdirectories
+	dataCount := 0
+	err = fs.WalkDir(embeddedAssets, embeddedPrefix+"/"+dataDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if !d.IsDir() && (strings.HasSuffix(d.Name(), ".md") || strings.HasSuffix(d.Name(), ".txt")) {
+			dataCount++
+		}
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+	counts.Data = dataCount
+
+	return nil
+}
+
+// analyzeEmbeddedRelationships analyzes agent relationships in embedded filesystem (comprehensive version)
+func (a *FrameworkAnalyzer) analyzeEmbeddedRelationships(ctx context.Context, embeddedAssets fs.FS, agentNames []string, insights *FrameworkInsights) error {
+	for _, agentName := range agentNames {
+		// Check for cancellation
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+		}
+
+		relationship, err := a.buildAgentRelationship(embeddedAssets, agentName)
+		if err != nil {
+			// Log warning but continue with other agents for robustness
+			// In a production system, you might want to use a proper logger here
+			fmt.Fprintf(os.Stderr, "Warning: failed to build relationship for agent %s: %v\n", agentName, err)
+			continue
+		}
+		insights.Relationships = append(insights.Relationships, *relationship)
+	}
+	return nil
+}
+
+// buildAgentRelationship builds a complete ComponentRelationship for a single agent
+func (a *FrameworkAnalyzer) buildAgentRelationship(embeddedAssets fs.FS, agentName string) (*ComponentRelationship, error) {
+	agentPath := fmt.Sprintf(agentFilePattern, embeddedPrefix, agentsDir, agentName)
+
+	relationship := ComponentRelationship{
+		Agent:      agentName,
+		Tasks:      make([]string, 0),
+		LocalTasks: make([]string, 0),
+		Templates:  make([]string, 0),
+		DataFiles:  make([]string, 0),
+	}
+
+	// Get tasks referenced by this agent
+	taskRefs, err := a.extractEmbeddedYAMLTasks(embeddedAssets, agentPath)
+	if err != nil {
+		return nil, fmt.Errorf("extracting tasks for agent %s: %w", agentName, err)
+	}
+
+	if err := a.processAgentTasks(embeddedAssets, taskRefs, &relationship); err != nil {
+		return nil, fmt.Errorf("processing tasks for agent %s: %w", agentName, err)
+	}
+
+	// Remove duplicates using utils package
+	relationship.Templates = utils.DeduplicateStrings(relationship.Templates)
+	relationship.DataFiles = utils.DeduplicateStrings(relationship.DataFiles)
+
+	return &relationship, nil
+}
+
+// processAgentTasks processes all tasks for an agent and updates the relationship
+func (a *FrameworkAnalyzer) processAgentTasks(embeddedAssets fs.FS, taskRefs []string, relationship *ComponentRelationship) error {
+	// Preallocate slices for better memory efficiency
+	if cap(relationship.Templates) == 0 {
+		relationship.Templates = make([]string, 0, len(taskRefs)*2)
+	}
+	if cap(relationship.DataFiles) == 0 {
+		relationship.DataFiles = make([]string, 0, len(taskRefs)*2)
+	}
+
+	for _, taskRef := range taskRefs {
+		taskName := filepath.Base(taskRef)
+
+		// Categorize as local or standard task
+		if strings.Contains(taskRef, localTasksPrefix) {
+			relationship.LocalTasks = append(relationship.LocalTasks, taskName)
+		} else {
+			relationship.Tasks = append(relationship.Tasks, taskName)
+		}
+
+		if err := a.addTaskDependencies(embeddedAssets, taskRef, relationship); err != nil {
+			return fmt.Errorf("adding dependencies for task %s: %w", taskRef, err)
+		}
+	}
+	return nil
+}
+
+// addTaskDependencies finds and adds template/data dependencies for a task
+func (a *FrameworkAnalyzer) addTaskDependencies(embeddedAssets fs.FS, taskRef string, relationship *ComponentRelationship) error {
+	// Convert task reference to embedded path
+	embeddedTaskPath := strings.Replace(taskRef, taskReferencePrefix, embeddedPrefix+"/", 1)
+
+	// Check if task file exists in embedded assets before analyzing
+	if _, err := embeddedAssets.Open(embeddedTaskPath); err != nil {
+		// Task file doesn't exist - this is not necessarily an error in embedded assets
+		return nil
+	}
+
+	templates, dataFiles, err := a.getEmbeddedTaskReferences(embeddedAssets, embeddedTaskPath)
+	if err != nil {
+		return fmt.Errorf("getting task references from %s: %w", embeddedTaskPath, err)
+	}
+
+	relationship.Templates = append(relationship.Templates, templates...)
+	relationship.DataFiles = append(relationship.DataFiles, dataFiles...)
+	return nil
+}
+
+// extractEmbeddedYAMLTasks extracts task references from embedded agent YAML files
+func (a *FrameworkAnalyzer) extractEmbeddedYAMLTasks(embeddedAssets fs.FS, agentPath string) ([]string, error) {
+	content, err := fs.ReadFile(embeddedAssets, agentPath)
+	if err != nil {
+		return nil, err
+	}
+
+	var agent struct {
+		Agent struct {
+			Tasks []string `yaml:"tasks"`
+		} `yaml:"agent"`
+	}
+
+	if err := yaml.Unmarshal(content, &agent); err != nil {
+		return nil, err
+	}
+
+	// Filter for .krci-ai task references (both standard and local)
+	var tasks []string
+	for _, task := range agent.Agent.Tasks {
+		if strings.HasPrefix(task, standardTasksPrefix) || strings.HasPrefix(task, localTasksPrefix) {
+			tasks = append(tasks, task)
+		}
+	}
+
+	return tasks, nil
+}
+
+// getEmbeddedTaskReferences extracts template and data references from embedded task file (minimal)
+func (a *FrameworkAnalyzer) getEmbeddedTaskReferences(embeddedAssets fs.FS, taskPath string) ([]string, []string, error) {
+	var templates, dataFiles []string
+
+	// Extract markdown links with proper error handling
+	links, err := a.extractEmbeddedMarkdownLinks(embeddedAssets, taskPath)
+	if err != nil {
+		return nil, nil, fmt.Errorf("extracting markdown links from %s: %w", taskPath, err)
+	}
+
+	for _, link := range links {
+		// Preserve full relative path to maintain subdirectory structure
+		relativePath := strings.TrimPrefix(link, taskReferencePrefix)
+		if strings.Contains(link, templatesLinkPattern) {
+			templates = append(templates, strings.TrimPrefix(relativePath, templatesDir+"/"))
+		} else if strings.Contains(link, dataLinkPattern) {
+			dataFiles = append(dataFiles, strings.TrimPrefix(relativePath, dataDir+"/"))
+		}
+	}
+
+	return templates, dataFiles, nil
+}
+
+// extractEmbeddedMarkdownLinks extracts internal framework links from embedded markdown files
+func (a *FrameworkAnalyzer) extractEmbeddedMarkdownLinks(embeddedAssets fs.FS, filePath string) ([]string, error) {
+	content, err := fs.ReadFile(embeddedAssets, filePath)
+	if err != nil {
+		return nil, err
+	}
+
+	// Regex for internal markdown links: [text](./.krci-ai/path/file.ext)
+	linkRegex := regexp.MustCompile(`\[([^\]]+)\]\((\./\.krci-ai/(?:tasks|templates|data)/[^)]+\.(md|yaml|yml|json))\)`)
+
+	var links []string
+	matches := linkRegex.FindAllStringSubmatch(string(content), -1)
+	for _, match := range matches {
+		if len(match) > 2 {
+			linkPath := match[2]
+			// Skip external links
+			if !strings.HasPrefix(linkPath, "http://") && !strings.HasPrefix(linkPath, "https://") {
+				links = append(links, linkPath)
+			}
+		}
+	}
+
+	return links, nil
+}
+
+// ValidateEmbeddedAgentDependencies implements EmbeddedAssetAnalyzer interface
+// Simple validation that ensures all agent dependencies exist in embedded assets
+func (a *FrameworkAnalyzer) ValidateEmbeddedAgentDependencies(ctx context.Context, embeddedAssets fs.FS, agentNames []string) ([]ValidationIssue, error) {
+	var issues []ValidationIssue
+
+	for _, agentName := range agentNames {
+		// Check for cancellation
+		select {
+		case <-ctx.Done():
+			return nil, ctx.Err()
+		default:
+		}
+
+		agentPath := fmt.Sprintf(agentFilePattern, embeddedPrefix, agentsDir, agentName)
+
+		// Check if agent file exists
+		if _, err := embeddedAssets.Open(agentPath); err != nil {
+			issues = append(issues, ValidationIssue{
+				Type:        "missing_embedded_agent",
+				Severity:    SeverityCritical,
+				File:        agentPath,
+				Line:        0,
+				Message:     fmt.Sprintf("Agent not found in embedded assets: %s", agentName),
+				FixGuidance: "Ensure agent file exists in embedded framework assets",
+			})
+			continue
+		}
+
+		// Validate task dependencies exist
+		taskIssues, err := a.validateEmbeddedAgentTasks(embeddedAssets, agentPath)
+		if err != nil {
+			return nil, err
+		}
+		issues = append(issues, taskIssues...)
+	}
+
+	return issues, nil
+}
+
+// validateEmbeddedAgentTasks validates task dependencies for embedded agent
+func (a *FrameworkAnalyzer) validateEmbeddedAgentTasks(embeddedAssets fs.FS, agentPath string) ([]ValidationIssue, error) {
+	var issues []ValidationIssue
+
+	taskRefs, err := a.extractEmbeddedYAMLTasks(embeddedAssets, agentPath)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, taskRef := range taskRefs {
+		// Convert task reference to embedded path
+		embeddedTaskPath := strings.Replace(taskRef, taskReferencePrefix, embeddedPrefix+"/", 1)
+
+		// Check if task file exists in embedded assets
+		if _, err := embeddedAssets.Open(embeddedTaskPath); err != nil {
+			issues = append(issues, ValidationIssue{
+				Type:        "missing_embedded_task",
+				Severity:    SeverityCritical,
+				File:        agentPath,
+				Line:        0,
+				Message:     fmt.Sprintf("Missing task file in embedded assets: %s", taskRef),
+				FixGuidance: "Ensure task file exists in embedded framework assets",
+			})
+		}
+	}
+
+	return issues, nil
 }

@@ -101,17 +101,20 @@ The YAML processing engine (`internal/engine/processor/`) handles:
 The comprehensive validation system (`internal/validation/`) provides:
 
 **Critical Issue Detection**:
+
 - Broken internal links with regex pattern matching
 - Missing task files referenced in agent YAML
 - Architecture violations (template/data separation)
 - Invalid YAML/JSON format validation
 
 **Warning & Dependency Analysis**:
+
 - Orphaned file detection via reverse dependency lookup
 - Circular dependency detection using DFS algorithm
 - Framework component usage statistics
 
 **Performance & UX**:
+
 - Sub-second validation (typically <0.02s for full framework)
 - Intelligent caching for large frameworks
 - Color-coded, actionable error messages
@@ -119,6 +122,7 @@ The comprehensive validation system (`internal/validation/`) provides:
 - Verbose/quiet modes for different use cases
 
 **Validation Components**:
+
 - `analyzer.go` - Core validation engine with 8 issue types
 - `dependency.go` - Advanced dependency analysis algorithms
 - `insights.go` - Framework statistics and relationship mapping

@@ -15,7 +15,21 @@ limitations under the License.
 */
 package validation
 
+import (
+	"context"
+	"io/fs"
+)
+
 // FrameworkScanner abstracts analyzer behavior for commands
 type FrameworkScanner interface {
 	OptimizedAnalyzeFramework() ([]ValidationIssue, *FrameworkInsights, error)
+}
+
+// EmbeddedAssetAnalyzer provides dependency analysis for embedded assets before installation
+type EmbeddedAssetAnalyzer interface {
+	// AnalyzeEmbeddedDependencies analyzes dependencies from embedded filesystem
+	AnalyzeEmbeddedDependencies(ctx context.Context, embeddedAssets fs.FS, agentNames []string) (*FrameworkInsights, error)
+
+	// ValidateEmbeddedAgentDependencies validates dependencies exist in embedded assets
+	ValidateEmbeddedAgentDependencies(ctx context.Context, embeddedAssets fs.FS, agentNames []string) ([]ValidationIssue, error)
 }

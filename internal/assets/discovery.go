@@ -16,6 +16,7 @@ limitations under the License.
 package assets
 
 import (
+	"context"
 	"embed"
 	"fmt"
 	"os"
@@ -31,6 +32,10 @@ import (
 const (
 	// DefaultAgentIcon is the placeholder icon used when an agent doesn't define an icon
 	DefaultAgentIcon = "🤖"
+
+	// Source type constants
+	FilesystemSourceType = "filesystem"
+	EmbeddedSourceType   = "embedded"
 )
 
 // AgentInfo represents basic information about an agent
@@ -70,83 +75,64 @@ type Agent struct {
 	} `yaml:"agent"`
 }
 
-// Discovery handles discovery and parsing of framework assets
-type Discovery struct {
-	installer *Installer
+// taskDependency holds template and data dependencies for a task
+type taskDependency struct {
+	templates []string
+	dataFiles []string
+	fullPath  string // Store full path for local task detection
 }
 
-// NewDiscovery creates a new asset discovery service
+// Discovery handles discovery and parsing of framework assets from any source
+type Discovery struct {
+	installer *Installer
+	source    AssetSource
+}
+
+// NewDiscovery creates a new asset discovery service for filesystem assets
 func NewDiscovery(targetDir string, embeddedAssets embed.FS) *Discovery {
 	return &Discovery{
 		installer: NewInstaller(targetDir, embeddedAssets),
+		source:    NewFilesystemSource(targetDir),
 	}
 }
 
-// DiscoverAgents discovers and returns information about all installed agents
+// NewDiscoveryWithSource creates a new asset discovery service with a specific source
+func NewDiscoveryWithSource(targetDir string, embeddedAssets embed.FS, source AssetSource) *Discovery {
+	return &Discovery{
+		installer: NewInstaller(targetDir, embeddedAssets),
+		source:    source,
+	}
+}
+
+// DiscoverAgents discovers and returns information about agents from the configured source
 func (d *Discovery) DiscoverAgents() ([]AgentInfo, error) {
-	if !d.installer.IsInstalled() {
+	// For filesystem source, check if framework is installed
+	if d.source.GetSourceType() == "filesystem" && !d.installer.IsInstalled() {
 		return nil, fmt.Errorf("framework not installed in current directory - run 'krci-ai install'")
 	}
 
-	agentsPath := d.installer.GetAgentsPath()
-	agentFiles, err := filepath.Glob(filepath.Join(agentsPath, "*.yaml"))
+	agentFiles, err := d.source.ListAgentFiles()
 	if err != nil {
-		return nil, fmt.Errorf("failed to scan agents directory: %w", err)
+		return nil, fmt.Errorf("failed to scan agents from %s source: %w", d.source.GetSourceType(), err)
 	}
 
 	if len(agentFiles) == 0 {
-		return nil, fmt.Errorf("no agent files found in %s", agentsPath)
+		return nil, fmt.Errorf("no agent files found in %s source", d.source.GetSourceType())
 	}
 
 	var agents []AgentInfo
 	for _, file := range agentFiles {
-		agentInfo, err := d.parseAgentFile(file)
+		agentInfo, err := parseAgentFromSource(d.source, file)
 		if err != nil {
 			// Log warning but continue with other agents
 			fmt.Fprintf(os.Stderr, "Warning: failed to parse agent file %s: %v\n", file, err)
 			continue
 		}
 
-		agentInfo.FilePath = file
-		agentInfo.ShortName = strings.TrimSuffix(filepath.Base(file), ".yaml")
-
 		agents = append(agents, *agentInfo)
 	}
 
 	return agents, nil
-}
-
-// parseAgentFile parses an agent YAML file and extracts basic information
-func (d *Discovery) parseAgentFile(filePath string) (*AgentInfo, error) {
-	data, err := os.ReadFile(filePath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read file: %w", err)
-	}
-
-	var agent Agent
-	if err := yaml.Unmarshal(data, &agent); err != nil {
-		return nil, fmt.Errorf("failed to parse YAML: %w", err)
-	}
-
-	// Extract agent information
-	identity := agent.Agent.Identity
-	agentInfo := &AgentInfo{
-		Name:        identity.Name,
-		Description: identity.Description,
-		Role:        identity.Role,
-		Goal:        identity.Goal,
-		Icon:        identity.Icon,
-	}
-
-	// Validate required fields
-	if agentInfo.Name == "" {
-		return nil, fmt.Errorf("agent name is required")
-	}
-	if agentInfo.Role == "" {
-		return nil, fmt.Errorf("agent role is required")
-	}
-
-	return agentInfo, nil
 }
 
 // GetAgentByName returns information about a specific agent by name
@@ -238,28 +224,120 @@ func (d *Discovery) ValidateAgentStructure(filePath string) error {
 	return nil
 }
 
-// DiscoverAgentsWithDependencies discovers and returns agents with their complete dependency information
-func (d *Discovery) DiscoverAgentsWithDependencies() ([]AgentDependencyInfo, error) {
-	if !d.installer.IsInstalled() {
-		return nil, fmt.Errorf("framework not installed in current directory - run 'krci-ai install'")
+// DiscoverAgentsWithDependencies discovers and returns agents with their complete dependency information.
+// If agentNames is empty, discovers all agents (filesystem behavior).
+// If agentNames provided, filters to specific agents (embedded behavior).
+func (d *Discovery) DiscoverAgentsWithDependencies(agentNames ...string) ([]AgentDependencyInfo, error) {
+	// Step A: Source-specific validation
+	if err := d.validateSourceRequirements(); err != nil {
+		return nil, err
 	}
 
-	// Create validation analyzer for dependency resolution
-	analyzer := validation.NewFrameworkAnalyzer(d.installer.targetDir)
-
-	// Generate insights which include complete dependency relationships
-	_, insights, err := analyzer.AnalyzeFramework()
-	if err != nil {
-		return nil, fmt.Errorf("failed to analyze dependencies: %w", err)
-	}
-
-	// Get basic agent information
-	agents, err := d.DiscoverAgents()
+	// Step B: Get validation insights based on source type
+	insights, err := d.getValidationInsights(agentNames)
 	if err != nil {
 		return nil, err
 	}
 
-	// Create map of agent relationships by agent name for quick lookup
+	// Step C: Get and filter agent information
+	targetAgents, err := d.getTargetAgents(agentNames)
+	if err != nil {
+		return nil, err
+	}
+
+	// Step D: Build dependency information
+	return d.buildAgentDependencies(targetAgents, insights), nil
+}
+
+// validateSourceRequirements validates source-specific requirements
+func (d *Discovery) validateSourceRequirements() error {
+	if d.source.GetSourceType() == FilesystemSourceType && !d.installer.IsInstalled() {
+		return fmt.Errorf("framework not installed in current directory - run 'krci-ai install'")
+	}
+	return nil
+}
+
+// getValidationInsights gets validation insights based on source type
+func (d *Discovery) getValidationInsights(agentNames []string) (*validation.FrameworkInsights, error) {
+	if d.source.GetSourceType() == FilesystemSourceType {
+		return d.getFilesystemInsights()
+	}
+	return d.getEmbeddedInsights(agentNames)
+}
+
+// getFilesystemInsights analyzes entire framework for filesystem source
+func (d *Discovery) getFilesystemInsights() (*validation.FrameworkInsights, error) {
+	analyzer := validation.NewFrameworkAnalyzer(d.installer.targetDir)
+	_, insights, err := analyzer.AnalyzeFramework()
+	if err != nil {
+		return nil, fmt.Errorf("failed to analyze framework: %w", err)
+	}
+	return insights, nil
+}
+
+// getEmbeddedInsights analyzes specific agents for embedded source
+func (d *Discovery) getEmbeddedInsights(agentNames []string) (*validation.FrameworkInsights, error) {
+	analyzer := validation.NewFrameworkAnalyzer("")
+
+	// Type assert to get embedded FS using the new interface
+	embeddedSource, ok := d.source.(EmbeddedAssetSource)
+	if !ok {
+		return nil, fmt.Errorf("expected embedded source but got %T", d.source)
+	}
+
+	// Use provided agent names or discover all if none specified
+	targetAgentNames := agentNames
+	if len(agentNames) == 0 {
+		// Discover all agent names for embedded case
+		allAgents, agentErr := d.DiscoverAgents()
+		if agentErr != nil {
+			return nil, fmt.Errorf("failed to discover agents: %w", agentErr)
+		}
+		targetAgentNames = make([]string, len(allAgents))
+		for i, agent := range allAgents {
+			targetAgentNames[i] = agent.ShortName
+		}
+	}
+
+	insights, err := analyzer.AnalyzeEmbeddedDependencies(context.Background(), embeddedSource.GetEmbeddedFS(), targetAgentNames)
+	if err != nil {
+		return nil, fmt.Errorf("failed to analyze embedded dependencies: %w", err)
+	}
+	return insights, nil
+}
+
+// getTargetAgents gets and filters agent information
+func (d *Discovery) getTargetAgents(agentNames []string) ([]AgentInfo, error) {
+	allAgents, err := d.DiscoverAgents()
+	if err != nil {
+		return nil, err
+	}
+
+	if len(agentNames) == 0 {
+		// No filter specified - use all agents (filesystem behavior)
+		return allAgents, nil
+	}
+
+	// Filter to specific agents (embedded behavior)
+	agentMap := make(map[string]AgentInfo)
+	for _, agent := range allAgents {
+		agentMap[agent.ShortName] = agent
+	}
+
+	var targetAgents []AgentInfo
+	for _, agentName := range agentNames {
+		if agent, exists := agentMap[agentName]; exists {
+			targetAgents = append(targetAgents, agent)
+		}
+		// Note: silently skip non-existent agents (existing behavior)
+	}
+
+	return targetAgents, nil
+}
+
+// buildAgentDependencies builds dependency information for agents
+func (d *Discovery) buildAgentDependencies(targetAgents []AgentInfo, insights *validation.FrameworkInsights) []AgentDependencyInfo {
+	// Build relationship mapping
 	relationshipMap := make(map[string]validation.ComponentRelationship)
 	for _, rel := range insights.Relationships {
 		relationshipMap[rel.Agent] = rel
@@ -267,9 +345,14 @@ func (d *Discovery) DiscoverAgentsWithDependencies() ([]AgentDependencyInfo, err
 
 	// Build dependency info for each agent
 	var agentDeps []AgentDependencyInfo
-	for _, agent := range agents {
-		// Extract agent name from file path (remove .yaml extension)
-		agentFileName := strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+	for _, agent := range targetAgents {
+		// Extract agent name from file path (filesystem) or use ShortName (embedded)
+		var agentKey string
+		if d.source.GetSourceType() == FilesystemSourceType {
+			agentKey = strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
+		} else {
+			agentKey = agent.ShortName
+		}
 
 		depInfo := AgentDependencyInfo{
 			AgentInfo: agent,
@@ -279,7 +362,7 @@ func (d *Discovery) DiscoverAgentsWithDependencies() ([]AgentDependencyInfo, err
 		}
 
 		// Look up dependency relationships
-		if rel, exists := relationshipMap[agentFileName]; exists {
+		if rel, exists := relationshipMap[agentKey]; exists {
 			depInfo.Tasks = rel.Tasks
 			depInfo.Templates = rel.Templates
 			depInfo.DataFiles = rel.DataFiles
@@ -288,11 +371,11 @@ func (d *Discovery) DiscoverAgentsWithDependencies() ([]AgentDependencyInfo, err
 		agentDeps = append(agentDeps, depInfo)
 	}
 
-	return agentDeps, nil
+	return agentDeps
 }
 
 func (d *Discovery) DiscoverAgentWithDependencies(shortName string) (AgentDependencyInfo, error) {
-	agents, err := d.DiscoverAgentsWithDependencies()
+	agents, err := d.DiscoverAgentsWithDependencies(shortName)
 	if err != nil {
 		return AgentDependencyInfo{}, err
 	}
@@ -665,13 +748,6 @@ func (d *Discovery) fitString(str string, maxWidth int) string {
 	return d.truncateString(str, maxWidth)
 }
 
-// taskDependency holds template and data dependencies for a task
-type taskDependency struct {
-	templates []string
-	dataFiles []string
-	fullPath  string // Store full path for local task detection
-}
-
 // getTaskDependenciesFromValidation uses the validation system to get task dependencies
 func (d *Discovery) getTaskDependenciesFromValidation(agent AgentDependencyInfo) map[string]taskDependency {
 	dependencies := make(map[string]taskDependency)
@@ -700,4 +776,46 @@ func (d *Discovery) formatTaskDisplayName(taskPath string) string {
 		return "📁 " + taskName // Local task indicator
 	}
 	return taskName
+}
+
+// DiscoverEmbeddedAgents discovers agents from embedded filesystem using the unified AssetSource approach
+func (d *Discovery) DiscoverEmbeddedAgents(embeddedAssets embed.FS) ([]AgentInfo, error) {
+	// Create temporary discovery with embedded source
+	embeddedSource := NewEmbeddedSource(embeddedAssets)
+	embeddedDiscovery := NewDiscoveryWithSource(d.installer.targetDir, embeddedAssets, embeddedSource)
+
+	return embeddedDiscovery.DiscoverAgents()
+}
+
+// ValidateEmbeddedAgentNames validates that agent names exist in embedded assets using unified validation
+func (d *Discovery) ValidateEmbeddedAgentNames(embeddedAssets embed.FS, agentNames []string) error {
+	// Reuse existing bundle command validation logic
+	availableAgents, err := d.DiscoverEmbeddedAgents(embeddedAssets)
+	if err != nil {
+		return err
+	}
+
+	// Create available agents map
+	available := make(map[string]bool)
+	for _, agent := range availableAgents {
+		available[agent.ShortName] = true
+	}
+
+	// Validate using same logic as bundle command
+	var missing []string
+	for _, agentName := range agentNames {
+		if !available[agentName] {
+			missing = append(missing, agentName)
+		}
+	}
+
+	if len(missing) > 0 {
+		availableNames := make([]string, 0, len(available))
+		for name := range available {
+			availableNames = append(availableNames, name)
+		}
+		return fmt.Errorf("agent(s) not found: %v. Available agents: %v", missing, availableNames)
+	}
+
+	return nil
 }
