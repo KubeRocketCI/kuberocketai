@@ -1,3 +1,18 @@
+/*
+Copyright © 2025 KubeRocketAI Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package assets
 
 import (
@@ -6,6 +21,9 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 //go:embed testdata/*
@@ -13,68 +31,50 @@ var testAssets embed.FS
 
 func TestNewInstaller(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
-	if installer == nil {
-		t.Fatal("NewInstaller returned nil")
-	}
-	if installer.targetDir != "test" {
-		t.Errorf("Expected targetDir 'test', got '%s'", installer.targetDir)
-	}
+	require.NotNil(t, installer, "NewInstaller should not return nil")
+	assert.Equal(t, "test", installer.targetDir, "targetDir should match input")
 }
 
 func TestNewInstallerWithEmptyDir(t *testing.T) {
 	installer := NewInstaller("", testAssets)
-	if installer.targetDir != "." {
-		t.Errorf("Expected targetDir '.', got '%s'", installer.targetDir)
-	}
+	assert.Equal(t, ".", installer.targetDir, "Empty targetDir should default to current directory")
 }
 
 func TestGetInstallationPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
 	expected := filepath.Join("test", KrciAIDir)
-	if installer.GetInstallationPath() != expected {
-		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetInstallationPath())
-	}
+	assert.Equal(t, expected, installer.GetInstallationPath(), "Installation path should match expected")
 }
 
 func TestGetAgentsPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
 	expected := filepath.Join("test", KrciAIDir, agentsDir)
-	if installer.GetAgentsPath() != expected {
-		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetAgentsPath())
-	}
+	assert.Equal(t, expected, installer.GetAgentsPath(), "Agents path should match expected")
 }
 
 func TestGetTasksPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
 	expected := filepath.Join("test", KrciAIDir, TasksDir)
-	if installer.GetTasksPath() != expected {
-		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetTasksPath())
-	}
+	assert.Equal(t, expected, installer.GetTasksPath(), "Tasks path should match expected")
 }
 
 func TestGetTemplatesPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
 	expected := filepath.Join("test", KrciAIDir, TemplatesDir)
-	if installer.GetTemplatesPath() != expected {
-		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetTemplatesPath())
-	}
+	assert.Equal(t, expected, installer.GetTemplatesPath(), "Templates path should match expected")
 }
 
 func TestGetDataPath(t *testing.T) {
 	installer := NewInstaller("test", testAssets)
 	expected := filepath.Join("test", KrciAIDir, DataDir)
-	if installer.GetDataPath() != expected {
-		t.Errorf("Expected path '%s', got '%s'", expected, installer.GetDataPath())
-	}
+	assert.Equal(t, expected, installer.GetDataPath(), "Data path should match expected")
 }
 
 func TestIsInstalledWhenNotInstalled(t *testing.T) {
 	tempDir := t.TempDir()
 	installer := NewInstaller(tempDir, testAssets)
 
-	if installer.IsInstalled() {
-		t.Error("Expected IsInstalled to return false for non-existent installation")
-	}
+	assert.False(t, installer.IsInstalled(), "IsInstalled should return false for non-existent installation")
 }
 
 func TestIsInstalledWhenInstalled(t *testing.T) {

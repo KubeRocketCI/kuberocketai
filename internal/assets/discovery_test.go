@@ -21,6 +21,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 // testAssets is already declared in installer_test.go
@@ -30,9 +32,7 @@ func setupTestFramework(t *testing.T) string {
 
 	// Create temporary directory
 	tmpDir, err := os.MkdirTemp("", "krci-ai-test-*")
-	if err != nil {
-		t.Fatalf("Failed to create temp dir: %v", err)
-	}
+	require.NoError(t, err, "Failed to create temp dir")
 
 	// Create framework structure
 	frameworkDir := filepath.Join(tmpDir, ".krci-ai")
@@ -42,9 +42,8 @@ func setupTestFramework(t *testing.T) string {
 	dataDir := filepath.Join(frameworkDir, "data")
 
 	for _, dir := range []string{agentsDir, tasksDir, templatesDir, dataDir} {
-		if err := os.MkdirAll(dir, 0755); err != nil {
-			t.Fatalf("Failed to create dir %s: %v", dir, err)
-		}
+		err := os.MkdirAll(dir, 0755)
+		require.NoError(t, err, "Failed to create dir %s", dir)
 	}
 
 	// Create test agent file

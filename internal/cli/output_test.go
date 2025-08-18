@@ -1,15 +1,30 @@
+/*
+Copyright © 2025 KubeRocketAI Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package cli
 
 import (
 	"bytes"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewOutputHandler(t *testing.T) {
 	handler := NewOutputHandler()
-	if handler == nil {
-		t.Fatal("NewOutputHandler returned nil")
-	}
+	assert.NotNil(t, handler, "NewOutputHandler should not return nil")
 }
 
 func TestOutputHandlerMessages(t *testing.T) {
@@ -48,7 +63,7 @@ func TestOutputHandlerMessages(t *testing.T) {
 			// Test that the function doesn't panic
 			defer func() {
 				if r := recover(); r != nil {
-					t.Errorf("Function %s panicked: %v", tt.name, r)
+					assert.Fail(t, "Function should not panic", "Function %s panicked: %v", tt.name, r)
 				}
 			}()
 
@@ -63,9 +78,7 @@ func TestOutputHandlerMessages(t *testing.T) {
 func TestErrorHandler(t *testing.T) {
 	// Test that error handler can be created
 	handler := NewErrorHandler()
-	if handler == nil {
-		t.Fatal("NewErrorHandler returned nil")
-	}
+	assert.NotNil(t, handler, "NewErrorHandler should not return nil")
 }
 
 func TestErrorHandlerMethods(t *testing.T) {
@@ -90,7 +103,7 @@ func TestErrorHandlerMethods(t *testing.T) {
 			// Test that the function doesn't panic
 			defer func() {
 				if r := recover(); r != nil {
-					t.Errorf("Function %s panicked: %v", tt.name, r)
+					assert.Fail(t, "Function should not panic", "Function %s panicked: %v", tt.name, r)
 				}
 			}()
 
@@ -105,7 +118,7 @@ func TestOutputHandlerPrintError(t *testing.T) {
 	// Test that PrintError doesn't panic
 	defer func() {
 		if r := recover(); r != nil {
-			t.Errorf("PrintError panicked: %v", r)
+			assert.Fail(t, "PrintError should not panic", "PrintError panicked: %v", r)
 		}
 	}()
 
@@ -118,7 +131,7 @@ func TestErrorHandlerPrintWarning(t *testing.T) {
 	// Test that PrintWarning doesn't panic
 	defer func() {
 		if r := recover(); r != nil {
-			t.Errorf("PrintWarning panicked: %v", r)
+			assert.Fail(t, "PrintWarning should not panic", "PrintWarning panicked: %v", r)
 		}
 	}()
 

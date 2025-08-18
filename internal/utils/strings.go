@@ -17,7 +17,6 @@ package utils
 
 import (
 	"slices"
-	"strings"
 )
 
 // DeduplicateStrings returns a new slice with unique values in stable order, sorted alphabetically
@@ -26,11 +25,4 @@ func DeduplicateStrings(values []string) []string {
 	slices.Sort(values)
 
 	return slices.Compact(values)
-}
-
-// EqualFoldInSlice returns true if the candidate matches any element in slice, case-insensitively
-func EqualFoldInSlice(slice []string, candidate string) bool {
-	return slices.ContainsFunc(slice, func(s string) bool {
-		return strings.EqualFold(s, candidate)
-	})
 }
