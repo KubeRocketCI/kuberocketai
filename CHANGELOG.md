@@ -2,6 +2,85 @@
 
 ## [Unreleased]
 
+### Chores
+
+- **ci:** ensure we add all details to the release changelog
+
+
+<a name="v0.28.0"></a>
+
+## [v0.28.0] - 2025-08-18
+
+### Chores
+
+- Align epic-9 with advanced installation
+- Update krci-ai to 0.27.0
+
+### Documentation
+
+- simplify selective installation scope to agent-level only
+
+### Features
+
+- **selective:** implement agent-specific dependency validation and installation ([#65](https://github.com/KubeRocketCI/kuberocketai/issues/65))
+- **stories:** add comprehensive implementation planning for Epic 8 selective installation
+
+### Tests
+
+- Refactor unit tests
+- Refactor unit tests
+
+
+<a name="v0.27.0"></a>
+
+## [v0.27.0] - 2025-08-16
+
+
+<a name="v0.26.1"></a>
+
+## [v0.26.1] - 2025-08-14
+
+### Bug Fixes
+
+- **bundle:** skip additional file collection for targeted agent bundles
+
+### Chores
+
+- Update framework to the latest stable version
+
+
+<a name="v0.26.0"></a>
+
+## [v0.26.0] - 2025-08-14
+
+### Bug Fixes
+
+- Fix documentation section with TOC
+
+### Chores
+
+- Update changelog
+
+### Code Refactoring
+
+- switch to internal tools
+- deduplicate helpers, centralize CLI style, and improve command exit handling
+
+### Documentation
+
+- Align mermaid to dark theme
+- Simplify README for '/docs' directory
+- **local-tasks:** make create-github-issues template-driven with dependency validation
+
+### Features
+
+- Implement token analysis CLI command and integrate GPT-4 tokenization
+- update story template to be aligned with epic flow
+- Add epic-9 to populate agents accross KubeRocketCI platform
+- Add cheatsheet for krci-ai
+- Create EPIC 8 for selective installation
+- **epic-template:** improve outcome-focused, locally verifiable epics to reduce prescriptive testing and boost clarity
+
 
 <a name="v0.25.2"></a>
 
@@ -606,7 +685,11 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.2...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.28.0...HEAD
+[v0.28.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.27.0...v0.28.0
+[v0.27.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.26.1...v0.27.0
+[v0.26.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.26.0...v0.26.1
+[v0.26.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.2...v0.26.0
 [v0.25.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.1...v0.25.2
 [v0.25.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.25.0...v0.25.1
 [v0.25.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.24.1...v0.25.0
