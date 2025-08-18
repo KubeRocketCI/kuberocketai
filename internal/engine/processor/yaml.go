@@ -41,9 +41,9 @@ func (a *AgentSpec) GetCustomization() string {
 	return *a.Customization
 }
 
-// HasCustomization returns true if customization field is present and non-empty
+// HasCustomization returns true if customization field is present and non-empty after trimming whitespace
 func (a *AgentSpec) HasCustomization() bool {
-	return a.Customization != nil && *a.Customization != ""
+	return a.Customization != nil && strings.TrimSpace(*a.Customization) != ""
 }
 
 // Agent represents the top-level agent structure

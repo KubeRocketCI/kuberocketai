@@ -17,8 +17,9 @@ package assets
 
 import (
 	"os"
-	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // Use the existing embedded assets from the main command for testing
@@ -49,12 +50,8 @@ func TestFilesystemVsEmbeddedBehaviorDifferences(t *testing.T) {
 		// Filesystem requires installation check
 		discovery := NewDiscovery("/nonexistent", testAssets)
 		_, err := discovery.DiscoverAgentsWithDependencies()
-		if err == nil {
-			t.Error("Expected error for non-installed framework in filesystem mode")
-		}
-		if !strings.Contains(err.Error(), "framework not installed") {
-			t.Errorf("Expected installation error, got: %v", err)
-		}
+		assert.Error(t, err, "Expected error for non-installed framework in filesystem mode")
+		assert.Contains(t, err.Error(), "framework not installed", "Expected installation error")
 
 		// TODO: Test embedded behavior once proper test setup is available
 		t.Skip("Embedded behavior testing requires proper test setup")

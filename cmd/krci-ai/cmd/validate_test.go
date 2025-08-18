@@ -23,6 +23,7 @@ import (
 	"testing"
 
 	"github.com/spf13/cobra"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/engine/processor"
@@ -224,45 +225,25 @@ func TestNewFrameworkValidator(t *testing.T) {
 
 func TestValidateCommand(t *testing.T) {
 	t.Run("validate command exists", func(t *testing.T) {
-		if validateCmd == nil {
-			t.Error("Validate command should not be nil")
-		}
-
-		if validateCmd.Use != "validate" {
-			t.Errorf("Expected validate command Use to be 'validate', got '%s'", validateCmd.Use)
-		}
-
-		if validateCmd.Short == "" {
-			t.Error("Validate command should have a short description")
-		}
-
-		if validateCmd.Long == "" {
-			t.Error("Validate command should have a long description")
-		}
-
-		if validateCmd.RunE == nil {
-			t.Error("Validate command should have a RunE function")
-		}
+		assert.NotNil(t, validateCmd, "Validate command should not be nil")
+		assert.Equal(t, "validate", validateCmd.Use, "Command Use should be 'validate'")
+		assert.NotEmpty(t, validateCmd.Short, "Command should have a short description")
+		assert.NotEmpty(t, validateCmd.Long, "Command should have a long description")
+		assert.NotNil(t, validateCmd.RunE, "Command should have a RunE function")
 	})
 
 	t.Run("validate command flags", func(t *testing.T) {
 		// Check if validate command has expected flags
 		verboseFlag := validateCmd.Flags().Lookup("verbose")
-		if verboseFlag == nil {
-			t.Error("Validate command should have --verbose flag")
-		}
-
-		if verboseFlag != nil && verboseFlag.Shorthand != "v" {
-			t.Errorf("Expected verbose flag shorthand to be 'v', got '%s'", verboseFlag.Shorthand)
+		assert.NotNil(t, verboseFlag, "Validate command should have --verbose flag")
+		if verboseFlag != nil {
+			assert.Equal(t, "v", verboseFlag.Shorthand, "Verbose flag shorthand should be 'v'")
 		}
 
 		quietFlag := validateCmd.Flags().Lookup("quiet")
-		if quietFlag == nil {
-			t.Error("Validate command should have --quiet flag")
-		}
-
-		if quietFlag != nil && quietFlag.Shorthand != "q" {
-			t.Errorf("Expected quiet flag shorthand to be 'q', got '%s'", quietFlag.Shorthand)
+		assert.NotNil(t, quietFlag, "Validate command should have --quiet flag")
+		if quietFlag != nil {
+			assert.Equal(t, "q", quietFlag.Shorthand, "Quiet flag shorthand should be 'q'")
 		}
 	})
 }

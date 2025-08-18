@@ -25,6 +25,8 @@ import (
 	"testing/fstest"
 	"time"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
@@ -38,18 +40,10 @@ const (
 func TestNewFrameworkAnalyzer(t *testing.T) {
 	analyzer := NewFrameworkAnalyzer("/test/path")
 
-	if analyzer.baseDir != "/test/path" {
-		t.Errorf("Expected baseDir to be '/test/path', got '%s'", analyzer.baseDir)
-	}
-	if analyzer.cache == nil {
-		t.Error("Expected cache to be initialized")
-	}
-	if analyzer.fileCache == nil {
-		t.Error("Expected fileCache to be initialized")
-	}
-	if analyzer.resultCache == nil {
-		t.Error("Expected resultCache to be initialized")
-	}
+	assert.Equal(t, "/test/path", analyzer.baseDir, "baseDir should match input")
+	assert.NotNil(t, analyzer.cache, "cache should be initialized")
+	assert.NotNil(t, analyzer.fileCache, "fileCache should be initialized")
+	assert.NotNil(t, analyzer.resultCache, "resultCache should be initialized")
 }
 
 func TestAnalyzeFramework_NoFrameworkDirectory(t *testing.T) {
@@ -57,12 +51,8 @@ func TestAnalyzeFramework_NoFrameworkDirectory(t *testing.T) {
 	analyzer := NewFrameworkAnalyzer(tempDir)
 
 	_, _, err := analyzer.AnalyzeFramework()
-	if err == nil {
-		t.Error("Expected error when no .krci-ai directory exists")
-	}
-	if !strings.Contains(err.Error(), "no .krci-ai directory found") {
-		t.Errorf("Expected error message about missing directory, got: %s", err.Error())
-	}
+	assert.Error(t, err, "Expected error when no .krci-ai directory exists")
+	assert.Contains(t, err.Error(), "no .krci-ai directory found", "Error should mention missing directory")
 }
 
 func TestDetectBrokenInternalLinks(t *testing.T) {

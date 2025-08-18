@@ -22,6 +22,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
@@ -44,34 +45,29 @@ func TestBundleCommandRegistered(t *testing.T) {
 			break
 		}
 	}
-	if !found {
-		t.Error("bundle command should be registered with root command")
-	}
+	assert.True(t, found, "bundle command should be registered with root command")
 }
 
 func TestBundleCommandFlags(t *testing.T) {
 	// Test --all flag
 	allFlag := bundleCmd.Flags().Lookup("all")
-	if allFlag == nil {
-		t.Error("--all flag should be defined")
-	} else if allFlag.Value.Type() != "bool" {
-		t.Errorf("--all should be a boolean flag, got %s", allFlag.Value.Type())
+	assert.NotNil(t, allFlag, "--all flag should be defined")
+	if allFlag != nil {
+		assert.Equal(t, "bool", allFlag.Value.Type(), "--all should be a boolean flag")
 	}
 
 	// Test --dry-run flag
 	dryRunFlag := bundleCmd.Flags().Lookup("dry-run")
-	if dryRunFlag == nil {
-		t.Error("--dry-run flag should be defined")
-	} else if dryRunFlag.Value.Type() != "bool" {
-		t.Errorf("--dry-run should be a boolean flag, got %s", dryRunFlag.Value.Type())
+	assert.NotNil(t, dryRunFlag, "--dry-run flag should be defined")
+	if dryRunFlag != nil {
+		assert.Equal(t, "bool", dryRunFlag.Value.Type(), "--dry-run should be a boolean flag")
 	}
 
 	// Test --output flag
 	outputFlag := bundleCmd.Flags().Lookup("output")
-	if outputFlag == nil {
-		t.Error("--output flag should be defined")
-	} else if outputFlag.Value.Type() != "string" {
-		t.Errorf("--output should be a string flag, got %s", outputFlag.Value.Type())
+	assert.NotNil(t, outputFlag, "--output flag should be defined")
+	if outputFlag != nil {
+		assert.Equal(t, "string", outputFlag.Value.Type(), "--output should be a string flag")
 	}
 }
 

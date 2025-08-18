@@ -1,3 +1,18 @@
+/*
+Copyright © 2025 KubeRocketAI Team
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 package assets
 
 import (
@@ -6,6 +21,9 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 //go:embed testdata/*
@@ -19,9 +37,7 @@ func TestInstallIDEIntegration(t *testing.T) {
 	krciPath := filepath.Join(tempDir, KrciAIDir)
 	agentsPath := filepath.Join(krciPath, agentsDir)
 	err := os.MkdirAll(agentsPath, 0755)
-	if err != nil {
-		t.Fatalf("Failed to create agents directory: %v", err)
-	}
+	require.NoError(t, err, "Failed to create agents directory")
 
 	// Create a test agent file
 	testAgentContent := `agent:
@@ -49,22 +65,16 @@ func TestInstallIDEIntegration(t *testing.T) {
 
 	agentFile := filepath.Join(agentsPath, "test.yaml")
 	err = os.WriteFile(agentFile, []byte(testAgentContent), 0644)
-	if err != nil {
-		t.Fatalf("Failed to create test agent file: %v", err)
-	}
+	require.NoError(t, err, "Failed to create test agent file")
 
 	// Test Cursor integration
 	cursorIntegration := &CursorIntegration{targetDir: tempDir}
 	err = installer.installIDEIntegration(cursorIntegration, "Cursor IDE")
-	if err != nil {
-		t.Errorf("Failed to install Cursor integration: %v", err)
-	}
+	assert.NoError(t, err, "Failed to install Cursor integration")
 
 	// Verify Cursor files were created
 	cursorFile := filepath.Join(tempDir, cursorRulesDir, "test.mdc")
-	if _, err := os.Stat(cursorFile); os.IsNotExist(err) {
-		t.Error("Cursor .mdc file was not created")
-	}
+	assert.FileExists(t, cursorFile, "Cursor .mdc file should be created")
 
 	// Test Claude integration
 	claudeIntegration := &ClaudeIntegration{targetDir: tempDir}

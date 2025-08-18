@@ -18,9 +18,9 @@ package cli
 import (
 	"bytes"
 	"os"
-	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -83,9 +83,7 @@ func TestPrintTaskValidationError(t *testing.T) {
 
 			// Check that expected strings are in output
 			for _, expected := range tt.expectInOutput {
-				if !strings.Contains(output, expected) {
-					t.Errorf("Expected '%s' in output, but it was missing. Output: %s", expected, output)
-				}
+				assert.Contains(t, output, expected, "Expected string should be in output")
 			}
 
 			// Reset pipe for next test
@@ -141,9 +139,7 @@ func TestPrintAgentValidationError(t *testing.T) {
 
 			// Check that expected strings are in output
 			for _, expected := range tt.expectInOutput {
-				if !strings.Contains(output, expected) {
-					t.Errorf("Expected '%s' in output, but it was missing. Output: %s", expected, output)
-				}
+				assert.Contains(t, output, expected, "Expected string should be in output")
 			}
 
 			// Reset pipe for next test
@@ -199,9 +195,7 @@ func TestPrintInstallationError(t *testing.T) {
 
 			// Check that expected strings are in output
 			for _, expected := range tt.expectInOutput {
-				if !strings.Contains(output, expected) {
-					t.Errorf("Expected '%s' in output, but it was missing. Output: %s", expected, output)
-				}
+				assert.Contains(t, output, expected, "Expected string should be in output")
 			}
 
 			// Reset pipe for next test
@@ -257,9 +251,7 @@ func TestPrintErrorWithGuidance(t *testing.T) {
 
 			// Check that expected strings are in output
 			for _, expected := range tt.expectInOutput {
-				if !strings.Contains(output, expected) {
-					t.Errorf("Expected '%s' in output, but it was missing. Output: %s", expected, output)
-				}
+				assert.Contains(t, output, expected, "Expected string should be in output")
 			}
 
 			// Reset pipe for next test
@@ -280,7 +272,7 @@ func TestExistingErrorMethods(t *testing.T) {
 	// Test that these methods don't panic
 	defer func() {
 		if r := recover(); r != nil {
-			t.Errorf("Existing error method panicked: %v", r)
+			assert.Fail(t, "Existing error methods should not panic", "Existing error method panicked: %v", r)
 		}
 	}()
 
