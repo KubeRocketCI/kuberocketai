@@ -64,15 +64,6 @@ Examples:
 	RunE: runBundle,
 }
 
-// Bundle generation flags
-var (
-	bundleAll    bool
-	bundleDryRun bool
-	bundleOutput string
-	bundleAgents string
-	bundleTask   string
-)
-
 // BundleContent represents the aggregated content for bundle generation
 type BundleContent struct {
 	Agents    []AgentBundleInfo
@@ -93,11 +84,11 @@ func init() {
 	rootCmd.AddCommand(bundleCmd)
 
 	// Add flags
-	bundleCmd.Flags().BoolVar(&bundleAll, "all", false, "Generate complete bundle with all agents and dependencies")
-	bundleCmd.Flags().StringVar(&bundleAgents, "agent", "", "Generate targeted bundle with specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
-	bundleCmd.Flags().StringVar(&bundleTask, "task", "", "Generate minimal bundle with specific agent and task (requires --agent flag)")
-	bundleCmd.Flags().BoolVar(&bundleDryRun, "dry-run", false, "Show bundle scope without generating files")
-	bundleCmd.Flags().StringVar(&bundleOutput, "output", "", "Custom output filename (creates ./.krci-ai/bundle/filename)")
+	bundleCmd.Flags().Bool("all", false, "Generate complete bundle with all agents and dependencies")
+	bundleCmd.Flags().String("agent", "", "Generate targeted bundle with specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
+	bundleCmd.Flags().String("task", "", "Generate minimal bundle with specific agent and task (requires --agent flag)")
+	bundleCmd.Flags().Bool("dry-run", false, "Show bundle scope without generating files")
+	bundleCmd.Flags().String("output", "", "Custom output filename (creates ./.krci-ai/bundle/filename)")
 }
 
 // ParseAgentList parses comma-separated or space-separated agent names
@@ -178,7 +169,23 @@ func validateAgentNames(currentDir string, selectedAgents []string, output *cli.
 }
 
 // validateBundleFlags validates the bundle command flags for mutual exclusivity and requirements
-func validateBundleFlags(output *cli.OutputHandler) error {
+func validateBundleFlags(cmd *cobra.Command, output *cli.OutputHandler) error {
+	// Get flag values
+	bundleAll, err := cmd.Flags().GetBool("all")
+	if err != nil {
+		return fmt.Errorf("failed to read all flag: %w", err)
+	}
+
+	bundleAgents, err := cmd.Flags().GetString("agent")
+	if err != nil {
+		return fmt.Errorf("failed to read agent flag: %w", err)
+	}
+
+	bundleTask, err := cmd.Flags().GetString("task")
+	if err != nil {
+		return fmt.Errorf("failed to read task flag: %w", err)
+	}
+
 	// Validate flags - ensure mutual exclusivity and required combinations
 	if !bundleAll && bundleAgents == "" {
 		output.PrintError("Bundle generation requires either --all or --agent flag")
@@ -220,7 +227,7 @@ func runBundle(cmd *cobra.Command, args []string) error {
 	errorHandler := cli.NewErrorHandler()
 
 	// Validate flags
-	if err := validateBundleFlags(output); err != nil {
+	if err := validateBundleFlags(cmd, output); err != nil {
 		return err
 	}
 
@@ -231,9 +238,15 @@ func runBundle(cmd *cobra.Command, args []string) error {
 	}
 
 	// Parse and validate agent selection
-	selectedAgents, err := parseAndValidateAgents(currentDir, output)
+	selectedAgents, err := parseAndValidateAgents(cmd, currentDir, output)
 	if err != nil {
 		return err
+	}
+
+	// Get task flag for content collection
+	bundleTask, err := cmd.Flags().GetString("task")
+	if err != nil {
+		return fmt.Errorf("failed to read task flag: %w", err)
 	}
 
 	// Collect bundle content
@@ -244,13 +257,25 @@ func runBundle(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	// Check dry-run flag
+	bundleDryRun, err := cmd.Flags().GetBool("dry-run")
+	if err != nil {
+		return fmt.Errorf("failed to read dry-run flag: %w", err)
+	}
+
 	// Show dry-run information if requested
 	if bundleDryRun {
 		return showBundleScope(output, bundleContent)
 	}
 
+	// Get output flag for bundle generation
+	bundleOutput, err := cmd.Flags().GetString("output")
+	if err != nil {
+		return fmt.Errorf("failed to read output flag: %w", err)
+	}
+
 	// Generate and write bundle
-	return generateAndWriteBundle(currentDir, selectedAgents, bundleContent, output, errorHandler)
+	return generateAndWriteBundle(cmd, currentDir, selectedAgents, bundleContent, bundleOutput, bundleTask, output, errorHandler)
 }
 
 // setupAndValidateFramework handles directory setup and framework validation
@@ -284,8 +309,14 @@ func setupAndValidateFramework(output *cli.OutputHandler, errorHandler *cli.Erro
 }
 
 // parseAndValidateAgents handles agent parsing and validation logic
-func parseAndValidateAgents(currentDir string, output *cli.OutputHandler) ([]string, error) {
+func parseAndValidateAgents(cmd *cobra.Command, currentDir string, output *cli.OutputHandler) ([]string, error) {
 	var selectedAgents []string
+
+	// Get agent flag
+	bundleAgents, err := cmd.Flags().GetString("agent")
+	if err != nil {
+		return nil, fmt.Errorf("failed to read agent flag: %w", err)
+	}
 
 	if bundleAgents == "" {
 		return selectedAgents, nil
@@ -302,12 +333,18 @@ func parseAndValidateAgents(currentDir string, output *cli.OutputHandler) ([]str
 		return nil, validateErr
 	}
 
+	// Get task flag for validation
+	bundleTask, err := cmd.Flags().GetString("task")
+	if err != nil {
+		return nil, fmt.Errorf("failed to read task flag: %w", err)
+	}
+
 	// Handle task validation and output
-	return handleTaskValidation(currentDir, selectedAgents, output)
+	return handleTaskValidation(currentDir, selectedAgents, bundleTask, output)
 }
 
 // handleTaskValidation handles task-specific validation and info output
-func handleTaskValidation(currentDir string, selectedAgents []string, output *cli.OutputHandler) ([]string, error) {
+func handleTaskValidation(currentDir string, selectedAgents []string, bundleTask string, output *cli.OutputHandler) ([]string, error) {
 	if bundleTask != "" {
 		if validateErr := ValidateAgentTaskCombination(currentDir, selectedAgents[0], bundleTask, output); validateErr != nil {
 			return nil, validateErr
@@ -321,7 +358,7 @@ func handleTaskValidation(currentDir string, selectedAgents []string, output *cl
 }
 
 // generateAndWriteBundle handles bundle generation and file writing
-func generateAndWriteBundle(currentDir string, selectedAgents []string, bundleContent *BundleContent, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) error {
+func generateAndWriteBundle(_ *cobra.Command, currentDir string, selectedAgents []string, bundleContent *BundleContent, bundleOutput string, bundleTask string, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) error {
 	// Generate bundle filename
 	bundleFilename := generateBundleFilename(bundleOutput, selectedAgents, bundleTask)
 	bundleDir := filepath.Join(currentDir, krciAIDir, "bundle")

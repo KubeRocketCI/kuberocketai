@@ -248,39 +248,70 @@ func TestInstallCommandRunFunction(t *testing.T) {
 	assert.NotNil(t, testCmd.Flags(), "Test command should have flags")
 }
 
-// TestInstallSelectiveFlags tests the selective installation flags
+// TestInstallSelectiveFlags tests the selective installation flags using GetString pattern
 func TestInstallSelectiveFlags(t *testing.T) {
-	// Test that the installAgent variable exists and can be modified
-	originalAgent := installAgent
-
-	// Cleanup after test
-	defer func() {
-		installAgent = originalAgent
-	}()
-
 	tests := []struct {
 		name       string
-		agentValue string
+		agentFlag  string
+		agentsFlag string
+		expected   string
 	}{
 		{
-			name:       "set agent only",
-			agentValue: "test-agent",
+			name:      "agent flag only",
+			agentFlag: "pm",
+			expected:  "pm",
 		},
 		{
-			name:       "empty agent",
-			agentValue: "",
+			name:       "agents flag only",
+			agentsFlag: "architect",
+			expected:   "architect",
 		},
 		{
-			name:       "multiple agents",
-			agentValue: "pm,architect",
+			name:       "agent flag takes precedence",
+			agentFlag:  "pm",
+			agentsFlag: "architect",
+			expected:   "pm",
+		},
+		{
+			name:     "both flags empty",
+			expected: "",
+		},
+		{
+			name:      "multiple agents comma-separated",
+			agentFlag: "pm,architect,dev",
+			expected:  "pm,architect,dev",
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			installAgent = tt.agentValue
+			// Create test command with flags
+			cmd := &cobra.Command{}
+			cmd.Flags().String("agent", "", "Install specific agents")
+			cmd.Flags().String("agents", "", "Alias for --agent flag")
 
-			assert.Equal(t, tt.agentValue, installAgent, "installAgent should be set correctly")
+			// Set flag values
+			if tt.agentFlag != "" {
+				err := cmd.Flags().Set("agent", tt.agentFlag)
+				require.NoError(t, err)
+			}
+			if tt.agentsFlag != "" {
+				err := cmd.Flags().Set("agents", tt.agentsFlag)
+				require.NoError(t, err)
+			}
+
+			// Test flag retrieval logic (matching main command logic)
+			agentFlag, err := cmd.Flags().GetString("agent")
+			require.NoError(t, err)
+
+			// Check aliases flag if main flag is empty
+			if agentFlag == "" {
+				if agentsFlag, err := cmd.Flags().GetString("agents"); err == nil && agentsFlag != "" {
+					agentFlag = agentsFlag
+				}
+			}
+
+			assert.Equal(t, tt.expected, agentFlag, "Final agent flag value should match expected")
 		})
 	}
 }

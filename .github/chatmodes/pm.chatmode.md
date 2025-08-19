@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Manager role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['codebase', 'usages', 'problems', 'changes', 'terminalLastCommand', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'editFiles', 'search', 'runCommands', 'sequential-thinking']
 ---
 
 # Senior Product Manager Agent Chat Mode

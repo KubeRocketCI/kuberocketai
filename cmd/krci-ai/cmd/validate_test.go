@@ -100,6 +100,8 @@ Test task description.
 
 		// Create test command
 		cmd := &cobra.Command{}
+		cmd.Flags().BoolP("verbose", "v", false, "verbose output")
+		cmd.Flags().BoolP("quiet", "q", false, "quiet output")
 
 		// Test runValidate function - this will call os.Exit, so we expect it to panic in test
 		// We'll test that the function can be called without initial errors
@@ -142,6 +144,8 @@ Test task description.
 
 		// Create test command
 		cmd := &cobra.Command{}
+		cmd.Flags().BoolP("verbose", "v", false, "verbose output")
+		cmd.Flags().BoolP("quiet", "q", false, "quiet output")
 
 		// Test that runValidate can be called
 		// Since it calls os.Exit, we use a defer/recover pattern
@@ -163,23 +167,28 @@ Test task description.
 	t.Run("runValidate with flags", func(t *testing.T) {
 		// Test that flags can be set without error
 		cmd := &cobra.Command{}
-		cmd.Flags().BoolVarP(&verboseOutput, "verbose", "v", false, "verbose output")
-		cmd.Flags().BoolVarP(&quietOutput, "quiet", "q", false, "quiet output")
+		cmd.Flags().BoolP("verbose", "v", false, "verbose output")
+		cmd.Flags().BoolP("quiet", "q", false, "quiet output")
 
 		// Set verbose flag
-		verboseOutput = true
-		defer func() { verboseOutput = false }()
-
+		cmd.Flags().Set("verbose", "true")
 		// Set quiet flag
-		quietOutput = true
-		defer func() { quietOutput = false }()
+		cmd.Flags().Set("quiet", "true")
 
 		// Verify flags can be accessed (basic flag test)
-		if !verboseOutput {
+		verboseFlag, err := cmd.Flags().GetBool("verbose")
+		if err != nil {
+			t.Errorf("Failed to get verbose flag: %v", err)
+		}
+		if !verboseFlag {
 			t.Error("Expected verbose flag to be true")
 		}
 
-		if !quietOutput {
+		quietFlag, err := cmd.Flags().GetBool("quiet")
+		if err != nil {
+			t.Errorf("Failed to get quiet flag: %v", err)
+		}
+		if !quietFlag {
 			t.Error("Expected quiet flag to be true")
 		}
 	})
