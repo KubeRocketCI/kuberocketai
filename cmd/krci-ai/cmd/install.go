@@ -36,7 +36,6 @@ const (
 // Selective installation flags (reusing bundle command patterns)
 var (
 	installAgent string
-	installTask  string
 )
 
 // installCmd represents the install command
@@ -56,7 +55,6 @@ Examples:
   krci-ai install --ide=cursor                 # Install with Cursor IDE integration
   krci-ai install --agent developer            # Install only developer agent and dependencies
   krci-ai install --agents pm,architect,dev    # Install specific agents (comma-separated)
-  krci-ai install --agent pm --task create-prd # Install agent with specific task filtering
   krci-ai install --agent developer --ide cursor # Selective install with IDE integration
   krci-ai install --all              # Install core + all IDE integrations (shortcut)
   krci-ai install --all --force      # Force install everything
@@ -110,12 +108,6 @@ func runSelectiveInstallation(ideFlag string, output *cli.OutputHandler, errorHa
 		return
 	}
 
-	// Validate task flag (if provided)
-	if installTask != "" && len(agentNames) != 1 {
-		errorHandler.PrintError("--task flag requires exactly one agent")
-		return
-	}
-
 	// Start selective installation process
 	output.PrintProgress(fmt.Sprintf("Installing selected agents: %v", agentNames))
 
@@ -133,9 +125,6 @@ func runSelectiveInstallation(ideFlag string, output *cli.OutputHandler, errorHa
 	}
 
 	output.PrintSuccess(fmt.Sprintf("Selected agents installed successfully: %v", agentNames))
-	if installTask != "" {
-		output.PrintInfo(fmt.Sprintf("Task filtering: %s", installTask))
-	}
 }
 
 // runFullInstallation handles standard full framework installation
@@ -248,7 +237,6 @@ func init() {
 	// Add selective installation flags (following bundle command patterns)
 	installCmd.Flags().StringVar(&installAgent, "agent", "", "Install specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
 	installCmd.Flags().StringVar(&installAgent, "agents", "", "Alias for --agent flag")
-	installCmd.Flags().StringVar(&installTask, "task", "", "Install specific task with agent (requires --agent flag)")
 }
 
 // validateIDEFlag validates the IDE flag value and returns error if invalid

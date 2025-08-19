@@ -250,45 +250,37 @@ func TestInstallCommandRunFunction(t *testing.T) {
 
 // TestInstallSelectiveFlags tests the selective installation flags
 func TestInstallSelectiveFlags(t *testing.T) {
-	// Test that the installAgent and installTask variables exist and can be modified
+	// Test that the installAgent variable exists and can be modified
 	originalAgent := installAgent
-	originalTask := installTask
 
 	// Cleanup after test
 	defer func() {
 		installAgent = originalAgent
-		installTask = originalTask
 	}()
 
 	tests := []struct {
 		name       string
 		agentValue string
-		taskValue  string
 	}{
 		{
 			name:       "set agent only",
 			agentValue: "test-agent",
-			taskValue:  "",
 		},
 		{
-			name:       "set task only",
+			name:       "empty agent",
 			agentValue: "",
-			taskValue:  "test-task",
 		},
 		{
-			name:       "set both agent and task",
-			agentValue: "test-agent",
-			taskValue:  "test-task",
+			name:       "multiple agents",
+			agentValue: "pm,architect",
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			installAgent = tt.agentValue
-			installTask = tt.taskValue
 
 			assert.Equal(t, tt.agentValue, installAgent, "installAgent should be set correctly")
-			assert.Equal(t, tt.taskValue, installTask, "installTask should be set correctly")
 		})
 	}
 }

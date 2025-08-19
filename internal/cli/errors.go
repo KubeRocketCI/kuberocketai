@@ -81,7 +81,7 @@ func (e *ErrorHandler) PrintTaskValidationError(agentName string, invalidTasks [
 			fmt.Fprintf(os.Stderr, "  • %s\n", task)
 		}
 		fmt.Fprintf(os.Stderr, "\n%s Example usage:\n", style.Warn("💡"))
-		fmt.Fprintf(os.Stderr, "  krci-ai install --agent %s --task %s\n", agentName, availableTasks[0])
+		fmt.Fprintf(os.Stderr, "  krci-ai bundle --agent %s --task %s\n", agentName, availableTasks[0])
 	}
 }
 
