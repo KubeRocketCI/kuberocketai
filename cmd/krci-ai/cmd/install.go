@@ -33,11 +33,6 @@ const (
 	ideWindsurf = "windsurf"
 )
 
-// Selective installation flags (reusing bundle command patterns)
-var (
-	installAgent string
-)
-
 // installCmd represents the install command
 var installCmd = &cobra.Command{
 	Use:   "install",
@@ -83,14 +78,27 @@ Examples:
 
 		// Validate IDE flag after potential --all override
 		if ideFlag != "" {
-			if err := validateIDEFlag(ideFlag, errorHandler); err != nil {
+			if validateErr := validateIDEFlag(ideFlag, errorHandler); validateErr != nil {
 				return
 			}
 		}
 
 		// Check for selective installation first
-		if installAgent != "" {
-			runSelectiveInstallation(ideFlag, output, errorHandler)
+		agentFlag, err := cmd.Flags().GetString("agent")
+		if err != nil {
+			errorHandler.HandleError(err, "Failed to read agent flag")
+			return
+		}
+
+		// Check aliases flag if main flag is empty
+		if agentFlag == "" {
+			if agentsFlag, err := cmd.Flags().GetString("agents"); err == nil && agentsFlag != "" {
+				agentFlag = agentsFlag
+			}
+		}
+
+		if agentFlag != "" {
+			runSelectiveInstallation(cmd, agentFlag, ideFlag, output, errorHandler)
 			return
 		}
 
@@ -100,9 +108,9 @@ Examples:
 }
 
 // runSelectiveInstallation handles installation of specific agents only
-func runSelectiveInstallation(ideFlag string, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
+func runSelectiveInstallation(_ *cobra.Command, agentFlag string, ideFlag string, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
 	// Parse agent list using existing bundle logic
-	agentNames := ParseAgentList(installAgent)
+	agentNames := ParseAgentList(agentFlag)
 	if len(agentNames) == 0 {
 		errorHandler.PrintError("No valid agent names provided")
 		return
@@ -235,8 +243,8 @@ func init() {
 	installCmd.Flags().BoolP("all", "a", false, "Install core framework with all IDE integrations (equivalent to --ide=all)")
 
 	// Add selective installation flags (following bundle command patterns)
-	installCmd.Flags().StringVar(&installAgent, "agent", "", "Install specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
-	installCmd.Flags().StringVar(&installAgent, "agents", "", "Alias for --agent flag")
+	installCmd.Flags().String("agent", "", "Install specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
+	installCmd.Flags().String("agents", "", "Alias for --agent flag")
 }
 
 // validateIDEFlag validates the IDE flag value and returns error if invalid

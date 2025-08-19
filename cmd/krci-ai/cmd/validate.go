@@ -52,22 +52,29 @@ Examples:
 	RunE: runValidate,
 }
 
-// Validation flags
-var (
-	verboseOutput bool
-	quietOutput   bool
-)
+// Validation flags removed - now using GetBool pattern
 
 func init() {
 	rootCmd.AddCommand(validateCmd)
 
 	// Add flags
-	validateCmd.Flags().BoolVarP(&verboseOutput, "verbose", "v", false, "verbose output with detailed validation results")
-	validateCmd.Flags().BoolVarP(&quietOutput, "quiet", "q", false, "quiet output, only show summary")
+	validateCmd.Flags().BoolP("verbose", "v", false, "verbose output with detailed validation results")
+	validateCmd.Flags().BoolP("quiet", "q", false, "quiet output, only show summary")
 }
 
 // runValidate executes the validation command
 func runValidate(cmd *cobra.Command, args []string) error {
+	// Get flags
+	verboseOutput, err := cmd.Flags().GetBool("verbose")
+	if err != nil {
+		return fmt.Errorf("failed to get verbose flag: %w", err)
+	}
+
+	quietOutput, err := cmd.Flags().GetBool("quiet")
+	if err != nil {
+		return fmt.Errorf("failed to get quiet flag: %w", err)
+	}
+
 	// Get current working directory
 	currentDir, err := os.Getwd()
 	if err != nil {

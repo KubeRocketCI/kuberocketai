@@ -22,6 +22,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -341,10 +342,7 @@ func TestBundleCommandRequiresAllOrAgentFlag(t *testing.T) {
 		t.Fatalf("Failed to change to temp dir: %v", err)
 	}
 
-	// Reset flags
-	bundleAll = false
-	bundleDryRun = false
-	bundleOutput = ""
+	// Test will use command with no flags set (default behavior)
 
 	err = runBundle(bundleCmd, []string{})
 	if err == nil {
@@ -376,10 +374,10 @@ func TestBundleCommandMissingFramework(t *testing.T) {
 		t.Fatalf("Failed to change to temp dir: %v", err)
 	}
 
-	// Set flags
-	bundleAll = true
-	bundleDryRun = false
-	bundleOutput = ""
+	// Set the --all flag to test framework validation (not flag validation)
+	err = bundleCmd.Flags().Set("all", "true")
+	require.NoError(t, err)
+	defer bundleCmd.Flags().Set("all", "false") // Reset after test
 
 	err = runBundle(bundleCmd, []string{})
 	if err == nil {
@@ -686,27 +684,32 @@ func TestValidateBundleFlags(t *testing.T) {
 		},
 	}
 
-	// Save original values to restore after tests
-	originalAll := bundleAll
-	originalAgents := bundleAgents
-	originalTask := bundleTask
-	defer func() {
-		bundleAll = originalAll
-		bundleAgents = originalAgents
-		bundleTask = originalTask
-	}()
-
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Set global flags for test
-			bundleAll = tt.bundleAll
-			bundleAgents = tt.bundleAgent
-			bundleTask = tt.bundleTask
+			// Create test command with flags
+			cmd := &cobra.Command{}
+			cmd.Flags().Bool("all", false, "Generate complete bundle")
+			cmd.Flags().String("agent", "", "Generate targeted bundle")
+			cmd.Flags().String("task", "", "Generate minimal bundle")
+
+			// Set flag values for test
+			if tt.bundleAll {
+				err := cmd.Flags().Set("all", "true")
+				require.NoError(t, err)
+			}
+			if tt.bundleAgent != "" {
+				err := cmd.Flags().Set("agent", tt.bundleAgent)
+				require.NoError(t, err)
+			}
+			if tt.bundleTask != "" {
+				err := cmd.Flags().Set("task", tt.bundleTask)
+				require.NoError(t, err)
+			}
 
 			// Create output handler - we'll just test error returns, not output
 			output := cli.NewOutputHandler()
 
-			err := validateBundleFlags(output)
+			err := validateBundleFlags(cmd, output)
 
 			if tt.expectError {
 				if err == nil {

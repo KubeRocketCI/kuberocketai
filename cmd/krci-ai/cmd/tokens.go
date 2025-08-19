@@ -28,13 +28,8 @@ import (
 	"github.com/KubeRocketCI/kuberocketai/internal/tokens"
 )
 
-var (
-	tokenAgent   string
-	tokenAll     bool
-	tokenJSON    bool
-	tokenTimeout time.Duration = 30 * time.Second
-	output       *cli.OutputHandler
-)
+// output is initialized in init function for CLI formatting
+var output *cli.OutputHandler
 
 // tokensCmd represents the tokens command
 var tokensCmd = &cobra.Command{
@@ -68,15 +63,37 @@ func init() {
 	rootCmd.AddCommand(tokensCmd)
 
 	// Define flags
-	tokensCmd.Flags().StringVar(&tokenAgent, "agent", "", "Analyze tokens for a specific agent")
-	tokensCmd.Flags().BoolVar(&tokenAll, "all", false, "Analyze tokens for all agents in the project")
-	tokensCmd.Flags().BoolVar(&tokenJSON, "json", false, "Output results in JSON format")
+	tokensCmd.Flags().String("agent", "", "Analyze tokens for a specific agent")
+	tokensCmd.Flags().Bool("all", false, "Analyze tokens for all agents in the project")
+	tokensCmd.Flags().Bool("json", false, "Output results in JSON format")
+	tokensCmd.Flags().Duration("timeout", 30*time.Second, "Timeout for token analysis")
 
 	// Mark flags as mutually exclusive
 	tokensCmd.MarkFlagsMutuallyExclusive("agent", "all")
 }
 
 func runTokensCommand(cmd *cobra.Command, args []string) error {
+	// Get flags
+	tokenAgent, err := cmd.Flags().GetString("agent")
+	if err != nil {
+		return fmt.Errorf("failed to get agent flag: %w", err)
+	}
+
+	tokenAll, err := cmd.Flags().GetBool("all")
+	if err != nil {
+		return fmt.Errorf("failed to get all flag: %w", err)
+	}
+
+	tokenJSON, err := cmd.Flags().GetBool("json")
+	if err != nil {
+		return fmt.Errorf("failed to get json flag: %w", err)
+	}
+
+	tokenTimeout, err := cmd.Flags().GetDuration("timeout")
+	if err != nil {
+		return fmt.Errorf("failed to get timeout flag: %w", err)
+	}
+
 	// Validate flags
 	if tokenAgent == "" && !tokenAll {
 		return fmt.Errorf("either --agent or --all flag must be specified")
@@ -85,7 +102,7 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 	// Create token calculator
 	calculator, err := tokens.NewCalculator(".", GetEmbeddedAssets())
 	if err != nil {
-		return handleTokenError(fmt.Errorf("failed to initialize token calculator: %w", err))
+		return handleTokenError(fmt.Errorf("failed to initialize token calculator: %w", err), tokenJSON)
 	}
 
 	// Create context with timeout
@@ -94,51 +111,51 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 
 	// Execute the appropriate command
 	if tokenAgent != "" {
-		return runAgentTokenAnalysis(ctx, calculator, tokenAgent)
+		return runAgentTokenAnalysis(ctx, calculator, tokenAgent, tokenJSON)
 	} else {
-		return runProjectTokenAnalysis(ctx, calculator)
+		return runProjectTokenAnalysis(ctx, calculator, tokenJSON)
 	}
 }
 
-func runAgentTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, agentName string) error {
+func runAgentTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, agentName string, jsonOutput bool) error {
 	// Validate agent exists
 	if err := calculator.ValidateAgentExists(agentName); err != nil {
-		return handleTokenError(err)
+		return handleTokenError(err, jsonOutput)
 	}
 
 	// Show progress indicator
-	if !tokenJSON {
+	if !jsonOutput {
 		fmt.Printf("🔍 Analyzing tokens for agent '%s'...\n", agentName)
 	}
 
 	// Calculate tokens
 	agentInfo, err := calculator.CalculateAgentTokens(ctx, agentName)
 	if err != nil {
-		return handleTokenError(err)
+		return handleTokenError(err, jsonOutput)
 	}
 
 	// Output results
-	if tokenJSON {
+	if jsonOutput {
 		return outputAgentTokensJSON(agentInfo)
 	} else {
 		return outputAgentTokensTable(agentInfo)
 	}
 }
 
-func runProjectTokenAnalysis(ctx context.Context, calculator *tokens.Calculator) error {
+func runProjectTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, jsonOutput bool) error {
 	// Show progress indicator
-	if !tokenJSON {
+	if !jsonOutput {
 		fmt.Println("🔍 Analyzing tokens for entire project...")
 	}
 
 	// Calculate tokens
 	projectInfo, err := calculator.CalculateAllTokens(ctx)
 	if err != nil {
-		return handleTokenError(err)
+		return handleTokenError(err, jsonOutput)
 	}
 
 	// Output results
-	if tokenJSON {
+	if jsonOutput {
 		return outputProjectTokensJSON(projectInfo)
 	} else {
 		return outputProjectTokensTable(projectInfo)
@@ -259,8 +276,8 @@ func outputProjectTokensTable(projectInfo *tokens.ProjectTokenInfo) error {
 	return nil
 }
 
-func handleTokenError(err error) error {
-	if tokenJSON {
+func handleTokenError(err error, jsonOutput bool) error {
+	if jsonOutput {
 		// For JSON output, return the raw error
 		return err
 	}

@@ -18,10 +18,12 @@ package cmd
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
@@ -62,14 +64,21 @@ func TestRunTokensCommandValidation(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Reset flags
-			tokenAgent = tt.agent
-			tokenAll = tt.all
+			// Create command with flags
+			cmd := &cobra.Command{}
+			cmd.Flags().String("agent", "", "Analyze tokens for a specific agent")
+			cmd.Flags().Bool("all", false, "Analyze tokens for all agents in the project")
+			cmd.Flags().Bool("json", false, "Output results in JSON format")
+			cmd.Flags().Duration("timeout", 30*time.Second, "Timeout for token analysis")
+
+			// Set flag values
+			cmd.Flags().Set("agent", tt.agent)
+			cmd.Flags().Set("all", fmt.Sprintf("%t", tt.all))
 
 			// Mock the calculator creation to avoid actual file system operations
 			// Note: In a real test, we would need to mock the NewCalculator function
 
-			err := runTokensCommand(&cobra.Command{}, []string{})
+			err := runTokensCommand(cmd, []string{})
 
 			if tt.expectError {
 				require.Error(t, err)
@@ -307,15 +316,13 @@ func TestHandleTokenError(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tokenJSON = tt.jsonMode
-
 			// Capture stderr for interactive mode
 			if !tt.jsonMode {
 				oldStderr := os.Stderr
 				r, w, _ := os.Pipe()
 				os.Stderr = w
 
-				err := handleTokenError(tt.err)
+				err := handleTokenError(tt.err, tt.jsonMode)
 
 				w.Close()
 				os.Stderr = oldStderr
@@ -328,7 +335,7 @@ func TestHandleTokenError(t *testing.T) {
 				}
 			} else {
 				// JSON mode should return the raw error
-				err := handleTokenError(tt.err)
+				err := handleTokenError(tt.err, tt.jsonMode)
 				assert.Error(t, err)
 				assert.Equal(t, tt.err, err)
 			}
@@ -338,7 +345,6 @@ func TestHandleTokenError(t *testing.T) {
 
 // TestHandleTokenErrorWithSuggestions tests error handling with suggestions
 func TestHandleTokenErrorWithSuggestions(t *testing.T) {
-	tokenJSON = false
 	err := errors.New("agent 'test' not found")
 
 	// Capture stderr
@@ -346,7 +352,7 @@ func TestHandleTokenErrorWithSuggestions(t *testing.T) {
 	r, w, _ := os.Pipe()
 	os.Stderr = w
 
-	resultErr := handleTokenError(err)
+	resultErr := handleTokenError(err, false) // false = not JSON mode
 
 	w.Close()
 	os.Stderr = oldStderr
