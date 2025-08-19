@@ -97,6 +97,7 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 - IDE integration success: Support for 3+ major AI-enhanced IDEs (Cursor, Claude Code, WindSurf)
 - Web chat integration: 75% of users successfully create and use bundled packages with ChatGPT/Gemini Pro within 4 weeks
 - Community engagement: 20+ community-contributed agent configurations in shared library
+- MCP integration success: fail fast if MCP server is not available
 
 ## 6. Constraints & Risks
 
@@ -181,6 +182,26 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 **BR15 [P0]**: User can combine selective installation with IDE integration using `krci-ai install --agent developer --ide cursor` or `krci-ai install --agents pm,architect --all` (for all supported IDEs), providing granular control over both agent scope and IDE configuration
 
+#### MCP Discovery (Epic 10 - MCP Server Management)
+
+**BR16 [P1]**: User can list all MCP servers referenced across the framework using `krci-ai list mcp` command, displaying server names and showing which tasks reference each MCP server with clear agent-to-MCP-server mapping
+
+**BR17 [P1]**: User can view detailed agent information including referenced MCP servers using `krci-ai list agents -v` command, showing agent definitions with associated MCP server dependencies for each task
+
+**BR18 [P1]**: Framework includes MCP server information in existing `krci-ai validate` command output, displaying which agents and tasks require MCP servers as part of standard validation reporting without additional flags
+
+**BR19 [P1]**: Task files include simple MCP server references using standardized metadata format that specifies required server names for runtime agent discovery and enablement, with all MCP servers treated as required dependencies
+
+#### Framework Adoption & Dogfooding (Epic 9 - Dogfooding KubeRocketAI)
+
+**BR20 [P2]**: Development teams can integrate KubeRocketAI into their existing repositories using selective installation to install only needed components for their specific workflows, enabling gradual adoption without framework overhead
+
+**BR21 [P2]**: Repository maintainers can seed minimal `.krci-ai` configurations with local agents tailored to their project needs, providing team-specific AI workflows while maintaining compatibility with framework standards
+
+**BR22 [P2]**: Framework provides clear quickstart documentation and integration guides for each target repository, enabling teams to install, validate, and use agents within their existing development workflows
+
+**BR23 [P2]**: Teams can track adoption progress and identify framework improvement opportunities through structured feedback collection and issue labeling (`krci-ai` label), enabling data-driven framework evolution based on real usage patterns
+
 ### Non-Functional Requirements (NFR)
 
 #### Performance & Reliability (Epic 2 - Core Engine)
@@ -206,6 +227,12 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 **NFR8 [P0]**: Token size estimation accuracy remains within 5% variance of actual AI platform token consumption, providing reliable planning data for context limit management
 
 **NFR9 [P0]**: System supports token analysis for all major AI platforms (OpenAI GPT models, Claude, Gemini Pro) with platform-specific tokenization algorithms and context limit awareness
+
+#### MCP Discovery Performance (Epic 10 - MCP Server Management)
+
+**NFR10 [P1]**: MCP server discovery and listing completes within 2 seconds for typical project configurations with up to 20 agents and 100 task definitions, providing immediate feedback for all MCP-related commands
+
+**NFR11 [P1]**: MCP functionality integrates seamlessly with existing commands and maintains backward compatibility with current task files, supporting incremental adoption without breaking existing workflows
 
 ### Epic Mapping & Implementation Phases
 
@@ -258,10 +285,20 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 - Multi-agent installation using comma-separated lists
 - IDE integration for selective installations
 
+**Epic 10 (MCP Server Management)**: BR16, BR17, BR18, BR19, NFR10, NFR11
+
+- MCP server discovery and listing through `krci-ai list mcp` command
+- Enhanced agent information display with MCP dependencies via `krci-ai list agents -v`
+- Integration of MCP server information into existing `krci-ai validate` output
+- Simple MCP metadata format in task files for runtime agent discovery
+- Backward-compatible incremental adoption with agent-to-MCP-server mapping
+
 #### Post-MVP Enhancements (P2+ Requirements)
 
-**Epic 9 (Advanced Features)**: BR8
+**Epic 9 (Framework Adoption & Dogfooding)**: BR20, BR21, BR22, BR23
 
-- Advanced bundle customization and optimization
-- Enhanced web chat context limit management
-- Extended dependency resolution capabilities
+- Repository integration using selective installation for gradual adoption
+- Local agent customization with project-specific workflows
+- Quickstart documentation and integration guides for target repositories
+- Structured feedback collection and framework improvement tracking
+- Data-driven evolution based on real usage patterns across development teams
