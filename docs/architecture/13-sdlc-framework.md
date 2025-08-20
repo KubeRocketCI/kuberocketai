@@ -16,21 +16,21 @@ This lightweight SDLC framework provides a structured approach for AI agents to 
 
 | Role | ID | Responsibilities | Input | Output |
 |------|----|--------------------|--------|--------|
-| **Product Manager** | `product-manager` | Strategic direction, market research, roadmap | Market insights, stakeholder feedback | PRD, roadmap, success metrics |
-| **Product Owner** | `product-owner` | Backlog management, sprint planning, story refinement | PRD, roadmap, feedback | Epics, stories, prioritized backlog |
-| **Business Analyst** | `business-analyst` | Requirements gathering, workflow design, documentation | Stakeholder inputs, vision | Refined PRD, workflows, acceptance criteria |
-| **Architect** | `architect` | System design, technical feasibility, architecture patterns | Epics, requirements, constraints | Architecture documents, technical specifications |
-| **Developer** | `developer` | Code implementation, feature development, code reviews | Stories, tasks, architecture specs | Code, pull requests, implementation |
-| **QA Engineer** | `qa-engineer` | Testing, quality validation, bug reporting | Stories, code, test cases | Test results, bug reports, quality metrics |
-| **DevOps Engineer** | `devops-engineer` | CI/CD, infrastructure, deployment, monitoring | Code, architecture, requirements | Deployment configs, infrastructure, monitoring |
+| **Product Owner** | `product-owner` | Define product vision and goals, manage and prioritize backlog, clarify requirements, make acceptance decisions, and align features to business value | PRD, roadmap, feedback | Product roadmap, prioritized backlog, approved user stories, acceptance criteria |
+| **Project Manager** | `project-manager` | Lead the entire project lifecycle: initiate, plan, execute, monitor, control, and close projects per PMBoK. Manage scope, schedule, resources, risk, communication, and documentation to ensure successful delivery | Project Charter, SoW, requirements, risks, feedback | Comprehensive project plans, schedules, WBS, risk and status reports, closure documents |
+| **Business Analyst** | `business-analyst` | Elicit and analyze requirements, map business processes, identify gaps, propose improvements, and bridge communication between stakeholders and technical teams | Stakeholder inputs, business needs, system analysis | Detailed product requirements document, workflows, gap analysis, business cases |
+| **Architect** | `architect` | Design system and solution architecture, ensure technical feasibility and scalability, maintain alignment to standards, and document patterns and interfaces | Requirements, use cases, constraints | Architecture diagrams, technical specifications, integration blueprints |
+| **Developer** | `developer` | Implement, integrate, and maintain software components and features based on design and requirements. Perform code reviews, resolve issues, and collaborate throughout the SDLC | User stories, technical specifications, architecture | Source code, pull requests, deployed software, resolved issues |
+| **QA Engineer** | `qa-engineer` | Design and execute test plans, validate requirements and functionality, identify and report defects, ensure solution quality and compliance | Code, requirements, test cases | Test reports, defect logs, QA sign-offs, quality metrics |
+| **DevOps Engineer** | `devops-engineer` | Manage CI/CD pipelines, automate deployments, maintain infrastructure, monitor systems, ensure scalability and reliability, and support operational excellence | Codebase, architecture, deployment requirements | Deployment scripts, infrastructure as code, monitoring dashboards, release documentation |
 
 ### Role Combinations
 
-For smaller teams, roles can be combined:
+Roles can be merged in compact teams:
 
-- **PO+DM**: Product Owner handles delivery management
-- **Dev+QA**: Developer handles basic testing
-- **Arch+DevOps**: Architect handles infrastructure decisions
+- **PO + PM**: Product Owner also manages project delivery, planning, and stakeholder communication.
+- **Dev + QA**: Developer handles coding and basic testing/unit tests.
+- **Arch + DevOps**: Architect oversees both solution design and infrastructure/CI/CD decisions.
 
 ## 13.3 Artifact System
 
@@ -102,45 +102,61 @@ All artifacts are **Markdown files** (.md) with natural language content that ag
 
 ## 13.4 Business Process Flow
 
-### Primary Flow
+### Primary Project Delivery Flow
 
 ```mermaid
 flowchart TD
-    Idea([Idea]) -->|Market Research| PM[Product Manager]
-    PM -->|PRD| BA[Business Analyst]
-    BA -->|Refined PRD| PO[Product Owner]
-    PM -->|Roadmap + Vision| PO
-    BA -.Draft Epics.-> Arch[Architect]
-    PO -->|Epics + Stories| Arch
-    PO -->|Prioritized Backlog| Dev[Developer]
-    Arch -->|Architecture Documents| Dev
-    Dev -->|Code + Pull Requests| QA[QA Engineer]
-    QA -->|Test Results| Dev
-    QA -->|Test Validation| DevOps[DevOps Engineer]
-    DevOps -->|CI/CD + Infrastructure| MVP([MVP Delivered])
-    MVP -->|Feedback| PO
-    MVP -->|Feedback + Metrics| PM
+    Idea["Idea / Opportunity"]
+    Project_Manager["Project Manager"]
+    Business_Analyst["Business Analyst"]
+    Product_Owner["Product Owner"]
+    Architect["Architect"]
+    Developer["Developer"]
+    QA_Engineer["QA Engineer"]
+    DevOps_Engineer["DevOps Engineer"]
+    MVP["MVP Delivered"]
+
+    Idea -->|Business Case / Requirements| Project_Manager
+    Project_Manager -->|Project Charter / Scope of Work| Business_Analyst
+    Project_Manager -->|Project Plan / Schedule| Product_Owner
+    Project_Manager -->|Status Reports / Risk Register| Product_Owner
+
+    Business_Analyst -->|Refined Requirements| Product_Owner
+    Product_Owner -->|Prioritized Backlog| Architect
+    Product_Owner -->|Epic & Story Breakdown| Architect
+    Architect -->|Architecture Documents| Developer
+    Developer -->|Code + Pull Requests| QA_Engineer
+    Developer -->|Test Results| QA_Engineer
+    QA_Engineer -->|Test Validation| DevOps_Engineer
+    QA_Engineer -->|Feedback| Developer
+    DevOps_Engineer -->|CI/CD + Infrastructure| MVP
+    MVP -->|Feedback| Product_Owner
+    MVP -->|Feedback + Metrics| Project_Manager
 ```
 
 ### Handoff Points
 
-1. **Idea → Product Manager**: Market research and validation
-2. **Product Manager → Business Analyst**: PRD creation and refinement
-3. **Business Analyst → Product Owner**: Requirements to backlog items
-4. **Product Owner → Architect**: Technical feasibility assessment
-5. **Architect → Developer**: Implementation guidance
-6. **Developer → QA Engineer**: Quality validation
-7. **QA Engineer → DevOps Engineer**: Deployment readiness
-8. **DevOps Engineer → MVP**: Live system delivery
+1. **Idea → Project Manager**: Define project business case, scope, initial requirements, feasibility
+2. **Project Manager → Business Analyst**: Handoff Project charter / Scope of Work (SoW) for detailed PRD creation and refinement
+3. **Business Analyst → Product Owner**: Translate refined requirements to backlog items for prioritization and planning
+4. **Product Owner → Architect**: Deliver prioritized backlog for technical feasibility assessment, solution design, and architectural planning
+5. **Architect → Developer**: Provide architecture documents, implementation guidance, and acceptance criteria for development
+6. **Developer → QA Engineer**: Handoff developed features/codebase for validation against requirements and quality standards
+7. **QA Engineer → DevOps Engineer**: Transfer validated code and test artifacts for deployment configuration and production readiness
+8. **DevOps Engineer → MVP**: Deploy solution to live environment/system and confirm successful release
 
 ### Quality Gates
 
-- **Project Brief Approval**: Project vision and strategy approved
-- **PRD Approval**: Business requirements validated
-- **Architecture Review**: Technical design approved
-- **Code Review**: Implementation quality checked
-- **Test Validation**: Quality criteria met
-- **Deployment Readiness**: Production criteria satisfied
+Every Quality Gate has the appropriate artifact(s).
+
+| Quality Gate                    | Artifact(s)                                 | Gate Description                                               |
+|---------------------------------|-----------------------|---------------------|
+| Project Brief/Charter Approval   | Project Charter                             | Business case and strategy validated; project officially initiated |
+| Requirements/SoW Approval        | PRD, Scope of Work         | Requirements complete, aligned, and signed off                |
+| Architecture Review              | Architecture diagrams, technical specs      | Solution design and feasibility approved                      |
+| Code Review                      | Source code, pull requests                  | Implementation adheres to standards; passes peer review        |
+| Test Validation                  | Test reports, QA sign-off                   | Product meets quality, functionality, and compliance criteria  |
+| Deployment Readiness             | Release checklists, deployment scripts, monitoring plan | Solution meets production criteria; ready for go-live          |
 
 ## 13.5 Configuration
 
@@ -184,15 +200,15 @@ The SDLC Framework follows a simple directory structure:
 
 Each SDLC role is responsible for creating specific artifacts:
 
-| SDLC Role | Primary Responsibilities | Artifact Outputs |
-|-----------|-------------------------|------------------|
-| **Product Manager** | Strategic planning, market research | Project Brief, PRD, Roadmap |
-| **Product Owner** | Backlog management, story definition | Epics, Stories |
-| **Business Analyst** | Requirements analysis, workflow design | Refined PRD, Workflows |
-| **Architect** | System design, technical decisions | Architecture Documents |
-| **Developer** | Implementation, code development | Code, Implementation |
-| **QA Engineer** | Testing, quality assurance | Test Results, Quality Reports |
-| **DevOps Engineer** | Infrastructure, deployment (as part of code and stories) | Deployment configs within code repository |
+| SDLC Role          | Primary Responsibilities                                                                         | Artifact Outputs                                 |
+|--------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| **Project Manager**| Project initiation, planning, execution, monitoring, closure; manages scope, schedule, risk, communication | Project Charter, Project Brief, Scope of Work (SoW), Project Plan, Status Report, Risk Register |
+| **Product Owner**  | Backlog management, story definition, prioritization, stakeholder alignment; defines product requirements                      | PRD (Product Requirements Document), Epics, User Stories, Prioritized Backlog, Acceptance Criteria |
+| **Business Analyst**| Requirements analysis, workflow/process modeling, documentation                                | Refined Requirements, Workflows, Use Cases       |
+| **Architect**      | System design, solution architecture, technical decisions, documentation                        | Architecture Documents, Technical Specifications  |
+| **Developer**      | Implementation, coding, code review, defect resolution                                          | Source Code, Implemented Features, Pull Requests  |
+| **QA Engineer**    | Test planning and execution, quality assurance, defect reporting                                | Test Results, QA Reports, Sign-off Documentation  |
+| **DevOps Engineer**| Infrastructure automation, CI/CD pipelines, deployment, monitoring                              | Deployment Scripts, Infrastructure as Code, Monitoring Dashboards |
 
 ## 13.7 End-to-End Scenario: Idea to Code
 
@@ -204,67 +220,68 @@ The following sequence diagram illustrates how artifacts are created and transfe
 
 ```mermaid
 sequenceDiagram
-    participant Stakeholder
-    participant PM as Product Manager
-    participant BA as Business Analyst
-    participant PO as Product Owner
-    participant Arch as Architect
-    participant Dev as Developer
-    participant QA as QA Engineer
+ participant Stakeholder
+ participant PM as Project Manager
+ participant BA as Business Analyst
+ participant PO as Product Owner
+ participant Arch as Architect
+ participant Dev as Developer
+ participant QA as QA Engineer
 
-    Note over Stakeholder: Initial Business Idea
+ Note over Stakeholder: Initial Business Idea
 
-    Stakeholder->>PM: Business Idea & Market Opportunity
-    PM->>PM: Market Research & Analysis
-    PM->>PM: Create Project Brief
+ Stakeholder->>PM: Business Opportunity & Requirements
+ PM->>PM: Project Initiation & Planning
+ PM->>PM: Create Project Charter & Project Brief
 
-    PM->>PM: Create PRD (based on Project Brief)
-    PM->>BA: PRD for Analysis
-    BA->>BA: Refine PRD with Detailed Requirements
-    BA->>PO: Refined PRD
+ PM->>PO: Handover Business Context & Objectives
+ PO->>PO: Create PRD (Product Requirements Document)
+ PO->>BA: PRD for Requirements Analysis
+ BA->>BA: Refine PRD with Detailed Requirements and Workflows
+ BA->>PO: Refined PRD
 
-    PO->>PO: Create Epics (based on PRD)
-    PO->>Arch: PRD + Epics for Technical Review
-    Arch->>Arch: Create Architecture Documents
+ PO->>PO: Create Epics (based on PRD)
+ PO->>Arch: Refined PRD + Epics for Technical Review
+ Arch->>Arch: Create Architecture Documents
 
-    PO->>PO: Create Stories (based on Epics)
-    PO->>Dev: Stories + Architecture Documents
+ PO->>PO: Create Stories (based on Epics)
+ PO->>Dev: Stories + Architecture Documents
 
-    Dev->>Dev: Implement Code (based on Stories + Architecture)
-    Dev->>QA: Code + Stories for Testing
+ Dev->>Dev: Implement Code (based on Stories + Architecture)
+ Dev->>QA: Code + Stories for Testing
 
-    QA->>QA: Create Test Results (based on Stories + Code)
-    QA->>Dev: Test Results
+ QA->>QA: Create Test Results (based on Stories + Code)
+ QA->>Dev: Test Results
 
-    alt Tests Pass
-        QA->>PM: Test Results (Success)
-        Note over PM: MVP Ready for Delivery
-    else Tests Fail
-        QA->>Dev: Test Results (Issues Found)
-        Dev->>Dev: Fix Code Issues
-        Dev->>QA: Updated Code
-    end
+ alt Tests Pass
+ QA->>PM: Test Results (Success)
+ Note over PM: MVP Ready for Delivery
+ else Tests Fail
+ QA->>Dev: Test Results (Issues Found)
+ Dev->>Dev: Fix Code Issues
+ Dev->>QA: Updated Code
+ end
 ```
 
 This scenario demonstrates how artifacts evolve and transform:
 
-1. **Stakeholder Idea** → **Project Brief**: Product Manager captures business vision and strategy
-2. **Project Brief** → **PRD**: Product Manager defines detailed product requirements
-3. **PRD** → **Refined PRD**: Business Analyst adds detailed workflows and acceptance criteria
-4. **Refined PRD** → **Epics**: Product Owner breaks down requirements into high-level features
-5. **PRD + Epics** → **Architecture**: Architect designs system to support features
-6. **Epics** → **Stories**: Product Owner creates user-focused requirements with implementation tasks
-7. **Stories + Architecture** → **Code**: Developer implements features following design
-8. **Stories + Code** → **Test Results**: QA Engineer validates implementation against requirements
-9. **Validated Code + Test Results** → **MVP**: Ready for delivery
+1. **Stakeholder Idea → Project Charter/Brief**: Project Manager captures business needs and strategic goals
+2. **Project Charter/Brief → PRD**: Product Owner defines product requirements based on business context
+3. **PRD → Refined PRD**: Business Analyst adds detailed workflows and acceptance criteria
+4. **Refined PRD → Epics**: Product Owner breaks down requirements into high-level features
+5. **Refined PRD + Epics → Architecture Documents**: Architect designs systems to support features
+6. **Epics → Stories**: Product Owner creates actionable requirements and tasks
+7. **Stories + Architecture → Code**: Developer implements features per specifications
+8. **Stories + Code → Test Results**: QA Engineer validates implementation against requirements
+9. **Validated Code + Test Results → MVP**: Ready for delivery
 
 ### Key Success Factors
 
 - **Clear Handoffs**: Each role has defined inputs and outputs
 - **Artifact Traceability**: Every artifact traces back to business requirements
-- **Quality Gates**: Testing validates implementation against original stories
+- **Quality Gates**: Testing validates implementation against original stories and acceptance criteria
 - **Iterative Refinement**: Feedback loops enable continuous improvement
-- **Documentation Trail**: Complete audit trail from idea to implementation
+- **Documentation Trail**: Complete audit trail from idea to deployment
 
 ## 13.8 Artifact Templates
 
@@ -281,8 +298,8 @@ Based on the KubeRocketAI 4-component architecture, the following implementation
 ```yaml
 agent:
   identity:
-    name: "Product Manager"
-    id: "product-manager-v1"
+    name: "Project Manager"
+    id: "project-manager-v1"
     role: "Strategic product direction"
     goal: "Define product vision and roadmap"
   commands:
@@ -349,7 +366,7 @@ standards:
 ```bash
 .krci-ai/
 ├── agents/
-│   ├── product-manager.yaml
+│   ├── project-manager.yaml
 │   ├── product-owner.yaml
 │   ├── architect.yaml
 │   ├── developer.yaml
@@ -397,7 +414,7 @@ This implementation enables AI-assisted SDLC artifact creation while maintaining
 
 1. **Artifact Issues**: If artifact is incomplete → Return to owner for completion
 2. **Requirement Changes**: If PRD changes → Update dependent artifacts (Epic, Architecture, Story)
-3. **Technical Blockers**: If Architecture infeasible → Escalate to Product Manager for scope adjustment
+3. **Technical Blockers**: If Architecture infeasible → Escalate to Project Manager for scope adjustment
 
 ### Change Management
 
@@ -405,7 +422,7 @@ This implementation enables AI-assisted SDLC artifact creation while maintaining
 
 - **Minor Changes**: Update affected artifacts and continue
 - **Major Changes**: Re-validate entire artifact chain from PRD forward
-- **Scope Changes**: Require Product Manager approval and impact assessment
+- **Scope Changes**: Require Project Manager approval and impact assessment
 
 **Version Control**:
 
@@ -417,7 +434,7 @@ This implementation enables AI-assisted SDLC artifact creation while maintaining
 
 | Issue | Cause | Resolution |
 |-------|-------|------------|
-| **Epic creation blocked** | PRD incomplete or unclear | Return to Product Manager for PRD completion |
+| **Epic creation blocked** | PRD incomplete or unclear | Return to Product Owner for PRD completion |
 | **Story blocked by Architecture** | Architecture not yet defined | Complete Architecture Document before Story creation |
 | **Implementation blocked** | Story acceptance criteria unclear | Return to Product Owner for Story refinement |
 | **Testing blocked** | Code incomplete | Ensure Developer completes all Story requirements |

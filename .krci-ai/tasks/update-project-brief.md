@@ -17,6 +17,7 @@ Dependencies:
 
 - ./.krci-ai/data/common/sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
+- ./.krci-ai/data/project-management-methodology.md
 - ./.krci-ai/templates/project-brief-template.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
