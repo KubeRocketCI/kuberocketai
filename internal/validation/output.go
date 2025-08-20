@@ -54,6 +54,9 @@ func NewValidationReport(issues []ValidationIssue, insights *FrameworkInsights, 
 			report.HasCritical = true
 			report.IsValid = false
 			report.CriticalCount++
+		case SeverityError:
+			report.IsValid = false
+			report.CriticalCount++ // Treat errors as critical for exit code purposes
 		case SeverityWarning:
 			report.HasWarnings = true
 			report.WarningCount++
@@ -116,7 +119,7 @@ func (r *ValidationReport) formatCriticalIssues() string {
 
 	issueNum := 1
 	for _, issue := range r.Issues {
-		if issue.Severity == SeverityCritical {
+		if issue.Severity == SeverityCritical || issue.Severity == SeverityError {
 			result.WriteString(fmt.Sprintf("   %d. %s", issueNum, issue.Message))
 			if issue.Line > 0 {
 				result.WriteString(fmt.Sprintf(" (line %d)", issue.Line))
