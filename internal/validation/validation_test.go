@@ -20,6 +20,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 	"testing/fstest"
@@ -1019,14 +1020,7 @@ More content here.`
 	}
 
 	for _, expected := range expectedLinks {
-		found := false
-		for _, link := range links {
-			if link == expected {
-				found = true
-				break
-			}
-		}
-		if !found {
+		if !slices.Contains(links, expected) {
 			t.Errorf("Expected to find link: %s", expected)
 		}
 	}
@@ -1045,14 +1039,7 @@ func TestRemoveDuplicates(t *testing.T) {
 
 	// Check all expected items are present
 	for _, exp := range expected {
-		found := false
-		for _, res := range result {
-			if res == exp {
-				found = true
-				break
-			}
-		}
-		if !found {
+		if !slices.Contains(result, exp) {
 			t.Errorf("Expected to find item: %s", exp)
 		}
 	}
@@ -1213,14 +1200,7 @@ func TestAddTaskDependencies(t *testing.T) {
 	// Check that template paths are correctly parsed
 	expectedTemplates := []string{"template1.md", "template2.md"}
 	for _, expected := range expectedTemplates {
-		found := false
-		for _, actual := range relationship.Templates {
-			if actual == expected {
-				found = true
-				break
-			}
-		}
-		if !found {
+		if !slices.Contains(relationship.Templates, expected) {
 			t.Errorf("Expected template '%s' not found in %v", expected, relationship.Templates)
 		}
 	}
@@ -1293,5 +1273,354 @@ agent:
 
 	if agentFound["non-existent"] {
 		t.Error("non-existent agent should not be in relationships")
+	}
+}
+
+func TestDetectInvalidAgentExtensions(t *testing.T) {
+	tempDir := t.TempDir()
+	analyzer := NewFrameworkAnalyzer(tempDir)
+
+	// Create .krci-ai directory
+	frameworkDir := filepath.Join(tempDir, ".krci-ai")
+	agentsDir := filepath.Join(frameworkDir, "agents")
+	if err := os.MkdirAll(agentsDir, 0755); err != nil {
+		t.Fatalf("Failed to create agents directory: %v", err)
+	}
+
+	// Test cases
+	testCases := []struct {
+		name     string
+		filename string
+		content  string
+		expected bool // whether we expect a validation issue
+	}{
+		{
+			name:     "Valid YAML agent",
+			filename: "valid-agent.yaml",
+			content:  "agent:\n  identity:\n    name: Valid",
+			expected: false,
+		},
+		{
+			name:     "Valid YML agent",
+			filename: "valid-agent.yml",
+			content:  "agent:\n  identity:\n    name: Valid",
+			expected: false,
+		},
+		{
+			name:     "Invalid MD agent",
+			filename: "invalid-agent.md",
+			content:  "agent:\n  identity:\n    name: Invalid",
+			expected: true,
+		},
+		{
+			name:     "Regular MD file (flagged)",
+			filename: "readme.md",
+			content:  "# This is just documentation\n\nNot an agent file.",
+			expected: true,
+		},
+	}
+
+	// Create test files
+	for _, tc := range testCases {
+		filePath := filepath.Join(agentsDir, tc.filename)
+		if err := os.WriteFile(filePath, []byte(tc.content), 0644); err != nil {
+			t.Fatalf("Failed to create test file %s: %v", tc.filename, err)
+		}
+	}
+
+	// Run validation
+	issues, err := analyzer.detectInvalidAgentExtensions(frameworkDir)
+	if err != nil {
+		t.Fatalf("detectInvalidAgentExtensions failed: %v", err)
+	}
+
+	// Check results - should find issues for all non-YAML files
+	expectedIssues := 2 // invalid-agent.md and readme.md
+	actualIssues := 0
+	for _, issue := range issues {
+		if issue.Type == issueTypeInvalidAgentExt {
+			actualIssues++
+			assert.Equal(t, SeverityWarning, issue.Severity)
+			assert.Contains(t, issue.Message, "extension")
+			assert.Contains(t, issue.FixGuidance, "Rename to")
+		}
+	}
+
+	if actualIssues != expectedIssues {
+		t.Errorf("Expected %d invalid extension issues, got %d", expectedIssues, actualIssues)
+	}
+}
+
+func TestValidateSingleTaskPath(t *testing.T) {
+	analyzer := NewFrameworkAnalyzer("/test")
+
+	testCases := []struct {
+		name         string
+		taskPath     string
+		expectedType string
+		severity     Severity
+		shouldError  bool
+	}{
+		{
+			name:        "Valid standard task path",
+			taskPath:    "./.krci-ai/tasks/valid-task.md",
+			shouldError: false,
+		},
+		{
+			name:        "Valid local task path",
+			taskPath:    "./.krci-ai/local/tasks/local-task.md",
+			shouldError: false,
+		},
+		{
+			name:         "Empty task path",
+			taskPath:     "",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+		{
+			name:         "Whitespace only path",
+			taskPath:     "   ",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+		{
+			name:         "Invalid prefix - no .krci-ai",
+			taskPath:     "tasks/invalid.md",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+		{
+			name:         "Invalid prefix - relative path",
+			taskPath:     "./tasks/invalid.md",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+		{
+			name:         "Path traversal attack",
+			taskPath:     "./.krci-ai/tasks/../../../etc/passwd",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityCritical,
+			shouldError:  true,
+		},
+		{
+			name:         "Path traversal in middle",
+			taskPath:     "./.krci-ai/tasks/../config/bad.md",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityCritical,
+			shouldError:  true,
+		},
+		{
+			name:         "Invalid file extension - txt",
+			taskPath:     "./.krci-ai/tasks/task.txt",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+		{
+			name:         "Invalid file extension - yaml",
+			taskPath:     "./.krci-ai/tasks/task.yaml",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+		{
+			name:         "No file extension",
+			taskPath:     "./.krci-ai/tasks/task",
+			expectedType: issueTypeInvalidTaskPath,
+			severity:     SeverityError,
+			shouldError:  true,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			issue := analyzer.validateSingleTaskPath(tc.taskPath, "test-agent.yaml")
+
+			if tc.shouldError {
+				if issue == nil {
+					t.Errorf("Expected validation issue for path: %s", tc.taskPath)
+					return
+				}
+				assert.Equal(t, tc.expectedType, issue.Type)
+				assert.Equal(t, tc.severity, issue.Severity)
+				assert.Equal(t, "test-agent.yaml", issue.File)
+				assert.NotEmpty(t, issue.Message)
+				assert.NotEmpty(t, issue.FixGuidance)
+			} else {
+				if issue != nil {
+					t.Errorf("Did not expect validation issue for valid path %s, got: %s", tc.taskPath, issue.Message)
+				}
+			}
+		})
+	}
+}
+
+func TestDetectMissingTaskFiles(t *testing.T) {
+	tempDir := t.TempDir()
+	analyzer := NewFrameworkAnalyzer(tempDir)
+
+	// Create .krci-ai directory structure
+	frameworkDir := filepath.Join(tempDir, ".krci-ai")
+	agentsDir := filepath.Join(frameworkDir, "agents")
+	tasksDir := filepath.Join(frameworkDir, "tasks")
+	localTasksDir := filepath.Join(frameworkDir, "local", "tasks")
+
+	if err := os.MkdirAll(agentsDir, 0755); err != nil {
+		t.Fatalf("Failed to create agents directory: %v", err)
+	}
+	if err := os.MkdirAll(tasksDir, 0755); err != nil {
+		t.Fatalf("Failed to create tasks directory: %v", err)
+	}
+	if err := os.MkdirAll(localTasksDir, 0755); err != nil {
+		t.Fatalf("Failed to create local tasks directory: %v", err)
+	}
+
+	// Create existing task file
+	existingTask := filepath.Join(tasksDir, "existing-task.md")
+	if err := os.WriteFile(existingTask, []byte("# Existing Task"), 0644); err != nil {
+		t.Fatalf("Failed to create existing task file: %v", err)
+	}
+
+	// Create local task file
+	localTask := filepath.Join(localTasksDir, "local-task.md")
+	if err := os.WriteFile(localTask, []byte("# Local Task"), 0644); err != nil {
+		t.Fatalf("Failed to create local task file: %v", err)
+	}
+
+	// Create agent with various task references
+	agentContent := `agent:
+  identity:
+    name: "Test Agent"
+  tasks:
+    - ./.krci-ai/tasks/existing-task.md
+    - ./.krci-ai/tasks/missing-task.md
+    - ./.krci-ai/local/tasks/local-task.md
+    - ./.krci-ai/local/tasks/missing-local-task.md
+    - invalid-path.md
+    - ./.krci-ai/tasks/../config/traversal.md
+    - ./.krci-ai/tasks/wrong-extension.txt
+`
+	agentFile := filepath.Join(agentsDir, "test-agent.yaml")
+	if err := os.WriteFile(agentFile, []byte(agentContent), 0644); err != nil {
+		t.Fatalf("Failed to create agent file: %v", err)
+	}
+
+	// Run validation
+	issues, err := analyzer.detectMissingTaskFiles(frameworkDir)
+	if err != nil {
+		t.Fatalf("detectMissingTaskFiles failed: %v", err)
+	}
+
+	// Categorize issues
+	issueTypes := make(map[string]int)
+	for _, issue := range issues {
+		issueTypes[issue.Type]++
+	}
+
+	// Should find path validation issues and missing files
+	expectedIssues := map[string]int{
+		issueTypeInvalidTaskPath: 3, // invalid-path.md, traversal, wrong-extension
+		issueTypeMissingTask:     2, // missing-task.md, missing-local-task.md
+	}
+
+	for expectedType, expectedCount := range expectedIssues {
+		actualCount := issueTypes[expectedType]
+		if actualCount != expectedCount {
+			t.Errorf("Expected %d issues of type %s, got %d", expectedCount, expectedType, actualCount)
+		}
+	}
+
+	// Verify specific issue messages
+	foundPathTraversal := false
+	foundMissingFile := false
+	foundInvalidFormat := false
+
+	for _, issue := range issues {
+		if strings.Contains(issue.Message, "Path traversal detected") {
+			foundPathTraversal = true
+			assert.Equal(t, SeverityCritical, issue.Severity)
+		}
+		if strings.Contains(issue.Message, "Missing task file") {
+			foundMissingFile = true
+			assert.Equal(t, SeverityCritical, issue.Severity)
+		}
+		if strings.Contains(issue.Message, "Invalid task path format") {
+			foundInvalidFormat = true
+			assert.Equal(t, SeverityError, issue.Severity)
+		}
+	}
+
+	if !foundPathTraversal {
+		t.Error("Expected to find path traversal issue")
+	}
+	if !foundMissingFile {
+		t.Error("Expected to find missing file issue")
+	}
+	if !foundInvalidFormat {
+		t.Error("Expected to find invalid format issue")
+	}
+}
+
+func TestGetAgentFiles(t *testing.T) {
+	tempDir := t.TempDir()
+	analyzer := NewFrameworkAnalyzer(tempDir)
+
+	agentsDir := filepath.Join(tempDir, "agents")
+	if err := os.MkdirAll(agentsDir, 0755); err != nil {
+		t.Fatalf("Failed to create agents directory: %v", err)
+	}
+
+	// Create test files with different extensions
+	testFiles := []string{
+		"agent1.yaml",
+		"agent2.yml",
+		"agent3.md",   // Should be ignored
+		"config.json", // Should be ignored
+		"readme.txt",  // Should be ignored
+	}
+
+	for _, filename := range testFiles {
+		filePath := filepath.Join(agentsDir, filename)
+		if err := os.WriteFile(filePath, []byte("content"), 0644); err != nil {
+			t.Fatalf("Failed to create test file %s: %v", filename, err)
+		}
+	}
+
+	// Test getAgentFiles
+	agentFiles, err := analyzer.getAgentFiles(agentsDir)
+	if err != nil {
+		t.Fatalf("getAgentFiles failed: %v", err)
+	}
+
+	// Should only return YAML files
+	expectedCount := 2 // agent1.yaml, agent2.yml
+	if len(agentFiles) != expectedCount {
+		t.Errorf("Expected %d agent files, got %d", expectedCount, len(agentFiles))
+	}
+
+	// Verify correct files are returned
+	foundYaml := false
+	foundYml := false
+	for _, file := range agentFiles {
+		basename := filepath.Base(file)
+		switch basename {
+		case "agent1.yaml":
+			foundYaml = true
+		case "agent2.yml":
+			foundYml = true
+		default:
+			t.Errorf("Unexpected file in results: %s", basename)
+		}
+	}
+
+	if !foundYaml {
+		t.Error("Expected to find agent1.yaml")
+	}
+	if !foundYml {
+		t.Error("Expected to find agent2.yml")
 	}
 }
