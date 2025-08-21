@@ -72,61 +72,6 @@ func TestBundleCommandFlags(t *testing.T) {
 	}
 }
 
-func TestGenerateBundleFilename(t *testing.T) {
-	tests := []struct {
-		name           string
-		customOutput   string
-		selectedAgents []string
-		expected       string
-	}{
-		{
-			name:           "default filename with no agents",
-			customOutput:   "",
-			selectedAgents: nil,
-			expected:       "all.md",
-		},
-		{
-			name:           "custom filename with extension",
-			customOutput:   "my-bundle.md",
-			selectedAgents: []string{"pm", "architect"},
-			expected:       "my-bundle.md",
-		},
-		{
-			name:           "custom filename without extension",
-			customOutput:   "my-bundle",
-			selectedAgents: []string{"pm"},
-			expected:       "my-bundle.md",
-		},
-		{
-			name:           "single agent filename",
-			customOutput:   "",
-			selectedAgents: []string{"pm"},
-			expected:       "pm.md",
-		},
-		{
-			name:           "multiple agents alphabetically sorted",
-			customOutput:   "",
-			selectedAgents: []string{"pm", "architect", "dev"},
-			expected:       "architect-dev-pm.md",
-		},
-		{
-			name:           "agents case insensitive sorting",
-			customOutput:   "",
-			selectedAgents: []string{"PM", "Architect"},
-			expected:       "architect-pm.md",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			result := generateBundleFilename(tt.customOutput, tt.selectedAgents, "")
-			if result != tt.expected {
-				t.Errorf("generateBundleFilename(%q, %v, %q) = %q, want %q", tt.customOutput, tt.selectedAgents, "", result, tt.expected)
-			}
-		})
-	}
-}
-
 func TestParseAgentList(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -929,47 +874,6 @@ func TestContainsString(t *testing.T) {
 			result := slices.Contains(tt.slice, tt.item)
 			if result != tt.expected {
 				t.Errorf("containsString(%v, %q) = %v, want %v", tt.slice, tt.item, result, tt.expected)
-			}
-		})
-	}
-}
-
-func TestGenerateBundleFilenameWithTask(t *testing.T) {
-	tests := []struct {
-		name           string
-		customOutput   string
-		selectedAgents []string
-		taskName       string
-		expected       string
-	}{
-		{
-			name:           "single agent with task",
-			customOutput:   "",
-			selectedAgents: []string{"pm"},
-			taskName:       "create-prd",
-			expected:       "pm-create-prd.md",
-		},
-		{
-			name:           "single agent with task - mixed case",
-			customOutput:   "",
-			selectedAgents: []string{"PM"},
-			taskName:       "Create-PRD",
-			expected:       "pm-create-prd.md",
-		},
-		{
-			name:           "multiple agents with task - should ignore task",
-			customOutput:   "",
-			selectedAgents: []string{"pm", "architect"},
-			taskName:       "create-prd",
-			expected:       "architect-pm.md",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			result := generateBundleFilename(tt.customOutput, tt.selectedAgents, tt.taskName)
-			if result != tt.expected {
-				t.Errorf("generateBundleFilename(%q, %v, %q) = %q, want %q", tt.customOutput, tt.selectedAgents, tt.taskName, result, tt.expected)
 			}
 		})
 	}

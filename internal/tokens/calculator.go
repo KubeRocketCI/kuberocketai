@@ -22,11 +22,13 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"strings"
 	"sync"
 
 	"golang.org/x/sync/errgroup"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
+	"github.com/KubeRocketCI/kuberocketai/internal/bundle"
 )
 
 // DiscoveryInterface defines the interface for asset discovery operations
@@ -46,12 +48,11 @@ type Calculator struct {
 // NewCalculator creates a new token calculator with GPT-4 tokenization
 // This is the original constructor for backward compatibility
 func NewCalculator(targetDir string, embeddedAssets embed.FS) (*Calculator, error) {
-	gpt4Calc, err := NewGPT4Calculator()
+	engine, err := NewDefaultEngine()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create GPT-4 calculator: %w", err)
 	}
 
-	engine := NewEngine(gpt4Calc)
 	discovery := assets.NewDiscovery(targetDir, embeddedAssets)
 
 	return NewCalculatorWithDependencies(engine, discovery, targetDir), nil
@@ -281,4 +282,31 @@ func (c *Calculator) ValidateAgentExists(agentName string) error {
 	}
 
 	return nil
+}
+
+// CalculateBundleTokens calculates tokens for an actual bundle file
+func (c *Calculator) CalculateBundleTokens(ctx context.Context, agents []string) (*BundleTokenInfo, error) {
+	bundleFilename := bundle.GenerateBundleFilename("", agents, "")
+	bundlePath := filepath.Join(c.targetDir, assets.KrciAIDir, assets.BundleDir, bundleFilename)
+
+	// Read bundle file content
+	bundleContent, err := os.ReadFile(bundlePath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read bundle file %s: %w", bundlePath, err)
+	}
+
+	// Calculate tokens for the bundle content
+	bundleTokens, err := c.engine.CalculateTokens(ctx, string(bundleContent))
+	if err != nil {
+		return nil, fmt.Errorf("failed to calculate bundle tokens: %w", err)
+	}
+
+	// Create bundle info
+	bundleInfo := &BundleTokenInfo{
+		BundleScope: strings.Join(agents, ","),
+		TotalTokens: bundleTokens,
+		BundleFile:  bundleFilename,
+	}
+
+	return bundleInfo, nil
 }
