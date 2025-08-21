@@ -55,8 +55,6 @@ Examples:
   krci-ai install --all --force      # Force install everything
   krci-ai install --force            # Force install core components only`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Create output and error handlers
-		output := cli.NewOutputHandler()
 		errorHandler := cli.NewErrorHandler()
 
 		// Validate IDE flag upfront (common to all installation paths)

@@ -21,6 +21,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
@@ -366,6 +367,173 @@ func TestCalculator_ValidateAgentExists(t *testing.T) {
 			}
 
 			assert.NoError(t, err, "Unexpected error")
+		})
+	}
+}
+
+func TestCalculator_CalculateBundleTokens(t *testing.T) {
+	tempDir := setupTestFiles(t)
+
+	tests := []struct {
+		name              string
+		agents            []string
+		setupBundleFile   func(t *testing.T, tempDir string, agents []string) string
+		mockDiscovery     *MockDiscovery
+		expectedError     string
+		expectedMinTokens int
+	}{
+		{
+			name:   "successful bundle calculation",
+			agents: []string{"dev", "pm"},
+			setupBundleFile: func(t *testing.T, tempDir string, agents []string) string {
+				bundleDir := filepath.Join(tempDir, assets.KrciAIDir, assets.BundleDir)
+				err := os.MkdirAll(bundleDir, 0755)
+				require.NoError(t, err, "Failed to create bundle directory")
+
+				bundleContent := `# KubeRocketAI Bundle
+
+==== FILE: .krci-ai/agents/dev.yaml ====
+name: Developer Agent
+description: A developer agent for coding tasks
+role: developer
+goal: Implement software features
+icon: 💻
+
+tasks:
+  - implement-feature.md
+  - code-review.md
+==== END FILE ====
+
+==== FILE: .krci-ai/agents/pm.yaml ====
+name: Product Manager Agent
+description: A PM agent for product planning
+role: product_manager
+goal: Define product requirements
+icon: 📋
+
+tasks:
+  - create-prd.md
+  - roadmap-planning.md
+==== END FILE ====
+`
+				bundleFilename := "dev-pm.md"
+				bundlePath := filepath.Join(bundleDir, bundleFilename)
+				err = os.WriteFile(bundlePath, []byte(bundleContent), 0644)
+				require.NoError(t, err, "Failed to create bundle file")
+
+				return bundleFilename
+			},
+			mockDiscovery:     &MockDiscovery{},
+			expectedMinTokens: 50,
+		},
+		{
+			name:   "single agent bundle",
+			agents: []string{"dev"},
+			setupBundleFile: func(t *testing.T, tempDir string, agents []string) string {
+				bundleDir := filepath.Join(tempDir, assets.KrciAIDir, assets.BundleDir)
+				err := os.MkdirAll(bundleDir, 0755)
+				require.NoError(t, err, "Failed to create bundle directory")
+
+				bundleContent := `# KubeRocketAI Bundle
+
+==== FILE: .krci-ai/agents/dev.yaml ====
+name: Developer Agent
+description: A developer agent for coding tasks
+role: developer
+goal: Implement software features
+icon: 💻
+==== END FILE ====
+`
+				bundleFilename := "dev.md"
+				bundlePath := filepath.Join(bundleDir, bundleFilename)
+				err = os.WriteFile(bundlePath, []byte(bundleContent), 0644)
+				require.NoError(t, err, "Failed to create bundle file")
+
+				return bundleFilename
+			},
+			mockDiscovery:     &MockDiscovery{},
+			expectedMinTokens: 20,
+		},
+		{
+			name:   "all agents bundle",
+			agents: []string{},
+			setupBundleFile: func(t *testing.T, tempDir string, agents []string) string {
+				bundleDir := filepath.Join(tempDir, assets.KrciAIDir, assets.BundleDir)
+				err := os.MkdirAll(bundleDir, 0755)
+				require.NoError(t, err, "Failed to create bundle directory")
+
+				bundleContent := `# KubeRocketAI Bundle - All Agents
+
+==== FILE: .krci-ai/agents/dev.yaml ====
+name: Developer Agent
+==== END FILE ====
+
+==== FILE: .krci-ai/agents/pm.yaml ====  
+name: Product Manager Agent
+==== END FILE ====
+
+==== FILE: .krci-ai/agents/qa.yaml ====
+name: Quality Assurance Agent
+==== END FILE ====
+`
+				bundleFilename := "all.md"
+				bundlePath := filepath.Join(bundleDir, bundleFilename)
+				err = os.WriteFile(bundlePath, []byte(bundleContent), 0644)
+				require.NoError(t, err, "Failed to create bundle file")
+
+				return bundleFilename
+			},
+			mockDiscovery:     &MockDiscovery{},
+			expectedMinTokens: 30,
+		},
+		{
+			name:            "bundle file does not exist",
+			agents:          []string{"nonexistent"},
+			setupBundleFile: func(t *testing.T, tempDir string, agents []string) string { return "" },
+			mockDiscovery:   &MockDiscovery{},
+			expectedError:   "failed to read bundle file",
+		},
+		{
+			name:   "empty bundle file",
+			agents: []string{"empty"},
+			setupBundleFile: func(t *testing.T, tempDir string, agents []string) string {
+				bundleDir := filepath.Join(tempDir, assets.KrciAIDir, assets.BundleDir)
+				err := os.MkdirAll(bundleDir, 0755)
+				require.NoError(t, err, "Failed to create bundle directory")
+
+				bundleFilename := "empty.md"
+				bundlePath := filepath.Join(bundleDir, bundleFilename)
+				err = os.WriteFile(bundlePath, []byte(""), 0644)
+				require.NoError(t, err, "Failed to create empty bundle file")
+
+				return bundleFilename
+			},
+			mockDiscovery:     &MockDiscovery{},
+			expectedMinTokens: 0,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			calc := createTestCalculator(tt.mockDiscovery)
+			calc.targetDir = tempDir
+
+			expectedFilename := tt.setupBundleFile(t, tempDir, tt.agents)
+
+			ctx := context.Background()
+			result, err := calc.CalculateBundleTokens(ctx, tt.agents)
+
+			if tt.expectedError != "" {
+				assert.Error(t, err, "Expected error but got none")
+				assert.Contains(t, err.Error(), tt.expectedError, "Error message should contain expected text")
+				return
+			}
+
+			assert.NoError(t, err, "Unexpected error")
+			require.NotNil(t, result, "Result should not be nil")
+			assert.GreaterOrEqual(t, result.TotalTokens, tt.expectedMinTokens, "Token count should meet minimum")
+			assert.Equal(t, strings.Join(tt.agents, ","), result.BundleScope, "BundleScope should match agents")
+			assert.Equal(t, expectedFilename, result.BundleFile, "BundleFile should match expected filename")
 		})
 	}
 }

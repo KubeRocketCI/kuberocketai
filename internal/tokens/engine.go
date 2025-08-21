@@ -63,6 +63,13 @@ type TokenBreakdown struct {
 	DataFiles int `json:"data_files"`
 }
 
+// BundleTokenInfo represents token information for a bundle configuration
+type BundleTokenInfo struct {
+	BundleScope string `json:"bundle_scope"`
+	BundleFile  string `json:"bundle_file"`
+	TotalTokens int    `json:"total_tokens"`
+}
+
 // Engine manages token calculation with pluggable tokenizer backends
 type Engine struct {
 	calculator TokenCalculator
@@ -73,6 +80,18 @@ func NewEngine(calculator TokenCalculator) *Engine {
 	return &Engine{
 		calculator: calculator,
 	}
+}
+
+// NewDefaultEngine creates a new token calculation engine with the default GPT-4 calculator.
+func NewDefaultEngine() (*Engine, error) {
+	gpt4Calc, err := NewGPT4Calculator()
+	if err != nil {
+		return nil, fmt.Errorf("failed to create GPT-4 calculator: %w", err)
+	}
+
+	e := NewEngine(gpt4Calc)
+
+	return e, nil
 }
 
 // CalculateTokens calculates tokens for the given text using the configured calculator

@@ -29,6 +29,7 @@ import (
 const (
 	// Main framework directory structure
 	KrciAIDir    = ".krci-ai"
+	BundleDir    = "bundle"
 	DataDir      = "data"
 	TasksDir     = "tasks"
 	TemplatesDir = "templates"

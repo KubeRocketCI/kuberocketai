@@ -47,6 +47,11 @@ Examples:
   # Analyze tokens for all agents in the project
   krci-ai tokens --all
   
+  # Analyze tokens for bundle configurations
+  krci-ai tokens --bundle dev
+  krci-ai tokens --bundle pm,architect
+  krci-ai tokens --bundle all
+  
   # Get detailed breakdown with JSON output
   krci-ai tokens --all --json --verbose
   
@@ -65,11 +70,12 @@ func init() {
 	// Define flags
 	tokensCmd.Flags().String("agent", "", "Analyze tokens for a specific agent")
 	tokensCmd.Flags().Bool("all", false, "Analyze tokens for all agents in the project")
+	tokensCmd.Flags().String("bundle", "", "Analyze tokens for bundle configuration (agent names: 'pm', 'pm,architect', 'all')")
 	tokensCmd.Flags().Bool("json", false, "Output results in JSON format")
 	tokensCmd.Flags().Duration("timeout", 30*time.Second, "Timeout for token analysis")
 
 	// Mark flags as mutually exclusive
-	tokensCmd.MarkFlagsMutuallyExclusive("agent", "all")
+	tokensCmd.MarkFlagsMutuallyExclusive("agent", "all", "bundle")
 }
 
 func runTokensCommand(cmd *cobra.Command, args []string) error {
@@ -84,6 +90,11 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to get all flag: %w", err)
 	}
 
+	tokenBundle, err := cmd.Flags().GetString("bundle")
+	if err != nil {
+		return fmt.Errorf("failed to get bundle flag: %w", err)
+	}
+
 	tokenJSON, err := cmd.Flags().GetBool("json")
 	if err != nil {
 		return fmt.Errorf("failed to get json flag: %w", err)
@@ -95,8 +106,8 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 	}
 
 	// Validate flags
-	if tokenAgent == "" && !tokenAll {
-		return fmt.Errorf("either --agent or --all flag must be specified")
+	if tokenAgent == "" && !tokenAll && tokenBundle == "" {
+		return fmt.Errorf("either --agent, --all, or --bundle flag must be specified")
 	}
 
 	// Create token calculator
@@ -112,6 +123,8 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 	// Execute the appropriate command
 	if tokenAgent != "" {
 		return runAgentTokenAnalysis(ctx, calculator, tokenAgent, tokenJSON)
+	} else if tokenBundle != "" {
+		return runBundleTokenAnalysis(ctx, calculator, tokenBundle, tokenJSON)
 	} else {
 		return runProjectTokenAnalysis(ctx, calculator, tokenJSON)
 	}
@@ -125,7 +138,7 @@ func runAgentTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, a
 
 	// Show progress indicator
 	if !jsonOutput {
-		fmt.Printf("🔍 Analyzing tokens for agent '%s'...\n", agentName)
+		output.PrintProgress(fmt.Sprintf("Analyzing tokens for agent '%s'...", agentName))
 	}
 
 	// Calculate tokens
@@ -145,7 +158,7 @@ func runAgentTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, a
 func runProjectTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, jsonOutput bool) error {
 	// Show progress indicator
 	if !jsonOutput {
-		fmt.Println("🔍 Analyzing tokens for entire project...")
+		output.PrintProgress("Analyzing tokens for entire project...")
 	}
 
 	// Calculate tokens
@@ -159,6 +172,50 @@ func runProjectTokenAnalysis(ctx context.Context, calculator *tokens.Calculator,
 		return outputProjectTokensJSON(projectInfo)
 	} else {
 		return outputProjectTokensTable(projectInfo)
+	}
+}
+
+func runBundleTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, bundleScope string, jsonOutput bool) error {
+	// Show progress indicator
+	if !jsonOutput {
+		output.PrintProgress(fmt.Sprintf("Analyzing tokens for bundle scope '%s'...", bundleScope))
+	}
+
+	// Parse bundle scope to get agent list
+	var selectedAgents []string
+	if bundleScope == "all" {
+		selectedAgents = nil // nil means all agents
+	} else {
+		selectedAgents = ParseAgentList(bundleScope)
+		if len(selectedAgents) == 0 {
+			return handleTokenError(fmt.Errorf("no valid agents specified in bundle scope"), jsonOutput)
+		}
+	}
+
+	// Get current working directory
+	currentDir, err := os.Getwd()
+	if err != nil {
+		return handleTokenError(fmt.Errorf("failed to get current directory: %w", err), jsonOutput)
+	}
+
+	// Validate agent names if specific agents are provided
+	if selectedAgents != nil {
+		if err = validateAgentNames(currentDir, selectedAgents, output); err != nil {
+			return handleTokenError(err, jsonOutput)
+		}
+	}
+
+	// Calculate bundle tokens using the tokens package
+	bundleTokenInfo, err := calculator.CalculateBundleTokens(ctx, selectedAgents)
+	if err != nil {
+		return handleTokenError(fmt.Errorf("bundle token analysis failed: %w", err), jsonOutput)
+	}
+
+	// Output results
+	if jsonOutput {
+		return outputBundleTokensJSON(bundleTokenInfo)
+	} else {
+		return outputBundleTokensTable(bundleTokenInfo, bundleScope)
 	}
 }
 
@@ -294,4 +351,43 @@ func handleTokenError(err error, jsonOutput bool) error {
 	}
 
 	return err
+}
+
+// outputBundleTokensJSON outputs bundle token information in JSON format
+func outputBundleTokensJSON(bundleInfo *tokens.BundleTokenInfo) error {
+	output, err := json.MarshalIndent(bundleInfo, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal JSON output: %w", err)
+	}
+
+	fmt.Println(string(output))
+	return nil
+}
+
+// outputBundleTokensTable outputs bundle token information in table format
+func outputBundleTokensTable(bundleInfo *tokens.BundleTokenInfo, bundleScope string) error {
+	// Header
+	output.Printf("\n%s\n", output.Bold("📊 Bundle Token Analysis"))
+	output.Printf("%s %s\n", output.PrintCyan("Bundle Scope:"), bundleScope)
+	output.Printf("%s %s\n", output.PrintCyan("Bundle File:"), bundleInfo.BundleFile)
+	output.Printf("%s %d tokens\n", output.PrintCyan("Total Tokens:"), bundleInfo.TotalTokens)
+
+	// Add disclaimer about token approximation
+	output.Newline()
+	output.Printf("%s  Token count is from the actual bundle file content.\n",
+		output.PrintCyan("ℹ️"))
+	output.Printf("%s  Use 'krci-ai bundle %s' to generate/update this bundle.\n",
+		output.PrintCyan("ℹ️"), generateBundleCommandFromScope(bundleScope))
+	output.Printf("%s  Token counts are approximate and best aligned with GPT-4 models.\n",
+		output.PrintCyan("ℹ️"))
+
+	return nil
+}
+
+// generateBundleCommandFromScope generates the appropriate bundle command for the scope
+func generateBundleCommandFromScope(bundleScope string) string {
+	if bundleScope == "all" {
+		return "--all"
+	}
+	return fmt.Sprintf("--agent %s", bundleScope)
 }
