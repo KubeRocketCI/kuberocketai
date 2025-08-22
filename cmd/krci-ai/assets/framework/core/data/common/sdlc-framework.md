@@ -14,8 +14,8 @@
 
 | Role | Outputs | Dependencies |
 |------|---------|--------------|
-| **Product Manager** | Project Brief, PRD, Roadmap | None (root artifacts) |
-| **Product Owner** | Epics, Stories | PRD |
+| **Project Manager** | Project Charter, Project Brief, Scope of Work (SoW), Project Plan, Status Report, Risk Register | None (root artifacts) |
+| **Product Owner** | PRD, Epics, Stories | Project Charter, Project Brief |
 | **Business Analyst** | Refined PRD, Workflows | PRD, Stakeholder inputs |
 | **Architect** | Architecture Documents | PRD, Epics |
 | **Developer** | Code, Implementation | Stories, Architecture |
@@ -24,7 +24,7 @@
 ## Artifact Flow
 
 ```text
-Project Brief → PRD → Epics → Stories → Code → Tests → MVP
+Project Charter/Brief → PRD → Epics → Stories → Code → Tests → MVP
                   ↓
               Architecture ← → Code
 ```
@@ -68,7 +68,7 @@ Project Brief → PRD → Epics → Stories → Code → Tests → MVP
 
 ## Quality Gates
 
-1. **Project Brief Approval** → Enables PRD creation
+1. **Project Charter and Project Brief Approval** → Enables PRD creation
 2. **PRD Approval** → Enables Epic/Architecture creation
 3. **Architecture Review** → Enables implementation
 4. **Code Review** → Enables testing
@@ -84,7 +84,7 @@ All templates use `{{variable_name}}` format for dynamic content:
 
 ## Success Flow
 
-**Idea** → **PM (Brief+PRD)** → **PO (Epics+Stories)** → **Architect (Design)** → **Developer (Code)** → **QA (Tests)** → **MVP**
+**Idea** → **PM (Project Charter+Project Brief)** → **PO (PRD+Epics+Stories)** → **Architect (Design)** → **Developer (Code)** → **QA (Tests)** → **MVP**
 
 ## Framework Implementation
 
