@@ -9,7 +9,7 @@ This guide provides a comprehensive prompt for LLM to implement a new Kubernetes
 
 **IMPORTANT**: Before starting implementation, you must read and fully understand the following documentation:
 
-1. **Read** `./.krci-ai/data/operator-best-practices.md` - Apply ALL the Kubernetes operator-specific patterns, architectural principles, CRD design guidelines, and operational practices defined in this document.
+1. [Operator Best Practices](./.krci-ai/data/operator-best-practices.md) - Apply ALL the Kubernetes operator-specific patterns, architectural principles, CRD design guidelines, and operational practices defined in this document.
 
 ## ⚠️ CRITICAL FIRST STEP
 
@@ -40,11 +40,13 @@ make operator-sdk create api --group <group> --version <version> --kind <kind> -
 ```
 
 **Example**: If the user wants to create a `KeycloakClient` CustomResource:
+
 ```bash
 make operator-sdk create api --group v1 --version v1alpha1 --kind KeycloakClient --resource --controller
 ```
 
 This command will create:
+
 - API types in `api/v1alpha1/`
 - Controller skeleton in `internal/controller/`
 - Basic RBAC markers
@@ -179,10 +181,10 @@ func (r *ReconcileYourResource) Reconcile(ctx context.Context, request reconcile
             return ctrl.Result{}, err
         }
 
-		// Get yourResource again to get the updated object
-		if err = r.client.Get(ctx, request.NamespacedName, yourResource); err != nil {
-			return reconcile.Result{}, err
-		}
+  // Get yourResource again to get the updated object
+  if err = r.client.Get(ctx, request.NamespacedName, yourResource); err != nil {
+   return reconcile.Result{}, err
+  }
     }
 
     oldStatus := yourResource.Status.DeepCopy()
@@ -213,9 +215,9 @@ func (r *ReconcileYourResource) Reconcile(ctx context.Context, request reconcile
 }
 
 func (r *ReconcileYourResource) updateYourResourceStatus(
-	ctx context.Context,
-	yourResource *yourresourceApi.YourResource,
-	oldStatus yourresourceApi.YourResourceStatus,
+ ctx context.Context,
+ yourResource *yourresourceApi.YourResource,
+ oldStatus yourresourceApi.YourResourceStatus,
 ) error {
     if equality.Semantic.DeepEqual(&yourResource.Status, oldStatus) {
         return nil
@@ -240,13 +242,14 @@ Create a chain package in `internal/controller/yourresource/chain/` with the fol
 **Note**: Replace `yourresource` and `YourResource` with the actual resource name you specified during scaffolding.
 
 Example `chain.go`:
+
 ```go
 package chain
 
 import (
     "context"
     "sigs.k8s.io/controller-runtime/pkg/client"
-    
+
     yourApi "github.com/your-org/your-operator/api/v1"
 )
 
