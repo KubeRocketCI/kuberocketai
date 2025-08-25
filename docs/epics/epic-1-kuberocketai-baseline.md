@@ -33,8 +33,8 @@ Enable KubeRocketAI framework foundation for 100% of development teams within 1 
 
 - **BR1 [P0]**: User can install KubeRocketAI framework with single command (krci-ai install)
 - **BR2 [P0]**: User can access 5 core SDLC agent definitions (PM, Architect, Developer, QA, BA) as Markdown files
-- **BR4 [P0]**: User can use agents directly in target IDEs (Cursor @agent, Claude Code /agent) without platform switching
-- **NFR1 [P0]**: System supports offline installation without network dependencies
+- **BR3 [P0]**: User can use agents directly in target IDEs (Cursor @agent, Claude Code /agent) without platform switching
+- **NFR2 [P0]**: System supports offline installation without network dependencies
 - **NFR3 [P0]**: System maintains multi-platform compatibility via Homebrew and GitHub releases
 
 **Core Deliverables:**
@@ -86,7 +86,7 @@ This epic follows an accelerated value-first approach, merging agent creation wi
    - Validation: GitHub releases contain binaries for all platforms
    - Command: `gh release list --repo kuberocketai/krci-ai`
 
-4. Framework foundation enables manual AI-code fix reduction (addresses BR4, NFR1)
+4. Framework foundation enables manual AI-code fix reduction (addresses BR3, NFR2)
    - Validation: Emily can use agents without platform switching in air-gapped environments
    - Command: `krci-ai validate --offline --user-scenario=emily`
 
