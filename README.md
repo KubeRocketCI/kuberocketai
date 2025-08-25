@@ -174,14 +174,14 @@ krci-ai install --all
 
 ## Success Metrics
 
-KubeRocketAI succeeds when you can scale your AI workflow like you scale your infrastructure:
+KubeRocketAI succeeds when you can scale your AI workflow like you scale your CI/CD pipelines:
 
 - **Agent Reusability**: Deploy proven configurations across multiple projects without manual setup
 - **Quality Assurance**: Validate agent configurations before deployment to catch issues early
 - **Version Control Integration**: Track what works, roll back when things break, collaborate on improvements
 - **Platform Flexibility**: Use the same agent definitions for IDE development, CI automation, and brainstorming sessions
 
-Our goal: Turn your AI agent expertise into scalable, maintainable infrastructure.
+Our goal: Turn your AI agent expertise into scalable, maintainable CI/CD pipelines.
 
 ## Inspiration & Related Work
 
@@ -194,7 +194,7 @@ KubeRocketAI builds upon the excellent work of several innovative frameworks tha
 **You'll love this if you:**
 
 - Have created effective AI agents but struggle to share them across your team
-- Want to version-control your agent configurations just like you do with your infrastructure
+- Want to version-control your agent configurations just like you do with your infrastructure and CI/CD pipelines
 - Need validation and quality assurance for agents before deploying them across projects
 - Need the same agents working in multiple contexts: IDE, CI/CD, brainstorming, code review
 - Maintain multiple repositories and are tired of keeping agent configurations in sync
