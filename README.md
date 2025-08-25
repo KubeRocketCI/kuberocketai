@@ -36,7 +36,7 @@ The real challenge isn't creating smart agents—it's **scaling that success** a
 
 ## Solution
 
-KubeRocketAI brings the proven **"Infrastructure-as-Code" model to AI agent management**. Teams define agents in version-controlled Markdown files that integrate seamlessly with existing development workflows, enabling the same declarative approach developers expect from modern CI/CD pipelines.
+KubeRocketAI brings the proven **"Pipeline-as-Code" model to AI agent management**. Teams define agents in version-controlled Markdown files that integrate seamlessly with existing development workflows, enabling the same declarative approach developers expect from modern CI/CD pipelines.
 
 ### Video Overview
 
@@ -51,7 +51,7 @@ This video demonstrates how KubeRocketAI applies AI-as-Code principles to delive
 
 ### Key Value Propositions
 
-1. **Agent-as-Code Distribution**: Version-control and share your proven agent configurations just like you do with Infrastructure-as-Code
+1. **Agent-as-Code Distribution**: Version-control and share your proven agent configurations just like you do with Pipeline-as-Code
 2. **Multi-Platform Injection**: Deploy the same agent definition to your IDE, CI pipeline, bundled for brainstorming, or wherever you need AI assistance
 3. **Built-in Validation**: Validate agent configurations and dependencies before deployment, ensuring consistent behavior across environments
 4. **Context-Preserving Bundling**: Package agents with full project context for web chat tools, maintaining architectural knowledge and organizational standards across platforms
@@ -203,7 +203,7 @@ KubeRocketAI builds upon the excellent work of several innovative frameworks tha
 **Perfect for:**
 
 - **Senior AI Engineers**: Have mastered individual agent creation, now need enterprise-scale management
-- **DevOps-Minded Teams**: Want to apply Infrastructure-as-Code principles to AI agent management
+- **DevOps-Minded Teams**: Want to apply Pipeline-as-Code principles to AI agent management
 - **Multi-Project Teams**: Need consistent AI capabilities across different repositories and contexts
 - **AI-First Organizations**: Ready to systematize their AI workflows beyond individual experimentation
 
