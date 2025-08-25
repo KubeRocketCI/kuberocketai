@@ -40,7 +40,8 @@ KubeRocketAI brings the proven **"Infrastructure-as-Code" model to AI agent mana
 
 ### Video Overview
 
-[KubeRocketAI: AI-as-Code Framework That Simply Works With Your Favorite IDE](https://3nwqeqhvckfwsch6.public.blob.vercel-storage.com/krci-ai-user-intro.mp4)
+<video src="https://3nwqeqhvckfwsch6.public.blob.vercel-storage.com/krci-ai-user-intro.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 For a practical case study on product development with project-specific AI agent customization, see:
 
