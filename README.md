@@ -40,8 +40,7 @@ KubeRocketAI brings the proven **"Pipeline-as-Code" model to AI agent management
 
 ### Video Overview
 
-<video src="https://3nwqeqhvckfwsch6.public.blob.vercel-storage.com/krci-ai-user-intro.mp4" controls="controls" style="max-width: 730px;">
-</video>
+https://github.com/user-attachments/assets/dd3ed25d-fc42-4dc4-a568-dcdecd027394
 
 For a practical case study on product development with project-specific AI agent customization, see:
 
