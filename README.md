@@ -7,7 +7,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/KubeRocketCI/kuberocketai?style=flat-square)](https://goreportcard.com/report/github.com/KubeRocketCI/kuberocketai)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/KubeRocketCI/kuberocketai?style=flat-square&logo=go)](go.mod)
 [![License](https://img.shields.io/github/license/KubeRocketCI/kuberocketai?style=flat-square&color=green)](LICENSE)
-[![Framework Overview](https://img.shields.io/badge/Framework-7%20agents%20%7C%2025+%20tasks%20%7C%2014+%20templates%20%7C%2012+%20data%20files-purple?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](.krci-ai)
+[![Framework Overview](https://img.shields.io/badge/Framework-8+%20agents%20%7C%2032+%20tasks%20%7C%2020+%20templates%20%7C%2014+%20data%20files-purple?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](.krci-ai)
 
 AI-as-Code framework for structuring AI-assisted software development. Define AI agents as version-controlled Markdown files with YAML frontmatter.
 
