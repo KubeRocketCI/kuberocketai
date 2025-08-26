@@ -23,6 +23,7 @@ This lightweight SDLC framework provides a structured approach for AI agents to 
 | **Developer** | `developer` | Code implementation, feature development, code reviews | Stories, tasks, architecture specs | Code, pull requests, implementation |
 | **QA Engineer** | `qa-engineer` | Testing, quality validation, bug reporting | Stories, code, test cases | Test results, bug reports, quality metrics |
 | **DevOps Engineer** | `devops-engineer` | CI/CD, infrastructure, deployment, monitoring | Code, architecture, requirements | Deployment configs, infrastructure, monitoring |
+| **Product Marketing Manager** | `product-marketing-manager` | Go-to-market strategy, sales enablement, promotional materials | PRD, MVP, market research | Marketing brief, pitch decks, sales materials, launch campaigns |
 
 ### Role Combinations
 
@@ -62,6 +63,13 @@ graph TD
     Code --> MVP[🎉 MVP Delivered]
     Test --> MVP
 
+    PRD --> Marketing[🚀 Marketing Brief<br/>Go-to-Market Strategy]
+    MVP --> Marketing
+    Marketing --> Launch[📢 Launch Materials<br/>Promotional Campaign]
+    Marketing --> Sales[💼 Sales Enablement<br/>Revenue Tools]
+    Launch --> Success[📈 Market Success]
+    Sales --> Success
+
     style Idea fill:#e1f5fe,stroke:#333,color:#000
     style Brief fill:#f0e68c,stroke:#333,color:#000
     style PRD fill:#f3e5f5,stroke:#333,color:#000
@@ -71,6 +79,10 @@ graph TD
     style Code fill:#f1f8e9,stroke:#333,color:#000
     style Test fill:#fff9c4,stroke:#333,color:#000
     style MVP fill:#ffebee,stroke:#333,color:#000
+    style Marketing fill:#e8f4fd,stroke:#333,color:#000
+    style Launch fill:#fef3e2,stroke:#333,color:#000
+    style Sales fill:#f0f9f0,stroke:#333,color:#000
+    style Success fill:#fdf2f8,stroke:#333,color:#000
 ```
 
 Artifact Dependencies Explained:
@@ -83,6 +95,10 @@ Artifact Dependencies Explained:
 - **Code**: Implementation with deployment configurations guided by Stories and Architecture (depends on Story, Architecture)
 - **Test Result**: Quality validation of Stories and Code (depends on Story, Code)
 - **MVP**: Final deliverable combining all artifacts (depends on Code, Test)
+- **Marketing Brief**: Go-to-market strategy and positioning (depends on PRD, MVP)
+- **Launch Materials**: Promotional campaign content and assets (depends on Marketing Brief)
+- **Sales Enablement**: Sales tools and revenue generation materials (depends on Marketing Brief)
+- **Market Success**: Achieved market adoption and business results (depends on Launch Materials, Sales Enablement)
 
 #### Consolidated Artifact Reference
 
@@ -95,6 +111,9 @@ Artifact Dependencies Explained:
 | **Story** | `/docs/stories/` | `product-owner` | Epic | Code, Test | User-focused requirement with acceptance criteria and implementation tasks. Files named as `{epic_number}.{story_number}.story.md` using two-digit format for proper sorting and Epic-Story traceability (e.g., `01.01.story.md`, `01.02.story.md`). |
 | **Code** | `-` | `developer` | Story, Architecture | Test, MVP | Implementation artifacts following coding standards |
 | **Test Result** | `/docs/tests/` | `qa-engineer` | Story, Code | MVP | Quality validation with test execution results and metrics |
+| **Marketing Brief** | `/docs/marketing/` | `product-marketing-manager` | PRD, MVP | Launch Materials, Sales Enablement | Go-to-market strategy, positioning, and marketing campaigns |
+| **Launch Materials** | `/docs/marketing/` | `product-marketing-manager` | Marketing Brief | Market Success | Promotional content, press releases, and campaign assets |
+| **Sales Enablement** | `/docs/marketing/` | `product-marketing-manager` | Marketing Brief | Market Success | Sales tools, training materials, and revenue generation resources |
 
 ### Artifact Format
 
@@ -120,6 +139,10 @@ flowchart TD
     DevOps -->|CI/CD + Infrastructure| MVP([MVP Delivered])
     MVP -->|Feedback| PO
     MVP -->|Feedback + Metrics| PM
+    PM -->|PRD + MVP| PMM[Product Marketing Manager]
+    MVP -->|Product Demo| PMM
+    PMM -->|Marketing Materials| Success([Market Success])
+    PMM -->|Go-to-Market Feedback| PM
 ```
 
 ### Handoff Points
@@ -132,6 +155,9 @@ flowchart TD
 6. **Developer → QA Engineer**: Quality validation
 7. **QA Engineer → DevOps Engineer**: Deployment readiness
 8. **DevOps Engineer → MVP**: Live system delivery
+9. **Product Manager → Product Marketing Manager**: Go-to-market strategy development
+10. **MVP → Product Marketing Manager**: Product demonstration and marketing material creation
+11. **Product Marketing Manager → Market Success**: Revenue generation and customer acquisition
 
 ### Quality Gates
 
@@ -141,6 +167,9 @@ flowchart TD
 - **Code Review**: Implementation quality checked
 - **Test Validation**: Quality criteria met
 - **Deployment Readiness**: Production criteria satisfied
+- **Marketing Brief Approval**: Go-to-market strategy validated
+- **Launch Materials Review**: Promotional content quality assured
+- **Sales Enablement Validation**: Revenue generation tools verified
 
 ## 13.5 Configuration
 
