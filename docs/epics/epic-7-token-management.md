@@ -4,10 +4,10 @@
 
 | Field                | Value                    |
 |----------------------|--------------------------|
-| Status               | Planning                 |
+| Status               | Complete                 |
 | Priority             | Critical                 |
 | Epic Owner           | Product Owner            |
-| Timeline             | 1 week                   |
+| Timeline             | 1 week - DONE            |
 
 ## Overview
 
