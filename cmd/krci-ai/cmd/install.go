@@ -45,15 +45,35 @@ This command will set up the AI-as-Code framework by installing:
 - Output templates for consistent formatting
 - Reference data for coding standards and best practices
 
+Supported IDE Integrations:
+- cursor     → .cursor/rules/krci-ai/*.mdc
+- claude     → .claude/commands/krci-ai/*.md
+- vscode     → .github/chatmodes/*.chatmode.md
+- windsurf   → .windsurf/rules/*.md
+- all        → Install all IDE integrations above
+
 Examples:
-  krci-ai install                              # Install core framework components
-  krci-ai install --ide=cursor                 # Install with Cursor IDE integration
-  krci-ai install --agent developer            # Install only developer agent and dependencies
-  krci-ai install --agents pm,architect,dev    # Install specific agents (comma-separated)
-  krci-ai install --agent developer --ide cursor # Selective install with IDE integration
-  krci-ai install --all              # Install core + all IDE integrations (shortcut)
-  krci-ai install --all --force      # Force install everything
-  krci-ai install --force            # Force install core components only`,
+  # Basic installation
+  krci-ai install                              # Install core structure + all agents (./.krci-ai)
+  krci-ai install --force                      # Force reinstall core structure + all agents
+
+  # IDE integrations (see supported list above)
+  krci-ai install --ide cursor                 # Install core + specific IDE integration
+  krci-ai install --all                        # Install core + all IDE integrations
+  krci-ai install -a                           # Same as --all (shorthand)
+
+  # Selective installation (core structure + specific agents only)
+  krci-ai install --agent dev                  # Install core structure + dev agent + dependencies
+  krci-ai install --agents pm,architect        # Install core structure + multiple agents (comma-separated)
+  krci-ai install --agent "pm po qa"           # Install core structure + multiple agents (space-separated)
+
+  # Combined selective + IDE
+  krci-ai install --agent dev -i cursor        # Install core + dev agent + IDE integration
+  krci-ai install --agents pm,po --ide vscode  # Install core + multiple agents + IDE
+
+  # Force operations
+  krci-ai install --ide cursor --force         # Add IDE integration to existing install
+  krci-ai install --all --force                # Force reinstall everything`,
 	Run: func(cmd *cobra.Command, args []string) {
 		errorHandler := cli.NewErrorHandler()
 
@@ -232,7 +252,7 @@ func init() {
 	rootCmd.AddCommand(installCmd)
 
 	// Add IDE integration flag
-	installCmd.Flags().StringP("ide", "i", "", "IDE integration (cursor, claude, vscode, windsurf, all)")
+	installCmd.Flags().StringP("ide", "i", "", "IDE integration: cursor, claude, vscode, windsurf, or 'all' for everything")
 
 	// Add force flag
 	installCmd.Flags().BoolP("force", "f", false, "Force installation even if framework is already installed")
