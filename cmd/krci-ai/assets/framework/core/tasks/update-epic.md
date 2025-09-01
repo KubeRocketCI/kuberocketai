@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - epic.md
+  data:
+    - common/sdlc-framework.md
+    - prioritization-frameworks.md
+---
 # Task: Update Epic
 
 ## Description

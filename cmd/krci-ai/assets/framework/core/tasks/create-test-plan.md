@@ -1,3 +1,13 @@
+---
+dependencies:
+  templates:
+    - test-plan.md
+  data:
+    - testing-strategy.md
+    - quality-metrics.md
+    - common/sdlc-framework.md
+    - test-methodologies.md
+---
 # Task: Create Test Plan
 
 ## Description

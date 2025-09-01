@@ -293,3 +293,8 @@ func (p *YAMLProcessor) ProcessAndValidateAgent(filePath string) (*Agent, []Vali
 	validationErrors := p.ValidateAgentRaw(rawData, filePath)
 	return agent, validationErrors, nil
 }
+
+// GetTaskMetadataSchemaPath returns the path to the task metadata schema for validation
+func (p *YAMLProcessor) GetTaskMetadataSchemaPath() string {
+	return "assets/schemas/task-metadata.json"
+}

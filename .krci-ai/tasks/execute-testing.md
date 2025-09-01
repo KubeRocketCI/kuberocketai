@@ -1,3 +1,12 @@
+---
+dependencies:
+  templates:
+    - test-report.md
+    - defect-report.md
+  data:
+    - common/sdlc-framework.md
+    - test-methodologies.md
+---
 # Task: Execute Testing
 
 ## Description

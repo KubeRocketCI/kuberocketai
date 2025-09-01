@@ -508,6 +508,16 @@ func TestYAMLProcessor_ValidateAgentRaw(t *testing.T) {
 	})
 }
 
+func TestYAMLProcessor_GetTaskMetadataSchemaPath(t *testing.T) {
+	processor, err := NewYAMLProcessorFromFile("../../../cmd/krci-ai/assets/schemas/agent-schema.json")
+	require.NoError(t, err)
+
+	expectedPath := "assets/schemas/task-metadata.json"
+	actualPath := processor.GetTaskMetadataSchemaPath()
+
+	assert.Equal(t, expectedPath, actualPath, "GetTaskMetadataSchemaPath should return the correct schema path")
+}
+
 // Helper function to create temporary files for testing
 func createTempFile(t *testing.T, content string) string {
 	tmpFile, err := os.CreateTemp("", "agent_test_*.yaml")

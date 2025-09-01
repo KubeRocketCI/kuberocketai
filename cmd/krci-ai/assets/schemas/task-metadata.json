@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://kuberocketai.com/schemas/task-metadata.json",
+  "title": "KubeRocketAI Task Metadata Schema",
+  "description": "YAML frontmatter schema for task dependency metadata",
+  "type": "object",
+  "properties": {
+    "dependencies": {
+      "type": "object",
+      "description": "Dependencies required by this task",
+      "properties": {
+        "templates": {
+          "type": "array",
+          "description": "Template files required by this task",
+          "items": {
+            "type": "string",
+            "pattern": "^(\\.(\\/local)?\\/templates\\/)?[a-zA-Z0-9/_.-]+\\.md$",
+            "description": "Template file path relative to .krci-ai/templates/ or ./local/templates/ prefix for local overrides"
+          },
+          "uniqueItems": true
+        },
+        "data": {
+          "type": "array",
+          "description": "Data files required by this task",
+          "items": {
+            "type": "string",
+            "pattern": "^(\\.(\\/local)?\\/data\\/)?[a-zA-Z0-9/_.-]+\\.(md|txt)$",
+            "description": "Data file path relative to .krci-ai/data/ or ./local/data/ prefix for local extensions"
+          },
+          "uniqueItems": true
+        },
+        "mcp": {
+          "type": "array",
+          "description": "MCP server references required by this task",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "MCP server identifier (alphanumeric, underscores, hyphens only)"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "dependencies": {
+        "templates": [
+          "story.md",
+          "epic.md"
+        ],
+        "data": [
+          "common/sdlc-framework.md",
+          "coding-standards.md"
+        ],
+        "mcp": [
+          "github-server",
+          "jira-integration"
+        ]
+      }
+    },
+    {
+      "dependencies": {
+        "templates": [
+          "./local/templates/custom-story.md"
+        ],
+        "data": [
+          "best-practices.md",
+          "./local/data/team-standards.md"
+        ]
+      }
+    }
+  ]
+}

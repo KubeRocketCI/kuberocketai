@@ -138,7 +138,7 @@ func TestErrorHandlerPrintWarning(t *testing.T) {
 	handler.PrintWarning("Test warning message")
 }
 
-func TestErrorHandlerHandleErrorWithActualError(t *testing.T) {
+func TestErrorHandlerHandleErrorWithActualError(_ *testing.T) {
 	// This test will verify that HandleError and HandleErrorWithCode
 	// properly handle errors, but we can't test the os.Exit behavior
 	// directly in unit tests without more complex setup

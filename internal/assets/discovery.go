@@ -16,7 +16,6 @@ limitations under the License.
 package assets
 
 import (
-	"context"
 	"embed"
 	"fmt"
 	"os"
@@ -25,8 +24,6 @@ import (
 
 	"github.com/fatih/color"
 	"gopkg.in/yaml.v3"
-
-	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
 
 const (
@@ -233,20 +230,14 @@ func (d *Discovery) DiscoverAgentsWithDependencies(agentNames ...string) ([]Agen
 		return nil, err
 	}
 
-	// Step B: Get validation insights based on source type
-	insights, err := d.getValidationInsights(agentNames)
-	if err != nil {
-		return nil, err
-	}
-
-	// Step C: Get and filter agent information
+	// Step B: Get and filter agent information
 	targetAgents, err := d.getTargetAgents(agentNames)
 	if err != nil {
 		return nil, err
 	}
 
-	// Step D: Build dependency information
-	return d.buildAgentDependencies(targetAgents, insights), nil
+	// Step C: Build dependency information without deprecated insights
+	return d.buildAgentDependencies(targetAgents), nil
 }
 
 // validateSourceRequirements validates source-specific requirements
@@ -255,55 +246,6 @@ func (d *Discovery) validateSourceRequirements() error {
 		return fmt.Errorf("framework not installed in current directory - run 'krci-ai install'")
 	}
 	return nil
-}
-
-// getValidationInsights gets validation insights based on source type
-func (d *Discovery) getValidationInsights(agentNames []string) (*validation.FrameworkInsights, error) {
-	if d.source.GetSourceType() == FilesystemSourceType {
-		return d.getFilesystemInsights()
-	}
-	return d.getEmbeddedInsights(agentNames)
-}
-
-// getFilesystemInsights analyzes entire framework for filesystem source
-func (d *Discovery) getFilesystemInsights() (*validation.FrameworkInsights, error) {
-	analyzer := validation.NewFrameworkAnalyzer(d.installer.targetDir)
-	_, insights, err := analyzer.AnalyzeFramework()
-	if err != nil {
-		return nil, fmt.Errorf("failed to analyze framework: %w", err)
-	}
-	return insights, nil
-}
-
-// getEmbeddedInsights analyzes specific agents for embedded source
-func (d *Discovery) getEmbeddedInsights(agentNames []string) (*validation.FrameworkInsights, error) {
-	analyzer := validation.NewFrameworkAnalyzer("")
-
-	// Type assert to get embedded FS using the new interface
-	embeddedSource, ok := d.source.(EmbeddedAssetSource)
-	if !ok {
-		return nil, fmt.Errorf("expected embedded source but got %T", d.source)
-	}
-
-	// Use provided agent names or discover all if none specified
-	targetAgentNames := agentNames
-	if len(agentNames) == 0 {
-		// Discover all agent names for embedded case
-		allAgents, agentErr := d.DiscoverAgents()
-		if agentErr != nil {
-			return nil, fmt.Errorf("failed to discover agents: %w", agentErr)
-		}
-		targetAgentNames = make([]string, len(allAgents))
-		for i, agent := range allAgents {
-			targetAgentNames[i] = agent.ShortName
-		}
-	}
-
-	insights, err := analyzer.AnalyzeEmbeddedDependencies(context.Background(), embeddedSource.GetEmbeddedFS(), targetAgentNames)
-	if err != nil {
-		return nil, fmt.Errorf("failed to analyze embedded dependencies: %w", err)
-	}
-	return insights, nil
 }
 
 // getTargetAgents gets and filters agent information
@@ -336,24 +278,11 @@ func (d *Discovery) getTargetAgents(agentNames []string) ([]AgentInfo, error) {
 }
 
 // buildAgentDependencies builds dependency information for agents
-func (d *Discovery) buildAgentDependencies(targetAgents []AgentInfo, insights *validation.FrameworkInsights) []AgentDependencyInfo {
-	// Build relationship mapping
-	relationshipMap := make(map[string]validation.ComponentRelationship)
-	for _, rel := range insights.Relationships {
-		relationshipMap[rel.Agent] = rel
-	}
+func (d *Discovery) buildAgentDependencies(targetAgents []AgentInfo) []AgentDependencyInfo {
 
 	// Build dependency info for each agent
 	var agentDeps []AgentDependencyInfo
 	for _, agent := range targetAgents {
-		// Extract agent name from file path (filesystem) or use ShortName (embedded)
-		var agentKey string
-		if d.source.GetSourceType() == FilesystemSourceType {
-			agentKey = strings.TrimSuffix(filepath.Base(agent.FilePath), ".yaml")
-		} else {
-			agentKey = agent.ShortName
-		}
-
 		depInfo := AgentDependencyInfo{
 			AgentInfo: agent,
 			Tasks:     make([]string, 0),
@@ -361,17 +290,137 @@ func (d *Discovery) buildAgentDependencies(targetAgents []AgentInfo, insights *v
 			DataFiles: make([]string, 0),
 		}
 
-		// Look up dependency relationships
-		if rel, exists := relationshipMap[agentKey]; exists {
-			depInfo.Tasks = rel.Tasks
-			depInfo.Templates = rel.Templates
-			depInfo.DataFiles = rel.DataFiles
-		}
+		// Extract task dependencies from agent YAML files
+		tasks, templates, dataFiles := d.extractAgentDependencies(agent.FilePath)
+		depInfo.Tasks = tasks
+		depInfo.Templates = templates
+		depInfo.DataFiles = dataFiles
 
 		agentDeps = append(agentDeps, depInfo)
 	}
 
 	return agentDeps
+}
+
+// extractAgentDependencies extracts task dependencies from agent YAML files
+func (d *Discovery) extractAgentDependencies(agentFilePath string) (tasks []string, templates []string, dataFiles []string) {
+	// Read agent YAML file
+	content, err := os.ReadFile(agentFilePath)
+	if err != nil {
+		return nil, nil, nil
+	}
+
+	// Parse YAML to extract tasks
+	var agent struct {
+		Agent struct {
+			Tasks []string `yaml:"tasks"`
+		} `yaml:"agent"`
+	}
+
+	if err := yaml.Unmarshal(content, &agent); err != nil {
+		return nil, nil, nil
+	}
+
+	// Extract task file names and their dependencies
+	for _, taskPath := range agent.Agent.Tasks {
+		taskName := filepath.Base(taskPath)
+		tasks = append(tasks, taskName)
+
+		// Extract dependencies from task files
+		taskTemplates, taskDataFiles := d.extractTaskDependencies(taskPath)
+		templates = append(templates, taskTemplates...)
+		dataFiles = append(dataFiles, taskDataFiles...)
+	}
+
+	// Remove duplicates
+	templates = removeDuplicates(templates)
+	dataFiles = removeDuplicates(dataFiles)
+
+	return tasks, templates, dataFiles
+}
+
+// extractTaskDependencies extracts template and data dependencies from task files
+func (d *Discovery) extractTaskDependencies(taskPath string) (templates []string, dataFiles []string) {
+	// Resolve full task path
+	var fullPath string
+	if strings.HasPrefix(taskPath, "./.krci-ai/") {
+		fullPath = filepath.Join(d.installer.GetTargetDir(), taskPath[2:]) // Remove "./"
+	} else {
+		fullPath = filepath.Join(d.installer.GetTargetDir(), taskPath)
+	}
+
+	// Read task file
+	content, err := os.ReadFile(fullPath)
+	if err != nil {
+		return nil, nil
+	}
+
+	// Extract frontmatter dependencies
+	frontmatter := extractFrontmatter(string(content))
+	if frontmatter != nil {
+		// Check for nested dependencies structure
+		if dependencies, ok := frontmatter["dependencies"].(map[string]interface{}); ok {
+			// Extract templates
+			if templateDeps, ok := dependencies["templates"].([]interface{}); ok {
+				for _, template := range templateDeps {
+					if templateStr, ok := template.(string); ok {
+						templates = append(templates, filepath.Base(templateStr))
+					}
+				}
+			}
+			// Extract data files
+			if dataDeps, ok := dependencies["data"].([]interface{}); ok {
+				for _, data := range dataDeps {
+					if dataStr, ok := data.(string); ok {
+						dataFiles = append(dataFiles, filepath.Base(dataStr))
+					}
+				}
+			}
+		}
+	}
+
+	return templates, dataFiles
+}
+
+// extractFrontmatter extracts YAML frontmatter from markdown files
+func extractFrontmatter(content string) map[string]interface{} {
+	lines := strings.Split(content, "\n")
+	if len(lines) < 3 || lines[0] != "---" {
+		return nil
+	}
+
+	var endIdx int
+	for i := 1; i < len(lines); i++ {
+		if lines[i] == "---" {
+			endIdx = i
+			break
+		}
+	}
+
+	if endIdx == 0 {
+		return nil
+	}
+
+	frontmatterContent := strings.Join(lines[1:endIdx], "\n")
+	var frontmatter map[string]interface{}
+	if err := yaml.Unmarshal([]byte(frontmatterContent), &frontmatter); err != nil {
+		return nil
+	}
+
+	return frontmatter
+}
+
+// removeDuplicates removes duplicate strings from a slice
+func removeDuplicates(slice []string) []string {
+	keys := make(map[string]bool)
+	result := []string{}
+	for _, item := range slice {
+		if !keys[item] {
+			keys[item] = true
+			result = append(result, item)
+		}
+	}
+	return result
 }
 
 func (d *Discovery) DiscoverAgentWithDependencies(shortName string) (AgentDependencyInfo, error) {

@@ -38,7 +38,7 @@ func TestCheckOnlineUpdates(t *testing.T) {
 	t.Run("checkOnlineUpdates function exists", func(t *testing.T) {
 		// Test that the function can be called without panicking
 		assert.NotPanics(t, func() {
-			checkOnlineUpdates()
+			_ = checkOnlineUpdates()
 		}, "checkOnlineUpdates should not panic")
 	})
 }

@@ -410,19 +410,23 @@ func generateAndWriteBundle(_ *cobra.Command, currentDir string, selectedAgents 
 
 // runFrameworkValidation runs the existing validation logic
 func runFrameworkValidation(currentDir string) error {
-	// Initialize enhanced validation system (reuse existing validation)
-	analyzer := validation.NewFrameworkAnalyzer(currentDir)
-
-	// Run optimized framework analysis with caching
-	issues, _, err := analyzer.OptimizedAnalyzeFramework()
+	// Initialize validation system with embedded assets
+	embeddedAssets := GetEmbeddedAssets()
+	validator, err := validation.NewValidationSystemBuilder(currentDir).
+		WithEmbeddedAssets(embeddedAssets).
+		Build()
 	if err != nil {
-		return fmt.Errorf("framework analysis failed: %w", err)
+		return fmt.Errorf("failed to create validator: %w", err)
 	}
 
-	// Check for critical issues that would prevent bundle generation
-	for _, issue := range issues {
-		if issue.Severity == validation.SeverityCritical {
-			return fmt.Errorf("critical validation error: %s", issue.Message)
+	// Run framework validation
+	report := validator.ValidateFramework(currentDir)
+	if report.Summary.CriticalCount > 0 || report.Summary.ErrorCount > 0 {
+		// Find the first critical or error result
+		for _, result := range report.Results {
+			if result.Severity == validation.SeverityCritical || result.Severity == validation.SeverityError {
+				return fmt.Errorf("validation error: %s", result.Message)
+			}
 		}
 	}
 
@@ -644,65 +648,23 @@ func FilterAgentsByNames(agentDeps []assets.AgentDependencyInfo, selectedAgents 
 
 // collectBundleContent discovers and collects framework content, optionally filtered by agent names and task
 func collectBundleContent(currentDir string, selectedAgents []string, taskName string) (*BundleContent, error) {
-	// Create discovery service
-	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
-
-	// Discover agents with dependencies
-	agentDeps, err := discovery.DiscoverAgentsWithDependencies()
+	// Discover and filter agents
+	agentDeps, err := discoverAndFilterAgents(currentDir, selectedAgents)
 	if err != nil {
-		return nil, fmt.Errorf("failed to discover agents: %w", err)
+		return nil, err
 	}
 
-	// Filter agents if specific agents are selected
-	if len(selectedAgents) > 0 {
-		agentDeps = FilterAgentsByNames(agentDeps, selectedAgents)
-	}
+	// Initialize bundle content structure
+	content := initializeBundleContent()
 
-	content := &BundleContent{
-		Agents:    make([]AgentBundleInfo, 0),
-		Tasks:     make(map[string]string),
-		Templates: make(map[string]string),
-		DataFiles: make(map[string]string),
-	}
-
-	// Collect agent files
+	// Process each agent and collect its assets
 	for _, agent := range agentDeps {
-		agentContent, err := os.ReadFile(agent.FilePath)
-		if err != nil {
-			return nil, fmt.Errorf("failed to read agent file %s: %w", agent.FilePath, err)
+		if err := collectAgentAssets(currentDir, agent, taskName, content); err != nil {
+			return nil, err
 		}
-
-		relPath, _ := filepath.Rel(currentDir, agent.FilePath)
-		content.Agents = append(content.Agents, AgentBundleInfo{
-			FilePath: relPath,
-			Content:  string(agentContent),
-			Name:     agent.Name,
-			Role:     agent.Role,
-		})
-
-		// Collect task files - filter by specific task if specified
-		for _, taskPath := range agent.Tasks {
-			// If a specific task is requested, only include that task
-			if taskName != "" {
-				taskFileName := strings.TrimSuffix(filepath.Base(taskPath), ".md")
-				if !strings.EqualFold(taskFileName, taskName) {
-					continue // Skip tasks that don't match the specified task
-				}
-			}
-
-			fullTaskPath := filepath.Join(currentDir, krciAIDir, "tasks", taskPath)
-			if taskContent, err := os.ReadFile(fullTaskPath); err == nil {
-				relTaskPath := filepath.Join("tasks", taskPath)
-				content.Tasks[relTaskPath] = string(taskContent)
-			}
-		}
-
-		// Collect template and data files using helper function
-		collectTemplatesAndData(currentDir, agent, taskName, content)
 	}
 
-	// Collect any additional templates and data files not referenced by agents
-	// Only do this for --all bundles, not for targeted agent bundles
+	// Collect additional files for complete bundles
 	if len(selectedAgents) == 0 {
 		if err := collectAdditionalFiles(currentDir, content); err != nil {
 			return nil, fmt.Errorf("failed to collect additional files: %w", err)
@@ -710,6 +672,89 @@ func collectBundleContent(currentDir string, selectedAgents []string, taskName s
 	}
 
 	return content, nil
+}
+
+// discoverAndFilterAgents discovers agents and applies filtering
+func discoverAndFilterAgents(currentDir string, selectedAgents []string) ([]assets.AgentDependencyInfo, error) {
+	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
+
+	agentDeps, err := discovery.DiscoverAgentsWithDependencies()
+	if err != nil {
+		return nil, fmt.Errorf("failed to discover agents: %w", err)
+	}
+
+	if len(selectedAgents) > 0 {
+		agentDeps = FilterAgentsByNames(agentDeps, selectedAgents)
+	}
+
+	return agentDeps, nil
+}
+
+// initializeBundleContent creates and initializes a BundleContent structure
+func initializeBundleContent() *BundleContent {
+	return &BundleContent{
+		Agents:    make([]AgentBundleInfo, 0),
+		Tasks:     make(map[string]string),
+		Templates: make(map[string]string),
+		DataFiles: make(map[string]string),
+	}
+}
+
+// collectAgentAssets collects all assets for a single agent
+func collectAgentAssets(currentDir string, agent assets.AgentDependencyInfo, taskName string, content *BundleContent) error {
+	// Read and store agent file
+	if err := collectAgentFile(currentDir, agent, content); err != nil {
+		return err
+	}
+
+	// Collect task files for this agent
+	if err := collectAgentTasks(currentDir, agent, taskName, content); err != nil {
+		return err
+	}
+
+	// Collect template and data files
+	collectTemplatesAndData(currentDir, agent, taskName, content)
+
+	return nil
+}
+
+// collectAgentFile reads and stores a single agent file
+func collectAgentFile(currentDir string, agent assets.AgentDependencyInfo, content *BundleContent) error {
+	agentContent, err := os.ReadFile(agent.FilePath)
+	if err != nil {
+		return fmt.Errorf("failed to read agent file %s: %w", agent.FilePath, err)
+	}
+
+	relPath, _ := filepath.Rel(currentDir, agent.FilePath)
+	content.Agents = append(content.Agents, AgentBundleInfo{
+		FilePath: relPath,
+		Content:  string(agentContent),
+		Name:     agent.Name,
+		Role:     agent.Role,
+	})
+
+	return nil
+}
+
+// collectAgentTasks collects task files for an agent, optionally filtered by task name
+func collectAgentTasks(currentDir string, agent assets.AgentDependencyInfo, taskName string, content *BundleContent) error {
+	for _, taskPath := range agent.Tasks {
+		// Skip tasks that don't match the specified task filter
+		if taskName != "" {
+			taskFileName := strings.TrimSuffix(filepath.Base(taskPath), ".md")
+			if !strings.EqualFold(taskFileName, taskName) {
+				continue
+			}
+		}
+
+		fullTaskPath := filepath.Join(currentDir, krciAIDir, "tasks", taskPath)
+		if taskContent, err := os.ReadFile(fullTaskPath); err == nil {
+			relTaskPath := filepath.Join("tasks", taskPath)
+			content.Tasks[relTaskPath] = string(taskContent)
+		}
+	}
+
+	return nil
 }
 
 // collectAdditionalFiles collects templates and data files not referenced by agents

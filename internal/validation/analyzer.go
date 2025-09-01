@@ -17,11 +17,11 @@ package validation
 
 import (
 	"context"
+	"embed"
 	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strings"
 	"time"
 
@@ -39,34 +39,11 @@ const (
 	embeddedPrefix = "assets/framework/core"
 )
 
-// File extension constants
-const (
-	yamlExt = ".yaml"
-	ymlExt  = ".yml"
-	mdExt   = ".md"
-)
-
 // Path pattern constants
 const (
-	agentFilePattern     = "%s/%s/%s.yaml"
-	taskReferencePrefix  = "./.krci-ai/"
-	localTasksPrefix     = "./.krci-ai/local/tasks/"
-	standardTasksPrefix  = "./.krci-ai/tasks/"
-	templatesLinkPattern = "/templates/"
-	dataLinkPattern      = "/data/"
-)
-
-// Glob patterns
-const (
-	yamlGlob = "*" + yamlExt
-	ymlGlob  = "*" + ymlExt
-)
-
-// Issue type constants
-const (
-	issueTypeMissingTask     = "missing_task"
-	issueTypeInvalidTaskPath = "invalid_task_path"
-	issueTypeInvalidAgentExt = "invalid_agent_extension"
+	agentFilePattern    = "%s/%s/%s.yaml"
+	localTasksPrefix    = "./.krci-ai/local/tasks/"
+	standardTasksPrefix = "./.krci-ai/tasks/"
 )
 
 // Severity levels for validation issues
@@ -92,7 +69,7 @@ func (s Severity) String() string {
 	}
 }
 
-// ValidationIssue represents a single validation issue
+// ValidationIssue represents a single validation issue (legacy compatibility)
 type ValidationIssue struct {
 	Type        string
 	Severity    Severity
@@ -102,494 +79,191 @@ type ValidationIssue struct {
 	FixGuidance string
 }
 
-// FrameworkAnalyzer provides comprehensive framework validation
+// FrameworkAnalyzer provides comprehensive framework validation using unified system
 type FrameworkAnalyzer struct {
-	baseDir     string
-	cache       map[string]time.Time
-	fileCache   map[string][]byte
-	resultCache map[string][]ValidationIssue
+	validator UniversalValidator
+	baseDir   string
+	cache     map[string]time.Time
 }
 
-// NewFrameworkAnalyzer creates a new framework analyzer
-func NewFrameworkAnalyzer(baseDir string) *FrameworkAnalyzer {
-	return &FrameworkAnalyzer{
-		baseDir:     baseDir,
-		cache:       make(map[string]time.Time),
-		fileCache:   make(map[string][]byte),
-		resultCache: make(map[string][]ValidationIssue),
+// NewFrameworkAnalyzer creates a new framework analyzer using the unified validation system
+func NewFrameworkAnalyzer(baseDir string, embeddedAssets embed.FS) (*FrameworkAnalyzer, error) {
+	validator, err := NewValidationSystemBuilder(baseDir).
+		WithEmbeddedAssets(embeddedAssets).
+		Build()
+
+	if err != nil {
+		return nil, fmt.Errorf("failed to create unified validator: %w", err)
 	}
+
+	return &FrameworkAnalyzer{
+		validator: validator,
+		baseDir:   baseDir,
+		cache:     make(map[string]time.Time),
+	}, nil
 }
 
 // AnalyzeFramework performs comprehensive framework analysis
 func (a *FrameworkAnalyzer) AnalyzeFramework() ([]ValidationIssue, *FrameworkInsights, error) {
-	var issues []ValidationIssue
+	// Use the unified validator to validate the entire framework
+	report := a.validator.ValidateFramework(a.baseDir)
 
+	// Convert unified results back to legacy format for compatibility
+	issues := make([]ValidationIssue, 0, len(report.Results))
+	for _, result := range report.Results {
+		issues = append(issues, ValidationIssue{
+			Type:        result.Type,
+			Severity:    result.Severity,
+			File:        result.File,
+			Line:        result.Line,
+			Message:     result.Message,
+			FixGuidance: result.FixGuidance,
+		})
+	}
+
+	// Generate framework insights
+	insights := a.generateFrameworkInsights()
+
+	return issues, insights, nil
+}
+
+// OptimizedAnalyzeFramework provides optimized framework analysis with caching
+func (a *FrameworkAnalyzer) OptimizedAnalyzeFramework() ([]ValidationIssue, *FrameworkInsights, error) {
+	// Check if analysis is needed based on file modifications
 	frameworkDir := filepath.Join(a.baseDir, ".krci-ai")
 	if _, err := os.Stat(frameworkDir); os.IsNotExist(err) {
 		return nil, nil, fmt.Errorf("no .krci-ai directory found")
 	}
 
-	// Phase 1: Critical issue detection
-	criticalIssues, err := a.detectCriticalIssues(frameworkDir)
-	if err != nil {
-		return nil, nil, fmt.Errorf("critical issue detection failed: %w", err)
-	}
-	issues = append(issues, criticalIssues...)
-
-	// Phase 2: Warning detection
-	warningIssues, err := a.detectWarningIssues(frameworkDir)
-	if err != nil {
-		return nil, nil, fmt.Errorf("warning detection failed: %w", err)
-	}
-	issues = append(issues, warningIssues...)
-
-	// Phase 3: Generate framework insights
-	insights, err := a.generateFrameworkInsights(frameworkDir)
-	if err != nil {
-		return nil, nil, fmt.Errorf("framework insights generation failed: %w", err)
-	}
-
-	return issues, insights, nil
+	// For now, always run full analysis - caching optimization can be added later
+	return a.AnalyzeFramework()
 }
 
-// detectCriticalIssues detects critical validation issues
-func (a *FrameworkAnalyzer) detectCriticalIssues(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
+// generateFrameworkInsights generates comprehensive insights about the framework
+func (a *FrameworkAnalyzer) generateFrameworkInsights() *FrameworkInsights {
+	frameworkDir := filepath.Join(a.baseDir, ".krci-ai")
 
-	// 1. Detect broken internal links
-	brokenLinks, err := a.detectBrokenInternalLinks(frameworkDir)
-	if err != nil {
-		return nil, err
+	insights := &FrameworkInsights{
+		ComponentCounts: ComponentCounts{},
+		Relationships:   make([]ComponentRelationship, 0),
+		UsageStatistics: UsageStatistics{},
 	}
-	issues = append(issues, brokenLinks...)
 
-	// 2. Detect missing and invalid task files referenced in agents
-	missingTasks, err := a.detectMissingTaskFiles(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, missingTasks...)
+	// Count components
+	a.countComponents(frameworkDir, &insights.ComponentCounts)
 
-	// 3. Detect architecture violations
-	archViolations, err := a.detectArchitectureViolations(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, archViolations...)
+	// Analyze relationships (simplified)
+	a.analyzeRelationships(frameworkDir, insights)
 
-	// 4. Detect local directory violations
-	localDirViolations, err := a.detectLocalDirectoryViolations(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, localDirViolations...)
+	// Generate usage statistics
+	a.generateUsageStatistics(insights)
 
-	// 5. Detect invalid file formats
-	formatIssues, err := a.detectFormatIssues(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, formatIssues...)
-
-	// 6. Detect invalid agent file extensions
-	agentExtensionIssues, err := a.detectInvalidAgentExtensions(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, agentExtensionIssues...)
-
-	return issues, nil
+	return insights
 }
 
-// detectBrokenInternalLinks detects broken internal framework links
-func (a *FrameworkAnalyzer) detectBrokenInternalLinks(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	// Regex for internal markdown links: [text](./.krci-ai/path/file.ext)
-	linkRegex := regexp.MustCompile(`\[([^\]]+)\]\((\./\.krci-ai/(?:tasks|templates|data)/[^)]+\.(md|yaml|yml|json))\)`)
-
-	// Find all markdown files
-	markdownFiles, err := a.findMarkdownFiles(frameworkDir)
-	if err != nil {
-		return nil, err
+// countComponents counts framework components
+func (a *FrameworkAnalyzer) countComponents(frameworkDir string, counts *ComponentCounts) {
+	// Count agents
+	agentFiles, err := filepath.Glob(filepath.Join(frameworkDir, agentsDir, "*.y*ml"))
+	if err == nil {
+		counts.Agents = len(agentFiles)
 	}
 
-	for _, file := range markdownFiles {
-		content, err := os.ReadFile(file)
-		if err != nil {
-			continue
-		}
-
-		lines := strings.Split(string(content), "\n")
-		for lineNum, line := range lines {
-			matches := linkRegex.FindAllStringSubmatch(line, -1)
-			for _, match := range matches {
-				if len(match) > 2 {
-					linkPath := match[2]
-					// Skip external links
-					if strings.HasPrefix(linkPath, "http://") || strings.HasPrefix(linkPath, "https://") {
-						continue
-					}
-
-					// Convert to absolute path
-					cleanPath := strings.TrimPrefix(linkPath, "./")
-					absolutePath := filepath.Join(a.baseDir, cleanPath)
-
-					if _, err := os.Stat(absolutePath); os.IsNotExist(err) {
-						relFile, _ := filepath.Rel(a.baseDir, file)
-						issues = append(issues, ValidationIssue{
-							Type:        "broken_link",
-							Severity:    SeverityCritical,
-							File:        relFile,
-							Line:        lineNum + 1,
-							Message:     fmt.Sprintf("Broken link to framework file: %s", linkPath),
-							FixGuidance: "Create the missing file or update the reference path",
-						})
-					}
-				}
-			}
-		}
+	// Count tasks
+	taskFiles, err := filepath.Glob(filepath.Join(frameworkDir, tasksDir, "*.md"))
+	if err == nil {
+		counts.Tasks = len(taskFiles)
 	}
 
-	return issues, nil
+	// Count local tasks
+	localTaskFiles, err := filepath.Glob(filepath.Join(frameworkDir, "local", tasksDir, "*.md"))
+	if err == nil {
+		counts.Tasks += len(localTaskFiles)
+	}
+
+	// Count templates
+	templateFiles, err := filepath.Glob(filepath.Join(frameworkDir, templatesDir, "*.md"))
+	if err == nil {
+		counts.Templates = len(templateFiles)
+	}
+
+	// Count data files
+	dataFiles, err := filepath.Glob(filepath.Join(frameworkDir, dataDir, "*.md"))
+	if err == nil {
+		counts.Data = len(dataFiles)
+	}
 }
 
-// detectMissingTaskFiles detects missing and invalid task files referenced in agent YAML
-func (a *FrameworkAnalyzer) detectMissingTaskFiles(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
+// analyzeRelationships analyzes component relationships (simplified)
+func (a *FrameworkAnalyzer) analyzeRelationships(frameworkDir string, insights *FrameworkInsights) {
 	agentsDir := filepath.Join(frameworkDir, "agents")
-	if _, err := os.Stat(agentsDir); os.IsNotExist(err) {
-		return issues, nil
-	}
-
-	agentFiles, err := a.getAgentFiles(agentsDir)
+	agentFiles, err := filepath.Glob(filepath.Join(agentsDir, "*.y*ml"))
 	if err != nil {
-		return nil, err
+		return // No agents directory
 	}
 
 	for _, agentFile := range agentFiles {
-		content, err := os.ReadFile(agentFile)
-		if err != nil {
-			continue
+		agentName := strings.TrimSuffix(filepath.Base(agentFile), filepath.Ext(agentFile))
+
+		relationship := ComponentRelationship{
+			Agent:      agentName,
+			Tasks:      make([]string, 0),
+			LocalTasks: make([]string, 0),
+			Templates:  make([]string, 0),
+			DataFiles:  make([]string, 0),
 		}
 
-		var agent struct {
-			Agent struct {
-				Tasks []string `yaml:"tasks"`
-			} `yaml:"agent"`
-		}
-
-		if err := yaml.Unmarshal(content, &agent); err != nil {
-			continue // Will be caught by format validation
-		}
-
-		relFile, _ := filepath.Rel(a.baseDir, agentFile)
-
-		for _, taskPath := range agent.Agent.Tasks {
-			// First validate the path format
-			if issue := a.validateSingleTaskPath(taskPath, relFile); issue != nil {
-				issues = append(issues, *issue)
-				continue
-			}
-
-			// Then check if file exists (only for valid paths)
-			if strings.HasPrefix(taskPath, standardTasksPrefix) || strings.HasPrefix(taskPath, localTasksPrefix) {
-				cleanPath := strings.TrimPrefix(taskPath, "./")
-				absolutePath := filepath.Join(a.baseDir, cleanPath)
-
-				if _, err := os.Stat(absolutePath); os.IsNotExist(err) {
-					issues = append(issues, ValidationIssue{
-						Type:        issueTypeMissingTask,
-						Severity:    SeverityCritical,
-						File:        relFile,
-						Line:        0,
-						Message:     fmt.Sprintf("Missing task file: %s", taskPath),
-						FixGuidance: "Create the missing task file or remove the reference",
-					})
+		// Extract tasks from agent YAML
+		if tasks, err := a.extractAgentTasks(agentFile); err == nil {
+			for _, task := range tasks {
+				taskName := filepath.Base(task)
+				if strings.Contains(task, localTasksPrefix) {
+					relationship.LocalTasks = append(relationship.LocalTasks, taskName)
+				} else {
+					relationship.Tasks = append(relationship.Tasks, taskName)
 				}
 			}
 		}
-	}
 
-	return issues, nil
+		insights.Relationships = append(insights.Relationships, relationship)
+	}
 }
 
-// getAgentFiles returns all YAML agent files in directory
-func (a *FrameworkAnalyzer) getAgentFiles(agentsDir string) ([]string, error) {
-	yamlFiles, err := filepath.Glob(filepath.Join(agentsDir, yamlGlob))
-	if err != nil {
-		return nil, err
-	}
-	ymlFiles, err := filepath.Glob(filepath.Join(agentsDir, ymlGlob))
-	if err != nil {
-		return nil, err
-	}
-	return append(yamlFiles, ymlFiles...), nil
-}
-
-// validateSingleTaskPath validates a single task path
-func (a *FrameworkAnalyzer) validateSingleTaskPath(taskPath, relFile string) *ValidationIssue {
-	if strings.TrimSpace(taskPath) == "" {
-		return &ValidationIssue{
-			Type:        issueTypeInvalidTaskPath,
-			Severity:    SeverityError,
-			File:        relFile,
-			Message:     "Empty task path found",
-			FixGuidance: fmt.Sprintf("Remove empty task path or provide valid path starting with '%s' or '%s'", standardTasksPrefix, localTasksPrefix),
-		}
-	}
-
-	if !strings.HasPrefix(taskPath, standardTasksPrefix) && !strings.HasPrefix(taskPath, localTasksPrefix) {
-		return &ValidationIssue{
-			Type:        issueTypeInvalidTaskPath,
-			Severity:    SeverityError,
-			File:        relFile,
-			Message:     fmt.Sprintf("Invalid task path format: %s", taskPath),
-			FixGuidance: fmt.Sprintf("Task paths must start with '%s' or '%s'", standardTasksPrefix, localTasksPrefix),
-		}
-	}
-
-	if strings.Contains(taskPath, "../") || strings.Contains(taskPath, "/..") {
-		return &ValidationIssue{
-			Type:        issueTypeInvalidTaskPath,
-			Severity:    SeverityCritical,
-			File:        relFile,
-			Message:     fmt.Sprintf("Path traversal detected in task path: %s", taskPath),
-			FixGuidance: "Remove path traversal sequences (..) from task path",
-		}
-	}
-
-	if !strings.HasSuffix(taskPath, mdExt) {
-		return &ValidationIssue{
-			Type:        issueTypeInvalidTaskPath,
-			Severity:    SeverityError,
-			File:        relFile,
-			Message:     fmt.Sprintf("Invalid task file extension: %s", taskPath),
-			FixGuidance: fmt.Sprintf("Task files must have %s extension", mdExt),
-		}
-	}
-
-	return nil
-}
-
-// detectArchitectureViolations detects violations of component separation
-func (a *FrameworkAnalyzer) detectArchitectureViolations(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	templatesDir := filepath.Join(frameworkDir, "templates")
-	if _, err := os.Stat(templatesDir); os.IsNotExist(err) {
-		return issues, nil
-	}
-
-	templateFiles, err := filepath.Glob(filepath.Join(templatesDir, "*.md"))
+// extractAgentTasks extracts task references from agent YAML
+func (a *FrameworkAnalyzer) extractAgentTasks(agentFile string) ([]string, error) {
+	content, err := os.ReadFile(agentFile)
 	if err != nil {
 		return nil, err
 	}
 
-	// Templates should not reference data files directly
-	dataLinkRegex := regexp.MustCompile(`\[([^\]]+)\]\((\./\.krci-ai/data/[^)]+)\)`)
-
-	for _, templateFile := range templateFiles {
-		content, err := os.ReadFile(templateFile)
-		if err != nil {
-			continue
-		}
-
-		lines := strings.Split(string(content), "\n")
-		for lineNum, line := range lines {
-			if dataLinkRegex.MatchString(line) {
-				relFile, _ := filepath.Rel(a.baseDir, templateFile)
-				issues = append(issues, ValidationIssue{
-					Type:        "architecture_violation",
-					Severity:    SeverityCritical,
-					File:        relFile,
-					Line:        lineNum + 1,
-					Message:     "Template contains data reference - violates component separation",
-					FixGuidance: "Move data reference from template to calling task",
-				})
-			}
-		}
+	var agent struct {
+		Agent struct {
+			Tasks []string `yaml:"tasks"`
+		} `yaml:"agent"`
 	}
 
-	return issues, nil
-}
-
-// detectLocalDirectoryViolations detects invalid local directory structure
-func (a *FrameworkAnalyzer) detectLocalDirectoryViolations(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	localDir := filepath.Join(frameworkDir, "local")
-	if _, err := os.Stat(localDir); os.IsNotExist(err) {
-		// No local directory, no violations
-		return issues, nil
-	}
-
-	// Check if local directory exists and get its contents
-	entries, err := os.ReadDir(localDir)
-	if err != nil {
+	if err := yaml.Unmarshal(content, &agent); err != nil {
 		return nil, err
 	}
 
-	// Allowed directories in .krci-ai/local/
-	allowedDirs := map[string]bool{
-		"tasks":     true,
-		"templates": true,
-		"data":      true,
-	}
-
-	for _, entry := range entries {
-		if !allowedDirs[entry.Name()] {
-			relFile, _ := filepath.Rel(a.baseDir, filepath.Join(localDir, entry.Name()))
-			issues = append(issues, ValidationIssue{
-				Type:        "local_directory_violation",
-				Severity:    SeverityCritical,
-				File:        relFile,
-				Line:        0,
-				Message:     fmt.Sprintf("Invalid directory '%s' in .krci-ai/local/ - only 'tasks', 'templates', and 'data' are allowed", entry.Name()),
-				FixGuidance: "Remove invalid directory or move contents to allowed directories (tasks/, templates/, data/)",
-			})
+	var tasks []string
+	for _, task := range agent.Agent.Tasks {
+		if strings.HasPrefix(task, standardTasksPrefix) || strings.HasPrefix(task, localTasksPrefix) {
+			tasks = append(tasks, task)
 		}
 	}
 
-	return issues, nil
+	return tasks, nil
 }
 
-// detectFormatIssues detects invalid file formats
-func (a *FrameworkAnalyzer) detectFormatIssues(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	// Check YAML files in agents directory
-	agentsDir := filepath.Join(frameworkDir, "agents")
-	if _, err := os.Stat(agentsDir); err == nil {
-		agentFiles, err := filepath.Glob(filepath.Join(agentsDir, "*.y*ml"))
-		if err != nil {
-			return nil, err
-		}
-
-		for _, agentFile := range agentFiles {
-			content, err := os.ReadFile(agentFile)
-			if err != nil {
-				continue
-			}
-
-			var temp interface{}
-			if err := yaml.Unmarshal(content, &temp); err != nil {
-				relFile, _ := filepath.Rel(a.baseDir, agentFile)
-				issues = append(issues, ValidationIssue{
-					Type:        "invalid_format",
-					Severity:    SeverityCritical,
-					File:        relFile,
-					Line:        0,
-					Message:     fmt.Sprintf("Invalid YAML syntax: %s", err.Error()),
-					FixGuidance: "Fix YAML syntax errors",
-				})
-			}
-		}
+// generateUsageStatistics generates usage statistics
+func (a *FrameworkAnalyzer) generateUsageStatistics(insights *FrameworkInsights) {
+	insights.UsageStatistics = UsageStatistics{
+		MostUsedTemplate:   "",
+		MostUsedData:       "",
+		TemplateUsageCount: 0,
+		DataUsageCount:     0,
 	}
-
-	return issues, nil
-}
-
-// detectInvalidAgentExtensions detects files in agents directory with non-YAML extensions
-func (a *FrameworkAnalyzer) detectInvalidAgentExtensions(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	agentsPath := filepath.Join(frameworkDir, agentsDir)
-	allFiles, err := filepath.Glob(filepath.Join(agentsPath, "*"))
-	if err != nil {
-		return nil, err
-	}
-
-	for _, file := range allFiles {
-		// Skip directories
-		if info, err := os.Stat(file); err != nil || info.IsDir() {
-			continue
-		}
-
-		ext := filepath.Ext(file)
-		if ext != yamlExt && ext != ymlExt {
-			relPath, _ := filepath.Rel(a.baseDir, file)
-			baseName := strings.TrimSuffix(filepath.Base(file), ext)
-
-			issues = append(issues, ValidationIssue{
-				Type:        issueTypeInvalidAgentExt,
-				Severity:    SeverityWarning,
-				File:        relPath,
-				Line:        0,
-				Message:     fmt.Sprintf("Agent files should have %s or %s extension, found: %s", yamlExt, ymlExt, ext),
-				FixGuidance: fmt.Sprintf("Rename to %s%s or %s%s", baseName, yamlExt, baseName, ymlExt),
-			})
-		}
-	}
-
-	return issues, nil
-}
-
-// detectWarningIssues detects warning-level issues
-func (a *FrameworkAnalyzer) detectWarningIssues(frameworkDir string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	// 1. Detect orphaned files
-	orphanedFiles, err := a.detectOrphanedFiles(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, orphanedFiles...)
-
-	// 2. Detect circular dependencies
-	circularDeps, err := a.detectCircularDependencies(frameworkDir)
-	if err != nil {
-		return nil, err
-	}
-	issues = append(issues, circularDeps...)
-
-	return issues, nil
-}
-
-// findMarkdownFiles finds all markdown files in the framework
-func (a *FrameworkAnalyzer) findMarkdownFiles(frameworkDir string) ([]string, error) {
-	var files []string
-	dirs := []string{agentsDir, tasksDir, templatesDir, dataDir}
-
-	// Include global directories
-	for _, dir := range dirs {
-		dirPath := filepath.Join(frameworkDir, dir)
-		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
-			continue
-		}
-
-		// Recursively find all markdown files including subdirectories
-		err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
-			if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") {
-				files = append(files, path)
-			}
-			return nil
-		})
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	// Include local directories
-	localDirs := []string{"local/tasks", "local/templates", "local/data"}
-	for _, dir := range localDirs {
-		dirPath := filepath.Join(frameworkDir, dir)
-		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
-			continue
-		}
-
-		dirFiles, err := filepath.Glob(filepath.Join(dirPath, "*.md"))
-		if err != nil {
-			return nil, err
-		}
-		files = append(files, dirFiles...)
-	}
-
-	return files, nil
 }
 
 // AnalyzeEmbeddedDependencies implements EmbeddedAssetAnalyzer interface
@@ -600,51 +274,51 @@ func (a *FrameworkAnalyzer) AnalyzeEmbeddedDependencies(ctx context.Context, emb
 		UsageStatistics: UsageStatistics{},
 	}
 
-	// Step 1: Count embedded components
-	if err := a.countEmbeddedComponents(embeddedAssets, &insights.ComponentCounts); err != nil {
-		return nil, err
+	// Count embedded components
+	a.countEmbeddedComponents(embeddedAssets, &insights.ComponentCounts)
+
+	// Analyze relationships for selected agents
+	for _, agentName := range agentNames {
+		select {
+		case <-ctx.Done():
+			return nil, ctx.Err()
+		default:
+			relationship, err := a.buildEmbeddedAgentRelationship(embeddedAssets, agentName)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Warning: failed to build relationship for agent %s: %v\n", agentName, err)
+				continue
+			}
+			insights.Relationships = append(insights.Relationships, *relationship)
+		}
 	}
 
-	// Step 2: Analyze relationships for selected agents
-	if err := a.analyzeEmbeddedRelationships(ctx, embeddedAssets, agentNames, insights); err != nil {
-		return nil, fmt.Errorf("analyzing embedded relationships: %w", err)
-	}
-
-	// Step 3: Generate usage statistics
+	// Generate usage statistics
 	a.generateUsageStatistics(insights)
 
 	return insights, nil
 }
 
 // countEmbeddedComponents counts components in embedded filesystem
-func (a *FrameworkAnalyzer) countEmbeddedComponents(embeddedAssets fs.FS, counts *ComponentCounts) error {
+func (a *FrameworkAnalyzer) countEmbeddedComponents(embeddedAssets fs.FS, counts *ComponentCounts) {
 	// Count agents
 	agentFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+agentsDir+"/*.y*ml")
-	if err != nil {
-		return err
-	}
-	counts.Agents = len(agentFiles)
-
-	// Count tasks (both standard and local)
-	taskFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+tasksDir+"/*.md")
-	if err != nil {
-		return err
-	}
-	counts.Tasks = len(taskFiles)
-
-	localTaskFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/local/"+tasksDir+"/*.md")
 	if err == nil {
-		counts.Tasks += len(localTaskFiles)
+		counts.Agents = len(agentFiles)
+	}
+
+	// Count tasks
+	taskFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+tasksDir+"/*.md")
+	if err == nil {
+		counts.Tasks = len(taskFiles)
 	}
 
 	// Count templates
 	templateFiles, err := fs.Glob(embeddedAssets, embeddedPrefix+"/"+templatesDir+"/*.md")
-	if err != nil {
-		return err
+	if err == nil {
+		counts.Templates = len(templateFiles)
 	}
-	counts.Templates = len(templateFiles)
 
-	// Count data files recursively including subdirectories
+	// Count data files
 	dataCount := 0
 	err = fs.WalkDir(embeddedAssets, embeddedPrefix+"/"+dataDir, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
@@ -655,38 +329,13 @@ func (a *FrameworkAnalyzer) countEmbeddedComponents(embeddedAssets fs.FS, counts
 		}
 		return nil
 	})
-	if err != nil {
-		return err
+	if err == nil {
+		counts.Data = dataCount
 	}
-	counts.Data = dataCount
-
-	return nil
 }
 
-// analyzeEmbeddedRelationships analyzes agent relationships in embedded filesystem (comprehensive version)
-func (a *FrameworkAnalyzer) analyzeEmbeddedRelationships(ctx context.Context, embeddedAssets fs.FS, agentNames []string, insights *FrameworkInsights) error {
-	for _, agentName := range agentNames {
-		// Check for cancellation
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
-
-		relationship, err := a.buildAgentRelationship(embeddedAssets, agentName)
-		if err != nil {
-			// Log warning but continue with other agents for robustness
-			// In a production system, you might want to use a proper logger here
-			fmt.Fprintf(os.Stderr, "Warning: failed to build relationship for agent %s: %v\n", agentName, err)
-			continue
-		}
-		insights.Relationships = append(insights.Relationships, *relationship)
-	}
-	return nil
-}
-
-// buildAgentRelationship builds a complete ComponentRelationship for a single agent
-func (a *FrameworkAnalyzer) buildAgentRelationship(embeddedAssets fs.FS, agentName string) (*ComponentRelationship, error) {
+// buildEmbeddedAgentRelationship builds a ComponentRelationship for an embedded agent
+func (a *FrameworkAnalyzer) buildEmbeddedAgentRelationship(embeddedAssets fs.FS, agentName string) (*ComponentRelationship, error) {
 	agentPath := fmt.Sprintf(agentFilePattern, embeddedPrefix, agentsDir, agentName)
 
 	relationship := ComponentRelationship{
@@ -697,69 +346,27 @@ func (a *FrameworkAnalyzer) buildAgentRelationship(embeddedAssets fs.FS, agentNa
 		DataFiles:  make([]string, 0),
 	}
 
-	// Get tasks referenced by this agent
+	// Extract tasks from embedded agent YAML
 	taskRefs, err := a.extractEmbeddedYAMLTasks(embeddedAssets, agentPath)
 	if err != nil {
 		return nil, fmt.Errorf("extracting tasks for agent %s: %w", agentName, err)
 	}
 
-	if err := a.processAgentTasks(embeddedAssets, taskRefs, &relationship); err != nil {
-		return nil, fmt.Errorf("processing tasks for agent %s: %w", agentName, err)
-	}
-
-	// Remove duplicates using utils package
-	relationship.Templates = utils.DeduplicateStrings(relationship.Templates)
-	relationship.DataFiles = utils.DeduplicateStrings(relationship.DataFiles)
-
-	return &relationship, nil
-}
-
-// processAgentTasks processes all tasks for an agent and updates the relationship
-func (a *FrameworkAnalyzer) processAgentTasks(embeddedAssets fs.FS, taskRefs []string, relationship *ComponentRelationship) error {
-	// Preallocate slices for better memory efficiency
-	if cap(relationship.Templates) == 0 {
-		relationship.Templates = make([]string, 0, len(taskRefs)*2)
-	}
-	if cap(relationship.DataFiles) == 0 {
-		relationship.DataFiles = make([]string, 0, len(taskRefs)*2)
-	}
-
+	// Process tasks
 	for _, taskRef := range taskRefs {
 		taskName := filepath.Base(taskRef)
-
-		// Categorize as local or standard task
 		if strings.Contains(taskRef, localTasksPrefix) {
 			relationship.LocalTasks = append(relationship.LocalTasks, taskName)
 		} else {
 			relationship.Tasks = append(relationship.Tasks, taskName)
 		}
-
-		if err := a.addTaskDependencies(embeddedAssets, taskRef, relationship); err != nil {
-			return fmt.Errorf("adding dependencies for task %s: %w", taskRef, err)
-		}
-	}
-	return nil
-}
-
-// addTaskDependencies finds and adds template/data dependencies for a task
-func (a *FrameworkAnalyzer) addTaskDependencies(embeddedAssets fs.FS, taskRef string, relationship *ComponentRelationship) error {
-	// Convert task reference to embedded path
-	embeddedTaskPath := strings.Replace(taskRef, taskReferencePrefix, embeddedPrefix+"/", 1)
-
-	// Check if task file exists in embedded assets before analyzing
-	if _, err := embeddedAssets.Open(embeddedTaskPath); err != nil {
-		// Task file doesn't exist - this is not necessarily an error in embedded assets
-		return nil
 	}
 
-	templates, dataFiles, err := a.getEmbeddedTaskReferences(embeddedAssets, embeddedTaskPath)
-	if err != nil {
-		return fmt.Errorf("getting task references from %s: %w", embeddedTaskPath, err)
-	}
+	// Remove duplicates
+	relationship.Templates = utils.DeduplicateStrings(relationship.Templates)
+	relationship.DataFiles = utils.DeduplicateStrings(relationship.DataFiles)
 
-	relationship.Templates = append(relationship.Templates, templates...)
-	relationship.DataFiles = append(relationship.DataFiles, dataFiles...)
-	return nil
+	return &relationship, nil
 }
 
 // extractEmbeddedYAMLTasks extracts task references from embedded agent YAML files
@@ -779,7 +386,6 @@ func (a *FrameworkAnalyzer) extractEmbeddedYAMLTasks(embeddedAssets fs.FS, agent
 		return nil, err
 	}
 
-	// Filter for .krci-ai task references (both standard and local)
 	var tasks []string
 	for _, task := range agent.Agent.Tasks {
 		if strings.HasPrefix(task, standardTasksPrefix) || strings.HasPrefix(task, localTasksPrefix) {
@@ -788,120 +394,4 @@ func (a *FrameworkAnalyzer) extractEmbeddedYAMLTasks(embeddedAssets fs.FS, agent
 	}
 
 	return tasks, nil
-}
-
-// getEmbeddedTaskReferences extracts template and data references from embedded task file (minimal)
-func (a *FrameworkAnalyzer) getEmbeddedTaskReferences(embeddedAssets fs.FS, taskPath string) ([]string, []string, error) {
-	var templates, dataFiles []string
-
-	// Extract markdown links with proper error handling
-	links, err := a.extractEmbeddedMarkdownLinks(embeddedAssets, taskPath)
-	if err != nil {
-		return nil, nil, fmt.Errorf("extracting markdown links from %s: %w", taskPath, err)
-	}
-
-	for _, link := range links {
-		// Preserve full relative path to maintain subdirectory structure
-		relativePath := strings.TrimPrefix(link, taskReferencePrefix)
-		if strings.Contains(link, templatesLinkPattern) {
-			templates = append(templates, strings.TrimPrefix(relativePath, templatesDir+"/"))
-		} else if strings.Contains(link, dataLinkPattern) {
-			dataFiles = append(dataFiles, strings.TrimPrefix(relativePath, dataDir+"/"))
-		}
-	}
-
-	return templates, dataFiles, nil
-}
-
-// extractEmbeddedMarkdownLinks extracts internal framework links from embedded markdown files
-func (a *FrameworkAnalyzer) extractEmbeddedMarkdownLinks(embeddedAssets fs.FS, filePath string) ([]string, error) {
-	content, err := fs.ReadFile(embeddedAssets, filePath)
-	if err != nil {
-		return nil, err
-	}
-
-	// Regex for internal markdown links: [text](./.krci-ai/path/file.ext)
-	linkRegex := regexp.MustCompile(`\[([^\]]+)\]\((\./\.krci-ai/(?:tasks|templates|data)/[^)]+\.(md|yaml|yml|json))\)`)
-
-	var links []string
-	matches := linkRegex.FindAllStringSubmatch(string(content), -1)
-	for _, match := range matches {
-		if len(match) > 2 {
-			linkPath := match[2]
-			// Skip external links
-			if !strings.HasPrefix(linkPath, "http://") && !strings.HasPrefix(linkPath, "https://") {
-				links = append(links, linkPath)
-			}
-		}
-	}
-
-	return links, nil
-}
-
-// ValidateEmbeddedAgentDependencies implements EmbeddedAssetAnalyzer interface
-// Simple validation that ensures all agent dependencies exist in embedded assets
-func (a *FrameworkAnalyzer) ValidateEmbeddedAgentDependencies(ctx context.Context, embeddedAssets fs.FS, agentNames []string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	for _, agentName := range agentNames {
-		// Check for cancellation
-		select {
-		case <-ctx.Done():
-			return nil, ctx.Err()
-		default:
-		}
-
-		agentPath := fmt.Sprintf(agentFilePattern, embeddedPrefix, agentsDir, agentName)
-
-		// Check if agent file exists
-		if _, err := embeddedAssets.Open(agentPath); err != nil {
-			issues = append(issues, ValidationIssue{
-				Type:        "missing_embedded_agent",
-				Severity:    SeverityCritical,
-				File:        agentPath,
-				Line:        0,
-				Message:     fmt.Sprintf("Agent not found in embedded assets: %s", agentName),
-				FixGuidance: "Ensure agent file exists in embedded framework assets",
-			})
-			continue
-		}
-
-		// Validate task dependencies exist
-		taskIssues, err := a.validateEmbeddedAgentTasks(embeddedAssets, agentPath)
-		if err != nil {
-			return nil, err
-		}
-		issues = append(issues, taskIssues...)
-	}
-
-	return issues, nil
-}
-
-// validateEmbeddedAgentTasks validates task dependencies for embedded agent
-func (a *FrameworkAnalyzer) validateEmbeddedAgentTasks(embeddedAssets fs.FS, agentPath string) ([]ValidationIssue, error) {
-	var issues []ValidationIssue
-
-	taskRefs, err := a.extractEmbeddedYAMLTasks(embeddedAssets, agentPath)
-	if err != nil {
-		return nil, err
-	}
-
-	for _, taskRef := range taskRefs {
-		// Convert task reference to embedded path
-		embeddedTaskPath := strings.Replace(taskRef, taskReferencePrefix, embeddedPrefix+"/", 1)
-
-		// Check if task file exists in embedded assets
-		if _, err := embeddedAssets.Open(embeddedTaskPath); err != nil {
-			issues = append(issues, ValidationIssue{
-				Type:        "missing_embedded_task",
-				Severity:    SeverityCritical,
-				File:        agentPath,
-				Line:        0,
-				Message:     fmt.Sprintf("Missing task file in embedded assets: %s", taskRef),
-				FixGuidance: "Ensure task file exists in embedded framework assets",
-			})
-		}
-	}
-
-	return issues, nil
 }

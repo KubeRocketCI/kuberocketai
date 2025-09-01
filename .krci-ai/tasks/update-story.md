@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - story.md
+  data:
+    - common/sdlc-framework.md
+    - prioritization-frameworks.md
+---
 # Task: Update Story
 
 ## Description

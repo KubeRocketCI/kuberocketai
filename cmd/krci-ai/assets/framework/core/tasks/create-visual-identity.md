@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - visual-identity-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Create Visual Identity
 
 ## Description

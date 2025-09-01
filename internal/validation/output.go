@@ -198,30 +198,3 @@ func (r *ValidationReport) formatExitCode() string {
 	}
 	return "Exit code: 0 (framework functional)\n"
 }
-
-// GetExitCode returns the appropriate exit code
-func (r *ValidationReport) GetExitCode() int {
-	if r.HasCritical {
-		return 1
-	}
-	return 0
-}
-
-// FormatSimpleSuccess formats a simple success message
-func FormatSimpleSuccess(insights *FrameworkInsights, processTime time.Duration) string {
-	var result strings.Builder
-	green := color.New(color.FgGreen)
-
-	result.WriteString("🔍 Validating framework integrity...\n\n")
-	result.WriteString(green.Sprint("✅ FRAMEWORK VALID"))
-	result.WriteString("\n")
-
-	if insights != nil {
-		result.WriteString(insights.FormatInsights())
-	}
-
-	result.WriteString(fmt.Sprintf("⚡ Validation completed in %.1fs\n", processTime.Seconds()))
-	result.WriteString("\n")
-
-	return result.String()
-}

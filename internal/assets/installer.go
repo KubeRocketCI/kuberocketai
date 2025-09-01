@@ -199,6 +199,16 @@ func NewInstaller(targetDir string, embeddedAssets embed.FS) *Installer {
 	}
 }
 
+// GetTargetDir returns the target directory
+func (i *Installer) GetTargetDir() string {
+	return i.targetDir
+}
+
+// GetEmbeddedAssets returns the embedded assets filesystem
+func (i *Installer) GetEmbeddedAssets() embed.FS {
+	return i.embeddedAssets
+}
+
 // Install installs framework assets to the target directory
 func (i *Installer) Install() error {
 	krciPath := filepath.Join(i.targetDir, KrciAIDir)

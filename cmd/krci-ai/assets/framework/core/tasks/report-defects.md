@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - defect-report.md
+  data:
+    - common/sdlc-framework.md
+    - quality-metrics.md
+---
 # Task: Report Defects
 
 ## Description

@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - user-journey.md
+  data:
+    - common/sdlc-framework.md
+    - analysis-methodologies.md
+---
 # Task: Map User Journeys
 
 ## Description

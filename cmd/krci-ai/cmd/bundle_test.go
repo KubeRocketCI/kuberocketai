@@ -271,7 +271,7 @@ func TestBundleCommandRequiresAllOrAgentFlag(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Change to temp directory
 	originalDir, err := os.Getwd()
@@ -303,7 +303,7 @@ func TestBundleCommandMissingFramework(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Change to temp directory
 	originalDir, err := os.Getwd()
@@ -322,7 +322,7 @@ func TestBundleCommandMissingFramework(t *testing.T) {
 	// Set the --all flag to test framework validation (not flag validation)
 	err = bundleCmd.Flags().Set("all", "true")
 	require.NoError(t, err)
-	defer bundleCmd.Flags().Set("all", "false") // Reset after test
+	defer func() { _ = bundleCmd.Flags().Set("all", "false") }() // Reset after test
 
 	err = runBundle(bundleCmd, []string{})
 	if err == nil {
@@ -338,7 +338,7 @@ func TestCollectAdditionalFiles(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Create test structure
 	templatesDir := filepath.Join(tempDir, ".krci-ai", "templates")
@@ -394,7 +394,7 @@ func TestWriteBundleFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	bundlePath := filepath.Join(tempDir, "test-bundle.md")
 	testContent := "# Test Bundle\nTest content"
@@ -734,7 +734,7 @@ func TestGetTaskDependencies(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Create test structure
 	tasksDir := filepath.Join(tempDir, ".krci-ai", "tasks")
@@ -785,7 +785,7 @@ func TestGetTaskDependenciesNonExistentFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	deps := getTaskDependencies(tempDir, "non-existent-task")
 	if len(deps) != 0 {
@@ -920,7 +920,7 @@ func TestCollectTemplatesAndDataWithTask(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Create test structure
 	templatesDir := filepath.Join(tempDir, ".krci-ai", "templates")
@@ -1069,7 +1069,7 @@ func TestWriteBundleFileErrorHandling(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	bundlePath := filepath.Join(tempDir, "empty-bundle.md")
 	err = writeBundleFile(bundlePath, "")
@@ -1133,7 +1133,7 @@ func TestCollectBundleContentFiltering(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Create test framework structure
 	agentsDir := filepath.Join(tempDir, ".krci-ai", "agents")
@@ -1261,7 +1261,7 @@ func TestCollectAdditionalFilesSkippedForTargetedBundles(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp dir: %v", err)
 	}
-	defer os.RemoveAll(tempDir)
+	defer func() { _ = os.RemoveAll(tempDir) }()
 
 	// Create test framework structure with extra files
 	templatesDir := filepath.Join(tempDir, ".krci-ai", "templates")
@@ -1411,4 +1411,21 @@ func TestBundleContentSizeValidation(t *testing.T) {
 			}
 		})
 	}
+}
+
+// Test the new refactored functions
+
+func TestInitializeBundleContent(t *testing.T) {
+	content := initializeBundleContent()
+
+	assert.NotNil(t, content, "Bundle content should not be nil")
+	assert.NotNil(t, content.Agents, "Agents slice should be initialized")
+	assert.NotNil(t, content.Tasks, "Tasks map should be initialized")
+	assert.NotNil(t, content.Templates, "Templates map should be initialized")
+	assert.NotNil(t, content.DataFiles, "DataFiles map should be initialized")
+
+	assert.Equal(t, 0, len(content.Agents), "Agents slice should be empty initially")
+	assert.Equal(t, 0, len(content.Tasks), "Tasks map should be empty initially")
+	assert.Equal(t, 0, len(content.Templates), "Templates map should be empty initially")
+	assert.Equal(t, 0, len(content.DataFiles), "DataFiles map should be empty initially")
 }

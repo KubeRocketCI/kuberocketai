@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - process-map.md
+  data:
+    - common/sdlc-framework.md
+    - analysis-methodologies.md
+---
 # Task: Analyze Processes
 
 ## Description

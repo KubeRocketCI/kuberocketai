@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - requirements-doc.md
+  data:
+    - common/sdlc-framework.md
+    - analysis-methodologies.md
+---
 # Task: Gather Requirements
 
 ## Description

@@ -1,3 +1,12 @@
+---
+dependencies:
+  templates:
+    - sad-template.md
+    - architecture-review.md
+  data:
+    - architecture-principles.md
+    - common/sdlc-framework.md
+---
 # Task: Review Architecture Documentation
 
 ## Description

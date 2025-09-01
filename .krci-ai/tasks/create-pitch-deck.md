@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - pitch-deck-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Create Pitch Deck
 
 ## Description

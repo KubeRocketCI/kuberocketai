@@ -39,13 +39,13 @@ linters:
     - govet
     - staticcheck
     - gosimple
-    - unused
+    - unused       # Detects unused variables, functions, constants, types
     - misspell
     - gocyclo
     - dupl
     - goconst
     - errcheck
-    - ineffassign
+    - ineffassign  # Detects ineffective assignments
     - typecheck
     - unparam      # Detects unused function parameters
   disable: []
@@ -54,13 +54,15 @@ issues:
   exclude-use-default: false
   exclude-dirs:
     - vendor
-  exclude-files:
-    - ".*_test.go"
   exclude-rules:
     - path: _test\.go
       linters:
         - dupl
         - goconst
+        - gocyclo  # Exclude cyclomatic complexity checks for test files
+        # Note: ineffassign and unused linters still run on test files to catch real issues
+    - path: _test\.go
+      text: "shadow:"  # Exclude variable shadow warnings for test files
     - linters:
         - staticcheck
       text: "SA1019:"  # Ignore deprecation warnings for now

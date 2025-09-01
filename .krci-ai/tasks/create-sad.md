@@ -1,3 +1,12 @@
+---
+dependencies:
+  templates:
+    - sad-template.md
+  data:
+    - common/sdlc-framework.md
+    - architecture-principles.md
+    - design-patterns.md
+---
 # Task: Create Software Architecture Document (SAD)
 
 ## Description

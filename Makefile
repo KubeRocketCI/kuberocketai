@@ -28,6 +28,7 @@ GOLANGCI_LINT_VERSION ?= v1.64.8
 GORELEASER_VERSION ?= v2.10.2
 STATICCHECK_VERSION ?= 2025.1.1
 GIT_CHGLOG_VERSION ?= v0.15.4
+DEADCODE_VERSION ?= v0.36.0
 
 # Cross-platform builds
 PLATFORMS := linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64
@@ -94,6 +95,11 @@ vet: ## Run go vet
 staticcheck: $(BIN_DIR)/staticcheck ## Run staticcheck
 	@echo "Running staticcheck..."
 	$(BIN_DIR)/staticcheck ./...
+
+.PHONY: deadcode
+deadcode: $(BIN_DIR)/deadcode ## Check for unused (dead) code
+	@echo "Checking for unused code..."
+	$(BIN_DIR)/deadcode -test ./...
 
 .PHONY: deps
 deps: ## Download Go modules
@@ -199,8 +205,12 @@ $(BIN_DIR)/git-chglog: $(BIN_DIR)
 	@echo "Installing git-chglog $(GIT_CHGLOG_VERSION)..."
 	GOBIN=$(PWD)/$(BIN_DIR) go install github.com/git-chglog/git-chglog/cmd/git-chglog@$(GIT_CHGLOG_VERSION)
 
+$(BIN_DIR)/deadcode: $(BIN_DIR)
+	@echo "Installing deadcode $(DEADCODE_VERSION)..."
+	GOBIN=$(PWD)/$(BIN_DIR) go install golang.org/x/tools/cmd/deadcode@$(DEADCODE_VERSION)
+
 .PHONY: tools
-tools: $(BIN_DIR)/golangci-lint $(BIN_DIR)/goreleaser $(BIN_DIR)/staticcheck $(BIN_DIR)/git-chglog ## Install all development tools
+tools: $(BIN_DIR)/golangci-lint $(BIN_DIR)/goreleaser $(BIN_DIR)/staticcheck $(BIN_DIR)/git-chglog $(BIN_DIR)/deadcode ## Install all development tools
 
 .PHONY: check-tools
 check-tools: ## Check if required tools are installed

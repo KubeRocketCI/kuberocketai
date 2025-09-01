@@ -104,7 +104,7 @@ func TestExecuteWithoutPanic(t *testing.T) {
 	}()
 
 	// Close writer and read output
-	w.Close()
+	_ = w.Close()
 	output, _ := io.ReadAll(r)
 
 	// Verify output contains expected help text

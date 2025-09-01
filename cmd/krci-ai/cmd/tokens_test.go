@@ -73,8 +73,8 @@ func TestRunTokensCommandValidation(t *testing.T) {
 			cmd.Flags().Duration("timeout", 30*time.Second, "Timeout for token analysis")
 
 			// Set flag values
-			cmd.Flags().Set("agent", tt.agent)
-			cmd.Flags().Set("all", fmt.Sprintf("%t", tt.all))
+			_ = cmd.Flags().Set("agent", tt.agent)
+			_ = cmd.Flags().Set("all", fmt.Sprintf("%t", tt.all))
 
 			// Mock the calculator creation to avoid actual file system operations
 			// Note: In a real test, we would need to mock the NewCalculator function
@@ -121,7 +121,7 @@ func TestOutputAgentTokensJSON(t *testing.T) {
 
 	err := outputAgentTokensJSON(agentInfo)
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = oldStdout
 	output, _ := io.ReadAll(r)
 
@@ -154,7 +154,7 @@ func TestOutputProjectTokensJSON(t *testing.T) {
 
 	err := outputProjectTokensJSON(projectInfo)
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = oldStdout
 	output, _ := io.ReadAll(r)
 
@@ -201,7 +201,7 @@ func TestOutputAgentTokensTable(t *testing.T) {
 
 	err := outputAgentTokensTable(agentInfo)
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = oldStdout
 	output, _ := io.ReadAll(r)
 
@@ -238,7 +238,7 @@ func TestOutputAgentTokensTableNoDependencies(t *testing.T) {
 
 	err := outputAgentTokensTable(agentInfo)
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = oldStdout
 	output, _ := io.ReadAll(r)
 
@@ -272,7 +272,7 @@ func TestOutputProjectTokensTable(t *testing.T) {
 
 	err := outputProjectTokensTable(projectInfo)
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = oldStdout
 	output, _ := io.ReadAll(r)
 
@@ -325,7 +325,7 @@ func TestHandleTokenError(t *testing.T) {
 
 				err := handleTokenError(tt.err, tt.jsonMode)
 
-				w.Close()
+				_ = w.Close()
 				os.Stderr = oldStderr
 				output, _ := io.ReadAll(r)
 
@@ -355,7 +355,7 @@ func TestHandleTokenErrorWithSuggestions(t *testing.T) {
 
 	resultErr := handleTokenError(err, false) // false = not JSON mode
 
-	w.Close()
+	_ = w.Close()
 	os.Stderr = oldStderr
 	output, _ := io.ReadAll(r)
 

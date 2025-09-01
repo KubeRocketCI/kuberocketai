@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - demo-script-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Create Demo Script
 
 ## Description

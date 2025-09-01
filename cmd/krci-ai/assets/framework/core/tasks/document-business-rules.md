@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - business-rules.md
+  data:
+    - common/sdlc-framework.md
+    - analysis-methodologies.md
+---
 # Task: Document Business Rules
 
 ## Description

@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - prd-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Update Product Requirements Document
 
 ## Description

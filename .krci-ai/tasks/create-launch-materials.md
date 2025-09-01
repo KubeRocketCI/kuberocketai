@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - launch-materials-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Create Launch Materials
 
 ## Description

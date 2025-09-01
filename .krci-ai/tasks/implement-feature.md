@@ -1,3 +1,10 @@
+---
+dependencies:
+  data:
+    - common/sdlc-framework.md
+    - coding-standards.md
+    - best-practices.md
+---
 # Task: Implement Feature
 
 ## Description

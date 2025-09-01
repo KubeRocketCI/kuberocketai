@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - marketing-brief-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Create Marketing Brief
 
 ## Description

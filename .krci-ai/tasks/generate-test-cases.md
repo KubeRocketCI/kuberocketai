@@ -1,3 +1,13 @@
+---
+dependencies:
+  templates:
+    - test-cases.md
+  data:
+    - testing-standards.md
+    - quality-metrics.md
+    - common/sdlc-framework.md
+    - test-methodologies.md
+---
 # Task: Generate Test Cases
 
 ## Description

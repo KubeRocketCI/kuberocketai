@@ -24,9 +24,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 )
 
 var testEmbedFS embed.FS
@@ -78,7 +79,7 @@ func (m *MockDiscovery) GetAgentByShortName(shortName string) (*assets.AgentInfo
 	return nil, errors.New("agent not found")
 }
 
-func (m *MockDiscovery) ValidateAgentStructure(filePath string) error {
+func (m *MockDiscovery) ValidateAgentStructure(_ string) error {
 	return m.validateError
 }
 

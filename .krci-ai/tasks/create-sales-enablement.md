@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - sales-enablement-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Create Sales Enablement
 
 ## Description

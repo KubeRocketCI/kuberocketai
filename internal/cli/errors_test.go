@@ -77,8 +77,8 @@ func TestPrintTaskValidationError(t *testing.T) {
 			handler.PrintTaskValidationError(tt.agentName, tt.invalidTasks, tt.availableTasks)
 
 			// Close write end and read from pipe
-			w.Close()
-			buf.ReadFrom(r)
+			_ = w.Close()
+			_, _ = buf.ReadFrom(r)
 			output := buf.String()
 
 			// Check that expected strings are in output
@@ -93,7 +93,7 @@ func TestPrintTaskValidationError(t *testing.T) {
 	}
 
 	// Restore stderr
-	w.Close()
+	_ = w.Close()
 	os.Stderr = old
 }
 
@@ -133,8 +133,8 @@ func TestPrintAgentValidationError(t *testing.T) {
 			handler.PrintAgentValidationError(tt.invalidAgents, tt.availableAgents)
 
 			// Close write end and read from pipe
-			w.Close()
-			buf.ReadFrom(r)
+			_ = w.Close()
+			_, _ = buf.ReadFrom(r)
 			output := buf.String()
 
 			// Check that expected strings are in output
@@ -149,7 +149,7 @@ func TestPrintAgentValidationError(t *testing.T) {
 	}
 
 	// Restore stderr
-	w.Close()
+	_ = w.Close()
 	os.Stderr = old
 }
 
@@ -189,8 +189,8 @@ func TestPrintInstallationError(t *testing.T) {
 			handler.PrintInstallationError(tt.err, tt.phase)
 
 			// Close write end and read from pipe
-			w.Close()
-			buf.ReadFrom(r)
+			_ = w.Close()
+			_, _ = buf.ReadFrom(r)
 			output := buf.String()
 
 			// Check that expected strings are in output
@@ -205,7 +205,7 @@ func TestPrintInstallationError(t *testing.T) {
 	}
 
 	// Restore stderr
-	w.Close()
+	_ = w.Close()
 	os.Stderr = old
 }
 
@@ -245,8 +245,8 @@ func TestPrintErrorWithGuidance(t *testing.T) {
 			handler.PrintErrorWithGuidance(tt.message, tt.guidance)
 
 			// Close write end and read from pipe
-			w.Close()
-			buf.ReadFrom(r)
+			_ = w.Close()
+			_, _ = buf.ReadFrom(r)
 			output := buf.String()
 
 			// Check that expected strings are in output
@@ -261,7 +261,7 @@ func TestPrintErrorWithGuidance(t *testing.T) {
 	}
 
 	// Restore stderr
-	w.Close()
+	_ = w.Close()
 	os.Stderr = old
 }
 

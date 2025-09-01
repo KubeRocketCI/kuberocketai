@@ -1,3 +1,8 @@
+---
+dependencies:
+  templates:
+    - story.md
+---
 # Task: Review Story (Product Owner)
 
 ## Description

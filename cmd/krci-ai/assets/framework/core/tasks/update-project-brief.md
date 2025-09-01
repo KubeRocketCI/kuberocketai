@@ -1,3 +1,11 @@
+---
+dependencies:
+  templates:
+    - project-brief-template.md
+  data:
+    - common/sdlc-framework.md
+    - business-frameworks.md
+---
 # Task: Update Project Brief
 
 ## Description

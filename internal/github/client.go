@@ -40,17 +40,6 @@ func NewDefaultClient() *Client {
 	}
 }
 
-// NewClientWith allows constructing a client with custom parameters
-func NewClientWith(baseURL, userAgent string, httpClient *http.Client) *Client {
-	c := &Client{BaseURL: baseURL, UserAgent: userAgent}
-	if httpClient != nil {
-		c.HTTPClient = httpClient
-	} else {
-		c.HTTPClient = &http.Client{Timeout: DefaultTimeout}
-	}
-	return c
-}
-
 // GetLatestRelease fetches the latest release for a repository
 func (c *Client) GetLatestRelease(owner, repo string) (*Release, error) {
 	url := fmt.Sprintf("%s/repos/%s/%s/releases/latest", c.BaseURL, owner, repo)

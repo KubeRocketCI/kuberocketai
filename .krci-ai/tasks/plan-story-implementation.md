@@ -1,3 +1,10 @@
+---
+dependencies:
+  templates:
+    - story.md
+  data:
+    - common/sdlc-framework.md
+---
 # Task: Plan Story Implementation
 
 ## Description
