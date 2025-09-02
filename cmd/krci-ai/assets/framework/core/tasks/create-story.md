@@ -97,7 +97,7 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
   - **Expected outputs** and success indicators
   - **Rollback steps** if testing fails
 
-### Documentation & Delivery
+### Output Formatting
 
 - [ ] **Story creation**: Use [story.md](./.krci-ai/templates/story.md) template structure
 - [ ] **Variable population**: Complete all template variables ({{story_number}}, {{story_title}}, etc.)
