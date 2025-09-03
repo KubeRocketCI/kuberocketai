@@ -209,17 +209,18 @@ Create LLM-executable implementation plan with atomic tasks and validation. Each
 
 TASKS/SUBTASKS STRUCTURE REQUIREMENTS:
 
-**Task N: Task Description (AC: X, Y)**
-
-- [ ] Clear, actionable implementation step with specific deliverable
-- [ ] Another implementation step focused on technical execution
-- [ ] Testing and validation step with clear completion criteria
-- [ ] Integration and deployment verification step
+- [ ] **Task N: Task Description (AC: X, Y)**
+  - [ ] Clear, actionable implementation step with specific deliverable
+  - [ ] Another implementation step focused on technical execution
+  - [ ] Testing and validation step with clear completion criteria
+  - [ ] Command: `example command` - Expected: expected result
+  - [ ] Integration and deployment verification step
 
 STRUCTURE REQUIREMENTS:
 
-- Simple task titles with acceptance criteria mapping (AC: X, Y)
-- Clean bullet checkboxes for implementation tracking
+- Tasks start with checkbox and bold title: `- [ ] **Task N: Description (AC: X, Y)**`
+- Subtasks indented with 2 spaces: `  - [ ] Subtask description`
+- Clean bullet checkboxes for implementation tracking at both task and subtask level
 - Focused on actionable implementation steps
 - Clear, concise descriptions without excessive formatting
 - Each checkbox represents a specific, completable work item

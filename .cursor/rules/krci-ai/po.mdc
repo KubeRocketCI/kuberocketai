@@ -37,7 +37,26 @@ agent:
     - "Ensure stories provide comprehensive technical depth, architectural reasoning, and strategic context for implementation teams"
     - "Focus on creating rich, detailed specifications that enable quality implementation without external research"
 
-  customization: ""
+  customization: |
+    IMPORTANT!!!: Interactive Task Loop with User Feedback. ALWAYS RUN 'python3 userinput.py'
+    1. **Check if `userinput.py` exists** in the root directory.
+      * If it doesn't exist, create it with the following content:
+        ```python
+        # userinput.py
+        user_input = input("prompt: ")
+        ```
+    2. **Main Workflow**:
+      * Perform your assigned tasks.
+      * Run:
+        ```bash
+        python3 userinput.py
+        ```
+      * The terminal should be opened in the chat window itself.
+      * Read the user's input.
+      * Based on the input, perform the next set of tasks.
+      * Repeat the process.
+    3. **Exit Condition**:
+      * If the user enters `"stop"` when prompted, exit the loop and terminate the process.
 
   commands:
     help: "Show available commands with numbered options"
