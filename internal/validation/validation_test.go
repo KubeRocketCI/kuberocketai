@@ -1211,6 +1211,64 @@ func TestAddTaskDependencies(t *testing.T) {
 	}
 }
 
+// TestGetTaskReferencesSubdirectories tests that getTaskReferences preserves subdirectory paths
+func TestGetTaskReferencesSubdirectories(t *testing.T) {
+	// Create temporary directory with test framework structure
+	tempDir, err := os.MkdirTemp("", "test-framework-")
+	if err != nil {
+		t.Fatalf("Failed to create temp dir: %v", err)
+	}
+	defer os.RemoveAll(tempDir)
+
+	// Create directory structure using constants
+	tasksPath := filepath.Join(tempDir, tasksDir)
+	dataPath := filepath.Join(tempDir, dataDir, "common")
+	templatesPath := filepath.Join(tempDir, templatesDir, "shared")
+
+	// Setup test directories - use t.Fatalf for setup failures
+	assert.NoError(t, os.MkdirAll(tasksPath, 0755), "Failed to create tasks directory")
+	assert.NoError(t, os.MkdirAll(dataPath, 0755), "Failed to create data directory")
+	assert.NoError(t, os.MkdirAll(templatesPath, 0755), "Failed to create templates directory")
+
+	// Create test task file with subdirectory references
+	taskContent := `# Test Task
+
+## Dependencies
+
+- [SDLC Framework](./.krci-ai/data/common/sdlc-framework.md)
+- [Business Template](./.krci-ai/templates/shared/business-template.md)
+- [Flat Data](./.krci-ai/data/flat-data.md)
+
+## Instructions
+Follow the guidelines and use the appropriate templates.
+`
+
+	// Create task and referenced files
+	taskFile := filepath.Join(tasksPath, "test-task.md")
+	assert.NoError(t, os.WriteFile(taskFile, []byte(taskContent), 0644), "Failed to write task file")
+	assert.NoError(t, os.WriteFile(filepath.Join(dataPath, "sdlc-framework.md"), []byte("# SDLC Framework"), 0644), "Failed to write data file")
+	assert.NoError(t, os.WriteFile(filepath.Join(templatesPath, "business-template.md"), []byte("# Business Template"), 0644), "Failed to write template file")
+	assert.NoError(t, os.WriteFile(filepath.Join(tempDir, dataDir, "flat-data.md"), []byte("# Flat Data"), 0644), "Failed to write flat data file")
+
+	// Test getTaskReferences
+	analyzer := NewFrameworkAnalyzer(tempDir)
+	templates, dataFiles := analyzer.getTaskReferences(taskFile)
+
+	// Use testify for assertions with better error messages
+	expectedTemplates := []string{"shared/business-template.md"}
+	assert.Len(t, templates, len(expectedTemplates), "Templates count mismatch")
+	assert.ElementsMatch(t, expectedTemplates, templates, "Template paths should match expected values")
+
+	expectedDataFiles := []string{"common/sdlc-framework.md", "flat-data.md"}
+	assert.Len(t, dataFiles, len(expectedDataFiles), "Data files count mismatch")
+	assert.ElementsMatch(t, expectedDataFiles, dataFiles, "Data file paths should match expected values")
+
+	// Verify subdirectory structure preservation with specific assertions
+	assert.Contains(t, dataFiles, "common/sdlc-framework.md", "Should preserve subdirectory structure for nested data files")
+	assert.Contains(t, templates, "shared/business-template.md", "Should preserve subdirectory structure for nested templates")
+	assert.Contains(t, dataFiles, "flat-data.md", "Should handle flat data files correctly")
+}
+
 // TestAnalyzeEmbeddedRelationships tests the main embedded relationships analysis method
 func TestAnalyzeEmbeddedRelationships(t *testing.T) {
 	analyzer := NewFrameworkAnalyzer("/test/path")

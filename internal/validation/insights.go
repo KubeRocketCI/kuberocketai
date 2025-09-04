@@ -114,9 +114,9 @@ func (a *FrameworkAnalyzer) countComponents(frameworkDir string, counts *Compone
 	}
 
 	// Count templates
-	templatesDir := filepath.Join(frameworkDir, "templates")
-	if _, err := os.Stat(templatesDir); err == nil {
-		templateFiles, err := filepath.Glob(filepath.Join(templatesDir, "*.md"))
+	templatesPath := filepath.Join(frameworkDir, templatesDir)
+	if _, err := os.Stat(templatesPath); err == nil {
+		templateFiles, err := filepath.Glob(filepath.Join(templatesPath, "*.md"))
 		if err != nil {
 			return err
 		}
@@ -124,9 +124,9 @@ func (a *FrameworkAnalyzer) countComponents(frameworkDir string, counts *Compone
 	}
 
 	// Count data files
-	dataDir := filepath.Join(frameworkDir, "data")
-	if _, err := os.Stat(dataDir); err == nil {
-		dataFiles, err := filepath.Glob(filepath.Join(dataDir, "*.*"))
+	dataPath := filepath.Join(frameworkDir, dataDir)
+	if _, err := os.Stat(dataPath); err == nil {
+		dataFiles, err := filepath.Glob(filepath.Join(dataPath, "*.*"))
 		if err != nil {
 			return err
 		}
@@ -206,11 +206,18 @@ func (a *FrameworkAnalyzer) getTaskReferences(taskFile string) ([]string, []stri
 	}
 
 	for _, link := range links {
-		fileName := filepath.Base(link)
-		if strings.Contains(link, "/templates/") {
-			templates = append(templates, fileName)
-		} else if strings.Contains(link, "/data/") {
-			dataFiles = append(dataFiles, fileName)
+		if strings.Contains(link, templatesLinkPattern) {
+			// Extract relative path from templates/ onward, preserving subdirectories
+			if idx := strings.Index(link, templatesLinkPattern); idx >= 0 {
+				relativePath := link[idx+len(templatesLinkPattern):]
+				templates = append(templates, relativePath)
+			}
+		} else if strings.Contains(link, dataLinkPattern) {
+			// Extract relative path from data/ onward, preserving subdirectories
+			if idx := strings.Index(link, dataLinkPattern); idx >= 0 {
+				relativePath := link[idx+len(dataLinkPattern):]
+				dataFiles = append(dataFiles, relativePath)
+			}
 		}
 	}
 
