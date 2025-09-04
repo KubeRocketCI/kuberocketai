@@ -6,10 +6,12 @@ Systematically gather and analyze business requirements from stakeholders to enh
 
 ## Prerequisites
 
-- [ ] **PRD foundation**: Initial PRD exists at `/docs/prd/prd.md` with basic business context
-- [ ] **Stakeholder access**: Identified stakeholders available for engagement sessions
-- [ ] **Analysis tools**: Requirements documentation tools and templates prepared
-- [ ] **Business context**: Project scope and objectives defined from Project Brief
+<prerequisites>
+- PRD foundation: Initial PRD exists at `/docs/prd/prd.md` with basic business context
+- Stakeholder access: Identified stakeholders available for engagement sessions
+- Analysis tools: Requirements documentation tools and templates prepared
+- Business context: Project scope and objectives defined from Project Brief
+</prerequisites>
 
 ### Reference Assets
 
@@ -23,10 +25,12 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for requirements gathering dependencies and workflow
-2. **Apply analysis methodologies**: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
-3. **Format output**: Use [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) for documentation
-4. **Enhance PRD**: Refine existing PRD with detailed BR/NFR requirements and stakeholder insights
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for requirements gathering dependencies and workflow
+2. Apply analysis methodologies: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
+3. Format output: Use [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) for documentation
+4. Enhance PRD: Refine existing PRD with detailed BR/NFR requirements and stakeholder insights
+</instructions>
 
 ## Output Format
 
@@ -39,14 +43,18 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Success Criteria
 
-- [ ] **PRD enhanced** - All gathered requirements integrated into PRD with BR/NFR format
-- [ ] **Stakeholder consensus** - All key stakeholders engaged and requirements validated
-- [ ] **Requirements completeness** - Functional and non-functional requirements comprehensively documented
-- [ ] **Acceptance criteria defined** - Clear, testable criteria provided for all requirements
-- [ ] **Epic readiness** - Requirements structured to enable Epic creation and Story breakdown
-- [ ] **Traceability established** - Clear links from business needs to solution requirements
+<success_criteria>
+- PRD enhanced: All gathered requirements integrated into PRD with BR/NFR format
+- Stakeholder consensus: All key stakeholders engaged and requirements validated
+- Requirements completeness: Functional and non-functional requirements comprehensively documented
+- Acceptance criteria defined: Clear, testable criteria provided for all requirements
+- Epic readiness: Requirements structured to enable Epic creation and Story breakdown
+- Traceability established: Clear links from business needs to solution requirements
+</success_criteria>
 
 ## Execution Checklist
+
+<execution_checklist>
 
 ### Stakeholder Engagement Phase
 
@@ -117,3 +125,4 @@ This requirements gathering should enable immediate Epic creation by providing:
 - **Acceptance criteria** that become Epic acceptance criteria and Story requirements
 - **Stakeholder insights** that inform Epic priorities and implementation sequencing
 - **Requirements traceability** that connects Epics back to business needs and stakeholder value
+</execution_checklist>

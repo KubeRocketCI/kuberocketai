@@ -6,10 +6,11 @@ Update existing epic with new requirements, scope additions, or refinements whil
 
 ## Prerequisites
 
-- [ ] **Epic exists**: Target epic file exists in `/docs/epics/` with current implementation status
-- [ ] **Change justification**: Clear business reason for epic update (new PRD requirements, scope clarification, story feedback)
-- [ ] **Impact assessment**: Understanding of how changes affect in-progress or completed Stories
-- [ ] **Stakeholder approval**: Product Owner and relevant stakeholders have approved the update scope
+<prerequisites>
+- Epic exists: Target epic file exists in `/docs/epics/` with current implementation status
+- Change justification: Clear business reason for epic update (new PRD requirements, scope clarification, story feedback)
+- Impact assessment: Understanding of how changes affect in-progress or completed Stories
+- Stakeholder approval: Product Owner and relevant stakeholders have approved the update scope
 
 ### Reference Assets
 
@@ -20,66 +21,76 @@ Dependencies:
 - ./.krci-ai/templates/epic.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+</prerequisites>
 
 ## Instructions
 
 ### CRITICAL: MANDATORY USER CONSULTATION FIRST
 
+<user_consultation>
 Before making ANY changes to the Epic, you MUST:
 
-1. **Ask the user** what specific updates they want to make to the Epic
-2. **Understand the trigger** for the changes (new PRD requirements, scope clarification, story feedback, etc.)
-3. **Clarify scope** which sections need updating and why
-4. **Get approval** for the proposed changes before implementation
-5. **Wait for explicit confirmation** before proceeding with any edits
+1. Ask the user what specific updates they want to make to the Epic
+2. Understand the trigger for the changes (new PRD requirements, scope clarification, story feedback, etc.)
+3. Clarify scope which sections need updating and why
+4. Get approval for the proposed changes before implementation
+5. Wait for explicit confirmation before proceeding with any edits
+</user_consultation>
 
 ### ONLY AFTER USER CONFIRMATION
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Epic update dependencies and downstream impact
-2. **Assess current status**: Review epic status and dependent Stories before making changes
-3. **Apply change control**: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
-4. **Maintain format**: Keep [epic.md](./.krci-ai/templates/epic.md) template structure and populate new variables
-5. **Preserve traceability**: Maintain existing PRD references while adding new BR/NFR connections
-6. **Ensure agent-optimization**: Maintain enhanced template compliance during all updates
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Epic update dependencies and downstream impact
+2. Assess current status: Review epic status and dependent Stories before making changes
+3. Apply change control: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
+4. Maintain format: Keep [epic.md](./.krci-ai/templates/epic.md) template structure and populate new variables
+5. Preserve traceability: Maintain existing PRD references while adding new BR/NFR connections
+6. Ensure agent-optimization: Maintain enhanced template compliance during all updates
+</instructions>
 
 ### Update Validation Process
 
+<update_validation>
 Before applying any update:
 
-1. **Check Story Status**: Verify no completed Stories become invalid
-2. **Validate Dependencies**: Ensure new dependencies don't conflict with completed work
-3. **Assess Timeline**: Calculate realistic timeline changes for scope additions
-4. **Document Rationale**: Record business justification for every change
+1. Check Story Status: Verify no completed Stories become invalid
+2. Validate Dependencies: Ensure new dependencies don't conflict with completed work
+3. Assess Timeline: Calculate realistic timeline changes for scope additions
+4. Document Rationale: Record business justification for every change
+</update_validation>
 
 ## Update Types & Restrictions
 
+<update_restrictions>
+
 ### ALLOWED Updates (Safe Changes)
 
-**Note**: All updates must maintain agent-optimized template compliance (Goal format, Dependencies grouping, Acceptance Criteria commands)
+Note: All updates must maintain agent-optimized template compliance (Goal format, Dependencies grouping, Acceptance Criteria commands)
 
-- **Add new Stories** to existing epic scope without changing completed work
-- **Expand acceptance criteria** with additional validation requirements and commands
-- **Add new dependencies** that don't conflict with completed Stories (maintain Epic/System/External grouping)
-- **Clarify problem statement** with additional context or user research
-- **Extend timeline** for additional scope (with stakeholder approval)
-- **Add new target users** without removing existing personas
-- **Enhance solution approach** with additional technical considerations
+- Add new Stories to existing epic scope without changing completed work
+- Expand acceptance criteria with additional validation requirements and commands
+- Add new dependencies that don't conflict with completed Stories (maintain Epic/System/External grouping)
+- Clarify problem statement with additional context or user research
+- Extend timeline for additional scope (with stakeholder approval)
+- Add new target users without removing existing personas
+- Enhance solution approach with additional technical considerations
 
 ### RESTRICTED Updates (Requires Validation)
 
-- **Modify goal metrics** - requires Story impact assessment and team validation
-- **Change scope boundaries** - must verify no completed Stories become out-of-scope
-- **Update dependencies** - requires dependency chain validation for affected Stories
-- **Alter timeline** - needs development team impact assessment
-- **Modify acceptance criteria** - must not invalidate completed Story validation
+- Modify goal metrics - requires Story impact assessment and team validation
+- Change scope boundaries - must verify no completed Stories become out-of-scope
+- Update dependencies - requires dependency chain validation for affected Stories
+- Alter timeline - needs development team impact assessment
+- Modify acceptance criteria - must not invalidate completed Story validation
 
 ### FORBIDDEN Updates (Never Change)
 
-- **Remove completed scope** - never remove features from completed Stories
-- **Delete existing Stories** - completed or in-progress Stories cannot be removed
-- **Change epic number** - epic numbering is immutable for traceability
-- **Reduce problem scope** - cannot narrow problem if Stories address broader scope
-- **Remove target users** - cannot remove personas if Stories serve them
+- Remove completed scope - never remove features from completed Stories
+- Delete existing Stories - completed or in-progress Stories cannot be removed
+- Change epic number - epic numbering is immutable for traceability
+- Reduce problem scope - cannot narrow problem if Stories address broader scope
+- Remove target users - cannot remove personas if Stories serve them
+</update_restrictions>
 
 ## Output Format
 
@@ -90,18 +101,20 @@ Before applying any update:
 
 ## Success Criteria
 
-- [ ] **Epic updated** in place with version tracking and change documentation
-- [ ] **Story compatibility** all existing Stories remain valid and implementable
-- [ ] **PRD traceability** new changes connect to specific BR/NFR requirements
-- [ ] **Change justification** clear business rationale documented for updates
-- [ ] **Impact assessment** downstream Story effects identified and communicated
-- [ ] **Template compliance** all template variables updated correctly
-- [ ] **Agent-optimization maintained** epic preserves enhanced template structure after updates
-- [ ] **Lifecycle-appropriate content** epic content matches status (Planning/In-Progress/Complete)
-- [ ] **Goal format preserved** goal maintains "Enable X for Y% within Z timeline" pattern
-- [ ] **Dependencies structure intact** Epic/System/External grouping maintained with exact headers
-- [ ] **Acceptance criteria updated** validation commands reflect current implementation status
-- [ ] **Quality gates passed** all validation commands execute successfully post-update
+<success_criteria>
+- Epic updated in place with version tracking and change documentation
+- Story compatibility all existing Stories remain valid and implementable
+- PRD traceability new changes connect to specific BR/NFR requirements
+- Change justification clear business rationale documented for updates
+- Impact assessment downstream Story effects identified and communicated
+- Template compliance all template variables updated correctly
+- Agent-optimization maintained epic preserves enhanced template structure after updates
+- Lifecycle-appropriate content epic content matches status (Planning/In-Progress/Complete)
+- Goal format preserved goal maintains "Enable X for Y% within Z timeline" pattern
+- Dependencies structure intact Epic/System/External grouping maintained with exact headers
+- Acceptance criteria updated validation commands reflect current implementation status
+- Quality gates passed all validation commands execute successfully post-update
+</success_criteria>
 
 ## Execution Checklist
 
