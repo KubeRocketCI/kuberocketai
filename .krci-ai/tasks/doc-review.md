@@ -16,7 +16,6 @@ Review a certain page requested by a user, applying professional technical writi
 Dependencies:
 
 - ./.krci-ai/data/common/sdlc-framework.md
-- ./.krci-ai/data/writing-standards.md
 - ./.krci-ai/templates/documentation-review.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
@@ -29,7 +28,6 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 3. Refer to source: Examine the project structure you work in. If this is a documentation project, read a number of pages to understand the project style and report to the user that you refer to these pages as examples
 4. Be professional: Respond as a Senior Technical Writer. Notify the user about what you have changed and why
 5. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for documentation review standards
-6. Apply writing standards: Use methodologies from [writing-standards.md](./.krci-ai/data/writing-standards.md)
 </instructions>
 
 ## Output Format
