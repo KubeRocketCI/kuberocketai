@@ -171,3 +171,85 @@ Framework for designing and testing value propositions.
 - **Customer Profile**: Customer jobs, pains, and gains
 - **Value Map**: Products/services, pain relievers, and gain creators
 - **Fit Analysis**: Alignment between customer needs and value offering
+
+## Presentation and Persuasion Frameworks
+
+### Problem-Agitation-Solution (PAS) Framework
+
+Proven copywriting and presentation framework for compelling narrative structure.
+
+- **Problem**: Identify specific pain point audience experiences daily
+- **Agitation**: Amplify emotional impact and consequences of the problem
+- **Solution**: Present your product as the clear resolution with evidence
+- **Application**: Ideal for 3-slide presentations (Problem → Agitation → Solution)
+
+### Before-After-Bridge (BAB) Framework
+
+Transformation-focused framework for demonstrating value proposition.
+
+- **Before**: Current undesirable state with specific pain points
+- **After**: Desired future state with quantified benefits
+- **Bridge**: Your solution as the path from Before to After
+- **Application**: Perfect for solution-focused presentations and demos
+
+### STAR Method for Proof Points
+
+Structured approach for presenting evidence and case studies.
+
+- **Situation**: Context and background of the challenge
+- **Task**: Specific objective or goal to be achieved
+- **Action**: Steps taken to address the situation
+- **Result**: Quantified outcomes and measurable impact
+- **Application**: Use for testimonials, case studies, and traction slides
+
+### SCRAP Framework for Concise Pitches
+
+Minimalist framework optimized for executive presentations.
+
+- **Situation**: Market context and opportunity size
+- **Complication**: Problem preventing success
+- **Resolution**: Your solution approach
+- **Action**: Specific next steps required
+- **Payoff**: Expected return on investment
+- **Application**: Ideal for 4-5 slide investor or executive presentations
+
+### Persuasion Psychology Principles
+
+Core psychological triggers for compelling presentations.
+
+- **Social Proof**: Testimonials, user numbers, industry recognition
+- **Authority**: Expert endorsements, certifications, credentials
+- **Scarcity**: Limited availability, exclusive access, time sensitivity
+- **Reciprocity**: Value provided before asking for commitment
+- **Consistency**: Alignment with audience values and commitments
+- **Liking**: Similarity, familiarity, and shared interests
+
+### Narrative Arc Framework
+
+Story structure for emotional engagement and retention.
+
+- **Hook**: Attention-grabbing opening (statistic, question, story)
+- **Exposition**: Context and background information
+- **Rising Action**: Building tension and problem awareness
+- **Climax**: Solution reveal and "AHA moment"
+- **Resolution**: Outcomes and call to action
+- **Application**: Use for longer presentations requiring emotional journey
+
+### Pain-Gains-Reveals Framework
+
+Product-focused framework for customer-centric presentations.
+
+- **Pain**: Contextualize critical problems with emotional resonance
+- **Gains**: Articulate tangible benefits and quantifiable value proposition
+- **Reveals**: Highlight unique differentiators and competitive advantages
+- **Application**: Ideal for product overview decks and customer presentations
+
+### AIDA Framework
+
+Classic marketing framework adapted for presentations.
+
+- **Attention**: Capture audience focus immediately
+- **Interest**: Maintain engagement with relevant content
+- **Desire**: Create want for your solution
+- **Action**: Drive specific next steps
+- **Application**: Structure for any persuasive presentation or pitch

@@ -65,7 +65,18 @@ Then, based on the selected Type, prompt for fields derived from the correspondi
 - Ask for explicit approval: "Should I create this issue?"
 - Only proceed after user confirms "yes"
 
-### 3. Create Issue
+### 3. Label Strategy
+
+**Base Labels**: Use template defaults from `.github/ISSUE_TEMPLATE/*.yml`
+
+**Repository Extensions** (add if conditions match):
+
+- All Epics → +`epic`
+- Breaking changes mentioned → +`breaking-change`
+- Technical debt scope → +`technical-debt`
+- High priority/complexity → +`critical`
+
+### 4. Create Issue
 
 ### Template-Driven Rendering (for API/MCP creation)
 
@@ -116,7 +127,8 @@ When creating issues programmatically, derive the output structure from the corr
 
 - [ ] Render preview using template labels as H2 headers, in template order
 - [ ] Validate all required fields populated; list any missing and HALT
-- [ ] Confirm labels and assignees (template defaults + user additions)
+- [ ] Apply label strategy: template defaults + repository extensions
+- [ ] Confirm labels and assignees (template defaults + repository patterns)
 
 ### Creation Phase
 

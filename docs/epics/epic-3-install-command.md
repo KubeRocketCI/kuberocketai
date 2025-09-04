@@ -32,7 +32,7 @@ Enable offline framework installation for 100% of development teams within 30 se
 **PRD Requirements Addressed:**
 
 - **BR1 [P0]**: User can install KubeRocketAI framework with single command (krci-ai install) that extracts embedded Agent Playbook locally
-- **NFR1 [P0]**: System supports offline installation without network dependencies, enabling air-gapped development environments
+- **NFR2 [P0]**: System supports offline installation without network dependencies, enabling air-gapped development environments
 - **NFR4 [P1]**: Framework handles bundle-based update management with version mismatch detection and graceful degradation
 
 **Core Deliverables:**
@@ -101,7 +101,7 @@ This epic implements a bundle-based distribution model where CLI and framework a
    - Validation: System detects and reports CLI vs framework version mismatches
    - Command: `krci-ai validate --version-check --verbose`
 
-6. Single-command framework setup for Emily's teams (addresses BR1, NFR1, NFR4)
+6. Single-command framework setup for Emily's teams (addresses BR1, NFR2, NFR4)
    - Validation: 30-second installation in air-gapped environments with update management
    - Command: `time krci-ai install --complete --validate-offline`
 

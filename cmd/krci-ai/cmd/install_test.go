@@ -208,6 +208,21 @@ func TestValidateIDEFlag(t *testing.T) {
 			ideFlag:     "",
 			expectError: true,
 		},
+		{
+			name:        "comma-separated IDEs",
+			ideFlag:     "cursor,vscode",
+			expectError: true,
+		},
+		{
+			name:        "space-separated IDEs",
+			ideFlag:     "cursor vscode",
+			expectError: true,
+		},
+		{
+			name:        "case-sensitive invalid",
+			ideFlag:     "Cursor",
+			expectError: true,
+		},
 	}
 
 	for _, tt := range tests {

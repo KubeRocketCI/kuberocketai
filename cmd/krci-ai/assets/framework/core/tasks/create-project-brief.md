@@ -6,10 +6,12 @@ Create a comprehensive project brief defining the foundation for product develop
 
 ## Prerequisites
 
-- [ ] Business opportunity or problem identified
-- [ ] Initial stakeholder discussions completed
-- [ ] Market context and user insights available
-- [ ] Strategic goals and constraints understood
+<prerequisites>
+- Business opportunity or problem identified
+- Initial stakeholder discussions completed
+- Market context and user insights available
+- Strategic goals and constraints understood
+</prerequisites>
 
 ### Reference Assets
 
@@ -23,9 +25,11 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for role responsibilities and artifact flow
-2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. **Format output**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for consistent structure
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for role responsibilities and artifact flow
+2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
+3. Format output: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for consistent structure
+</instructions>
 
 ## Output Format
 
@@ -35,36 +39,44 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Success Criteria
 
-- [ ] **File saved** to `/docs/prd/project-brief.md`
-- [ ] **Length** is 2-3 pages maximum
-- [ ] **Problem** is specific and evidence-based
-- [ ] **Users** are clearly defined with usage patterns
-- [ ] **Success metrics** are specific and testable
-- [ ] **Constraints** reflect actual limitations
-- [ ] **Risks** identified with impact levels (HIGH/MEDIUM/LOW)
+<success_criteria>
+- File saved to `/docs/prd/project-brief.md`
+- Length is 2-3 pages maximum
+- Problem is specific and evidence-based
+- Users are clearly defined with usage patterns
+- Success metrics are specific and testable
+- Constraints reflect actual limitations
+- Risks identified with impact levels (HIGH/MEDIUM/LOW)
+</success_criteria>
 
 ## Execution Checklist
 
 ### Discovery Phase
 
-- [ ] **Stakeholder interviews**: Understand business context and strategic priorities
-- [ ] **Problem validation**: Gather evidence that this problem is real and significant
-- [ ] **User research**: Identify who has this problem and how it impacts them
-- [ ] **Opportunity sizing**: Quantify business value and market opportunity
+<discovery_phase>
+- Stakeholder interviews: Understand business context and strategic priorities
+- Problem validation: Gather evidence that this problem is real and significant
+- User research: Identify who has this problem and how it impacts them
+- Opportunity sizing: Quantify business value and market opportunity
+</discovery_phase>
 
 ### Analysis Phase
 
-- [ ] **Problem definition**: Write specific problem statement with evidence
-- [ ] **User segmentation**: Define target users with demographics and usage patterns
-- [ ] **Success planning**: Define measurable outcomes with realistic timelines
-- [ ] **Constraint assessment**: Identify realistic limitations and assumptions
+<analysis_phase>
+- Problem definition: Write specific problem statement with evidence
+- User segmentation: Define target users with demographics and usage patterns
+- Success planning: Define measurable outcomes with realistic timelines
+- Constraint assessment: Identify realistic limitations and assumptions
+</analysis_phase>
 
 ### Documentation Phase
 
-- [ ] **Brief creation**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
-- [ ] **Content validation**: Ensure all required sections are completed
-- [ ] **Length verification**: Confirm document is 2-3 pages maximum
-- [ ] **File placement**: Save to exact location `/docs/prd/project-brief.md`
+<documentation_phase>
+- Brief creation: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
+- Content validation: Ensure all required sections are completed
+- Length verification: Confirm document is 2-3 pages maximum
+- File placement: Save to exact location `/docs/prd/project-brief.md`
+</documentation_phase>
 
 ## Content Guidelines
 

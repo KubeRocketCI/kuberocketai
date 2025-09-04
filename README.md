@@ -7,7 +7,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/KubeRocketCI/kuberocketai?style=flat-square)](https://goreportcard.com/report/github.com/KubeRocketCI/kuberocketai)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/KubeRocketCI/kuberocketai?style=flat-square&logo=go)](go.mod)
 [![License](https://img.shields.io/github/license/KubeRocketCI/kuberocketai?style=flat-square&color=green)](LICENSE)
-[![Framework Overview](https://img.shields.io/badge/Framework-6%20agents%20%7C%2025%20tasks%20%7C%2014%20templates%20%7C%2012%20data%20files-purple?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](.krci-ai)
+[![Framework Overview](https://img.shields.io/badge/Framework-8+%20agents%20%7C%2032+%20tasks%20%7C%2020+%20templates%20%7C%2014+%20data%20files-purple?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMCA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDQgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](.krci-ai)
 
 AI-as-Code framework for structuring AI-assisted software development. Define AI agents as version-controlled Markdown files with YAML frontmatter.
 
@@ -36,9 +36,11 @@ The real challenge isn't creating smart agents—it's **scaling that success** a
 
 ## Solution
 
-KubeRocketAI brings the proven **"Infrastructure-as-Code" model to AI agent management**. Teams define agents in version-controlled Markdown files that integrate seamlessly with existing development workflows, enabling the same declarative approach developers expect from modern CI/CD pipelines.
+KubeRocketAI brings the proven **"Pipeline-as-Code" model to AI agent management**. Teams define agents in version-controlled Markdown files that integrate seamlessly with existing development workflows, enabling the same declarative approach developers expect from modern CI/CD pipelines.
 
 ### Video Overview
+
+https://github.com/user-attachments/assets/dd3ed25d-fc42-4dc4-a568-dcdecd027394
 
 For a practical case study on product development with project-specific AI agent customization, see:
 
@@ -48,7 +50,7 @@ This video demonstrates how KubeRocketAI applies AI-as-Code principles to delive
 
 ### Key Value Propositions
 
-1. **Agent-as-Code Distribution**: Version-control and share your proven agent configurations just like you do with Infrastructure-as-Code
+1. **Agent-as-Code Distribution**: Version-control and share your proven agent configurations just like you do with Pipeline-as-Code
 2. **Multi-Platform Injection**: Deploy the same agent definition to your IDE, CI pipeline, bundled for brainstorming, or wherever you need AI assistance
 3. **Built-in Validation**: Validate agent configurations and dependencies before deployment, ensuring consistent behavior across environments
 4. **Context-Preserving Bundling**: Package agents with full project context for web chat tools, maintaining architectural knowledge and organizational standards across platforms
@@ -171,14 +173,14 @@ krci-ai install --all
 
 ## Success Metrics
 
-KubeRocketAI succeeds when you can scale your AI workflow like you scale your infrastructure:
+KubeRocketAI succeeds when you can scale your AI workflow like you scale your CI/CD pipelines:
 
 - **Agent Reusability**: Deploy proven configurations across multiple projects without manual setup
 - **Quality Assurance**: Validate agent configurations before deployment to catch issues early
 - **Version Control Integration**: Track what works, roll back when things break, collaborate on improvements
 - **Platform Flexibility**: Use the same agent definitions for IDE development, CI automation, and brainstorming sessions
 
-Our goal: Turn your AI agent expertise into scalable, maintainable infrastructure.
+Our goal: Turn your AI agent expertise into scalable, maintainable CI/CD pipelines.
 
 ## Inspiration & Related Work
 
@@ -191,7 +193,7 @@ KubeRocketAI builds upon the excellent work of several innovative frameworks tha
 **You'll love this if you:**
 
 - Have created effective AI agents but struggle to share them across your team
-- Want to version-control your agent configurations just like you do with your infrastructure
+- Want to version-control your agent configurations just like you do with your infrastructure and CI/CD pipelines
 - Need validation and quality assurance for agents before deploying them across projects
 - Need the same agents working in multiple contexts: IDE, CI/CD, brainstorming, code review
 - Maintain multiple repositories and are tired of keeping agent configurations in sync
@@ -200,7 +202,7 @@ KubeRocketAI builds upon the excellent work of several innovative frameworks tha
 **Perfect for:**
 
 - **Senior AI Engineers**: Have mastered individual agent creation, now need enterprise-scale management
-- **DevOps-Minded Teams**: Want to apply Infrastructure-as-Code principles to AI agent management
+- **DevOps-Minded Teams**: Want to apply Pipeline-as-Code principles to AI agent management
 - **Multi-Project Teams**: Need consistent AI capabilities across different repositories and contexts
 - **AI-First Organizations**: Ready to systematize their AI workflows beyond individual experimentation
 

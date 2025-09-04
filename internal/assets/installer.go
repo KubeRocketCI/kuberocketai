@@ -29,13 +29,13 @@ import (
 const (
 	// Main framework directory structure
 	KrciAIDir    = ".krci-ai"
+	BundleDir    = "bundle"
 	DataDir      = "data"
 	TasksDir     = "tasks"
 	TemplatesDir = "templates"
 
 	// Internal directory structure (unexported)
 	agentsDir      = "agents"
-	configDir      = "config"
 	embeddedPrefix = "assets/framework/core"
 
 	// IDE integration directories
@@ -209,7 +209,7 @@ func (i *Installer) Install() error {
 	}
 
 	// Create subdirectories
-	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir, configDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		if err := i.createDirectory(dirPath); err != nil {
@@ -512,7 +512,7 @@ func (i *Installer) installWithFilter(agentDeps []AgentDependencyInfo) error {
 	}
 
 	// Create subdirectories
-	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir, configDir}
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		if err := i.createDirectory(dirPath); err != nil {
