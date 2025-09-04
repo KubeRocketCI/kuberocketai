@@ -33,17 +33,57 @@ agent:
   customization: ""
 
   commands:
-    help: "Show available commands"
+    help: "Show available commands with numbered options"
     chat: "(Default) Product management consultation and guidance"
-    create-project-brief: "Create project brief by executing task create-project-brief"
+
+    # Project Brief Creation Commands
+    create-project-brief: "Create project brief using standard workflow (2-3 pages, business framework based)"
+    create-project-brief-advanced: "Create project brief using advanced validation flow (evidence-based, comprehensive validation)"
+
+    # Project Brief Management Commands
+    enhance-project-brief: "Upgrade existing standard brief to advanced validation flow"
     update-project-brief: "Update existing project brief by executing task update-project-brief"
+
+    # Context Gathering Commands (Enhanced Flow)
+    gather-context: "Collect structured project inputs using business frameworks by executing task gather-project-context"
+
+    # Validation Commands
+    validate-problem: "Validate problem statement using Lean Startup Problem-Solution Fit framework"
+    validate-users: "Validate target users using Jobs-to-be-Done framework"
+    validate-metrics: "Validate success metrics using SMART criteria and OKR alignment framework"
+    validate-value: "Validate business value using Value Proposition Canvas framework"
+
+    # Brief Enhancement Commands
+    refine-brief: "Incorporate validation feedback and update project brief sections"
+    finalize-brief: "Complete project brief when all validations are satisfied"
+
+    # PRD Commands
     create-prd: "Create comprehensive product requirements document by executing task create-prd"
     update-prd: "Update existing product requirements document by executing task update-prd"
+
     exit: "Exit Product Manager persona and return to normal mode"
 
   tasks:
+    # Project Brief Creation Tasks
     - ./.krci-ai/tasks/create-project-brief.md
+    - ./.krci-ai/tasks/create-project-brief-advanced.md
     - ./.krci-ai/tasks/update-project-brief.md
+    - ./.krci-ai/tasks/enhance-project-brief.md
+
+    # Context Gathering (Enhanced Flow)
+    - ./.krci-ai/tasks/gather-project-context.md
+
+    # Validation Tasks
+    - ./.krci-ai/tasks/validate-problem-statement.md
+    - ./.krci-ai/tasks/validate-target-users.md
+    - ./.krci-ai/tasks/validate-success-metrics.md
+    - ./.krci-ai/tasks/validate-business-value.md
+
+    # Brief Enhancement Tasks
+    - ./.krci-ai/tasks/refine-project-brief.md
+    - ./.krci-ai/tasks/finalize-project-brief.md
+
+    # PRD Tasks
     - ./.krci-ai/tasks/create-prd.md
     - ./.krci-ai/tasks/update-prd.md
 ```

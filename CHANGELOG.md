@@ -2,9 +2,159 @@
 
 ## [Unreleased]
 
+
+<a name="v0.34.0"></a>
+
+## [v0.34.0] - 2025-09-04
+
+### Features
+
+- **pm:** add support for advanced project-brief creation
+
+
+<a name="v0.33.1"></a>
+
+## [v0.33.1] - 2025-09-04
+
+### Chores
+
+- Update sdlc framework documentation with latest changes
+
+
+<a name="v0.33.0"></a>
+
+## [v0.33.0] - 2025-09-04
+
+### Bug Fixes
+
+- **validation:** preserve subdirectory paths in dependency tracking
+
+### Chores
+
+- **ci:** fix command Injection via sonarqube-scan-action GitHub Action
+
+### Features
+
+- Add Technical Writer agent
+- **epic-99:** add Story 99.03 Local Agent Apply Command
+
+
+<a name="v0.32.0"></a>
+
+## [v0.32.0] - 2025-09-02
+
+### Bug Fixes
+
+- fix Project Manager linting issues
+
+### Chores
+
+- Update krci-ai to version 0.31.0
+
+### Features
+
+- Create the PM assistant with the respective tasks, templates, data files
+- Use XML tags for the most of the tasks in the framework
+
+
+<a name="v0.31.0"></a>
+
+## [v0.31.0] - 2025-09-01
+
+### Chores
+
+- We need to start adding documentation on how to use
+- Update krci-ai to the latest version
+
+### Features
+
+- Use XML tags as a part of some tasks to validate efficiency
+
+
+<a name="v0.30.0"></a>
+
+## [v0.30.0] - 2025-08-27
+
+### Bug Fixes
+
+- Fix link to the short video
+- Fix link to the short video
+
+### Chores
+
+- Align PRD artifacts accross the project
+
+### Documentation
+
+- Update status of Epic 7 to complete
+- Update documentation
+- Align docs to the latest changes
+- Add link to quick video
+
+### Features
+
+- Add Product Marketing Manager persona
+
+
+<a name="v0.29.1"></a>
+
+## [v0.29.1] - 2025-08-22
+
+### Bug Fixes
+
+- ensure we are including go-dev assets in our bundle and advanced install
+
+### Chores
+
+- update go-dev agent instructions
+
+### Code Refactoring
+
+- remove 'config' directory that we are not using
+
+
+<a name="v0.29.0"></a>
+
+## [v0.29.0] - 2025-08-22
+
+### Features
+
+- **agents:** Add Go Developer agent and associated tasks and standards
+- **tokens:** Add bundle token analysis command and integrate with bundle generation
+
+
+<a name="v0.28.2"></a>
+
+## [v0.28.2] - 2025-08-20
+
+### Bug Fixes
+
+- **validation:** warn on non-YAML agent files in agents directory ([#91](https://github.com/KubeRocketCI/kuberocketai/issues/91))
+
+### Code Refactoring
+
+- **install:** eliminate global variables in flag handling to improve thread safety and testability
+
+### Documentation
+
+- Epic 7 refinement
+
+### Features
+
+- **docs:** Define new epic on the MCP server topic
+
+
+<a name="v0.28.1"></a>
+
+## [v0.28.1] - 2025-08-19
+
 ### Chores
 
 - **ci:** ensure we add all details to the release changelog
+
+### Code Refactoring
+
+- remove task reference from install command
 
 
 <a name="v0.28.0"></a>
@@ -685,7 +835,17 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.28.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.34.0...HEAD
+[v0.34.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.33.1...v0.34.0
+[v0.33.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.33.0...v0.33.1
+[v0.33.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.32.0...v0.33.0
+[v0.32.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.31.0...v0.32.0
+[v0.31.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.30.0...v0.31.0
+[v0.30.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.29.1...v0.30.0
+[v0.29.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.29.0...v0.29.1
+[v0.29.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.28.2...v0.29.0
+[v0.28.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.28.1...v0.28.2
+[v0.28.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.28.0...v0.28.1
 [v0.28.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.27.0...v0.28.0
 [v0.27.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.26.1...v0.27.0
 [v0.26.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.26.0...v0.26.1
