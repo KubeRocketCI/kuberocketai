@@ -2,7 +2,7 @@
 
 ## 1. Problem/Opportunity
 
-**Core Problem**: While development teams have successfully adopted "Infrastructure-as-Code" and declarative CI/CD pipeline management, AI agent configuration remains ad-hoc and fragmented. Teams face critical inefficiencies due to inconsistent agent management, lack of version control integration, and inability to apply proven DevOps patterns to AI workflow governance.
+**Core Problem**: While development teams have successfully adopted "Pipeline-as-Code" and declarative CI/CD pipeline management, AI agent configuration remains ad-hoc and fragmented. Teams face critical inefficiencies due to inconsistent agent management, lack of version control integration, and inability to apply proven DevOps patterns to AI workflow governance.
 
 **Specific Pain Points**:
 
@@ -38,48 +38,48 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 ## 2. Target Users & Use Cases
 
-**Primary User**: Emily - Enterprise Development Lead
+**Primary Users**: AI Adopters Across SDLC Roles
 
-*Demographics*: Senior Developer/Tech Lead managing 8-15 developers across 3-4 microservices in Fortune 500 company with established DevOps culture. 7+ years development experience, 2+ years with AI tools.
+*Demographics*: Product Owners, Product Managers, Business Analysts, QA Engineers, Developers, Architects, and Team Leads who actively use AI tools in their daily workflows. Basic experience with AI-enhanced development tools, work primarily within IDEs (Cursor, GitHub Copilot, Claude Code, WindSurf, VS Code) as their main interface for development tasks.
 
-*User Volume*: 10+ Active Development Leads (expanding from current early adopter base to strategic adoption)
-*Usage Patterns*: Manages 3-5 active repositories, reviews 1-2 PRs weekly, evaluates new development tools quarterly
-*Demographics*: Global enterprise adoption across continents, 80% use AI-enhanced IDEs (Cursor, Claude Code, WindSurf), team leads and senior developers
+*User Volume*: 50+ AI adopters across various SDLC roles (expanding from current developer-focused adoption to cross-functional team adoption)
+*Usage Patterns*: Use IDEs daily for primary work, leverage AI tools 3-5 times per day, occasionally use web-based AI tools (ChatGPT, Claude Desktop, Gemini Pro) for specialized tasks, prefer staying within their IDE environment
+*Demographics*: Cross-functional teams globally, 95% use AI-enhanced IDEs daily, span all SDLC roles from product strategy to quality assurance
 
-*Pain Points*: AI-generated code doesn't follow project standards and patterns, team lacks consistent agent configurations, security teams require auditability, context switching between IDE and external AI platforms disrupts flow.
+*Pain Points*: AI-generated content doesn't follow role-specific patterns and organizational standards, lack consistent AI agent configurations across projects and roles, context switching between IDE and external AI platforms disrupts workflow, difficulty maintaining project context when using web-based AI tools.
 
 **Key Use Cases**:
 
-1. **Standardized Agent Management**: Define and share consistent AI agent configurations across team projects
-2. **Standards Compliance**: Ensure AI-generated code adheres to project-specific patterns, architectural requirements, and organizational standards
-3. **Context-Aware Development**: AI agents understand project-specific rules, dependencies, and standards
-4. **Transparent Workflows**: Maintain auditability and transparency in AI-assisted development processes
-5. **Web Chat Integration**: Bundle agents and dependencies into single-file packages for use with web-based AI tools (ChatGPT, Gemini Pro, Claude Web)
+1. **Cross-Role Agent Standardization**: Product Owners, Developers, QA Engineers, and Business Analysts define and share consistent AI agent configurations across team projects through Git-versioned workflows
+2. **Role-Specific Standards Compliance**: Ensure AI-generated content (code, requirements, test cases, documentation) adheres to role-specific patterns, organizational standards, and project requirements
+3. **Context-Aware SDLC Support**: AI agents understand project-specific rules, dependencies, and standards relevant to each SDLC role and deliverable type
+4. **Pipeline-Based Workflows**: Maintain auditability and transparency in AI-assisted processes through Git repository management, enabling agent workflows that can be connected into larger pipelines
+5. **Flexible Deployment Options**: Bundle agents and dependencies for IDE-native use or single-file packages for web-based AI tools (ChatGPT, Claude Desktop, Gemini Pro) based on user preference and context needs
 
 ---
 
 ## 3. Current Journeys/Landscape *(Optional)*
 
-**Current User Journey**: Developers manually configure AI tools per project, copy-paste prompts across team members, and frequently need to manually fix AI-generated code that doesn't align with project standards, patterns, and architectural requirements.
+**Current User Journey**: SDLC practitioners (developers, product owners, QA engineers, business analysts) manually configure AI tools per project, copy-paste prompts across team members, and frequently need to manually fix AI-generated content (code, requirements, test cases, documentation) that doesn't align with project standards, role-specific patterns, and organizational requirements.
 
-**Platform Integration**: KubeRocketAI enhances existing IDE capabilities (GitHub Copilot, Cursor, Claude Code, WindSurf) by providing a universal agent management framework. Rather than competing with these tools, we enable consistent agent definitions that work seamlessly across all platforms, adding team-scale governance and CI/CD integration that individual IDEs don't provide.
+**IDE-First Platform Integration**: KubeRocketAI enhances existing IDE capabilities (GitHub Copilot, Cursor, Claude Code, WindSurf) by providing a universal agent management framework that keeps users in their preferred development environment. Rather than competing with these tools, we enable consistent agent definitions that work seamlessly across all platforms, adding team-scale governance and CI/CD integration that individual IDEs don't provide. Users maintain their daily IDE workflow while gaining access to organizational agent standards and project-specific context.
 
-**Web Chat Expansion**: Beyond IDE integration, KubeRocketAI addresses the growing need for web-based AI tool integration. Developers frequently use ChatGPT, Gemini Pro, and Claude Web for quick consultations but lose project context. Our bundling capability creates single-file packages containing all relevant agents and dependencies, enabling seamless context transfer to web tools while maintaining organizational standards and project-specific knowledge.
+**Flexible Bundling for Web Chat**: While maintaining IDE-first design, KubeRocketAI addresses the periodic need for web-based AI tool integration. When users need to leverage large context window models (supporting million+ tokens) in ChatGPT, Claude Desktop, Gemini Pro, or other web platforms for specialized consultations like brainstorming and elicitation—where web platforms offer better cost efficiency than IDE-based models—our bundling capability creates single-file system prompts containing all relevant agents and dependencies. This enables seamless context transfer to web tools while preserving organizational standards and project-specific knowledge.
 
 ---
 
 ## 4. Proposed Solution/Elevator Pitch
 
-**Elevator Pitch**: KubeRocketAI brings the proven "Infrastructure-as-Code" and CI/CD pipeline model to AI agent management. Teams define agents in version-controlled Markdown files that can live alongside code or be imported from shared organizational libraries, enabling the same flexibility developers expect from modern CI/CD workflows while ensuring agent consistency, auditability, and seamless IDE integration.
+**Elevator Pitch**: KubeRocketAI brings the proven "Pipeline-as-Code" and CI/CD pipeline model to AI agent management. Teams define agents in version-controlled Markdown files that can live alongside code or be imported from shared organizational libraries, enabling the same flexibility developers expect from modern CI/CD workflows while ensuring agent consistency, auditability, and seamless IDE integration.
 
 **Top 4 MVP Value Props**:
 
 1. **Project-Local Agent Definitions**: Version-controlled Markdown files eliminate external dependencies and enable team collaboration through standard git workflows
 2. **Project Context Awareness**: Agents understand codebase-specific rules, dependencies, and patterns, significantly reducing manual fixes through deep project integration
-3. **Universal Compatibility**: Works seamlessly across IDEs (Cursor, Claude Code, WindSurf) and web chat tools (ChatGPT, Gemini Pro) through flexible bundling without vendor lock-in
+3. **IDE-First Universal Compatibility**: Prioritizes native IDE experience (Cursor, GitHub Copilot, Claude Code, WindSurf) while providing flexible bundling for web chat tools (ChatGPT, Claude Desktop, Gemini Pro) when needed, ensuring no vendor lock-in and supporting user's preferred workflow
 4. **Token Size Transparency**: Built-in token calculation and size estimation helps users understand asset composition and optimize for AI platform context limits, preventing runtime failures and enabling informed decision-making
 
-**Conceptual Model**: Following the proven CI/CD pipeline pattern, KubeRocketAI enables agent definitions to live alongside code (project-specific) or be imported from shared organizational libraries, with dynamic composition at runtime. Just as teams use shared CI/CD templates while maintaining project-specific customizations, developers use `krci-ai install` to scaffold projects with organizational agent standards, then customize locally while preserving shared governance and best practices.
+**Conceptual Model**: Following the proven CI/CD pipeline pattern, KubeRocketAI enables agent definitions to live alongside code (project-specific) or be imported from shared organizational libraries, with dynamic composition at runtime. Just as teams use shared CI/CD templates while maintaining project-specific customizations, SDLC practitioners use `krci-ai install` to scaffold projects with organizational agent standards, then customize locally while preserving shared governance and best practices. This Git-based approach allows agents to be connected into workflows, reflecting the true pipeline nature of connecting specialized AI agents for complex SDLC processes.
 
 ---
 
@@ -88,15 +88,16 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 **Success Metrics**:
 
 1. **Community Adoption**: Achieve 100+ GitHub stars (25x growth from current 4) and 20+ active forks within 5 months of MVP launch
-2. **User Value**: Reduce time spent manually adjusting AI-generated code by 85% (from 5-10 minutes to 1-2 minutes daily) within 6 weeks of user adoption
-3. **Developer Experience**: Enable new users to complete meaningful AI agent task within 45 minutes of installation (pilot testing with 5-10 early adopters)
+2. **User Value**: Reduce time spent manually adjusting AI-generated content by 85% (from 5-10 minutes to 1-2 minutes daily) across all SDLC roles within 6 weeks of user adoption
+3. **User Experience**: Enable new users across different SDLC roles to complete meaningful AI agent task within 45 minutes of installation (pilot testing with 5-10 early adopters from diverse roles)
 
 **Additional Success Indicators**:
 
-- Strategic team adoption: 10+ teams using KubeRocketAI for standardized agent management
-- IDE integration success: Support for 3+ major AI-enhanced IDEs (Cursor, Claude Code, WindSurf)
-- Web chat integration: 75% of users successfully create and use bundled packages with ChatGPT/Gemini Pro within 4 weeks
-- Community engagement: 20+ community-contributed agent configurations in shared library
+- Cross-role adoption: 10+ teams with diverse SDLC roles using KubeRocketAI for standardized agent management
+- IDE integration success: Support for 3+ major AI-enhanced IDEs (Cursor, GitHub Copilot, Claude Code, WindSurf) with seamless daily workflow integration
+- Flexible deployment success: 75% of users successfully create and use bundled packages with ChatGPT/Claude Desktop/Gemini Pro when needed within 4 weeks
+- Community engagement: 20+ community-contributed agent configurations covering diverse SDLC roles in shared library
+- Pipeline workflow adoption: Teams begin connecting agents into workflow sequences, demonstrating pipeline-as-code value
 - MCP integration success: fail fast if MCP server is not available
 
 ## 6. Constraints & Risks
@@ -134,7 +135,7 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 **Community Adoption Risk [MEDIUM]**: Early adopter community may be too small for sustainable momentum
 
-- *Mitigation*: Target established DevOps teams familiar with Infrastructure-as-Code patterns
+- *Mitigation*: Target established DevOps teams familiar with Pipeline-as-Code patterns
 
 ---
 
@@ -148,11 +149,11 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 **BR2 [P0]**: User can access 5 core SDLC agent definitions (PM, Architect, Developer, QA, BA) as structured Markdown files with YAML frontmatter configuration
 
-**BR4 [P0]**: User can install and invoke agents directly in their current IDE (Cursor, Claude Code, WindSurf) using `krci-ai install --ide` command without switching platforms or installing additional dependencies beyond the CLI
+**BR3 [P0]**: User can install and invoke agents directly in their current IDE (Cursor, Claude Code, WindSurf) using `krci-ai install --ide` command without switching platforms or installing additional dependencies beyond the CLI
 
 #### Validation & Processing (Epic 2 - Core Engine)
 
-**BR3 [P0]**: User can validate agent configurations using built-in validation engine with CLI static validation (YAML/schema) and LLM runtime validation (template execution), providing clear pass/fail results with specific error messages
+**BR4 [P0]**: User can validate agent configurations using built-in validation engine with CLI static validation (YAML/schema) and LLM runtime validation (template execution), providing clear pass/fail results with specific error messages
 
 #### Advanced Integration (Epic 4 - IDE Integration)
 
@@ -206,19 +207,19 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 #### Performance & Reliability (Epic 2 - Core Engine)
 
-**NFR2 [P0]**: Framework validates agent configurations in under 2 seconds for real-time feedback during development and CI/CD pipeline integration
+**NFR1 [P0]**: Framework validates agent configurations in under 2 seconds for real-time feedback during development and CI/CD pipeline integration
 
 #### Installation & Deployment (Epic 3 - Install Command)
 
-**NFR1 [P0]**: System supports offline installation without network dependencies, enabling air-gapped development environments and enterprise security requirements
+**NFR2 [P0]**: System supports offline installation without network dependencies, enabling air-gapped development environments and organizational security requirements
 
 **NFR3 [P0]**: System maintains multi-platform compatibility (Windows, macOS, Linux) via Homebrew, GitHub releases, and direct binary distribution
 
 #### Bundle Management (Epic 5 - Bundle Management)
 
-**NFR4 [P1]**: Bundle generation completes within 10 seconds for typical project configurations and scales to handle large enterprise codebases with 50+ agents and 200+ dependencies without memory constraints
+**NFR4 [P1]**: Bundle generation completes within 10 seconds for typical project configurations and scales to handle large organizational codebases with 50+ agents and 200+ dependencies without memory constraints
 
-**NFR5 [P1]**: Bundled output files remain within web chat context limits (up to 1M tokens for GPT-4, 2M tokens for Gemini Pro) with intelligent truncation and prioritization of critical dependencies
+**NFR5 [P1]**: Bundled output files leverage web chat large context capabilities (up to 1M+ tokens for GPT-4, 2M+ tokens for Gemini Pro) with intelligent dependency prioritization for cost-effective specialized consultations
 
 **NFR6 [P1]**: System discovers and loads local components from `.krci-ai/local/` directory within 1 second, with local components taking absolute priority over global components during agent resolution and execution
 
@@ -238,18 +239,18 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 #### MVP Scope (P0/P1 Requirements)
 
-**Epic 1 (KubeRocketAI Baseline)**: BR1, BR2, BR4, NFR1, NFR3
+**Epic 1 (KubeRocketAI Baseline)**: BR1, BR2, BR3, NFR1, NFR3
 
 - Core foundation functionality with single-command installation
 - Essential agent definitions and IDE integration
 - Multi-platform compatibility and offline operation
 
-**Epic 2 (Core Engine)**: BR3, NFR2
+**Epic 2 (Core Engine)**: BR4, NFR2
 
 - Validation and processing engine with performance requirements
 - Real-time feedback and configuration validation
 
-**Epic 3 (Install Command)**: BR1, NFR1
+**Epic 3 (Install Command)**: BR1, NFR2
 
 - Installation system with update management
 - Bundle handling and version control
@@ -285,6 +286,14 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 - Multi-agent installation using comma-separated lists
 - IDE integration for selective installations
 
+**Epic 9 (Framework Adoption & Dogfooding)**: BR20, BR21, BR22, BR23
+
+- Repository integration using selective installation for gradual adoption
+- Local agent customization with project-specific workflows
+- Quickstart documentation and integration guides for target repositories
+- Structured feedback collection and framework improvement tracking
+- Data-driven evolution based on real usage patterns across development teams
+
 **Epic 10 (MCP Server Management)**: BR16, BR17, BR18, BR19, NFR10, NFR11
 
 - MCP server discovery and listing through `krci-ai list mcp` command
@@ -295,10 +304,4 @@ Based on interviews with 5 developer teams, community forum analysis, and market
 
 #### Post-MVP Enhancements (P2+ Requirements)
 
-**Epic 9 (Framework Adoption & Dogfooding)**: BR20, BR21, BR22, BR23
-
-- Repository integration using selective installation for gradual adoption
-- Local agent customization with project-specific workflows
-- Quickstart documentation and integration guides for target repositories
-- Structured feedback collection and framework improvement tracking
-- Data-driven evolution based on real usage patterns across development teams
+This epic contains the P2+ requirements that will be implemented after the MVP release.

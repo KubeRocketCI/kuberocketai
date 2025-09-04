@@ -16,6 +16,7 @@ limitations under the License.
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -27,7 +28,9 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
+	"github.com/KubeRocketCI/kuberocketai/internal/bundle"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/tokens"
 	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
 
@@ -101,26 +104,30 @@ func ParseAgentList(agentStr string) []string {
 
 	// First try comma-separated
 	if strings.Contains(agentStr, ",") {
-		parts := strings.Split(agentStr, ",")
-		for _, part := range parts {
+		for part := range strings.SplitSeq(agentStr, ",") {
 			agent := strings.TrimSpace(part)
 			if agent != "" {
 				agents = append(agents, agent)
 			}
 		}
-	} else {
-		// Space-separated
-		parts := strings.Fields(agentStr)
-		for _, part := range parts {
-			agents = append(agents, strings.TrimSpace(part))
-		}
+
+		return agents
+	}
+
+	// Space-separated
+	for part := range strings.FieldsSeq(agentStr) {
+		agents = append(agents, strings.TrimSpace(part))
 	}
 
 	return agents
 }
 
-// validateAgentNames validates that specified agent names exist in the framework
+// validateAgentNames validates that specified agent names exist in the framework.
 func validateAgentNames(currentDir string, selectedAgents []string, output *cli.OutputHandler) error {
+	if len(selectedAgents) == 0 {
+		return nil
+	}
+
 	// Create discovery service
 	discovery := assets.NewDiscovery(currentDir, GetEmbeddedAssets())
 
@@ -360,7 +367,7 @@ func handleTaskValidation(currentDir string, selectedAgents []string, bundleTask
 // generateAndWriteBundle handles bundle generation and file writing
 func generateAndWriteBundle(_ *cobra.Command, currentDir string, selectedAgents []string, bundleContent *BundleContent, bundleOutput string, bundleTask string, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) error {
 	// Generate bundle filename
-	bundleFilename := generateBundleFilename(bundleOutput, selectedAgents, bundleTask)
+	bundleFilename := bundle.GenerateBundleFilename(bundleOutput, selectedAgents, bundleTask)
 	bundleDir := filepath.Join(currentDir, krciAIDir, "bundle")
 	bundlePath := filepath.Join(bundleDir, bundleFilename)
 
@@ -383,6 +390,14 @@ func generateAndWriteBundle(_ *cobra.Command, currentDir string, selectedAgents 
 	output.PrintSuccess("Bundle generated successfully!")
 	output.PrintInfo(fmt.Sprintf("Bundle file: %s", bundlePath))
 	output.PrintInfo(fmt.Sprintf("Bundle size: %d bytes", len(bundleMarkdown)))
+
+	// Calculate and display token summary (with graceful error handling)
+	if err := displayBundleTokenSummary(bundleMarkdown); err != nil {
+		// Token calculation error should not prevent bundle generation success
+		output.PrintWarning(fmt.Sprintf("Token analysis failed: %v", err))
+		output.PrintInfo("Bundle was created successfully despite token calculation error")
+		output.PrintInfo("Use 'krci-ai tokens --bundle <scope>' for detailed token analysis")
+	}
 
 	// Show usage instructions
 	output.PrintInfo("\nUsage instructions:")
@@ -783,49 +798,6 @@ func showBundleScope(output *cli.OutputHandler, content *BundleContent) error {
 	return nil
 }
 
-// generateBundleFilename creates the bundle filename
-func generateBundleFilename(customOutput string, selectedAgents []string, taskName string) string {
-	if customOutput != "" {
-		// Ensure .md extension
-		if !strings.HasSuffix(customOutput, ".md") {
-			customOutput += ".md"
-		}
-		return customOutput
-	}
-
-	// Generate filename based on selected agents and task
-	if len(selectedAgents) > 0 {
-		// If both agent and task are specified, use agent-task pattern
-		if taskName != "" && len(selectedAgents) == 1 {
-			agentName := strings.ToLower(selectedAgents[0])
-			taskNameLower := strings.ToLower(taskName)
-			return fmt.Sprintf("%s-%s.md", agentName, taskNameLower)
-		}
-
-		// For multiple agents or agent-only bundles, use existing logic
-		sortedAgents := make([]string, len(selectedAgents))
-		copy(sortedAgents, selectedAgents)
-
-		// Convert to lowercase for consistent filenames
-		for i, agent := range sortedAgents {
-			sortedAgents[i] = strings.ToLower(agent)
-		}
-
-		// Sort alphabetically
-		for i := 0; i < len(sortedAgents); i++ {
-			for j := i + 1; j < len(sortedAgents); j++ {
-				if sortedAgents[i] > sortedAgents[j] {
-					sortedAgents[i], sortedAgents[j] = sortedAgents[j], sortedAgents[i]
-				}
-			}
-		}
-
-		return strings.Join(sortedAgents, "-") + ".md"
-	}
-
-	return "all.md"
-}
-
 // generateBundleMarkdown creates the complete bundle markdown content
 func generateBundleMarkdown(content *BundleContent) string {
 	var result strings.Builder
@@ -1004,6 +976,24 @@ func writeBundleFile(bundlePath, content string) error {
 	if _, err := file.WriteString(content); err != nil {
 		return fmt.Errorf("failed to write bundle content: %w", err)
 	}
+
+	return nil
+}
+
+// displayBundleTokenSummary calculates and displays token summary for the generated bundle
+func displayBundleTokenSummary(bundleContent string) error {
+	engine, err := tokens.NewDefaultEngine()
+	if err != nil {
+		return fmt.Errorf("failed to create tokens calculator: %w", err)
+	}
+
+	totalTokens, err := engine.CalculateTokens(context.TODO(), bundleContent)
+	if err != nil {
+		return fmt.Errorf("failed to calculate tokens: %w", err)
+	}
+
+	// Display token summary
+	output.PrintInfo(fmt.Sprintf("Bundle contains %d tokens", totalTokens))
 
 	return nil
 }

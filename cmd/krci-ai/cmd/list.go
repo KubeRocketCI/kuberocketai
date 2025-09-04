@@ -59,8 +59,6 @@ Examples:
   krci-ai list agents          # List all agents
   krci-ai list agents -v       # List agents with dependency table showing tasks, templates, and data`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Create output and error handlers
-		output := cli.NewOutputHandler()
 		errorHandler := cli.NewErrorHandler()
 
 		// Check verbose flag

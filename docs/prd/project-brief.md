@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-KubeRocketAI brings the proven "Infrastructure-as-Code" model to AI agent management, enabling development teams to define, version-control, and share AI agents through simple Markdown files alongside their code. This addresses the critical gap where teams have successfully adopted declarative CI/CD pipeline management but AI agent configuration remains ad-hoc and fragmented. Expected outcome: 100+ GitHub stars within 3 months (25x growth from current 4) and 85% reduction in manual fixes for AI-generated code through project-specific context awareness.
+KubeRocketAI brings the proven "Pipeline-as-Code" model to AI agent management, enabling development teams to define, version-control, and share AI agents through simple Markdown files alongside their code. This addresses the critical gap where teams have successfully adopted declarative CI/CD pipeline management but AI agent configuration remains ad-hoc and fragmented. Expected outcome: 100+ GitHub stars within 3 months (25x growth from current 4) and 85% reduction in manual fixes for AI-generated code through project-specific context awareness.
 
 ## Problem Statement
 
@@ -22,16 +22,16 @@ Evidence: Based on interviews with 5 developer teams and community forum analysi
 
 ## Opportunity
 
-Applying the proven Infrastructure-as-Code (Pipeline-as-Code) methodology to AI agent management would deliver quantified business value through reduced developer friction and improved code quality. Teams already understand and trust declarative configuration management from CI/CD success, creating immediate market readiness for this approach. Implementation through lightweight, version-controlled Markdown files targets 85% reduction in AI-generated code fixes while providing organizational governance and cross-team standardization.
+Applying the proven Pipeline-as-Code methodology to AI agent management would deliver quantified business value through reduced friction and improved output quality across all SDLC roles. Teams already understand and trust declarative configuration management from CI/CD success, creating immediate market readiness for this approach. Implementation through lightweight, version-controlled Markdown files targets 85% reduction in AI-generated content fixes while providing organizational governance and cross-team standardization.
 
 ## Target Users
 
-**Primary**: Emily - Development Lead managing 8-15 developers across 6-10 microservices in companies with established DevOps culture. Demographics: Senior Developer/Tech Lead, 7+ years development experience, 2+ years with AI tools.
+**Primary**: AI Adopters across SDLC roles - Product Owners, Product Managers, Business Analysts, QA Engineers, Developers, Architects, and Team Leads who work daily with AI-enhanced IDEs (Cursor, GitHub Copilot, Claude Desktop, WindSurf, VS Code) and want to maintain their IDE as the primary interface for their work while having the flexibility to bundle agents for web-based AI tools when needed.
 
-**User Volume**: 10+ Active Development Leads (expanding from current early adopter base to strategic adoption)
-**Usage Patterns**: Manages 3-5 active repositories, reviews 1-2 PRs weekly, evaluates new development tools quarterly
+**User Volume**: 50+ AI adopters across various SDLC roles (expanding from current developer-focused adoption to cross-functional team adoption)
+**Usage Patterns**: Use IDEs daily as primary work environment, leverage AI tools 3-5 times per day, periodically use web-based AI platforms that support models with large context windows (ChatGPT, Claude Desktop, Gemini Pro) for cost-effective specialized consultations (brainstorming, elicitation, etc.) where million+ token context is beneficial, prefer staying within IDE workflow for daily work and granular tasks.
 
-**Key Pain Points**: AI-generated code doesn't follow project standards, team lacks consistent agent configurations, security teams require auditability, context switching between IDE and external platforms disrupts flow.
+**Key Pain Points**: AI-generated content doesn't follow role-specific and organizational standards, team lacks consistent agent configurations across projects and roles, context switching between IDE and external platforms disrupts workflow, difficulty maintaining project context when using web-based AI tools.
 
 ## Success Metrics
 

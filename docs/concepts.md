@@ -32,16 +32,16 @@ Based on our research with enterprise teams:
 
 ## Our Solution: AI-as-Code
 
-### Apply Infrastructure-as-Code to AI Agents
+### Apply Pipeline-as-Code to AI Agents
 
-**Just like you've solved infrastructure management:**
+**Just like you've solved CI/CD pipeline management:**
 
 ```yaml
 # Old Way: Manual server setup
-"SSH into server, install packages, configure..."
+"copy-paste from docs, hope for consistency..."
 
-# New Way: Infrastructure-as-Code
-terraform apply infrastructure.tf
+# New Way: Pipeline-as-Code
+krci-ai install --ide=cursor
 ```
 
 **KubeRocketAI applies the same principle to AI agents:**

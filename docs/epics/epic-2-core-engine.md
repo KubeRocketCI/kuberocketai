@@ -31,8 +31,8 @@ Enable reliable asset processing and validation for 100% of KubeRocketAI framewo
 
 **PRD Requirements Addressed:**
 
-- **BR3 [P0]**: User can validate agent configurations and templates using built-in validation engine with design-time and runtime checks
-- **NFR2 [P0]**: Framework validates agent configurations in under 2 seconds for real-time feedback during development
+- **BR4 [P0]**: User can validate agent configurations and templates using built-in validation engine with design-time and runtime checks
+- **NFR1 [P0]**: Framework validates agent configurations in under 2 seconds for real-time feedback during development
 
 **Core Deliverables:**
 

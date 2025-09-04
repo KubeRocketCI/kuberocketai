@@ -36,8 +36,14 @@ const (
 	tasksDir       = "tasks"
 	templatesDir   = "templates"
 	dataDir        = "data"
-	localDir       = "local"
 	embeddedPrefix = "assets/framework/core"
+)
+
+// File extension constants
+const (
+	yamlExt = ".yaml"
+	ymlExt  = ".yml"
+	mdExt   = ".md"
 )
 
 // Path pattern constants
@@ -48,6 +54,19 @@ const (
 	standardTasksPrefix  = "./.krci-ai/tasks/"
 	templatesLinkPattern = "/templates/"
 	dataLinkPattern      = "/data/"
+)
+
+// Glob patterns
+const (
+	yamlGlob = "*" + yamlExt
+	ymlGlob  = "*" + ymlExt
+)
+
+// Issue type constants
+const (
+	issueTypeMissingTask     = "missing_task"
+	issueTypeInvalidTaskPath = "invalid_task_path"
+	issueTypeInvalidAgentExt = "invalid_agent_extension"
 )
 
 // Severity levels for validation issues
@@ -144,7 +163,7 @@ func (a *FrameworkAnalyzer) detectCriticalIssues(frameworkDir string) ([]Validat
 	}
 	issues = append(issues, brokenLinks...)
 
-	// 2. Detect missing task files referenced in agents
+	// 2. Detect missing and invalid task files referenced in agents
 	missingTasks, err := a.detectMissingTaskFiles(frameworkDir)
 	if err != nil {
 		return nil, err
@@ -171,6 +190,13 @@ func (a *FrameworkAnalyzer) detectCriticalIssues(frameworkDir string) ([]Validat
 		return nil, err
 	}
 	issues = append(issues, formatIssues...)
+
+	// 6. Detect invalid agent file extensions
+	agentExtensionIssues, err := a.detectInvalidAgentExtensions(frameworkDir)
+	if err != nil {
+		return nil, err
+	}
+	issues = append(issues, agentExtensionIssues...)
 
 	return issues, nil
 }
@@ -228,7 +254,7 @@ func (a *FrameworkAnalyzer) detectBrokenInternalLinks(frameworkDir string) ([]Va
 	return issues, nil
 }
 
-// detectMissingTaskFiles detects missing task files referenced in agent YAML
+// detectMissingTaskFiles detects missing and invalid task files referenced in agent YAML
 func (a *FrameworkAnalyzer) detectMissingTaskFiles(frameworkDir string) ([]ValidationIssue, error) {
 	var issues []ValidationIssue
 
@@ -237,15 +263,10 @@ func (a *FrameworkAnalyzer) detectMissingTaskFiles(frameworkDir string) ([]Valid
 		return issues, nil
 	}
 
-	agentFiles, err := filepath.Glob(filepath.Join(agentsDir, "*.yaml"))
+	agentFiles, err := a.getAgentFiles(agentsDir)
 	if err != nil {
 		return nil, err
 	}
-	ymlFiles, err := filepath.Glob(filepath.Join(agentsDir, "*.yml"))
-	if err != nil {
-		return nil, err
-	}
-	agentFiles = append(agentFiles, ymlFiles...)
 
 	for _, agentFile := range agentFiles {
 		content, err := os.ReadFile(agentFile)
@@ -263,29 +284,93 @@ func (a *FrameworkAnalyzer) detectMissingTaskFiles(frameworkDir string) ([]Valid
 			continue // Will be caught by format validation
 		}
 
+		relFile, _ := filepath.Rel(a.baseDir, agentFile)
+
 		for _, taskPath := range agent.Agent.Tasks {
-			if !strings.HasPrefix(taskPath, "./.krci-ai/tasks/") {
+			// First validate the path format
+			if issue := a.validateSingleTaskPath(taskPath, relFile); issue != nil {
+				issues = append(issues, *issue)
 				continue
 			}
 
-			cleanPath := strings.TrimPrefix(taskPath, "./")
-			absolutePath := filepath.Join(a.baseDir, cleanPath)
+			// Then check if file exists (only for valid paths)
+			if strings.HasPrefix(taskPath, standardTasksPrefix) || strings.HasPrefix(taskPath, localTasksPrefix) {
+				cleanPath := strings.TrimPrefix(taskPath, "./")
+				absolutePath := filepath.Join(a.baseDir, cleanPath)
 
-			if _, err := os.Stat(absolutePath); os.IsNotExist(err) {
-				relFile, _ := filepath.Rel(a.baseDir, agentFile)
-				issues = append(issues, ValidationIssue{
-					Type:        "missing_task",
-					Severity:    SeverityCritical,
-					File:        relFile,
-					Line:        0,
-					Message:     fmt.Sprintf("Missing task file: %s", taskPath),
-					FixGuidance: "Create the missing task file or remove the reference",
-				})
+				if _, err := os.Stat(absolutePath); os.IsNotExist(err) {
+					issues = append(issues, ValidationIssue{
+						Type:        issueTypeMissingTask,
+						Severity:    SeverityCritical,
+						File:        relFile,
+						Line:        0,
+						Message:     fmt.Sprintf("Missing task file: %s", taskPath),
+						FixGuidance: "Create the missing task file or remove the reference",
+					})
+				}
 			}
 		}
 	}
 
 	return issues, nil
+}
+
+// getAgentFiles returns all YAML agent files in directory
+func (a *FrameworkAnalyzer) getAgentFiles(agentsDir string) ([]string, error) {
+	yamlFiles, err := filepath.Glob(filepath.Join(agentsDir, yamlGlob))
+	if err != nil {
+		return nil, err
+	}
+	ymlFiles, err := filepath.Glob(filepath.Join(agentsDir, ymlGlob))
+	if err != nil {
+		return nil, err
+	}
+	return append(yamlFiles, ymlFiles...), nil
+}
+
+// validateSingleTaskPath validates a single task path
+func (a *FrameworkAnalyzer) validateSingleTaskPath(taskPath, relFile string) *ValidationIssue {
+	if strings.TrimSpace(taskPath) == "" {
+		return &ValidationIssue{
+			Type:        issueTypeInvalidTaskPath,
+			Severity:    SeverityError,
+			File:        relFile,
+			Message:     "Empty task path found",
+			FixGuidance: fmt.Sprintf("Remove empty task path or provide valid path starting with '%s' or '%s'", standardTasksPrefix, localTasksPrefix),
+		}
+	}
+
+	if !strings.HasPrefix(taskPath, standardTasksPrefix) && !strings.HasPrefix(taskPath, localTasksPrefix) {
+		return &ValidationIssue{
+			Type:        issueTypeInvalidTaskPath,
+			Severity:    SeverityError,
+			File:        relFile,
+			Message:     fmt.Sprintf("Invalid task path format: %s", taskPath),
+			FixGuidance: fmt.Sprintf("Task paths must start with '%s' or '%s'", standardTasksPrefix, localTasksPrefix),
+		}
+	}
+
+	if strings.Contains(taskPath, "../") || strings.Contains(taskPath, "/..") {
+		return &ValidationIssue{
+			Type:        issueTypeInvalidTaskPath,
+			Severity:    SeverityCritical,
+			File:        relFile,
+			Message:     fmt.Sprintf("Path traversal detected in task path: %s", taskPath),
+			FixGuidance: "Remove path traversal sequences (..) from task path",
+		}
+	}
+
+	if !strings.HasSuffix(taskPath, mdExt) {
+		return &ValidationIssue{
+			Type:        issueTypeInvalidTaskPath,
+			Severity:    SeverityError,
+			File:        relFile,
+			Message:     fmt.Sprintf("Invalid task file extension: %s", taskPath),
+			FixGuidance: fmt.Sprintf("Task files must have %s extension", mdExt),
+		}
+	}
+
+	return nil
 }
 
 // detectArchitectureViolations detects violations of component separation
@@ -400,6 +485,41 @@ func (a *FrameworkAnalyzer) detectFormatIssues(frameworkDir string) ([]Validatio
 					FixGuidance: "Fix YAML syntax errors",
 				})
 			}
+		}
+	}
+
+	return issues, nil
+}
+
+// detectInvalidAgentExtensions detects files in agents directory with non-YAML extensions
+func (a *FrameworkAnalyzer) detectInvalidAgentExtensions(frameworkDir string) ([]ValidationIssue, error) {
+	var issues []ValidationIssue
+
+	agentsPath := filepath.Join(frameworkDir, agentsDir)
+	allFiles, err := filepath.Glob(filepath.Join(agentsPath, "*"))
+	if err != nil {
+		return nil, err
+	}
+
+	for _, file := range allFiles {
+		// Skip directories
+		if info, err := os.Stat(file); err != nil || info.IsDir() {
+			continue
+		}
+
+		ext := filepath.Ext(file)
+		if ext != yamlExt && ext != ymlExt {
+			relPath, _ := filepath.Rel(a.baseDir, file)
+			baseName := strings.TrimSuffix(filepath.Base(file), ext)
+
+			issues = append(issues, ValidationIssue{
+				Type:        issueTypeInvalidAgentExt,
+				Severity:    SeverityWarning,
+				File:        relPath,
+				Line:        0,
+				Message:     fmt.Sprintf("Agent files should have %s or %s extension, found: %s", yamlExt, ymlExt, ext),
+				FixGuidance: fmt.Sprintf("Rename to %s%s or %s%s", baseName, yamlExt, baseName, ymlExt),
+			})
 		}
 	}
 

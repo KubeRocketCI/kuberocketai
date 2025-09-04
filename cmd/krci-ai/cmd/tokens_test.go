@@ -46,7 +46,7 @@ func TestRunTokensCommandValidation(t *testing.T) {
 			agent:       "",
 			all:         false,
 			expectError: true,
-			errorMsg:    "either --agent or --all flag must be specified",
+			errorMsg:    "either --agent, --all, or --bundle flag must be specified",
 		},
 		{
 			name:        "agent flag provided",
@@ -68,6 +68,7 @@ func TestRunTokensCommandValidation(t *testing.T) {
 			cmd := &cobra.Command{}
 			cmd.Flags().String("agent", "", "Analyze tokens for a specific agent")
 			cmd.Flags().Bool("all", false, "Analyze tokens for all agents in the project")
+			cmd.Flags().String("bundle", "", "Analyze tokens for bundle configuration")
 			cmd.Flags().Bool("json", false, "Output results in JSON format")
 			cmd.Flags().Duration("timeout", 30*time.Second, "Timeout for token analysis")
 

@@ -6,10 +6,12 @@ Review and validate user story from Architect perspective to ensure system desig
 
 ## Prerequisites
 
-- [ ] **Story exists**: Target story file exists in `/docs/stories/` requiring architectural review
-- [ ] **Architecture context**: Understanding of system architecture, design patterns, and technical standards
-- [ ] **Design authority**: Architect expertise to validate system design and integration approach
-- [ ] **System knowledge**: Familiarity with existing system components, interfaces, and constraints
+<prerequisites>
+- Story exists: Target story file exists in `/docs/stories/` requiring architectural review
+- Architecture context: Understanding of system architecture, design patterns, and technical standards
+- Design authority: Architect expertise to validate system design and integration approach
+- System knowledge: Familiarity with existing system components, interfaces, and constraints
+</prerequisites>
 
 ### Reference Assets
 
@@ -22,11 +24,13 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
-1. **Validate system design alignment**: Ensure implementation approach aligns with overall system architecture
-2. **Review component boundaries**: Verify proposed components have clear responsibilities and interfaces
-3. **Assess integration patterns**: Validate integration approach follows established architectural patterns
-4. **Check performance implications**: Evaluate performance, scalability, and resource considerations
-5. **Verify compliance standards**: Ensure approach meets security, compliance, and technical standards; confirm AC include appropriate guardrails and that Verification Method/Evidence are adequate where commands aren't feasible
+<instructions>
+1. Validate system design alignment: Ensure implementation approach aligns with overall system architecture
+2. Review component boundaries: Verify proposed components have clear responsibilities and interfaces
+3. Assess integration patterns: Validate integration approach follows established architectural patterns
+4. Check performance implications: Evaluate performance, scalability, and resource considerations
+5. Verify compliance standards: Ensure approach meets security, compliance, and technical standards; confirm AC include appropriate guardrails and that Verification Method/Evidence are adequate where commands aren't feasible
+</instructions>
 
 ## Output Format
 
@@ -38,63 +42,79 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Success Criteria
 
-- [ ] **System architecture alignment**: Implementation approach consistent with overall system design
-- [ ] **Component boundaries clear**: Clear separation of concerns and component responsibilities
-- [ ] **Integration patterns appropriate**: Integration follows established architectural patterns
-- [ ] **Performance considerations addressed**: Scalability, performance, and resource implications evaluated
-- [ ] **Security standards compliance**: Implementation approach meets security and compliance requirements
-- [ ] **Architect approval documented**: Architectural validation and design approval recorded
+<success_criteria>
+- System architecture alignment: Implementation approach consistent with overall system design
+- Component boundaries clear: Clear separation of concerns and component responsibilities
+- Integration patterns appropriate: Integration follows established architectural patterns
+- Performance considerations addressed: Scalability, performance, and resource implications evaluated
+- Security standards compliance: Implementation approach meets security and compliance requirements
+- Architect approval documented: Architectural validation and design approval recorded
+</success_criteria>
 
 ## Execution Checklist
 
 ### System Architecture Alignment
 
+<system_architecture_alignment>
 - [ ] **Design pattern consistency**: Implementation follows established system design patterns
 - [ ] **Component integration**: New components integrate properly with existing system architecture
 - [ ] **Service boundary respect**: Implementation respects established service and component boundaries
 - [ ] **Data flow alignment**: Data flow and transformation aligns with system data architecture
+</system_architecture_alignment>
 
 ### Component Design Validation
 
+<component_design_validation>
 - [ ] **Separation of concerns**: Components have clear, single responsibilities
 - [ ] **Interface definition**: Component interfaces are well-defined and consistent
 - [ ] **Dependency management**: Component dependencies are minimal and well-structured
 - [ ] **Reusability consideration**: Components designed for reusability where appropriate
+</component_design_validation>
 
 ### Integration Pattern Review
 
+<integration_pattern_review>
 - [ ] **Communication patterns**: Inter-component communication follows established patterns
 - [ ] **Event handling**: Event-driven patterns implemented correctly if applicable
 - [ ] **Error propagation**: Error handling and propagation follows architectural standards
 - [ ] **Transaction boundaries**: Transaction management aligns with system transaction patterns
+</integration_pattern_review>
 
 ### Performance and Scalability Assessment
 
+<performance_scalability_assessment>
 - [ ] **Performance impact**: Implementation approach evaluated for performance implications
 - [ ] **Scalability considerations**: Design supports system scalability requirements
 - [ ] **Resource utilization**: Resource usage (memory, CPU, storage) appropriately planned
 - [ ] **Bottleneck identification**: Potential performance bottlenecks identified and addressed
+</performance_scalability_assessment>
 
 ### Security and Compliance Validation
 
+<security_compliance_validation>
 - [ ] **Security standards**: Implementation follows established security patterns and standards
 - [ ] **Data protection**: Data handling and protection requirements appropriately addressed
 - [ ] **Access control**: Authentication and authorization patterns correctly implemented
 - [ ] **Compliance requirements**: Implementation meets relevant compliance and regulatory standards
+</security_compliance_validation>
 
 ### Technical Standards Compliance
 
+<technical_standards_compliance>
 - [ ] **Coding standards**: Technical approach aligns with established coding and design standards
 - [ ] **Documentation patterns**: Technical documentation follows architectural documentation standards
 - [ ] **Testing approach**: Testing strategy aligns with architectural testing patterns
 - [ ] **Deployment considerations**: Implementation supports established deployment and operations patterns
+</technical_standards_compliance>
 
 ### System Integration Readiness
 
+<system_integration_readiness>
 - [ ] **API consistency**: New APIs follow established API design patterns and standards
 - [ ] **Configuration management**: Configuration approach aligns with system configuration patterns
 - [ ] **Monitoring integration**: Implementation supports established monitoring and observability patterns
 - [ ] **Operational readiness**: Implementation approach supports operational requirements
+</system_integration_readiness>
 
 ## Content Guidelines
 

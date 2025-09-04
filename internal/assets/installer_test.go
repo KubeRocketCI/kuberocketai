@@ -281,8 +281,8 @@ func TestInstall(t *testing.T) {
 		t.Fatalf("Failed to create .krci-ai directory: %v", err)
 	}
 
-	// Create subdirectories
-	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir, configDir}
+	// Create subdirectories (configDir no longer created by default)
+	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
 	for _, subdir := range subdirs {
 		dirPath := filepath.Join(krciPath, subdir)
 		err := installer.createDirectory(dirPath)
