@@ -48,3 +48,6 @@ bin/
 
 # Claude settings
 .claude/settings.local.json
+
+# JetBrains IDEs
+/.idea/
