@@ -85,6 +85,7 @@ Update an existing project status report to reflect current project performance,
 
 ## Output Format
 
+<output_format>
 **Updated Status Report:**
 - Use current status report template format
 - Maintain consistency with previous report structure
@@ -96,9 +97,11 @@ Update an existing project status report to reflect current project performance,
 - Summarize new developments and their impact
 - Present trend analysis and performance insights
 - Document stakeholder feedback incorporation
+</output_format>
 
 ## Success Criteria
 
+<success_criteria>
 **Report Currency:**
 - [ ] All performance data current and accurate
 - [ ] Status reflects latest project developments
@@ -116,6 +119,7 @@ Update an existing project status report to reflect current project performance,
 - [ ] Data accuracy verified and validated
 - [ ] Analysis provides meaningful insights for stakeholders
 - [ ] Recommendations are actionable and timely
+</success_criteria>
 
 ## Execution Checklist
 
