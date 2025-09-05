@@ -4,38 +4,41 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 
 ## Problem Validation Frameworks
 
+<problem_validation>
+
 ### Lean Startup Problem-Solution Fit Assessment
 
-**Methodology**: Eric Ries Lean Startup approach for validating problem-solution alignment.
+Methodology: Eric Ries Lean Startup approach for validating problem-solution alignment.
 
-**Application**: Use for Problem Statement and Opportunity sections validation.
+Application: Use for Problem Statement and Opportunity sections validation.
 
-**Validation Process**:
+Validation Process:
 
-1. **Problem Hypothesis Validation**
+1. Problem Hypothesis Validation
    - Define problem hypothesis with specific user segment
    - Identify measurable problem indicators (support tickets, workarounds, time spent)
    - Validate problem urgency using customer interview evidence
    - Quantify problem frequency and impact
 
-2. **Solution Hypothesis Validation**
+2. Solution Hypothesis Validation
    - Define minimum viable solution approach
    - Test solution desirability with target users
    - Validate solution feasibility with technical constraints
    - Assess solution viability with business model fit
 
-3. **Evidence Requirements**
+3. Evidence Requirements
    - Customer interview data (minimum 10 target users)
    - Quantified problem metrics (costs, time, frequency)
    - Competitive analysis of existing solutions
    - Technical feasibility assessment
 
-**Validation Questions**:
+Validation Questions:
 
 - Is this problem urgent enough for users to seek solutions?
 - Do users currently pay (time/money) for workarounds?
 - Does our solution approach address the root cause?
 - Is the solution technically and commercially viable?
+</problem_validation>
 
 ### Six Sigma Root Cause Analysis (5 Whys)
 
@@ -99,6 +102,8 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - Comparative analysis with other organizational priorities
 
 ## User Validation Frameworks
+
+<user_validation>
 
 ### Jobs-to-be-Done Validation (Clayton Christensen)
 
@@ -238,7 +243,11 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - Are user needs validated through direct user research?
 - Is market sizing based on credible industry data?
 
+</user_validation>
+
 ## Success Metrics Validation Frameworks
+
+<metrics_validation>
 
 ### SMART Criteria Assessment
 
@@ -384,7 +393,11 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - Can the team act on leading indicator signals effectively?
 - Are lagging indicators true measures of project success?
 
+</metrics_validation>
+
 ## Business Value Validation Frameworks
+
+<business_validation>
 
 ### Business Model Canvas Validation
 
@@ -521,7 +534,11 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - Does the ROI meet organizational investment criteria?
 - What are the key risks to ROI achievement and how can they be mitigated?
 
+</business_validation>
+
 ## Framework Selection Guide
+
+<selection_guide>
 
 ### Problem Statement Validation
 
@@ -547,7 +564,11 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - **Secondary**: ROI Calculation Validation
 - **Situational**: Business Model Canvas Validation (for new business models)
 
+</selection_guide>
+
 ## Validation Confidence Levels
+
+<confidence_levels>
 
 ### High Confidence (80-100%)
 
@@ -577,7 +598,11 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - No stakeholder validation
 - High uncertainty in key assumptions
 
+</confidence_levels>
+
 ## Usage Guidelines
+
+<usage_guidelines>
 
 ### When to Apply Validation Frameworks
 
@@ -599,3 +624,4 @@ Purpose: Provide methodologically grounded validation frameworks for project bri
 - Record evidence sources and confidence levels
 - Track assumptions and validation status
 - Update validation as new evidence becomes available
+</usage_guidelines>

@@ -6,28 +6,33 @@ This methodology provides comprehensive guidance for project management activiti
 
 ## Project Management Framework
 
+<pmbok_principles>
+
 ### PMBoK 7th Edition Principles
 
-1. **Stakeholder-Focused**: Engage stakeholders effectively throughout the project lifecycle
-2. **Collaborative**: Foster team collaboration and collective accountability
-3. **Development Approach and Life Cycle**: Select appropriate development approach and life cycle
-4. **Value-Driven**: Focus on outcomes and business value delivery
-5. **Systems Thinking**: Recognize system interactions and interdependencies
-6. **Leadership**: Demonstrate leadership behaviors and competencies
-7. **Tailoring**: Adapt practices to project context and environment
-8. **Quality**: Build quality into processes and deliverables
-9. **Complexity**: Navigate complexity through adaptive and resilient practices
+1. Stakeholder-Focused: Engage stakeholders effectively throughout the project lifecycle
+2. Collaborative: Foster team collaboration and collective accountability
+3. Development Approach and Life Cycle: Select appropriate development approach and life cycle
+4. Value-Driven: Focus on outcomes and business value delivery
+5. Systems Thinking: Recognize system interactions and interdependencies
+6. Leadership: Demonstrate leadership behaviors and competencies
+7. Tailoring: Adapt practices to project context and environment
+8. Quality: Build quality into processes and deliverables
+9. Complexity: Navigate complexity through adaptive and resilient practices
+</pmbok_principles>
 
 ### Process Groups
 
-#### 1. Initiating Process Group
+<process_groups>
+
+#### Initiating Process Group
 
 - Develop Project Charter
 - Identify Stakeholders
 - Define preliminary scope and objectives
 - Establish project governance structure
 
-#### 2. Planning Process Group
+#### Planning Process Group
 
 - Develop comprehensive Project Plan
 - Create Work Breakdown Structure (WBS)
@@ -37,14 +42,14 @@ This methodology provides comprehensive guidance for project management activiti
 - Plan Communications
 - Plan Procurement (if applicable)
 
-#### 3. Executing Process Group
+#### Executing Process Group
 
 - Direct and manage project work
 - Manage stakeholder engagement
 - Implement planned activities
 - Execute quality assurance
 
-#### 4. Monitoring & Controlling Process Group
+#### Monitoring & Controlling Process Group
 
 - Monitor project performance
 - Control scope, schedule, cost, and quality
@@ -52,16 +57,19 @@ This methodology provides comprehensive guidance for project management activiti
 - Report performance through Status Reports
 - Implement integrated change control
 
-#### 5. Closing Process Group
+#### Closing Process Group
 
 - Close project or phase
 - Document lessons learned
 - Release project resources
 - Archive project documents
+</process_groups>
 
 ## Knowledge Areas Integration
 
-### 1. Project Integration Management
+<knowledge_areas>
+
+### Project Integration Management
 
 - **Charter Development**: Formal authorization and high-level requirements
 - **Project Plan Development**: Comprehensive planning document integration
@@ -517,3 +525,4 @@ This methodology provides comprehensive guidance for project management activiti
 - Customer satisfaction scores
 
 This methodology provides the foundation for all Project Manager activities within the KubeRocketAI framework, ensuring consistent application of PMBoK principles and organizational best practices across all projects and initiatives.
+</knowledge_areas>

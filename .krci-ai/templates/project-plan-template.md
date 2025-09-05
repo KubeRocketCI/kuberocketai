@@ -4,21 +4,37 @@
 
 ## Document Control
 
+<document_control>
 | Field | Value |
 |-------|-------|
-| **Document Type** | Project Management Plan |
-| **Project Name** | {{project_name}} |
-| **Version** | {{version}} |
-| **Date** | {{date}} |
-| **Project Manager** | {{project_manager}} |
-| **Sponsor** | {{project_sponsor}} |
-| **Status** | {{status}} |
+| Document Type | Project Management Plan |
+| Project Name | {{project_name}} |
+| Version | {{version}} |
+| Date | {{date}} |
+| Project Manager | {{project_manager}} |
+| Sponsor | {{project_sponsor}} |
+| Status | {{status}} |
+
+<instructions>
+Document control section provides essential project metadata and governance information.
+Ensure all fields are populated with current, accurate information.
+Status options: Draft, In Review, Approved, Active, Closed
+</instructions>
+</document_control>
 
 ---
 
 ## 1. Executive Summary
 
+<executive_summary>
 {{executive_summary}}
+
+<instructions>
+Provide a high-level overview of the project including purpose, key deliverables, success criteria, and business value.
+Keep concise - 2-3 paragraphs maximum.
+Focus on strategic value and stakeholder benefits.
+</instructions>
+</executive_summary>
 
 ---
 
@@ -40,6 +56,7 @@
 
 ## 3. Scope Management Plan
 
+<scope_management>
 ### 3.1 Scope Planning Process
 
 {{scope_planning_process}}
@@ -52,10 +69,18 @@
 
 {{work_breakdown_structure}}
 
+<instructions>
+Scope management plan defines how project scope will be defined, validated, and controlled.
+Include clear scope boundaries, exclusions, and change control procedures.
+Work breakdown structure should decompose deliverables to manageable work packages.
+</instructions>
+</scope_management>
+
 ---
 
 ## 4. Schedule Management Plan
 
+<schedule_management>
 ### 4.1 Schedule Development
 
 {{schedule_development}}
@@ -67,6 +92,13 @@
 ### 4.3 Schedule Control Process
 
 {{schedule_control_process}}
+
+<instructions>
+Schedule management plan establishes approach for developing and controlling project timeline.
+Include activity definition, sequencing, resource estimation, and duration estimation.
+Identify critical path and key milestones with dependencies.
+</instructions>
+</schedule_management>
 
 ---
 
@@ -140,6 +172,7 @@
 
 ## 9. Risk Management Plan
 
+<risk_management>
 ### 9.1 Risk Identification
 
 {{risk_identification}}
@@ -155,6 +188,14 @@
 ### 9.4 Risk Monitoring
 
 {{risk_monitoring}}
+
+<instructions>
+Risk management plan describes how risk management activities will be structured and performed.
+Include risk identification methods, qualitative and quantitative analysis approaches.
+Define risk response strategies and monitoring procedures.
+Maintain risk register with probability, impact, and response plans.
+</instructions>
+</risk_management>
 
 ---
 

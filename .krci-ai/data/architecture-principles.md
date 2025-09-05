@@ -2,7 +2,9 @@
 
 ## Core Principles
 
-### 1. Scalability First
+<architecture_principles>
+
+### Scalability First
 
 Design systems for growth from day one. Consider horizontal and vertical scaling strategies.
 
@@ -10,7 +12,7 @@ Design systems for growth from day one. Consider horizontal and vertical scaling
 - Design stateless services where possible
 - Use load balancing and auto-scaling
 
-### 2. Security by Design
+### Security by Design
 
 Implement security at every layer, not as an afterthought.
 
@@ -19,7 +21,7 @@ Implement security at every layer, not as an afterthought.
 - Implement secure defaults
 - Regular security assessments
 
-### 3. Fault Tolerance
+### Fault Tolerance
 
 Plan for component failures and graceful degradation.
 
@@ -28,7 +30,7 @@ Plan for component failures and graceful degradation.
 - Use redundancy and failover mechanisms
 - Plan disaster recovery
 
-### 4. Separation of Concerns
+### Separation of Concerns
 
 Organize code and components by responsibility.
 
@@ -37,7 +39,7 @@ Organize code and components by responsibility.
 - Minimal coupling between components
 - High cohesion within components
 
-### 5. Observability
+### Observability
 
 Build monitoring, logging, and tracing into the system.
 
@@ -46,7 +48,7 @@ Build monitoring, logging, and tracing into the system.
 - Distributed tracing for complex flows
 - Performance metrics and analytics
 
-### 6. Maintainability
+### Maintainability
 
 Prioritize code and architecture that can be easily understood and modified.
 
@@ -55,7 +57,7 @@ Prioritize code and architecture that can be easily understood and modified.
 - Automated testing
 - Simple deployment processes
 
-### 7. Performance Optimization
+### Performance Optimization
 
 Balance performance with maintainability and cost.
 
@@ -64,7 +66,7 @@ Balance performance with maintainability and cost.
 - Consider caching strategies
 - Optimize data access patterns
 
-### 8. Evolutionary Architecture
+### Evolutionary Architecture
 
 Design for change and adaptation over time.
 
@@ -72,3 +74,4 @@ Design for change and adaptation over time.
 - API versioning strategy
 - Incremental migration paths
 - Technology stack flexibility
+</architecture_principles>

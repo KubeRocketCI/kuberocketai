@@ -6,19 +6,23 @@ Update an existing project plan to reflect approved changes, new information, or
 
 ## Prerequisites
 
+<prerequisites>
 - Existing project plan available for modification
 - Approved change requests or update requirements
 - Change impact assessment completed
 - Stakeholder approval for plan modifications
 - Updated baseline information available
+</prerequisites>
 
 ## Reference Assets
 
+<reference_assets>
 **Primary Dependencies:**
 - Current project plan document
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [project-plan-template.md](./.krci-ai/templates/project-plan-template.md)
 - Change request and impact assessment documentation
+</reference_assets>
 
 ## Instructions
 
@@ -103,24 +107,28 @@ Update an existing project plan to reflect approved changes, new information, or
 ## Execution Checklist
 
 ### Preparation Phase
+
 - [ ] Review change requests and approval documentation
 - [ ] Gather current plan and related project documents
 - [ ] Identify stakeholders requiring involvement in updates
 - [ ] Plan change communication and approval timeline
 
 ### Analysis Phase
+
 - [ ] Conduct comprehensive integrated change impact assessment
 - [ ] Identify all plan components requiring modification
 - [ ] Assess implications for project execution and control
 - [ ] Prepare change summary and rationale documentation
 
 ### Update Phase
+
 - [ ] Modify affected subsidiary plans with tracked changes
 - [ ] Ensure consistency and integration across all plans
 - [ ] Update project baselines following change procedures
 - [ ] Validate changes maintain plan viability and effectiveness
 
 ### Approval Phase
+
 - [ ] Coordinate stakeholder reviews and feedback sessions
 - [ ] Address concerns and incorporate approved modifications
 - [ ] Obtain formal approvals following organizational procedures
@@ -130,12 +138,14 @@ Update an existing project plan to reflect approved changes, new information, or
 ## Content Guidelines
 
 ### Quality Principles
+
 - **Integration**: Maintain coherence across all subsidiary plans
 - **Accuracy**: Ensure all updates reflect approved changes correctly
 - **Consistency**: Keep all plan elements aligned and mutually supportive
 - **Traceability**: Document change rationale and approval decisions clearly
 
 ### PMBoK Integration Context
+
 - Apply integrated change control throughout update process
 - Ensure plan updates support all PMBoK knowledge areas effectively
 - Maintain plan's role as comprehensive project management framework

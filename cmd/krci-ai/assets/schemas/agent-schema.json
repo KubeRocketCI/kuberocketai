@@ -46,7 +46,7 @@
             "goal": {
               "type": "string",
               "minLength": 10,
-              "maxLength": 200,
+              "maxLength": 600,
               "description": "Ultimate objective or mission statement"
             }
           },
@@ -62,14 +62,14 @@
           },
           "minItems": 1,
           "maxItems": 10,
-          "description": "Persona activation instructions (1-10 items, each 10-300 chars)"
+          "description": "Persona activation instructions (1-10 items, each 10-600 chars)"
         },
         "principles": {
           "type": "array",
           "items": {
             "type": "string",
             "minLength": 10,
-            "maxLength": 200
+            "maxLength": 600
           },
           "minItems": 3,
           "maxItems": 10,

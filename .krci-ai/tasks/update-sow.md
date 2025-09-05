@@ -6,19 +6,23 @@ Update an existing Scope of Work document to reflect approved scope changes, ref
 
 ## Prerequisites
 
+<prerequisites>
 - Existing SOW document available for modification
 - Approved change request or scope modification
 - Impact assessment completed
 - Stakeholder approval for changes obtained
 - Change control board authorization (if applicable)
+</prerequisites>
 
 ## Reference Assets
 
+<reference_assets>
 **Primary Dependencies:**
 - Current SOW document
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [sow-template.md](./.krci-ai/templates/sow-template.md)
 - Change request documentation
+</reference_assets>
 
 ## Instructions
 
@@ -67,6 +71,7 @@ Update an existing Scope of Work document to reflect approved scope changes, ref
 
 ## Output Format
 
+<output_format>
 **Updated SOW Document:**
 - Use current SOW template format
 - Include version control and change tracking
@@ -78,64 +83,81 @@ Update an existing Scope of Work document to reflect approved scope changes, ref
 - Impact assessment results and approvals
 - Comparison highlighting key modifications
 - Updated baseline for project execution
+</output_format>
 
 ## Success Criteria
 
+<success_criteria>
 **SOW Update Quality:**
-- [ ] All approved changes accurately reflected
-- [ ] SOW maintains internal consistency and clarity
-- [ ] Updated acceptance criteria are measurable
-- [ ] Revised timeline and resources are realistic
-- [ ] Change impact properly assessed and documented
+- All approved changes accurately reflected
+- SOW maintains internal consistency and clarity
+- Updated acceptance criteria are measurable
+- Revised timeline and resources are realistic
+- Change impact properly assessed and documented
 
 **Stakeholder Alignment:**
-- [ ] All affected stakeholders reviewed and approved changes
-- [ ] Change rationale clearly communicated
-- [ ] Updated SOW maintains stakeholder commitment
-- [ ] Team understands revised scope and responsibilities
+- All affected stakeholders reviewed and approved changes
+- Change rationale clearly communicated
+- Updated SOW maintains stakeholder commitment
+- Team understands revised scope and responsibilities
 
 **Process Compliance:**
-- [ ] Change control procedures followed appropriately
-- [ ] Proper version control and change tracking maintained
-- [ ] Authorization approvals documented
-- [ ] Updated SOW distributed to stakeholders
+- Change control procedures followed appropriately
+- Proper version control and change tracking maintained
+- Authorization approvals documented
+- Updated SOW distributed to stakeholders
+</success_criteria>
 
 ## Execution Checklist
 
 ### Preparation Phase
-- [ ] Review change requests and approval documentation
-- [ ] Gather current SOW and related project documents
-- [ ] Identify stakeholders requiring involvement
-- [ ] Plan change communication and approval timeline
+
+<preparation_phase>
+- Review change requests and approval documentation
+- Gather current SOW and related project documents
+- Identify stakeholders requiring involvement
+- Plan change communication and approval timeline
+</preparation_phase>
 
 ### Analysis Phase
-- [ ] Conduct comprehensive change impact assessment
-- [ ] Identify all SOW sections requiring modification
-- [ ] Assess implications for project execution
-- [ ] Prepare change summary and rationale
+
+<analysis_phase>
+- Conduct comprehensive change impact assessment
+- Identify all SOW sections requiring modification
+- Assess implications for project execution
+- Prepare change summary and rationale
+</analysis_phase>
 
 ### Update Phase
-- [ ] Modify SOW sections using tracked changes
-- [ ] Ensure consistency across updated content
-- [ ] Validate changes maintain SOW integrity
-- [ ] Prepare updated SOW for stakeholder review
+
+<update_phase>
+- Modify SOW sections using tracked changes
+- Ensure consistency across updated content
+- Validate changes maintain SOW integrity
+- Prepare updated SOW for stakeholder review
+</update_phase>
 
 ### Approval Phase
-- [ ] Coordinate stakeholder reviews and feedback
-- [ ] Address concerns and incorporate approved changes
-- [ ] Obtain formal approvals following procedures
-- [ ] Finalize SOW with updated version information
-- [ ] Distribute updated SOW and communicate changes
+
+<approval_phase>
+- Coordinate stakeholder reviews and feedback
+- Address concerns and incorporate approved changes
+- Obtain formal approvals following procedures
+- Finalize SOW with updated version information
+- Distribute updated SOW and communicate changes
+</approval_phase>
 
 ## Content Guidelines
 
 ### Quality Principles
+
 - **Accuracy**: Ensure all updates reflect approved changes correctly
 - **Consistency**: Maintain SOW coherence across all sections
 - **Traceability**: Document change rationale and approval decisions
 - **Completeness**: Address all aspects affected by scope changes
 
 ### PMBoK Integration Context
+
 - Apply integrated change control throughout update process
 - Ensure SOW updates support scope management best practices
 - Maintain SOW role as definitive project scope baseline

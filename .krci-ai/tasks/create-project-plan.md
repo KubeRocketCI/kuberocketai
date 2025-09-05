@@ -6,11 +6,13 @@ Create a comprehensive project plan that integrates all subsidiary plans and ser
 
 ## Prerequisites
 
+<prerequisites>
 - Project charter approved and SOW finalized
 - Work breakdown structure (WBS) completed
 - Resource requirements identified and validated
 - Risk assessment and stakeholder analysis completed
 - Quality standards and acceptance criteria defined
+</prerequisites>
 
 ## Reference Assets
 
@@ -26,21 +28,22 @@ Create a comprehensive project plan that integrates all subsidiary plans and ser
 
 ## Instructions
 
+<instructions>
 ### 1. Integrated Planning Development
 
-**Scope Management Plan:**
+Scope Management Plan:
 - Define scope management processes and procedures
 - Establish change control processes for scope modifications
 - Document scope validation and acceptance procedures
 - Create work breakdown structure with detailed work packages
 
-**Schedule Management Plan:**
+Schedule Management Plan:
 - Develop detailed project schedule with critical path analysis
 - Define activity sequencing and dependency relationships
 - Establish milestone schedule and progress measurement
 - Create resource loading and leveling plans
 
-**Cost Management Plan:**
+Cost Management Plan:
 - Develop comprehensive project budget with cost baselines
 - Establish cost control procedures and variance thresholds
 - Define earned value management approach
@@ -48,13 +51,13 @@ Create a comprehensive project plan that integrates all subsidiary plans and ser
 
 ### 2. Resource and Quality Planning
 
-**Resource Management Plan:**
+Resource Management Plan:
 - Define organizational structure and role assignments
 - Establish resource acquisition and release procedures
 - Create team development and performance management plans
 - Document resource optimization and conflict resolution processes
 
-**Quality Management Plan:**
+Quality Management Plan:
 - Define quality standards and acceptance criteria
 - Establish quality assurance and control procedures
 - Create testing, review, and validation processes
@@ -62,23 +65,24 @@ Create a comprehensive project plan that integrates all subsidiary plans and ser
 
 ### 3. Communication and Risk Planning
 
-**Communications Management Plan:**
+Communications Management Plan:
 - Define stakeholder communication requirements and methods
 - Establish reporting frequency, format, and distribution
 - Create meeting schedules and decision-making procedures
 - Document information management and storage protocols
 
-**Risk Management Plan:**
+Risk Management Plan:
 - Integrate risk register with detailed response strategies
 - Establish risk monitoring and control procedures
 - Define risk escalation and reporting processes
 - Create contingency and fallback planning approaches
 
-**Procurement Management Plan (if applicable):**
+Procurement Management Plan (if applicable):
 - Define procurement approach and vendor selection criteria
 - Establish contract management and performance monitoring
 - Create procurement timeline and milestone schedule
 - Document vendor relationship and conflict resolution procedures
+</instructions>
 
 ## Output Format
 
@@ -100,54 +104,58 @@ Use template: [project-plan-template.md](./.krci-ai/templates/project-plan-templ
 
 ## Success Criteria
 
-**Plan Completeness:**
-- [ ] All subsidiary plans integrated coherently
-- [ ] Detailed schedules with realistic timelines
-- [ ] Comprehensive budget with appropriate contingencies
-- [ ] Clear quality standards and acceptance criteria
-- [ ] Well-defined roles, responsibilities, and governance
+<success_criteria>
+Plan Completeness:
+- All subsidiary plans integrated coherently
+- Detailed schedules with realistic timelines
+- Comprehensive budget with appropriate contingencies
+- Clear quality standards and acceptance criteria
+- Well-defined roles, responsibilities, and governance
 
-**Plan Viability:**
-- [ ] Resource requirements validated and committed
-- [ ] Schedule achievable with identified constraints
-- [ ] Budget realistic and approved by stakeholders
-- [ ] Risk responses adequate for identified threats
-- [ ] Communication plan addresses all stakeholder needs
+Plan Viability:
+- Resource requirements validated and committed
+- Schedule achievable with identified constraints
+- Budget realistic and approved by stakeholders
+- Risk responses adequate for identified threats
+- Communication plan addresses all stakeholder needs
 
-**Stakeholder Acceptance:**
-- [ ] All stakeholders understand and approve plan
-- [ ] Resource commitments confirmed and documented
-- [ ] Schedule milestones aligned with business needs
-- [ ] Quality expectations clearly established
-- [ ] Change management procedures agreed upon
+Stakeholder Acceptance:
+- All stakeholders understand and approve plan
+- Resource commitments confirmed and documented
+- Schedule milestones aligned with business needs
+- Quality expectations clearly established
+- Change management procedures agreed upon
+</success_criteria>
 
 ## Execution Checklist
 
+<execution_checklist>
 ### Planning Preparation
-- [ ] Gather all prerequisite documents and information
-- [ ] Assemble planning team with appropriate expertise
-- [ ] Review organizational standards and methodologies
-- [ ] Establish planning timeline and milestone schedule
+- Gather all prerequisite documents and information
+- Assemble planning team with appropriate expertise
+- Review organizational standards and methodologies
+- Establish planning timeline and milestone schedule
 
 ### Integrated Planning Development
-- [ ] Develop comprehensive scope and schedule plans
-- [ ] Create detailed cost and resource management plans
-- [ ] Establish quality and communication management plans
-- [ ] Integrate risk and procurement plans (if applicable)
-- [ ] Develop change management and control procedures
+- Develop comprehensive scope and schedule plans
+- Create detailed cost and resource management plans
+- Establish quality and communication management plans
+- Integrate risk and procurement plans (if applicable)
+- Develop change management and control procedures
 
 ### Plan Validation and Approval
-- [ ] Conduct comprehensive plan review with stakeholders
-- [ ] Validate resource commitments and schedule feasibility
-- [ ] Confirm budget approval and cost baseline establishment
-- [ ] Obtain formal stakeholder sign-off on integrated plan
-- [ ] Establish plan as project execution baseline
+- Conduct comprehensive plan review with stakeholders
+- Validate resource commitments and schedule feasibility
+- Confirm budget approval and cost baseline establishment
+- Obtain formal stakeholder sign-off on integrated plan
+- Establish plan as project execution baseline
 
 ### Plan Implementation Preparation
-- [ ] Communicate plan to all project team members
-- [ ] Establish monitoring and control procedures
-- [ ] Set up reporting and performance measurement systems
-- [ ] Prepare for project execution phase initiation
+- Communicate plan to all project team members
+- Establish monitoring and control procedures
+- Set up reporting and performance measurement systems
+- Prepare for project execution phase initiation
+</execution_checklist>
 
 ## Content Guidelines
 
