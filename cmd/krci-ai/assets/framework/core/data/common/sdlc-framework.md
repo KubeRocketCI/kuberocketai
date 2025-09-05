@@ -192,6 +192,10 @@ All templates use `{{variable_name}}` format for dynamic content:
 - `{{acceptance_criteria}}` → Specific testable conditions
 - `{{dependency_artifacts}}` → "epic-1-user-auth.md, 02-high-level-architecture.md"
 
+### Template Conventions
+
+CRITICAL: Template files contain XML-style tags that are for agent guidance only and must not be included in the final rendered output. Structural tags (e.g., <executive_summary>) define the document's sections, and their associated markdown headings should be used instead of the tags themselves. Instructional tags (e.g., <instructions>) contain specific directives that the agent must follow when generating content but must be omitted from the final document.
+
 <success_flow>
 Idea → PM (Brief+PRD) → BA (Analysis) → PO (Epics+Stories) → Architect (Design) → Developer/Go Developer (Code) → QA (Tests) → MVP → PMM (Marketing)
 </success_flow>
