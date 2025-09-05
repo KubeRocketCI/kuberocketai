@@ -2,46 +2,51 @@
 
 ## Primary Prioritization Methods
 
-### 1. RICE Framework
+<primary_methods>
+
+### RICE Framework
 
 Reach, Impact, Confidence, Effort prioritization method.
 
-- **Reach**: How many users will be affected in a given period?
-- **Impact**: How much will this increase the key metric per user?
-- **Confidence**: How confident are you in your estimates?
-- **Effort**: How much time and resources will this require?
-- **Score**: (Reach × Impact × Confidence) / Effort
+- Reach: How many users will be affected in a given period?
+- Impact: How much will this increase the key metric per user?
+- Confidence: How confident are you in your estimates?
+- Effort: How much time and resources will this require?
+- Score: (Reach × Impact × Confidence) / Effort
 
-### 2. MoSCoW Method
+### MoSCoW Method
 
 Must have, Should have, Could have, Won't have prioritization.
 
-- **Must Have**: Critical requirements that must be implemented
-- **Should Have**: Important features that add significant value
-- **Could Have**: Nice-to-have features that enhance the product
-- **Won't Have**: Features that are out of scope for this release
+- Must Have: Critical requirements that must be implemented
+- Should Have: Important features that add significant value
+- Could Have: Nice-to-have features that enhance the product
+- Won't Have: Features that are out of scope for this release
 
-### 3. Value vs Effort Matrix
+### Value vs Effort Matrix
 
 Two-dimensional prioritization based on value and implementation effort.
 
-- **Quick Wins**: High value, low effort (prioritize first)
-- **Big Bets**: High value, high effort (strategic investments)
-- **Fill-ins**: Low value, low effort (when capacity allows)
-- **Time Wasters**: Low value, high effort (avoid or deprioritize)
+- Quick Wins: High value, low effort (prioritize first)
+- Big Bets: High value, high effort (strategic investments)
+- Fill-ins: Low value, low effort (when capacity allows)
+- Time Wasters: Low value, high effort (avoid or deprioritize)
 
-### 4. Kano Model
+### Kano Model
 
 User satisfaction vs feature implementation prioritization.
 
-- **Must-be Features**: Basic expectations that cause dissatisfaction if missing
-- **Performance Features**: Features that increase satisfaction linearly
-- **Attractive Features**: Delighters that provide competitive advantage
-- **Indifferent Features**: Features that don't significantly impact satisfaction
+- Must-be Features: Basic expectations that cause dissatisfaction if missing
+- Performance Features: Features that increase satisfaction linearly
+- Attractive Features: Delighters that provide competitive advantage
+- Indifferent Features: Features that don't significantly impact satisfaction
+</primary_methods>
 
 ## Advanced Prioritization Techniques
 
-### 5. Weighted Scoring Model
+<advanced_techniques>
+
+### Weighted Scoring Model
 
 Multi-criteria decision analysis with weighted factors.
 
@@ -50,7 +55,7 @@ Multi-criteria decision analysis with weighted factors.
 - Score each feature against criteria
 - Calculate weighted scores for prioritization
 
-### 6. Opportunity Scoring
+### Opportunity Scoring
 
 Prioritization based on importance and satisfaction gaps.
 
@@ -59,7 +64,7 @@ Prioritization based on importance and satisfaction gaps.
 - Prioritize features with highest opportunity scores
 - Focus on important features with low satisfaction
 
-### 7. Story Mapping
+### Story Mapping
 
 User journey-based prioritization for holistic product planning.
 
@@ -68,7 +73,7 @@ User journey-based prioritization for holistic product planning.
 - Prioritize features that support critical user workflows
 - Plan subsequent releases to enhance user experience
 
-### 8. Theme-Based Prioritization
+### Theme-Based Prioritization
 
 Strategic alignment through thematic grouping.
 
@@ -76,8 +81,11 @@ Strategic alignment through thematic grouping.
 - Allocate resources across themes based on strategic importance
 - Prioritize features within each theme
 - Balance portfolio across different strategic areas
+</advanced_techniques>
 
 ## Prioritization Criteria
+
+<prioritization_criteria>
 
 ### Business Value Factors
 
@@ -114,10 +122,13 @@ Criteria for evaluating market considerations.
 - Customer requests and feedback frequency
 - Market trends and industry direction
 - Regulatory and compliance requirements
+</prioritization_criteria>
 
 ## Prioritization Process
 
-### 1. Preparation Phase
+<prioritization_process>
+
+### Preparation Phase
 
 Setting up for effective prioritization.
 
@@ -126,7 +137,7 @@ Setting up for effective prioritization.
 - Collect relevant data and metrics
 - Establish scoring methodology
 
-### 2. Evaluation Phase
+### Evaluation Phase
 
 Assessing features against criteria.
 
@@ -135,7 +146,7 @@ Assessing features against criteria.
 - Document assumptions and rationale
 - Identify dependencies and constraints
 
-### 3. Decision Phase
+### Decision Phase
 
 Making prioritization decisions.
 
@@ -144,7 +155,7 @@ Making prioritization decisions.
 - Balance portfolio across strategic themes
 - Make final prioritization decisions
 
-### 4. Communication Phase
+### Communication Phase
 
 Sharing prioritization outcomes.
 
@@ -152,8 +163,11 @@ Sharing prioritization outcomes.
 - Communicate decisions to stakeholders
 - Update roadmaps and planning documents
 - Establish review and update processes
+</prioritization_process>
 
 ## Common Pitfalls and Best Practices
+
+<best_practices>
 
 ### Pitfalls to Avoid
 
@@ -168,3 +182,4 @@ Sharing prioritization outcomes.
 - Involve diverse stakeholders in prioritization process
 - Regular review and update of priorities
 - Clear communication of prioritization criteria and rationale
+</best_practices>

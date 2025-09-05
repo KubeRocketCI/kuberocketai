@@ -2,7 +2,9 @@
 
 ## Core Testing Principles
 
-### 1. Risk-Based Testing
+<testing_principles>
+
+### Risk-Based Testing
 
 Focus testing efforts on areas with highest risk and impact.
 
@@ -11,7 +13,7 @@ Focus testing efforts on areas with highest risk and impact.
 - Allocate testing resources based on risk analysis
 - Continuously reassess and adjust testing priorities
 
-### 2. Comprehensive Test Coverage
+### Comprehensive Test Coverage
 
 Ensure thorough testing across all dimensions of the application.
 
@@ -20,7 +22,7 @@ Ensure thorough testing across all dimensions of the application.
 - Test all user journeys and critical business workflows
 - Validate system behavior under various conditions
 
-### 3. Early and Continuous Testing
+### Early and Continuous Testing
 
 Integrate testing throughout the development lifecycle.
 
@@ -29,7 +31,7 @@ Integrate testing throughout the development lifecycle.
 - Perform testing at multiple levels (unit, integration, system)
 - Provide rapid feedback to development teams
 
-### 4. Test Automation Strategy
+### Test Automation Strategy
 
 Balance manual and automated testing for optimal efficiency.
 
@@ -38,7 +40,7 @@ Balance manual and automated testing for optimal efficiency.
 - Maintain automated test suites for reliable execution
 - Design tests for maintainability and scalability
 
-### 5. Quality-First Mindset
+### Quality-First Mindset
 
 Embed quality considerations into all development activities.
 
@@ -46,6 +48,7 @@ Embed quality considerations into all development activities.
 - Collaborate with development teams on quality standards
 - Establish quality gates and acceptance criteria
 - Promote quality awareness across the organization
+</testing_principles>
 
 ### 6. Evidence-Based Quality Assessment
 

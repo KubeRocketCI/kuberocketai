@@ -2,32 +2,35 @@
 
 ## Requirements Analysis Frameworks
 
+<requirements_frameworks>
+
 ### BABOK (Business Analysis Body of Knowledge)
 
 Comprehensive framework for business analysis practices and techniques.
 
-- **Knowledge Areas**: Business Analysis Planning, Elicitation, Requirements Management, Solution Assessment
-- **Techniques**: Interviews, Workshops, Document Analysis, Observation, Surveys
-- **Deliverables**: Requirements Documentation, Stakeholder Analysis, Solution Assessment
-- **Application**: Use for structured requirements gathering and analysis projects
+- Knowledge Areas: Business Analysis Planning, Elicitation, Requirements Management, Solution Assessment
+- Techniques: Interviews, Workshops, Document Analysis, Observation, Surveys
+- Deliverables: Requirements Documentation, Stakeholder Analysis, Solution Assessment
+- Application: Use for structured requirements gathering and analysis projects
 
 ### MoSCoW Prioritization
 
 Framework for prioritizing requirements based on business importance.
 
-- **Must Have**: Critical requirements without which the solution fails
-- **Should Have**: Important requirements that add significant value
-- **Could Have**: Desirable requirements that enhance the solution
-- **Won't Have**: Requirements that are out of scope for current iteration
+- Must Have: Critical requirements without which the solution fails
+- Should Have: Important requirements that add significant value
+- Could Have: Desirable requirements that enhance the solution
+- Won't Have: Requirements that are out of scope for current iteration
 
 ### Kano Model
 
 Framework for understanding customer satisfaction with product features.
 
-- **Must-be Quality**: Basic expectations that cause dissatisfaction if missing
-- **One-dimensional Quality**: Features that increase satisfaction linearly
-- **Attractive Quality**: Unexpected features that delight customers
-- **Indifferent Quality**: Features that don't significantly impact satisfaction
+- Must-be Quality: Basic expectations that cause dissatisfaction if missing
+- One-dimensional Quality: Features that increase satisfaction linearly
+- Attractive Quality: Unexpected features that delight customers
+- Indifferent Quality: Features that don't significantly impact satisfaction
+</requirements_frameworks>
 
 ## Process Analysis Frameworks
 

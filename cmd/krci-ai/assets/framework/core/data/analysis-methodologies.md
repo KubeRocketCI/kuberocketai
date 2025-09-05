@@ -2,7 +2,9 @@
 
 ## Core Analysis Principles
 
-### 1. Stakeholder-Centric Approach
+<analysis_principles>
+
+### Stakeholder-Centric Approach
 
 Focus on understanding and addressing stakeholder needs throughout the analysis process.
 
@@ -11,7 +13,7 @@ Focus on understanding and addressing stakeholder needs throughout the analysis 
 - Facilitate effective stakeholder communication and collaboration
 - Balance competing stakeholder needs and priorities
 
-### 2. Requirements-Driven Analysis
+### Requirements-Driven Analysis
 
 Ensure all analysis activities trace back to clearly defined business requirements.
 
@@ -20,7 +22,7 @@ Ensure all analysis activities trace back to clearly defined business requiremen
 - Validate requirements through iterative stakeholder feedback
 - Document requirements with appropriate level of detail
 
-### 3. Process-Oriented Thinking
+### Process-Oriented Thinking
 
 Analyze business activities as interconnected processes and systems.
 
@@ -29,7 +31,7 @@ Analyze business activities as interconnected processes and systems.
 - Understand process interdependencies and workflow relationships
 - Focus on process efficiency and effectiveness
 
-### 4. Data-Driven Decision Making
+### Data-Driven Decision Making
 
 Base analysis conclusions on objective data and evidence.
 
@@ -38,7 +40,7 @@ Base analysis conclusions on objective data and evidence.
 - Validate assumptions through empirical evidence
 - Apply statistical analysis where appropriate
 
-### 5. Continuous Improvement Mindset
+### Continuous Improvement Mindset
 
 Approach analysis with focus on ongoing optimization and enhancement.
 
@@ -47,7 +49,7 @@ Approach analysis with focus on ongoing optimization and enhancement.
 - Recommend innovative solutions and best practices
 - Plan for iterative implementation and feedback cycles
 
-### 6. Risk-Aware Analysis
+### Risk-Aware Analysis
 
 Consider and address potential risks throughout the analysis process.
 
@@ -56,7 +58,7 @@ Consider and address potential risks throughout the analysis process.
 - Develop risk mitigation strategies and contingency plans
 - Monitor and communicate risks to stakeholders
 
-### 7. Solution-Agnostic Approach
+### Solution-Agnostic Approach
 
 Focus on understanding problems before prescribing solutions.
 
@@ -65,7 +67,7 @@ Focus on understanding problems before prescribing solutions.
 - Consider multiple solution alternatives and trade-offs
 - Maintain objectivity in analysis and recommendations
 
-### 8. Communication Excellence
+### Communication Excellence
 
 Ensure clear, effective communication with all stakeholders.
 
@@ -74,7 +76,7 @@ Ensure clear, effective communication with all stakeholders.
 - Facilitate productive meetings and workshops
 - Document findings and recommendations clearly
 
-### 9. Collaborative Facilitation
+### Collaborative Facilitation
 
 Work effectively with cross-functional teams and diverse stakeholders.
 
@@ -83,7 +85,7 @@ Work effectively with cross-functional teams and diverse stakeholders.
 - Manage conflicts and competing priorities constructively
 - Foster team collaboration and knowledge sharing
 
-### 10. Iterative and Adaptive
+### Iterative and Adaptive
 
 Apply flexible, iterative approaches that adapt to changing conditions.
 
@@ -91,3 +93,4 @@ Apply flexible, iterative approaches that adapt to changing conditions.
 - Adapt analysis approach based on project context and constraints
 - Incorporate new information and changing requirements
 - Maintain flexibility while ensuring thoroughness
+</analysis_principles>
