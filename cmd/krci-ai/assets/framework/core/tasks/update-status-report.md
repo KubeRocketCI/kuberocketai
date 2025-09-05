@@ -6,11 +6,13 @@ Update an existing project status report to reflect current project performance,
 
 ## Prerequisites
 
+<prerequisites>
 - Previous status report available for reference
 - Current project performance data collected
 - Performance measurement systems updated
 - Stakeholder feedback on previous reports received
 - Reporting schedule and requirements confirmed
+</prerequisites>
 
 ## Reference Assets
 
@@ -21,6 +23,8 @@ Update an existing project status report to reflect current project performance,
 - Current project performance data and metrics
 
 ## Instructions
+
+<instructions>
 
 ### 1. Performance Data Update
 
@@ -77,6 +81,7 @@ Update an existing project status report to reflect current project performance,
 - Identify new corrective actions required
 - Modify resource allocation or approach recommendations
 - Update stakeholder decision requirements and timing
+</instructions>
 
 ## Output Format
 
@@ -115,24 +120,28 @@ Update an existing project status report to reflect current project performance,
 ## Execution Checklist
 
 ### Data Collection Update
+
 - [ ] Gather latest project performance data and metrics
 - [ ] Update risk register and issue log information
 - [ ] Collect stakeholder feedback and satisfaction data
 - [ ] Compile new achievements and milestone completions
 
 ### Analysis and Comparison
+
 - [ ] Calculate updated performance indices and variances
 - [ ] Conduct trend analysis comparing multiple periods
 - [ ] Assess impact of changes on project outlook
 - [ ] Update forecast and projection calculations
 
 ### Report Revision
+
 - [ ] Update status report using current template format
 - [ ] Revise all sections reflecting current status
 - [ ] Maintain consistency with previous report structure
 - [ ] Include new information and analysis insights
 
 ### Review and Distribution
+
 - [ ] Review updated report for accuracy and completeness
 - [ ] Validate data and calculations for correctness
 - [ ] Obtain necessary approvals before distribution
@@ -142,6 +151,7 @@ Update an existing project status report to reflect current project performance,
 ## Content Guidelines
 
 ### Quality Principles
+
 - **Consistency**: Maintain format and structure continuity with previous reports
 - **Currency**: Ensure all information reflects latest project status
 - **Accuracy**: Verify all data and analysis for correctness
@@ -149,6 +159,7 @@ Update an existing project status report to reflect current project performance,
 - **Relevance**: Focus on information most important to stakeholders
 
 ### LLM Error Prevention
+
 - **Data Verification**: Confirm accuracy of all updated performance data
 - **Trend Validation**: Ensure trend analysis uses sufficient historical data
 - **Change Highlighting**: Clearly identify what has changed since last report
@@ -156,6 +167,7 @@ Update an existing project status report to reflect current project performance,
 - **Format Consistency**: Maintain established reporting standards and templates
 
 ### PMBoK Integration Context
+
 - Apply PMBoK performance reporting principles in all updates
 - Use updated reports to support ongoing project management and control
 - Ensure reports continue to enable effective stakeholder communication

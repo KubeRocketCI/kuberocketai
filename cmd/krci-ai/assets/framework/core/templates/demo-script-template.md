@@ -8,21 +8,22 @@
 
 ## Demo Overview
 
+<demo_overview>
 **Demo Title**: {{demo_title}}
 **Target Audience**: {{demo_target_audience}}
 **Demo Duration**: {{demo_duration}}
 **Demo Objective**: {{demo_objective}}
 **Demo Environment**: {{demo_environment}}
 
-<!-- Template Guidance:
+<instructions>
 Define the specific demo context and success criteria.
 
 Example:
-Title: "KubeRocketAI: From Zero to AI-Powered Development in 30 Seconds"
-Audience: "Technical decision-makers and developers evaluating AI development tools"
-Duration: "7 minutes core demo + 3 minutes Q&A"
-Objective: "Demonstrate speed, simplicity, and enterprise capabilities to drive trial signup"
-Environment: "Pre-configured demo environment with sample project and test accounts"
+Title: KubeRocketAI: From Zero to AI-Powered Development in 30 Seconds
+Audience: Technical decision-makers and developers evaluating AI development tools
+Duration: 7 minutes core demo + 3 minutes Q&A
+Objective: Demonstrate speed, simplicity, and enterprise capabilities to drive trial signup
+Environment: Pre-configured demo environment with sample project and test accounts
 
 Key Elements:
 - Clear, memorable demo title that sets expectations
@@ -30,25 +31,27 @@ Key Elements:
 - Realistic time allocation with buffer for questions
 - Measurable objective (trial signup, meeting, proposal)
 - Technical requirements and environment setup
--->
+</instructions>
+</demo_overview>
 
 ---
 
 ## Demo Structure
 
+<demo_structure>
 ### Opening Hook (30 seconds)
 
 **Hook Statement**: {{opening_hook}}
 **Visual**: {{opening_visual}}
 **Audience Engagement**: {{opening_engagement}}
 
-<!-- Template Guidance:
+<instructions>
 Create immediate engagement that captures attention and sets up the problem.
 
 Example:
-Hook: "Show of hands - how many of you have more than 5 AI tools installed right now? Keep your hands up if you spent over an hour this week just setting up or switching between these tools. [Pause for response] Today I'm going to show you how to get all the AI power you need in 30 seconds, not 30 minutes."
-Visual: "Split screen showing cluttered desktop with 10+ AI tool icons vs. clean IDE with KubeRocketAI"
-Engagement: "Interactive question that gets audience to physically participate and acknowledge the problem"
+Hook: Show of hands - how many of you have more than 5 AI tools installed right now? Keep your hands up if you spent over an hour this week just setting up or switching between these tools. Today I'm going to show you how to get all the AI power you need in 30 seconds, not 30 minutes.
+Visual: Split screen showing cluttered desktop with 10+ AI tool icons vs. clean IDE with KubeRocketAI
+Engagement: Interactive question that gets audience to physically participate and acknowledge the problem
 
 DO:
 - Start with relatable problem audience recognizes
@@ -56,12 +59,13 @@ DO:
 - Set clear expectation for what they'll see
 - Create curiosity about the solution
 
-DON'T:
+DONT:
 - Start with company history or generic introductions
 - Use complex technical concepts before building context
 - Skip audience engagement and interaction
--->
+</instructions>
 
+<problem_amplification>
 ### Problem Amplification (90 seconds)
 
 **Pain Point 1**: {{pain_point_1}}
@@ -71,32 +75,34 @@ DON'T:
 **Problem Demonstration**: {{problem_demonstration}}
 **Emotional Impact**: {{emotional_connection}}
 
-<!-- Template Guidance:
+<instructions>
 Build emotional tension around problems the audience experiences daily.
 
 Example:
-Pain Point 1: "Tool Setup Chaos: Every AI tool requires different API keys, different interfaces, different workflows. Your developers spend 2+ hours daily just managing tools instead of building."
+Pain Point 1: Tool Setup Chaos: Every AI tool requires different API keys, different interfaces, different workflows. Your developers spend 2+ hours daily just managing tools instead of building.
 
-Pain Point 2: "Context Switching Fatigue: Jumping between ChatGPT, Copilot, Claude, and 8 other tools destroys focus and productivity. It takes 23 minutes to regain deep focus after each interruption."
+Pain Point 2: Context Switching Fatigue: Jumping between ChatGPT, Copilot, Claude, and 8 other tools destroys focus and productivity. It takes 23 minutes to regain deep focus after each interruption.
 
-Pain Point 3: "Enterprise Security Nightmare: Each tool has different security standards, data handling, compliance requirements. Your IT team can't keep up with vendor reviews."
+Pain Point 3: Enterprise Security Nightmare: Each tool has different security standards, data handling, compliance requirements. Your IT team can't keep up with vendor reviews.
 
-Problem Demonstration: "Let me show you what a typical developer day looks like... [Screen recording of frustrating tool switching, setup process, configuration issues]"
+Problem Demonstration: Let me show you what a typical developer day looks like... [Screen recording of frustrating tool switching, setup process, configuration issues]
 
-Emotional Impact: "This isn't just inefficiency - it's developer burnout. The tools that promised to make us more productive are making us less human."
+Emotional Impact: This isn't just inefficiency - it's developer burnout. The tools that promised to make us more productive are making us less human.
 
 DO:
 - Use specific, quantified pain points
 - Show actual problem scenarios when possible
 - Connect to emotional impact, not just efficiency
-- Make audience nod and think "that's exactly my experience"
+- Make audience nod and think that's exactly my experience
 
-DON'T:
+DONT:
 - List generic problems without audience connection
 - Skip emotional resonance for dry facts
 - Use abstract concepts without concrete examples
--->
+</instructions>
+</problem_amplification>
 
+<solution_reveal>
 ### Solution Reveal (60 seconds)
 
 **Transformation Statement**: {{solution_reveal}}
@@ -108,18 +114,18 @@ DON'T:
 
 **WOW Moment Setup**: {{wow_moment_setup}}
 
-<!-- Template Guidance:
-Create the "AHA moment" when solution is presented with clear transformation.
+<instructions>
+Create the AHA moment when solution is presented with clear transformation.
 
 Example:
-Transformation: "What if I told you there's a way to get all the AI power you need, in any IDE, with zero setup, enterprise security built-in, and it takes exactly 30 seconds to get started?"
+Transformation: What if I told you there's a way to get all the AI power you need, in any IDE, with zero setup, enterprise security built-in, and it takes exactly 30 seconds to get started?
 
 Key Benefits:
-- "Deploy any AI agent instantly across all your IDEs with one click"
-- "Enterprise security and compliance built-in from day one"
-- "Your developers stay in flow state, stop context switching"
+- Deploy any AI agent instantly across all your IDEs with one click
+- Enterprise security and compliance built-in from day one
+- Your developers stay in flow state, stop context switching
 
-WOW Setup: "I know that sounds too good to be true. Let me prove it to you. I'm going to start with a completely fresh VS Code installation and show you how fast this really is. Time me."
+WOW Setup: I know that sounds too good to be true. Let me prove it to you. I'm going to start with a completely fresh VS Code installation and show you how fast this really is. Time me.
 
 DO:
 - Present clear before/after transformation
@@ -127,12 +133,14 @@ DO:
 - Build anticipation for the demonstration
 - Promise proof through demonstration
 
-DON'T:
+DONT:
 - Overwhelm with technical details
 - Use generic benefits without differentiation
-- Skip the emotional "wow" moment setup
--->
+- Skip the emotional wow moment setup
+</instructions>
+</solution_reveal>
 
+<core_demo_sequence>
 ### Core Demo Sequence (4 minutes)
 
 #### Demo Step 1: Installation (30 seconds)
@@ -163,20 +171,21 @@ DON'T:
 **Visual Focus**: {{demo_step_4_visual}}
 **Timing**: {{demo_step_4_timing}}
 
-<!-- Template Guidance:
+
+<instructions>
 Show the product in action with specific, impressive use cases that build excitement.
 
 Example:
 Demo Step 1: Installation
-Action: "Click 'Install KubeRocketAI' extension in VS Code marketplace"
-Script: "Watch this - I'm going to install KubeRocketAI in VS Code. One click, no configuration required. [Click install] That's it. 10 seconds and we're installed."
-Visual: "Close-up screen recording of VS Code extension installation, large cursor, clear timing"
-Timing: "Exactly 30 seconds including explanation"
+Action: Click Install KubeRocketAI extension in VS Code marketplace
+Script: Watch this - I'm going to install KubeRocketAI in VS Code. One click, no configuration required. [Click install] That's it. 10 seconds and we're installed.
+Visual: Close-up screen recording of VS Code extension installation, large cursor, clear timing
+Timing: Exactly 30 seconds including explanation
 
 Demo Step 3: AI-Powered Development
-Action: "Create a complex React component using multiple AI agents"
-Script: "Now the magic happens. I want to build a data visualization dashboard. I'll ask GPT-4 for the structure, Claude for optimization, and Copilot for styling - all without leaving my IDE. Watch how seamless this is... [Demonstrate] Notice how I never switched apps, never opened a browser, never lost context."
-Visual: "Split screen showing code being written and AI suggestions appearing in real-time"
+Action: Create a complex React component using multiple AI agents
+Script: Now the magic happens. I want to build a data visualization dashboard. I'll ask GPT-4 for the structure, Claude for optimization, and Copilot for styling - all without leaving my IDE. Watch how seamless this is... [Demonstrate] Notice how I never switched apps, never opened a browser, never lost context.
+Visual: Split screen showing code being written and AI suggestions appearing in real-time
 
 DO:
 - Use realistic, impressive use cases
@@ -184,26 +193,28 @@ DO:
 - Focus on user experience and outcomes
 - Highlight speed and simplicity at each step
 
-DON'T:
+DONT:
 - Show features without clear user benefit
 - Use complex scenarios that confuse audience
 - Risk technical difficulties with untested demos
 - Rush through steps without allowing impact to register
--->
+</instructions>
+</core_demo_sequence>
 
+<impact_demonstration>
 ### Impact Demonstration (30 seconds)
 
 **Before/After Comparison**: {{before_after_comparison}}
 **Time Savings**: {{time_savings_demonstration}}
 **Productivity Impact**: {{productivity_impact}}
 
-<!-- Template Guidance:
+<instructions>
 Quantify the transformation and impact just demonstrated.
 
 Example:
-Before/After: "Let's recap what just happened. Traditional approach: 30 minutes of setup, 3 different apps, 15 minutes of context switching, 2 hours of development. KubeRocketAI approach: 30 seconds setup, 1 app, zero context switching, 20 minutes of development."
-Time Savings: "We just saved 2.5 hours on a simple task. For a development team of 20 people, that's 50 hours per day saved, or $5,000 daily at $100/hour developer cost."
-Productivity Impact: "But this isn't just about time - it's about flow state. When developers stay focused, code quality improves, bugs decrease, and job satisfaction increases."
+Before/After: Let's recap what just happened. Traditional approach: 30 minutes of setup, 3 different apps, 15 minutes of context switching, 2 hours of development. KubeRocketAI approach: 30 seconds setup, 1 app, zero context switching, 20 minutes of development.
+Time Savings: We just saved 2.5 hours on a simple task. For a development team of 20 people, that's 50 hours per day saved, or $5,000 daily at $100/hour developer cost.
+Productivity Impact: But this isn't just about time - it's about flow state. When developers stay focused, code quality improves, bugs decrease, and job satisfaction increases.
 
 DO:
 - Quantify specific time and cost savings
@@ -211,25 +222,27 @@ DO:
 - Use concrete numbers audience can verify
 - Show both immediate and long-term benefits
 
-DON'T:
+DONT:
 - Use inflated or unverifiable savings
 - Focus only on time without broader impact
 - Skip connection to business value
--->
+</instructions>
+</impact_demonstration>
 
+<enterprise_features>
 ### Enterprise Features Highlight (1 minute)
 
 **Security & Compliance**: {{security_features}}
 **Team Management**: {{team_management_features}}
 **Integration Capabilities**: {{integration_features}}
 
-<!-- Template Guidance:
+<instructions>
 Address enterprise concerns that could block adoption.
 
 Example:
-Security: "I know you're thinking about security. KubeRocketAI is SOC 2 compliant, GDPR ready, with enterprise-grade encryption. All AI interactions are logged and auditable. Your code never leaves your environment unless you explicitly choose to share it."
-Team Management: "For larger teams, you get centralized management, usage analytics, and billing controls. See how IT can approve AI agents, set usage limits, and track productivity metrics."
-Integration: "And it works with your existing stack - Jira, GitHub, Azure DevOps, your CI/CD pipeline. No workflow disruption."
+Security: I know you're thinking about security. KubeRocketAI is SOC 2 compliant, GDPR ready, with enterprise-grade encryption. All AI interactions are logged and auditable. Your code never leaves your environment unless you explicitly choose to share it.
+Team Management: For larger teams, you get centralized management, usage analytics, and billing controls. See how IT can approve AI agents, set usage limits, and track productivity metrics.
+Integration: And it works with your existing stack - Jira, GitHub, Azure DevOps, your CI/CD pipeline. No workflow disruption.
 
 DO:
 - Address specific enterprise concerns proactively
@@ -237,12 +250,14 @@ DO:
 - Connect to IT and security team requirements
 - Demonstrate integration with common enterprise tools
 
-DON'T:
+DONT:
 - Skip enterprise concerns for technical audiences
 - Make security claims without demonstration
 - Ignore integration with existing workflows
--->
+</instructions>
+</enterprise_features>
 
+<call_to_action>
 ### Call to Action (30 seconds)
 
 **Primary Ask**: {{primary_call_to_action}}
@@ -250,14 +265,14 @@ DON'T:
 **Urgency Creation**: {{urgency_element}}
 **Contact Information**: {{contact_information}}
 
-<!-- Template Guidance:
+<instructions>
 Create specific, actionable next steps that maintain momentum.
 
 Example:
-Primary Ask: "I want you to experience this for yourself. Let's set up a free trial for your team right now."
-Next Steps: "Here's what happens next: 1) I'll send you a custom trial link today, 2) Your team can start using KubeRocketAI tomorrow, 3) We'll schedule a check-in call next week to see your results."
-Urgency: "I have two trial spots left this month with dedicated onboarding support. If you want one, let's claim it now."
-Contact: "Here's my direct email and calendar link. I'll also send the trial link to everyone here."
+Primary Ask: I want you to experience this for yourself. Let's set up a free trial for your team right now.
+Next Steps: Here's what happens next: 1) I'll send you a custom trial link today, 2) Your team can start using KubeRocketAI tomorrow, 3) We'll schedule a check-in call next week to see your results.
+Urgency: I have two trial spots left this month with dedicated onboarding support. If you want one, let's claim it now.
+Contact: Here's my direct email and calendar link. I'll also send the trial link to everyone here.
 
 DO:
 - Make specific, time-bound requests
@@ -265,17 +280,20 @@ DO:
 - Create reasonable urgency without being pushy
 - Include direct contact information
 
-DON'T:
-- End with generic "any questions?"
-- Make vague requests for "interest"
+DONT:
+- End with generic any questions?
+- Make vague requests for interest
 - Skip follow-up logistics
 - Create false urgency that destroys trust
--->
+</instructions>
+</call_to_action>
+</demo_structure>
 
 ---
 
 ## Demo Variations
 
+<demo_variations>
 ### 5-Minute Version (For Shorter Time Slots)
 
 **Opening Hook**: {{short_demo_hook}}
@@ -297,16 +315,17 @@ DON'T:
 **For IT Teams**: {{it_demo_focus}}
 **For Product Teams**: {{product_demo_focus}}
 
-<!-- Template Guidance:
+
+<instructions>
 Adapt demo length and focus for different contexts and audiences.
 
 Example:
 5-Minute Version:
-Hook: "Quick question - how much time do your developers waste on AI tool setup? [Pause] Let me show you 30 seconds that will save you 30 hours per week."
+Hook: Quick question - how much time do your developers waste on AI tool setup? [Pause] Let me show you 30 seconds that will save you 30 hours per week.
 Demo: Focus only on installation and one powerful use case, skip enterprise features
 
-Developer Demo Focus: "Deep dive into technical capabilities, code quality, debugging features, IDE integrations, advanced AI agent capabilities"
-CTO Demo Focus: "ROI metrics, team productivity, security compliance, integration with existing tech stack, scalability"
+Developer Demo Focus: Deep dive into technical capabilities, code quality, debugging features, IDE integrations, advanced AI agent capabilities
+CTO Demo Focus: ROI metrics, team productivity, security compliance, integration with existing tech stack, scalability
 
 DO:
 - Adapt content to audience priorities and concerns
@@ -314,16 +333,18 @@ DO:
 - Adjust technical depth appropriately
 - Keep timing realistic for each format
 
-DON'T:
+DONT:
 - Try to cram full demo into shorter time slots
 - Use same technical depth for all audiences
 - Skip audience-specific concerns and priorities
--->
+</instructions>
+</demo_variations>
 
 ---
 
 ## Technical Requirements
 
+<technical_requirements>
 ### Demo Environment Setup
 
 **Hardware Requirements**: {{hardware_requirements}}
@@ -343,17 +364,18 @@ DON'T:
 **Quick Fixes**: {{quick_fixes}}
 **Emergency Backup**: {{emergency_backup}}
 
-<!-- Template Guidance:
+
+<instructions>
 Ensure reliable demo execution through systematic preparation.
 
 Example:
-Hardware: "Laptop with minimum 16GB RAM, external monitor for screen sharing, backup laptop with identical setup"
-Software: "Latest Chrome browser, screen recording software, demo account pre-configured, sample projects loaded"
-Backup Plans: "Pre-recorded demo video ready, slides with screenshots as backup, mobile hotspot for network issues"
+Hardware: Laptop with minimum 16GB RAM, external monitor for screen sharing, backup laptop with identical setup
+Software: Latest Chrome browser, screen recording software, demo account pre-configured, sample projects loaded
+Backup Plans: Pre-recorded demo video ready, slides with screenshots as backup, mobile hotspot for network issues
 
-Pre-Demo Checklist: "✓ Test all demo flows 30 minutes before, ✓ Clear browser cache and history, ✓ Close unnecessary applications, ✓ Check audio/video quality, ✓ Verify demo accounts are active"
+Pre-Demo Checklist: Test all demo flows 30 minutes before, Clear browser cache and history, Close unnecessary applications, Check audio/video quality, Verify demo accounts are active
 
-Common Issues: "Network connectivity loss → Use pre-recorded segments, Demo account login failure → Switch to backup account, Screen sharing problems → Use backup slides with screenshots"
+Common Issues: Network connectivity loss → Use pre-recorded segments, Demo account login failure → Switch to backup account, Screen sharing problems → Use backup slides with screenshots
 
 DO:
 - Test all demo flows multiple times
@@ -361,17 +383,19 @@ DO:
 - Have multiple backup options ready
 - Practice seamless recovery from problems
 
-DON'T:
+DONT:
 - Risk live demo without extensive testing
 - Skip backup plans for critical demo moments
 - Ignore audio/video quality requirements
 - Assume network and systems will work perfectly
--->
+</instructions>
+</technical_requirements>
 
 ---
 
 ## Presentation Tips
 
+<presentation_tips>
 ### Delivery Best Practices
 
 **Voice & Pacing**: {{voice_pacing_tips}}
@@ -393,15 +417,16 @@ DON'T:
 **Attention Management**: {{attention_management}}
 **Memorable Moments**: {{memorable_moments}}
 
-<!-- Template Guidance:
+
+<instructions>
 Ensure professional, engaging demo delivery that maximizes impact.
 
 Example:
-Voice & Pacing: "Speak 15% slower than normal conversation pace. Pause for 3 seconds after key points to let impact register. Use rising intonation for questions, falling for statements."
-Screen Setup: "Use largest possible screen, increase font sizes to 18pt minimum, hide desktop clutter, use high contrast for visibility"
-Question Timing: "Encourage questions during setup time, pause for questions after each major demo section, save complex questions for follow-up"
+Voice & Pacing: Speak 15% slower than normal conversation pace. Pause for 3 seconds after key points to let impact register. Use rising intonation for questions, falling for statements.
+Screen Setup: Use largest possible screen, increase font sizes to 18pt minimum, hide desktop clutter, use high contrast for visibility
+Question Timing: Encourage questions during setup time, pause for questions after each major demo section, save complex questions for follow-up
 
-Memorable Moments: "Use countdown timer for 30-second setup, ask audience to time the demo, react with genuine excitement at results, use phrases like 'watch this magic happen'"
+Memorable Moments: Use countdown timer for 30-second setup, ask audience to time the demo, react with genuine excitement at results, use phrases like watch this magic happen
 
 DO:
 - Practice demo delivery until completely natural
@@ -409,17 +434,19 @@ DO:
 - Build excitement and engagement throughout
 - Create specific memorable moments
 
-DON'T:
+DONT:
 - Rush through demo without pausing for impact
 - Focus on screen instead of audience
 - Skip opportunities for audience interaction
 - Deliver demo like a rehearsed script
--->
+</instructions>
+</presentation_tips>
 
 ---
 
 ## Success Metrics
 
+<success_metrics>
 ### Demo Effectiveness
 
 **Engagement Metrics**: {{engagement_metrics}}
@@ -432,13 +459,14 @@ DON'T:
 **Short-term Follow-up**: {{short_term_followup}}
 **Long-term Conversion**: {{long_term_conversion}}
 
-<!-- Template Guidance:
+
+<instructions>
 Track demo performance to continuously improve effectiveness.
 
 Example:
-Engagement: "Audience questions asked (target: 3+ per demo), attention maintained throughout (visual observation), positive body language and reactions"
-Conversion: "Trial signups within 24 hours (target: 60%), follow-up meetings scheduled (target: 80%), proposal requests (target: 30%)"
-Immediate Actions: "Contact information exchanged, trial access requested, calendar meetings scheduled, specific next steps agreed"
+Engagement: Audience questions asked (target: 3+ per demo), attention maintained throughout (visual observation), positive body language and reactions
+Conversion: Trial signups within 24 hours (target: 60%), follow-up meetings scheduled (target: 80%), proposal requests (target: 30%)
+Immediate Actions: Contact information exchanged, trial access requested, calendar meetings scheduled, specific next steps agreed
 
 DO:
 - Track both leading and lagging indicators
@@ -446,11 +474,12 @@ DO:
 - Monitor conversion rates over time
 - Identify most effective demo elements
 
-DON'T:
+DONT:
 - Focus only on immediate reactions
 - Skip systematic performance tracking
 - Ignore feedback that could improve demos
--->
+</instructions>
+</success_metrics>
 
 ---
 
