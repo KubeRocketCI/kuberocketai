@@ -6,10 +6,11 @@ Update existing user story with new requirements, scope refinements, or implemen
 
 ## Prerequisites
 
-- [ ] **Story exists**: Target story file exists in `/docs/stories/` with current implementation status
-- [ ] **Change justification**: Clear business reason for story update (new requirements, scope clarification, task feedback)
-- [ ] **Impact assessment**: Understanding of how changes affect in-progress or completed Tasks/Subtasks
-- [ ] **Epic alignment**: Product Owner confirms updates maintain Epic goals and traceability
+<prerequisites>
+- Story exists: Target story file exists in `/docs/stories/` with current implementation status
+- Change justification: Clear business reason for story update (new requirements, scope clarification, task feedback)
+- Impact assessment: Understanding of how changes affect in-progress or completed Tasks/Subtasks
+- Epic alignment: Product Owner confirms updates maintain Epic goals and traceability
 
 ### Reference Assets
 
@@ -20,63 +21,73 @@ Dependencies:
 - ./.krci-ai/templates/story.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+</prerequisites>
 
 ## Instructions
 
 ### CRITICAL: MANDATORY USER CONSULTATION FIRST
 
+<user_consultation>
 Before making ANY changes to the Story, you MUST:
 
-1. **Ask the user** what specific updates they want to make to the Story
-2. **Understand the trigger** for the changes (new requirements, scope clarification, task feedback, etc.)
-3. **Clarify scope** which sections need updating and why
-4. **Get approval** for the proposed changes before implementation
-5. **Wait for explicit confirmation** before proceeding with any edits
+1. Ask the user what specific updates they want to make to the Story
+2. Understand the trigger for the changes (new requirements, scope clarification, task feedback, etc.)
+3. Clarify scope which sections need updating and why
+4. Get approval for the proposed changes before implementation
+5. Wait for explicit confirmation before proceeding with any edits
+</user_consultation>
 
 ### ONLY AFTER USER CONFIRMATION
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story update dependencies and downstream impact
-2. **Assess current status**: Review story status and Tasks/Subtasks before making changes
-3. **Apply change control**: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
-4. **Maintain format**: Keep [story.md](./.krci-ai/templates/story.md) template structure and populate new variables
-5. **Preserve Epic traceability**: Maintain existing Epic references while ensuring new changes align with Epic goals
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story update dependencies and downstream impact
+2. Assess current status: Review story status and Tasks/Subtasks before making changes
+3. Apply change control: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
+4. Maintain format: Keep [story.md](./.krci-ai/templates/story.md) template structure and populate new variables
+5. Preserve Epic traceability: Maintain existing Epic references while ensuring new changes align with Epic goals
+</instructions>
 
 ### Update Validation Process
 
+<update_validation>
 Before applying any update:
 
-1. **Check Task Status**: Verify no completed Tasks/Subtasks become invalid
-2. **Validate Epic Alignment**: Ensure changes maintain Epic traceability and goals
-3. **Assess Acceptance Criteria**: Calculate impact on existing acceptance criteria and validation
-4. **Document Rationale**: Record business justification for every change
+1. Check Task Status: Verify no completed Tasks/Subtasks become invalid
+2. Validate Epic Alignment: Ensure changes maintain Epic traceability and goals
+3. Assess Acceptance Criteria: Calculate impact on existing acceptance criteria and validation
+4. Document Rationale: Record business justification for every change
+</update_validation>
 
 ## Update Types & Restrictions
 
+<update_restrictions>
+
 ### ALLOWED Updates (Safe Changes)
 
-- **Add new Tasks/Subtasks** to existing story scope without changing completed work
-- **Expand acceptance criteria** with additional validation requirements
-- **Add new dependencies** that don't conflict with completed Tasks
-- **Clarify story description** with additional context or user research
-- **Extend story points** for additional scope (with development team validation)
-- **Enhance QA checklist** with additional testing requirements
-- **Update implementation results** with actual deliverables as work progresses
+- Add new Tasks/Subtasks to existing story scope without changing completed work
+- Expand acceptance criteria with additional validation requirements
+- Add new dependencies that don't conflict with completed Tasks
+- Clarify story description with additional context or user research
+- Extend story points for additional scope (with development team validation)
+- Enhance QA checklist with additional testing requirements
+- Update implementation results with actual deliverables as work progresses
 
 ### RESTRICTED Updates (Requires Validation)
 
-- **Modify story goal** - requires Epic alignment check and development team validation
-- **Change acceptance criteria** - must verify no completed Tasks become invalid
-- **Update dependencies** - requires dependency chain validation for affected Tasks
-- **Alter story points** - needs development team estimation review
-- **Modify task structure** - must not invalidate completed subtask validation
+- Modify story goal - requires Epic alignment check and development team validation
+- Change acceptance criteria - must verify no completed Tasks become invalid
+- Update dependencies - requires dependency chain validation for affected Tasks
+- Alter story points - needs development team estimation review
+- Modify task structure - must not invalidate completed subtask validation
 
 ### FORBIDDEN Updates (Never Change)
 
-- **Remove completed Tasks/Subtasks** - never remove work that has been completed
-- **Delete completed acceptance criteria** - completed validation cannot be removed
-- **Change story number** - story numbering is immutable for Epic traceability
-- **Reduce story scope** - cannot narrow scope if Tasks address broader functionality
-- **Remove Epic reference** - Epic traceability must always be maintained
+- Remove completed Tasks/Subtasks - never remove work that has been completed
+- Delete completed acceptance criteria - completed validation cannot be removed
+- Change story number - story numbering is immutable for Epic traceability
+- Reduce story scope - cannot narrow scope if Tasks address broader functionality
+- Remove Epic reference - Epic traceability must always be maintained
+</update_restrictions>
 
 ## Output Format
 
@@ -88,12 +99,14 @@ Before applying any update:
 
 ## Success Criteria
 
-- [ ] **Story updated** in place with version tracking and change documentation
-- [ ] **Task compatibility** all existing Tasks/Subtasks remain valid and implementable
-- [ ] **Epic traceability** story maintains alignment with parent Epic goals
-- [ ] **Change justification** clear business rationale documented for updates
-- [ ] **Impact assessment** downstream Task effects identified and communicated
-- [ ] **Template compliance** all template variables updated correctly
+<success_criteria>
+- Story updated in place with version tracking and change documentation
+- Task compatibility all existing Tasks/Subtasks remain valid and implementable
+- Epic traceability story maintains alignment with parent Epic goals
+- Change justification clear business rationale documented for updates
+- Impact assessment downstream Task effects identified and communicated
+- Template compliance all template variables updated correctly
+</success_criteria>
 
 ## Execution Checklist
 
@@ -131,10 +144,12 @@ Before applying any update:
 
 ### Quality Principles for LLM Self-Evaluation
 
-- **Change-Controlled**: Only make approved updates that don't invalidate completed work
-- **Epic-Aligned**: Ensure all changes maintain alignment with parent Epic goals
-- **Task-Compatible**: Preserve all existing Tasks/Subtasks that have been completed
-- **Traceability-Maintained**: Keep Epic references and story numbering intact
+<quality_principles>
+- Change-Controlled: Only make approved updates that don't invalidate completed work
+- Epic-Aligned: Ensure all changes maintain alignment with parent Epic goals
+- Task-Compatible: Preserve all existing Tasks/Subtasks that have been completed
+- Traceability-Maintained: Keep Epic references and story numbering intact
+</quality_principles>
 
 ### LLM Error Prevention Checklist
 

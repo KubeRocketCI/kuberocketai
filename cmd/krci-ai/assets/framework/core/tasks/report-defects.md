@@ -6,10 +6,11 @@ Create comprehensive defect reports and quality assessments based on testing exe
 
 ## Prerequisites
 
-- [ ] **Test execution completed**: Testing execution finished with documented results and identified issues
-- [ ] **Testing evidence**: Screenshots, logs, and supporting documentation collected during test execution
-- [ ] **Quality standards**: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
-- [ ] **Reporting tools**: Access to defect tracking system and reporting templates
+<prerequisites>
+- Test execution completed: Testing execution finished with documented results and identified issues
+- Testing evidence: Screenshots, logs, and supporting documentation collected during test execution
+- Quality standards: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
+- Reporting tools: Access to defect tracking system and reporting templates
 
 ### Reference Assets
 
@@ -20,13 +21,16 @@ Dependencies:
 - ./.krci-ai/templates/defect-report.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+</prerequisites>
 
 ## Instructions
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for defect reporting workflow and quality gates
-2. **Apply quality standards**: Use defect classification approaches from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
-3. **Format output**: Use [defect-report.md](./.krci-ai/templates/defect-report.md) for structured defect documentation
-4. **Ensure traceability**: Link defects to specific test cases, Story acceptance criteria, and Epic requirements
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for defect reporting workflow and quality gates
+2. Apply quality standards: Use defect classification approaches from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
+3. Format output: Use [defect-report.md](./.krci-ai/templates/defect-report.md) for structured defect documentation
+4. Ensure traceability: Link defects to specific test cases, Story acceptance criteria, and Epic requirements
+</instructions>
 
 ## Output Format
 
@@ -39,12 +43,14 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Success Criteria
 
-- [ ] **Defects documented** - All identified issues reported with comprehensive reproduction steps and evidence
-- [ ] **Quality assessed** - Overall Story/Epic quality evaluated with clear release readiness recommendation
-- [ ] **Priority assigned** - Defects classified by severity and priority with resolution recommendations
-- [ ] **Traceability established** - Clear links between defects and affected Story acceptance criteria
-- [ ] **Stakeholder informed** - Quality assessment and defect reports communicated to development and product teams
-- [ ] **Action items defined** - Clear next steps and resolution timeline recommendations provided
+<success_criteria>
+- Defects documented: All identified issues reported with comprehensive reproduction steps and evidence
+- Quality assessed: Overall Story/Epic quality evaluated with clear release readiness recommendation
+- Priority assigned: Defects classified by severity and priority with resolution recommendations
+- Traceability established: Clear links between defects and affected Story acceptance criteria
+- Stakeholder informed: Quality assessment and defect reports communicated to development and product teams
+- Action items defined: Clear next steps and resolution timeline recommendations provided
+</success_criteria>
 
 ## Execution Checklist
 

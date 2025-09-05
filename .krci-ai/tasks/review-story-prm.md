@@ -6,10 +6,11 @@ Review and enhance user story against the story template to ensure completeness 
 
 ## Prerequisites
 
-- [ ] **Story exists**: Target story file exists in `/docs/stories/` requiring review and enhancement
-- [ ] **Template available**: Story template at `./.krci-ai/templates/story.md` for reference
-- [ ] **Role context**: Understanding appropriate to your role (PO: business clarity, Dev: technical details, Architect: system design)
-- [ ] **Story knowledge**: Familiarity with story structure and requirements for implementation readiness
+<prerequisites>
+- Story exists: Target story file exists in `/docs/stories/` requiring review and enhancement
+- Template available: Story template at `./.krci-ai/templates/story.md` for reference
+- Role context: Understanding appropriate to your role (PO: business clarity, Dev: technical details, Architect: system design)
+- Story knowledge: Familiarity with story structure and requirements for implementation readiness
 
 ### Reference Assets
 
@@ -18,56 +19,67 @@ Dependencies:
 - ./.krci-ai/templates/story.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+</prerequisites>
 
 ## Instructions
 
-1. **Validate against template**: Check story against [story.md](./.krci-ai/templates/story.md) template structure
-2. **Role-based review**: Assess story from your role perspective (PO: business clarity, Dev: technical details, Architect: design)
-3. **Identify gaps**: Find missing details needed for implementation readiness
-4. **Provide feedback**: Document what's unclear, missing, or needs enhancement
-5. **Enhance story**: Add appropriate details while preserving business requirements and Epic alignment
+<instructions>
+1. Validate against template: Check story against [story.md](./.krci-ai/templates/story.md) template structure
+2. Role-based review: Assess story from your role perspective (PO: business clarity, Dev: technical details, Architect: design)
+3. Identify gaps: Find missing details needed for implementation readiness
+4. Provide feedback: Document what's unclear, missing, or needs enhancement
+5. Enhance story: Add appropriate details while preserving business requirements and Epic alignment
+</instructions>
 
 ### Template Compliance Check
 
+<story_format_review>
 Validate story against template sections:
 
-1. **Status Table**: Status, Epic, Priority, Story Points properly filled
-2. **Dependencies**: Technical dependencies clearly specified
-3. **Story Format**: "As a/I want/so that" correctly structured
-4. **Acceptance Criteria**: Testable, specific, with validation commands
-5. **Description**: Clear context for implementation
-6. **Tasks/Subtasks**: Specific, executable implementation steps
-7. **Implementation Results**: Section ready for developer documentation
-8. **QA Checklist**: Testing requirements with specific commands
+1. Status Table: Status, Epic, Priority, Story Points properly filled
+2. Dependencies: Technical dependencies clearly specified
+3. Story Format: "As a/I want/so that" correctly structured
+4. Acceptance Criteria: Testable, specific, with validation commands
+5. Description: Clear context for implementation
+6. Tasks/Subtasks: Specific, executable implementation steps
+7. Implementation Results: Section ready for developer documentation
+8. QA Checklist: Testing requirements with specific commands
+</story_format_review>
 
 ## Multi-Role Review Focus
 
 ### STORY Completeness (All Roles)
 
-**Template Section Validation:**
+<story_completeness>
+Template Section Validation:
 
-- **Status table complete** - Status, Epic, Priority, Story Points filled
-- **Dependencies clear** - Technical and business dependencies specified
-- **Story format correct** - "As a/I want/so that" properly structured
-- **Acceptance criteria specific** - Testable and measurable conditions
+- Status table complete - Status, Epic, Priority, Story Points filled
+- Dependencies clear - Technical and business dependencies specified
+- Story format correct - "As a/I want/so that" properly structured
+- Acceptance criteria specific - Testable and measurable conditions
+</story_completeness>
 
 ### TECHNICAL Clarity (Developer/Architect Focus)
 
-**Implementation Details:**
+<technical_completeness>
+Implementation Details:
 
-- **File paths specified** - Exact paths for files to create/modify
-- **Libraries/versions defined** - Specific packages with versions
-- **Commands specified** - Exact commands to execute
-- **Architecture patterns** - Design approaches and system integration
+- File paths specified - Exact paths for files to create/modify
+- Libraries/versions defined - Specific packages with versions
+- Commands specified - Exact commands to execute
+- Architecture patterns - Design approaches and system integration
+</technical_completeness>
 
 ### BUSINESS Clarity (Product Owner Focus)
 
-**Business Requirements:**
+<business_validation>
+Business Requirements:
 
-- **User value clear** - Business value and user benefit obvious
-- **Acceptance criteria testable** - Criteria can be validated
-- **How to test it** - Clear from QA Checklist
-- **No assumptions needed** - All technical decisions pre-defined
+- User value clear - Business value and user benefit obvious
+- Acceptance criteria testable - Criteria can be validated
+- How to test it - Clear from QA Checklist
+- No assumptions needed - All technical decisions pre-defined
+</business_validation>
 
 ## Output Format
 
@@ -78,12 +90,14 @@ Validate story against template sections:
 
 ## Success Criteria
 
-- [ ] **Story technically complete** - All technical implementation details specified
-- [ ] **Tasks/Subtasks enhanced** - Atomic, executable steps with specific commands and file paths
-- [ ] **Implementation autonomous** - Developer can implement without external consultations
-- [ ] **Quality requirements defined** - Specific testing commands and validation steps included
-- [ ] **Repository specifications clear** - Exact file paths, directory structures, and dependencies specified
-- [ ] **Technical decisions documented** - Implementation approaches and patterns pre-defined
+<success_criteria>
+- Story technically complete - All technical implementation details specified
+- Tasks/Subtasks enhanced - Atomic, executable steps with specific commands and file paths
+- Implementation autonomous - Developer can implement without external consultations
+- Quality requirements defined - Specific testing commands and validation steps included
+- Repository specifications clear - Exact file paths, directory structures, and dependencies specified
+- Technical decisions documented - Implementation approaches and patterns pre-defined
+</success_criteria>
 
 ## Execution Checklist
 

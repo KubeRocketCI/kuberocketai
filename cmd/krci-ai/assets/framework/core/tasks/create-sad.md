@@ -6,10 +6,12 @@ Create comprehensive system architecture documentation that translates PRD requi
 
 ## Prerequisites
 
-- [ ] **Completed PRD**: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
-- [ ] **Epic definitions**: Epics available at `/docs/epics/` with business context and scope
-- [ ] **Architecture principles**: Understanding of organizational architecture standards
-- [ ] **Technology constraints**: Awareness of technology stack and platform limitations
+<prerequisites>
+- Completed PRD: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
+- Epic definitions: Epics available at `/docs/epics/` with business context and scope
+- Architecture principles: Understanding of organizational architecture standards
+- Technology constraints: Awareness of technology stack and platform limitations
+</prerequisites>
 
 ### Reference Assets
 
@@ -24,10 +26,12 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ## Instructions
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for architecture documentation dependencies and quality gates
-2. **Apply design principles**: Use guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
-3. **Format output**: Use [sad-template.md](./.krci-ai/templates/sad-template.md) for comprehensive structure
-4. **Ensure traceability**: Map PRD requirements (BR/NFR) and Epic features to architectural components
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for architecture documentation dependencies and quality gates
+2. Apply design principles: Use guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
+3. Format output: Use [sad-template.md](./.krci-ai/templates/sad-template.md) for comprehensive structure
+4. Ensure traceability: Map PRD requirements (BR/NFR) and Epic features to architectural components
+</instructions>
 
 ## Output Format
 
@@ -58,45 +62,53 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 **Template Reference**: Follow comprehensive structure and content guidelines from [sad-template.md](./.krci-ai/templates/sad-template.md)
 
-## Success Criteria
-
-- [ ] **Core sections completed** - Required architecture sections (01-executive-summary.md, 02-introduction.md, 06-target-architecture.md, 07-transition-migration.md, 08-architectural-decisions.md) created with project-specific content
-- [ ] **PRD traceability established** - Clear mapping from BR/NFR requirements to architectural components in 02-introduction.md
-- [ ] **Epic enablement provided** - Architecture guidance in 07-transition-migration.md enables Epic breakdown and Story creation
-- [ ] **Quality attributes addressed** - NFR requirements have specific implementation approaches in 06-target-architecture.md
-- [ ] **Technology decisions documented** - All major architectural decisions in 08-architectural-decisions.md using ADR format
-- [ ] **Professional quality maintained** - All sections follow template structure from [sad-template.md](./.krci-ai/templates/sad-template.md)
-- [ ] **Project-appropriate scope** - Section count matches project complexity (5 for small, 8 for medium, 11 for large projects)
+<success_criteria>
+- Core sections completed: Required architecture sections (01-executive-summary.md, 02-introduction.md, 06-target-architecture.md, 07-transition-migration.md, 08-architectural-decisions.md) created with project-specific content
+- PRD traceability established: Clear mapping from BR/NFR requirements to architectural components in 02-introduction.md
+- Epic enablement provided: Architecture guidance in 07-transition-migration.md enables Epic breakdown and Story creation
+- Quality attributes addressed: NFR requirements have specific implementation approaches in 06-target-architecture.md
+- Technology decisions documented: All major architectural decisions in 08-architectural-decisions.md using ADR format
+- Professional quality maintained: All sections follow template structure from [sad-template.md](./.krci-ai/templates/sad-template.md)
+- Project-appropriate scope: Section count matches project complexity (5 for small, 8 for medium, 11 for large projects)
+</success_criteria>
 
 ## Execution Checklist
 
 ### Discovery Phase
 
-- [ ] **PRD analysis**: Extract all BR/NFR requirements and identify architectural implications
-- [ ] **Epic review**: Understand business features and component breakdown needs
-- [ ] **Stakeholder requirements**: Identify architectural concerns from business stakeholders
-- [ ] **Technology constraints**: Review organizational standards and platform limitations
+<discovery_phase>
+- PRD analysis: Extract all BR/NFR requirements and identify architectural implications
+- Epic review: Understand business features and component breakdown needs
+- Stakeholder requirements: Identify architectural concerns from business stakeholders
+- Technology constraints: Review organizational standards and platform limitations
+</discovery_phase>
 
 ### Architecture Design Phase
 
-- [ ] **System context**: Define system boundaries and external interfaces
-- [ ] **Component architecture**: Design high-level system components and their interactions
-- [ ] **Quality attributes**: Address NFR requirements with specific architectural approaches
-- [ ] **Technology decisions**: Select technology stack aligned with requirements and standards
+<architecture_design_phase>
+- System context: Define system boundaries and external interfaces
+- Component architecture: Design high-level system components and their interactions
+- Quality attributes: Address NFR requirements with specific architectural approaches
+- Technology decisions: Select technology stack aligned with requirements and standards
+</architecture_design_phase>
 
 ### Documentation Phase
 
-- [ ] **SAD creation**: Use [sad-template.md](./.krci-ai/templates/sad-template.md) structure
-- [ ] **Variable population**: Complete all template variables with project-specific content
-- [ ] **Requirements mapping**: Ensure every BR/NFR requirement is addressed in architecture
-- [ ] **Epic guidance**: Provide implementation guidance for Epic breakdown and Story creation
+<documentation_phase>
+- SAD creation: Use [sad-template.md](./.krci-ai/templates/sad-template.md) structure
+- Variable population: Complete all template variables with project-specific content
+- Requirements mapping: Ensure every BR/NFR requirement is addressed in architecture
+- Epic guidance: Provide implementation guidance for Epic breakdown and Story creation
+</documentation_phase>
 
 ### Validation Phase
 
-- [ ] **Completeness check**: Verify all 11 sections are populated and professional
-- [ ] **Consistency validation**: Ensure architecture decisions align across all sections
-- [ ] **Traceability verification**: Confirm all PRD requirements map to architectural components
-- [ ] **Implementation readiness**: Validate architecture provides sufficient development guidance
+<validation_phase>
+- Completeness check: Verify all 11 sections are populated and professional
+- Consistency validation: Ensure architecture decisions align across all sections
+- Traceability verification: Confirm all PRD requirements map to architectural components
+- Implementation readiness: Validate architecture provides sufficient development guidance
+</validation_phase>
 
 ## Content Guidelines
 

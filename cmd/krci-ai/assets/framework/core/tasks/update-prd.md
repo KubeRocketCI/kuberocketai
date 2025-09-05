@@ -6,10 +6,11 @@ Update an existing PRD with new requirements, scope changes, or refined business
 
 ## Prerequisites
 
-- [ ] **Existing PRD**: `/docs/prd/prd.md` exists and is properly accessible
-- [ ] **Change trigger**: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
-- [ ] **Stakeholder input**: Understanding of what specifically needs to change and why
-- [ ] **Epic/Story review**: Current understanding of feature groupings and requirements structure
+<prerequisites>
+- Existing PRD: `/docs/prd/prd.md` exists and is properly accessible
+- Change trigger: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
+- Stakeholder input: Understanding of what specifically needs to change and why
+- Epic/Story review: Current understanding of feature groupings and requirements structure
 
 ### Reference Assets
 
@@ -20,25 +21,30 @@ Dependencies:
 - ./.krci-ai/templates/prd-template.md
 
 Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+</prerequisites>
 
 ## Instructions
 
 ### CRITICAL: MANDATORY USER CONSULTATION FIRST
 
+<user_consultation>
 Before making ANY changes to the PRD, you MUST:
 
-1. **Ask the user** what specific updates they want to make to the PRD
-2. **Understand the trigger** for the changes (new requirements, stakeholder feedback, market changes, etc.)
-3. **Clarify scope** which sections need updating and why
-4. **Get approval** for the proposed changes before implementation
-5. **Wait for explicit confirmation** before proceeding with any edits
+1. Ask the user what specific updates they want to make to the PRD
+2. Understand the trigger for the changes (new requirements, stakeholder feedback, market changes, etc.)
+3. Clarify scope which sections need updating and why
+4. Get approval for the proposed changes before implementation
+5. Wait for explicit confirmation before proceeding with any edits
+</user_consultation>
 
 ### ONLY AFTER USER CONFIRMATION
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process
-2. **Use business frameworks**: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. **Format output**: Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure
-4. **Maintain traceability**: Update BR/NFR numbering and include epic-level feature definitions
+<instructions>
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process
+2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
+3. Format output: Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure
+4. Maintain traceability: Update BR/NFR numbering and include epic-level feature definitions
+</instructions>
 
 ## Output Format
 
@@ -50,13 +56,15 @@ Before making ANY changes to the PRD, you MUST:
 
 ## Success Criteria
 
-- [ ] **File updated** at `/docs/prd/prd.md` reflects all changes
-- [ ] **Requirements numbered** BR/NFR structure maintained with priority indicators and epic-level features
-- [ ] **Change documented** clear record of what changed and why
-- [ ] **Feature impact** identified which feature areas need updates
-- [ ] **Quality maintained** document remains 6-8 pages maximum
-- [ ] **Project Brief alignment** changes align with Project Brief updates (if any)
-- [ ] **Stakeholder approval** key stakeholders have approved requirement changes
+<success_criteria>
+- File updated at `/docs/prd/prd.md` reflects all changes
+- Requirements numbered BR/NFR structure maintained with priority indicators and epic-level features
+- Change documented clear record of what changed and why
+- Feature impact identified which feature areas need updates
+- Quality maintained document remains 6-8 pages maximum
+- Project Brief alignment changes align with Project Brief updates (if any)
+- Stakeholder approval key stakeholders have approved requirement changes
+</success_criteria>
 
 ## Execution Checklist
 
@@ -78,10 +86,12 @@ Before making ANY changes to the PRD, you MUST:
 
 ### Requirements Phase
 
-- [ ] **Business requirements**: Update BR1, BR2, BR3... with new business functionality needs
-- [ ] **Non-functional requirements**: Update NFR1, NFR2, NFR3... with new system behavior/performance needs
-- [ ] **Priority assessment**: Review and update P0/P1/P2 priority indicators as needed
-- [ ] **Epic groupings**: Ensure updated requirements can be organized into logical epic-level features within the PRD
+<requirements_validation>
+- Business requirements: Update BR1, BR2, BR3... with new business functionality needs
+- Non-functional requirements: Update NFR1, NFR2, NFR3... with new system behavior/performance needs
+- Priority assessment: Review and update P0/P1/P2 priority indicators as needed
+- Epic groupings: Ensure updated requirements can be organized into logical epic-level features within the PRD
+</requirements_validation>
 
 ### Update Phase
 
@@ -92,18 +102,22 @@ Before making ANY changes to the PRD, you MUST:
 
 ### Change Management Phase
 
-- [ ] **Feature impact assessment**: Determine which feature areas need updating based on requirement changes
-- [ ] **Team communication**: Notify development teams of requirement changes
-- [ ] **Documentation**: Record change rationale and feature impact plan
+<change_management>
+- Feature impact assessment: Determine which feature areas need updating based on requirement changes
+- Team communication: Notify development teams of requirement changes
+- Documentation: Record change rationale and feature impact plan
+</change_management>
 
 ## Content Guidelines
 
 ### Quality Principles for LLM Self-Evaluation
 
-- **Change Impact Focused**: Always assess feature impact before implementing PRD changes
-- **Requirement Versioning**: Maintain BR/NFR numbering and priority consistency with epic-level feature definitions
-- **Stakeholder Aligned**: Ensure all requirement changes have proper approval before implementation
-- **Quality Preserved**: Keep updates within 6-8 page limit while maintaining user-centered focus
+<quality_principles>
+- Change Impact Focused: Always assess feature impact before implementing PRD changes
+- Requirement Versioning: Maintain BR/NFR numbering and priority consistency with epic-level feature definitions
+- Stakeholder Aligned: Ensure all requirement changes have proper approval before implementation
+- Quality Preserved: Keep updates within 6-8 page limit while maintaining user-centered focus
+</quality_principles>
 
 ### LLM Error Prevention Checklist
 

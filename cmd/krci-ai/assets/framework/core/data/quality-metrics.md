@@ -2,41 +2,44 @@
 
 ## Core Quality Metrics
 
+<core_metrics>
+
 ### Test Coverage Metrics
 
 Measure the extent of testing performed across different dimensions.
 
-- **Code Coverage**: Percentage of code executed by tests
-- **Requirements Coverage**: Percentage of requirements tested
-- **Functional Coverage**: Percentage of features tested
-- **Branch Coverage**: Percentage of code branches tested
+- Code Coverage: Percentage of code executed by tests
+- Requirements Coverage: Percentage of requirements tested
+- Functional Coverage: Percentage of features tested
+- Branch Coverage: Percentage of code branches tested
 
 ### Defect Metrics
 
 Track defect patterns and resolution effectiveness.
 
-- **Defect Density**: Number of defects per size unit (KLOC, function points)
-- **Defect Detection Rate**: Defects found during testing vs production
-- **Defect Resolution Time**: Average time to resolve defects
-- **Defect Escape Rate**: Defects found in production vs total defects
+- Defect Density: Number of defects per size unit (KLOC, function points)
+- Defect Detection Rate: Defects found during testing vs production
+- Defect Resolution Time: Average time to resolve defects
+- Defect Escape Rate: Defects found in production vs total defects
 
 ### Test Execution Metrics
 
 Monitor testing progress and efficiency.
 
-- **Test Execution Rate**: Percentage of planned tests executed
-- **Test Pass Rate**: Percentage of tests passing successfully
-- **Test Automation Rate**: Percentage of tests automated
-- **Test Execution Time**: Time required for test execution
+- Test Execution Rate: Percentage of planned tests executed
+- Test Pass Rate: Percentage of tests passing successfully
+- Test Automation Rate: Percentage of tests automated
+- Test Execution Time: Time required for test execution
 
 ### Quality Trend Metrics
 
 Track quality improvements over time.
 
-- **Quality Index**: Composite score of multiple quality factors
-- **Customer Satisfaction**: User feedback and satisfaction scores
-- **System Reliability**: Mean time between failures (MTBF)
-- **Performance Trends**: Response times and throughput metrics
+- Quality Index: Composite score of multiple quality factors
+- Customer Satisfaction: User feedback and satisfaction scores
+- System Reliability: Mean time between failures (MTBF)
+- Performance Trends: Response times and throughput metrics
+</core_metrics>
 
 ## Test Planning Metrics
 

@@ -6,14 +6,17 @@ Update an existing project charter to reflect approved changes, new information,
 
 ## Prerequisites
 
+<prerequisites>
 - Existing project charter available for modification
 - Change request or update rationale documented
 - Stakeholder approval for charter modifications
 - Impact assessment of proposed changes completed
 - Version control process established
+</prerequisites>
 
 ## Reference Assets
 
+<reference_assets>
 **Primary Dependencies:**
 - Current project charter document
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
@@ -25,6 +28,7 @@ Update an existing project charter to reflect approved changes, new information,
 - Stakeholder feedback and requirements updates
 - Updated business case or strategic direction
 - Revised resource or timeline information
+</reference_assets>
 
 ## Instructions
 
@@ -131,6 +135,7 @@ Update an existing project charter to reflect approved changes, new information,
 ## Execution Checklist
 
 ### Preparation Phase
+
 - [ ] Review change request or update requirements thoroughly
 - [ ] Gather current charter and related project documentation
 - [ ] Identify stakeholders requiring involvement in update process
@@ -138,6 +143,7 @@ Update an existing project charter to reflect approved changes, new information,
 - [ ] Prepare impact assessment framework and criteria
 
 ### Analysis Phase
+
 - [ ] Conduct comprehensive impact assessment of proposed changes
 - [ ] Review current charter for accuracy and completeness
 - [ ] Identify all sections requiring modification or update
@@ -145,6 +151,7 @@ Update an existing project charter to reflect approved changes, new information,
 - [ ] Prepare change summary and rationale documentation
 
 ### Update Phase
+
 - [ ] Modify charter sections using tracked changes for transparency
 - [ ] Ensure consistency between updated and unchanged content
 - [ ] Validate that changes maintain charter integrity and purpose
@@ -152,6 +159,7 @@ Update an existing project charter to reflect approved changes, new information,
 - [ ] Prepare draft for stakeholder review and feedback
 
 ### Approval Phase
+
 - [ ] Coordinate stakeholder reviews and feedback sessions
 - [ ] Address concerns and incorporate approved feedback
 - [ ] Obtain formal approvals following organizational procedures
@@ -161,6 +169,7 @@ Update an existing project charter to reflect approved changes, new information,
 ## Content Guidelines
 
 ### Quality Principles
+
 - **Consistency**: Maintain charter integrity while incorporating necessary changes
 - **Transparency**: Use change tracking to clearly show modifications
 - **Accuracy**: Ensure all updates reflect current project reality and requirements
@@ -168,6 +177,7 @@ Update an existing project charter to reflect approved changes, new information,
 - **Authorization**: Follow proper approval processes for charter modifications
 
 ### LLM Error Prevention
+
 - **Version Control**: Maintain clear version identification and change history
 - **Impact Analysis**: Thoroughly assess implications of all proposed changes
 - **Stakeholder Alignment**: Ensure all affected parties understand and approve changes
@@ -175,6 +185,7 @@ Update an existing project charter to reflect approved changes, new information,
 - **Consistency Check**: Verify updated charter aligns with other project documents
 
 ### PMBoK Integration Context
+
 - Apply integrated change control processes throughout update procedure
 - Ensure charter updates support PMBoK 7th Edition principles and methodology
 - Maintain charter's role as formal project authorization document
