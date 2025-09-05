@@ -2,20 +2,20 @@
 
 ## Description
 
-Interactively edit testing settings stored in `docs/testing/README.md`. The wizard shows current content for each section and asks whether to change it, add new data, or skip. Changes are applied in-place with a backup created automatically.
+Interactively edit testing settings stored in `src/main/resources/README.md`. The wizard shows current content for each section and asks whether to change it, add new data, or skip. Changes are applied in-place with a backup created automatically.
 
 ## When to Use
 
-- You already have `docs/testing/README.md` and want to adjust providers, tags, structure, or guidance
+- You already have `src/main/resources/README.md` and want to adjust providers, tags, structure, or guidance
 - After onboarding or setup, to refine details without regenerating from scratch
 
 ## Prerequisites (HALT if missing)
 
-- `docs/testing/README.md` must exist
-- Write permissions for `docs/testing/`
+- `src/main/resources/README.md` must exist
+- Write permissions for `src/main/resources/`
 
 If README is missing:
-- If `docs/testing/features/` exists → propose running `onboard-testing`
+- If `src/main/resources/features/` exists → propose running `onboard-testing`
 - If both missing → propose `setup-testing`
 
 ## Modes
@@ -73,13 +73,13 @@ The wizard should detect headings by `##`/`###` and operate on those blocks. If 
 
 ## Safety and Backups
 
-- Before any edit, create `docs/testing/README.md.bak` (overwrite if exists)
+- Before any edit, create `src/main/resources/README.md.bak` (overwrite if exists)
 - Validate that resulting README contains the edited headings and is non-empty
 
 ## Outputs
 
-- Updated `docs/testing/README.md`
-- Optional: backup at `docs/testing/README.md.bak`
+- Updated `src/main/resources/README.md`
+- Optional: backup at `src/main/resources/README.md.bak`
 - Summary of edited sections (titles) for the user
 
 ## Success Criteria

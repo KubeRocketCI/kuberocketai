@@ -5,7 +5,7 @@ This directory contains all project tests written in Gherkin (BDD).
 ## Directory structure
 
 ```
-docs/testing/
+src/main/resources/
 ├── features/                           # Gherkin feature files (.feature)
 │   ├── {Topic}.feature                 # UI/functional features
 │   └── api_tests/                      # optional: API features
@@ -17,7 +17,7 @@ Maintenance: when adding, removing, or renaming feature files, update the Direct
 
 ## How the QA agent works with tests
 
-1. Analyze existing coverage under `docs/testing/features/` using filename and scenario/title/tag heuristics
+1. Analyze existing coverage under `src/main/resources/features/` using filename and scenario/title/tag heuristics
 2. Decide on a testing strategy using the decision matrix (Covered / Partial / Not covered)
 3. Generate or extend Gherkin tests with provider parity and UI/API alignment
 
@@ -56,9 +56,9 @@ Recommended usage:
 ## How to add your existing tests
 
 1. Placement (choose the correct path):
-   - UI/functional features: `docs/testing/features/{Topic}.feature`
-   - API features (optional folder): `docs/testing/features/api_tests/{Topic}.feature`
-   - Utilities/maintenance (optional): `docs/testing/features/utility/...`
+   - UI/functional features: `src/main/resources/features/{Topic}.feature`
+   - API features (optional folder): `src/main/resources/features/api_tests/{Topic}.feature`
+   - Utilities/maintenance (optional): `src/main/resources/features/utility/...`
 
 2. Naming convention: {{naming_convention}}
 

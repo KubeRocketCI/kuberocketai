@@ -13,31 +13,83 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 
 ### Reference Assets
 
-Dependencies:
+Dependencies (BDD-only):
 
-- ./.krci-ai/data/testing-standards.md
-- ./.krci-ai/data/quality-metrics.md
-- ./.krci-ai/data/common/sdlc-framework.md
-- ./.krci-ai/data/test-methodologies.md
-- ./.krci-ai/templates/test-cases.md
+- ./src/main/resources/README.md
+- ./src/main/resources/features/
+- ./.krci-ai/data/test-methodologies.md (optional)
+- ./.krci-ai/data/testing-standards.md (optional)
+- ./.krci-ai/data/quality-metrics.md (optional)
+- ./.krci-ai/data/common/sdlc-framework.md (optional)
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+Validation (HALT if missing):
+- Require ./src/main/resources/README.md and ./src/main/resources/features/
+
+Prechecks (route user appropriately):
+- If `./src/main/resources/features/` exists and `./src/main/resources/README.md` is missing → propose running `onboard-testing` instead; HALT until user confirms.
+- If both `./src/main/resources/README.md` and `./src/main/resources/features/` are missing → propose running `setup-testing` instead; HALT until user confirms.
 
 ## Instructions
 
-1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for test case generation workflow and quality gates
-2. **Apply testing methodologies**: Use test case design techniques from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
-3. **Format output**: Use [test-cases.md](./.krci-ai/templates/test-cases.md) for structured test case documentation
-4. **Ensure traceability**: Map each test case to specific Story acceptance criteria and test plan scenarios
+0. **Select input source (HALT until resolved)**:
+   - Ask the user: "Where should I get the task text?"
+   - Options:
+     a) Scan repository for available stories under `docs/stories/` (list with numbers, then HALT to pick)
+     b) Use a specific story file (user provides path like `docs/stories/NN.MM.story.md`; validate exists)
+     c) User will paste the task context here in chat (do not scan until provided)
+1. **Intent confirmation (HALT)**:
+   - Summarize planned actions before any search:
+     - What will be searched (keywords/themes)
+     - Where (directories/namespace priority)
+     - Expected action (extend existing vs create new)
+     - Open questions/assumptions
+   - Proceed only after user confirms or refines the intent.
+2. **Discovery phase (universal search for candidates)**:
+   - Build normalized keyword variants (hyphen/underscore/space/camelCase; add common prefixes/suffixes like `-remote`, `sast`, `security`).
+   - Detect domain/context hints (e.g., UI vs API, module/subsystem names) from the task; prioritize likely directories/namespaces in this repository.
+   - ALWAYS PROMPT before search: "Rebuild semantic index now (ALL .feature files) to ensure up-to-date results? [yes/no]".
+     - On yes: prefer FAISS vector index (`./.krci-ai/indexes/gherkin-faiss.index` + `.meta.json`) using sentence-transformers; fallback to JSON index under `./.krci-ai/indexes/` if FAISS is unavailable.
+     - On no: use existing FAISS/JSON index if present; otherwise scan files directly.
+     - If user approves rebuild, propose and run (upon approval) one of the following commands:
+
+```bash
+pwsh -NoProfile -Command "python ./.krci-ai/scripts/build_gherkin_faiss.py --root . --model sentence-transformers/all-MiniLM-L6-v2 --out-index ./.krci-ai/indexes/gherkin-faiss.index --out-meta ./.krci-ai/indexes/gherkin-faiss.meta.json"
+```
+
+```bash
+pwsh -NoProfile -Command "python ./.krci-ai/scripts/build_gherkin_index.py --root . --out-json ./.krci-ai/indexes/gherkin-lex.json --out-sqlite ./.krci-ai/indexes/gherkin-lex.sqlite"
+```
+   - FAISS-first if available: encode intent → top-K (e.g., 10) → post-filter lexically (anchors: steps/tags/artifacts) and re-rank.
+   - Search across: scenario titles, steps, tags, Examples. Include characteristic artifacts discovered in this repo (avoid vendor-specific hardcoding).
+   - Present top 3–5 candidates (file path + short snippet) and HALT for user choice (extend vs reject).
+3. **Read testing README**: Review `./src/main/resources/README.md` for process, directory structure, and tagging rules (single source of truth)
+4. **Scan existing coverage**: Analyze `./src/main/resources/features/` per README to determine Covered / Partial / Not covered
+5. **Decide actions**: Use README decision matrix; request confirmation before creating/updating tests
+6. **Generate Gherkin**: Create or extend `.feature` files under `./src/main/resources/features/` with proper tags and structure
+7. **Ensure traceability**: Map each Story acceptance criterion to specific feature files and scenarios
+8. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for test case generation workflow and quality gates
+9. **Apply testing methodologies**: Use test case design techniques from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
+
+### Extension policy (respect user intent)
+
+- If user requests to extend an existing test:
+  1) Ask the user to pick the target scenario or confirm best match (by exact/nearest title or a unique anchor step/tag).
+  2) Prefer in-place edits to that scenario: insert after a specified/matched step anchor; avoid duplicating the scenario header.
+  3) If the change represents a distinct flow, add a new Scenario/Scenario Outline in the same file; do not duplicate existing flows.
+  4) Create a new file only if no suitable host file exists or upon explicit user request.
+  5) Show a minimal diff preview around the anchor and ask for confirmation.
 
 ## Output Format
 
-**Test Cases Documentation** - Create executable test specifications:
+**Gherkin Outputs** - Create or update BDD feature specifications:
 
-- [ ] **Test case document**: Complete test cases using [test-cases.md](./.krci-ai/templates/test-cases.md) template
+- [ ] **Feature files**: List of created/updated `.feature` files with paths
+- [ ] **Scenarios**: New/updated Scenario/Scenario Outline titles and Examples blocks
 - [ ] **Functional test cases**: Detailed test cases covering all Story acceptance criteria
 - [ ] **Non-functional test cases**: Performance, security, and usability test cases based on requirements
 - [ ] **Test data specifications**: Required test data and environment setup for test execution
+- [ ] **UI/API alignment**: Which side is covered and any proposed complementary coverage
+- [ ] **Traceability**: Story acceptance criteria mapped to feature files and scenarios
 
 ## Success Criteria
 
@@ -73,10 +125,10 @@ Validation: Verify all dependencies exist at specified paths before proceeding. 
 
 ### Documentation and Validation Phase
 
-- [ ] **Test case documentation**: Document all test cases using [test-cases.md](./.krci-ai/templates/test-cases.md) format
+- [ ] **Feature sources of truth**: Ensure `.feature` files contain authoritative steps and data tables
 - [ ] **Test data preparation**: Define required test data, user accounts, and environment configurations
-- [ ] **Traceability matrix**: Create mapping between test cases and Story acceptance criteria
-- [ ] **Peer review**: Conduct test case review with development team and obtain approval
+- [ ] **Traceability matrix**: Map Story acceptance criteria to feature files and scenarios
+- [ ] **Peer review**: Review Gherkin with the team and obtain approval
 
 ## Content Guidelines
 

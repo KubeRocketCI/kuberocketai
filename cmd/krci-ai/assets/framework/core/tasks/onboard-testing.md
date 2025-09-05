@@ -2,35 +2,35 @@
 
 ## Description
 
-Analyze an existing directory of Gherkin `.feature` files and generate a `docs/testing/README.md` aligned with repository conventions. Onboarding is non-interactive: it performs analysis and writes the README, then reports how to change settings via the edit command.
+Analyze an existing directory of Gherkin `.feature` files and generate a `src/main/resources/README.md` aligned with repository conventions. Onboarding is non-interactive: it performs analysis and writes the README, then reports how to change settings via the edit command.
 
 ## When to Use
 
-- You already have `.feature` files but lack `docs/testing/README.md`
+- You already have `.feature` files but lack `src/main/resources/README.md`
 - You are migrating an external Gherkin test suite into this system
 
 ## Inputs
 
-- Source directory containing `.feature` files (default: `docs/testing/features/`)
+- Source directory containing `.feature` files (default: `src/main/resources/features/`)
 
 ## Validation (HALT if missing)
 
 - Source directory exists and contains at least one `.feature` file
-- `docs/testing/README.md` does not already exist (otherwise use `edit-testing-settings`)
-- Write permissions for `docs/testing/`
+- `src/main/resources/README.md` does not already exist (otherwise use `edit-testing-settings`)
+- Write permissions for `src/main/resources/`
 
 ## Prechecks and Routing (HALT)
 
-- If `docs/testing/README.md` already exists → HALT and propose running `edit-testing-settings` to modify settings interactively.
+- If `src/main/resources/README.md` already exists → HALT and propose running `edit-testing-settings` to modify settings interactively.
 - If no `.feature` files are present in the source directory → HALT and propose `setup-testing` to initialize the structure and README.
 - If both `.feature` files and README are present → this flow is not applicable; use `edit-testing-settings` or `generate-test-cases` as needed.
 
 ## Flow (Non-interactive)
 
 1) Scan and infer domains, UI/API presence, naming convention, tag families (with frequencies and scopes), discovery hints (preferred directories, topics, artifacts).
-2) Create `docs/testing/` if missing and write `docs/testing/README.md` from `./.krci-ai/templates/testing-readme.md` using inferred values and hints.
+2) Create `src/main/resources/` if missing and write `src/main/resources/README.md` from `./.krci-ai/templates/testing-readme.md` using inferred values and hints.
 3) Enrich the README with analysis outputs:
-   - Replace the template "Directory structure" code block with the actual tree under `docs/testing/features/` (preserve readability by limiting depth if very large).
+   - Replace the template "Directory structure" code block with the actual tree under `src/main/resources/features/` (preserve readability by limiting depth if very large).
    - Set the naming convention to the detected style (`PascalCase`, `kebab-case`, or `snake_case`).
    - Insert a concise UI vs API coverage summary (presence and high-level distribution).
    - Add a "Current tags in this repository" subsection listing top tags with counts, grouped into recommended families; include an "Additional tags" note for unmapped tags.
@@ -97,7 +97,7 @@ These hints are summarized into the README under a "Discovery hints for this rep
 
 ## Output
 
-- `docs/testing/README.md` reflecting existing suite structure and inferred conventions
+- `src/main/resources/README.md` reflecting existing suite structure and inferred conventions
 - Console summary with the README path and next-step instruction (`edit-testing-settings`)
 
 ## Success Criteria
