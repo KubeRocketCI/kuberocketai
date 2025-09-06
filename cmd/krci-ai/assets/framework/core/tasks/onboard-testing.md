@@ -28,7 +28,7 @@ Analyze an existing directory of Gherkin `.feature` files and generate a `src/ma
 ## Flow (Non-interactive)
 
 1) Scan and infer domains, UI/API presence, naming convention, tag families (with frequencies and scopes), discovery hints (preferred directories, topics, artifacts).
-2) Create `src/main/resources/` if missing and write `src/main/resources/README.md` from `./.krci-ai/templates/testing-readme.md` using inferred values and hints.
+2) Create `src/main/resources/` if missing and write `src/main/resources/README.md` from [template](./.krci-ai/templates/testing-readme.md) using inferred values and hints.
 3) Enrich the README with analysis outputs:
    - Replace the template "Directory structure" code block with the actual tree under `src/main/resources/features/` (preserve readability by limiting depth if very large).
    - Set the naming convention to the detected style (`PascalCase`, `kebab-case`, or `snake_case`).
@@ -106,5 +106,3 @@ These hints are summarized into the README under a "Discovery hints for this rep
 - Provider/tags guidance is accurate and actionable for subsequent generation
 - Discovery hints help the agent prioritize relevant areas during search
 - Further refinements are handled by `edit-testing-settings`
-
-

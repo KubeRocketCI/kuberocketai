@@ -77,7 +77,7 @@ Wizard behavior:
      - `src/main/resources/features/api_tests/{{domain_name}}/{{provider}}/` (if API selected)
    - If utilities enabled: `src/main/resources/features/api_tests/utility/cleanup/`
 
-2. Generate `src/main/resources/README.md` from `./.krci-ai/templates/testing-readme.md` by replacing placeholders:
+2. Generate `src/main/resources/README.md` from [template](./.krci-ai/templates/testing-readme.md) by replacing placeholders:
    - `{{domain_name}}`
    - `{{providers_csv}}` (comma-separated)
    - `{{include_ui}}` / `{{include_api}}` → `true/false`
@@ -117,6 +117,3 @@ Wizard behavior:
 - After setup, you can create local Gherkin indexes to speed up discovery; they are optional and can be regenerated anytime.
 - After setup, run the discovery/search phase (see generate task) to index existing or starter features and validate provider/tag structure.
 - You can rerun this wizard later to adjust configuration; review diffs before committing changes.
-
-
-
