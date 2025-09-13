@@ -117,11 +117,11 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^\\./\\.krci-ai/(tasks|local/tasks)/[^/]+\\.md$",
-            "description": "Strict local path to .md file under ./.krci-ai/tasks/ or ./.krci-ai/local/tasks/"
+            "pattern": "^\\./\\.krci-ai/tasks/.+\\.md$",
+            "description": "Path to .md file under ./.krci-ai/tasks/ (arbitrary subdirectory structure allowed)"
           },
           "uniqueItems": true,
-          "description": "List of available task file paths (must match ./.krci-ai/tasks/*.md or ./.krci-ai/local/tasks/*.md)"
+          "description": "List of available task file paths under ./.krci-ai/tasks/ (arbitrary subdirectory structure allowed)"
         }
       },
       "required": [
