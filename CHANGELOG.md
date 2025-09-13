@@ -2,6 +2,81 @@
 
 ## [Unreleased]
 
+### Bug Fixes
+
+- fix markdown linting
+
+### Chores
+
+- **create-story:** add support for personas and assets in the site documentation
+
+### Features
+
+- add 'advisor' agent to the framework
+
+
+<a name="v0.36.0"></a>
+
+## [v0.36.0] - 2025-09-06
+
+### Chores
+
+- **create-story:** extend cursor and claudecode with commands support
+
+### Features
+
+- add aqa agent
+
+
+<a name="v0.35.1"></a>
+
+## [v0.35.1] - 2025-09-05
+
+### Chores
+
+- **xml:** add notice to the sdlc-framework general file
+
+### Features
+
+- **xml:** instruct agents to use xml tags correctly
+
+
+<a name="v0.35.0"></a>
+
+## [v0.35.0] - 2025-09-05
+
+### Chores
+
+- **migration:** add migration task to repo
+- **xml:** convert update status report task
+- **xml:** Add xml tags to the data sources
+
+### Features
+
+- **md2xml:** finalize adding xml tasks for framework components
+
+
+<a name="v0.34.2"></a>
+
+## [v0.34.2] - 2025-09-04
+
+### Bug Fixes
+
+- **tw:** remove reference to the non existing document
+
+
+<a name="v0.34.1"></a>
+
+## [v0.34.1] - 2025-09-04
+
+### Chores
+
+- update local installed framework to the latest version
+
+### Features
+
+- convert instructions to new format with xml tags
+
 
 <a name="v0.34.0"></a>
 
@@ -835,7 +910,12 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.34.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.36.0...HEAD
+[v0.36.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.35.1...v0.36.0
+[v0.35.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.35.0...v0.35.1
+[v0.35.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.34.2...v0.35.0
+[v0.34.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.34.1...v0.34.2
+[v0.34.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.34.0...v0.34.1
 [v0.34.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.33.1...v0.34.0
 [v0.33.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.33.0...v0.33.1
 [v0.33.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.32.0...v0.33.0
