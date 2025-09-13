@@ -323,14 +323,29 @@ func (a *FrameworkAnalyzer) processTaskDependenciesInDirectory(frameworkDir, tas
 	return nil
 }
 
-// processDirectoryFiles is a generic helper to process files in a directory
+// processDirectoryFiles is a generic helper to process files in a directory (recursively scans subdirectories)
 func (a *FrameworkAnalyzer) processDirectoryFiles(frameworkDir, subDir, pattern string, extractRefs func(string) ([]string, error), processRef func(string)) error {
 	dir := filepath.Join(frameworkDir, subDir)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		return nil
 	}
 
-	files, err := filepath.Glob(filepath.Join(dir, pattern))
+	// Recursively find all files matching the pattern including subdirectories
+	var files []string
+	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			// Check if file matches pattern (simple extension check for *.md, *.yaml, etc.)
+			if pattern == "*.md" && strings.HasSuffix(info.Name(), ".md") {
+				files = append(files, path)
+			} else if pattern == "*.y*ml" && (strings.HasSuffix(info.Name(), ".yaml") || strings.HasSuffix(info.Name(), ".yml")) {
+				files = append(files, path)
+			}
+		}
+		return nil
+	})
 	if err != nil {
 		return err
 	}

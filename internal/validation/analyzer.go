@@ -727,11 +727,21 @@ func (a *FrameworkAnalyzer) processAgentTasks(embeddedAssets fs.FS, taskRefs []s
 	for _, taskRef := range taskRefs {
 		taskName := filepath.Base(taskRef)
 
+		// Extract relative path from task reference (remove ./.krci-ai/tasks/ prefix)
+		var taskRelativePath string
+		if strings.HasPrefix(taskRef, "./.krci-ai/tasks/") {
+			taskRelativePath = strings.TrimPrefix(taskRef, "./.krci-ai/tasks/")
+		} else if strings.HasPrefix(taskRef, "./.krci-ai/local/tasks/") {
+			taskRelativePath = strings.TrimPrefix(taskRef, "./.krci-ai/local/tasks/")
+		} else {
+			taskRelativePath = taskName // fallback to filename
+		}
+
 		// Categorize as local or standard task
 		if strings.Contains(taskRef, localTasksPrefix) {
-			relationship.LocalTasks = append(relationship.LocalTasks, taskName)
+			relationship.LocalTasks = append(relationship.LocalTasks, taskRelativePath)
 		} else {
-			relationship.Tasks = append(relationship.Tasks, taskName)
+			relationship.Tasks = append(relationship.Tasks, taskRelativePath)
 		}
 
 		if err := a.addTaskDependencies(embeddedAssets, taskRef, relationship); err != nil {

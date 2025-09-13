@@ -233,7 +233,17 @@ func (c *Calculator) calculateAssetTokens(ctx context.Context, files []string, a
 			return fmt.Errorf("failed to walk %s: %w", path, err)
 		}
 
-		if info.IsDir() || !slices.Contains(files, filepath.Base(path)) {
+		if info.IsDir() {
+			return nil
+		}
+
+		// Check if this file matches any of the expected files (handle subdirectories)
+		relPath, err := filepath.Rel(filepath.Join(c.targetDir, assets.KrciAIDir, assetType), path)
+		if err != nil {
+			return nil
+		}
+
+		if !slices.Contains(files, relPath) {
 			return nil
 		}
 

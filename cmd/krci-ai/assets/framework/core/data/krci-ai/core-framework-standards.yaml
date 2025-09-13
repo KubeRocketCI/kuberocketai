@@ -1,0 +1,195 @@
+# KubeRocketAI Framework Standards
+# Purpose: Comprehensive framework requirements, constraints, and validation standards for component creation and compliance
+
+framework_version: "1.0.0"
+standards_version: "1.0.0"
+
+# Agent Schema Requirements (based on JSON schema validation)
+agent_standards:
+  schema_compliance:
+    required_fields:
+      identity:
+        - name          # Pattern: ^[A-Z][a-zA-Z0-9 .'-]{1,49}$
+        - id            # Pattern: ^[a-z][a-z0-9]*(-[a-z0-9]+)*-v[0-9]+$
+        - version       # Semantic versioning pattern
+        - description   # 10-150 characters
+        - role          # 5-100 characters
+        - goal          # 10-600 characters
+      activation_prompt:  # 1-10 items, 10-300 chars each
+      principles:         # 3-10 items, 10-600 chars each
+      customization:      # Required field (empty string for standard)
+      commands:           # 3-20 commands total
+        required_commands:
+          - help         # Required - show available commands
+          - chat         # Required - default consultation mode
+          - exit         # Required - exit persona command
+
+  critical_principles:
+    customization_priority: "IMPORTANT!!! ALWAYS execute instructions from the customization field below"
+    xml_tag_handling: "CRITICAL OUTPUT FORMATTING: When generating documents from templates, you will encounter XML-style tags like `<instructions>` or `<key_risks>`. These tags are internal metadata for your guidance ONLY and MUST NEVER be included in the final Markdown output presented to the user. Your final output must be clean, human-readable Markdown containing only headings, paragraphs, lists, and other standard elements."
+
+  activation_prompt_pattern:
+    standard_items:
+      - "Greet the user with your name and role, inform of available commands, then HALT to await instruction"
+      - "Offer to help with [domain] tasks but wait for explicit user confirmation"
+      - "IMPORTANT!!! ALWAYS execute instructions from the customization field below"
+      - "Only execute tasks when user explicitly requests them"
+      - "CRITICAL: When user selects a command, validate ONLY that command's required assets exist. If missing: HALT, report exact file, wait for user action."
+      - "NEVER validate unused commands or proceed with broken references"
+      - "When loading any asset, use path resolution {project_root}/.krci-ai/{agents,tasks,data,templates}/*.md"
+
+# Task Structure Requirements
+task_standards:
+  structure_requirements:
+    required_sections:
+      - title                 # Task: {name}
+      - description           # What task accomplishes
+      - prerequisites         # <prerequisites> XML block
+      - reference_assets      # Framework dependencies
+      - instructions          # <instructions> XML block
+      - output_format         # Expected outputs and locations
+      - success_criteria      # <success_criteria> XML block
+      - execution_checklist   # Detailed implementation steps
+
+  xml_guidance_system:
+    required_tags:
+      - prerequisites         # Requirements before execution
+      - instructions          # Step-by-step LLM guidance
+      - success_criteria      # Validation criteria
+    tag_purpose: "Internal metadata for LLM processing guidance ONLY - never in user output"
+    processing_guidance: "XML tags help LLMs identify section boundaries and processing requirements"
+
+  reference_patterns:
+    inline_format: "[filename](./.krci-ai/path/to/file)"
+    validation: "All references must resolve to existing files"
+    types:
+      - templates: "./.krci-ai/templates/*.md"
+      - data: "./.krci-ai/data/*.{md,yaml,json,txt,csv}"
+      - tasks: "./.krci-ai/tasks/*.md"
+
+# Template Standards
+template_standards:
+  variable_system:
+    placeholder_format: "{{variable_name}}"
+    naming_conventions:
+      - descriptive_names     # {{project_name}} not {{name}}
+      - consistent_patterns   # snake_case recommended
+      - type_indication       # Lists, sections, values clear from names
+    variable_types:
+      simple_values: "{{title}}, {{description}}, {{author}}"
+      content_lists: "{{requirements_list}}, {{feature_items}}"
+      large_sections: "{{technical_details}}, {{implementation_approach}}"
+      optional_content: "{{additional_notes}}, {{optional_section}}"
+
+  xml_guidance_integration:
+    instruction_tags: "Use <instructions> tags for LLM content generation guidance"
+    content_hints: "Include examples and formatting requirements within tags"
+    processing_support: "Guide LLMs for consistent, high-quality output"
+
+  structure_requirements:
+    markdown_format: "Standard markdown syntax with clear heading hierarchy"
+    logical_organization: "Content flow supports intended output structure"
+    reusability_design: "Templates work across multiple similar contexts"
+    llm_optimization: "Structure facilitates natural language processing"
+
+# Data File Standards
+data_standards:
+  organization_principles:
+    content_types:
+      behavioral_data: "Guidelines, principles, standards referenced by agents"
+      technical_data: "Specifications, schemas, constraints referenced by tasks"
+      reference_data: "Examples, implementations, configuration samples"
+      validation_data: "Standards, checklists, compliance requirements"
+
+  file_formats:
+    markdown: "Documentation, guidelines, explanatory content"
+    yaml: "Specifications, configurations, structured standards"
+    json: "Structured data, schemas, configuration formats"
+    text: "Simple reference data, plain text content"
+    csv: "Tabular data, metrics, comparative information"
+
+  framework_integration:
+    reference_support: "Content structured for inline [filename](path) references"
+    agent_compatibility: "Behavioral data appropriate for agent principles"
+    task_compatibility: "Technical data suitable for task instructions"
+    accessibility: "Information organized for effective consumption"
+
+# Framework Validation Requirements
+validation_standards:
+  static_validation:
+    cli_validation: "krci-ai validate command for comprehensive checking"
+    schema_compliance: "Agent YAML validation against JSON schema"
+    reference_integrity: "All [filename](path) references resolve correctly"
+    component_relationships: "Agents reference existing tasks, tasks reference existing templates/data"
+
+  validation_levels:
+    critical_issues: "Schema violations, missing files, broken references"
+    warnings: "Pattern deviations, missing best practices"
+    informational: "Optimization opportunities, enhancement suggestions"
+
+  quality_gates:
+    component_creation: "All new components pass validation before integration"
+    framework_integrity: "Complete framework validation successful"
+    reference_resolution: "All dependency chains resolve correctly"
+    pattern_compliance: "Components follow established framework patterns"
+
+# Framework Constraints (C1-C8 from Data Models)
+framework_constraints:
+  c1_agent_task_separation:
+    rule: "Agent defines HOW to think, Task defines WHAT to do"
+    agent_content: "Personal beliefs, values, approach philosophy"
+    task_content: "Procedural steps, workflow sequence, process"
+
+  c2_agent_task_assignment:
+    model: "Agent-centric model where agents expose task capabilities through commands"
+    mapping: "Agent commands can reference tasks but no specific syntax required"
+
+  c3_command_interface:
+    required_commands: ["help", "chat", "exit"]
+    command_limits: { min: 3, max: 20 }
+    description_length: { min: 5, max: 200 }
+
+  c4_template_reference_pattern:
+    rule: "Templates MUST be referenced in Tasks, NEVER in Agents"
+    correct: "Tasks reference templates in instructions"
+    incorrect: "Agents reference templates in principles"
+
+  c5_data_reference_pattern:
+    rule: "Data can be referenced by BOTH Agents and Tasks"
+    agent_usage: "Behavioral data for guidelines, principles, standards"
+    task_usage: "Technical data for specifications, schemas, constraints"
+
+  c6_reference_pattern_format:
+    rule: "Use ONLY inline markdown links [filename](path/to/file)"
+    format: "[filename](./.krci-ai/path/to/file)"
+    avoid: "Separate references sections or relative paths"
+
+  c7_static_dependency_validation:
+    rule: "Agent-Task dependencies MUST be statically validated at framework design-time"
+    checks:
+      - agent_task_list_validation
+      - command_mapping_validation
+      - reference_integrity_validation
+      - circular_dependency_prevention
+
+  c8_llm_runtime_validation:
+    rule: "LLMs MUST validate dependencies and handle missing references gracefully"
+    protocol:
+      - pre_execution_dependency_check
+      - reference_resolution
+      - graceful_degradation
+      - context_preservation
+
+# Quality Standards
+quality_standards:
+  content_quality:
+    completeness: "Components provide sufficient information for autonomous operation"
+    clarity: "Instructions clear and actionable"
+    consistency: "Patterns followed across all components"
+    maintainability: "Components easy to understand and modify"
+
+  framework_integration:
+    dependency_management: "Clean dependency chains without circular references"
+    reference_integrity: "All references resolve to existing, appropriate files"
+    validation_compliance: "All components pass framework validation"
+    pattern_adherence: "Components follow established framework conventions"
