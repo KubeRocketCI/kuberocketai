@@ -2,7 +2,7 @@
 
 ## Description
 
-Guide user through creating framework-compliant templates for consistent LLM output formatting. This task provides instructions for template creation using variable placeholders, XML guidance tags, and structured content organization for effective LLM processing.
+Guide user through creating framework-compliant templates for consistent LLM output formatting. This task provides instructions for template creation using variable placeholders, XML guidance tags, and structured content organization for effective LLM processing and reusable content generation.
 
 <prerequisites>
 - Framework installed: .krci-ai directory exists with templates/ subdirectory
@@ -19,81 +19,79 @@ Dependencies:
 - ./.krci-ai/templates/krci-ai/core-template-template.md
 - ./.krci-ai/data/krci-ai/core-validation-checklist.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
-1. Apply template structure: Use markdown format with `{{variable}}` placeholders for dynamic content
-2. Include XML guidance tags: Add `<instructions>` sections for LLM processing guidance
-3. Design variable system: Create descriptive variable names using consistent naming patterns
-4. Provide LLM guidance: Include comments and instructions for content generation
-5. Ensure reusability: Design template for use across multiple similar contexts
+1. Apply template structure: Use markdown format with `{{variable}}` placeholders for dynamic content substitution
+2. Include XML guidance tags: Add `<instructions>` sections for LLM processing guidance and content generation
+3. Design variable system: Create descriptive variable names using consistent naming patterns and types
+4. Provide LLM guidance: Include comments and instructions for content generation within templates
+5. Ensure reusability: Design template for use across multiple similar contexts with flexible variable system
 6. Format output: Use [core-template-template.md](./.krci-ai/templates/krci-ai/core-template-template.md) as structural guide
 </instructions>
 
-## Framework Context: Template Architecture
+## Framework Context: Template Architecture and Variable System
 
-Template Variable System: Templates use `{{variable_name}}` placeholders for LLM content substitution:
-- Simple Values: `{{project_name}}`, `{{description}}` for single values
-- Lists: `{{requirements}}`, `{{features}}` for bullet points or numbered lists
-- Sections: `{{technical_details}}`, `{{implementation_approach}}` for large content blocks
-- Optional Content: `{{optional_section}}` may be empty based on context
+**Template Variable System**: Templates use `{{variable_name}}` placeholders for LLM content substitution with specific types:
 
-XML Guidance Integration: Templates include XML tags for LLM processing instructions:
-- `<instructions>` - Guidance for LLM content generation within sections
-- Comments for variable usage examples and formatting requirements
-- Section organization help for consistent structure
+- Simple values: `{{project_name}}`, `{{description}}`, `{{author}}` for single-line content
+- Content lists: `{{requirements}}`, `{{features}}`, `{{task_items}}` for structured lists
+- Large sections: `{{technical_details}}`, `{{implementation_approach}}` for multi-paragraph content
+- Optional content: `{{optional_section}}`, `{{additional_notes}}` may be empty based on context
 
-LLM-Friendly Design: Templates optimized for natural language processing and content generation.
+**XML Guidance Integration**: Templates include XML tags for LLM processing instructions:
+
+- `<instructions>` tags provide guidance for LLM content generation within sections
+- Comments explain variable usage examples and formatting requirements
+- Section organization guidance helps maintain consistent structure across outputs
+- Processing hints facilitate effective template usage and content generation
+
+**LLM-Friendly Design Principles**: Templates optimized for natural language processing with clear structure, logical content flow, and comprehensive guidance for autonomous content generation.
+
+**Template Reusability Architecture**: Design patterns support use across multiple similar contexts while maintaining structural integrity and variable system consistency.
 
 ## Output Format
 
 - Location: `./.krci-ai/templates/{template-name}.md` following naming conventions
 - Structure: Markdown format with clear sections and variable placeholders
 - LLM guidance: XML instruction tags and comments for processing guidance
-- Variable consistency: Descriptive variable names with consistent patterns
+- Variable consistency: Descriptive variable names with consistent patterns and types
 
 <success_criteria>
-- Template file created with proper markdown structure and naming
-- Variable placeholders use `{{variable_name}}` format consistently
-- XML guidance tags included for LLM processing instructions
-- Template structure supports intended output formatting
-- Variable system enables flexible content generation
-- Template validates against framework standards
+- Framework compliance verified: Template passes all automated validation checks without errors
+- Pattern adherence confirmed: Template follows established framework conventions exactly
+- Reference integrity validated: All references resolve correctly and appropriately
+- Quality standards met: Template meets completeness, clarity, and maintainability requirements
+- Integration readiness achieved: Template ready for framework operation and usage
+- Documentation completeness confirmed: All required sections populated with actionable content
 </success_criteria>
 
 ## Execution Checklist
 
-### Template Structure Design
+### Preparation Phase
 
-- [ ] Markdown format: Template uses standard markdown syntax for structure
-- [ ] Section organization: Logical content flow with clear headings and organization
-- [ ] Variable placement: `{{variable}}` placeholders positioned appropriately for content substitution
-- [ ] Content hierarchy: Proper heading levels and content organization
+- [ ] Framework validation: Run `krci-ai validate` to ensure clean starting state
+- [ ] Dependency verification: Confirm all reference assets exist at specified paths
+- [ ] Context gathering: Review template requirements and intended usage scenarios
+- [ ] Template purpose definition: Clear understanding of what output template will structure
+- [ ] Variable identification: Analyze dynamic content areas requiring placeholders
 
-### Variable System Implementation
+### Execution Phase
 
-- [ ] Variable naming: Descriptive names using consistent patterns (snake_case recommended)
-- [ ] Variable types: Appropriate mix of simple values, lists, and content sections
-- [ ] Variable documentation: Comments explaining variable purpose and expected content
-- [ ] Optional handling: Clear indication of optional vs required variables
+- [ ] Template structure creation: Use markdown format with clear sections and logical organization
+- [ ] Variable system implementation: Create `{{variable}}` placeholders with descriptive names
+- [ ] Variable type organization: Implement simple values, lists, sections, and optional content appropriately
+- [ ] XML guidance integration: Add `<instructions>` tags for LLM processing guidance
+- [ ] Content examples inclusion: Provide examples and hints for variable content within instruction tags
+- [ ] LLM guidance documentation: Include comments explaining variable purpose and expected content
+- [ ] Reusability design: Ensure template works across multiple similar contexts
+- [ ] Template application: Use [core-template-template.md](./.krci-ai/templates/krci-ai/core-template-template.md) structure
 
-### LLM Guidance Integration
+### Validation Phase
 
-- [ ] XML instructions: `<instructions>` tags provide clear guidance for content generation
-- [ ] Content examples: Examples or hints for variable content within instruction tags
-- [ ] Formatting guidance: Instructions for consistent formatting and style
-- [ ] Processing hints: Guidance for LLM content generation and structure
-
-### Template Optimization
-
-- [ ] Reusability: Template design supports use across multiple similar contexts
-- [ ] Flexibility: Variable system allows for diverse content while maintaining structure
-- [ ] LLM compatibility: Template structure facilitates natural language processing
-- [ ] Framework integration: Template follows established framework patterns
-
-### Validation and Testing
-
-- [ ] Template syntax: Markdown syntax correct and renders properly
-- [ ] Variable consistency: All variables follow naming conventions and patterns
-- [ ] XML tag validity: Instruction tags properly formatted and closed
-- [ ] Framework compliance: Template meets framework standards and validation requirements
+- [ ] Template syntax verification: Ensure markdown syntax is correct and renders properly
+- [ ] Variable consistency check: Verify all variables follow naming conventions and patterns
+- [ ] XML tag validation: Confirm instruction tags are properly formatted and closed
+- [ ] Framework validation: Run template validation against framework standards
+- [ ] Reusability testing: Verify template supports flexible content generation scenarios
+- [ ] Integration testing: Confirm template integrates properly with framework ecosystem

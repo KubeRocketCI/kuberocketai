@@ -2,7 +2,7 @@
 
 ## Description
 
-Review and validate existing tasks for framework compliance, XML tag usage, and structural integrity. This task provides systematic evaluation criteria to ensure tasks follow KubeRocketAI patterns and provide proper LLM guidance.
+Review and validate existing tasks for framework compliance, XML tag usage, and structural integrity. This task provides systematic evaluation criteria to ensure tasks follow KubeRocketAI patterns and provide proper LLM guidance with comprehensive quality assessment.
 
 <prerequisites>
 - Task exists: Target task file exists and is accessible for review
@@ -19,28 +19,34 @@ Dependencies:
 - ./.krci-ai/data/krci-ai/core-validation-checklist.md
 - ./.krci-ai/templates/krci-ai/core-task-template.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
-1. Validate XML guidance system: Ensure task uses proper XML tags for LLM section identification
-2. Check inline references: Verify all `[filename](path)` references resolve to existing files
-3. Review structure compliance: Confirm task follows template pattern with required sections
-4. Assess self-contained guidance: Evaluate if task provides context-free usage explanations
-5. Test framework validation: Run `krci-ai validate` to identify automated compliance issues
-6. Provide improvement recommendations: Offer specific, actionable feedback for enhancement
+1. Validate XML guidance system: Ensure task uses proper XML tags for LLM section identification and guidance
+2. Check inline references: Verify all `[filename](path)` references resolve to existing files with proper validation
+3. Review structure compliance: Confirm task follows template pattern with required sections and ordering
+4. Assess self-contained guidance: Evaluate if task provides context-free usage explanations and framework context
+5. Test framework validation: Run `krci-ai validate` to identify automated compliance issues and resolution steps
+6. Provide improvement recommendations: Offer specific, actionable feedback for enhancement with implementation examples
 </instructions>
 
-## Framework Context: Review Standards
+## Framework Context: Task Review Standards and Quality Assessment
 
-XML Tag Evaluation: Tasks must use XML-style tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM guidance. These tags are internal metadata only and must never appear in user-facing output. Review should verify:
-- Proper XML tag placement and closure
-- Content appropriateness within tags
-- LLM guidance effectiveness
+**XML Tag Evaluation**: Tasks must use XML-style tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM guidance. These tags are internal metadata only and must never appear in user-facing output. Review should verify:
 
-Reference Pattern Validation: All framework references must use inline `[filename](./.krci-ai/path/to/file)` format. Check for:
-- Correct path resolution
-- Existing target files
-- Appropriate reference context
+- Proper XML tag placement and closure with correct syntax
+- Content appropriateness within tags providing clear LLM guidance
+- LLM guidance effectiveness for autonomous task execution
+- Section boundary identification and processing requirements clarity
+
+**Reference Pattern Validation**: All framework references must use inline `[filename](./.krci-ai/path/to/file)` format. Comprehensive validation includes:
+
+- Correct path resolution to existing framework components
+- Target file existence and accessibility verification
+- Appropriate reference context and integration patterns
+- Dependency chain integrity and circular reference prevention
+
+**Task Structure Requirements**: Tasks must follow exact template compliance with proper section ordering, comprehensive execution checklists, and autonomous execution capability.
 
 ## Output Format
 
@@ -50,40 +56,38 @@ Reference Pattern Validation: All framework references must use inline `[filenam
 - Validation results: Include `krci-ai validate` output and interpretation
 
 <success_criteria>
-- Complete evaluation of task against framework standards
-- XML tag usage properly assessed for LLM guidance effectiveness
-- All inline references validated for existence and correctness
-- Structural compliance confirmed against template requirements
-- Specific, actionable improvement recommendations provided
-- Framework validation results documented and interpreted
+- Framework compliance verified: Task passes all automated validation checks without errors
+- Pattern adherence confirmed: Task follows established framework conventions exactly
+- Reference integrity validated: All references resolve correctly and appropriately
+- Quality standards met: Task meets completeness, clarity, and maintainability requirements
+- Integration readiness achieved: Task ready for framework operation and usage
+- Documentation completeness confirmed: All required sections populated with actionable content
 </success_criteria>
 
-## Review Checklist
+## Execution Checklist
 
-### XML Guidance Assessment
+### Preparation Phase
 
-- [ ] XML tag presence: Task includes `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
-- [ ] Tag closure: All XML tags properly opened and closed
-- [ ] Content appropriateness: XML tag content provides effective LLM guidance
-- [ ] User output safety: Verify XML tags won't appear in final user-facing content
+- [ ] Framework validation: Run `krci-ai validate` to establish baseline task status
+- [ ] Dependency verification: Confirm all reference assets exist at specified paths
+- [ ] Context gathering: Review task specifications and intended functionality
+- [ ] Review scope definition: Identify specific areas requiring evaluation and feedback
 
-### Reference Validation
+### Execution Phase
 
-- [ ] Inline format: All references use `[filename](./.krci-ai/path/to/file)` pattern
-- [ ] Path accuracy: Referenced files exist at specified locations
-- [ ] Reference relevance: Referenced files are appropriate for task context
-- [ ] Link resolution: All `[filename](path)` links resolve correctly
+- [ ] XML guidance assessment: Verify task includes proper `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
+- [ ] XML tag validation: Check all XML tags are properly opened, closed, and provide effective LLM guidance
+- [ ] Reference pattern verification: Confirm all references use `[filename](./.krci-ai/path/to/file)` format correctly
+- [ ] Reference resolution testing: Verify all referenced files exist at specified locations
+- [ ] Structure compliance review: Confirm task follows template pattern with required sections and ordering
+- [ ] Self-contained guidance assessment: Evaluate if task provides context-free usage explanations
+- [ ] Framework context validation: Verify educational context and architectural guidance presence
 
-### Structure Compliance
+### Validation Phase
 
-- [ ] Template adherence: Task follows krci-ai/core-task-template.md structure
-- [ ] Section completeness: Required sections (Description, Prerequisites, Instructions, etc.) present
-- [ ] Content organization: Information logically organized and accessible
-- [ ] Self-contained guidance: Task provides context-free usage explanations
-
-### Framework Integration
-
-- [ ] Validation passing: Task passes `krci-ai validate` without errors
-- [ ] Agent integration: Task can be properly referenced by target agents
-- [ ] Framework patterns: Task follows established framework conventions
-- [ ] Quality standards: Content meets framework quality and completeness requirements
+- [ ] Framework validation execution: Run `krci-ai validate` and document results with interpretation
+- [ ] Issue categorization: Organize findings by XML tags, references, structure, content quality
+- [ ] Improvement recommendations: Provide specific, actionable feedback with implementation examples
+- [ ] Quality assurance verification: Confirm task meets framework completeness and clarity requirements
+- [ ] Integration readiness assessment: Verify task capability for framework operation and agent reference
+- [ ] Documentation completeness review: Ensure all sections populated with actionable, comprehensive content
