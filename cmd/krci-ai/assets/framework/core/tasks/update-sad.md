@@ -21,7 +21,7 @@ Dependencies:
 - ./.krci-ai/data/common/sdlc-framework.md
 - ./.krci-ai/templates/architecture-review.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

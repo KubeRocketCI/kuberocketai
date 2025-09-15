@@ -20,7 +20,7 @@ Dependencies:
 - ./.krci-ai/data/prioritization-frameworks.md
 - ./.krci-ai/templates/story.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

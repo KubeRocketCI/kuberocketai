@@ -33,7 +33,7 @@ Dependencies:
 - ./.krci-ai/templates/pitch-deck-template.md
 - /docs/prd/prd.md (primary source for product information)
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing. If PRD is incomplete or missing sections, proceed with available information and gather missing details through user interaction.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing. If PRD is incomplete or missing sections, proceed with available information and gather missing details through user interaction.
 
 ## Instructions
 

@@ -20,7 +20,7 @@ Dependencies:
 - ./.krci-ai/templates/story.md
 - ./.krci-ai/data/common/sdlc-framework.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 ## Instructions
 
