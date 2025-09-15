@@ -23,6 +23,7 @@ import (
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/discovery"
 )
 
 const (
@@ -137,8 +138,18 @@ func runSelectiveInstallation(_ *cobra.Command, agentFlag string, ideFlag string
 	// Start selective installation process
 	output.PrintProgress(fmt.Sprintf("Installing selected agents: %v", agentNames))
 
+	projectRoot, err := discovery.GetProjectRoot()
+	if err != nil {
+		errorHandler.HandleError(err, "Failed to get project root")
+		return
+	}
+
 	// Create installer and run selective installation
-	installer := assets.NewInstaller(".", GetEmbeddedAssets())
+	installer := assets.NewInstaller(
+		projectRoot,
+		GetEmbeddedAssets(),
+		assets.NewEmbeddedDiscovery(GetEmbeddedAssets(), assets.EmbeddedPrefix),
+	)
 	if err := installer.InstallSelective(agentNames); err != nil {
 		errorHandler.HandleError(err, "Failed to install selected agents")
 		return
@@ -169,8 +180,18 @@ func runFullInstallation(cmd *cobra.Command, ideFlag string, output *cli.OutputH
 		output.PrintInfo(fmt.Sprintf("IDE integration: %s", ideFlag))
 	}
 
+	projectRoot, err := discovery.GetProjectRoot()
+	if err != nil {
+		errorHandler.HandleError(err, "Failed to get project root")
+		return
+	}
+
 	// Create installer
-	installer := assets.NewInstaller(".", GetEmbeddedAssets())
+	installer := assets.NewInstaller(
+		projectRoot,
+		GetEmbeddedAssets(),
+		assets.NewEmbeddedDiscovery(GetEmbeddedAssets(), assets.EmbeddedPrefix),
+	)
 
 	// Check installation status and force flag
 	if !handleInstallationCheck(installer, forceFlag, output) {
@@ -227,7 +248,7 @@ func performCoreInstallation(installer *assets.Installer, output *cli.OutputHand
 func showInstallationSuccess(installer *assets.Installer, ideFlag string, output *cli.OutputHandler) {
 	// Success
 	output.PrintSuccess("Framework installation completed successfully!")
-	output.PrintInfo("Framework components installed to: " + installer.GetInstallationPath())
+	output.PrintInfo("Framework components installed to: " + installer.GetFrameworkPath())
 
 	// Show next steps
 	output.PrintInfo("\nNext steps:")

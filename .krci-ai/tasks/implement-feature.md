@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - coding-standards.md
+    - best-practices.md
+---
+
 # Task: Implement Feature
 
 ## Description

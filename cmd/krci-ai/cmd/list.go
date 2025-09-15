@@ -16,12 +16,16 @@ limitations under the License.
 package cmd
 
 import (
+	"context"
 	"fmt"
+	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/discovery"
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 // listCmd represents the list command
@@ -60,6 +64,7 @@ Examples:
   krci-ai list agents -v       # List agents with dependency table showing tasks, templates, and data`,
 	Run: func(cmd *cobra.Command, args []string) {
 		errorHandler := cli.NewErrorHandler()
+		outputHandler := cli.NewOutputHandler()
 
 		// Check verbose flag
 		verbose, err := cmd.Flags().GetBool("verbose")
@@ -68,72 +73,112 @@ Examples:
 			return
 		}
 
+		projectRoot, err := discovery.GetProjectRoot()
+		if err != nil {
+			errorHandler.HandleError(err, "Failed to get project root")
+			return
+		}
+
 		// Create discovery service
-		discovery := assets.NewDiscovery(".", GetEmbeddedAssets())
+		discovery := assets.NewDiscovery(assets.GetKrciPath(projectRoot))
 
 		// Discover agents
-		agents, err := discovery.DiscoverAgents()
+		agents, err := discovery.GetAgents(context.Background())
 		if err != nil {
-			// Check if it's a "not installed" error
-			if err.Error() == "framework not installed in current directory - run 'krci-ai install'" {
-				output.PrintWarning("Framework not installed in current directory")
-				output.PrintInfo("Run 'krci-ai install' to install the framework and then try again")
-				return
-			}
 			errorHandler.HandleError(err, "Failed to discover agents")
 			return
 		}
 
 		// Display results
 		if len(agents) == 0 {
-			output.PrintWarning("No agents found")
-			output.PrintInfo("The framework is installed but no agent files were found")
+			outputHandler.PrintWarning("No agents found")
+			outputHandler.PrintInfo("The framework is installed but no agent files were found")
 			return
 		}
 
 		// Print header
-		output.PrintSuccess(fmt.Sprintf("Found %d agent(s):", len(agents)))
-		fmt.Println()
+		outputHandler.PrintSuccess(fmt.Sprintf("Found %d agent(s):", len(agents)))
+		outputHandler.Newline()
 
 		if verbose {
 			// Verbose output with dependency table
-			agentDeps, err := discovery.DiscoverAgentsWithDependencies()
-			if err != nil {
-				output.PrintWarning("Could not load dependency information, showing basic details only")
-				output.PrintError(fmt.Sprintf("Dependency error: %v", err))
-				fmt.Println()
 
-				// Fallback to basic information
-				for _, agent := range agents {
-					fmt.Printf("Agent: %s\n", agent.Name)
-					fmt.Printf("  Role: %s\n", agent.Role)
-					fmt.Printf("  Description: %s\n", agent.Description)
-					if agent.Goal != "" {
-						fmt.Printf("  Goal: %s\n", agent.Goal)
-					}
-					fmt.Printf("  File: %s\n", agent.FilePath)
-					fmt.Println()
-				}
-			} else {
-				// Show dependency table
-				output.PrintInfo("Agent Dependencies:")
-				fmt.Println()
-				table := discovery.FormatAgentDependencyTable(agentDeps)
-				fmt.Print(table)
-			}
+			// Show dependency table
+			outputHandler.PrintInfo("Agent Dependencies:")
+			outputHandler.Newline()
+			table := formatAgentDependencyTable(agents)
+			fmt.Print(table)
 		} else {
 			// Simple table format
-			fmt.Printf("%-15s | %-25s | %s\n", "Name", "Role", "Description")
-			fmt.Printf("%-15s | %-25s | %s\n", "---------------", "-------------------------", "-----------------------------------")
-			for _, agent := range agents {
-				summary := discovery.FormatAgentSummary(agent)
-				fmt.Println(summary)
+			summary := formatAgentSummary(agents)
+			fmt.Print(summary)
+		}
+
+		outputHandler.Newline()
+		outputHandler.PrintInfo("Use 'krci-ai list agents -v' for dependency table showing tasks, templates, and data")
+	},
+}
+
+// formatAgentSummary formats agents for simple table display using lipgloss
+func formatAgentSummary(agents []assets.Agent) string {
+	rows := make([][]string, 0, len(agents))
+
+	for _, agent := range agents {
+		description := cli.TruncateDescription(agent.Description)
+		rows = append(rows, []string{agent.Name, agent.Role, description})
+	}
+
+	t := cli.CreateStyledTable().
+		Headers("NAME", "ROLE", "DESCRIPTION").
+		Rows(rows...)
+
+	return t.String()
+}
+
+// formatAgentDependencyTable creates a styled table showing agent dependencies
+func formatAgentDependencyTable(agents []assets.Agent) string {
+	rows := make([][]string, 0, len(agents))
+
+	for _, agent := range agents {
+		taskNames := make([]string, 0, len(agent.Tasks))
+		templateNames := make([]string, 0)
+		dataFileNames := make([]string, 0)
+
+		for _, task := range agent.Tasks {
+			taskNames = append(taskNames, task.Name)
+
+			for _, template := range task.Dependencies.Templates {
+				templateNames = append(templateNames, template.Name)
+			}
+
+			for _, dataFile := range task.Dependencies.DataFiles {
+				dataFileNames = append(dataFileNames, dataFile.Name)
 			}
 		}
 
-		fmt.Println()
-		output.PrintInfo("Use 'krci-ai list agents -v' for dependency table showing tasks, templates, and data")
-	},
+		tasksStr := strings.Join(taskNames, "\n")
+		if tasksStr == "" {
+			tasksStr = cli.NoneValue
+		}
+
+		templatesStr := strings.Join(utils.DeduplicateStrings(templateNames), "\n")
+		if templatesStr == "" {
+			templatesStr = cli.NoneValue
+		}
+
+		dataFilesStr := strings.Join(utils.DeduplicateStrings(dataFileNames), "\n")
+		if dataFilesStr == "" {
+			dataFilesStr = cli.NoneValue
+		}
+
+		rows = append(rows, []string{agent.Name, tasksStr, templatesStr, dataFilesStr})
+	}
+
+	t := cli.CreateStyledTable().
+		Headers("AGENT", "TASKS", "TEMPLATES", "DATA FILES").
+		Rows(rows...)
+
+	return t.String()
 }
 
 func init() {

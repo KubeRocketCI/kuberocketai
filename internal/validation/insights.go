@@ -16,12 +16,9 @@ limitations under the License.
 package validation
 
 import (
+	"context"
 	"fmt"
-	"os"
-	"path/filepath"
 	"strings"
-
-	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 // FrameworkInsights provides component statistics and relationship analysis
@@ -42,11 +39,10 @@ type ComponentCounts struct {
 
 // ComponentRelationship represents agent → task → template/data flows
 type ComponentRelationship struct {
-	Agent      string   `json:"agent"`
-	Tasks      []string `json:"tasks"`
-	LocalTasks []string `json:"local_tasks"` // Local tasks from .krci-ai/local/tasks/
-	Templates  []string `json:"templates"`
-	DataFiles  []string `json:"data_files"`
+	Agent     string   `json:"agent"`
+	Tasks     []string `json:"tasks"`
+	Templates []string `json:"templates"`
+	DataFiles []string `json:"data_files"`
 }
 
 // UsageStatistics provides insights about component usage patterns
@@ -58,180 +54,70 @@ type UsageStatistics struct {
 }
 
 // generateFrameworkInsights analyzes the framework and generates insights
-func (a *FrameworkAnalyzer) generateFrameworkInsights(frameworkDir string) (*FrameworkInsights, error) {
+func (a *FrameworkAnalyzer) generateFrameworkInsights() (*FrameworkInsights, error) {
 	insights := &FrameworkInsights{
 		ComponentCounts: ComponentCounts{},
 		Relationships:   make([]ComponentRelationship, 0),
 		UsageStatistics: UsageStatistics{},
 	}
 
-	// Step 1: Count components
-	if err := a.countComponents(frameworkDir, &insights.ComponentCounts); err != nil {
+	// Step 1: Get agents and analyze components
+	if err := a.analyzeComponents(insights); err != nil {
 		return nil, err
 	}
 
-	// Step 2: Analyze relationships
-	if err := a.analyzeRelationships(frameworkDir, insights); err != nil {
-		return nil, err
-	}
-
-	// Step 3: Generate usage statistics
+	// Step 2: Generate usage statistics
 	a.generateUsageStatistics(insights)
 
 	return insights, nil
 }
 
-// countComponents counts the number of each component type
-func (a *FrameworkAnalyzer) countComponents(frameworkDir string, counts *ComponentCounts) error {
-	// Count agents
-	agentsDir := filepath.Join(frameworkDir, "agents")
-	if _, err := os.Stat(agentsDir); err == nil {
-		agentFiles, err := filepath.Glob(filepath.Join(agentsDir, "*.y*ml"))
-		if err != nil {
-			return err
-		}
-		counts.Agents = len(agentFiles)
+// analyzeComponents gets agents and builds component counts and relationships
+func (a *FrameworkAnalyzer) analyzeComponents(insights *FrameworkInsights) error {
+	// Get all agents from discovery
+	agents, err := a.discovery.GetAgents(context.Background())
+	if err != nil {
+		return fmt.Errorf("failed to get agents: %w", err)
 	}
 
-	// Count tasks (both standard and local)
-	tasksDir := filepath.Join(frameworkDir, "tasks")
-	if _, err := os.Stat(tasksDir); err == nil {
-		taskFiles, err := filepath.Glob(filepath.Join(tasksDir, "*.md"))
-		if err != nil {
-			return err
+	// Track unique components using sets
+	uniqueTemplates := make(map[string]struct{})
+	uniqueDataFiles := make(map[string]struct{})
+	uniqueTasks := make(map[string]struct{})
+
+	// Build relationships and count components
+	for _, agent := range agents {
+		rel := ComponentRelationship{
+			Agent:     agent.ShortName,
+			Tasks:     make([]string, 0, len(agent.Tasks)),
+			Templates: agent.GetAllTemplatesPaths(),
+			DataFiles: agent.GetAllDataFilesPaths(),
 		}
-		counts.Tasks += len(taskFiles)
+
+		// Collect task names
+		for _, task := range agent.Tasks {
+			rel.Tasks = append(rel.Tasks, task.Name)
+			uniqueTasks[task.Name] = struct{}{}
+		}
+
+		// Track unique templates and data files
+		for _, template := range rel.Templates {
+			uniqueTemplates[template] = struct{}{}
+		}
+		for _, dataFile := range rel.DataFiles {
+			uniqueDataFiles[dataFile] = struct{}{}
+		}
+
+		insights.Relationships = append(insights.Relationships, rel)
 	}
 
-	// Count local tasks
-	localTasksDir := filepath.Join(frameworkDir, "local", "tasks")
-	if _, err := os.Stat(localTasksDir); err == nil {
-		localTaskFiles, err := filepath.Glob(filepath.Join(localTasksDir, "*.md"))
-		if err != nil {
-			return err
-		}
-		counts.Tasks += len(localTaskFiles)
-	}
-
-	// Count templates
-	templatesPath := filepath.Join(frameworkDir, templatesDir)
-	if _, err := os.Stat(templatesPath); err == nil {
-		templateFiles, err := filepath.Glob(filepath.Join(templatesPath, "*.md"))
-		if err != nil {
-			return err
-		}
-		counts.Templates = len(templateFiles)
-	}
-
-	// Count data files
-	dataPath := filepath.Join(frameworkDir, dataDir)
-	if _, err := os.Stat(dataPath); err == nil {
-		dataFiles, err := filepath.Glob(filepath.Join(dataPath, "*.*"))
-		if err != nil {
-			return err
-		}
-		counts.Data = len(dataFiles)
-	}
+	// Set component counts
+	insights.ComponentCounts.Agents = len(agents)
+	insights.ComponentCounts.Tasks = len(uniqueTasks)
+	insights.ComponentCounts.Templates = len(uniqueTemplates)
+	insights.ComponentCounts.Data = len(uniqueDataFiles)
 
 	return nil
-}
-
-// analyzeRelationships analyzes agent → task → template/data relationships
-func (a *FrameworkAnalyzer) analyzeRelationships(frameworkDir string, insights *FrameworkInsights) error {
-	agentsDir := filepath.Join(frameworkDir, "agents")
-	if _, err := os.Stat(agentsDir); os.IsNotExist(err) {
-		return nil
-	}
-
-	agentFiles, err := filepath.Glob(filepath.Join(agentsDir, "*.y*ml"))
-	if err != nil {
-		return err
-	}
-
-	for _, agentFile := range agentFiles {
-		agentName := strings.TrimSuffix(filepath.Base(agentFile), filepath.Ext(agentFile))
-
-		relationship := ComponentRelationship{
-			Agent:      agentName,
-			Tasks:      make([]string, 0),
-			LocalTasks: make([]string, 0),
-			Templates:  make([]string, 0),
-			DataFiles:  make([]string, 0),
-		}
-
-		// Get tasks referenced by this agent
-		taskRefs, err := a.extractYAMLTasks(agentFile)
-		if err != nil {
-			continue
-		}
-
-		for _, taskRef := range taskRefs {
-			taskName := filepath.Base(taskRef)
-
-			// Extract relative path from task reference (remove ./.krci-ai/tasks/ prefix)
-			var taskRelativePath string
-			if strings.HasPrefix(taskRef, "./.krci-ai/tasks/") {
-				taskRelativePath = strings.TrimPrefix(taskRef, "./.krci-ai/tasks/")
-			} else if strings.HasPrefix(taskRef, "./.krci-ai/local/tasks/") {
-				taskRelativePath = strings.TrimPrefix(taskRef, "./.krci-ai/local/tasks/")
-			} else {
-				taskRelativePath = taskName // fallback to filename
-			}
-
-			// Categorize as local or standard task
-			if strings.Contains(taskRef, "/local/tasks/") {
-				relationship.LocalTasks = append(relationship.LocalTasks, taskRelativePath)
-			} else {
-				relationship.Tasks = append(relationship.Tasks, taskRelativePath)
-			}
-
-			// For each task, find what templates/data it references
-			cleanPath := strings.TrimPrefix(taskRef, "./")
-			taskPath := filepath.Join(a.baseDir, cleanPath)
-
-			if _, err := os.Stat(taskPath); err == nil {
-				templates, dataFiles := a.getTaskReferences(taskPath)
-				relationship.Templates = append(relationship.Templates, templates...)
-				relationship.DataFiles = append(relationship.DataFiles, dataFiles...)
-			}
-		}
-
-		// Remove duplicates using utils package
-		relationship.Templates = utils.DeduplicateStrings(relationship.Templates)
-		relationship.DataFiles = utils.DeduplicateStrings(relationship.DataFiles)
-
-		insights.Relationships = append(insights.Relationships, relationship)
-	}
-
-	return nil
-}
-
-// getTaskReferences extracts template and data references from a task file
-func (a *FrameworkAnalyzer) getTaskReferences(taskFile string) ([]string, []string) {
-	var templates, dataFiles []string
-
-	links, err := a.extractMarkdownLinks(taskFile)
-	if err != nil {
-		return templates, dataFiles
-	}
-
-	for _, link := range links {
-		if strings.Contains(link, templatesLinkPattern) {
-			// Extract relative path from templates/ onward, preserving subdirectories
-			if idx := strings.Index(link, templatesLinkPattern); idx >= 0 {
-				relativePath := link[idx+len(templatesLinkPattern):]
-				templates = append(templates, relativePath)
-			}
-		} else if strings.Contains(link, dataLinkPattern) {
-			// Extract relative path from data/ onward, preserving subdirectories
-			if idx := strings.Index(link, dataLinkPattern); idx >= 0 {
-				relativePath := link[idx+len(dataLinkPattern):]
-				dataFiles = append(dataFiles, relativePath)
-			}
-		}
-	}
-
-	return templates, dataFiles
 }
 
 // generateUsageStatistics analyzes usage patterns to identify most/least used components
@@ -291,16 +177,11 @@ func (insights *FrameworkInsights) FormatInsights() string {
 		result.WriteString("\n💡 FRAMEWORK INSIGHTS:\n")
 
 		for _, rel := range insights.Relationships {
-			totalTasks := len(rel.Tasks) + len(rel.LocalTasks)
+			totalTasks := len(rel.Tasks)
 			if totalTasks > 0 {
 				templateCount := len(rel.Templates)
-				if len(rel.LocalTasks) > 0 {
-					result.WriteString(fmt.Sprintf("   • %s → %d tasks (including %d local) → %d templates\n",
-						rel.Agent, totalTasks, len(rel.LocalTasks), templateCount))
-				} else {
-					result.WriteString(fmt.Sprintf("   • %s → %d tasks → %d templates\n",
-						rel.Agent, totalTasks, templateCount))
-				}
+				result.WriteString(fmt.Sprintf("   • %s → %d tasks → %d templates\n",
+					rel.Agent, totalTasks, templateCount))
 			}
 		}
 
