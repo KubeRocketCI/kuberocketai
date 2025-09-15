@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+  templates:
+    - story.md
+---
+
 # Task: Plan Story Implementation
 
 ## Description

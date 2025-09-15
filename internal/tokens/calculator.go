@@ -17,11 +17,9 @@ package tokens
 
 import (
 	"context"
-	"embed"
 	"fmt"
 	"os"
 	"path/filepath"
-	"slices"
 	"strings"
 	"sync"
 
@@ -33,81 +31,97 @@ import (
 
 // DiscoveryInterface defines the interface for asset discovery operations
 type DiscoveryInterface interface {
-	DiscoverAgentWithDependencies(shortName string) (assets.AgentDependencyInfo, error)
-	DiscoverAgentsWithDependencies(agentNames ...string) ([]assets.AgentDependencyInfo, error)
-	GetAgentByShortName(shortName string) (*assets.AgentInfo, error)
+	GetAgent(ctx context.Context, shortName string) (*assets.Agent, error)
+	GetAgents(ctx context.Context) ([]assets.Agent, error)
+	GetAgentsByNames(ctx context.Context, names []string) ([]assets.Agent, error)
 }
 
 // Calculator provides high-level token calculation functionality
 type Calculator struct {
-	engine    *Engine
-	discovery DiscoveryInterface
-	targetDir string
+	engine     *Engine
+	discovery  DiscoveryInterface
+	projectDir string
 }
 
 // NewCalculator creates a new token calculator with GPT-4 tokenization
 // This is the original constructor for backward compatibility
-func NewCalculator(targetDir string, embeddedAssets embed.FS) (*Calculator, error) {
+func NewCalculator(projectDir string) (*Calculator, error) {
 	engine, err := NewDefaultEngine()
 	if err != nil {
 		return nil, fmt.Errorf("failed to create GPT-4 calculator: %w", err)
 	}
 
-	discovery := assets.NewDiscovery(targetDir, embeddedAssets)
+	discovery := assets.NewDiscovery(projectDir)
 
-	return NewCalculatorWithDependencies(engine, discovery, targetDir), nil
+	return NewCalculatorWithDependencies(engine, discovery, projectDir), nil
 }
 
 // NewCalculatorWithDependencies creates a new calculator with injected dependencies
 // This is the preferred constructor for testing and when you have custom dependencies
-func NewCalculatorWithDependencies(engine *Engine, discovery DiscoveryInterface, targetDir string) *Calculator {
+func NewCalculatorWithDependencies(engine *Engine, discovery DiscoveryInterface, projectDir string) *Calculator {
 	return &Calculator{
-		engine:    engine,
-		discovery: discovery,
-		targetDir: targetDir,
+		engine:     engine,
+		discovery:  discovery,
+		projectDir: projectDir,
 	}
 }
 
 // CalculateAgentTokens calculates token information for a specific agent
 func (c *Calculator) CalculateAgentTokens(ctx context.Context, agentShortName string) (*AgentTokenInfo, error) {
 	// Get agent information with dependencies
-	agentDeps, err := c.discovery.DiscoverAgentWithDependencies(agentShortName)
+	agent, err := c.discovery.GetAgent(ctx, agentShortName)
 	if err != nil {
 		return nil, fmt.Errorf("failed to discover agents: %w", err)
 	}
 
-	return c.calculateSingleAgentTokens(ctx, agentDeps)
+	return c.calculateSingleAgentTokens(ctx, agent)
 }
 
 // CalculateAllTokens calculates token information for the entire project
 func (c *Calculator) CalculateAllTokens(ctx context.Context) (*ProjectTokenInfo, error) {
 	// Get all agents with dependencies
-	agentDeps, err := c.discovery.DiscoverAgentsWithDependencies()
+	agents, err := c.discovery.GetAgents(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to discover agents: %w", err)
 	}
 
 	projectInfo := &ProjectTokenInfo{
-		Agents:    make([]AgentTokenInfo, 0, len(agentDeps)),
+		Agents:    make([]AgentTokenInfo, 0, len(agents)),
 		Breakdown: TokenBreakdown{},
 	}
 
 	// Use goroutines for parallel processing
 	g, ctx := errgroup.WithContext(ctx)
-	results := make(chan AgentTokenInfo, len(agentDeps))
 
-	// Process each agent concurrently
-	for _, agent := range agentDeps {
-		g.Go(func() error {
-			agentInfo, err := c.calculateSingleAgentTokens(ctx, agent)
-			if err != nil {
-				return fmt.Errorf("failed to calculate tokens for agent %s: %w", agent.Name, err)
-			}
-
+	agentsC := make(chan assets.Agent)
+	g.Go(func() error {
+		defer close(agentsC)
+		for _, agent := range agents {
 			select {
-			case results <- *agentInfo:
+			case agentsC <- agent:
 			case <-ctx.Done():
 				return ctx.Err()
+			}
+		}
+
+		return nil
+	})
+
+	results := make(chan AgentTokenInfo)
+	workers := 10
+	for range workers {
+		g.Go(func() error {
+			for agent := range agentsC {
+				agentInfo, err := c.calculateSingleAgentTokens(ctx, &agent)
+				if err != nil {
+					return fmt.Errorf("failed to calculate tokens for agent %s: %w", agent.Name, err)
+				}
+
+				select {
+				case results <- *agentInfo:
+				case <-ctx.Done():
+					return ctx.Err()
+				}
 			}
 
 			return nil
@@ -162,7 +176,7 @@ func (c *Calculator) updateProjectBreakdown(breakdown *TokenBreakdown, result Ag
 }
 
 // calculateSingleAgentTokens calculates tokens for a single agent and its dependencies
-func (c *Calculator) calculateSingleAgentTokens(ctx context.Context, agent assets.AgentDependencyInfo) (*AgentTokenInfo, error) {
+func (c *Calculator) calculateSingleAgentTokens(ctx context.Context, agent *assets.Agent) (*AgentTokenInfo, error) {
 	agentInfo := &AgentTokenInfo{
 		AgentName:      agent.Name,
 		AgentShortName: agent.ShortName,
@@ -185,7 +199,7 @@ func (c *Calculator) calculateSingleAgentTokens(ctx context.Context, agent asset
 	agentInfo.TotalTokens += agentAsset.Tokens
 
 	// Calculate tokens for task dependencies
-	agentInfo.Dependencies.Tasks, err = c.calculateAssetTokens(ctx, agent.Tasks, assets.TasksDir)
+	agentInfo.Dependencies.Tasks, err = c.calculateAssetTokens(ctx, agent.GetAllTasksPaths(), assets.TasksDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to calculate task tokens: %w", err)
 	}
@@ -195,7 +209,7 @@ func (c *Calculator) calculateSingleAgentTokens(ctx context.Context, agent asset
 	}
 
 	// Calculate tokens for template dependencies
-	agentInfo.Dependencies.Templates, err = c.calculateAssetTokens(ctx, agent.Templates, assets.TemplatesDir)
+	agentInfo.Dependencies.Templates, err = c.calculateAssetTokens(ctx, agent.GetAllTemplatesPaths(), assets.TemplatesDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to calculate template tokens: %w", err)
 	}
@@ -205,7 +219,7 @@ func (c *Calculator) calculateSingleAgentTokens(ctx context.Context, agent asset
 	}
 
 	// Calculate tokens for data file dependencies
-	agentInfo.Dependencies.DataFiles, err = c.calculateAssetTokens(ctx, agent.DataFiles, assets.DataDir)
+	agentInfo.Dependencies.DataFiles, err = c.calculateAssetTokens(ctx, agent.GetAllDataFilesPaths(), assets.DataDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to calculate data file tokens: %w", err)
 	}
@@ -223,57 +237,49 @@ func (c *Calculator) calculateAssetTokens(ctx context.Context, files []string, a
 		return []AssetTokenInfo{}, nil
 	}
 
-	var mu sync.Mutex
 	g, ctx := errgroup.WithContext(ctx)
+	filePaths := make(chan string)
 
-	results := make([]AssetTokenInfo, 0, len(files))
-
-	err := filepath.Walk(filepath.Join(c.targetDir, assets.KrciAIDir, assetType), func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return fmt.Errorf("failed to walk %s: %w", path, err)
-		}
-
-		if info.IsDir() {
-			return nil
-		}
-
-		// Check if this file matches any of the expected files (handle subdirectories)
-		relPath, err := filepath.Rel(filepath.Join(c.targetDir, assets.KrciAIDir, assetType), path)
-		if err != nil {
-			return nil
-		}
-
-		if !slices.Contains(files, relPath) {
-			return nil
-		}
-
-		g.Go(func() error {
-			content, err := os.ReadFile(path)
-			if err != nil {
-				return fmt.Errorf("failed to read %s file %s: %w", assetType, path, err)
-			}
-
-			assetInfo, err := c.engine.CalculateAssetTokens(ctx, path, assetType, string(content))
-			if err != nil {
-				return err
-			}
-
-			mu.Lock()
-			results = append(results, assetInfo)
-			mu.Unlock()
-
-			if ctx.Err() != nil {
+	g.Go(func() error {
+		defer close(filePaths)
+		for _, path := range files {
+			select {
+			case filePaths <- path:
+			case <-ctx.Done():
 				return ctx.Err()
 			}
-
-			return nil
-		})
+		}
 
 		return nil
 	})
 
-	if err != nil {
-		return nil, fmt.Errorf("failed to walk directory: %w", err)
+	mu := sync.Mutex{}
+	results := make([]AssetTokenInfo, 0, len(files))
+	workers := 10
+	for range workers {
+		g.Go(func() error {
+			for path := range filePaths {
+				content, err := os.ReadFile(path)
+				if err != nil {
+					return fmt.Errorf("failed to read %s file %s: %w", assetType, path, err)
+				}
+
+				assetInfo, err := c.engine.CalculateAssetTokens(ctx, path, assetType, string(content))
+				if err != nil {
+					return err
+				}
+
+				mu.Lock()
+				results = append(results, assetInfo)
+				mu.Unlock()
+
+				if ctx.Err() != nil {
+					return ctx.Err()
+				}
+			}
+
+			return nil
+		})
 	}
 
 	// Wait for all goroutines to complete
@@ -284,20 +290,10 @@ func (c *Calculator) calculateAssetTokens(ctx context.Context, files []string, a
 	return results, nil
 }
 
-// ValidateAgentExists checks if an agent with the given name exists
-func (c *Calculator) ValidateAgentExists(agentName string) error {
-	_, err := c.discovery.GetAgentByShortName(agentName)
-	if err != nil {
-		return fmt.Errorf("agent validation failed: %w", err)
-	}
-
-	return nil
-}
-
 // CalculateBundleTokens calculates tokens for an actual bundle file
 func (c *Calculator) CalculateBundleTokens(ctx context.Context, agents []string) (*BundleTokenInfo, error) {
-	bundleFilename := bundle.GenerateBundleFilename("", agents, "")
-	bundlePath := filepath.Join(c.targetDir, assets.KrciAIDir, assets.BundleDir, bundleFilename)
+	bundleFilename := bundle.GenerateBundleFilename("", agents)
+	bundlePath := filepath.Join(c.projectDir, assets.KrciAIDir, assets.BundleDir, bundleFilename)
 
 	// Read bundle file content
 	bundleContent, err := os.ReadFile(bundlePath)

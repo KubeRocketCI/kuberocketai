@@ -16,14 +16,16 @@ limitations under the License.
 package assets
 
 import (
+	"context"
 	"embed"
 	"fmt"
 	"io/fs"
+	"maps"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"gopkg.in/yaml.v3"
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 const (
@@ -36,320 +38,188 @@ const (
 
 	// Internal directory structure (unexported)
 	agentsDir      = "agents"
-	embeddedPrefix = "assets/framework/core"
-
-	// IDE integration directories
-	cursorRulesDir    = ".cursor/rules/krci-ai"
-	claudeCommandsDir = ".claude/commands/krci-ai"
-	vscodeModesDir    = ".github/chatmodes"
-	windsurfRulesDir  = ".windsurf/rules"
+	EmbeddedPrefix = "assets/framework/core"
 
 	// File extensions
 	mdExtension = ".md"
 
 	// GitHub tools configuration
 	GitHubToolsList = "['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']"
+
+	DefaultAgentIcon = "🤖"
+
+	// File permissions
+	DirectoryPermissions = 0755 // Read, write, execute for owner; read, execute for group and others
+	FilePermissions      = 0644 // Read, write for owner; read for group and others
 )
 
-// AgentData represents the parsed YAML structure for agent files
-type AgentData struct {
-	Agent struct {
-		Identity struct {
-			Role string `yaml:"role"`
-		} `yaml:"identity"`
-	} `yaml:"agent"`
-}
-
-// IDEIntegration defines the interface for IDE-specific integrations
-type IDEIntegration interface {
-	GetDirectoryPath() string
-	GetFileExtension() string
-	GenerateContent(agentName, role string, yamlContent []byte) string
-}
-
-// CursorIntegration implements IDEIntegration for Cursor IDE
-type CursorIntegration struct {
-	targetDir string
-}
-
-func (c *CursorIntegration) GetDirectoryPath() string {
-	return filepath.Join(c.targetDir, cursorRulesDir)
-}
-
-func (c *CursorIntegration) GetFileExtension() string {
-	return ".mdc"
-}
-
-func (c *CursorIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
-	// Simple title case for agent name (capitalize first letter)
-	titleCaseAgentName := strings.ToUpper(agentName[:1]) + agentName[1:]
-
-	return fmt.Sprintf(`---
-description:
-globs: []
-alwaysApply: false
----
-
-# %s Agent Activation
-
-CRITICAL: Carefully read the YAML agent definition below. Immediately activate the %s persona by following the activation instructions, and remain in this persona until you receive an explicit command to exit.
-
-`+"```yaml\n%s```\n",
-		titleCaseAgentName,
-		role,
-		string(yamlContent))
-}
-
-// ClaudeIntegration implements IDEIntegration for Claude Code
-type ClaudeIntegration struct {
-	targetDir string
-}
-
-func (c *ClaudeIntegration) GetDirectoryPath() string {
-	return filepath.Join(c.targetDir, claudeCommandsDir)
-}
-
-func (c *ClaudeIntegration) GetFileExtension() string {
-	return mdExtension
-}
-
-func (c *ClaudeIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
-	return fmt.Sprintf(`# /%s Command
-
-CRITICAL: Carefully read the YAML agent definition below. Immediately activate the %s persona by following the activation instructions, and remain in this persona until you receive an explicit command to exit.
-
-`+"```yaml\n%s```\n",
-		agentName,
-		role,
-		string(yamlContent))
-}
-
-// VSCodeIntegration implements IDEIntegration for VS Code
-type VSCodeIntegration struct {
-	targetDir string
-}
-
-func (v *VSCodeIntegration) GetDirectoryPath() string {
-	return filepath.Join(v.targetDir, vscodeModesDir)
-}
-
-func (v *VSCodeIntegration) GetFileExtension() string {
-	return ".chatmode.md"
-}
-
-func (v *VSCodeIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
-	return fmt.Sprintf(`---
-description: Activate %s role for specialized development assistance
-tools: %s
----
-
-# %s Agent Chat Mode
-
-CRITICAL: Carefully read the YAML agent definition below. Immediately activate the %s persona by following the activation instructions, and remain in this persona until you receive an explicit command to exit.
-
-`+"```yaml\n%s```\n",
-		role,
-		GitHubToolsList,
-		role,
-		role,
-		string(yamlContent))
-}
-
-// WindsurfIntegration implements IDEIntegration for Windsurf IDE
-type WindsurfIntegration struct {
-	targetDir string
-}
-
-func (w *WindsurfIntegration) GetDirectoryPath() string {
-	return filepath.Join(w.targetDir, windsurfRulesDir)
-}
-
-func (w *WindsurfIntegration) GetFileExtension() string {
-	return mdExtension
-}
-
-func (w *WindsurfIntegration) GenerateContent(agentName, role string, yamlContent []byte) string {
-	return fmt.Sprintf(`# %s Agent Rule
-
-Activate the %s persona by following the agent definition below. This rule provides specialized development assistance for %s-related tasks.
-
-## Agent Definition
-
-`+"```yaml\n%s```\n",
-		role,
-		role,
-		strings.ToLower(role),
-		string(yamlContent))
+type IstallerDiscovery interface {
+	GetAgents(ctx context.Context) ([]Agent, error)
+	GetAgentsByNames(ctx context.Context, names []string) ([]Agent, error)
 }
 
 // Installer handles installation of framework assets
 type Installer struct {
-	targetDir      string
+	projectDir     string
+	krciPath       string
 	embeddedAssets embed.FS
+	discovery      IstallerDiscovery
 }
 
 // NewInstaller creates a new asset installer
-func NewInstaller(targetDir string, embeddedAssets embed.FS) *Installer {
-	if targetDir == "" {
-		targetDir = "."
-	}
+func NewInstaller(projectDir string, embeddedAssets embed.FS, discovery IstallerDiscovery) *Installer {
 	return &Installer{
-		targetDir:      targetDir,
+		projectDir:     projectDir,
+		krciPath:       GetKrciPath(projectDir),
 		embeddedAssets: embeddedAssets,
+		discovery:      discovery,
 	}
 }
 
 // Install installs framework assets to the target directory
 func (i *Installer) Install() error {
-	krciPath := filepath.Join(i.targetDir, KrciAIDir)
-
-	// Create main .krci-ai directory
-	if err := i.createDirectory(krciPath); err != nil {
-		return fmt.Errorf("failed to create .krci-ai directory: %w", err)
+	agents, err := i.discovery.GetAgents(context.Background())
+	if err != nil {
+		return fmt.Errorf("failed to get agents: %w", err)
 	}
 
-	// Create subdirectories
-	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
-	for _, subdir := range subdirs {
-		dirPath := filepath.Join(krciPath, subdir)
-		if err := i.createDirectory(dirPath); err != nil {
-			return fmt.Errorf("failed to create %s directory: %w", subdir, err)
+	prefix := EmbeddedPrefix + string(filepath.Separator)
+	filesFilter := make(map[string]struct{})
+	for _, agent := range agents {
+		i.addAgentDependencies(agent, filesFilter, prefix)
+	}
+
+	return i.copyEmbeddedDir(filesFilter)
+}
+
+// InstallSelective installs only specified agents and their dependencies using existing bundle logic
+func (i *Installer) InstallSelective(agentNames []string) error {
+	if len(agentNames) == 0 {
+		return fmt.Errorf("no agents specified")
+	}
+
+	agents, err := i.discovery.GetAgentsByNames(context.Background(), agentNames)
+	if err != nil {
+		return fmt.Errorf("failed to get agents: %w", err)
+	}
+
+	if err := i.validateAgentsFound(agents, agentNames); err != nil {
+		return err
+	}
+
+	prefix := EmbeddedPrefix + string(filepath.Separator)
+	filesFilter := make(map[string]struct{})
+	for _, agent := range agents {
+		i.addAgentDependencies(agent, filesFilter, prefix)
+	}
+
+	return i.copyEmbeddedDir(filesFilter)
+}
+
+// validateAgentsFound checks if all requested agents were found
+func (i *Installer) validateAgentsFound(agents []Agent, agentNames []string) error {
+	if len(agents) == len(agentNames) {
+		return nil
+	}
+
+	foundNames := make(map[string]struct{})
+	for _, agent := range agents {
+		foundNames[agent.Name] = struct{}{}
+	}
+
+	var notFound []string
+	for _, name := range agentNames {
+		if _, exists := foundNames[name]; !exists {
+			notFound = append(notFound, name)
 		}
 	}
+	return fmt.Errorf("agents not found: %s", strings.Join(notFound, ", "))
+}
 
-	// Copy embedded assets
-	if err := i.copyEmbeddedAssets(krciPath); err != nil {
-		return fmt.Errorf("failed to copy embedded assets: %w", err)
+// addAgentDependencies adds agent and its dependencies to the files filter
+func (i *Installer) addAgentDependencies(agent Agent, filesFilter map[string]struct{}, prefix string) {
+	trimPrefix := func(path string) string {
+		return strings.TrimPrefix(path, prefix)
 	}
 
-	return nil
+	filesFilter[trimPrefix(agent.FilePath)] = struct{}{}
+	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllDataFilesPaths(), trimPrefix)))
+	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllTemplatesPaths(), trimPrefix)))
+	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllTasksPaths(), trimPrefix)))
+}
+
+// copyEmbeddedDir copies a directory from an embed.FS to the local filesystem.
+// If filesFilter is empty, copies all files. Otherwise, only copies files whose
+// paths (relative to src) are in filesFilter.
+func (i *Installer) copyEmbeddedDir(filesFilter map[string]struct{}) error {
+	return fs.WalkDir(i.embeddedAssets, EmbeddedPrefix, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return fmt.Errorf("failed to walk embedded assets: %w", err)
+		}
+
+		relPath, err := filepath.Rel(EmbeddedPrefix, path)
+		if err != nil {
+			return fmt.Errorf("failed to get relative path for %s: %w", path, err)
+		}
+
+		targetPath := filepath.Join(i.krciPath, relPath)
+
+		if d.IsDir() {
+			// Don’t blindly create the directory yet.
+			// Only create it if we later copy a file inside.
+			return nil
+		}
+
+		// If filter is set, skip files not in filter
+		if len(filesFilter) > 0 {
+			if _, ok := filesFilter[relPath]; !ok {
+				return nil
+			}
+		}
+
+		// Ensure parent directory exists before writing
+		if err = os.MkdirAll(filepath.Dir(targetPath), DirectoryPermissions); err != nil {
+			return fmt.Errorf("failed to create parent directory for %s: %w", targetPath, err)
+		}
+
+		data, err := fs.ReadFile(i.embeddedAssets, path)
+		if err != nil {
+			return fmt.Errorf("failed to read file %s: %w", path, err)
+		}
+
+		if err := os.WriteFile(targetPath, data, FilePermissions); err != nil {
+			return fmt.Errorf("failed to write file %s: %w", targetPath, err)
+		}
+
+		return nil
+	})
 }
 
 // createDirectory creates a directory if it doesn't exist
 func (i *Installer) createDirectory(path string) error {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		return os.MkdirAll(path, 0755)
+		return os.MkdirAll(path, DirectoryPermissions)
 	}
-	return nil
-}
-
-// copyEmbeddedAssets copies all embedded assets to the target directory
-func (i *Installer) copyEmbeddedAssets(krciPath string) error {
-	// Walk through embedded filesystem
-	return fs.WalkDir(i.embeddedAssets, embeddedPrefix, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-
-		// Skip the root directory
-		if path == embeddedPrefix {
-			return nil
-		}
-
-		// Get relative path from embedded prefix
-		relPath, err := filepath.Rel(embeddedPrefix, path)
-		if err != nil {
-			return fmt.Errorf("failed to get relative path: %w", err)
-		}
-
-		// Target path in the .krci-ai directory
-		targetPath := filepath.Join(krciPath, relPath)
-
-		if d.IsDir() {
-			return i.createDirectory(targetPath)
-		}
-
-		// Copy file
-		return i.copyEmbeddedFile(path, targetPath)
-	})
-}
-
-// copyEmbeddedFile copies a single embedded file to the target location
-func (i *Installer) copyEmbeddedFile(embeddedPath, targetPath string) error {
-	// Read embedded file
-	data, err := i.embeddedAssets.ReadFile(embeddedPath)
-	if err != nil {
-		return fmt.Errorf("failed to read embedded file %s: %w", embeddedPath, err)
-	}
-
-	// Ensure target directory exists
-	targetDir := filepath.Dir(targetPath)
-	if err := i.createDirectory(targetDir); err != nil {
-		return fmt.Errorf("failed to create target directory %s: %w", targetDir, err)
-	}
-
-	// Write file to target
-	if err := os.WriteFile(targetPath, data, 0644); err != nil {
-		return fmt.Errorf("failed to write file %s: %w", targetPath, err)
-	}
-
 	return nil
 }
 
 // IsInstalled checks if the framework is properly installed in the target directory
 func (i *Installer) IsInstalled() bool {
-	krciPath := filepath.Join(i.targetDir, KrciAIDir)
-
 	// Check if main directory exists
-	if _, err := os.Stat(krciPath); os.IsNotExist(err) {
+	if _, err := os.Stat(i.krciPath); os.IsNotExist(err) {
 		return false
 	}
 
 	// Check if required subdirectories exist
-	requiredDirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
+	requiredDirs := []string{agentsDir, TasksDir}
 	for _, dir := range requiredDirs {
-		dirPath := filepath.Join(krciPath, dir)
+		dirPath := filepath.Join(i.krciPath, dir)
 		if _, err := os.Stat(dirPath); os.IsNotExist(err) {
 			return false
 		}
 	}
 
 	return true
-}
-
-// GetInstallationPath returns the full path to the .krci-ai directory
-func (i *Installer) GetInstallationPath() string {
-	return filepath.Join(i.targetDir, KrciAIDir)
-}
-
-// GetAgentsPath returns the path to the agents directory
-func (i *Installer) GetAgentsPath() string {
-	return filepath.Join(i.targetDir, KrciAIDir, agentsDir)
-}
-
-// GetTasksPath returns the path to the tasks directory
-func (i *Installer) GetTasksPath() string {
-	return filepath.Join(i.targetDir, KrciAIDir, TasksDir)
-}
-
-// GetTemplatesPath returns the path to the templates directory
-func (i *Installer) GetTemplatesPath() string {
-	return filepath.Join(i.targetDir, KrciAIDir, TemplatesDir)
-}
-
-// GetDataPath returns the path to the data directory
-func (i *Installer) GetDataPath() string {
-	return filepath.Join(i.targetDir, KrciAIDir, DataDir)
-}
-
-// GetCursorRulesPath returns the path to the Cursor rules directory
-func (i *Installer) GetCursorRulesPath() string {
-	return filepath.Join(i.targetDir, cursorRulesDir)
-}
-
-// GetClaudeCommandsPath returns the path to the Claude commands directory
-func (i *Installer) GetClaudeCommandsPath() string {
-	return filepath.Join(i.targetDir, claudeCommandsDir)
-}
-
-// GetVSCodeChatmodesPath returns the path to the VS Code chatmodes directory
-func (i *Installer) GetVSCodeChatmodesPath() string {
-	return filepath.Join(i.targetDir, vscodeModesDir)
-}
-
-// GetWindsurfRulesPath returns the path to the Windsurf rules directory
-func (i *Installer) GetWindsurfRulesPath() string {
-	return filepath.Join(i.targetDir, windsurfRulesDir)
 }
 
 // ValidateInstallation performs basic validation of the installation
@@ -381,227 +251,6 @@ func (i *Installer) ValidateInstallation() error {
 	return nil
 }
 
-// ListInstalledAgents returns a list of installed agent file names
-func (i *Installer) ListInstalledAgents() ([]string, error) {
-	if !i.IsInstalled() {
-		return nil, fmt.Errorf("framework not installed")
-	}
-
-	agentsPath := i.GetAgentsPath()
-	agentFiles, err := filepath.Glob(filepath.Join(agentsPath, "*.yaml"))
-	if err != nil {
-		return nil, fmt.Errorf("failed to list agent files: %w", err)
-	}
-
-	var agents []string
-	for _, file := range agentFiles {
-		agentName := strings.TrimSuffix(filepath.Base(file), ".yaml")
-		agents = append(agents, agentName)
-	}
-
-	return agents, nil
-}
-
-// installIDEIntegration is a generic method for installing IDE integrations
-func (i *Installer) installIDEIntegration(integration IDEIntegration, ideName string) error {
-	// Create IDE-specific directory
-	integrationPath := integration.GetDirectoryPath()
-	if err := i.createDirectory(integrationPath); err != nil {
-		return fmt.Errorf("failed to create %s directory: %w", ideName, err)
-	}
-
-	// Get list of agent files
-	agentsPath := i.GetAgentsPath()
-	agentFiles, err := filepath.Glob(filepath.Join(agentsPath, "*.yaml"))
-	if err != nil {
-		return fmt.Errorf("failed to find agent files: %w", err)
-	}
-
-	// Generate IDE-specific files for each agent
-	for _, agentFile := range agentFiles {
-		if err := i.generateIDEFile(agentFile, integration); err != nil {
-			agentName := strings.TrimSuffix(filepath.Base(agentFile), ".yaml")
-			return fmt.Errorf("failed to generate %s file for %s: %w", ideName, agentName, err)
-		}
-	}
-
-	return nil
-}
-
-// generateIDEFile creates an IDE-specific file from an agent YAML file
-func (i *Installer) generateIDEFile(agentFile string, integration IDEIntegration) error {
-	// Read agent YAML file
-	agentData, err := os.ReadFile(agentFile)
-	if err != nil {
-		return fmt.Errorf("failed to read agent file %s: %w", agentFile, err)
-	}
-
-	// Parse YAML to get agent identity for role
-	var agent AgentData
-	if err := yaml.Unmarshal(agentData, &agent); err != nil {
-		return fmt.Errorf("failed to parse agent YAML: %w", err)
-	}
-
-	// Generate output file path
-	agentName := strings.TrimSuffix(filepath.Base(agentFile), ".yaml")
-	outputPath := filepath.Join(integration.GetDirectoryPath(), agentName+integration.GetFileExtension())
-
-	// Generate content using the integration-specific logic
-	content := integration.GenerateContent(agentName, agent.Agent.Identity.Role, agentData)
-
-	// Write file
-	if err := os.WriteFile(outputPath, []byte(content), 0644); err != nil {
-		return fmt.Errorf("failed to write file %s: %w", outputPath, err)
-	}
-
-	return nil
-}
-
-// InstallCursorIntegration creates .cursor/rules directory and generates .mdc files for agents
-func (i *Installer) InstallCursorIntegration() error {
-	integration := &CursorIntegration{targetDir: i.targetDir}
-	return i.installIDEIntegration(integration, "Cursor IDE")
-}
-
-// InstallClaudeIntegration creates .claude/commands directory and generates .md files for agents
-func (i *Installer) InstallClaudeIntegration() error {
-	integration := &ClaudeIntegration{targetDir: i.targetDir}
-	return i.installIDEIntegration(integration, "Claude Code")
-}
-
-// InstallVSCodeIntegration creates .github/chatmodes directory and generates .chatmode.md files for agents
-func (i *Installer) InstallVSCodeIntegration() error {
-	integration := &VSCodeIntegration{targetDir: i.targetDir}
-	return i.installIDEIntegration(integration, "VS Code")
-}
-
-// InstallWindsurfIntegration creates .windsurf/rules directory and generates .md files for agents
-func (i *Installer) InstallWindsurfIntegration() error {
-	integration := &WindsurfIntegration{targetDir: i.targetDir}
-	return i.installIDEIntegration(integration, "Windsurf IDE")
-}
-
-// InstallSelective installs only specified agents and their dependencies using existing bundle logic
-func (i *Installer) InstallSelective(agentNames []string) error {
-	// Create embedded source and discovery following SOLID principles
-	embeddedSource := NewEmbeddedSource(i.embeddedAssets)
-	discovery := NewDiscoveryWithSource(i.targetDir, i.embeddedAssets, embeddedSource)
-
-	// Validate agent names using unified validation
-	if err := discovery.ValidateEmbeddedAgentNames(i.embeddedAssets, agentNames); err != nil {
-		return fmt.Errorf("agent validation failed: %w", err)
-	}
-
-	// Get dependencies using unified discovery method
-	agentDeps, err := discovery.DiscoverAgentsWithDependencies(agentNames...)
-	if err != nil {
-		return fmt.Errorf("dependency analysis failed: %w", err)
-	}
-
-	// Use simplified installation approach
-	return i.installWithFilter(agentDeps)
-}
-
-// installWithFilter installs assets with optional filtering for selective installation
-func (i *Installer) installWithFilter(agentDeps []AgentDependencyInfo) error {
-	krciPath := filepath.Join(i.targetDir, KrciAIDir)
-
-	// Create main .krci-ai directory
-	if err := i.createDirectory(krciPath); err != nil {
-		return fmt.Errorf("failed to create .krci-ai directory: %w", err)
-	}
-
-	// Create subdirectories
-	subdirs := []string{agentsDir, TasksDir, TemplatesDir, DataDir}
-	for _, subdir := range subdirs {
-		dirPath := filepath.Join(krciPath, subdir)
-		if err := i.createDirectory(dirPath); err != nil {
-			return fmt.Errorf("failed to create %s directory: %w", subdir, err)
-		}
-	}
-
-	// Install filtered assets
-	return i.installFilteredAssets(krciPath, agentDeps)
-}
-
-// installFilteredAssets installs only the specified agents and their dependencies
-func (i *Installer) installFilteredAssets(krciPath string, agentDeps []AgentDependencyInfo) error {
-	// Track all files that need to be copied to avoid duplicates
-	filesToCopy := make(map[string]bool)
-
-	// Add agent files using constants
-	for _, agent := range agentDeps {
-		agentPath := fmt.Sprintf("%s/%s/%s.yaml", embeddedPrefix, agentsDir, agent.ShortName)
-		filesToCopy[agentPath] = true
-	}
-
-	// Add task files using constants (no local tasks for embedded assets)
-	for _, agent := range agentDeps {
-		for _, task := range agent.Tasks {
-			taskPath := fmt.Sprintf("%s/%s/%s", embeddedPrefix, TasksDir, task)
-			filesToCopy[taskPath] = true
-		}
-	}
-
-	// Add template files using constants
-	for _, agent := range agentDeps {
-		for _, template := range agent.Templates {
-			templatePath := fmt.Sprintf("%s/%s/%s", embeddedPrefix, TemplatesDir, template)
-			filesToCopy[templatePath] = true
-		}
-	}
-
-	// Add data files using constants
-	for _, agent := range agentDeps {
-		for _, dataFile := range agent.DataFiles {
-			dataPath := fmt.Sprintf("%s/%s/%s", embeddedPrefix, DataDir, dataFile)
-			filesToCopy[dataPath] = true
-		}
-	}
-
-	// Copy all required files using unified copy method
-	for embeddedPath := range filesToCopy {
-		if err := i.copyAssetFile(embeddedPath, krciPath); err != nil {
-			return fmt.Errorf("failed to copy %s: %w", embeddedPath, err)
-		}
-	}
-
-	return nil
-}
-
-// copyAssetFile copies a file from embedded assets to target directory
-func (i *Installer) copyAssetFile(embeddedPath, krciPath string) error {
-	// Check if file exists in embedded assets
-	if _, err := i.embeddedAssets.Open(embeddedPath); err != nil {
-		// File doesn't exist, skip silently (might be optional dependency)
-		return nil
-	}
-
-	// Get relative path from embedded prefix using constant
-	relPath, err := filepath.Rel(embeddedPrefix, embeddedPath)
-	if err != nil {
-		return fmt.Errorf("failed to get relative path for %s: %w", embeddedPath, err)
-	}
-
-	// Target path in the .krci-ai directory
-	targetPath := filepath.Join(krciPath, relPath)
-
-	// Read embedded file
-	data, err := i.embeddedAssets.ReadFile(embeddedPath)
-	if err != nil {
-		return fmt.Errorf("failed to read embedded file %s: %w", embeddedPath, err)
-	}
-
-	// Ensure target directory exists
-	targetDir := filepath.Dir(targetPath)
-	if err := i.createDirectory(targetDir); err != nil {
-		return fmt.Errorf("failed to create target directory %s: %w", targetDir, err)
-	}
-
-	// Write file to target
-	if err := os.WriteFile(targetPath, data, 0644); err != nil {
-		return fmt.Errorf("failed to write file %s: %w", targetPath, err)
-	}
-
-	return nil
+func (i *Installer) GetFrameworkPath() string {
+	return i.krciPath
 }

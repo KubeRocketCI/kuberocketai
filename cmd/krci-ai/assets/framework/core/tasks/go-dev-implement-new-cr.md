@@ -1,4 +1,8 @@
-
+---
+dependencies:
+  data:
+    - operator-best-practices.md
+---
 # Task: Implement a new Kubernetes Custom Resource
 
 ## Description

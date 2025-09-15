@@ -18,7 +18,21 @@ package cli
 import (
 	"fmt"
 
+	"github.com/charmbracelet/lipgloss"
+	"github.com/charmbracelet/lipgloss/table"
+
 	"github.com/KubeRocketCI/kuberocketai/internal/cli/style"
+)
+
+// Table styling constants
+const (
+	TableCyanColor      = "14"
+	TableGrayColor      = "245"
+	TableLightGrayColor = "241"
+	TableCellWidth      = 20
+	DescriptionMaxLen   = 50
+	DescriptionTruncLen = 47
+	NoneValue           = "None"
 )
 
 // OutputHandler provides colorized output functions for CLI commands
@@ -88,11 +102,47 @@ func (o *OutputHandler) PrintGreenBold(text string) string {
 }
 
 // Printf provides formatted printing with style support
-func (o *OutputHandler) Printf(format string, args ...interface{}) {
+func (o *OutputHandler) Printf(format string, args ...any) {
 	fmt.Printf(format, args...)
 }
 
 // Newline prints a newline character
 func (o *OutputHandler) Newline() {
 	fmt.Println()
+}
+
+// CreateStyledTable creates a lipgloss table with consistent styling
+func CreateStyledTable() *table.Table {
+	var (
+		cyan      = lipgloss.Color(TableCyanColor)
+		gray      = lipgloss.Color(TableGrayColor)
+		lightGray = lipgloss.Color(TableLightGrayColor)
+
+		headerStyle  = lipgloss.NewStyle().Foreground(cyan).Bold(true).Align(lipgloss.Center)
+		cellStyle    = lipgloss.NewStyle().Padding(0, 1).Width(TableCellWidth)
+		oddRowStyle  = cellStyle.Foreground(gray)
+		evenRowStyle = cellStyle.Foreground(lightGray)
+	)
+
+	return table.New().
+		Border(lipgloss.NormalBorder()).
+		BorderStyle(lipgloss.NewStyle().Foreground(cyan)).
+		StyleFunc(func(row, col int) lipgloss.Style {
+			switch {
+			case row == table.HeaderRow:
+				return headerStyle
+			case row%2 == 0:
+				return evenRowStyle
+			default:
+				return oddRowStyle
+			}
+		})
+}
+
+// TruncateDescription truncates description if it's too long
+func TruncateDescription(description string) string {
+	if len(description) > DescriptionMaxLen {
+		return description[:DescriptionTruncLen] + "..."
+	}
+	return description
 }

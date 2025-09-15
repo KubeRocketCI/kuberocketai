@@ -24,7 +24,9 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/cli"
+	"github.com/KubeRocketCI/kuberocketai/internal/discovery"
 	"github.com/KubeRocketCI/kuberocketai/internal/tokens"
 )
 
@@ -110,8 +112,13 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("either --agent, --all, or --bundle flag must be specified")
 	}
 
+	projectRoot, err := discovery.GetProjectRoot()
+	if err != nil {
+		return handleTokenError(fmt.Errorf("failed to initialize token calculator: %w", err), tokenJSON)
+	}
+
 	// Create token calculator
-	calculator, err := tokens.NewCalculator(".", GetEmbeddedAssets())
+	calculator, err := tokens.NewCalculator(assets.GetKrciPath(projectRoot))
 	if err != nil {
 		return handleTokenError(fmt.Errorf("failed to initialize token calculator: %w", err), tokenJSON)
 	}
@@ -131,11 +138,6 @@ func runTokensCommand(cmd *cobra.Command, args []string) error {
 }
 
 func runAgentTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, agentName string, jsonOutput bool) error {
-	// Validate agent exists
-	if err := calculator.ValidateAgentExists(agentName); err != nil {
-		return handleTokenError(err, jsonOutput)
-	}
-
 	// Show progress indicator
 	if !jsonOutput {
 		output.PrintProgress(fmt.Sprintf("Analyzing tokens for agent '%s'...", agentName))
@@ -189,19 +191,6 @@ func runBundleTokenAnalysis(ctx context.Context, calculator *tokens.Calculator, 
 		selectedAgents = ParseAgentList(bundleScope)
 		if len(selectedAgents) == 0 {
 			return handleTokenError(fmt.Errorf("no valid agents specified in bundle scope"), jsonOutput)
-		}
-	}
-
-	// Get current working directory
-	currentDir, err := os.Getwd()
-	if err != nil {
-		return handleTokenError(fmt.Errorf("failed to get current directory: %w", err), jsonOutput)
-	}
-
-	// Validate agent names if specific agents are provided
-	if selectedAgents != nil {
-		if err = validateAgentNames(currentDir, selectedAgents, output); err != nil {
-			return handleTokenError(err, jsonOutput)
 		}
 	}
 
