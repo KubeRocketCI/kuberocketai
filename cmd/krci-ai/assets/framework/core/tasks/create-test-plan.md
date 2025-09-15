@@ -23,7 +23,7 @@ Dependencies:
 - ./.krci-ai/data/test-methodologies.md
 - ./.krci-ai/templates/test-plan.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
 1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for testing dependencies and quality gates

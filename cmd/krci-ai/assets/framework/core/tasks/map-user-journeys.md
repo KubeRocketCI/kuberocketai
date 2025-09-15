@@ -20,7 +20,7 @@ Dependencies:
 - ./.krci-ai/data/analysis-methodologies.md
 - ./.krci-ai/templates/user-journey.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

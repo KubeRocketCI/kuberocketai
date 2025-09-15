@@ -19,7 +19,7 @@ Dependencies:
 - ./.krci-ai/data/prioritization-frameworks.md
 - ./.krci-ai/templates/story.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
 1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story dependencies and naming conventions

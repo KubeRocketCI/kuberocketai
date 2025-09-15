@@ -18,7 +18,7 @@ Dependencies:
 - ./.krci-ai/data/krci-ai/core-framework-standards.yaml
 - ./.krci-ai/data/krci-ai/core-validation-checklist.md
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
 1. Execute CLI validation: Run `krci-ai validate` with appropriate verbosity for comprehensive checking
