@@ -18,7 +18,7 @@ Create a comprehensive go-to-market strategy and marketing brief that transforms
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/marketing-brief-template.md
 
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Marketing Brief dependencies and artifact flow
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Marketing Brief dependencies and artifact flow
 2. Apply business frameworks: Use methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. Format output: Use [marketing-brief-template.md](./.krci-ai/templates/marketing-brief-template.md) for structure
 4. Focus on WOW factor: Create strategies that generate emotional impact and market excitement

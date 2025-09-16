@@ -16,7 +16,7 @@ Update an existing PRD with new requirements, scope changes, or refined business
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/prd-template.md
 
@@ -40,7 +40,7 @@ Before making ANY changes to the PRD, you MUST:
 ### ONLY AFTER USER CONFIRMATION
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change management process
 2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. Format output: Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure
 4. Maintain traceability: Update BR/NFR numbering and include epic-level feature definitions

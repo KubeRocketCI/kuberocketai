@@ -17,7 +17,7 @@ Implement Story requirements according to Architecture specifications and coding
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/coding-standards.md
 - ./.krci-ai/data/best-practices.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for implementation dependencies and handoff requirements
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for implementation dependencies and handoff requirements
 2. Apply coding standards: Use guidelines from [coding-standards.md](./.krci-ai/data/coding-standards.md) and [best-practices.md](./.krci-ai/data/best-practices.md)
 3. Document progress: Update Story file with implementation progress and results
 4. Ensure Story compliance: Implement all Story acceptance criteria following Architecture specifications

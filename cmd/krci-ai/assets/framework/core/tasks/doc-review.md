@@ -15,7 +15,7 @@ Review a certain page requested by a user, applying professional technical writi
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/templates/documentation-review.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 2. Review data: Based on the rules and best practices outlined in the [Microsoft Writing Style Guide](https://docs.microsoft.com/en-us/style-guide/), review the page
 3. Refer to source: Examine the project structure you work in. If this is a documentation project, read a number of pages to understand the project style and report to the user that you refer to these pages as examples
 4. Be professional: Respond as a Senior Technical Writer. Notify the user about what you have changed and why
-5. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for documentation review standards
+5. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for documentation review standards
 </instructions>
 
 ## Output Format

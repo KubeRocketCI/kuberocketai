@@ -25,7 +25,7 @@ Create compelling product demonstration script that showcases product value thro
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/demo-script-template.md
 
@@ -34,7 +34,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Demo Script dependencies
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Demo Script dependencies
 2. Apply demonstration best practices: Use proven demo methodologies for maximum conversion impact
 3. Format output: Use [demo-script-template.md](./.krci-ai/templates/demo-script-template.md) for structure
 4. Create engagement moments: Design specific points where audience participation and excitement peak

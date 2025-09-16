@@ -16,7 +16,7 @@ Update existing epic with new requirements, scope additions, or refinements whil
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/prioritization-frameworks.md
 - ./.krci-ai/templates/epic.md
 
@@ -40,7 +40,7 @@ Before making ANY changes to the Epic, you MUST:
 ### ONLY AFTER USER CONFIRMATION
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Epic update dependencies and downstream impact
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Epic update dependencies and downstream impact
 2. Assess current status: Review epic status and dependent Stories before making changes
 3. Apply change control: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
 4. Maintain format: Keep [epic.md](./.krci-ai/templates/epic.md) template structure and populate new variables

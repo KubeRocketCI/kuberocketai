@@ -16,7 +16,7 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/test-methodologies.md
 - ./.krci-ai/templates/test-report.md
 - ./.krci-ai/templates/defect-report.md
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for testing execution workflow and quality gates
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing execution workflow and quality gates
 2. Apply testing methodologies: Use execution practices from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
 3. Format output: Use [test-report.md](./.krci-ai/templates/test-report.md) for test execution documentation
 4. Document results: Record all test results, defects, and quality observations for stakeholder review

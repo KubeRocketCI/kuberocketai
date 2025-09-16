@@ -15,14 +15,14 @@ Create user-focused requirements with implementation tasks and acceptance criter
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/prioritization-frameworks.md
 - ./.krci-ai/templates/story.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story dependencies and naming conventions
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story dependencies and naming conventions
 2. Apply prioritization: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md)
 3. Format output: Use [story.md](./.krci-ai/templates/story.md) template with proper naming
 4. Ensure Epic traceability: Reference parent Epic and map to specific Epic deliverables

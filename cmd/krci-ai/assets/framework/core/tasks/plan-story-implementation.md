@@ -14,7 +14,7 @@ Comprehensive technical planning task for developers to analyze, validate, and e
 
 Dependencies:
 - ./.krci-ai/templates/story.md
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>

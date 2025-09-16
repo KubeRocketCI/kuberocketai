@@ -19,14 +19,14 @@ Dependencies:
 
 - ./.krci-ai/data/testing-strategy.md
 - ./.krci-ai/data/quality-metrics.md
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/test-methodologies.md
 - ./.krci-ai/templates/test-plan.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for testing dependencies and quality gates
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing dependencies and quality gates
 2. Apply testing methodologies: Use approaches from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
 3. Format output: Use [test-plan.md](./.krci-ai/templates/test-plan.md) for structured test planning
 4. Ensure coverage: Address all Story acceptance criteria and Epic business requirements

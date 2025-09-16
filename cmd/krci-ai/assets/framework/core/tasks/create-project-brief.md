@@ -17,7 +17,7 @@ Create a comprehensive project brief defining the foundation for product develop
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/project-brief-template.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for role responsibilities and artifact flow
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for role responsibilities and artifact flow
 2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. Format output: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for consistent structure
 </instructions>

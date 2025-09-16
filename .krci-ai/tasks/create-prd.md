@@ -17,7 +17,7 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/prd-template.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for PRD dependencies and quality gates
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for PRD dependencies and quality gates
 2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. Format output: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for structure
 4. Ensure traceability: Link back to Project Brief and include epic-level feature definitions

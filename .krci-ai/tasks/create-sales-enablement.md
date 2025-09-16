@@ -18,7 +18,7 @@ Create comprehensive sales enablement package including sales scripts, objection
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/sales-enablement-template.md
 
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Sales Enablement dependencies
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Sales Enablement dependencies
 2. Apply sales methodologies: Use proven sales frameworks for maximum conversion impact
 3. Format output: Use [sales-enablement-template.md](./.krci-ai/templates/sales-enablement-template.md) for structure
 4. Focus on conversion: Create tools that directly increase close rates and deal velocity
