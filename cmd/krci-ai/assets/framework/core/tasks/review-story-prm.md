@@ -1,3 +1,9 @@
+---
+dependencies:
+  templates:
+    - story.md
+---
+
 # Task: Review Story (Project Manager)
 
 ## Description

@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-validation-checklist.md
+  templates:
+    - krci-ai/core-template-template.md
+---
+
 # Task: Core Create Template
 
 ## Description

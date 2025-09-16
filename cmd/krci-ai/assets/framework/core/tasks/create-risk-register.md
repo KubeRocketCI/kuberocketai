@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+  templates:
+    - risk-register-template.md
+---
+
 # Task: Create Risk Register
 
 ## Description

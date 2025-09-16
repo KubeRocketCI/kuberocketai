@@ -1,3 +1,17 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - demo-script-template.md
+    - launch-materials-template.md
+    - marketing-brief-template.md
+    - pitch-deck-template.md
+    - sales-enablement-template.md
+    - visual-identity-template.md
+---
+
 # Task: Create Marketing Brief
 
 ## Description

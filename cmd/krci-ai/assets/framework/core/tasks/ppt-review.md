@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+  mcp_servers:
+    - office-powerpoint
+---
+
 # Task: PowerPoint Review
 
 ## Description

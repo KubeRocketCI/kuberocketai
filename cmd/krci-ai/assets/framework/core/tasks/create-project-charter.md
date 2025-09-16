@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+    - business-frameworks.md
+    - best-practices.md
+  templates:
+    - project-charter-template.md
+---
+
 # Task: Create Project Charter
 
 ## Description

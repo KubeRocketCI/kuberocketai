@@ -1,3 +1,9 @@
+---
+dependencies:
+  templates:
+    - testing-readme.md
+---
+
 # Task: Setup Testing (First-Run Wizard)
 
 ## Description

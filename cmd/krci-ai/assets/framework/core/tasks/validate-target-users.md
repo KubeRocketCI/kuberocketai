@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - validation-frameworks.md
+    - business-frameworks.md
+  templates:
+    - validation-report-template.md
+---
+
 # Task: Validate Target Users
 
 ## Description

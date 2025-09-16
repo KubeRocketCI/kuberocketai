@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - test-methodologies.md
+    - testing-standards.md
+    - quality-metrics.md
+  templates:
+    - testing-readme.md
+---
+
 # Task: Onboard Existing Gherkin Tests
 
 ## Description

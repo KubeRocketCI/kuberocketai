@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - pitch-deck-template.md
+---
+
 # Task: Create Pitch Deck
 
 ## Description

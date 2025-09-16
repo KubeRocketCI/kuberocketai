@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - sales-enablement-template.md
+---
+
 # Task: Create Sales Enablement
 
 ## Description

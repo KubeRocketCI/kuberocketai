@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - quality-metrics.md
+  templates:
+    - defect-report.md
+---
+
 # Task: Report Defects
 
 ## Description

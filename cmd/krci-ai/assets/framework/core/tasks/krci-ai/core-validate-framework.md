@@ -1,3 +1,9 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-validation-checklist.md
+---
+
 # Task: Core Validate Framework
 
 ## Description

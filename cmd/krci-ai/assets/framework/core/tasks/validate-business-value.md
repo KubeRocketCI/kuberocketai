@@ -1,3 +1,17 @@
+---
+dependencies:
+  data:
+    - business-frameworks.md
+    - krci-ai/core-sdlc-framework.md
+    - validation-frameworks.md
+  templates:
+    - assumption-tracker-template.md
+    - context-gathering-guide-template.md
+    - prd-template.md
+    - project-brief-template-advanced.md
+    - project-brief-template.md
+    - validation-report-template.md
+---
 # Task: Validate Business Value
 
 ## Description

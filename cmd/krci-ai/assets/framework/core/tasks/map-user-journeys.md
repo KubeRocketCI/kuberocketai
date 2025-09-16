@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - analysis-methodologies.md
+  templates:
+    - user-journey.md
+---
+
 # Task: Map User Journeys
 
 ## Description

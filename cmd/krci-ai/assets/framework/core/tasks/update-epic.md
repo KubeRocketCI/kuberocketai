@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - prioritization-frameworks.md
+  templates:
+    - epic.md
+    - story.md
+---
+
 # Task: Update Epic
 
 ## Description

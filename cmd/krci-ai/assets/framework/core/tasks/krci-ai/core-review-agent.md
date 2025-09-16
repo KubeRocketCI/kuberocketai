@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-validation-checklist.md
+  templates:
+    - krci-ai/core-agent-template.yaml
+---
+
 # Task: Core Review Agent
 
 ## Description

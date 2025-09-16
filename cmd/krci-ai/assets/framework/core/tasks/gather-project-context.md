@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - validation-frameworks.md
+    - business-frameworks.md
+    - krci-ai/core-sdlc-framework.md
+  templates:
+    - context-gathering-guide-template.md
+---
+
 # Task: Gather Project Context
 
 ## Description

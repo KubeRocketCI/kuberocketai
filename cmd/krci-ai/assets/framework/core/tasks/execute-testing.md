@@ -1,3 +1,14 @@
+---
+dependencies:
+  data:
+    - test-methodologies.md
+    - testing-standards.md
+    - testing-strategy.md
+    - quality-metrics.md
+  templates:
+    - test-cases.md
+---
+
 # Task: Execute Testing
 
 ## Description
