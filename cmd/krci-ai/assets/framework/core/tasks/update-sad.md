@@ -7,7 +7,6 @@ dependencies:
   templates:
     - sad-template.md
     - architecture-review.md
-    - story.md
 ---
 
 # Task: Update Architecture Documentation

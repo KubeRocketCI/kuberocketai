@@ -5,8 +5,6 @@ dependencies:
     - testing-standards.md
     - quality-metrics.md
     - krci-ai/core-sdlc-framework.md
-  templates:
-    - test-cases.md
 ---
 
 # Task: Generate Test Cases
