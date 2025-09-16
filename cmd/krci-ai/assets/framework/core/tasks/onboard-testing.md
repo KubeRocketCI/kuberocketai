@@ -1,4 +1,5 @@
 ---
+dependencies:
   templates:
     - testing-readme.md
 ---
