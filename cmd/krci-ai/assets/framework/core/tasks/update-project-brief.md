@@ -16,7 +16,7 @@ Update an existing project brief with new information, scope changes, or refined
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/project-brief-template.md
 
@@ -40,7 +40,7 @@ Before making ANY changes to the Project Brief, you MUST:
 ### ONLY AFTER USER CONFIRMATION
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change impact assessment
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change impact assessment
 2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 3. Format output: Maintain [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
 4. Assess downstream impact: Identify which PRD artifacts need updates

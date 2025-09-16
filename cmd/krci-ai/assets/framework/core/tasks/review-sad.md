@@ -18,7 +18,7 @@ Dependencies:
 
 - ./.krci-ai/templates/sad-template.md
 - ./.krci-ai/data/architecture-principles.md
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/templates/architecture-review.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for quality gate requirements and review criteria
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for quality gate requirements and review criteria
 2. Apply review standards: Use [architecture-principles.md](./.krci-ai/data/architecture-principles.md) for quality assessment
 3. Format output: Use [architecture-review.md](./.krci-ai/templates/architecture-review.md) for review documentation
 4. Validate traceability: Ensure all PRD requirements and Epic features are addressed across architecture sections

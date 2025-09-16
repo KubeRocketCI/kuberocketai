@@ -18,7 +18,7 @@ Dependencies:
 
 - ./.krci-ai/templates/sad-template.md
 - ./.krci-ai/data/architecture-principles.md
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/templates/architecture-review.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for change management process and impact assessment
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change management process and impact assessment
 2. Apply design principles: Maintain consistency with [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
 3. Update relevant sections: Modify appropriate architecture files based on change scope using [sad-template.md](./.krci-ai/templates/sad-template.md) structure
 4. Document decisions: Update 08-architectural-decisions.md with new ADR entries for significant changes

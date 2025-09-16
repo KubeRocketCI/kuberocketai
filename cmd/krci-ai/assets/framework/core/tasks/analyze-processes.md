@@ -17,7 +17,7 @@ Analyze current business processes and workflows to identify improvement opportu
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/analysis-methodologies.md
 - ./.krci-ai/templates/process-map.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for process analysis dependencies and workflow
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for process analysis dependencies and workflow
 2. Apply analysis methodologies: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
 3. Format output: Use [process-map.md](./.krci-ai/templates/process-map.md) for workflow documentation
 4. Connect to PRD: Identify how process improvements map to PRD requirements and Epic features

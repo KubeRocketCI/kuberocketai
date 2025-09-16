@@ -22,7 +22,7 @@ Dependencies:
 - /docs/prd/project-brief.md (refined brief)
 - /docs/prd/brief-validation-*.md (validation reports)
 - /docs/prd/brief-assumptions.md (assumption tracker)
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 
 ## Instructions
 

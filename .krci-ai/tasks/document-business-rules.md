@@ -16,7 +16,7 @@ Systematically document business rules and constraints that govern system behavi
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/analysis-methodologies.md
 - ./.krci-ai/templates/business-rules.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for business rule documentation dependencies and workflow
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for business rule documentation dependencies and workflow
 2. Apply analysis methodologies: Use approaches from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
 3. Format output: Use [business-rules.md](./.krci-ai/templates/business-rules.md) template for structured documentation
 4. Link to PRD: Ensure business rules support and clarify PRD requirements (BR/NFR)

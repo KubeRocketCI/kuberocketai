@@ -17,7 +17,7 @@ Create comprehensive system architecture documentation that translates PRD requi
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/architecture-principles.md
 - ./.krci-ai/data/design-patterns.md
 - ./.krci-ai/templates/sad-template.md
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for architecture documentation dependencies and quality gates
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for architecture documentation dependencies and quality gates
 2. Apply design principles: Use guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
 3. Format output: Use [sad-template.md](./.krci-ai/templates/sad-template.md) for comprehensive structure
 4. Ensure traceability: Map PRD requirements (BR/NFR) and Epic features to architectural components

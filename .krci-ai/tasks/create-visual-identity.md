@@ -18,7 +18,7 @@ Create comprehensive visual identity and brand guidelines that establish consist
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/visual-identity-template.md
 
@@ -27,7 +27,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Visual Identity dependencies
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Visual Identity dependencies
 2. Apply design principles: Use proven visual design methodologies for maximum impact
 3. Format output: Use [visual-identity-template.md](./.krci-ai/templates/visual-identity-template.md) for structure
 4. Maximize visual impact: Create design systems that immediately capture attention and build credibility

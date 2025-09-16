@@ -17,7 +17,7 @@ Create clear epic with problem statement, goal, scope, and implementation approa
 
 <reference_assets>
 Dependencies:
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/prioritization-frameworks.md
 - ./.krci-ai/templates/epic.md
 

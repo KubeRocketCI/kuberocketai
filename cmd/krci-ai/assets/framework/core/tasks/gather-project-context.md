@@ -21,7 +21,7 @@ Dependencies:
 
 - ./.krci-ai/data/validation-frameworks.md
 - ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/templates/context-gathering-guide-template.md
 
 CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
@@ -346,7 +346,7 @@ Document project context using structured templates:
 
 ## Framework Integration Notes
 
-- **SDLC Integration**: Project context serves as foundation for all downstream [SDLC framework](./.krci-ai/data/common/sdlc-framework.md) artifacts
+- **SDLC Integration**: Project context serves as foundation for all downstream [SDLC framework](./.krci-ai/data/krci-ai/core-sdlc-framework.md) artifacts
 - **Business Framework Usage**: Leverages established methodologies for professional analysis
 - **Evidence Standards**: Maintains KubeRocketAI focus on quantified, evidence-based approach
 - **Quality Assurance**: Built-in validation checkpoints ensure context accuracy and completeness

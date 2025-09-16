@@ -17,7 +17,7 @@ Systematically gather and analyze business requirements from stakeholders to enh
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/analysis-methodologies.md
 - ./.krci-ai/templates/requirements-doc.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for requirements gathering dependencies and workflow
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for requirements gathering dependencies and workflow
 2. Apply analysis methodologies: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
 3. Format output: Use [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) for documentation
 4. Enhance PRD: Refine existing PRD with detailed BR/NFR requirements and stakeholder insights

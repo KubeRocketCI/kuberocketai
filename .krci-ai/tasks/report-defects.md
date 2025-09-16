@@ -16,7 +16,7 @@ Create comprehensive defect reports and quality assessments based on testing exe
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/quality-metrics.md
 - ./.krci-ai/templates/defect-report.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for defect reporting workflow and quality gates
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for defect reporting workflow and quality gates
 2. Apply quality standards: Use defect classification approaches from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 3. Format output: Use [defect-report.md](./.krci-ai/templates/defect-report.md) for structured defect documentation
 4. Ensure traceability: Link defects to specific test cases, Story acceptance criteria, and Epic requirements

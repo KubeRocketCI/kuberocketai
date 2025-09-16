@@ -20,7 +20,7 @@ Dependencies (BDD-only):
 - ./.krci-ai/data/test-methodologies.md (optional)
 - ./.krci-ai/data/testing-standards.md (optional)
 - ./.krci-ai/data/quality-metrics.md (optional)
-- ./.krci-ai/data/common/sdlc-framework.md (optional)
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md (optional)
 
 Validation (HALT if missing):
 - Require ./src/main/resources/README.md and ./src/main/resources/features/
@@ -67,7 +67,7 @@ pwsh -NoProfile -Command "python ./.krci-ai/scripts/build_gherkin_index.py --roo
 5. **Decide actions**: Use README decision matrix; request confirmation before creating/updating tests
 6. **Generate Gherkin**: Create or extend `.feature` files under `./src/main/resources/features/` with proper tags and structure
 7. **Ensure traceability**: Map each Story acceptance criterion to specific feature files and scenarios
-8. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for test case generation workflow and quality gates
+8. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for test case generation workflow and quality gates
 9. **Apply testing methodologies**: Use test case design techniques from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
 
 ### Extension policy (respect user intent)

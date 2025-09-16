@@ -16,7 +16,7 @@ Create comprehensive user journey maps that visualize user experiences and ident
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/analysis-methodologies.md
 - ./.krci-ai/templates/user-journey.md
 
@@ -26,7 +26,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for user journey mapping workflow and dependencies
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for user journey mapping workflow and dependencies
 2. Apply analysis methodologies: Use approaches from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
 3. Format output: Use [user-journey.md](./.krci-ai/templates/user-journey.md) for structured journey documentation
 4. Support Epic/Story creation: Ensure journey maps inform Epic features and Story acceptance criteria

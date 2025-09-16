@@ -16,7 +16,7 @@ Update existing user story with new requirements, scope refinements, or implemen
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/prioritization-frameworks.md
 - ./.krci-ai/templates/story.md
 
@@ -40,7 +40,7 @@ Before making ANY changes to the Story, you MUST:
 ### ONLY AFTER USER CONFIRMATION
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for Story update dependencies and downstream impact
+1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story update dependencies and downstream impact
 2. Assess current status: Review story status and Tasks/Subtasks before making changes
 3. Apply change control: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
 4. Maintain format: Keep [story.md](./.krci-ai/templates/story.md) template structure and populate new variables

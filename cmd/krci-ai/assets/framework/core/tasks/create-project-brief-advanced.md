@@ -27,7 +27,7 @@ Dependencies:
 
 - ./.krci-ai/data/validation-frameworks.md
 - ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/templates/project-brief-template-advanced.md
 - ./.krci-ai/tasks/gather-project-context.md
 

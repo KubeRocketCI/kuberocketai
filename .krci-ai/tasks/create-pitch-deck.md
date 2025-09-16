@@ -28,7 +28,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 
 Dependencies:
 
-- ./.krci-ai/data/common/sdlc-framework.md
+- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
 - ./.krci-ai/data/business-frameworks.md
 - ./.krci-ai/templates/pitch-deck-template.md
 - /docs/prd/prd.md (primary source for product information)
