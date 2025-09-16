@@ -5,7 +5,6 @@ dependencies:
     - prioritization-frameworks.md
   templates:
     - epic.md
-    - story.md
 ---
 
 # Task: Create Epic

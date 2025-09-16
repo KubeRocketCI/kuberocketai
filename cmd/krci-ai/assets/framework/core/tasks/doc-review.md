@@ -2,6 +2,8 @@
 dependencies:
   data:
     - krci-ai/core-sdlc-framework.md
+  templates:
+    - documentation-review.md
 ---
 
 # Task: Documentation Review

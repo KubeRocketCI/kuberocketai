@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+  templates:
+    - project-charter-template.md
+---
+
 # Task: Update Project Charter
 
 ## Description

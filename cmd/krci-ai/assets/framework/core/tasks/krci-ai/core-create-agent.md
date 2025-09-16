@@ -1,6 +1,7 @@
 ---
 dependencies:
   data:
+    - krci-ai/core-framework-standards.yaml
     - krci-ai/core-validation-checklist.md
   templates:
     - krci-ai/core-agent-template.yaml

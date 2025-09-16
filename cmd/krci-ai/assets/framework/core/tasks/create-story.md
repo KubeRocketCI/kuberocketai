@@ -4,7 +4,6 @@ dependencies:
     - krci-ai/core-sdlc-framework.md
     - prioritization-frameworks.md
   templates:
-    - epic.md
     - story.md
 ---
 
