@@ -103,6 +103,17 @@ func (a *Agent) GetAllDataFilesPaths() []string {
 	return utils.DeduplicateStrings(dataFilesPaths)
 }
 
+func (a *Agent) GetAllReferencedTasksPaths() []string {
+	tasksPaths := make([]string, 0, len(a.Tasks))
+	for _, task := range a.Tasks {
+		for _, taskRef := range task.Dependencies.Tasks {
+			tasksPaths = append(tasksPaths, taskRef.Path)
+		}
+	}
+
+	return utils.DeduplicateStrings(tasksPaths)
+}
+
 type Task struct {
 	Path         string
 	Name         string
@@ -112,6 +123,7 @@ type Task struct {
 type TaskDependencies struct {
 	Templates  []Template
 	DataFiles  []DataFile
+	Tasks      []TaskRef
 	McpServers []string
 }
 
@@ -121,6 +133,11 @@ type Template struct {
 }
 
 type DataFile struct {
+	Path string
+	Name string
+}
+
+type TaskRef struct {
 	Path string
 	Name string
 }
@@ -375,6 +392,7 @@ func MakeTaskDependency(basePath string, dependency processor.TaskDependenciesYa
 	d := TaskDependencies{
 		Templates:  make([]Template, 0, len(dependency.Dependencies.Templates)),
 		DataFiles:  make([]DataFile, 0, len(dependency.Dependencies.DataFiles)),
+		Tasks:      make([]TaskRef, 0, len(dependency.Dependencies.Tasks)),
 		McpServers: dependency.Dependencies.McpServers,
 	}
 
@@ -389,6 +407,13 @@ func MakeTaskDependency(basePath string, dependency processor.TaskDependenciesYa
 		d.DataFiles = append(d.DataFiles, DataFile{
 			Path: filepath.Join(GetDataPath(basePath), dataFile),
 			Name: dataFile,
+		})
+	}
+
+	for _, task := range dependency.Dependencies.Tasks {
+		d.Tasks = append(d.Tasks, TaskRef{
+			Path: filepath.Join(GetTasksPath(basePath), task),
+			Name: task,
 		})
 	}
 

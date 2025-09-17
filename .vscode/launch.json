@@ -102,6 +102,17 @@
             "env": {
                 "KRCI_AI_PROJECT_DIR": "${workspaceFolder}"
             }
+        },
+        {
+            "name": "bundle pm",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/krci-ai/main.go",
+            "args": ["bundle", "--agent=pm"],
+            "env": {
+                "KRCI_AI_PROJECT_DIR": "${workspaceFolder}"
+            }
         }
     ]
 }

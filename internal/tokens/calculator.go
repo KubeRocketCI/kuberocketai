@@ -27,6 +27,7 @@ import (
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 	"github.com/KubeRocketCI/kuberocketai/internal/bundle"
+	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
 // DiscoveryInterface defines the interface for asset discovery operations
@@ -198,8 +199,9 @@ func (c *Calculator) calculateSingleAgentTokens(ctx context.Context, agent *asse
 	agentInfo.Assets = append(agentInfo.Assets, agentAsset)
 	agentInfo.TotalTokens += agentAsset.Tokens
 
+	taskPaths := utils.DeduplicateStrings(append(agent.GetAllTasksPaths(), agent.GetAllReferencedTasksPaths()...))
 	// Calculate tokens for task dependencies
-	agentInfo.Dependencies.Tasks, err = c.calculateAssetTokens(ctx, agent.GetAllTasksPaths(), assets.TasksDir)
+	agentInfo.Dependencies.Tasks, err = c.calculateAssetTokens(ctx, taskPaths, assets.TasksDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to calculate task tokens: %w", err)
 	}
