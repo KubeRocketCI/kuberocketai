@@ -1,3 +1,9 @@
+---
+dependencies:
+  templates:
+    - testing-readme.md
+---
+
 # Task: Onboard Existing Gherkin Tests
 
 ## Description

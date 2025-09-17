@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+  templates:
+    - sow-template.md
+---
+
 # Task: Update Scope of Work (SOW)
 
 ## Description

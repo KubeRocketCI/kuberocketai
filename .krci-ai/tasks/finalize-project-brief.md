@@ -1,3 +1,10 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - validation-frameworks.md
+---
+
 # Task: Finalize Project Brief
 
 ## Description

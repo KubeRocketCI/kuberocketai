@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - test-methodologies.md
+    - testing-standards.md
+    - quality-metrics.md
+    - krci-ai/core-sdlc-framework.md
+---
+
 # Task: Generate Test Cases
 
 ## Description

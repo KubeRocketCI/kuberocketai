@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-framework-standards.yaml
+    - krci-ai/core-validation-checklist.md
+  templates:
+    - krci-ai/core-data-template.md
+---
+
 # Task: Core Create Data
 
 ## Description
@@ -49,7 +58,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 
 **Reference Integration Architecture**: Data files integrate with framework components through:
 
-- Inline reference pattern: `[filename](./.krci-ai/data/path/to/file)` format for component linking
+- Frontmatter dependency pattern: List in YAML frontmatter for component linking
 - Agent behavioral integration: Data supports principle definitions and guidance references
 - Task technical integration: Data provides specifications and constraint information
 - Framework validation compatibility: Data structure supports automated validation processes
@@ -84,7 +93,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 
 - [ ] Data format selection: Choose appropriate format (.md, .yaml, .json, .txt, .csv) based on content
 - [ ] Content structure creation: Organize data logically following framework patterns
-- [ ] Reference optimization: Structure content to support inline `[filename](path)` references
+- [ ] Dependency optimization: Structure content to support frontmatter dependency references
 - [ ] Naming conventions application: Use descriptive file and section names indicating purpose
 - [ ] Accessibility focus: Organize information for effective agent and task consumption
 - [ ] Template application: Use [core-data-template.md](./.krci-ai/templates/krci-ai/core-data-template.md) structure

@@ -1,3 +1,18 @@
+---
+dependencies:
+  data:
+    - validation-frameworks.md
+  templates:
+    - project-brief-template-advanced.md
+  tasks:
+    - gather-project-context.md
+    - validate-problem-statement.md
+    - validate-target-users.md
+    - validate-success-metrics.md
+    - validate-business-value.md
+    - refine-project-brief.md
+---
+
 # Task: Enhance Project Brief
 
 ## Description

@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - test-methodologies.md
+  templates:
+    - test-report.md
+    - defect-report.md
+---
+
 # Task: Execute Testing
 
 ## Description

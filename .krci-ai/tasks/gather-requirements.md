@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - analysis-methodologies.md
+  templates:
+    - requirements-doc.md
+---
 # Task: Gather Requirements
 
 ## Description

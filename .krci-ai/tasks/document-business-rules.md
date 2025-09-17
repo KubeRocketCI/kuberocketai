@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - analysis-methodologies.md
+  templates:
+    - business-rules.md
+---
 # Task: Document Business Rules
 
 ## Description

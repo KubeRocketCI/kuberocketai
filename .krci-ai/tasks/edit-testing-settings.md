@@ -1,3 +1,7 @@
+---
+dependencies: {}
+---
+
 # Task: Edit Testing Settings (Interactive Wizard)
 
 ## Description

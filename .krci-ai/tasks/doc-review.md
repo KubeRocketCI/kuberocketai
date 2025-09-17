@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+  templates:
+    - documentation-review.md
+---
+
 # Task: Documentation Review
 
 Review a certain page requested by a user, applying professional technical writing standards and ensuring consistency with project documentation style.

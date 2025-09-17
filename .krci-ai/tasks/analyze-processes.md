@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - analysis-methodologies.md
+  templates:
+    - process-map.md
+---
 # Task: Analyze Processes
 
 ## Description

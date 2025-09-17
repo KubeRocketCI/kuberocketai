@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - demo-script-template.md
+---
+
 # Task: Create Demo Script
 
 ## Description

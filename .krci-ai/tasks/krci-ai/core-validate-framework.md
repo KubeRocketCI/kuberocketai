@@ -1,3 +1,10 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-framework-standards.yaml
+    - krci-ai/core-validation-checklist.md
+---
+
 # Task: Core Validate Framework
 
 ## Description
@@ -24,10 +31,11 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 1. Execute CLI validation: Run `krci-ai validate` with appropriate verbosity for comprehensive checking
 2. Analyze validation results: Interpret automated validation findings and categorize issues
 3. Perform manual inspection: Review components for framework pattern compliance beyond automated checks
-4. Validate reference integrity: Ensure all `[filename](path)` references resolve to existing files
-5. Check component relationships: Verify agents reference existing tasks and tasks reference existing templates/data
-6. Validate against [core-validation-checklist](./.krci-ai/data/krci-ai/core-validation-checklist.md)
-7. Document findings: Create comprehensive validation report with specific remediation actions
+4. Validate reference integrity: Ensure all file path references resolve to existing files
+5. Check dependency consistency: Verify YAML frontmatter dependencies match content references
+6. Check component relationships: Verify agents reference existing tasks and tasks reference existing templates/data
+7. Validate against ./.krci-ai/data/krci-ai/core-validation-checklist.md
+8. Document findings: Create comprehensive validation report with specific remediation actions
 </instructions>
 
 ## Framework Context: Validation Architecture
@@ -36,7 +44,7 @@ CLI Validation Capabilities: `krci-ai validate` provides automated validation in
 - Agent Schema Compliance: JSON schema validation for agent YAML structure
 - Task Path Validation: Verification that agent task references resolve to existing files
 - Template Accessibility: Confirmation that templates are accessible from framework structure
-- Markdown Link Validation: Checking `[filename](path)` references for existing targets
+- File Path Validation: Checking file path references for existing targets
 - Cross-platform Compatibility: File accessibility across different operating systems
 
 Validation Scope Areas:
@@ -87,7 +95,7 @@ Validation Scope Areas:
 ### Reference Integrity Verification
 
 - [ ] Agent-task references: Confirm all agent.tasks entries resolve to existing task files
-- [ ] Task-template references: Verify task `[filename](path)` links resolve to existing templates
+- [ ] Task-template references: Verify task frontmatter dependencies resolve to existing templates
 - [ ] Task-data references: Confirm task references to data files resolve correctly
 - [ ] Agent-data references: Verify agent references to behavioral data resolve properly
 

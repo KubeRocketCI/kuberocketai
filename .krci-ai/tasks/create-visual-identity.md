@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - visual-identity-template.md
+---
+
 # Task: Create Visual Identity
 
 ## Description

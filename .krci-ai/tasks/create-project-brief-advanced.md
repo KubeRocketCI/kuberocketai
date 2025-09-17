@@ -1,3 +1,25 @@
+---
+dependencies:
+  data:
+    - validation-frameworks.md
+    - business-frameworks.md
+    - krci-ai/core-sdlc-framework.md
+  templates:
+    - project-brief-template-advanced.md
+    - context-gathering-guide-template.md
+    - assumption-tracker-template.md
+    - validation-report-template.md
+  tasks:
+    - gather-project-context.md
+    - validate-problem-statement.md
+    - validate-target-users.md
+    - validate-success-metrics.md
+    - validate-business-value.md
+    - refine-project-brief.md
+    - finalize-project-brief.md
+    - enhance-project-brief.md
+---
+
 # Task: Create Project Brief (Advanced)
 
 ## Description

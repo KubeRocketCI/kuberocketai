@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+    - best-practices.md
+  templates:
+    - sow-template.md
+---
+
 # Task: Create Scope of Work (SOW)
 
 ## Description

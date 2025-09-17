@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - architecture-principles.md
+    - design-patterns.md
+    - krci-ai/core-sdlc-framework.md
+  templates:
+    - sad-template.md
+---
+
 # Task: Create Software Architecture Document (SAD)
 
 ## Description

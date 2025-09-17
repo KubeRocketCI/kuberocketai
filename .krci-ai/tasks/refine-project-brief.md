@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - validation-frameworks.md
+  templates:
+    - project-brief-template.md
+    - assumption-tracker-template.md
+---
+
 # Task: Refine Project Brief
 
 ## Description

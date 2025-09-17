@@ -2,12 +2,71 @@
 
 ## [Unreleased]
 
+### Chores
+
+- update krci-ai to the latest version
+
+
+<a name="v0.38.0"></a>
+
+## [v0.38.0] - 2025-09-17
+
+### Bug Fixes
+
+- remove unrelated dependecies from the tasks
+- align tasks to the latest dependency schema
+
+### Chores
+
+- update dependecy for AQA tasks
+
+### Code Refactoring
+
+- align to the latest dependency schema
+
+### Features
+
+- Update 'advisor' persona with new dependency management
+- Refactor task dependency tracking system ([#98](https://github.com/KubeRocketCI/kuberocketai/issues/98))
+
+
+<a name="v0.37.2"></a>
+
+## [v0.37.2] - 2025-09-16
+
+### Bug Fixes
+
+- we've migrated to the new location for the framework data
+
+### Code Refactoring
+
+- update sdlc-framework instructions and align with structure
+
+
+<a name="v0.37.1"></a>
+
+## [v0.37.1] - 2025-09-15
+
+### Chores
+
+- update installed framework to the latest version
+
+### Features
+
+- update instructions on dependecy loading
+
+
+<a name="v0.37.0"></a>
+
+## [v0.37.0] - 2025-09-13
+
 ### Bug Fixes
 
 - fix markdown linting
 
 ### Chores
 
+- Install the latest version of framework locally
 - **create-story:** add support for personas and assets in the site documentation
 
 ### Features
@@ -910,7 +969,11 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.36.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.0...HEAD
+[v0.38.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.37.2...v0.38.0
+[v0.37.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.37.1...v0.37.2
+[v0.37.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.37.0...v0.37.1
+[v0.37.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.36.0...v0.37.0
 [v0.36.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.35.1...v0.36.0
 [v0.35.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.35.0...v0.35.1
 [v0.35.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.34.2...v0.35.0

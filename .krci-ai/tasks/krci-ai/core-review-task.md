@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-framework-standards.yaml
+    - krci-ai/core-validation-checklist.md
+  templates:
+    - krci-ai/core-task-template.md
+---
+
 # Task: Core Review Task
 
 ## Description
@@ -6,7 +15,7 @@ Review and validate existing tasks for framework compliance, XML tag usage, and 
 
 <prerequisites>
 - Task exists: Target task file exists and is accessible for review
-- Framework context: Understanding of XML tag system, inline references, and validation requirements
+- Framework context: Understanding of XML tag system, frontmatter dependencies, and validation requirements
 - Validation access: Ability to run `krci-ai validate` for automated checking
 - Review authority: Knowledge of framework patterns to provide actionable feedback
 </prerequisites>
@@ -23,7 +32,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 
 <instructions>
 1. Validate XML guidance system: Ensure task uses proper XML tags for LLM section identification and guidance
-2. Check inline references: Verify all `[filename](path)` references resolve to existing files with proper validation
+2. Validate dependencies: Confirm YAML frontmatter lists all referenced files under data/templates sections
 3. Review structure compliance: Confirm task follows template pattern with required sections and ordering
 4. Assess self-contained guidance: Evaluate if task provides context-free usage explanations and framework context
 5. Test framework validation: Run `krci-ai validate` to identify automated compliance issues and resolution steps
@@ -39,7 +48,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 - LLM guidance effectiveness for autonomous task execution
 - Section boundary identification and processing requirements clarity
 
-**Reference Pattern Validation**: All framework references must use inline `[filename](./.krci-ai/path/to/file)` format. Comprehensive validation includes:
+**Dependency Validation**: All framework dependencies must be declared in YAML frontmatter. Comprehensive validation includes:
 
 - Correct path resolution to existing framework components
 - Target file existence and accessibility verification
@@ -77,7 +86,7 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 
 - [ ] XML guidance assessment: Verify task includes proper `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
 - [ ] XML tag validation: Check all XML tags are properly opened, closed, and provide effective LLM guidance
-- [ ] Reference pattern verification: Confirm all references use `[filename](./.krci-ai/path/to/file)` format correctly
+- [ ] Dependency verification: Confirm all dependencies are declared in YAML frontmatter correctly
 - [ ] Reference resolution testing: Verify all referenced files exist at specified locations
 - [ ] Structure compliance review: Confirm task follows template pattern with required sections and ordering
 - [ ] Self-contained guidance assessment: Evaluate if task provides context-free usage explanations

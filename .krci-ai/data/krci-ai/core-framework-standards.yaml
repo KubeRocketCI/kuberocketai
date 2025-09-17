@@ -59,9 +59,26 @@ task_standards:
     tag_purpose: "Internal metadata for LLM processing guidance ONLY - never in user output"
     processing_guidance: "XML tags help LLMs identify section boundaries and processing requirements"
 
-  reference_patterns:
-    inline_format: "[filename](./.krci-ai/path/to/file)"
-    validation: "All references must resolve to existing files"
+  dependency_frontmatter:
+    format: "YAML frontmatter at beginning of task files"
+    structure:
+      dependencies:
+        data:
+          - "file1.md"
+          - "krci-ai/core-framework-standards.yaml"
+        templates:
+          - "template1.md"
+          - "template2.md"
+    example: |
+      ---
+      dependencies:
+        data:
+          - business-frameworks.md
+          - krci-ai/core-sdlc-framework.md
+        templates:
+          - validation-report-template.md
+      ---
+    validation: "All dependencies must resolve to existing files"
     types:
       - templates: "./.krci-ai/templates/*.md"
       - data: "./.krci-ai/data/*.{md,yaml,json,txt,csv}"
@@ -109,7 +126,7 @@ data_standards:
     csv: "Tabular data, metrics, comparative information"
 
   framework_integration:
-    reference_support: "Content structured for inline [filename](path) references"
+    reference_support: "Content structured for frontmatter dependency references"
     agent_compatibility: "Behavioral data appropriate for agent principles"
     task_compatibility: "Technical data suitable for task instructions"
     accessibility: "Information organized for effective consumption"
@@ -119,7 +136,7 @@ validation_standards:
   static_validation:
     cli_validation: "krci-ai validate command for comprehensive checking"
     schema_compliance: "Agent YAML validation against JSON schema"
-    reference_integrity: "All [filename](path) references resolve correctly"
+    reference_integrity: "All frontmatter dependencies resolve correctly"
     component_relationships: "Agents reference existing tasks, tasks reference existing templates/data"
 
   validation_levels:
@@ -160,9 +177,9 @@ framework_constraints:
     task_usage: "Technical data for specifications, schemas, constraints"
 
   c6_reference_pattern_format:
-    rule: "Use ONLY inline markdown links [filename](path/to/file)"
-    format: "[filename](./.krci-ai/path/to/file)"
-    avoid: "Separate references sections or relative paths"
+    rule: "Use ONLY YAML frontmatter dependencies"
+    format: "dependencies section in YAML frontmatter"
+    avoid: "Inline markdown links or separate references sections"
 
   c7_static_dependency_validation:
     rule: "Agent-Task dependencies MUST be statically validated at framework design-time"

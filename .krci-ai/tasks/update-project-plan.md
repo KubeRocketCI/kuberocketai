@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+  templates:
+    - project-plan-template.md
+---
+
 # Task: Update Project Plan
 
 ## Description

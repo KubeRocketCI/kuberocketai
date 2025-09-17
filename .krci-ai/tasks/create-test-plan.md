@@ -1,3 +1,14 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - quality-metrics.md
+    - test-methodologies.md
+    - testing-strategy.md
+  templates:
+    - test-plan.md
+---
+
 # Task: Create Test Plan
 
 ## Description

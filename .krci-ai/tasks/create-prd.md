@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - prd-template.md
+---
+
 # Task: Create Product Requirements Document (PRD)
 
 ## Description

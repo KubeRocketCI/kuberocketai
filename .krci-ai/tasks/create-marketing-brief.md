@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - marketing-brief-template.md
+---
+
 # Task: Create Marketing Brief
 
 ## Description

@@ -1,3 +1,14 @@
+---
+dependencies:
+  data:
+    - architecture-principles.md
+    - design-patterns.md
+    - krci-ai/core-sdlc-framework.md
+  templates:
+    - sad-template.md
+    - architecture-review.md
+---
+
 # Task: Update Architecture Documentation
 
 ## Description

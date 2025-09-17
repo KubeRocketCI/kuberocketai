@@ -1,3 +1,10 @@
+---
+dependencies:
+  data:
+  mcp_servers:
+    - office-powerpoint
+---
+
 # Task: PowerPoint Review
 
 ## Description

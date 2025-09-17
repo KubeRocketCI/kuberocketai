@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - business-frameworks.md
+  templates:
+    - launch-materials-template.md
+---
+
 # Task: Create Launch Materials
 
 ## Description

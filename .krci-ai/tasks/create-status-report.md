@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+  templates:
+    - status-report-template.md
+---
+
 # Task: Create Project Status Report
 
 ## Description

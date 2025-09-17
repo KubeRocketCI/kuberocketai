@@ -1,3 +1,12 @@
+---
+dependencies:
+  data:
+    - project-management-methodology.md
+    - quality-metrics.md
+  templates:
+    - project-plan-template.md
+---
+
 # Task: Create Project Plan
 
 ## Description

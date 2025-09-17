@@ -1,3 +1,11 @@
+---
+dependencies:
+  data:
+    - business-frameworks.md
+    - validation-frameworks.md
+  templates:
+    - validation-report-template.md
+---
 # Task: Validate Business Value
 
 ## Description
