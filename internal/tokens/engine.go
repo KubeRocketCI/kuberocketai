@@ -45,6 +45,7 @@ type AgentTokenInfo struct {
 		Tasks     []AssetTokenInfo `json:"tasks"`
 		Templates []AssetTokenInfo `json:"templates"`
 		DataFiles []AssetTokenInfo `json:"data_files"`
+		TasksRef  []AssetTokenInfo `json:"tasks_ref"`
 	} `json:"dependencies"`
 }
 

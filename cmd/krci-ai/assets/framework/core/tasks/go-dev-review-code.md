@@ -3,8 +3,6 @@ dependencies:
   data:
     - go-coding-standards.md
     - operator-best-practices.md
-  mcp_servers:
-    - github
 ---
 
 # Task: Review Go code

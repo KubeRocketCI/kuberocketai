@@ -271,18 +271,9 @@ func parseAndValidateAgents(cmd *cobra.Command, discovery *assets.Discovery, out
 
 // collectBundleContent collects all content needed for bundle generation
 func collectBundleContent(ctx context.Context, discovery *assets.Discovery, selectedAgents []string) (*BundleContent, error) {
-	var agents []assets.Agent
-	var err error
-
-	if len(selectedAgents) == 0 {
-		// Get all agents
-		agents, err = discovery.GetAgents(ctx)
-	} else {
-		// Get specific agents
-		agents, err = discovery.GetAgentsByNames(ctx, selectedAgents)
-	}
+	agents, err := getAgentsForBundle(ctx, discovery, selectedAgents)
 	if err != nil {
-		return nil, fmt.Errorf("failed to get agents: %w", err)
+		return nil, err
 	}
 
 	content := &BundleContent{
@@ -292,43 +283,65 @@ func collectBundleContent(ctx context.Context, discovery *assets.Discovery, sele
 		DataFiles: make(map[string]string),
 	}
 
-	// Collect all task, template, and data file content
 	for _, agent := range agents {
-		// Collect task files
-		for _, taskPath := range agent.GetAllTasksPaths() {
-			if _, exists := content.Tasks[taskPath]; !exists {
-				taskContent, err := readFileContent(discovery, taskPath)
-				if err != nil {
-					return nil, fmt.Errorf("failed to read task file %s: %w", taskPath, err)
-				}
-				content.Tasks[taskPath] = taskContent
-			}
-		}
-
-		// Collect template files
-		for _, templatePath := range agent.GetAllTemplatesPaths() {
-			if _, exists := content.Templates[templatePath]; !exists {
-				templateContent, err := readFileContent(discovery, templatePath)
-				if err != nil {
-					return nil, fmt.Errorf("failed to read template file %s: %w", templatePath, err)
-				}
-				content.Templates[templatePath] = templateContent
-			}
-		}
-
-		// Collect data files
-		for _, dataFilePath := range agent.GetAllDataFilesPaths() {
-			if _, exists := content.DataFiles[dataFilePath]; !exists {
-				dataContent, err := readFileContent(discovery, dataFilePath)
-				if err != nil {
-					return nil, fmt.Errorf("failed to read data file %s: %w", dataFilePath, err)
-				}
-				content.DataFiles[dataFilePath] = dataContent
-			}
+		if err := collectAgentContent(discovery, agent, content); err != nil {
+			return nil, err
 		}
 	}
 
 	return content, nil
+}
+
+// getAgentsForBundle retrieves the appropriate agents based on selection
+func getAgentsForBundle(ctx context.Context, discovery *assets.Discovery, selectedAgents []string) ([]assets.Agent, error) {
+	if len(selectedAgents) == 0 {
+		agents, err := discovery.GetAgents(ctx)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get agents: %w", err)
+		}
+		return agents, nil
+	}
+
+	agents, err := discovery.GetAgentsByNames(ctx, selectedAgents)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get agents: %w", err)
+	}
+	return agents, nil
+}
+
+// collectAgentContent collects all content for a specific agent
+func collectAgentContent(discovery *assets.Discovery, agent assets.Agent, content *BundleContent) error {
+	if err := collectFilePaths(discovery, agent.GetAllTasksPaths(), content.Tasks); err != nil {
+		return err
+	}
+
+	if err := collectFilePaths(discovery, agent.GetAllReferencedTasksPaths(), content.Tasks); err != nil {
+		return err
+	}
+
+	if err := collectFilePaths(discovery, agent.GetAllTemplatesPaths(), content.Templates); err != nil {
+		return err
+	}
+
+	if err := collectFilePaths(discovery, agent.GetAllDataFilesPaths(), content.DataFiles); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// collectFilePaths collects content for a list of file paths into the target map
+func collectFilePaths(discovery *assets.Discovery, paths []string, target map[string]string) error {
+	for _, path := range paths {
+		if _, exists := target[path]; !exists {
+			content, err := readFileContent(discovery, path)
+			if err != nil {
+				return fmt.Errorf("failed to read file %s: %w", path, err)
+			}
+			target[path] = content
+		}
+	}
+	return nil
 }
 
 // readFileContent reads file content using the discovery filesystem

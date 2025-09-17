@@ -23,6 +23,7 @@ type TaskDependenciesYamlRepresentation struct {
 	Dependencies struct {
 		Templates  []string `yaml:"templates"`
 		DataFiles  []string `yaml:"data"`
+		Tasks      []string `yaml:"tasks"`
 		McpServers []string `yaml:"mcp_servers"`
 	} `yaml:"dependencies"`
 }

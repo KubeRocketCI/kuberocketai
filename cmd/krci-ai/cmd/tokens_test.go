@@ -181,6 +181,7 @@ func TestOutputAgentTokensTable(t *testing.T) {
 			Tasks     []tokens.AssetTokenInfo `json:"tasks"`
 			Templates []tokens.AssetTokenInfo `json:"templates"`
 			DataFiles []tokens.AssetTokenInfo `json:"data_files"`
+			TasksRef  []tokens.AssetTokenInfo `json:"tasks_ref"`
 		}{
 			Tasks: []tokens.AssetTokenInfo{
 				{Path: "create-story.md", Tokens: 300},
@@ -190,6 +191,9 @@ func TestOutputAgentTokensTable(t *testing.T) {
 			},
 			DataFiles: []tokens.AssetTokenInfo{
 				{Path: "best-practices.md", Tokens: 500},
+			},
+			TasksRef: []tokens.AssetTokenInfo{
+				{Path: "create-story.md", Tokens: 300},
 			},
 		},
 	}
@@ -228,6 +232,7 @@ func TestOutputAgentTokensTableNoDependencies(t *testing.T) {
 			Tasks     []tokens.AssetTokenInfo `json:"tasks"`
 			Templates []tokens.AssetTokenInfo `json:"templates"`
 			DataFiles []tokens.AssetTokenInfo `json:"data_files"`
+			TasksRef  []tokens.AssetTokenInfo `json:"tasks_ref"`
 		}{}, // No dependencies
 	}
 

@@ -25,6 +25,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"golang.org/x/sync/errgroup"
+
 	"github.com/KubeRocketCI/kuberocketai/internal/utils"
 )
 
@@ -89,7 +91,7 @@ func (i *Installer) Install() error {
 		i.addAgentDependencies(agent, filesFilter, prefix)
 	}
 
-	return i.copyEmbeddedDir(filesFilter)
+	return i.copyEmbeddedFiles(context.TODO(), filesFilter)
 }
 
 // InstallSelective installs only specified agents and their dependencies using existing bundle logic
@@ -113,7 +115,7 @@ func (i *Installer) InstallSelective(agentNames []string) error {
 		i.addAgentDependencies(agent, filesFilter, prefix)
 	}
 
-	return i.copyEmbeddedDir(filesFilter)
+	return i.copyEmbeddedFiles(context.TODO(), filesFilter)
 }
 
 // validateAgentsFound checks if all requested agents were found
@@ -146,53 +148,65 @@ func (i *Installer) addAgentDependencies(agent Agent, filesFilter map[string]str
 	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllDataFilesPaths(), trimPrefix)))
 	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllTemplatesPaths(), trimPrefix)))
 	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllTasksPaths(), trimPrefix)))
+	maps.Insert(filesFilter, maps.All(utils.MapSliceToSet(agent.GetAllReferencedTasksPaths(), trimPrefix)))
 }
 
-// copyEmbeddedDir copies a directory from an embed.FS to the local filesystem.
-// If filesFilter is empty, copies all files. Otherwise, only copies files whose
-// paths (relative to src) are in filesFilter.
-func (i *Installer) copyEmbeddedDir(filesFilter map[string]struct{}) error {
-	return fs.WalkDir(i.embeddedAssets, EmbeddedPrefix, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return fmt.Errorf("failed to walk embedded assets: %w", err)
-		}
+// copyEmbeddedFiles copies embedded files to the target directory.
+func (i *Installer) copyEmbeddedFiles(ctx context.Context, filepaths map[string]struct{}) error {
+	g, ctx := errgroup.WithContext(ctx)
+	paths := make(chan string)
 
-		relPath, err := filepath.Rel(EmbeddedPrefix, path)
-		if err != nil {
-			return fmt.Errorf("failed to get relative path for %s: %w", path, err)
-		}
-
-		targetPath := filepath.Join(i.krciPath, relPath)
-
-		if d.IsDir() {
-			// Don’t blindly create the directory yet.
-			// Only create it if we later copy a file inside.
-			return nil
-		}
-
-		// If filter is set, skip files not in filter
-		if len(filesFilter) > 0 {
-			if _, ok := filesFilter[relPath]; !ok {
-				return nil
+	g.Go(func() error {
+		defer close(paths)
+		for path := range filepaths {
+			select {
+			case paths <- path:
+			case <-ctx.Done():
+				return ctx.Err()
 			}
-		}
-
-		// Ensure parent directory exists before writing
-		if err = os.MkdirAll(filepath.Dir(targetPath), DirectoryPermissions); err != nil {
-			return fmt.Errorf("failed to create parent directory for %s: %w", targetPath, err)
-		}
-
-		data, err := fs.ReadFile(i.embeddedAssets, path)
-		if err != nil {
-			return fmt.Errorf("failed to read file %s: %w", path, err)
-		}
-
-		if err := os.WriteFile(targetPath, data, FilePermissions); err != nil {
-			return fmt.Errorf("failed to write file %s: %w", targetPath, err)
 		}
 
 		return nil
 	})
+
+	// Configure worker count based on workload size
+	fileCount := len(filepaths)
+	workers := min(max(fileCount/10, 1), 10) // 1-10 workers based on file count
+	for range workers {
+		g.Go(func() error {
+			for path := range paths {
+				select {
+				case <-ctx.Done():
+					return ctx.Err()
+				default:
+				}
+
+				targetPath := filepath.Join(i.krciPath, path)
+
+				if err := os.MkdirAll(filepath.Dir(targetPath), DirectoryPermissions); err != nil {
+					return fmt.Errorf("failed to create parent directory for %s: %w", targetPath, err)
+				}
+
+				embeddedPath := filepath.Join(EmbeddedPrefix, path)
+				data, err := fs.ReadFile(i.embeddedAssets, embeddedPath)
+				if err != nil {
+					return fmt.Errorf("failed to read embedded file %s (target: %s): %w", embeddedPath, targetPath, err)
+				}
+
+				if err := os.WriteFile(targetPath, data, FilePermissions); err != nil {
+					return fmt.Errorf("failed to write file to %s (source: %s): %w", targetPath, embeddedPath, err)
+				}
+			}
+
+			return nil
+		})
+	}
+
+	if err := g.Wait(); err != nil {
+		return fmt.Errorf("failed to copy embedded files: %w", err)
+	}
+
+	return nil
 }
 
 // createDirectory creates a directory if it doesn't exist
