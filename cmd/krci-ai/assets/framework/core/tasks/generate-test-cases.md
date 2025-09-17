@@ -22,6 +22,7 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 - Story clarity: Stories with well-defined acceptance criteria available for test case generation
 - Testing standards: Understanding of test case writing standards from [testing-standards.md](./.krci-ai/data/testing-standards.md)
 - Quality metrics: Familiarity with test coverage requirements from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
+</prerequisites>
 
 ## Instructions
 

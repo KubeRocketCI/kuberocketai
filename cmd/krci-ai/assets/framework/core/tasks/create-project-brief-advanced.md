@@ -42,6 +42,7 @@ Use Advanced Flow When:
 - Time available for multi-session validation process (2-4 weeks)
 - Access to stakeholders for interviews and validation
 - Budget/timeline justifies enhanced validation effort
+</prerequisites>
 
 ## Instructions
 

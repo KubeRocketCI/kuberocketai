@@ -17,6 +17,7 @@ Review and enhance user story against the story template to ensure completeness 
 - Template available: Story template at `./.krci-ai/templates/story.md` for reference
 - Role context: Understanding appropriate to your role (PO: business clarity, Dev: technical details, Architect: system design)
 - Story knowledge: Familiarity with story structure and requirements for implementation readiness
+</prerequisites>
 
 ## Instructions
 

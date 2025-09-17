@@ -20,6 +20,7 @@ Create comprehensive user journey maps that visualize user experiences and ident
 - User personas defined: Customer segments or user types identified from requirements gathering
 - Business process understanding: Current user workflows and touchpoints mapped
 - User research access: Availability of user feedback, analytics data, and customer insights
+</prerequisites>
 
 ## Instructions
 

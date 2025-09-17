@@ -21,6 +21,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Reference documents: Access to PRD (`/docs/prd/prd.md`) and Epics (`/docs/epics/`) for validation
 - Architecture standards: Understanding of organizational architecture principles and guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md)
 - Review criteria: Clear understanding of quality gates and acceptance criteria
+</prerequisites>
 
 ## Instructions
 

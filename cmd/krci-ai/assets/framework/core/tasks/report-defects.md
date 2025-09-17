@@ -20,6 +20,7 @@ Create comprehensive defect reports and quality assessments based on testing exe
 - Testing evidence: Screenshots, logs, and supporting documentation collected during test execution
 - Quality standards: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 - Reporting tools: Access to defect tracking system and reporting templates
+</prerequisites>
 
 ## Instructions
 
