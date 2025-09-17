@@ -33,17 +33,6 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 - Visual assets and brand guidelines (for brand-consistent presentations)
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/pitch-deck-template.md
-- /docs/prd/prd.md (primary source for product information)
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing. If PRD is incomplete or missing sections, proceed with available information and gather missing details through user interaction.
-
 ## Instructions
 
 <instructions>

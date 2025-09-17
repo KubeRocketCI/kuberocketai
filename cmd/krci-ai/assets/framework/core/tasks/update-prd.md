@@ -20,16 +20,6 @@ Update an existing PRD with new requirements, scope changes, or refined business
 - Change trigger: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
 - Stakeholder input: Understanding of what specifically needs to change and why
 - Epic/Story review: Current understanding of feature groupings and requirements structure
-
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/prd-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

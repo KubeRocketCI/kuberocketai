@@ -21,17 +21,6 @@ Create comprehensive defect reports and quality assessments based on testing exe
 - Quality standards: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 - Reporting tools: Access to defect tracking system and reporting templates
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/quality-metrics.md
-- ./.krci-ai/templates/defect-report.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

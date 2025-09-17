@@ -20,16 +20,6 @@ Review and validate existing tasks for framework compliance, XML tag usage, and 
 - Review authority: Knowledge of framework patterns to provide actionable feedback
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-- ./.krci-ai/templates/krci-ai/core-task-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Validate XML guidance system: Ensure task uses proper XML tags for LLM section identification and guidance
 2. Validate dependencies: Confirm YAML frontmatter lists all referenced files under data/templates sections

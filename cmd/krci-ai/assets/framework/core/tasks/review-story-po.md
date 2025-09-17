@@ -19,14 +19,6 @@ Review and validate user story from Product Owner perspective to ensure business
 - Business validation authority: Product Owner approval rights for story advancement
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/templates/story.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

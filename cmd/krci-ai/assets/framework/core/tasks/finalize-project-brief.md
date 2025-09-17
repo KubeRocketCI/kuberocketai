@@ -22,15 +22,6 @@ This task may reference [validation frameworks](./.krci-ai/data/validation-frame
 - Assumption tracker updated with current status
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- /docs/prd/project-brief.md (refined brief)
-- /docs/prd/brief-validation-*.md (validation reports)
-- /docs/prd/brief-assumptions.md (assumption tracker)
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-
 ## Instructions
 
 <instructions>

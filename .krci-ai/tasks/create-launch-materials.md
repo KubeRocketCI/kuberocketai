@@ -23,18 +23,6 @@ Create comprehensive product launch campaign materials including press releases,
 - Visual brand assets and guidelines available
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/launch-materials-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
-## Instructions
-
 <instructions>
 1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Launch Materials dependencies
 2. Apply campaign frameworks: Use proven launch methodologies for maximum market impact

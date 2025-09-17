@@ -20,16 +20,6 @@ Review and validate existing templates for variable consistency, LLM guidance ef
 - LLM processing: Knowledge of how templates guide content generation and framework integration
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/templates/krci-ai/core-template-template.md
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Validate variable system: Check `{{variable}}` placeholder consistency and naming patterns with type appropriateness
 2. Review XML guidance: Assess `<instructions>` tags for effective LLM processing guidance and content generation

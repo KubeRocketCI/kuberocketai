@@ -20,16 +20,6 @@ Guide user through creating framework-compliant tasks following KubeRocketAI pat
 - Framework patterns understood: Knowledge of XML tags, frontmatter dependencies, and validation requirements
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/templates/krci-ai/core-task-template.md
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Apply XML guidance system: Use XML tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM section identification and guidance
 2. Follow naming convention: Use descriptive task names with appropriate prefixes (e.g., "core-" for framework tasks)

@@ -22,16 +22,6 @@ Create a comprehensive project brief defining the foundation for product develop
 - Strategic goals and constraints understood
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/project-brief-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

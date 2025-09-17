@@ -23,19 +23,6 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 - Testing standards: Understanding of test case writing standards from [testing-standards.md](./.krci-ai/data/testing-standards.md)
 - Quality metrics: Familiarity with test coverage requirements from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/testing-standards.md
-- ./.krci-ai/data/quality-metrics.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/test-methodologies.md
-- ./.krci-ai/templates/test-cases.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

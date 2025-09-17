@@ -20,16 +20,6 @@ Guide user through creating framework-compliant templates for consistent LLM out
 - Usage context: Understanding of which tasks will reference this template
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/templates/krci-ai/core-template-template.md
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Apply template structure: Use markdown format with `{{variable}}` placeholders for dynamic content substitution
 2. Include XML guidance tags: Add `<instructions>` sections for LLM processing guidance and content generation

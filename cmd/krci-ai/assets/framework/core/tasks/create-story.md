@@ -20,15 +20,7 @@ Create user-focused requirements with implementation tasks and acceptance criter
 - Story scope defined: Specific functionality this Story will deliver
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/prioritization-frameworks.md
-- ./.krci-ai/templates/story.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
+## Instructions
 
 <instructions>
 1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story dependencies and naming conventions

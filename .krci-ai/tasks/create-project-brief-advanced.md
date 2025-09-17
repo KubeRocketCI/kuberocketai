@@ -43,19 +43,6 @@ This task leverages [validation frameworks](./.krci-ai/data/validation-framework
 - Access to stakeholders for interviews and validation
 - Budget/timeline justifies enhanced validation effort
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/validation-frameworks.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/templates/project-brief-template-advanced.md
-- ./.krci-ai/tasks/gather-project-context.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

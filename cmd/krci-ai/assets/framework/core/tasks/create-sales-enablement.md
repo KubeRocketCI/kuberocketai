@@ -23,16 +23,6 @@ Create comprehensive sales enablement package including sales scripts, objection
 - Competitive landscape analysis completed
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/sales-enablement-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

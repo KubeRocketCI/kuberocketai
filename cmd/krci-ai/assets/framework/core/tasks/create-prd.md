@@ -22,16 +22,6 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 - Technical feasibility assessment completed (if complex features)
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/prd-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

@@ -21,15 +21,6 @@ Review and validate user story from Architect perspective to ensure system desig
 - System knowledge: Familiarity with existing system components, interfaces, and constraints
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/templates/story.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

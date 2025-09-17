@@ -22,18 +22,6 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 - Test environment: Testing environment configured with required test data and dependencies
 - Testing tools: Access to testing tools, browsers, and validation resources
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/test-methodologies.md
-- ./.krci-ai/templates/test-report.md
-- ./.krci-ai/templates/defect-report.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

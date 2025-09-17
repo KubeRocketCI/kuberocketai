@@ -24,17 +24,7 @@ Create comprehensive test plan and strategy for Stories and Epic features, ensur
 - Quality metrics: Familiarity with quality benchmarks from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/testing-strategy.md
-- ./.krci-ai/data/quality-metrics.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/test-methodologies.md
-- ./.krci-ai/templates/test-plan.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
+## Instructions
 
 <instructions>
 1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing dependencies and quality gates
@@ -42,8 +32,6 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 3. Format output: Use [test-plan.md](./.krci-ai/templates/test-plan.md) for structured test planning
 4. Ensure coverage: Address all Story acceptance criteria and Epic business requirements
 </instructions>
-
-## Instructions
 
 ## Output Format
 

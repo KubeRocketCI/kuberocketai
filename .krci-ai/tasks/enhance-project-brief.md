@@ -30,17 +30,6 @@ This task uses the [advanced project brief template](./.krci-ai/templates/projec
 - Time available for comprehensive validation process
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- /docs/prd/project-brief.md (existing simple brief)
-- ./.krci-ai/templates/project-brief-template-advanced.md (advanced template)
-- ./.krci-ai/data/validation-frameworks.md
-- ./.krci-ai/tasks/gather-project-context.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

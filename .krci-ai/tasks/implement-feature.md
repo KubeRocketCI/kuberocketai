@@ -21,16 +21,6 @@ Implement Story requirements according to Architecture specifications and coding
 - Dependencies available: Required libraries, tools, and systems accessible
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/coding-standards.md
-- ./.krci-ai/data/best-practices.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

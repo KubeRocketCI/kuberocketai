@@ -20,17 +20,6 @@ Systematically document business rules and constraints that govern system behavi
 - Stakeholder access: Subject matter experts and decision makers available for rule validation
 - Regulatory context: Compliance requirements and organizational policies understood
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/analysis-methodologies.md
-- ./.krci-ai/templates/business-rules.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

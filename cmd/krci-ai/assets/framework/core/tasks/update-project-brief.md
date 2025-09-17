@@ -20,16 +20,6 @@ Update an existing project brief with new information, scope changes, or refined
 - Change trigger: Clear reason for update (strategic shifts, market changes, new insights, stakeholder feedback, resource changes)
 - Impact assessment: Understanding of how changes affect dependent PRD and downstream artifacts
 - Stakeholder buy-in: Key stakeholders aware of planned strategic changes
-
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/project-brief-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

@@ -20,16 +20,6 @@ Guide user through creating framework-compliant agents following KubeRocketAI sc
 - Task dependencies: Tasks that agent will reference are created or planned
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/templates/krci-ai/core-agent-template.yaml
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Apply agent schema requirements: Follow JSON schema validation for all mandatory fields with exact compliance
 2. Include critical activation prompt: Use standard activation prompt pattern with customization field priority

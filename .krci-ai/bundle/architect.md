@@ -85,17 +85,6 @@ Create comprehensive system architecture documentation that translates PRD requi
 - [ ] **Architecture principles**: Understanding of organizational architecture standards
 - [ ] **Technology constraints**: Awareness of technology stack and platform limitations
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/common/sdlc-framework.md
-- ./.krci-ai/data/architecture-principles.md
-- ./.krci-ai/data/design-patterns.md
-- ./.krci-ai/templates/sad-template.md
-
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
-
 ## Instructions
 
 1. **Follow SDLC workflow**: Reference [sdlc-framework.md](./.krci-ai/data/common/sdlc-framework.md) for architecture documentation dependencies and quality gates
@@ -1816,4 +1805,3 @@ Standard patterns for authentication and authorization.
 - **Weighted**: Route based on server capacity
 
 ==== END FILE ====
-

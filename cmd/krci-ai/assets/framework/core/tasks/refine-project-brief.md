@@ -24,17 +24,6 @@ This task uses [validation frameworks](./.krci-ai/data/validation-frameworks.md)
 - Stakeholder feedback on validation results available
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- /docs/prd/project-brief.md (source document)
-- /docs/prd/brief-validation-*.md (validation reports)
-- /docs/prd/brief-assumptions.md (assumption tracker)
-- ./.krci-ai/templates/project-brief-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

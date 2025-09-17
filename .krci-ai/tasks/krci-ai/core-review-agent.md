@@ -20,16 +20,6 @@ Review and validate existing agents for framework compliance, schema adherence, 
 - Validation tools: Ability to run `krci-ai validate` for automated schema checking
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/templates/krci-ai/core-agent-template.yaml
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Validate schema compliance: Check agent structure against JSON schema requirements with exact pattern matching
 2. Review critical principles: Ensure XML tag handling and customization priority principles included verbatim

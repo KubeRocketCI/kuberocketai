@@ -20,16 +20,6 @@ Update existing epic with new requirements, scope additions, or refinements whil
 - Change justification: Clear business reason for epic update (new PRD requirements, scope clarification, story feedback)
 - Impact assessment: Understanding of how changes affect in-progress or completed Stories
 - Stakeholder approval: Product Owner and relevant stakeholders have approved the update scope
-
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/prioritization-frameworks.md
-- ./.krci-ai/templates/epic.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

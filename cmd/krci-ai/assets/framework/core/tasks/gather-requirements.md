@@ -21,16 +21,6 @@ Systematically gather and analyze business requirements from stakeholders to enh
 - Business context: Project scope and objectives defined from Project Brief
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/analysis-methodologies.md
-- ./.krci-ai/templates/requirements-doc.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

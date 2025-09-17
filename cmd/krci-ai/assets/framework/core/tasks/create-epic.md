@@ -22,17 +22,6 @@ Create clear epic with problem statement, goal, scope, and implementation approa
 - Epic scope defined: Boundaries of what this Epic includes and excludes
 </prerequisites>
 
-### Reference Assets
-
-<reference_assets>
-Dependencies:
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/prioritization-frameworks.md
-- ./.krci-ai/templates/epic.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</reference_assets>
-
 ## Instructions
 
 <instructions>
@@ -65,7 +54,7 @@ Before epic creation, verify:
 ### Validation Commands
 
 Post-creation verification:
-- Goal format: echo "[goal_text]" | grep -E "Enable .* for [0-9]+% .* within .*"
+- Goal format: echo "[goal_text]" | grep -E "Enable .*for [0-9]+% .* within .*"
 - Dependencies structure: grep -E "^(Epic|System|External) Dependencies:" [epic_file]
 - Acceptance commands: grep -E "Command: \`.*\`" [epic_file]
 </template_enforcement>
@@ -96,6 +85,7 @@ Post-creation verification:
 ## Execution Checklist
 
 <execution_checklist>
+
 ### Discovery Phase
 
 - PRD analysis: Review BR/NFR requirements to identify Epic scope
@@ -130,6 +120,7 @@ Post-creation verification:
 ## Content Guidelines
 
 <content_guidelines>
+
 ### Quality Principles for LLM Self-Evaluation
 
 - Problem-Focused: Epic addresses specific user problems from PRD with quantifiable impact

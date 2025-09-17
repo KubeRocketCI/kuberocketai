@@ -18,15 +18,6 @@ Execute comprehensive framework validation using CLI tools and manual inspection
 - Issue resolution: Ability to address validation findings and implement fixes
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Execute CLI validation: Run `krci-ai validate` with appropriate verbosity for comprehensive checking
 2. Analyze validation results: Interpret automated validation findings and categorize issues

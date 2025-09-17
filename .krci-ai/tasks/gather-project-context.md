@@ -25,17 +25,6 @@ This task leverages [validation frameworks](./.krci-ai/data/validation-framework
 - Access to existing research, documentation, or data sources
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/validation-frameworks.md
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/templates/context-gathering-guide-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

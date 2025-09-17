@@ -24,17 +24,6 @@ This validation uses [validation frameworks](./.krci-ai/data/validation-framewor
 - Market segmentation data or competitive user research
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/validation-frameworks.md (Jobs-to-be-Done section)
-- ./.krci-ai/data/business-frameworks.md
-- ./.krci-ai/templates/validation-report-template.md
-- /docs/prd/project-brief.md (source document)
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

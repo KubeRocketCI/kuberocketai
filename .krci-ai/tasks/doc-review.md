@@ -19,15 +19,6 @@ Review a certain page requested by a user, applying professional technical writi
 - Project context: Understanding of project documentation style and standards
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/templates/documentation-review.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

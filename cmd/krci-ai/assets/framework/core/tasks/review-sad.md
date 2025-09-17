@@ -22,18 +22,6 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Architecture standards: Understanding of organizational architecture principles and guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md)
 - Review criteria: Clear understanding of quality gates and acceptance criteria
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/templates/sad-template.md
-- ./.krci-ai/data/architecture-principles.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/templates/architecture-review.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

@@ -21,16 +21,6 @@ Analyze current business processes and workflows to identify improvement opportu
 - Analysis tools: Process mapping tools and performance measurement capabilities prepared
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/analysis-methodologies.md
-- ./.krci-ai/templates/process-map.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

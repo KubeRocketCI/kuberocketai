@@ -21,15 +21,6 @@ Review and validate user story from Developer perspective to ensure technical im
 - Development environment: Access to existing codebase and technical documentation
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/templates/story.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

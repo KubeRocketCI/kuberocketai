@@ -18,15 +18,6 @@ Review and enhance user story against the story template to ensure completeness 
 - Role context: Understanding appropriate to your role (PO: business clarity, Dev: technical details, Architect: system design)
 - Story knowledge: Familiarity with story structure and requirements for implementation readiness
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/templates/story.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

@@ -22,17 +22,6 @@ Update existing multi-file architecture documentation to reflect new requirement
 - Change trigger: Clear reason for update (PRD changes, Epic updates, technical constraints)
 - Updated requirements: New or modified BR/NFR requirements from PRD updates
 - Impact scope: Understanding of which architectural sections and components are affected
-
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/templates/sad-template.md
-- ./.krci-ai/data/architecture-principles.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/templates/architecture-review.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions

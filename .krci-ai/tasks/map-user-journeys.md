@@ -21,17 +21,6 @@ Create comprehensive user journey maps that visualize user experiences and ident
 - Business process understanding: Current user workflows and touchpoints mapped
 - User research access: Availability of user feedback, analytics data, and customer insights
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/analysis-methodologies.md
-- ./.krci-ai/templates/user-journey.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>

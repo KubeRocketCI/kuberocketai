@@ -23,17 +23,6 @@ Create comprehensive system architecture documentation that translates PRD requi
 - Technology constraints: Awareness of technology stack and platform limitations
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/architecture-principles.md
-- ./.krci-ai/data/design-patterns.md
-- ./.krci-ai/templates/sad-template.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 ## Instructions
 
 <instructions>

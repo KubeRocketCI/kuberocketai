@@ -20,16 +20,6 @@ Guide user through creating framework data files that provide knowledge, standar
 - Content type identified: Understanding of appropriate file format for data content
 </prerequisites>
 
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-framework-standards.yaml
-- ./.krci-ai/templates/krci-ai/core-data-template.md
-- ./.krci-ai/data/krci-ai/core-validation-checklist.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-
 <instructions>
 1. Determine data format: Choose appropriate format (.md, .yaml, .json, .txt, .csv) based on content type and usage
 2. Organize data structure: Create logical organization following framework patterns for reference integration

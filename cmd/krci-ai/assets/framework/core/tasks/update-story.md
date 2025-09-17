@@ -20,16 +20,6 @@ Update existing user story with new requirements, scope refinements, or implemen
 - Change justification: Clear business reason for story update (new requirements, scope clarification, task feedback)
 - Impact assessment: Understanding of how changes affect in-progress or completed Tasks/Subtasks
 - Epic alignment: Product Owner confirms updates maintain Epic goals and traceability
-
-### Reference Assets
-
-Dependencies:
-
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-- ./.krci-ai/data/prioritization-frameworks.md
-- ./.krci-ai/templates/story.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
 </prerequisites>
 
 ## Instructions
