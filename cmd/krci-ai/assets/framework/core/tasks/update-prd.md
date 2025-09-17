@@ -47,11 +47,11 @@ Before making ANY changes to the PRD, you MUST:
 
 ## Output Format
 
-- **Location**: Updates existing `/docs/prd/prd.md` (EXACT path and filename)
-- **Length**: Maintain 6-8 pages maximum
-- **Requirements Format**: Maintain BR1, BR2, BR3... and NFR1, NFR2, NFR3... numbering with P0/P1/P2 priority indicators and epic-level feature definitions
-- **Impact Documentation**: Clear notes on what changed and feature impact
-- **Downstream Updates**: List of feature areas requiring updates
+- Location: Updates existing `/docs/prd/prd.md` (EXACT path and filename)
+- Length: Maintain 6-8 pages maximum
+- Requirements Format: Maintain BR1, BR2, BR3... and NFR1, NFR2, NFR3... numbering with P0/P1/P2 priority indicators and epic-level feature definitions
+- Impact Documentation: Clear notes on what changed and feature impact
+- Downstream Updates: List of feature areas requiring updates
 
 ## Success Criteria
 
@@ -69,19 +69,19 @@ Before making ANY changes to the PRD, you MUST:
 
 ### User Consultation Phase (MANDATORY FIRST STEP)
 
-- [ ] **User interview**: Ask user what specific changes they want to make to the PRD
-- [ ] **Change justification**: Understand why these changes are needed (stakeholder feedback, new requirements, market changes, etc.)
-- [ ] **Scope definition**: Clarify which PRD sections need updating and what specific content changes are required
-- [ ] **Impact discussion**: Explain potential impact on existing features to user
-- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
-- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+- User interview: Ask user what specific changes they want to make to the PRD
+- Change justification: Understand why these changes are needed (stakeholder feedback, new requirements, market changes, etc.)
+- Scope definition: Clarify which PRD sections need updating and what specific content changes are required
+- Impact discussion: Explain potential impact on existing features to user
+- User approval: Get explicit user confirmation before proceeding with any changes
+- Change plan agreement: Confirm the proposed approach with user before implementation
 
 ### Assessment Phase (ONLY AFTER USER APPROVAL)
 
-- [ ] **Change scope**: Identify which sections need updating based on user requirements
-- [ ] **Impact analysis**: Evaluate how changes affect existing feature definitions and requirements structure
-- [ ] **Stakeholder review**: Confirm who needs to approve these changes before implementation
-- [ ] **Requirements mapping**: Understand which BR/NFR numbers and priorities are affected
+- Change scope: Identify which sections need updating based on user requirements
+- Impact analysis: Evaluate how changes affect existing feature definitions and requirements structure
+- Stakeholder review: Confirm who needs to approve these changes before implementation
+- Requirements mapping: Understand which BR/NFR numbers and priorities are affected
 
 ### Requirements Phase
 
@@ -94,10 +94,10 @@ Before making ANY changes to the PRD, you MUST:
 
 ### Update Phase
 
-- [ ] **Section updates**: Modify specific sections using [prd-template.md](./.krci-ai/templates/prd-template.md) structure
-- [ ] **Content integration**: Ensure changes are properly integrated without breaking flow
-- [ ] **Length verification**: Confirm document remains 6-8 pages maximum
-- [ ] **Quality validation**: Verify all changes maintain PRD quality standards
+- Section updates: Modify specific sections using [prd-template.md](./.krci-ai/templates/prd-template.md) structure
+- Content integration: Ensure changes are properly integrated without breaking flow
+- Length verification: Confirm document remains 6-8 pages maximum
+- Quality validation: Verify all changes maintain PRD quality standards
 
 ### Change Management Phase
 
@@ -120,13 +120,13 @@ Before making ANY changes to the PRD, you MUST:
 
 ### LLM Error Prevention Checklist
 
-- **NEVER**: Start making PRD changes without explicit user consultation and approval
-- **NEVER**: Assume what changes the user wants - always ask for specific requirements
-- **Avoid**: Breaking existing BR/NFR numbering that features depend on
-- **Avoid**: Making changes without assessing feature impact
-- **Avoid**: Updating requirements without proper stakeholder approval process
-- **Always**: Wait for user confirmation before proceeding with any edits
-- **Reference**: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting consistency
+- NEVER: Start making PRD changes without explicit user consultation and approval
+- NEVER: Assume what changes the user wants - always ask for specific requirements
+- Avoid: Breaking existing BR/NFR numbering that features depend on
+- Avoid: Making changes without assessing feature impact
+- Avoid: Updating requirements without proper stakeholder approval process
+- Always: Wait for user confirmation before proceeding with any edits
+- Reference: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting consistency
 
 ### SDLC Integration Context
 

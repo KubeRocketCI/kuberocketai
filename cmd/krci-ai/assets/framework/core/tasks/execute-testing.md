@@ -34,7 +34,7 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 ## Output Format
 
 <output_format>
-**Test Execution Results** - Create comprehensive testing documentation:
+Test Execution Results - Create comprehensive testing documentation:
 
 - Test execution report: Complete test results using [test-report.md](./.krci-ai/templates/test-report.md) template
 - Test case results: Pass/fail status for each executed test case with detailed observations
@@ -93,7 +93,7 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 
 ## Content Guidelines
 
-### 🎯 **Test Execution Focus Areas:**
+### 🎯 Test Execution Focus Areas:
 
 <test_execution_focus>
 
@@ -112,7 +112,7 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 - Improvement Recommendations: Suggest areas for quality improvement or additional testing
 </test_execution_focus>
 
-### ✅ **Quality Standards:**
+### ✅ Quality Standards:
 
 <quality_standards>
 - Systematic Execution: All test cases executed following documented procedures
@@ -123,7 +123,7 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 - Standards Compliant: Test execution follows testing standards and quality procedures
 </quality_standards>
 
-### ❌ **Common Pitfalls to Avoid:**
+### ❌ Common Pitfalls to Avoid:
 
 <common_pitfalls>
 - Executing tests without proper environment verification and setup
@@ -134,7 +134,7 @@ Execute test cases systematically to validate Story acceptance criteria and Epic
 - Executing tests without understanding acceptance criteria and validation requirements
 </common_pitfalls>
 
-### 🎯 **Story Completion Integration:**
+### 🎯 Story Completion Integration:
 
 <story_integration>
 This test execution should enable Story completion decisions by providing:

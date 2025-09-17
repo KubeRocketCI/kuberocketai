@@ -11,7 +11,7 @@ dependencies:
 
 ## Description
 
-Create a comprehensive project brief defining the foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. This document serves as the **root artifact** in the SDLC framework that defines the essential foundation for all downstream artifacts, answers fundamental questions before solution development begins, and provides strategic context for PRD creation.
+Create a comprehensive project brief defining the foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. This document serves as the root artifact in the SDLC framework that defines the essential foundation for all downstream artifacts, answers fundamental questions before solution development begins, and provides strategic context for PRD creation.
 
 ## Prerequisites
 
@@ -32,9 +32,9 @@ Create a comprehensive project brief defining the foundation for product develop
 
 ## Output Format
 
-- **Location**: `/docs/prd/project-brief.md` (EXACT path and filename)
-- **Length**: 2-3 pages maximum for executive consumption
-- **Downstream Enable**: Enables PRD creation at `/docs/prd/prd.md`
+- Location: `/docs/prd/project-brief.md` (EXACT path and filename)
+- Length: 2-3 pages maximum for executive consumption
+- Downstream Enable: Enables PRD creation at `/docs/prd/prd.md`
 
 ## Success Criteria
 
@@ -81,17 +81,17 @@ Create a comprehensive project brief defining the foundation for product develop
 
 ### Quality Principles for LLM Self-Evaluation
 
-- **Problem Focus**: Use concrete user scenarios and quantified evidence, not solution-oriented statements
-- **User Specificity**: Define target users specifically enough to guide solution design decisions
-- **Measurable Success**: Create specific, testable outcomes with realistic timelines and evidence
-- **Evidence-Based**: Support all statements with data, research, and quantified metrics
+- Problem Focus: Use concrete user scenarios and quantified evidence, not solution-oriented statements
+- User Specificity: Define target users specifically enough to guide solution design decisions
+- Measurable Success: Create specific, testable outcomes with realistic timelines and evidence
+- Evidence-Based: Support all statements with data, research, and quantified metrics
 
 ### LLM Error Prevention Checklist
 
-- **Avoid**: Solution-oriented problem statements (focus on user pain, not missing features)
-- **Avoid**: Vague user descriptions without usage patterns and demographics
-- **Avoid**: Unmeasurable success metrics or aspirational statements without evidence
-- **Reference**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting guidance and examples
+- Avoid: Solution-oriented problem statements (focus on user pain, not missing features)
+- Avoid: Vague user descriptions without usage patterns and demographics
+- Avoid: Unmeasurable success metrics or aspirational statements without evidence
+- Reference: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting guidance and examples
 
 ### SDLC Integration Context
 

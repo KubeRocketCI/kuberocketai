@@ -25,13 +25,13 @@ Update an existing project charter to reflect approved changes, new information,
 ## Reference Assets
 
 <reference_assets>
-**Primary Dependencies:**
+Primary Dependencies:
 - Current project charter document
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [project-charter-template.md](./.krci-ai/templates/project-charter-template.md)
 - Change control procedures from methodology
 
-**Optional Supporting Materials:**
+Optional Supporting Materials:
 - Change request documentation
 - Stakeholder feedback and requirements updates
 - Updated business case or strategic direction
@@ -42,13 +42,13 @@ Update an existing project charter to reflect approved changes, new information,
 
 ### 1. Change Analysis and Impact Assessment
 
-**Review Update Requirements:**
+Review Update Requirements:
 - Analyze change request or update rationale thoroughly
 - Identify specific charter sections requiring modification
 - Assess impact on project scope, timeline, budget, and resources
 - Determine stakeholder communication and approval requirements
 
-**Impact Assessment:**
+Impact Assessment:
 - Evaluate effect on project objectives and success criteria
 - Assess impact on stakeholder roles and responsibilities
 - Review implications for resource allocation and Project Manager authority
@@ -56,13 +56,13 @@ Update an existing project charter to reflect approved changes, new information,
 
 ### 2. Charter Revision Process
 
-**Document Review:**
+Document Review:
 - Review current charter for accuracy and completeness
 - Identify sections requiring updates based on change analysis
 - Ensure consistency between modified and unchanged sections
 - Validate that updates maintain charter integrity and purpose
 
-**Content Updates:**
+Content Updates:
 - Modify affected sections using tracked changes for transparency
 - Update project scope, deliverables, or success criteria as needed
 - Revise stakeholder information, roles, or responsibilities
@@ -71,13 +71,13 @@ Update an existing project charter to reflect approved changes, new information,
 
 ### 3. Stakeholder Validation
 
-**Review Coordination:**
+Review Coordination:
 - Schedule review sessions with affected stakeholders
 - Present changes with clear rationale and impact analysis
 - Gather feedback and address concerns or questions
 - Obtain necessary approvals before finalizing updates
 
-**Change Authorization:**
+Change Authorization:
 - Follow organizational change control procedures
 - Document approval decisions and authorization dates
 - Update charter with formal approval signatures
@@ -85,13 +85,13 @@ Update an existing project charter to reflect approved changes, new information,
 
 ### 4. Charter Finalization
 
-**Version Control:**
+Version Control:
 - Update document version number and revision history
 - Maintain previous versions for audit trail and reference
 - Document change rationale and approval information
 - Distribute updated charter to stakeholder distribution list
 
-**Integration:**
+Integration:
 - Ensure updated charter aligns with current project documentation
 - Update related planning documents as needed
 - Verify consistency with project management plans
@@ -99,19 +99,19 @@ Update an existing project charter to reflect approved changes, new information,
 
 ## Output Format
 
-**Updated Charter Document:**
+Updated Charter Document:
 - Use current project charter template format
 - Include version control and change tracking information
 - Document revision history with dates and change descriptions
 - Maintain professional formatting and organizational standards
 
-**Change Documentation:**
+Change Documentation:
 - Summary of changes made and rationale
 - Impact assessment results and stakeholder approvals
 - Version comparison highlighting key modifications
 - Communication plan for change notification
 
-**File Management:**
+File Management:
 - Updated file name: `project-charter-[project-name]-[version]-[date].md`
 - Archive previous version with clear version identification
 - Update document distribution and access controls
@@ -119,78 +119,78 @@ Update an existing project charter to reflect approved changes, new information,
 
 ## Success Criteria
 
-**Charter Update Quality:**
-- [ ] All required changes accurately reflected in charter
-- [ ] Updated content maintains consistency and clarity
-- [ ] Charter continues to serve as effective project authorization
-- [ ] Changes align with approved change requests or requirements
-- [ ] Document format and structure remain professional and clear
+Charter Update Quality:
+- All required changes accurately reflected in charter
+- Updated content maintains consistency and clarity
+- Charter continues to serve as effective project authorization
+- Changes align with approved change requests or requirements
+- Document format and structure remain professional and clear
 
-**Stakeholder Acceptance:**
-- [ ] All affected stakeholders reviewed and approved changes
-- [ ] Change rationale clearly communicated and understood
-- [ ] Updated charter maintains stakeholder support and commitment
-- [ ] Project Manager authority appropriately adjusted if needed
-- [ ] Team understands implications of charter changes
+Stakeholder Acceptance:
+- All affected stakeholders reviewed and approved changes
+- Change rationale clearly communicated and understood
+- Updated charter maintains stakeholder support and commitment
+- Project Manager authority appropriately adjusted if needed
+- Team understands implications of charter changes
 
-**Process Compliance:**
-- [ ] Change control procedures followed appropriately
-- [ ] Proper version control and change tracking maintained
-- [ ] Authorization signatures and dates documented
-- [ ] Change impact assessment completed and documented
-- [ ] Updated charter distributed to all relevant stakeholders
+Process Compliance:
+- Change control procedures followed appropriately
+- Proper version control and change tracking maintained
+- Authorization signatures and dates documented
+- Change impact assessment completed and documented
+- Updated charter distributed to all relevant stakeholders
 
 ## Execution Checklist
 
 ### Preparation Phase
 
-- [ ] Review change request or update requirements thoroughly
-- [ ] Gather current charter and related project documentation
-- [ ] Identify stakeholders requiring involvement in update process
-- [ ] Plan change communication and approval timeline
-- [ ] Prepare impact assessment framework and criteria
+- Review change request or update requirements thoroughly
+- Gather current charter and related project documentation
+- Identify stakeholders requiring involvement in update process
+- Plan change communication and approval timeline
+- Prepare impact assessment framework and criteria
 
 ### Analysis Phase
 
-- [ ] Conduct comprehensive impact assessment of proposed changes
-- [ ] Review current charter for accuracy and completeness
-- [ ] Identify all sections requiring modification or update
-- [ ] Assess implications for project planning and execution
-- [ ] Prepare change summary and rationale documentation
+- Conduct comprehensive impact assessment of proposed changes
+- Review current charter for accuracy and completeness
+- Identify all sections requiring modification or update
+- Assess implications for project planning and execution
+- Prepare change summary and rationale documentation
 
 ### Update Phase
 
-- [ ] Modify charter sections using tracked changes for transparency
-- [ ] Ensure consistency between updated and unchanged content
-- [ ] Validate that changes maintain charter integrity and purpose
-- [ ] Review updated charter for quality and completeness
-- [ ] Prepare draft for stakeholder review and feedback
+- Modify charter sections using tracked changes for transparency
+- Ensure consistency between updated and unchanged content
+- Validate that changes maintain charter integrity and purpose
+- Review updated charter for quality and completeness
+- Prepare draft for stakeholder review and feedback
 
 ### Approval Phase
 
-- [ ] Coordinate stakeholder reviews and feedback sessions
-- [ ] Address concerns and incorporate approved feedback
-- [ ] Obtain formal approvals following organizational procedures
-- [ ] Finalize charter with updated version and approval information
-- [ ] Distribute updated charter and communicate changes
+- Coordinate stakeholder reviews and feedback sessions
+- Address concerns and incorporate approved feedback
+- Obtain formal approvals following organizational procedures
+- Finalize charter with updated version and approval information
+- Distribute updated charter and communicate changes
 
 ## Content Guidelines
 
 ### Quality Principles
 
-- **Consistency**: Maintain charter integrity while incorporating necessary changes
-- **Transparency**: Use change tracking to clearly show modifications
-- **Accuracy**: Ensure all updates reflect current project reality and requirements
-- **Completeness**: Address all aspects affected by proposed changes
-- **Authorization**: Follow proper approval processes for charter modifications
+- Consistency: Maintain charter integrity while incorporating necessary changes
+- Transparency: Use change tracking to clearly show modifications
+- Accuracy: Ensure all updates reflect current project reality and requirements
+- Completeness: Address all aspects affected by proposed changes
+- Authorization: Follow proper approval processes for charter modifications
 
 ### LLM Error Prevention
 
-- **Version Control**: Maintain clear version identification and change history
-- **Impact Analysis**: Thoroughly assess implications of all proposed changes
-- **Stakeholder Alignment**: Ensure all affected parties understand and approve changes
-- **Documentation**: Clearly document change rationale and approval decisions
-- **Consistency Check**: Verify updated charter aligns with other project documents
+- Version Control: Maintain clear version identification and change history
+- Impact Analysis: Thoroughly assess implications of all proposed changes
+- Stakeholder Alignment: Ensure all affected parties understand and approve changes
+- Documentation: Clearly document change rationale and approval decisions
+- Consistency Check: Verify updated charter aligns with other project documents
 
 ### PMBoK Integration Context
 

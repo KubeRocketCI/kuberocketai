@@ -34,10 +34,10 @@ Create comprehensive visual identity and brand guidelines that establish consist
 
 ## Output Format
 
-- **Location**: `/docs/marketing/visual-identity.md` (EXACT path and filename)
-- **Length**: 6-10 pages covering complete visual system guidelines
-- **Components**: Logo guidelines, color palettes, typography, imagery style, template specifications
-- **Downstream Enable**: Consistent visual implementation across all marketing materials
+- Location: `/docs/marketing/visual-identity.md` (EXACT path and filename)
+- Length: 6-10 pages covering complete visual system guidelines
+- Components: Logo guidelines, color palettes, typography, imagery style, template specifications
+- Downstream Enable: Consistent visual implementation across all marketing materials
 
 ## Success Criteria
 

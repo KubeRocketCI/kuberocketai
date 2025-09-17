@@ -26,12 +26,12 @@ Create a comprehensive project charter that formally authorizes the project and 
 
 ## Reference Assets
 
-**Primary Dependencies:**
+Primary Dependencies:
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [project-charter-template.md](./.krci-ai/templates/project-charter-template.md)
 - SDLC framework: [13-sdlc-framework.md](./docs/architecture/13-sdlc-framework.md) (if available)
 
-**Optional Supporting Materials:**
+Optional Supporting Materials:
 - Business analysis standards: [business-frameworks.md](./.krci-ai/data/business-frameworks.md) (if available)
 - Organizational standards: [best-practices.md](./.krci-ai/data/best-practices.md) (if available)
 
@@ -110,16 +110,16 @@ Review and Validation:
 
 ## Output Format
 
-**Primary Deliverable:**
+Primary Deliverable:
 Use template: [project-charter-template.md](./.krci-ai/templates/project-charter-template.md)
 
-**Document Control:**
+Document Control:
 - File name: `project-charter-[project-name]-[date].md`
 - Version control with change tracking
 - Document review and approval status
 - Distribution list for stakeholders
 
-**Content Requirements:**
+Content Requirements:
 - Executive summary (1-2 paragraphs)
 - Comprehensive project overview and business justification
 - Detailed scope statement with inclusions and exclusions
@@ -190,19 +190,19 @@ Quality Standards:
 
 ### Quality Principles
 
-- **Clarity**: Use clear, unambiguous language appropriate for executive audience
-- **Completeness**: Address all essential charter elements per PMBoK standards
-- **Conciseness**: Provide sufficient detail without unnecessary complexity
-- **Accuracy**: Base all content on verified information and stakeholder input
-- **Alignment**: Ensure charter supports organizational strategy and objectives
+- Clarity: Use clear, unambiguous language appropriate for executive audience
+- Completeness: Address all essential charter elements per PMBoK standards
+- Conciseness: Provide sufficient detail without unnecessary complexity
+- Accuracy: Base all content on verified information and stakeholder input
+- Alignment: Ensure charter supports organizational strategy and objectives
 
 ### LLM Error Prevention
 
-- **Specificity**: Avoid vague statements; use measurable and specific language
-- **Validation**: Cross-reference information with source documents and stakeholders
-- **Structure**: Follow template format consistently for professional presentation
-- **Review**: Conduct thorough review before finalizing and distributing
-- **Authority**: Ensure charter properly establishes Project Manager authority and responsibilities
+- Specificity: Avoid vague statements; use measurable and specific language
+- Validation: Cross-reference information with source documents and stakeholders
+- Structure: Follow template format consistently for professional presentation
+- Review: Conduct thorough review before finalizing and distributing
+- Authority: Ensure charter properly establishes Project Manager authority and responsibilities
 
 ### PMBoK Integration Context
 

@@ -31,14 +31,14 @@ Guide user through creating framework data files that provide knowledge, standar
 
 ## Framework Context: Data Architecture and Integration Patterns
 
-**Data Types and Organization**:
+Data Types and Organization:
 
 - Behavioral Data: Guidelines, principles, standards referenced by agents for decision-making
 - Technical Data: Specifications, schemas, constraints referenced by tasks for implementation
 - Reference Data: Examples, implementations, configuration samples for guidance
 - Validation Data: Standards, checklists, compliance requirements for quality assurance
 
-**File Format Selection Strategy**: Framework supports multiple formats based on content requirements:
+File Format Selection Strategy: Framework supports multiple formats based on content requirements:
 
 - Markdown (.md): Documentation, guidelines, principles, explanatory content with rich formatting
 - YAML (.yaml/.yml): Specifications, configurations, structured standards with hierarchy
@@ -46,7 +46,7 @@ Guide user through creating framework data files that provide knowledge, standar
 - Text (.txt): Simple reference data, plain text content for basic information
 - CSV (.csv): Tabular data, metrics, lists, comparative information with structured columns
 
-**Reference Integration Architecture**: Data files integrate with framework components through:
+Reference Integration Architecture: Data files integrate with framework components through:
 
 - Frontmatter dependency pattern: List in YAML frontmatter for component linking
 - Agent behavioral integration: Data supports principle definitions and guidance references
@@ -55,7 +55,7 @@ Guide user through creating framework data files that provide knowledge, standar
 
 ## Output Format
 
-- Location: `./.krci-ai/data/**/{data-name}.{ext}` following naming conventions and organization
+- Location: `./.krci-ai/data//{data-name}.{ext}` following naming conventions and organization
 - Format: Appropriate file format based on content type and usage requirements
 - Structure: Logical organization supporting framework reference patterns
 - Accessibility: Content organized for easy consumption and reference by components
@@ -73,27 +73,27 @@ Guide user through creating framework data files that provide knowledge, standar
 
 ### Preparation Phase
 
-- [ ] Framework validation: Run `krci-ai validate` to ensure clean starting state
-- [ ] Dependency verification: Confirm all reference assets exist at specified paths
-- [ ] Context gathering: Review data requirements and intended usage scenarios
-- [ ] Purpose definition: Clear understanding of what knowledge or standards data will provide
-- [ ] Usage context identification: Determine which agents or tasks will reference this data
+- Framework validation: Run `krci-ai validate` to ensure clean starting state
+- Dependency verification: Confirm all reference assets exist at specified paths
+- Context gathering: Review data requirements and intended usage scenarios
+- Purpose definition: Clear understanding of what knowledge or standards data will provide
+- Usage context identification: Determine which agents or tasks will reference this data
 
 ### Execution Phase
 
-- [ ] Data format selection: Choose appropriate format (.md, .yaml, .json, .txt, .csv) based on content
-- [ ] Content structure creation: Organize data logically following framework patterns
-- [ ] Dependency optimization: Structure content to support frontmatter dependency references
-- [ ] Naming conventions application: Use descriptive file and section names indicating purpose
-- [ ] Accessibility focus: Organize information for effective agent and task consumption
-- [ ] Template application: Use [core-data-template.md](./.krci-ai/templates/krci-ai/core-data-template.md) structure
-- [ ] Content development: Populate data with comprehensive, accurate information
+- Data format selection: Choose appropriate format (.md, .yaml, .json, .txt, .csv) based on content
+- Content structure creation: Organize data logically following framework patterns
+- Dependency optimization: Structure content to support frontmatter dependency references
+- Naming conventions application: Use descriptive file and section names indicating purpose
+- Accessibility focus: Organize information for effective agent and task consumption
+- Template application: Use [core-data-template.md](./.krci-ai/templates/krci-ai/core-data-template.md) structure
+- Content development: Populate data with comprehensive, accurate information
 
 ### Validation Phase
 
-- [ ] Format validation: Verify file format syntax is correct and parseable
-- [ ] Structure consistency: Ensure content organization follows established framework patterns
-- [ ] Reference compatibility: Confirm data supports proper framework integration
-- [ ] Content quality assurance: Verify information accuracy and completeness
-- [ ] Framework validation: Test data file compatibility with validation requirements
-- [ ] Integration testing: Confirm data integrates properly with intended framework components
+- Format validation: Verify file format syntax is correct and parseable
+- Structure consistency: Ensure content organization follows established framework patterns
+- Reference compatibility: Confirm data supports proper framework integration
+- Content quality assurance: Verify information accuracy and completeness
+- Framework validation: Test data file compatibility with validation requirements
+- Integration testing: Confirm data integrates properly with intended framework components

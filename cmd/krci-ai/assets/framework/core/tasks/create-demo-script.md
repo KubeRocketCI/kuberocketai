@@ -16,7 +16,7 @@ Create compelling product demonstration script that showcases product value thro
 ## Prerequisites
 
 <prerequisites>
-**Core Requirements (Industry Standard):**
+Core Requirements (Industry Standard):
 
 - Completed PRD at `/docs/prd/prd.md` with feature specifications and use cases
 - Product or MVP available for demonstration
@@ -24,7 +24,7 @@ Create compelling product demonstration script that showcases product value thro
 - Target audience use cases and pain points documented
 - Technical requirements and demo environment setup completed
 
-**Optional (For Advanced Marketing Scenarios):**
+Optional (For Advanced Marketing Scenarios):
 
 - Marketing Brief at `/docs/marketing/marketing-brief.md` (for sophisticated positioning)
 - Competitive differentiation points (for competitive demo scenarios)
@@ -45,10 +45,10 @@ Create compelling product demonstration script that showcases product value thro
 
 ## Output Format
 
-- **Location**: `/docs/marketing/demo-script.md` (EXACT path and filename)
-- **Length**: 4-8 pages covering complete demonstration flow and variations
-- **Components**: Opening hook, use case scenarios, feature showcases, interaction points, closing
-- **Downstream Enable**: Ready-to-use demonstration scripts for sales teams and presentations
+- Location: `/docs/marketing/demo-script.md` (EXACT path and filename)
+- Length: 4-8 pages covering complete demonstration flow and variations
+- Components: Opening hook, use case scenarios, feature showcases, interaction points, closing
+- Downstream Enable: Ready-to-use demonstration scripts for sales teams and presentations
 
 ## Success Criteria
 

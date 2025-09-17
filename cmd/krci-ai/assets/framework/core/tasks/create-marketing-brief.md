@@ -34,9 +34,9 @@ Create a comprehensive go-to-market strategy and marketing brief that transforms
 
 ## Output Format
 
-- **Location**: `/docs/marketing/marketing-brief.md` (EXACT path and filename)
-- **Length**: 4-6 pages maximum for marketing team consumption
-- **Downstream Enable**: Enables pitch deck, sales materials, and launch campaign creation
+- Location: `/docs/marketing/marketing-brief.md` (EXACT path and filename)
+- Length: 4-6 pages maximum for marketing team consumption
+- Downstream Enable: Enables pitch deck, sales materials, and launch campaign creation
 
 ## Success Criteria
 

@@ -22,13 +22,13 @@ Create a comprehensive project status report that provides stakeholders with cle
 
 ## Reference Assets
 
-**Primary Dependencies:**
+Primary Dependencies:
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [status-report-template.md](./.krci-ai/templates/status-report-template.md)
 - Project plan, schedule, and budget documents
 - Risk register and quality metrics
 
-**Optional Supporting Materials:**
+Optional Supporting Materials:
 - Earned value management data
 - Stakeholder communication plan
 - Previous status reports for trend analysis
@@ -55,10 +55,10 @@ Create a comprehensive project status report that provides stakeholders with cle
 
 ## Output Format
 
-**Primary Deliverable:**
+Primary Deliverable:
 Use template: [status-report-template.md](./.krci-ai/templates/status-report-template.md)
 
-**Document Structure:**
+Document Structure:
 - Executive summary (key highlights and concerns)
 - Project overview and current phase status
 - Schedule performance and milestone progress

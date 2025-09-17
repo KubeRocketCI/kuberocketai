@@ -33,7 +33,7 @@ Create comprehensive user journey maps that visualize user experiences and ident
 ## Output Format
 
 <output_format>
-**User Journey Documentation** - Create comprehensive user experience insights:
+User Journey Documentation - Create comprehensive user experience insights:
 
 - Journey maps: Complete user journey documentation using [user-journey.md](./.krci-ai/templates/user-journey.md) template
 - Touchpoint analysis: Detailed evaluation of user interactions and experience quality
@@ -92,7 +92,7 @@ Create comprehensive user journey maps that visualize user experiences and ident
 
 ## Content Guidelines
 
-### 📋 **User Journey Structure:**
+### 📋 User Journey Structure:
 
 <user_journey_structure>
 

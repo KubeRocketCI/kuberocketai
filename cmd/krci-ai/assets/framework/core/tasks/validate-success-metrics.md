@@ -35,20 +35,20 @@ Extract current success metrics from project brief:
 
 #### Current Metrics Analysis
 
-1. **Business Metrics**: Revenue, cost savings, market share goals
-2. **User Metrics**: Adoption, engagement, satisfaction targets
-3. **Performance Metrics**: System performance, reliability goals
-4. **Operational Metrics**: Efficiency, productivity improvements
+1. Business Metrics: Revenue, cost savings, market share goals
+2. User Metrics: Adoption, engagement, satisfaction targets
+3. Performance Metrics: System performance, reliability goals
+4. Operational Metrics: Efficiency, productivity improvements
 
 #### Metrics Hypothesis Structure
 
 ```markdown
-**Success Metrics Hypothesis**: {{project_name}} success measured by achieving:
+Success Metrics Hypothesis: {{project_name}} success measured by achieving:
 - Business Impact: {{business_metric}} from {{baseline}} to {{target}} by {{date}}
 - User Impact: {{user_metric}} from {{baseline}} to {{target}} by {{date}}
 - Performance Impact: {{performance_metric}} from {{baseline}} to {{target}} by {{date}}
 
-**Specific Claims to Validate**:
+Specific Claims to Validate:
 - Baseline measurements: {{baseline_claims}}
 - Target achievability: {{target_claims}}
 - Timeline feasibility: {{timeline_claims}}
@@ -61,31 +61,31 @@ Extract current success metrics from project brief:
 
 For each success metric, evaluate against SMART criteria:
 
-**Specific Validation (1-5 scale)**:
+Specific Validation (1-5 scale):
 - Is the metric clearly defined without ambiguity?
 - Can stakeholders understand what exactly will be measured?
 - Is the metric scope bounded and focused?
 - Does the metric avoid vague or subjective language?
 
-**Measurable Validation (1-5 scale)**:
+Measurable Validation (1-5 scale):
 - Can the metric be quantified with specific numbers?
 - Are measurement tools and data sources identified?
 - Is the measurement process documented and reliable?
 - Can progress be tracked throughout project lifecycle?
 
-**Achievable Validation (1-5 scale)**:
+Achievable Validation (1-5 scale):
 - Is the target realistic given available resources?
 - Are there precedents for similar achievements?
 - Have constraints and limitations been considered?
 - Is the metric within team/organization control or influence?
 
-**Relevant Validation (1-5 scale)**:
+Relevant Validation (1-5 scale):
 - Does the metric align with business objectives?
 - Will achieving this metric create meaningful value?
 - Is the metric important to key stakeholders?
 - Does the metric contribute to strategic goals?
 
-**Time-bound Validation (1-5 scale)**:
+Time-bound Validation (1-5 scale):
 - Is there a clear deadline or timeframe?
 - Are there intermediate milestones defined?
 - Is the timeline realistic for metric achievement?
@@ -107,13 +107,13 @@ Interpretation:
 
 #### Organizational Alignment Assessment
 
-**Objective Alignment**:
+Objective Alignment:
 - Does project objective align with company/department OKRs?
 - Is the objective inspirational and directionally correct?
 - Does the objective contribute to higher-level strategic goals?
 - Is the objective clear enough to guide decision-making?
 
-**Key Result Quality**:
+Key Result Quality:
 - Are key results outcome-focused rather than activity-focused?
 - Do key results collectively indicate objective achievement?
 - Are key results ambitious yet achievable (60-70% confidence)?
@@ -122,11 +122,11 @@ Interpretation:
 #### OKR Integration Analysis
 
 ```markdown
-**Company/Department OKR**: {{higher_level_okr}}
-**Project Objective**: {{project_objective}}
-**Alignment Score**: {{alignment_score}}/10
+Company/Department OKR: {{higher_level_okr}}
+Project Objective: {{project_objective}}
+Alignment Score: {{alignment_score}}/10
 
-**Key Results Analysis**:
+Key Results Analysis:
 KR1: {{key_result_1}}
 - Outcome Focus: {{outcome_score_1}}/5
 - Measurability: {{measurability_score_1}}/5
@@ -139,20 +139,20 @@ KR2: {{key_result_2}}
 - Ambition Level: {{ambition_score_2}}/5
 - Achievement Confidence: {{confidence_score_2}}%
 
-**Overall OKR Quality Score**: {{okr_total_score}}/50
+Overall OKR Quality Score: {{okr_total_score}}/50
 ```
 
 ### Phase 4: Leading/Lagging Indicator Analysis
 
 #### Indicator Balance Assessment
 
-**Leading Indicators** (Predictive metrics):
+Leading Indicators (Predictive metrics):
 - Identify metrics that predict future outcomes
 - Validate correlation with historical data
 - Assess controllability and actionability
 - Define measurement frequency and reporting
 
-**Lagging Indicators** (Outcome metrics):
+Lagging Indicators (Outcome metrics):
 - Identify metrics that measure final results
 - Validate as true measures of success
 - Assess measurement accuracy and reliability
@@ -161,15 +161,15 @@ KR2: {{key_result_2}}
 #### Balanced Scorecard Creation
 
 ```markdown
-**Leading Indicators** (Early Warning System):
+Leading Indicators (Early Warning System):
 1. {{leading_indicator_1}}: {{description}} (Frequency: {{frequency}})
 2. {{leading_indicator_2}}: {{description}} (Frequency: {{frequency}})
 
-**Lagging Indicators** (Success Measurement):
+Lagging Indicators (Success Measurement):
 1. {{lagging_indicator_1}}: {{description}} (Frequency: {{frequency}})
 2. {{lagging_indicator_2}}: {{description}} (Frequency: {{frequency}})
 
-**Predictive Relationships**:
+Predictive Relationships:
 - {{leading_indicator}} correlates with {{lagging_indicator}} (R² = {{correlation}})
 - Time lag: {{time_lag_period}}
 - Confidence in relationship: {{relationship_confidence}}%
@@ -179,7 +179,7 @@ KR2: {{key_result_2}}
 
 #### Baseline Data Validation
 
-**Data Collection Requirements**:
+Data Collection Requirements:
 - Historical performance data for achievability assessment
 - Industry benchmark data for target calibration
 - Measurement system reliability validation
@@ -187,7 +187,7 @@ KR2: {{key_result_2}}
 
 #### Benchmark Analysis
 
-**Industry Benchmarking**:
+Industry Benchmarking:
 - Identify relevant industry performance benchmarks
 - Compare proposed targets with industry standards
 - Assess competitive positioning implications
@@ -195,7 +195,7 @@ KR2: {{key_result_2}}
 
 #### Measurement Feasibility Assessment
 
-**Technical Validation**:
+Technical Validation:
 - Verify measurement tools and systems capability
 - Assess data collection cost and complexity
 - Identify measurement gaps and solutions
@@ -252,70 +252,70 @@ KR2: {{key_result_2}}
 
 ### Pre-Validation Preparation
 
-- [ ] **Current metrics review**: Analyze existing success metrics in project brief
-- [ ] **Data source identification**: Identify available baseline and benchmark data
-- [ ] **Stakeholder coordination**: Connect with teams responsible for measurement
-- [ ] **OKR documentation**: Gather organizational and departmental OKR information
+- Current metrics review: Analyze existing success metrics in project brief
+- Data source identification: Identify available baseline and benchmark data
+- Stakeholder coordination: Connect with teams responsible for measurement
+- OKR documentation: Gather organizational and departmental OKR information
 
 ### SMART Criteria Assessment
 
-- [ ] **Individual metric evaluation**: Apply SMART criteria to each metric
-- [ ] **Scoring documentation**: Record scores and rationale for each criterion
-- [ ] **Gap identification**: Identify metrics failing SMART criteria
-- [ ] **Improvement recommendations**: Suggest specific metric enhancements
+- Individual metric evaluation: Apply SMART criteria to each metric
+- Scoring documentation: Record scores and rationale for each criterion
+- Gap identification: Identify metrics failing SMART criteria
+- Improvement recommendations: Suggest specific metric enhancements
 
 ### OKR Alignment Validation
 
-- [ ] **Alignment mapping**: Document connection to higher-level OKRs
-- [ ] **Key result analysis**: Evaluate each key result for quality
-- [ ] **Ambition calibration**: Assess and adjust target ambition levels
-- [ ] **Confidence assessment**: Rate achievement probability for each metric
+- Alignment mapping: Document connection to higher-level OKRs
+- Key result analysis: Evaluate each key result for quality
+- Ambition calibration: Assess and adjust target ambition levels
+- Confidence assessment: Rate achievement probability for each metric
 
 ### Evidence Collection
 
-- [ ] **Baseline data gathering**: Collect historical performance data
-- [ ] **Benchmark research**: Identify relevant industry performance standards
-- [ ] **Measurement validation**: Verify measurement system capabilities
-- [ ] **Cost assessment**: Evaluate measurement cost and complexity
+- Baseline data gathering: Collect historical performance data
+- Benchmark research: Identify relevant industry performance standards
+- Measurement validation: Verify measurement system capabilities
+- Cost assessment: Evaluate measurement cost and complexity
 
 ### Documentation and Reporting
 
-- [ ] **Validation report creation**: Complete comprehensive validation report
-- [ ] **Brief updates**: Update project brief with validated metrics
-- [ ] **Assumption tracking**: Update assumption tracker with metrics validation results
-- [ ] **Stakeholder communication**: Present validation results to project team
+- Validation report creation: Complete comprehensive validation report
+- Brief updates: Update project brief with validated metrics
+- Assumption tracking: Update assumption tracker with metrics validation results
+- Stakeholder communication: Present validation results to project team
 </execution_checklist>
 
 ## Content Guidelines
 
 ### Metrics Quality Standards
 
-- **Quantified Focus**: Prioritize metrics with specific numerical targets
-- **Evidence-Based Targets**: Ground all targets in baseline data and benchmarks
-- **Balanced Portfolio**: Include both leading (predictive) and lagging (outcome) indicators
-- **Stakeholder Relevance**: Ensure metrics matter to key decision makers
-- **Measurement Feasibility**: Verify realistic measurement capability and cost
+- Quantified Focus: Prioritize metrics with specific numerical targets
+- Evidence-Based Targets: Ground all targets in baseline data and benchmarks
+- Balanced Portfolio: Include both leading (predictive) and lagging (outcome) indicators
+- Stakeholder Relevance: Ensure metrics matter to key decision makers
+- Measurement Feasibility: Verify realistic measurement capability and cost
 
 ### Validation Methodology Standards
 
-- **Systematic Assessment**: Apply SMART criteria consistently across all metrics
-- **Evidence Requirements**: Support all assessments with documented evidence
-- **Benchmark Integration**: Use industry data to calibrate targets appropriately
-- **Stakeholder Validation**: Confirm metrics relevance with key stakeholders
-- **Continuous Monitoring**: Establish ongoing measurement and review processes
+- Systematic Assessment: Apply SMART criteria consistently across all metrics
+- Evidence Requirements: Support all assessments with documented evidence
+- Benchmark Integration: Use industry data to calibrate targets appropriately
+- Stakeholder Validation: Confirm metrics relevance with key stakeholders
+- Continuous Monitoring: Establish ongoing measurement and review processes
 
 ### Documentation Standards
 
-- **Clear Scoring**: Document all SMART and OKR scores with explicit rationale
-- **Evidence Citation**: Properly attribute all baseline data and benchmarks
-- **Improvement Recommendations**: Provide specific guidance for metric enhancement
-- **Measurement Planning**: Document how each metric will be tracked and reported
-- **Success Criteria**: Define clear thresholds for success and failure
+- Clear Scoring: Document all SMART and OKR scores with explicit rationale
+- Evidence Citation: Properly attribute all baseline data and benchmarks
+- Improvement Recommendations: Provide specific guidance for metric enhancement
+- Measurement Planning: Document how each metric will be tracked and reported
+- Success Criteria: Define clear thresholds for success and failure
 
 ## Framework Integration Notes
 
-- **SDLC Integration**: Validated metrics inform Epic success criteria and Story acceptance criteria
-- **Business Framework Usage**: Leverages SMART methodology and OKR framework for systematic validation
-- **Evidence Standards**: Maintains quantified, benchmark-driven approach for credible targets
-- **Quality Assurance**: Built-in scoring ensures metrics support effective project management
-- **Professional Output**: Structured documentation supports stakeholder decision-making and tracking
+- SDLC Integration: Validated metrics inform Epic success criteria and Story acceptance criteria
+- Business Framework Usage: Leverages SMART methodology and OKR framework for systematic validation
+- Evidence Standards: Maintains quantified, benchmark-driven approach for credible targets
+- Quality Assurance: Built-in scoring ensures metrics support effective project management
+- Professional Output: Structured documentation supports stakeholder decision-making and tracking

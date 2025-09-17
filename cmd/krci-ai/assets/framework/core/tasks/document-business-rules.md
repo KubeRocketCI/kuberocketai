@@ -32,7 +32,7 @@ Systematically document business rules and constraints that govern system behavi
 ## Output Format
 
 <output_format>
-**Business Rules Documentation** - Create comprehensive rules repository:
+Business Rules Documentation - Create comprehensive rules repository:
 
 - Primary documentation: `/docs/business-rules.md` with structured rule catalog following [business-rules.md](./.krci-ai/templates/business-rules.md) template
 - Rules traceability: Clear mapping from business policies to system rules to PRD requirements

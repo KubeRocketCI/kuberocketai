@@ -57,10 +57,10 @@ Assume story is ready with complete Tasks/Subtasks for step-by-step execution.
 
 ## Output Format
 
-- **Location**: Working code implementation with updated Story file in `/docs/stories/`
-- **Story completion**: All empty sections populated with implementation details
-- **Progress tracking**: Real-time updates to Tasks/Subtasks completion status
-- **Quality documentation**: Completed QA Checklist and Implementation Results
+- Location: Working code implementation with updated Story file in `/docs/stories/`
+- Story completion: All empty sections populated with implementation details
+- Progress tracking: Real-time updates to Tasks/Subtasks completion status
+- Quality documentation: Completed QA Checklist and Implementation Results
 
 ## Success Criteria
 

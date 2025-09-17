@@ -35,11 +35,11 @@ Create user-focused requirements with implementation tasks and acceptance criter
 
 ## Output Format
 
-- **Location**: `/docs/stories/{epic_number}.{story_number}.story.md` (EXACT naming pattern)
-- **Story numbering**: Sequential number within Epic (e.g., 01.01, 01.02, 01.03 for Epic 1)
-- **Epic reference**: Clear connection to parent Epic in format "Epic {number}: {title}"
-- **Implementation Ready**: Story contains sufficient detail for autonomous development
-- **Testing Ready**: Acceptance criteria provide clear validation steps for QA
+- Location: `/docs/stories/{epic_number}.{story_number}.story.md` (EXACT naming pattern)
+- Story numbering: Sequential number within Epic (e.g., 01.01, 01.02, 01.03 for Epic 1)
+- Epic reference: Clear connection to parent Epic in format "Epic {number}: {title}"
+- Implementation Ready: Story contains sufficient detail for autonomous development
+- Testing Ready: Acceptance criteria provide clear validation steps for QA
 
 <success_criteria>
 - File saved to `/docs/stories/{epic_number}.{story_number}.story.md` with correct naming
@@ -63,16 +63,16 @@ Create user-focused requirements with implementation tasks and acceptance criter
 
 ### Story Definition
 
-- [ ] **User story creation**: Write "As a [user], I want [goal], so that [value]" aligned with Epic features
-- [ ] **Story points estimation**: Estimate complexity (1, 2, 3, 5, 8, 13) using Epic context
-- [ ] **Business value validation**: Ensure Story delivers measurable user value
-- [ ] **Status format**: Use table format as defined in template (| Field | Value |)
+- User story creation: Write "As a [user], I want [goal], so that [value]" aligned with Epic features
+- Story points estimation: Estimate complexity (1, 2, 3, 5, 8, 13) using Epic context
+- Business value validation: Ensure Story delivers measurable user value
+- Status format: Use table format as defined in template (| Field | Value |)
 
 ### Requirements Specification
 
-- [ ] **Acceptance criteria**: Define specific, testable conditions with measurable outcomes and file deliverables
-- [ ] **Technical approach**: Define overall implementation approach and strategy with specific technologies
-- [ ] **Architecture references**: Include direct links to specific architecture sections needed (format: `[filename](path)`)
+- Acceptance criteria: Define specific, testable conditions with measurable outcomes and file deliverables
+- Technical approach: Define overall implementation approach and strategy with specific technologies
+- Architecture references: Include direct links to specific architecture sections needed (format: `[filename](path)`)
 
 <tasks_development>
 - Detailed Task Architecture: Create comprehensive implementation Tasks with:
@@ -92,15 +92,15 @@ Create user-focused requirements with implementation tasks and acceptance criter
 
 ### Quality Assurance Planning
 
-- [ ] **QA checklist**: Define testing requirements with clear verification steps/commands and expected outputs
-- [ ] **Validation plan**: Create testing checklist with:
-  - **Verification methods** LLMs can run (commands where applicable)
-  - **Expected outputs** and success indicators
-  - **Rollback steps** if testing fails
+- QA checklist: Define testing requirements with clear verification steps/commands and expected outputs
+- Validation plan: Create testing checklist with:
+  - Verification methods LLMs can run (commands where applicable)
+  - Expected outputs and success indicators
+  - Rollback steps if testing fails
 
 ### Output Formatting
 
-- [ ] **Story creation**: Use [story.md](./.krci-ai/templates/story.md) template structure
-- [ ] **Variable population**: Complete all template variables ({{story_number}}, {{story_title}}, etc.)
-- [ ] **Content validation**: Ensure user story, acceptance criteria, and Tasks/Subtasks are complete
-- [ ] **File placement**: Save to exact location `/docs/stories/{epic_number}.{story_number}.story.md`
+- Story creation: Use [story.md](./.krci-ai/templates/story.md) template structure
+- Variable population: Complete all template variables ({{story_number}}, {{story_title}}, etc.)
+- Content validation: Ensure user story, acceptance criteria, and Tasks/Subtasks are complete
+- File placement: Save to exact location `/docs/stories/{epic_number}.{story_number}.story.md`

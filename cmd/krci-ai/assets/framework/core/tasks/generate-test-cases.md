@@ -35,7 +35,7 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 ## Output Format
 
 <output_format>
-**Test Cases Documentation** - Create executable test specifications:
+Test Cases Documentation - Create executable test specifications:
 
 - Test case document: Complete test cases using [test-cases.md](./.krci-ai/templates/test-cases.md) template
 - Functional test cases: Detailed test cases covering all Story acceptance criteria
@@ -94,7 +94,7 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 
 ## Content Guidelines
 
-### 🎯 **Test Case Generation Focus Areas:**
+### 🎯 Test Case Generation Focus Areas:
 
 <test_case_focus_areas>
 
@@ -113,7 +113,7 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 - Validation Criteria: Clear expected results and success criteria for each test case
 </test_case_focus_areas>
 
-### ✅ **Quality Standards:**
+### ✅ Quality Standards:
 
 <quality_standards>
 - Requirements Traceable: Every test case maps to specific Story acceptance criteria
@@ -124,7 +124,7 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 - Maintainable: Test cases are structured for easy maintenance and updates
 </quality_standards>
 
-### ❌ **Common Pitfalls to Avoid:**
+### ❌ Common Pitfalls to Avoid:
 
 <common_pitfalls>
 - Writing test cases without referencing specific Story acceptance criteria
@@ -135,7 +135,7 @@ Generate detailed test cases and scenarios based on test plan strategy and Story
 - Test cases that cannot be executed independently
 </common_pitfalls>
 
-### 🎯 **Story Testing Integration:**
+### 🎯 Story Testing Integration:
 
 <story_testing_integration>
 This test case generation should enable comprehensive quality validation by providing:

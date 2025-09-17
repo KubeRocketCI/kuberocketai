@@ -33,11 +33,11 @@ Review and validate user story from Architect perspective to ensure system desig
 
 ## Output Format
 
-- **Location**: Update existing story file with architectural validation
-- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
-- **Content Placement**: Architecture guidance in Description section, approval in Implementation Results
-- **Architecture Compliance**: Document system design alignment and integration approach validation
-- **Verification**: Story passes architect review with documented design approval
+- Location: Update existing story file with architectural validation
+- Template: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- Content Placement: Architecture guidance in Description section, approval in Implementation Results
+- Architecture Compliance: Document system design alignment and integration approach validation
+- Verification: Story passes architect review with documented design approval
 
 ## Success Criteria
 
@@ -55,78 +55,78 @@ Review and validate user story from Architect perspective to ensure system desig
 ### System Architecture Alignment
 
 <system_architecture_alignment>
-- [ ] **Design pattern consistency**: Implementation follows established system design patterns
-- [ ] **Component integration**: New components integrate properly with existing system architecture
-- [ ] **Service boundary respect**: Implementation respects established service and component boundaries
-- [ ] **Data flow alignment**: Data flow and transformation aligns with system data architecture
+- Design pattern consistency: Implementation follows established system design patterns
+- Component integration: New components integrate properly with existing system architecture
+- Service boundary respect: Implementation respects established service and component boundaries
+- Data flow alignment: Data flow and transformation aligns with system data architecture
 </system_architecture_alignment>
 
 ### Component Design Validation
 
 <component_design_validation>
-- [ ] **Separation of concerns**: Components have clear, single responsibilities
-- [ ] **Interface definition**: Component interfaces are well-defined and consistent
-- [ ] **Dependency management**: Component dependencies are minimal and well-structured
-- [ ] **Reusability consideration**: Components designed for reusability where appropriate
+- Separation of concerns: Components have clear, single responsibilities
+- Interface definition: Component interfaces are well-defined and consistent
+- Dependency management: Component dependencies are minimal and well-structured
+- Reusability consideration: Components designed for reusability where appropriate
 </component_design_validation>
 
 ### Integration Pattern Review
 
 <integration_pattern_review>
-- [ ] **Communication patterns**: Inter-component communication follows established patterns
-- [ ] **Event handling**: Event-driven patterns implemented correctly if applicable
-- [ ] **Error propagation**: Error handling and propagation follows architectural standards
-- [ ] **Transaction boundaries**: Transaction management aligns with system transaction patterns
+- Communication patterns: Inter-component communication follows established patterns
+- Event handling: Event-driven patterns implemented correctly if applicable
+- Error propagation: Error handling and propagation follows architectural standards
+- Transaction boundaries: Transaction management aligns with system transaction patterns
 </integration_pattern_review>
 
 ### Performance and Scalability Assessment
 
 <performance_scalability_assessment>
-- [ ] **Performance impact**: Implementation approach evaluated for performance implications
-- [ ] **Scalability considerations**: Design supports system scalability requirements
-- [ ] **Resource utilization**: Resource usage (memory, CPU, storage) appropriately planned
-- [ ] **Bottleneck identification**: Potential performance bottlenecks identified and addressed
+- Performance impact: Implementation approach evaluated for performance implications
+- Scalability considerations: Design supports system scalability requirements
+- Resource utilization: Resource usage (memory, CPU, storage) appropriately planned
+- Bottleneck identification: Potential performance bottlenecks identified and addressed
 </performance_scalability_assessment>
 
 ### Security and Compliance Validation
 
 <security_compliance_validation>
-- [ ] **Security standards**: Implementation follows established security patterns and standards
-- [ ] **Data protection**: Data handling and protection requirements appropriately addressed
-- [ ] **Access control**: Authentication and authorization patterns correctly implemented
-- [ ] **Compliance requirements**: Implementation meets relevant compliance and regulatory standards
+- Security standards: Implementation follows established security patterns and standards
+- Data protection: Data handling and protection requirements appropriately addressed
+- Access control: Authentication and authorization patterns correctly implemented
+- Compliance requirements: Implementation meets relevant compliance and regulatory standards
 </security_compliance_validation>
 
 ### Technical Standards Compliance
 
 <technical_standards_compliance>
-- [ ] **Coding standards**: Technical approach aligns with established coding and design standards
-- [ ] **Documentation patterns**: Technical documentation follows architectural documentation standards
-- [ ] **Testing approach**: Testing strategy aligns with architectural testing patterns
-- [ ] **Deployment considerations**: Implementation supports established deployment and operations patterns
+- Coding standards: Technical approach aligns with established coding and design standards
+- Documentation patterns: Technical documentation follows architectural documentation standards
+- Testing approach: Testing strategy aligns with architectural testing patterns
+- Deployment considerations: Implementation supports established deployment and operations patterns
 </technical_standards_compliance>
 
 ### System Integration Readiness
 
 <system_integration_readiness>
-- [ ] **API consistency**: New APIs follow established API design patterns and standards
-- [ ] **Configuration management**: Configuration approach aligns with system configuration patterns
-- [ ] **Monitoring integration**: Implementation supports established monitoring and observability patterns
-- [ ] **Operational readiness**: Implementation approach supports operational requirements
+- API consistency: New APIs follow established API design patterns and standards
+- Configuration management: Configuration approach aligns with system configuration patterns
+- Monitoring integration: Implementation supports established monitoring and observability patterns
+- Operational readiness: Implementation approach supports operational requirements
 </system_integration_readiness>
 
 ## Content Guidelines
 
 ### Architectural Validation Principles for LLM Self-Evaluation
 
-- **System Consistency**: All architectural decisions must align with overall system design and patterns
-- **Component Clarity**: Component boundaries and responsibilities must be clear and well-defined
-- **Integration Alignment**: Integration approaches must follow established architectural patterns
-- **Standards Compliance**: Implementation must meet security, performance, and compliance standards
+- System Consistency: All architectural decisions must align with overall system design and patterns
+- Component Clarity: Component boundaries and responsibilities must be clear and well-defined
+- Integration Alignment: Integration approaches must follow established architectural patterns
+- Standards Compliance: Implementation must meet security, performance, and compliance standards
 
 ### LLM Error Prevention Checklist
 
-- **Avoid**: Architectural decisions that conflict with established system design patterns
-- **Avoid**: Component designs that violate separation of concerns or create tight coupling
-- **Avoid**: Integration approaches that bypass established architectural patterns
-- **Reference**: Ensure architectural alignment with system design standards and [story.md](./.krci-ai/templates/story.md) template
+- Avoid: Architectural decisions that conflict with established system design patterns
+- Avoid: Component designs that violate separation of concerns or create tight coupling
+- Avoid: Integration approaches that bypass established architectural patterns
+- Reference: Ensure architectural alignment with system design standards and [story.md](./.krci-ai/templates/story.md) template

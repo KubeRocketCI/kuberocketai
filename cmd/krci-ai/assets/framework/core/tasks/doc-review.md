@@ -31,7 +31,7 @@ Review a certain page requested by a user, applying professional technical writi
 
 ## Output Format
 
-**A refined ready-to-read file** - As a result of your work, I expect you to report me about the reviewed file and what you have done.
+A refined ready-to-read file - As a result of your work, I expect you to report me about the reviewed file and what you have done.
 
 ## Success Criteria
 
