@@ -22,6 +22,7 @@ import (
 	"github.com/charmbracelet/lipgloss/table"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/cli/style"
+	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
 
 // Table styling constants
@@ -145,4 +146,71 @@ func TruncateDescription(description string) string {
 		return description[:DescriptionTruncLen] + "..."
 	}
 	return description
+}
+
+// PrintFrameworkInsights prints comprehensive framework insights with styled output
+func (o *OutputHandler) PrintFrameworkInsights(insights *validation.FrameworkInsights, issueCount int) {
+	if insights == nil {
+		o.PrintError("No framework insights available")
+		return
+	}
+
+	// Print overview
+	o.Printf("Overview: %s, %s, %s, %s\n",
+		o.PrintCyan(fmt.Sprintf("%d agents", insights.TotalAgents)),
+		o.PrintCyan(fmt.Sprintf("%d tasks", insights.TotalTasks)),
+		o.PrintCyan(fmt.Sprintf("%d templates", insights.TotalTemplates)),
+		o.PrintCyan(fmt.Sprintf("%d data files", insights.TotalDataFiles)))
+
+	// Print link resolution status
+	if issueCount == 0 {
+		o.Printf("All internal links resolved (%s checked)\n",
+			o.PrintCyan(fmt.Sprintf("%d references", insights.TotalReferences)))
+	} else {
+		o.Printf("Found %s out of %s checked\n",
+			o.PrintYellow(fmt.Sprintf("%d broken links", issueCount)),
+			o.PrintCyan(fmt.Sprintf("%d references", insights.TotalReferences)))
+	}
+
+	o.Newline()
+
+	// Print agent insights table
+	o.PrintBold("FRAMEWORK INSIGHTS:")
+	o.Newline()
+
+	if len(insights.AgentStats) > 0 {
+		agentTable := CreateStyledTable()
+		agentTable.Headers("Agent", "Tasks", "Templates", "Data Files")
+
+		for _, agent := range insights.AgentStats {
+			agentTable.Row(
+				agent.Name,
+				fmt.Sprintf("%d tasks", agent.TaskCount),
+				fmt.Sprintf("%d templates", agent.TemplateCount),
+				fmt.Sprintf("%d data files", agent.DataFileCount),
+			)
+		}
+
+		fmt.Println(agentTable.Render())
+		o.Newline()
+	}
+
+	// Print most used components
+	if insights.MostUsedTemplate != nil {
+		o.Printf("Most used template: %s (%s)\n",
+			o.PrintYellow(insights.MostUsedTemplate.Path),
+			o.PrintCyan(fmt.Sprintf("%d references", insights.MostUsedTemplate.Count)))
+	}
+
+	if insights.MostUsedTask != nil {
+		o.Printf("Most used task: %s (%s)\n",
+			o.PrintYellow(insights.MostUsedTask.Path),
+			o.PrintCyan(fmt.Sprintf("%d references", insights.MostUsedTask.Count)))
+	}
+
+	if insights.MostUsedDataFile != nil {
+		o.Printf("Most used data file: %s (%s)\n",
+			o.PrintYellow(insights.MostUsedDataFile.Path),
+			o.PrintCyan(fmt.Sprintf("%d references", insights.MostUsedDataFile.Count)))
+	}
 }
