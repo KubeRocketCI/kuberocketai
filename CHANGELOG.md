@@ -2,9 +2,58 @@
 
 ## [Unreleased]
 
+
+<a name="v0.38.5"></a>
+
+## [v0.38.5] - 2025-09-19
+
+### Chores
+
+- update to the latest version of the framework
+
+### Code Refactoring
+
+- enhance validation output and insights generation
+
+
+<a name="v0.38.4"></a>
+
+## [v0.38.4] - 2025-09-17
+
+### Features
+
+- Add task dependencies field to task frontmatter ([#98](https://github.com/KubeRocketCI/kuberocketai/issues/98))
+
+
+<a name="v0.38.3"></a>
+
+## [v0.38.3] - 2025-09-17
+
+### Bug Fixes
+
+- fix xml tags for the number of tasks
+
+
+<a name="v0.38.2"></a>
+
+## [v0.38.2] - 2025-09-17
+
+### Code Refactoring
+
+- simplify formatting for tasks
+
+
+<a name="v0.38.1"></a>
+
+## [v0.38.1] - 2025-09-17
+
 ### Chores
 
 - update krci-ai to the latest version
+
+### Code Refactoring
+
+- update activation prompt by introducing dependecies
 
 
 <a name="v0.38.0"></a>
@@ -969,7 +1018,12 @@ Content Guidelines sections restructured
 - initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.5...HEAD
+[v0.38.5]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.4...v0.38.5
+[v0.38.4]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.3...v0.38.4
+[v0.38.3]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.2...v0.38.3
+[v0.38.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.1...v0.38.2
+[v0.38.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.0...v0.38.1
 [v0.38.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.37.2...v0.38.0
 [v0.37.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.37.1...v0.37.2
 [v0.37.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.37.0...v0.37.1
