@@ -35,7 +35,7 @@ Update existing multi-file architecture documentation to reflect new requirement
 
 ## Output Format
 
-**Updated Architecture Files** - Modify existing numbered section files in `/docs/architecture/`:
+Updated Architecture Files - Modify existing numbered section files in `/docs/architecture/`:
 
 ### Common Update Targets
 

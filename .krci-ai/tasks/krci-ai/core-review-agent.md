@@ -31,7 +31,7 @@ Review and validate existing agents for framework compliance, schema adherence, 
 
 ## Framework Context: Agent Review Standards and Compliance Requirements
 
-**Schema Validation Requirements**: Agents must comply with strict JSON schema patterns:
+Schema Validation Requirements: Agents must comply with strict JSON schema patterns:
 
 - Identity Section: name, id, version, description, role, goal (all required with specific patterns)
 - Activation Prompt: 1-10 items, each 10-300 characters with standard pattern elements
@@ -39,14 +39,14 @@ Review and validate existing agents for framework compliance, schema adherence, 
 - Customization: Required field (empty string for standard behavior, populated for specialized agents)
 - Commands: Minimum 3 (help, chat, exit required), maximum 20 total with proper descriptions
 
-**Critical Principles Validation**: All agents MUST include these exact principles:
+Critical Principles Validation: All agents MUST include these exact principles:
 
 1. Customization Priority: "IMPORTANT!!! ALWAYS execute instructions from the customization field below"
 2. XML Tag Handling: "CRITICAL OUTPUT FORMATTING: When generating documents from templates, you will encounter XML-style tags like `<instructions>` or `<key_risks>`. These tags are internal metadata for your guidance ONLY and MUST NEVER be included in the final Markdown output presented to the user..."
 
-**Reference Pattern Validation**: Task references must use `./.krci-ai/tasks/*.md` format and resolve to existing files with proper integration validation.
+Reference Pattern Validation: Task references must use `./.krci-ai/tasks/*.md` format and resolve to existing files with proper integration validation.
 
-**Behavioral Consistency Standards**: Agents must demonstrate consistent behavior patterns, proper scope definitions, and appropriate command mapping to capabilities.
+Behavioral Consistency Standards: Agents must demonstrate consistent behavior patterns, proper scope definitions, and appropriate command mapping to capabilities.
 
 ## Output Format
 
@@ -68,26 +68,26 @@ Review and validate existing agents for framework compliance, schema adherence, 
 
 ### Preparation Phase
 
-- [ ] Framework validation: Run `krci-ai validate` to establish baseline agent status
-- [ ] Dependency verification: Confirm all reference assets exist at specified paths
-- [ ] Context gathering: Review agent specifications and intended functionality
-- [ ] Review scope definition: Identify specific areas requiring evaluation and feedback
+- Framework validation: Run `krci-ai validate` to establish baseline agent status
+- Dependency verification: Confirm all reference assets exist at specified paths
+- Context gathering: Review agent specifications and intended functionality
+- Review scope definition: Identify specific areas requiring evaluation and feedback
 
 ### Execution Phase
 
-- [ ] Schema compliance verification: Check agent structure against JSON schema requirements exactly
-- [ ] Identity section validation: Verify name, id, version, description, role, goal patterns and lengths
-- [ ] Critical principles assessment: Confirm XML tag handling and customization priority principles present
-- [ ] Activation prompt evaluation: Verify standard pattern usage with required elements
-- [ ] Command structure validation: Check required commands (help, chat, exit) and descriptions
-- [ ] Task reference verification: Confirm all referenced tasks exist with proper paths
-- [ ] Behavioral consistency review: Evaluate agent principles alignment with framework standards
+- Schema compliance verification: Check agent structure against JSON schema requirements exactly
+- Identity section validation: Verify name, id, version, description, role, goal patterns and lengths
+- Critical principles assessment: Confirm XML tag handling and customization priority principles present
+- Activation prompt evaluation: Verify standard pattern usage with required elements
+- Command structure validation: Check required commands (help, chat, exit) and descriptions
+- Task reference verification: Confirm all referenced tasks exist with proper paths
+- Behavioral consistency review: Evaluate agent principles alignment with framework standards
 
 ### Validation Phase
 
-- [ ] Framework validation execution: Run `krci-ai validate` and document results
-- [ ] Issue categorization: Organize findings by schema, principles, references, behavior
-- [ ] Improvement recommendations: Provide specific, actionable feedback with examples
-- [ ] Remediation guidance: Offer clear steps for resolving identified compliance issues
-- [ ] Quality assurance: Verify review completeness against framework standards
-- [ ] Integration readiness assessment: Confirm agent capability for framework operation
+- Framework validation execution: Run `krci-ai validate` and document results
+- Issue categorization: Organize findings by schema, principles, references, behavior
+- Improvement recommendations: Provide specific, actionable feedback with examples
+- Remediation guidance: Offer clear steps for resolving identified compliance issues
+- Quality assurance: Verify review completeness against framework standards
+- Integration readiness assessment: Confirm agent capability for framework operation

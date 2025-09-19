@@ -28,7 +28,7 @@ Create a comprehensive project brief using advanced validation workflow with bus
 
 This task leverages [validation frameworks](./.krci-ai/data/validation-frameworks.md) and the [advanced project brief template](./.krci-ai/templates/project-brief-template-advanced.md) for comprehensive project analysis.
 
-**Use Advanced Flow When:**
+Use Advanced Flow When:
 - High-stakes projects (>$100K budget, >6 month timeline)
 - Strategic initiatives requiring executive approval
 - Market uncertainty or unvalidated assumptions
@@ -42,6 +42,7 @@ This task leverages [validation frameworks](./.krci-ai/data/validation-framework
 - Time available for multi-session validation process (2-4 weeks)
 - Access to stakeholders for interviews and validation
 - Budget/timeline justifies enhanced validation effort
+</prerequisites>
 
 ## Instructions
 
@@ -209,8 +210,8 @@ Standard project briefs can be upgraded to advanced using [enhance-project-brief
 
 ## Framework Integration Notes
 
-- **SDLC Integration**: Advanced brief provides stronger foundation for complex PRD development
-- **Business Framework Usage**: Leverages established methodologies for professional validation
-- **Evidence Standards**: Maintains quantified, multi-source validation approach
-- **Quality Assurance**: Built-in validation ensures enterprise-grade output
-- **Professional Output**: Investment-grade documentation suitable for executive and board presentation
+- SDLC Integration: Advanced brief provides stronger foundation for complex PRD development
+- Business Framework Usage: Leverages established methodologies for professional validation
+- Evidence Standards: Maintains quantified, multi-source validation approach
+- Quality Assurance: Built-in validation ensures enterprise-grade output
+- Professional Output: Investment-grade documentation suitable for executive and board presentation

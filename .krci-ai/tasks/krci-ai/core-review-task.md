@@ -31,21 +31,21 @@ Review and validate existing tasks for framework compliance, XML tag usage, and 
 
 ## Framework Context: Task Review Standards and Quality Assessment
 
-**XML Tag Evaluation**: Tasks must use XML-style tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM guidance. These tags are internal metadata only and must never appear in user-facing output. Review should verify:
+XML Tag Evaluation: Tasks must use XML-style tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM guidance. These tags are internal metadata only and must never appear in user-facing output. Review should verify:
 
 - Proper XML tag placement and closure with correct syntax
 - Content appropriateness within tags providing clear LLM guidance
 - LLM guidance effectiveness for autonomous task execution
 - Section boundary identification and processing requirements clarity
 
-**Dependency Validation**: All framework dependencies must be declared in YAML frontmatter. Comprehensive validation includes:
+Dependency Validation: All framework dependencies must be declared in YAML frontmatter. Comprehensive validation includes:
 
 - Correct path resolution to existing framework components
 - Target file existence and accessibility verification
 - Appropriate reference context and integration patterns
 - Dependency chain integrity and circular reference prevention
 
-**Task Structure Requirements**: Tasks must follow exact template compliance with proper section ordering, comprehensive execution checklists, and autonomous execution capability.
+Task Structure Requirements: Tasks must follow exact template compliance with proper section ordering, comprehensive execution checklists, and autonomous execution capability.
 
 ## Output Format
 
@@ -67,26 +67,26 @@ Review and validate existing tasks for framework compliance, XML tag usage, and 
 
 ### Preparation Phase
 
-- [ ] Framework validation: Run `krci-ai validate` to establish baseline task status
-- [ ] Dependency verification: Confirm all reference assets exist at specified paths
-- [ ] Context gathering: Review task specifications and intended functionality
-- [ ] Review scope definition: Identify specific areas requiring evaluation and feedback
+- Framework validation: Run `krci-ai validate` to establish baseline task status
+- Dependency verification: Confirm all reference assets exist at specified paths
+- Context gathering: Review task specifications and intended functionality
+- Review scope definition: Identify specific areas requiring evaluation and feedback
 
 ### Execution Phase
 
-- [ ] XML guidance assessment: Verify task includes proper `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
-- [ ] XML tag validation: Check all XML tags are properly opened, closed, and provide effective LLM guidance
-- [ ] Dependency verification: Confirm all dependencies are declared in YAML frontmatter correctly
-- [ ] Reference resolution testing: Verify all referenced files exist at specified locations
-- [ ] Structure compliance review: Confirm task follows template pattern with required sections and ordering
-- [ ] Self-contained guidance assessment: Evaluate if task provides context-free usage explanations
-- [ ] Framework context validation: Verify educational context and architectural guidance presence
+- XML guidance assessment: Verify task includes proper `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
+- XML tag validation: Check all XML tags are properly opened, closed, and provide effective LLM guidance
+- Dependency verification: Confirm all dependencies are declared in YAML frontmatter correctly
+- Reference resolution testing: Verify all referenced files exist at specified locations
+- Structure compliance review: Confirm task follows template pattern with required sections and ordering
+- Self-contained guidance assessment: Evaluate if task provides context-free usage explanations
+- Framework context validation: Verify educational context and architectural guidance presence
 
 ### Validation Phase
 
-- [ ] Framework validation execution: Run `krci-ai validate` and document results with interpretation
-- [ ] Issue categorization: Organize findings by XML tags, references, structure, content quality
-- [ ] Improvement recommendations: Provide specific, actionable feedback with implementation examples
-- [ ] Quality assurance verification: Confirm task meets framework completeness and clarity requirements
-- [ ] Integration readiness assessment: Verify task capability for framework operation and agent reference
-- [ ] Documentation completeness review: Ensure all sections populated with actionable, comprehensive content
+- Framework validation execution: Run `krci-ai validate` and document results with interpretation
+- Issue categorization: Organize findings by XML tags, references, structure, content quality
+- Improvement recommendations: Provide specific, actionable feedback with implementation examples
+- Quality assurance verification: Confirm task meets framework completeness and clarity requirements
+- Integration readiness assessment: Verify task capability for framework operation and agent reference
+- Documentation completeness review: Ensure all sections populated with actionable, comprehensive content

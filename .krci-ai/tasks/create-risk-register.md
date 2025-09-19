@@ -24,12 +24,12 @@ Create a comprehensive risk register that identifies, analyzes, and documents pr
 
 ## Reference Assets
 
-**Primary Dependencies:**
+Primary Dependencies:
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [risk-register-template.md](./.krci-ai/templates/risk-register-template.md)
 - Project charter, SOW, and project plan documents
 
-**Optional Supporting Materials:**
+Optional Supporting Materials:
 - Historical risk data from similar projects
 - Organizational risk categories and templates
 - Industry-specific risk frameworks
@@ -114,10 +114,10 @@ Control Measures:
 
 ## Output Format
 
-**Primary Deliverable:**
+Primary Deliverable:
 Use template: [risk-register-template.md](./.krci-ai/templates/risk-register-template.md)
 
-**Document Structure:**
+Document Structure:
 - Risk register summary and overview
 - Risk identification methodology and sources
 - Risk analysis criteria and assessment framework
@@ -162,53 +162,53 @@ Quality Standards:
 
 ### Risk Identification Phase
 
-- [ ] Conduct risk identification workshops with team and stakeholders
-- [ ] Review project documentation for risk sources
-- [ ] Analyze work breakdown structure for activity risks
-- [ ] Consider external and organizational risk factors
-- [ ] Document all identified risks with clear descriptions
+- Conduct risk identification workshops with team and stakeholders
+- Review project documentation for risk sources
+- Analyze work breakdown structure for activity risks
+- Consider external and organizational risk factors
+- Document all identified risks with clear descriptions
 
 ### Risk Analysis Phase
 
-- [ ] Assess probability and impact for each identified risk
-- [ ] Calculate risk scores and establish priority rankings
-- [ ] Analyze risk interdependencies and cumulative effects
-- [ ] Validate risk assessments with stakeholders and experts
-- [ ] Document analysis results and rationale
+- Assess probability and impact for each identified risk
+- Calculate risk scores and establish priority rankings
+- Analyze risk interdependencies and cumulative effects
+- Validate risk assessments with stakeholders and experts
+- Document analysis results and rationale
 
 ### Risk Response Planning Phase
 
-- [ ] Develop appropriate response strategies for all significant risks
-- [ ] Define specific response actions and implementation plans
-- [ ] Assign risk owners and response responsibilities
-- [ ] Establish resource requirements and budget allocations
-- [ ] Create monitoring and control procedures
+- Develop appropriate response strategies for all significant risks
+- Define specific response actions and implementation plans
+- Assign risk owners and response responsibilities
+- Establish resource requirements and budget allocations
+- Create monitoring and control procedures
 
 ### Risk Register Finalization
 
-- [ ] Complete risk register using approved template
-- [ ] Review register for completeness and accuracy
-- [ ] Validate with stakeholders and obtain approval
-- [ ] Establish risk register as project management baseline
-- [ ] Implement risk monitoring and review procedures
+- Complete risk register using approved template
+- Review register for completeness and accuracy
+- Validate with stakeholders and obtain approval
+- Establish risk register as project management baseline
+- Implement risk monitoring and review procedures
 
 ## Content Guidelines
 
 ### Quality Principles
 
-- **Comprehensiveness**: Identify risks across all project knowledge areas
-- **Specificity**: Define risks with clear, actionable descriptions
-- **Realism**: Base assessments on factual analysis and expert judgment
-- **Actionability**: Ensure response plans are specific and implementable
-- **Ownership**: Assign clear accountability for risk management activities
+- Comprehensiveness: Identify risks across all project knowledge areas
+- Specificity: Define risks with clear, actionable descriptions
+- Realism: Base assessments on factual analysis and expert judgment
+- Actionability: Ensure response plans are specific and implementable
+- Ownership: Assign clear accountability for risk management activities
 
 ### LLM Error Prevention
 
-- **Stakeholder Input**: Involve appropriate stakeholders in risk identification and analysis
-- **Expert Validation**: Verify risk assessments with subject matter experts
-- **Historical Data**: Reference lessons learned and organizational experience
-- **Regular Updates**: Establish procedures for ongoing risk register maintenance
-- **Response Feasibility**: Ensure risk responses are realistic and resourced appropriately
+- Stakeholder Input: Involve appropriate stakeholders in risk identification and analysis
+- Expert Validation: Verify risk assessments with subject matter experts
+- Historical Data: Reference lessons learned and organizational experience
+- Regular Updates: Establish procedures for ongoing risk register maintenance
+- Response Feasibility: Ensure risk responses are realistic and resourced appropriately
 
 ### PMBoK Integration Context
 

@@ -32,10 +32,10 @@ Create comprehensive product launch campaign materials including press releases,
 
 ## Output Format
 
-- **Location**: `/docs/marketing/launch-materials.md` (EXACT path and filename)
-- **Length**: 8-12 pages covering all launch components
-- **Components**: Press release, website copy, social media campaigns, email sequences, promotional materials
-- **Downstream Enable**: Ready-to-use content for marketing team execution
+- Location: `/docs/marketing/launch-materials.md` (EXACT path and filename)
+- Length: 8-12 pages covering all launch components
+- Components: Press release, website copy, social media campaigns, email sequences, promotional materials
+- Downstream Enable: Ready-to-use content for marketing team execution
 
 ## Success Criteria
 

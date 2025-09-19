@@ -12,7 +12,7 @@ This guide provides a comprehensive prompt for LLM to implement a new Kubernetes
 ## Prerequisites
 
 <prerequisites>
-**IMPORTANT**: Before starting implementation, you must read and fully understand the following documentation:
+IMPORTANT: Before starting implementation, you must read and fully understand the following documentation:
 
 1. [Operator Best Practices](./.krci-ai/data/operator-best-practices.md) - Apply ALL the Kubernetes operator-specific patterns, architectural principles, CRD design guidelines, and operational practices defined in this document.
 </prerequisites>
@@ -20,9 +20,9 @@ This guide provides a comprehensive prompt for LLM to implement a new Kubernetes
 ## ⚠️ CRITICAL FIRST STEP
 
 <critical_first_step>
-**BEFORE ANY IMPLEMENTATION**: You MUST run the `make operator-sdk create api` command first to scaffold the proper structure. See Step 1.0 below for detailed instructions on how to do this.
+BEFORE ANY IMPLEMENTATION: You MUST run the `make operator-sdk create api` command first to scaffold the proper structure. See Step 1.0 below for detailed instructions on how to do this.
 
-**DO NOT** manually create files before running this command!
+DO NOT manually create files before running this command!
 </critical_first_step>
 
 ## Overview
@@ -40,7 +40,7 @@ Follow the [Operator SDK Tutorial](https://sdk.operatorframework.io/docs/buildin
 ### 1 Scaffold API and Controller
 
 <scaffold_api_controller>
-**Before implementing the controller, ask the user for the CustomResource details:**
+Before implementing the controller, ask the user for the CustomResource details:
 
 1. Group: The API group (typically use `v1` for this project)
 2. Version: The API version (typically `v1alpha1`)
@@ -52,7 +52,7 @@ Once you have these details, use the Operator SDK to scaffold the basic API and 
 make operator-sdk create api --group <group> --version <version> --kind <kind> --resource --controller
 ```
 
-**Example**: If the user wants to create a `KeycloakClient` CustomResource:
+Example: If the user wants to create a `KeycloakClient` CustomResource:
 
 ```bash
 make operator-sdk create api --group v1 --version v1alpha1 --kind KeycloakClient --resource --controller
@@ -72,7 +72,7 @@ After scaffolding, you'll need to customize the generated code to follow the pro
 <implement_api_types>
 Implement your Custom Resource Definition (CRD) spec and status, based on user requirements, in `api/v1alpha1/`:
 
-**Note**: The following examples use `YourResource` as a placeholder. Replace this with the actual resource name you specified during scaffolding.
+Note: The following examples use `YourResource` as a placeholder. Replace this with the actual resource name you specified during scaffolding.
 
 ```go
 // +kubebuilder:object:root=true
@@ -117,7 +117,7 @@ make manifests
 <implement_controller>
 Implement your controller in `internal/controller/yourresource/` following the existing pattern:
 
-**Note**: Replace `YourResource` and `yourresource` with the actual resource name you specified during scaffolding.
+Note: Replace `YourResource` and `yourresource` with the actual resource name you specified during scaffolding.
 
 ```go
 package yourresource
@@ -263,7 +263,7 @@ Create a chain package in `internal/controller/yourresource/chain/` with the fol
 2. `factory.go` - Chain factory
 3. Individual handler files for each step in the chain
 
-**Note**: Replace `yourresource` and `YourResource` with the actual resource name you specified during scaffolding.
+Note: Replace `yourresource` and `YourResource` with the actual resource name you specified during scaffolding.
 
 Example `chain.go`:
 
@@ -327,5 +327,5 @@ if err = yourresourcecontroller.NewReconcileYourResource(mgr.GetClient()).SetupW
 }
 ```
 
-**Note**: Replace `YourResource` with the actual resource name you specified during scaffolding.
+Note: Replace `YourResource` with the actual resource name you specified during scaffolding.
 </register_controller>

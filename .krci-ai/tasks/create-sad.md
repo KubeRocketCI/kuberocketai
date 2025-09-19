@@ -34,32 +34,32 @@ Create comprehensive system architecture documentation that translates PRD requi
 
 ## Output Format
 
-**Multi-File Architecture Documentation** - Create numbered section files in `/docs/architecture/` following the structure from [sad-template.md](./.krci-ai/templates/sad-template.md):
+Multi-File Architecture Documentation - Create numbered section files in `/docs/architecture/` following the structure from [sad-template.md](./.krci-ai/templates/sad-template.md):
 
 ### Core Architecture Sections (Required for All Projects)
 
-- [ ] **01-executive-summary.md** - Business context, architectural approach, success metrics
-- [ ] **02-introduction.md** - Definitions, scope, stakeholders, **PRD requirements mapping**
-- [ ] **06-target-architecture.md** - Target state C4 diagrams, quality attributes, solution strategy
-- [ ] **07-transition-migration.md** - Migration approach, roadmap, **Epic breakdown guidance**
-- [ ] **08-architectural-decisions.md** - ADR format decisions with context, alternatives, consequences
+- 01-executive-summary.md - Business context, architectural approach, success metrics
+- 02-introduction.md - Definitions, scope, stakeholders, PRD requirements mapping
+- 06-target-architecture.md - Target state C4 diagrams, quality attributes, solution strategy
+- 07-transition-migration.md - Migration approach, roadmap, Epic breakdown guidance
+- 08-architectural-decisions.md - ADR format decisions with context, alternatives, consequences
 
 ### Extended Sections (Medium/Large Projects)
 
-- [ ] **03-context.md** - Technology strategy, business/data/infrastructure/application/security architecture
-- [ ] **04-requirements.md** - Business goals, functional requirements, NFRs, constraints, assumptions
-- [ ] **05-baseline-architecture.md** - Current state conceptual, logical, integration, physical views
-- [ ] **09-cross-cutting-concerns.md** - Security, scalability, observability, fault tolerance approaches
-- [ ] **10-quality-assurance.md** - Testing strategy, automation approach, quality metrics
-- [ ] **11-appendices.md** - Glossary, diagram index, reference materials
+- 03-context.md - Technology strategy, business/data/infrastructure/application/security architecture
+- 04-requirements.md - Business goals, functional requirements, NFRs, constraints, assumptions
+- 05-baseline-architecture.md - Current state conceptual, logical, integration, physical views
+- 09-cross-cutting-concerns.md - Security, scalability, observability, fault tolerance approaches
+- 10-quality-assurance.md - Testing strategy, automation approach, quality metrics
+- 11-appendices.md - Glossary, diagram index, reference materials
 
-**Project Sizing Guidelines:**
+Project Sizing Guidelines:
 
-- **Small Projects**: Use core 5-file structure (sections 1, 2, 6, 7, 8)
-- **Medium Projects**: Use 8-file structure (sections 1, 2, 3, 6, 7, 8, 9, 10)
-- **Large Projects**: Use full 11-file structure above
+- Small Projects: Use core 5-file structure (sections 1, 2, 6, 7, 8)
+- Medium Projects: Use 8-file structure (sections 1, 2, 3, 6, 7, 8, 9, 10)
+- Large Projects: Use full 11-file structure above
 
-**Template Reference**: Follow comprehensive structure and content guidelines from [sad-template.md](./.krci-ai/templates/sad-template.md)
+Template Reference: Follow comprehensive structure and content guidelines from [sad-template.md](./.krci-ai/templates/sad-template.md)
 
 <success_criteria>
 - Core sections completed: Required architecture sections (01-executive-summary.md, 02-introduction.md, 06-target-architecture.md, 07-transition-migration.md, 08-architectural-decisions.md) created with project-specific content
@@ -111,29 +111,29 @@ Create comprehensive system architecture documentation that translates PRD requi
 
 ## Content Guidelines
 
-### 📋 **SAD Template Sections (11 Required):**
+### 📋 SAD Template Sections (11 Required):
 
-1. **Executive Summary**: Business-focused overview connecting architecture to business value
-2. **Introduction**: Foundation and context for architectural decisions
-3. **Context**: Business context, stakeholders, and external dependencies
-4. **Requirements**: Detailed BR/NFR requirements analysis and architectural implications
-5. **Baseline Architecture**: Current state and existing system components
-6. **Target Architecture**: Desired future state and new system design
-7. **Transition/Migration**: Implementation approach and migration strategy
-8. **Architectural Decisions**: Key technical decisions with rationale and alternatives
-9. **Cross-Cutting Concerns**: Security, logging, monitoring, and other system-wide concerns
-10. **Quality Assurance**: Testing strategy and quality validation approaches
-11. **Appendices**: Supporting documentation and reference materials
+1. Executive Summary: Business-focused overview connecting architecture to business value
+2. Introduction: Foundation and context for architectural decisions
+3. Context: Business context, stakeholders, and external dependencies
+4. Requirements: Detailed BR/NFR requirements analysis and architectural implications
+5. Baseline Architecture: Current state and existing system components
+6. Target Architecture: Desired future state and new system design
+7. Transition/Migration: Implementation approach and migration strategy
+8. Architectural Decisions: Key technical decisions with rationale and alternatives
+9. Cross-Cutting Concerns: Security, logging, monitoring, and other system-wide concerns
+10. Quality Assurance: Testing strategy and quality validation approaches
+11. Appendices: Supporting documentation and reference materials
 
-### ✅ **Quality Standards:**
+### ✅ Quality Standards:
 
-- **Requirements Traceable**: Every BR/NFR requirement addressed in architecture
-- **Epic Enabling**: Architecture provides clear guidance for Epic implementation
-- **Professional Quality**: Document suitable for stakeholder review and development use
-- **Technology Aligned**: Architecture decisions align with organizational standards
-- **Implementation Ready**: Sufficient detail for development team implementation
+- Requirements Traceable: Every BR/NFR requirement addressed in architecture
+- Epic Enabling: Architecture provides clear guidance for Epic implementation
+- Professional Quality: Document suitable for stakeholder review and development use
+- Technology Aligned: Architecture decisions align with organizational standards
+- Implementation Ready: Sufficient detail for development team implementation
 
-### ❌ **Common Pitfalls to Avoid:**
+### ❌ Common Pitfalls to Avoid:
 
 - Leaving template variables unfilled ({{variable}} placeholders)
 - Missing requirements traceability from PRD to architecture
@@ -141,11 +141,11 @@ Create comprehensive system architecture documentation that translates PRD requi
 - Insufficient implementation guidance for development teams
 - Architectural decisions without clear rationale or alternatives
 
-### 🎯 **Implementation Enablement:**
+### 🎯 Implementation Enablement:
 
 This SAD should enable immediate development by providing:
 
-- **Clear component boundaries** that Epics and Stories can implement
-- **Technology guidance** that development teams can follow
-- **Quality requirements** that become Story acceptance criteria
-- **Implementation roadmap** that guides Epic sequencing and Story creation
+- Clear component boundaries that Epics and Stories can implement
+- Technology guidance that development teams can follow
+- Quality requirements that become Story acceptance criteria
+- Implementation roadmap that guides Epic sequencing and Story creation

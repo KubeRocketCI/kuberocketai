@@ -31,18 +31,18 @@ Guide user through creating framework-compliant tasks following KubeRocketAI pat
 
 ## Framework Context: Task Architecture and XML Tag System
 
-**XML Tags Purpose**: XML-style tags like `<instructions>` are internal metadata for LLM guidance only. They help LLMs identify section boundaries and processing requirements. These tags MUST NEVER appear in final user output - only clean Markdown should be presented to users.
+XML Tags Purpose: XML-style tags like `<instructions>` are internal metadata for LLM guidance only. They help LLMs identify section boundaries and processing requirements. These tags MUST NEVER appear in final user output - only clean Markdown should be presented to users.
 
-**Task Structure Requirements**: All framework tasks must follow exact section ordering from template:
+Task Structure Requirements: All framework tasks must follow exact section ordering from template:
 1. Title → 2. Description → 3. Prerequisites (XML) → 4. Reference Assets → 5. Instructions (XML) → 6. Framework Context → 7. Output Format → 8. Success Criteria (XML) → 9. Execution Checklist
 
-**Common XML Tags and Usage**:
+Common XML Tags and Usage:
 - `<prerequisites>` - Requirements before task execution with specific validation criteria
 - `<instructions>` - Step-by-step guidance for LLM processing with numbered, actionable items
 - `<success_criteria>` - Validation criteria for completion with measurable outcomes
 - `<content_guidelines>` - Content quality and formatting requirements for consistency
 
-**Framework Integration Patterns**: Tasks must be self-contained with context-free usage capability, comprehensive frontmatter dependencies, and autonomous execution guidance.
+Framework Integration Patterns: Tasks must be self-contained with context-free usage capability, comprehensive frontmatter dependencies, and autonomous execution guidance.
 
 ## Output Format
 
@@ -64,27 +64,27 @@ Guide user through creating framework-compliant tasks following KubeRocketAI pat
 
 ### Preparation Phase
 
-- [ ] Framework validation: Run `krci-ai validate` to ensure clean starting state
-- [ ] Dependency verification: Confirm all reference assets exist at specified paths
-- [ ] Context gathering: Review user requirements and framework constraints
-- [ ] Task naming: Define descriptive name following framework conventions
-- [ ] Agent mapping: Identify target agent that will reference this task
-- [ ] Purpose definition: Clear statement of what task accomplishes
+- Framework validation: Run `krci-ai validate` to ensure clean starting state
+- Dependency verification: Confirm all reference assets exist at specified paths
+- Context gathering: Review user requirements and framework constraints
+- Task naming: Define descriptive name following framework conventions
+- Agent mapping: Identify target agent that will reference this task
+- Purpose definition: Clear statement of what task accomplishes
 
 ### Execution Phase
 
-- [ ] Template application: Use [core-task-template.md](./.krci-ai/templates/krci-ai/core-task-template.md) structure completely
-- [ ] Content generation: Populate all sections with framework-compliant content
-- [ ] Dependency integration: Add all required dependencies in YAML frontmatter using correct format
-- [ ] XML guidance: Include `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
-- [ ] Framework context: Add educational explanations and architectural guidance
-- [ ] Self-contained context: Include XML tag explanations and framework pattern guidance
+- Template application: Use [core-task-template.md](./.krci-ai/templates/krci-ai/core-task-template.md) structure completely
+- Content generation: Populate all sections with framework-compliant content
+- Dependency integration: Add all required dependencies in YAML frontmatter using correct format
+- XML guidance: Include `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
+- Framework context: Add educational explanations and architectural guidance
+- Self-contained context: Include XML tag explanations and framework pattern guidance
 
 ### Validation Phase
 
-- [ ] Structure validation: Verify task follows template requirements exactly
-- [ ] Dependency resolution: Confirm all frontmatter dependencies resolve to existing files
-- [ ] Framework validation: Run `krci-ai validate` and resolve any identified issues
-- [ ] Content completeness: Confirm task provides sufficient guidance for autonomous execution
-- [ ] Quality assurance: Review against framework standards and validation checklist
-- [ ] Integration testing: Verify task integrates properly with framework ecosystem
+- Structure validation: Verify task follows template requirements exactly
+- Dependency resolution: Confirm all frontmatter dependencies resolve to existing files
+- Framework validation: Run `krci-ai validate` and resolve any identified issues
+- Content completeness: Confirm task provides sufficient guidance for autonomous execution
+- Quality assurance: Review against framework standards and validation checklist
+- Integration testing: Verify task integrates properly with framework ecosystem

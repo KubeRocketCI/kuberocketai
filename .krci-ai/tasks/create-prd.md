@@ -33,10 +33,10 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 
 ## Output Format
 
-- **Location**: `/docs/prd/prd.md` (EXACT path and filename)
-- **Length**: 6-8 pages maximum for team consumption
-- **Requirements Format**: Use BR1, BR2, BR3... for business requirements and NFR1, NFR2, NFR3... for system requirements with P0/P1/P2 priority indicators and epic-level feature definitions
-- **Downstream Enable**: Provides clear requirements structure for development teams
+- Location: `/docs/prd/prd.md` (EXACT path and filename)
+- Length: 6-8 pages maximum for team consumption
+- Requirements Format: Use BR1, BR2, BR3... for business requirements and NFR1, NFR2, NFR3... for system requirements with P0/P1/P2 priority indicators and epic-level feature definitions
+- Downstream Enable: Provides clear requirements structure for development teams
 
 ## Success Criteria
 
@@ -92,17 +92,17 @@ Create a streamlined PRD that drives team alignment on what to build and why, fo
 
 ### Quality Principles for LLM Self-Evaluation
 
-- **User-Centered**: Always prioritize user needs over technical implementation details
-- **Evidence-Based**: Support all requirements with user research and business data
-- **Traceable**: Maintain clear connection from Project Brief → PRD with epic-level features
-- **Measurable**: Ensure all success metrics are specific, testable, and time-bound
+- User-Centered: Always prioritize user needs over technical implementation details
+- Evidence-Based: Support all requirements with user research and business data
+- Traceable: Maintain clear connection from Project Brief → PRD with epic-level features
+- Measurable: Ensure all success metrics are specific, testable, and time-bound
 
 ### LLM Error Prevention Checklist
 
-- **Avoid**: Technical implementation details (save for Architecture documents)
-- **Avoid**: Solution-oriented problem statements (focus on user pain points)
-- **Avoid**: Vague requirements that cannot be grouped into epic-level features
-- **Reference**: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting guidance and examples
+- Avoid: Technical implementation details (save for Architecture documents)
+- Avoid: Solution-oriented problem statements (focus on user pain points)
+- Avoid: Vague requirements that cannot be grouped into epic-level features
+- Reference: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for all formatting guidance and examples
 
 ### SDLC Integration Context
 

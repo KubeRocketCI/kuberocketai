@@ -35,17 +35,17 @@ Collect and analyze all completed validation results:
 
 #### Validation Report Analysis
 
-1. **Review all validation reports** in `/docs/prd/brief-validation-*.md`
-2. **Extract key findings** that impact project brief sections
-3. **Identify confidence level changes** based on validation evidence
-4. **Document required brief updates** based on validation results
+1. Review all validation reports in `/docs/prd/brief-validation-*.md`
+2. Extract key findings that impact project brief sections
+3. Identify confidence level changes based on validation evidence
+4. Document required brief updates based on validation results
 
 #### Evidence Quality Assessment
 
-1. **Aggregate evidence quality scores** across all validations
-2. **Identify strongest and weakest evidence** areas
-3. **Update overall brief confidence** based on evidence assessment
-4. **Flag areas requiring additional validation**
+1. Aggregate evidence quality scores across all validations
+2. Identify strongest and weakest evidence areas
+3. Update overall brief confidence based on evidence assessment
+4. Flag areas requiring additional validation
 
 ### Phase 2: Project Brief Section Updates
 
@@ -146,25 +146,25 @@ For each section, update validation checkpoints:
 
 ### Validation Integration
 
-- [ ] **Collect validation reports**: Gather all completed validation documents
-- [ ] **Extract key findings**: Identify findings that require brief updates
-- [ ] **Assess evidence quality**: Evaluate strength of validation evidence
-- [ ] **Plan section updates**: Determine which sections need refinement using [project brief template](./.krci-ai/templates/project-brief-template.md) structure
+- Collect validation reports: Gather all completed validation documents
+- Extract key findings: Identify findings that require brief updates
+- Assess evidence quality: Evaluate strength of validation evidence
+- Plan section updates: Determine which sections need refinement using [project brief template](./.krci-ai/templates/project-brief-template.md) structure
 
 ### Brief Refinement
 
-- [ ] **Update executive summary**: Integrate high-level validation insights
-- [ ] **Refine problem statement**: Add validated evidence and refined scope
-- [ ] **Enhance user sections**: Include validated user research and insights
-- [ ] **Improve success metrics**: Update with validated baselines and targets
-- [ ] **Update constraints/risks**: Include validation-discovered factors
+- Update executive summary: Integrate high-level validation insights
+- Refine problem statement: Add validated evidence and refined scope
+- Enhance user sections: Include validated user research and insights
+- Improve success metrics: Update with validated baselines and targets
+- Update constraints/risks: Include validation-discovered factors
 
 ### Quality Assurance
 
-- [ ] **Length verification**: Ensure brief remains within 2-3 page limit
-- [ ] **Evidence documentation**: Verify all claims have supporting evidence cited
-- [ ] **Assumption alignment**: Ensure brief content aligns with assumption tracker
-- [ ] **Stakeholder readiness**: Confirm brief is executive-ready and decision-enabling
+- Length verification: Ensure brief remains within 2-3 page limit
+- Evidence documentation: Verify all claims have supporting evidence cited
+- Assumption alignment: Ensure brief content aligns with assumption tracker
+- Stakeholder readiness: Confirm brief is executive-ready and decision-enabling
 
 </execution_checklist>
 
@@ -172,14 +172,14 @@ For each section, update validation checkpoints:
 
 ### Integration Principles
 
-- **Evidence Primacy**: Prioritize validated evidence over original assumptions
-- **Transparency**: Clearly indicate confidence levels and evidence sources
-- **Conciseness**: Maintain executive brevity while including essential validation insights
-- **Actionability**: Ensure refined brief enables clear next steps and decisions
+- Evidence Primacy: Prioritize validated evidence over original assumptions
+- Transparency: Clearly indicate confidence levels and evidence sources
+- Conciseness: Maintain executive brevity while including essential validation insights
+- Actionability: Ensure refined brief enables clear next steps and decisions
 
 ### Quality Standards
 
-- **Professional Presentation**: Maintain executive-level language and structure
-- **Evidence Attribution**: Clearly cite validation sources and evidence quality
-- **Balanced Perspective**: Include both confirming and challenging validation results
-- **Future-Focused**: Identify areas needing continued validation and monitoring
+- Professional Presentation: Maintain executive-level language and structure
+- Evidence Attribution: Clearly cite validation sources and evidence quality
+- Balanced Perspective: Include both confirming and challenging validation results
+- Future-Focused: Identify areas needing continued validation and monitoring

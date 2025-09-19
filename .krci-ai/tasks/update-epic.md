@@ -93,10 +93,10 @@ Note: All updates must maintain agent-optimized template compliance (Goal format
 
 ## Output Format
 
-- **Location**: Update existing `/docs/epics/{epic_number}-epic-{slug}.md` file in place
-- **Version tracking**: Add update timestamp and change summary to file header
-- **Change log**: Document what was updated and rationale in epic comments
-- **Story impact**: Note which Stories are affected by changes
+- Location: Update existing `/docs/epics/{epic_number}-epic-{slug}.md` file in place
+- Version tracking: Add update timestamp and change summary to file header
+- Change log: Document what was updated and rationale in epic comments
+- Story impact: Note which Stories are affected by changes
 
 ## Success Criteria
 
@@ -119,60 +119,60 @@ Note: All updates must maintain agent-optimized template compliance (Goal format
 
 ### User Consultation Phase (MANDATORY FIRST STEP)
 
-- [ ] **User interview**: Ask user what specific changes they want to make to the Epic
-- [ ] **Change justification**: Understand why these changes are needed (new PRD requirements, scope clarification, story feedback, etc.)
-- [ ] **Scope definition**: Clarify which Epic sections need updating and what specific content changes are required
-- [ ] **Impact discussion**: Explain potential impact on existing Stories to user
-- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
-- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+- User interview: Ask user what specific changes they want to make to the Epic
+- Change justification: Understand why these changes are needed (new PRD requirements, scope clarification, story feedback, etc.)
+- Scope definition: Clarify which Epic sections need updating and what specific content changes are required
+- Impact discussion: Explain potential impact on existing Stories to user
+- User approval: Get explicit user confirmation before proceeding with any changes
+- Change plan agreement: Confirm the proposed approach with user before implementation
 
 ### Pre-Update Assessment (ONLY AFTER USER APPROVAL)
 
-- [ ] **Status review**: Check epic status (Planning, In Progress, Implementation, Testing, Complete)
-- [ ] **Story analysis**: Review dependent Stories and their current implementation status
-- [ ] **Change scope**: Define exactly what needs updating and why
-- [ ] **Impact evaluation**: Assess how changes affect existing work and timeline
-- [ ] **Template compliance check**: Verify current epic follows agent-optimized template structure
-- [ ] **Content structure assessment**: Verify epic maintains agent-optimized template structure
-- [ ] **Validation command review**: Check if existing validation commands need updates
+- Status review: Check epic status (Planning, In Progress, Implementation, Testing, Complete)
+- Story analysis: Review dependent Stories and their current implementation status
+- Change scope: Define exactly what needs updating and why
+- Impact evaluation: Assess how changes affect existing work and timeline
+- Template compliance check: Verify current epic follows agent-optimized template structure
+- Content structure assessment: Verify epic maintains agent-optimized template structure
+- Validation command review: Check if existing validation commands need updates
 
 ### Change Planning Phase
 
-- [ ] **Update classification**: Determine if changes are ALLOWED, RESTRICTED, or FORBIDDEN
-- [ ] **Stakeholder validation**: Confirm updates with development team and product stakeholders
-- [ ] **Story impact**: Identify which Stories need corresponding updates
-- [ ] **Timeline adjustment**: Calculate any timeline changes from scope additions
-- [ ] **Template compliance planning**: Ensure updates maintain agent-optimized structure
-- [ ] **Template compliance planning**: Ensure updates maintain agent-optimized structure
-- [ ] **Validation command updates**: Identify validation commands that need modification
+- Update classification: Determine if changes are ALLOWED, RESTRICTED, or FORBIDDEN
+- Stakeholder validation: Confirm updates with development team and product stakeholders
+- Story impact: Identify which Stories need corresponding updates
+- Timeline adjustment: Calculate any timeline changes from scope additions
+- Template compliance planning: Ensure updates maintain agent-optimized structure
+- Template compliance planning: Ensure updates maintain agent-optimized structure
+- Validation command updates: Identify validation commands that need modification
 
 ### Update Implementation Phase
 
-- [ ] **Version header**: Add update timestamp and change summary to epic file
-- [ ] **Content updates**: Apply approved changes using [epic.md](./.krci-ai/templates/epic.md) structure
-- [ ] **Template compliance maintenance**: Preserve Goal format, Dependencies grouping, Acceptance Criteria commands
-- [ ] **Template structure maintenance**: Preserve Goal format, Dependencies grouping, Acceptance Criteria
-- [ ] **Validation command updates**: Update validation methods and commands as needed
-- [ ] **Agent-optimization verification**: Ensure consistent structure for automated processing
-- [ ] **Change documentation**: Document what changed and why in epic comments
-- [ ] **Story synchronization**: Update affected Stories to maintain epic alignment
-- [ ] **Quality gates validation**: Run validation commands to verify template compliance post-update
+- Version header: Add update timestamp and change summary to epic file
+- Content updates: Apply approved changes using [epic.md](./.krci-ai/templates/epic.md) structure
+- Template compliance maintenance: Preserve Goal format, Dependencies grouping, Acceptance Criteria commands
+- Template structure maintenance: Preserve Goal format, Dependencies grouping, Acceptance Criteria
+- Validation command updates: Update validation methods and commands as needed
+- Agent-optimization verification: Ensure consistent structure for automated processing
+- Change documentation: Document what changed and why in epic comments
+- Story synchronization: Update affected Stories to maintain epic alignment
+- Quality gates validation: Run validation commands to verify template compliance post-update
 
 ## Content Guidelines
 
 ### Quality Principles for LLM Self-Evaluation
 
-- **Change-Controlled**: Only make approved updates that don't invalidate completed work
-- **Impact-Aware**: Consider and document effects on all dependent Stories
-- **Traceability-Maintained**: Preserve existing PRD connections while adding new ones
-- **Story-Compatible**: Ensure all existing Stories remain valid and implementable
+- Change-Controlled: Only make approved updates that don't invalidate completed work
+- Impact-Aware: Consider and document effects on all dependent Stories
+- Traceability-Maintained: Preserve existing PRD connections while adding new ones
+- Story-Compatible: Ensure all existing Stories remain valid and implementable
 
 ### LLM Error Prevention Checklist
 
-- **NEVER**: Start making Epic changes without explicit user consultation and approval
-- **NEVER**: Assume what changes the user wants - always ask for specific requirements
-- **Avoid**: Removing scope that has completed Stories implementation
-- **Avoid**: Changing epic fundamentals (number, core problem) that break traceability
-- **Avoid**: Updates that make in-progress Stories irrelevant or incorrect
-- **Always**: Wait for user confirmation before proceeding with any edits
-- **Reference**: Use change control principles to validate every update decision
+- NEVER: Start making Epic changes without explicit user consultation and approval
+- NEVER: Assume what changes the user wants - always ask for specific requirements
+- Avoid: Removing scope that has completed Stories implementation
+- Avoid: Changing epic fundamentals (number, core problem) that break traceability
+- Avoid: Updates that make in-progress Stories irrelevant or incorrect
+- Always: Wait for user confirmation before proceeding with any edits
+- Reference: Use change control principles to validate every update decision

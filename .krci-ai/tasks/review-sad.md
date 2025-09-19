@@ -21,6 +21,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Reference documents: Access to PRD (`/docs/prd/prd.md`) and Epics (`/docs/epics/`) for validation
 - Architecture standards: Understanding of organizational architecture principles and guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md)
 - Review criteria: Clear understanding of quality gates and acceptance criteria
+</prerequisites>
 
 ## Instructions
 
@@ -91,7 +92,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 
 ## Content Guidelines
 
-### 📋 **Review Focus Areas:**
+### 📋 Review Focus Areas:
 
 <review_focus_areas>
 1. Section Completeness: All 11 sections populated with relevant, project-specific content
@@ -102,7 +103,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 6. Professional Standards: Document meets enterprise architecture documentation standards
 </review_focus_areas>
 
-### ✅ **PASS Criteria:**
+### ✅ PASS Criteria:
 
 <pass_criteria>
 - Complete Documentation: All 11 sections fully populated without template variables
@@ -113,7 +114,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Decision Quality: Architectural decisions are well-reasoned with clear alternatives
 </pass_criteria>
 
-### ❌ **FAIL Criteria:**
+### ❌ FAIL Criteria:
 
 <fail_criteria>
 - Missing or incomplete sections in SAD document
@@ -124,7 +125,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Documentation quality below professional standards
 </fail_criteria>
 
-### 🔍 **Common Review Issues:**
+### 🔍 Common Review Issues:
 
 <common_review_issues>
 
@@ -147,7 +148,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Solutions that don't address stated constraints or limitations
 </common_review_issues>
 
-### 🎯 **Review Questions:**
+### 🎯 Review Questions:
 
 <review_questions>
 Key questions to evaluate during review:
@@ -159,7 +160,7 @@ Key questions to evaluate during review:
 - "Is the proposed solution technically feasible within stated constraints?"
 </review_questions>
 
-### 📋 **Quality Gate Checklist:**
+### 📋 Quality Gate Checklist:
 
 <quality_gate_checklist>
 - Documentation Quality: Professional presentation suitable for stakeholder review

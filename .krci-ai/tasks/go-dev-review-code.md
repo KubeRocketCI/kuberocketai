@@ -3,8 +3,6 @@ dependencies:
   data:
     - go-coding-standards.md
     - operator-best-practices.md
-  mcp_servers:
-    - github
 ---
 
 # Task: Review Go code
@@ -14,7 +12,7 @@ You are an expert Go developer and Kubernetes operator specialist tasked with re
 ## Prerequisites
 
 <prerequisites>
-**IMPORTANT**: Before starting your review, you must read and fully understand the following documentation:
+IMPORTANT: Before starting your review, you must read and fully understand the following documentation:
 
 1. Read [Go Coding Standards](./.krci-ai/data/go-coding-standards.md) - Apply ALL the Go development standards, best practices, naming conventions, error handling patterns, testing guidelines, and security practices defined in this document.
 

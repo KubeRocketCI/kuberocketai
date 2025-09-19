@@ -47,10 +47,10 @@ Before making ANY changes to the Project Brief, you MUST:
 
 ## Output Format
 
-- **Location**: Updates existing `/docs/prd/project-brief.md` (EXACT path and filename)
-- **Length**: Maintain 2-3 pages maximum
-- **Impact Documentation**: Clear notes on what changed and downstream impact
-- **Downstream Updates**: List of PRD artifacts requiring updates
+- Location: Updates existing `/docs/prd/project-brief.md` (EXACT path and filename)
+- Length: Maintain 2-3 pages maximum
+- Impact Documentation: Clear notes on what changed and downstream impact
+- Downstream Updates: List of PRD artifacts requiring updates
 
 ## Success Criteria
 
@@ -67,12 +67,12 @@ Before making ANY changes to the Project Brief, you MUST:
 
 ### User Consultation Phase (MANDATORY FIRST STEP)
 
-- [ ] **User interview**: Ask user what specific changes they want to make to the Project Brief
-- [ ] **Change justification**: Understand why these changes are needed (strategic shifts, market changes, stakeholder feedback, resource changes, etc.)
-- [ ] **Scope definition**: Clarify which Project Brief sections need updating and what specific content changes are required
-- [ ] **Impact discussion**: Explain potential impact on existing PRD artifacts to user
-- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
-- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+- User interview: Ask user what specific changes they want to make to the Project Brief
+- Change justification: Understand why these changes are needed (strategic shifts, market changes, stakeholder feedback, resource changes, etc.)
+- Scope definition: Clarify which Project Brief sections need updating and what specific content changes are required
+- Impact discussion: Explain potential impact on existing PRD artifacts to user
+- User approval: Get explicit user confirmation before proceeding with any changes
+- Change plan agreement: Confirm the proposed approach with user before implementation
 
 ### Assessment Phase (ONLY AFTER USER APPROVAL)
 
@@ -85,10 +85,10 @@ Before making ANY changes to the Project Brief, you MUST:
 
 ### Update Phase
 
-- [ ] **Section updates**: Modify specific sections using [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
-- [ ] **Strategic alignment**: Ensure updates maintain strategic coherence and business focus
-- [ ] **Quality check**: Verify updated Project Brief maintains 2-3 page limit and foundation quality
-- [ ] **Content validation**: Ensure all changes are properly integrated
+- Section updates: Modify specific sections using [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
+- Strategic alignment: Ensure updates maintain strategic coherence and business focus
+- Quality check: Verify updated Project Brief maintains 2-3 page limit and foundation quality
+- Content validation: Ensure all changes are properly integrated
 
 ### Change Management Phase
 
@@ -111,13 +111,13 @@ Before making ANY changes to the Project Brief, you MUST:
 
 ### LLM Error Prevention Checklist
 
-- **NEVER**: Start making Project Brief changes without explicit user consultation and approval
-- **NEVER**: Assume what changes the user wants - always ask for specific requirements
-- **Avoid**: Making changes without clear strategic justification and stakeholder approval
-- **Avoid**: Updating without assessing downstream PRD impact
-- **Avoid**: Expanding scope beyond strategic foundation changes into tactical details
-- **Always**: Wait for user confirmation before proceeding with any edits
-- **Reference**: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting consistency
+- NEVER: Start making Project Brief changes without explicit user consultation and approval
+- NEVER: Assume what changes the user wants - always ask for specific requirements
+- Avoid: Making changes without clear strategic justification and stakeholder approval
+- Avoid: Updating without assessing downstream PRD impact
+- Avoid: Expanding scope beyond strategic foundation changes into tactical details
+- Always: Wait for user confirmation before proceeding with any edits
+- Reference: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for all formatting consistency
 
 ### SDLC Integration Context
 

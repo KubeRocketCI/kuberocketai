@@ -61,10 +61,10 @@ Post-creation verification:
 
 ## Output Format
 
-- **Location**: `/docs/epics/{epic_number}-epic-{slug}.md` (EXACT naming pattern)
-- **Epic numbering**: Sequential number based on existing epics (check `/docs/epics/` folder)
-- **Slug format**: Lowercase, hyphenated description (e.g., "ide-integration", "core-engine")
-- **Downstream Enable**: Enables Story creation at `/docs/stories/`
+- Location: `/docs/epics/{epic_number}-epic-{slug}.md` (EXACT naming pattern)
+- Epic numbering: Sequential number based on existing epics (check `/docs/epics/` folder)
+- Slug format: Lowercase, hyphenated description (e.g., "ide-integration", "core-engine")
+- Downstream Enable: Enables Story creation at `/docs/stories/`
 
 ## Success Criteria
 

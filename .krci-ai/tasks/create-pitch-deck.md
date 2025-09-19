@@ -16,7 +16,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 ## Prerequisites
 
 <prerequisites>
-**Core Requirements (PRD-First + Interactive):**
+Core Requirements (PRD-First + Interactive):
 
 - Completed PRD at `/docs/prd/prd.md` containing product information (primary source)
 - Product demo or MVP available for showcasing
@@ -26,7 +26,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
   - Competitive context
   - Presentation objectives
 
-**Optional (For Advanced Marketing Scenarios):**
+Optional (For Advanced Marketing Scenarios):
 
 - Marketing Brief at `/docs/marketing/marketing-brief.md` (for sophisticated positioning)
 - Competitive analysis and market research (for differentiation focus)
@@ -36,7 +36,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 ## Instructions
 
 <instructions>
-**EXECUTION SEQUENCE (Follow in Order):**
+EXECUTION SEQUENCE (Follow in Order):
 
 1. Load Context: Read all reference assets to load framework knowledge and templates
 2. Gather Information: Collect all prerequisites and analyze PRD/MVP content
@@ -44,7 +44,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 4. Structure Content: Apply chosen framework to organize pitch deck slides
 5. Create Output: Generate final pitch deck using template structure with visual design guidance
 
-**Framework Application Requirements:**
+Framework Application Requirements:
 
 - Mandatory: Use presentation frameworks from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
 - Available Frameworks: Pain-Gains-Reveals, PAS, BAB, SCRAP (all adapt to 3-5 slides)
@@ -53,10 +53,10 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 
 ## Output Format
 
-- **Location**: `/docs/marketing/pitch-deck.md` (EXACT path and filename)
-- **Length**: 3-5 slides maximum for focused, high-impact presentation
-- **Format**: Structured markdown with concise slide descriptions optimized for immediate visual implementation
-- **Downstream Enable**: Ready for PowerPoint/presentation tool conversion and executive-level presentations
+- Location: `/docs/marketing/pitch-deck.md` (EXACT path and filename)
+- Length: 3-5 slides maximum for focused, high-impact presentation
+- Format: Structured markdown with concise slide descriptions optimized for immediate visual implementation
+- Downstream Enable: Ready for PowerPoint/presentation tool conversion and executive-level presentations
 
 ## Success Criteria
 
@@ -87,7 +87,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 - Review MVP: Identify key capabilities for demonstration
 - Ask user for gaps: Follow template PRD Integration Guide for interactive questions to fill missing information
 
-**Interactive Question Examples:**
+Interactive Question Examples:
 
 - Who is your specific presentation audience? (e.g., Tech executives at SaaS companies or Series A investors)
 - What tone should this presentation have? (professional, innovative, empathetic, or other)
@@ -109,7 +109,7 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 - Integrate persuasion: Add Social Proof, Authority, Scarcity elements
 - Add emotional connection: Use Customer Emotion Guidelines for human feelings
 
-**Content Integration Guide:** Start by mapping your framework structure to emotional touchpoints - for Pain-Gains-Reveals, weave frustration/hope emotions into Pain slides, excitement/relief into Gains, and confidence/authority into Reveals. Layer persuasion psychology throughout: use Social Proof in problem validation, Authority in solution presentation, and Scarcity in competitive differentiation. Apply STAR method (Situation-Task-Action-Result) for any proof points, ensuring each slide contributes to the emotional journey from problem awareness to solution commitment. Follow all template guidance sections for implementation details.
+Content Integration Guide: Start by mapping your framework structure to emotional touchpoints - for Pain-Gains-Reveals, weave frustration/hope emotions into Pain slides, excitement/relief into Gains, and confidence/authority into Reveals. Layer persuasion psychology throughout: use Social Proof in problem validation, Authority in solution presentation, and Scarcity in competitive differentiation. Apply STAR method (Situation-Task-Action-Result) for any proof points, ensuring each slide contributes to the emotional journey from problem awareness to solution commitment. Follow all template guidance sections for implementation details.
 </structure_content>
 
 ### Step 5: Create Output
@@ -135,8 +135,8 @@ Create a concise, high-impact pitch deck (3-5 slides) that transforms product fe
 
 ### Framework Application Reference
 
-**Framework Selection**: Use template "Framework Adaptation Guide" for detailed structure and selection criteria
-**Customer Emotion Guidelines**: Follow template guidance for human emotions and quantifiable impact integration
+Framework Selection: Use template "Framework Adaptation Guide" for detailed structure and selection criteria
+Customer Emotion Guidelines: Follow template guidance for human emotions and quantifiable impact integration
 
 ### LLM Error Prevention Checklist
 

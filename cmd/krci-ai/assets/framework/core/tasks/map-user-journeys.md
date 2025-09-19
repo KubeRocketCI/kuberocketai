@@ -93,7 +93,7 @@ User Journey Documentation - Create comprehensive user experience insights:
 
 ## Content Guidelines
 
-### 📋 User Journey Structure:
+### User Journey Structure:
 
 <user_journey_structure>
 

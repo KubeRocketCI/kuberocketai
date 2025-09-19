@@ -40,11 +40,11 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 
 ## Output Format
 
-- **Location**: Update existing story file with implementation planning enhancements
-- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
-- **Content Placement**: Technical details in Description section, enhanced tasks in Tasks/Subtasks section
-- **Implementation Ready**: Story contains specific file paths, commands, and technical specifications
-- **Verification**: Story enables autonomous development without additional technical consultation
+- Location: Update existing story file with implementation planning enhancements
+- Template: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- Content Placement: Technical details in Description section, enhanced tasks in Tasks/Subtasks section
+- Implementation Ready: Story contains specific file paths, commands, and technical specifications
+- Verification: Story enables autonomous development without additional technical consultation
 
 ## Success Criteria
 
@@ -148,14 +148,14 @@ CRITICAL: Load all dependencies by reading their complete content before task ex
 
 ### Technical Planning Principles for LLM Self-Evaluation
 
-- **Implementation-Ready Planning**: All technical decisions documented with specific details and rationale
-- **Executable Task Enhancement**: Every task/subtask enhanced to be executable without additional research
-- **Comprehensive Technical Validation**: Complete testing and verification approach planned for implementation
-- **Architecture Integration**: All integration points, dependencies, and technical standards identified
+- Implementation-Ready Planning: All technical decisions documented with specific details and rationale
+- Executable Task Enhancement: Every task/subtask enhanced to be executable without additional research
+- Comprehensive Technical Validation: Complete testing and verification approach planned for implementation
+- Architecture Integration: All integration points, dependencies, and technical standards identified
 
 ### LLM Error Prevention Checklist
 
-- **Avoid**: Generic planning without specific technical details (libraries, versions, file paths)
-- **Avoid**: Task enhancement without validation commands and success criteria
-- **Avoid**: Implementation planning that ignores existing project structure and patterns
-- **Reference**: Use [story.md](./.krci-ai/templates/story.md) template for consistent enhancement formatting
+- Avoid: Generic planning without specific technical details (libraries, versions, file paths)
+- Avoid: Task enhancement without validation commands and success criteria
+- Avoid: Implementation planning that ignores existing project structure and patterns
+- Reference: Use [story.md](./.krci-ai/templates/story.md) template for consistent enhancement formatting

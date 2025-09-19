@@ -20,6 +20,7 @@ Create comprehensive defect reports and quality assessments based on testing exe
 - Testing evidence: Screenshots, logs, and supporting documentation collected during test execution
 - Quality standards: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
 - Reporting tools: Access to defect tracking system and reporting templates
+</prerequisites>
 
 ## Instructions
 
@@ -32,12 +33,12 @@ Create comprehensive defect reports and quality assessments based on testing exe
 
 ## Output Format
 
-**Defect Reports and Quality Assessment** - Create comprehensive quality documentation:
+Defect Reports and Quality Assessment - Create comprehensive quality documentation:
 
-- [ ] **Defect reports**: Individual defect reports using [defect-report.md](./.krci-ai/templates/defect-report.md) template
-- [ ] **Quality assessment**: Overall quality evaluation and release readiness recommendation
-- [ ] **Traceability matrix**: Mapping between defects, test cases, and Story acceptance criteria
-- [ ] **Priority recommendations**: Defect prioritization and resolution timeline suggestions
+- Defect reports: Individual defect reports using [defect-report.md](./.krci-ai/templates/defect-report.md) template
+- Quality assessment: Overall quality evaluation and release readiness recommendation
+- Traceability matrix: Mapping between defects, test cases, and Story acceptance criteria
+- Priority recommendations: Defect prioritization and resolution timeline suggestions
 
 ## Success Criteria
 
@@ -54,60 +55,60 @@ Create comprehensive defect reports and quality assessments based on testing exe
 
 ### Defect Analysis Phase
 
-- [ ] **Issue identification**: Review test execution results and identify all defects and quality issues
-- [ ] **Impact assessment**: Evaluate how each defect affects Story acceptance criteria and Epic functionality
-- [ ] **Severity classification**: Assign severity levels (Critical, High, Medium, Low) based on business impact
-- [ ] **Evidence compilation**: Organize screenshots, logs, and supporting documentation for each defect
+- Issue identification: Review test execution results and identify all defects and quality issues
+- Impact assessment: Evaluate how each defect affects Story acceptance criteria and Epic functionality
+- Severity classification: Assign severity levels (Critical, High, Medium, Low) based on business impact
+- Evidence compilation: Organize screenshots, logs, and supporting documentation for each defect
 
 ### Defect Documentation Phase
 
-- [ ] **Defect report creation**: Document each defect using [defect-report.md](./.krci-ai/templates/defect-report.md) format
-- [ ] **Reproduction steps**: Provide detailed steps to reproduce each defect with specific test data
-- [ ] **Expected vs actual results**: Clearly document expected behavior versus observed behavior
-- [ ] **Environment details**: Include environment configuration, browser, device, and system information
+- Defect report creation: Document each defect using [defect-report.md](./.krci-ai/templates/defect-report.md) format
+- Reproduction steps: Provide detailed steps to reproduce each defect with specific test data
+- Expected vs actual results: Clearly document expected behavior versus observed behavior
+- Environment details: Include environment configuration, browser, device, and system information
 
 ### Quality Assessment Phase
 
-- [ ] **Story impact evaluation**: Assess how defects affect Story acceptance criteria completion
-- [ ] **Epic functionality review**: Evaluate overall Epic quality and feature readiness
-- [ ] **Risk analysis**: Identify potential risks if defects are not resolved before release
-- [ ] **Release readiness determination**: Make quality-based recommendation for Story/Epic release
+- Story impact evaluation: Assess how defects affect Story acceptance criteria completion
+- Epic functionality review: Evaluate overall Epic quality and feature readiness
+- Risk analysis: Identify potential risks if defects are not resolved before release
+- Release readiness determination: Make quality-based recommendation for Story/Epic release
 
 ### Communication and Follow-up Phase
 
-- [ ] **Stakeholder notification**: Communicate quality assessment and defect findings to development and product teams
-- [ ] **Priority recommendations**: Suggest defect resolution priority and timeline based on business impact
-- [ ] **Resolution tracking**: Establish process for tracking defect resolution and verification
-- [ ] **Follow-up planning**: Plan re-testing activities once defects are resolved
+- Stakeholder notification: Communicate quality assessment and defect findings to development and product teams
+- Priority recommendations: Suggest defect resolution priority and timeline based on business impact
+- Resolution tracking: Establish process for tracking defect resolution and verification
+- Follow-up planning: Plan re-testing activities once defects are resolved
 
 ## Content Guidelines
 
-### 🎯 **Defect Reporting Focus Areas:**
+### 🎯 Defect Reporting Focus Areas:
 
-#### **Defect Documentation (Primary Focus):**
+#### Defect Documentation (Primary Focus):
 
-- **Clear Reproduction**: Step-by-step instructions that enable consistent defect reproduction
-- **Impact Assessment**: Business impact evaluation and effect on Story acceptance criteria
-- **Evidence Support**: Screenshots, logs, and data supporting defect identification
-- **Environment Context**: Specific environment, browser, device, and configuration details
+- Clear Reproduction: Step-by-step instructions that enable consistent defect reproduction
+- Impact Assessment: Business impact evaluation and effect on Story acceptance criteria
+- Evidence Support: Screenshots, logs, and data supporting defect identification
+- Environment Context: Specific environment, browser, device, and configuration details
 
-#### **Quality Assessment (Decision Support):**
+#### Quality Assessment (Decision Support):
 
-- **Story Readiness**: Evaluation of Story completion readiness based on defect impact
-- **Risk Analysis**: Assessment of risks associated with releasing despite known defects
-- **Priority Guidance**: Recommendations for defect resolution priority and timeline
-- **Release Decision Support**: Quality-based recommendations for stakeholder decision making
+- Story Readiness: Evaluation of Story completion readiness based on defect impact
+- Risk Analysis: Assessment of risks associated with releasing despite known defects
+- Priority Guidance: Recommendations for defect resolution priority and timeline
+- Release Decision Support: Quality-based recommendations for stakeholder decision making
 
-### ✅ **Quality Standards:**
+### ✅ Quality Standards:
 
-- **Defect Reproducible**: All defects include sufficient detail for consistent reproduction
-- **Impact Assessed**: Business and technical impact clearly evaluated for each defect
-- **Evidence Supported**: Screenshots, logs, and supporting documentation included
-- **Priority Classified**: Appropriate severity and priority assigned based on standards
-- **Traceability Maintained**: Clear links to affected test cases and acceptance criteria
-- **Stakeholder Communicated**: Quality findings clearly communicated to relevant teams
+- Defect Reproducible: All defects include sufficient detail for consistent reproduction
+- Impact Assessed: Business and technical impact clearly evaluated for each defect
+- Evidence Supported: Screenshots, logs, and supporting documentation included
+- Priority Classified: Appropriate severity and priority assigned based on standards
+- Traceability Maintained: Clear links to affected test cases and acceptance criteria
+- Stakeholder Communicated: Quality findings clearly communicated to relevant teams
 
-### ❌ **Common Pitfalls to Avoid:**
+### ❌ Common Pitfalls to Avoid:
 
 - Reporting defects without sufficient reproduction steps or supporting evidence
 - Missing impact assessment and business context for identified issues
@@ -116,11 +117,11 @@ Create comprehensive defect reports and quality assessments based on testing exe
 - Reporting defects without linking to specific Story acceptance criteria or test cases
 - Missing follow-up planning for defect resolution verification
 
-### 🎯 **Story/Epic Quality Integration:**
+### 🎯 Story/Epic Quality Integration:
 
 This defect reporting should enable informed decision making by providing:
 
-- **Story completion assessment** based on acceptance criteria validation and defect impact
-- **Epic quality evaluation** considering overall functionality and user experience
-- **Release readiness recommendation** based on comprehensive quality analysis
-- **Action plan guidance** for defect resolution and quality improvement
+- Story completion assessment based on acceptance criteria validation and defect impact
+- Epic quality evaluation considering overall functionality and user experience
+- Release readiness recommendation based on comprehensive quality analysis
+- Action plan guidance for defect resolution and quality improvement

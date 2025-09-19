@@ -34,10 +34,10 @@ Create comprehensive sales enablement package including sales scripts, objection
 
 ## Output Format
 
-- **Location**: `/docs/marketing/sales-enablement.md` (EXACT path and filename)
-- **Length**: 10-15 pages covering all sales scenarios and tools
-- **Components**: Sales scripts, objection handling, competitive analysis, ROI tools, case studies
-- **Downstream Enable**: Complete sales team training and reference materials
+- Location: `/docs/marketing/sales-enablement.md` (EXACT path and filename)
+- Length: 10-15 pages covering all sales scenarios and tools
+- Components: Sales scripts, objection handling, competitive analysis, ROI tools, case studies
+- Downstream Enable: Complete sales team training and reference materials
 
 ## Success Criteria
 

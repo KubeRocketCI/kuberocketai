@@ -33,11 +33,11 @@ Review and validate user story from Developer perspective to ensure technical im
 
 ## Output Format
 
-- **Location**: Update existing story file with developer technical validation
-- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
-- **Content Placement**: Technical enhancements in Description section, validation in Implementation Results
-- **Developer Approval**: Document technical readiness and development feasibility assessment
-- **Verification**: Story passes developer review with documented technical approval
+- Location: Update existing story file with developer technical validation
+- Template: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- Content Placement: Technical enhancements in Description section, validation in Implementation Results
+- Developer Approval: Document technical readiness and development feasibility assessment
+- Verification: Story passes developer review with documented technical approval
 
 ## Success Criteria
 
@@ -55,69 +55,69 @@ Review and validate user story from Developer perspective to ensure technical im
 ### Technical Completeness Assessment
 
 <technical_completeness>
-- [ ] **Library specifications**: All required libraries include specific versions (e.g., `gopkg.in/yaml.v3 v3.0.1`)
-- [ ] **File path precision**: Exact file paths specified for all inputs and outputs (`/path/to/file.ext`)
-- [ ] **Verification executability**: Verification methods/commands are specific and executable without modification
-- [ ] **Dependency clarity**: Technical dependencies clearly specified and available
+- Library specifications: All required libraries include specific versions (e.g., `gopkg.in/yaml.v3 v3.0.1`)
+- File path precision: Exact file paths specified for all inputs and outputs (`/path/to/file.ext`)
+- Verification executability: Verification methods/commands are specific and executable without modification
+- Dependency clarity: Technical dependencies clearly specified and available
 </technical_completeness>
 
 ### Task/Subtask Implementation Review
 
 <task_implementation_review>
-- [ ] **Atomic verification**: Each subtask represents single, executable action
-- [ ] **Verification completeness**: Every subtask includes specific verification method/steps and success indicators
-- [ ] **File target specificity**: Each task specifies exact files to create, modify, or validate
-- [ ] **Validation integration**: Each subtask includes verification commands and success indicators
+- Atomic verification: Each subtask represents single, executable action
+- Verification completeness: Every subtask includes specific verification method/steps and success indicators
+- File target specificity: Each task specifies exact files to create, modify, or validate
+- Validation integration: Each subtask includes verification commands and success indicators
 </task_implementation_review>
 
 ### Technical Architecture Validation
 
 <architecture_validation>
-- [ ] **Project structure alignment**: Implementation fits existing directory and module organization
-- [ ] **Pattern consistency**: Code follows established project patterns and conventions
-- [ ] **Integration point clarity**: Clear identification of how new code integrates with existing systems
-- [ ] **Performance consideration**: Implementation approach addresses performance requirements
+- Project structure alignment: Implementation fits existing directory and module organization
+- Pattern consistency: Code follows established project patterns and conventions
+- Integration point clarity: Clear identification of how new code integrates with existing systems
+- Performance consideration: Implementation approach addresses performance requirements
 </architecture_validation>
 
 ### Implementation Feasibility Check
 
 <feasibility_check>
-- [ ] **Technical viability**: Proposed approach is technically sound and implementable
-- [ ] **Resource availability**: Required tools, libraries, and dependencies are accessible
-- [ ] **Complexity assessment**: Implementation complexity matches story points and timeline
-- [ ] **Risk identification**: Technical risks identified with mitigation approaches
+- Technical viability: Proposed approach is technically sound and implementable
+- Resource availability: Required tools, libraries, and dependencies are accessible
+- Complexity assessment: Implementation complexity matches story points and timeline
+- Risk identification: Technical risks identified with mitigation approaches
 </feasibility_check>
 
 ### Quality Assurance Validation
 
 <quality_assurance>
-- [ ] **Testing completeness**: QA checklist includes comprehensive testing requirements
-- [ ] **Verification method**: Clear verification method provided (automated | semi-automated | manual) with commands where applicable
-- [ ] **Success criteria**: Clear, measurable criteria for implementation completion
-- [ ] **Error handling**: Testing includes error scenarios and edge cases
+- Testing completeness: QA checklist includes comprehensive testing requirements
+- Verification method: Clear verification method provided (automated | semi-automated | manual) with commands where applicable
+- Success criteria: Clear, measurable criteria for implementation completion
+- Error handling: Testing includes error scenarios and edge cases
 </quality_assurance>
 
 ### Development Workflow Readiness
 
 <workflow_readiness>
-- [ ] **Implementation sequence**: Clear order of implementation tasks and dependencies
-- [ ] **Development environment**: Environment setup and configuration requirements specified
-- [ ] **Code review preparation**: Implementation approach enables effective code review
-- [ ] **Documentation requirements**: Technical documentation needs clearly defined
+- Implementation sequence: Clear order of implementation tasks and dependencies
+- Development environment: Environment setup and configuration requirements specified
+- Code review preparation: Implementation approach enables effective code review
+- Documentation requirements: Technical documentation needs clearly defined
 </workflow_readiness>
 
 ## Content Guidelines
 
 ### Technical Implementation Principles for LLM Self-Evaluation
 
-- **Implementation Autonomy**: All technical details must enable autonomous development without external consultation
-- **Executable Specificity**: Every task/subtask must be executable with specific commands and file paths
-- **Architecture Integration**: Implementation must align with existing project structure and patterns
-- **Testing Completeness**: Comprehensive validation strategy with specific commands and success criteria
+- Implementation Autonomy: All technical details must enable autonomous development without external consultation
+- Executable Specificity: Every task/subtask must be executable with specific commands and file paths
+- Architecture Integration: Implementation must align with existing project structure and patterns
+- Testing Completeness: Comprehensive validation strategy with specific commands and success criteria
 
 ### LLM Error Prevention Checklist
 
-- **Avoid**: Generic implementation descriptions without specific technical details
-- **Avoid**: Missing file paths, library versions, or command specifications
-- **Avoid**: Implementation approaches that ignore existing project architecture
-- **Reference**: Ensure technical completeness aligns with [story.md](./.krci-ai/templates/story.md) template requirements
+- Avoid: Generic implementation descriptions without specific technical details
+- Avoid: Missing file paths, library versions, or command specifications
+- Avoid: Implementation approaches that ignore existing project architecture
+- Reference: Ensure technical completeness aligns with [story.md](./.krci-ai/templates/story.md) template requirements

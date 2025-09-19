@@ -66,7 +66,7 @@ Wizard behavior:
 
 - Before starting: HALT with a short intro explaining the wizard flow and expected outputs.
 - For each question above: ask → HALT for the answer → echo back the interpreted value → HALT for confirmation or edits.
-- Existing features: recommend the user to place `.feature` files directly into `src/main/resources/features/` (next to the future `src/main/resources/README.md`) with desired subfolders; alternatively offer to accept explicit paths or to scan typical paths (`docs/**`, `test/**`, `**/*.feature`) and HALT to confirm which to import and where they will be placed under `src/main/resources/features/`.
+- Existing features: recommend the user to place `.feature` files directly into `src/main/resources/features/` (next to the future `src/main/resources/README.md`) with desired subfolders; alternatively offer to accept explicit paths or to scan typical paths (`docs/`, `test/`, `/*.feature`) and HALT to confirm which to import and where they will be placed under `src/main/resources/features/`.
 - Plan summary: after gathering all inputs, present a concise plan (directories to create, README sections to include/customize, files to import/move) and HALT for approval.
 - Diff/preview: before writing, show a short preview of the new `src/main/resources/README.md` (first 20–30 lines and any customized sections) plus the file/folder actions list, and HALT for final confirmation.
 - On any "no" at confirmation points: allow the user to revise inputs or cancel without writing.

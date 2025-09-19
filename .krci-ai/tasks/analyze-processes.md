@@ -36,12 +36,12 @@ Analyze current business processes and workflows to identify improvement opportu
 
 ## Output Format
 
-**Process Analysis Documentation** - Create comprehensive process insights:
+Process Analysis Documentation - Create comprehensive process insights:
 
-- [ ] **Current state documentation**: Process maps and performance analysis using [process-map.md](./.krci-ai/templates/process-map.md) template
-- [ ] **Gap analysis report**: Performance gaps, improvement opportunities, and optimization recommendations
-- [ ] **Future state design**: Optimized process flows that address identified inefficiencies
-- [ ] **PRD enhancement guidance**: Process insights that inform PRD BR/NFR requirements and Epic features
+- Current state documentation: Process maps and performance analysis using [process-map.md](./.krci-ai/templates/process-map.md) template
+- Gap analysis report: Performance gaps, improvement opportunities, and optimization recommendations
+- Future state design: Optimized process flows that address identified inefficiencies
+- PRD enhancement guidance: Process insights that inform PRD BR/NFR requirements and Epic features
 
 ## Success Criteria
 

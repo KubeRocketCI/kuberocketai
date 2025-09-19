@@ -26,13 +26,13 @@ Create a comprehensive Scope of Work document that clearly defines project deliv
 ## Reference Assets
 
 <reference_assets>
-**Primary Dependencies:**
+Primary Dependencies:
 - Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
 - Template: [sow-template.md](./.krci-ai/templates/sow-template.md)
 - Project charter document
 - Requirements documentation
 
-**Optional Supporting Materials:**
+Optional Supporting Materials:
 - SDLC framework: [13-sdlc-framework.md](./docs/architecture/13-sdlc-framework.md) (if available)
 - Best practices: [best-practices.md](./.krci-ai/data/best-practices.md) (if available)
 </reference_assets>
@@ -42,13 +42,13 @@ Create a comprehensive Scope of Work document that clearly defines project deliv
 <instructions>
 ### 1. Scope Definition
 
-**Deliverable Specification:**
+Deliverable Specification:
 - Define all project deliverables with detailed descriptions
 - Specify deliverable formats, standards, and quality criteria
 - Establish clear acceptance criteria for each deliverable
 - Document dependencies between deliverables
 
-**Work Breakdown:**
+Work Breakdown:
 - Develop comprehensive work breakdown structure
 - Define specific tasks and activities required
 - Establish task sequences and dependencies
@@ -56,13 +56,13 @@ Create a comprehensive Scope of Work document that clearly defines project deliv
 
 ### 2. Performance Criteria
 
-**Acceptance Standards:**
+Acceptance Standards:
 - Define clear, measurable acceptance criteria
 - Establish quality standards and metrics
 - Specify testing and validation requirements
 - Document review and approval processes
 
-**Timeline and Milestones:**
+Timeline and Milestones:
 - Create detailed project schedule with milestones
 - Define critical path activities and dependencies
 - Establish deadline requirements and constraints
@@ -70,13 +70,13 @@ Create a comprehensive Scope of Work document that clearly defines project deliv
 
 ### 3. Roles and Responsibilities
 
-**Team Structure:**
+Team Structure:
 - Define project team roles and responsibilities
 - Specify decision-making authority and escalation paths
 - Document communication protocols and procedures
 - Establish accountability frameworks
 
-**Stakeholder Engagement:**
+Stakeholder Engagement:
 - Define stakeholder involvement requirements
 - Specify approval authorities and sign-off procedures
 - Document communication and reporting requirements
@@ -86,10 +86,10 @@ Create a comprehensive Scope of Work document that clearly defines project deliv
 ## Output Format
 
 <output_format>
-**Primary Deliverable:**
+Primary Deliverable:
 Use template: [sow-template.md](./.krci-ai/templates/sow-template.md)
 
-**Document Structure:**
+Document Structure:
 - Executive summary and project overview
 - Detailed scope definition and deliverables
 - Work breakdown structure and activities
@@ -104,14 +104,14 @@ Use template: [sow-template.md](./.krci-ai/templates/sow-template.md)
 ## Success Criteria
 
 <success_criteria>
-**SOW Completeness:**
+SOW Completeness:
 - All deliverables clearly defined with acceptance criteria
 - Comprehensive work breakdown structure completed
 - Realistic timeline with appropriate milestones
 - Clear roles, responsibilities, and governance structure
 - Quality standards and testing procedures defined
 
-**Stakeholder Agreement:**
+Stakeholder Agreement:
 - All stakeholders understand and agree to scope
 - Acceptance criteria are clear and measurable
 - Resource commitments are confirmed

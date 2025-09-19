@@ -90,11 +90,11 @@ Before applying any update:
 
 ## Output Format
 
-- **Location**: Update existing `/docs/stories/{epic_number}.{story_number}.story.md` file in place
-- **Template**: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
-- **Change Documentation**: Add timestamp to Status table, document changes in story comments
-- **Content Updates**: Modify appropriate sections based on change type (AC, Tasks, Description)
-- **Verification**: File maintains valid template structure with documented change history
+- Location: Update existing `/docs/stories/{epic_number}.{story_number}.story.md` file in place
+- Template: Maintain [story.md](./.krci-ai/templates/story.md) structure (8 sections only)
+- Change Documentation: Add timestamp to Status table, document changes in story comments
+- Content Updates: Modify appropriate sections based on change type (AC, Tasks, Description)
+- Verification: File maintains valid template structure with documented change history
 
 ## Success Criteria
 
@@ -111,33 +111,33 @@ Before applying any update:
 
 ### User Consultation Phase (MANDATORY FIRST STEP)
 
-- [ ] **User interview**: Ask user what specific changes they want to make to the Story
-- [ ] **Change justification**: Understand why these changes are needed (new requirements, scope clarification, task feedback, etc.)
-- [ ] **Scope definition**: Clarify which Story sections need updating and what specific content changes are required
-- [ ] **Impact discussion**: Explain potential impact on existing Tasks/Subtasks to user
-- [ ] **User approval**: Get explicit user confirmation before proceeding with any changes
-- [ ] **Change plan agreement**: Confirm the proposed approach with user before implementation
+- User interview: Ask user what specific changes they want to make to the Story
+- Change justification: Understand why these changes are needed (new requirements, scope clarification, task feedback, etc.)
+- Scope definition: Clarify which Story sections need updating and what specific content changes are required
+- Impact discussion: Explain potential impact on existing Tasks/Subtasks to user
+- User approval: Get explicit user confirmation before proceeding with any changes
+- Change plan agreement: Confirm the proposed approach with user before implementation
 
 ### Pre-Update Assessment (ONLY AFTER USER APPROVAL)
 
-- [ ] **Status review**: Check story status (Pending, In Progress, Approved, Completed)
-- [ ] **Task analysis**: Review Tasks/Subtasks and their current implementation status
-- [ ] **Change scope**: Define exactly what needs updating and why
-- [ ] **Epic validation**: Confirm changes maintain Epic alignment and traceability
+- Status review: Check story status (Pending, In Progress, Approved, Completed)
+- Task analysis: Review Tasks/Subtasks and their current implementation status
+- Change scope: Define exactly what needs updating and why
+- Epic validation: Confirm changes maintain Epic alignment and traceability
 
 ### Change Planning Phase
 
-- [ ] **Update classification**: Determine if changes are ALLOWED, RESTRICTED, or FORBIDDEN
-- [ ] **Team validation**: Confirm updates with development team and Epic stakeholders
-- [ ] **Task impact**: Identify which Tasks/Subtasks need corresponding updates
-- [ ] **Story points adjustment**: Recalculate story complexity if scope changes
+- Update classification: Determine if changes are ALLOWED, RESTRICTED, or FORBIDDEN
+- Team validation: Confirm updates with development team and Epic stakeholders
+- Task impact: Identify which Tasks/Subtasks need corresponding updates
+- Story points adjustment: Recalculate story complexity if scope changes
 
 ### Update Implementation Phase
 
-- [ ] **Version header**: Add update timestamp and change summary to story file
-- [ ] **Content updates**: Apply approved changes using [story.md](./.krci-ai/templates/story.md) structure
-- [ ] **Change documentation**: Document what changed and why in story comments
-- [ ] **Task synchronization**: Update affected Tasks/Subtasks to maintain story alignment
+- Version header: Add update timestamp and change summary to story file
+- Content updates: Apply approved changes using [story.md](./.krci-ai/templates/story.md) structure
+- Change documentation: Document what changed and why in story comments
+- Task synchronization: Update affected Tasks/Subtasks to maintain story alignment
 
 ## Content Guidelines
 
@@ -152,10 +152,10 @@ Before applying any update:
 
 ### LLM Error Prevention Checklist
 
-- **NEVER**: Start making Story changes without explicit user consultation and approval
-- **NEVER**: Assume what changes the user wants - always ask for specific requirements
-- **Avoid**: Removing Tasks/Subtasks that have completed implementation
-- **Avoid**: Changing story fundamentals (number, Epic reference) that break traceability
-- **Avoid**: Updates that make completed acceptance criteria irrelevant
-- **Always**: Wait for user confirmation before proceeding with any edits
-- **Reference**: Use change control principles to validate every update decision
+- NEVER: Start making Story changes without explicit user consultation and approval
+- NEVER: Assume what changes the user wants - always ask for specific requirements
+- Avoid: Removing Tasks/Subtasks that have completed implementation
+- Avoid: Changing story fundamentals (number, Epic reference) that break traceability
+- Avoid: Updates that make completed acceptance criteria irrelevant
+- Always: Wait for user confirmation before proceeding with any edits
+- Reference: Use change control principles to validate every update decision

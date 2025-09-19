@@ -31,23 +31,23 @@ Review and validate existing templates for variable consistency, LLM guidance ef
 
 ## Framework Context: Template Review Standards and Quality Assessment
 
-**Variable System Evaluation**: Templates should use consistent `{{variable_name}}` patterns with comprehensive validation:
+Variable System Evaluation: Templates should use consistent `{{variable_name}}` patterns with comprehensive validation:
 
 - Naming consistency: Variables follow descriptive naming conventions with clear purpose indication
 - Type appropriateness: Simple values, content lists, large sections, and optional content used correctly
 - Documentation clarity: Variable purpose clear through naming, context, and instruction comments
 - Optional handling: Optional vs required variables clearly indicated and properly documented
 
-**XML Guidance Assessment**: Review instruction tags for LLM processing effectiveness:
+XML Guidance Assessment: Review instruction tags for LLM processing effectiveness:
 
 - `<instructions>` tags provide clear, actionable content generation guidance
 - Comments explain variable usage and formatting expectations with examples
 - Processing hints facilitate proper LLM content generation and template usage
 - Section organization guidance maintains consistent structure across outputs
 
-**Structure and Reusability Standards**: Templates should support flexible usage while maintaining consistency, logical content flow, and framework integration patterns.
+Structure and Reusability Standards: Templates should support flexible usage while maintaining consistency, logical content flow, and framework integration patterns.
 
-**LLM Optimization Requirements**: Templates must be optimized for natural language processing with clear guidance, appropriate variable placement, and autonomous content generation capability.
+LLM Optimization Requirements: Templates must be optimized for natural language processing with clear guidance, appropriate variable placement, and autonomous content generation capability.
 
 ## Output Format
 
@@ -69,26 +69,26 @@ Review and validate existing templates for variable consistency, LLM guidance ef
 
 ### Preparation Phase
 
-- [ ] Framework validation: Run `krci-ai validate` to establish baseline template status
-- [ ] Dependency verification: Confirm all reference assets exist at specified paths
-- [ ] Context gathering: Review template specifications and intended usage scenarios
-- [ ] Review scope definition: Identify specific areas requiring evaluation and feedback
+- Framework validation: Run `krci-ai validate` to establish baseline template status
+- Dependency verification: Confirm all reference assets exist at specified paths
+- Context gathering: Review template specifications and intended usage scenarios
+- Review scope definition: Identify specific areas requiring evaluation and feedback
 
 ### Execution Phase
 
-- [ ] Variable system validation: Check `{{variable}}` placeholder consistency and naming patterns
-- [ ] Variable type assessment: Verify appropriate mix of simple values, lists, and content sections
-- [ ] XML guidance review: Assess `<instructions>` tags for effective LLM processing guidance
-- [ ] Structure evaluation: Confirm template supports intended output format with logical organization
-- [ ] Reusability testing: Assess template design for use across multiple similar contexts
-- [ ] LLM compatibility verification: Review template for natural language processing optimization
-- [ ] Framework integration assessment: Verify template follows established patterns and conventions
+- Variable system validation: Check `{{variable}}` placeholder consistency and naming patterns
+- Variable type assessment: Verify appropriate mix of simple values, lists, and content sections
+- XML guidance review: Assess `<instructions>` tags for effective LLM processing guidance
+- Structure evaluation: Confirm template supports intended output format with logical organization
+- Reusability testing: Assess template design for use across multiple similar contexts
+- LLM compatibility verification: Review template for natural language processing optimization
+- Framework integration assessment: Verify template follows established patterns and conventions
 
 ### Validation Phase
 
-- [ ] Template effectiveness evaluation: Assess overall template quality and usability
-- [ ] Issue categorization: Organize findings by variable system, XML guidance, structure, reusability
-- [ ] Improvement recommendations: Provide specific, actionable feedback with implementation examples
-- [ ] Quality standards verification: Confirm template meets framework completeness requirements
-- [ ] Integration readiness assessment: Verify template capability for effective framework usage
-- [ ] Documentation completeness review: Ensure template provides comprehensive guidance and examples
+- Template effectiveness evaluation: Assess overall template quality and usability
+- Issue categorization: Organize findings by variable system, XML guidance, structure, reusability
+- Improvement recommendations: Provide specific, actionable feedback with implementation examples
+- Quality standards verification: Confirm template meets framework completeness requirements
+- Integration readiness assessment: Verify template capability for effective framework usage
+- Documentation completeness review: Ensure template provides comprehensive guidance and examples
