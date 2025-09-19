@@ -22,6 +22,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
+	"github.com/KubeRocketCI/kuberocketai/internal/cli"
 	"github.com/KubeRocketCI/kuberocketai/internal/discovery"
 	"github.com/KubeRocketCI/kuberocketai/internal/validation"
 )
@@ -45,7 +46,6 @@ detailed error reporting for any issues found.
 
 Examples:
   krci-ai validate                    # Validate framework in current directory
-  krci-ai validate --verbose          # Validate with detailed output
   krci-ai validate --quiet            # Validate with minimal output`,
 	RunE: runValidate,
 }
@@ -56,18 +56,12 @@ func init() {
 	rootCmd.AddCommand(validateCmd)
 
 	// Add flags
-	validateCmd.Flags().BoolP("verbose", "v", false, "verbose output with detailed validation results")
 	validateCmd.Flags().BoolP("quiet", "q", false, "quiet output, only show summary")
 }
 
 // runValidate executes the validation command
 func runValidate(cmd *cobra.Command, args []string) error {
 	// Get flags
-	verboseOutput, err := cmd.Flags().GetBool("verbose")
-	if err != nil {
-		return fmt.Errorf("failed to get verbose flag: %w", err)
-	}
-
 	quietOutput, err := cmd.Flags().GetBool("quiet")
 	if err != nil {
 		return fmt.Errorf("failed to get quiet flag: %w", err)
@@ -96,19 +90,32 @@ func runValidate(cmd *cobra.Command, args []string) error {
 
 	processTime := time.Since(startTime)
 
-	// Create validation report
-	report := validation.NewValidationReport(issues, insights, processTime)
+	// Create output handler
+	output := cli.NewOutputHandler()
 
-	// Display results
+	// Display validation results
 	if !quietOutput {
-		fmt.Print(report.FormatReport(verboseOutput))
-	} else if !report.IsValid {
-		fmt.Printf("❌ Framework validation failed with %d critical issues\n", report.CriticalCount)
+		if len(issues) > 0 {
+			output.PrintError("Framework validation failed")
+			for _, issue := range issues {
+				output.PrintError(fmt.Sprintf("- %s", issue.Message))
+			}
+			output.Newline()
+		} else {
+			output.PrintSuccess("Framework validation passed")
+		}
+
+		// Print framework insights
+		output.PrintFrameworkInsights(insights, len(issues))
+
+		output.Printf("⚡ Validation completed in %.1fs\n", processTime.Seconds())
+	} else if len(issues) > 0 {
+		output.Printf("❌ Framework validation failed with %d issues\n", len(issues))
 	}
 
-	// Return error for critical issues. Cobra root will handle exit.
-	if report.HasCritical {
-		return fmt.Errorf("validation failed with %d critical issues", report.CriticalCount)
+	// Return error for issues. Cobra root will handle exit.
+	if len(issues) > 0 {
+		return fmt.Errorf("validation failed with %d issues", len(issues))
 	}
 	return nil
 }
