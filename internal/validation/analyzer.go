@@ -18,7 +18,11 @@ package validation
 import (
 	"context"
 	"fmt"
+	"io"
 	"os"
+	"path/filepath"
+	"sort"
+	"strings"
 
 	"github.com/KubeRocketCI/kuberocketai/internal/assets"
 )
@@ -82,6 +86,9 @@ func (a *FrameworkAnalyzer) AnalyzeFramework() ([]ValidationIssue, *FrameworkIns
 	dataFileUsage := make(map[string]int)
 	totalReferences := 0
 
+	// Collect file usage information for deduplication
+	fileUsage := a.collectFileUsage(agents)
+
 	for _, agent := range agents {
 		agentIssues := a.validateAgentFiles(agent)
 		issues = append(issues, agentIssues...)
@@ -91,11 +98,116 @@ func (a *FrameworkAnalyzer) AnalyzeFramework() ([]ValidationIssue, *FrameworkIns
 		totalReferences += refs
 	}
 
+	// Deduplicate XML validation issues
+	deduplicatedXMLIssues := a.deduplicateXMLValidationIssues(fileUsage)
+	issues = append(issues, deduplicatedXMLIssues...)
+
 	insights := a.buildInsights(agents, agentStats, templateUsage, taskUsage, dataFileUsage, totalReferences)
 	return issues, insights, nil
 }
 
-// validateAgentFiles validates all files referenced by an agent
+// FileReference represents how a file is referenced by agents/tasks
+type FileReference struct {
+	FilePath   string
+	FileType   string // "task", "template", "data file"
+	References []AgentTaskRef
+}
+
+// AgentTaskRef represents an agent/task combination that references a file
+type AgentTaskRef struct {
+	AgentName string
+	TaskName  string // empty for agent-level files
+}
+
+// collectFileUsage collects information about which files are referenced by which agents/tasks
+func (a *FrameworkAnalyzer) collectFileUsage(agents []assets.Agent) map[string]*FileReference {
+	fileUsage := make(map[string]*FileReference)
+
+	for _, agent := range agents {
+		// Collect task files
+		for _, taskPath := range agent.GetAllTasksPaths() {
+			if fileRef, exists := fileUsage[taskPath]; exists {
+				fileRef.References = append(fileRef.References, AgentTaskRef{
+					AgentName: agent.ShortName,
+					TaskName:  "",
+				})
+			} else {
+				fileUsage[taskPath] = &FileReference{
+					FilePath: taskPath,
+					FileType: "task",
+					References: []AgentTaskRef{{
+						AgentName: agent.ShortName,
+						TaskName:  "",
+					}},
+				}
+			}
+		}
+
+		// Collect files referenced by each task
+		for _, task := range agent.Tasks {
+			// Template files
+			for _, template := range task.Dependencies.Templates {
+				if fileRef, exists := fileUsage[template.Path]; exists {
+					fileRef.References = append(fileRef.References, AgentTaskRef{
+						AgentName: agent.ShortName,
+						TaskName:  task.Name,
+					})
+				} else {
+					fileUsage[template.Path] = &FileReference{
+						FilePath: template.Path,
+						FileType: "template",
+						References: []AgentTaskRef{{
+							AgentName: agent.ShortName,
+							TaskName:  task.Name,
+						}},
+					}
+				}
+			}
+
+			// Data files
+			for _, dataFile := range task.Dependencies.DataFiles {
+				if fileRef, exists := fileUsage[dataFile.Path]; exists {
+					fileRef.References = append(fileRef.References, AgentTaskRef{
+						AgentName: agent.ShortName,
+						TaskName:  task.Name,
+					})
+				} else {
+					fileUsage[dataFile.Path] = &FileReference{
+						FilePath: dataFile.Path,
+						FileType: "data file",
+						References: []AgentTaskRef{{
+							AgentName: agent.ShortName,
+							TaskName:  task.Name,
+						}},
+					}
+				}
+			}
+
+			// Referenced task files
+			for _, taskRef := range task.Dependencies.Tasks {
+				if fileRef, exists := fileUsage[taskRef.Path]; exists {
+					fileRef.References = append(fileRef.References, AgentTaskRef{
+						AgentName: agent.ShortName,
+						TaskName:  task.Name,
+					})
+				} else {
+					fileUsage[taskRef.Path] = &FileReference{
+						FilePath: taskRef.Path,
+						FileType: "referenced task",
+						References: []AgentTaskRef{{
+							AgentName: agent.ShortName,
+							TaskName:  task.Name,
+						}},
+					}
+				}
+			}
+		}
+	}
+
+	return fileUsage
+}
+
+// validateAgentFiles validates all files referenced by an agent (excluding XML validation which is handled separately)
 func (a *FrameworkAnalyzer) validateAgentFiles(agent assets.Agent) []ValidationIssue {
 	var issues []ValidationIssue
 
@@ -151,6 +263,107 @@ func (a *FrameworkAnalyzer) validateAgentFiles(agent assets.Agent) []ValidationI
 	}
 
 	return issues
+}
+
+// deduplicateXMLValidationIssues validates each unique file once and creates consolidated error messages
+func (a *FrameworkAnalyzer) deduplicateXMLValidationIssues(fileUsage map[string]*FileReference) []ValidationIssue {
+	var issues []ValidationIssue
+
+	for filePath, fileRef := range fileUsage {
+		// Check if file exists
+		if _, err := os.Stat(filePath); os.IsNotExist(err) {
+			// File doesn't exist - skip XML validation (existence validation is handled elsewhere)
+			continue
+		}
+
+		// Skip XML validation for YAML files
+		ext := strings.ToLower(filepath.Ext(filePath))
+		if ext == ".yaml" || ext == ".yml" {
+			continue
+		}
+
+		// Read file content
+		file, err := os.Open(filePath)
+		if err != nil {
+			// Cannot open file - skip XML validation
+			continue
+		}
+		defer func() {
+			_ = file.Close()
+		}()
+
+		content, err := io.ReadAll(file)
+		if err != nil {
+			// Cannot read file - skip XML validation
+			continue
+		}
+
+		// Validate XML tags in content
+		xmlIssues := a.validateXMLTags(string(content))
+		if len(xmlIssues) == 0 {
+			continue // No XML issues in this file
+		}
+
+		// Create consolidated error messages for each XML issue
+		for _, xmlIssue := range xmlIssues {
+			var referencedBy string
+			if len(fileRef.References) == 1 {
+				// Single reference - use original format
+				ref := fileRef.References[0]
+				if ref.TaskName != "" {
+					referencedBy = fmt.Sprintf("(agent: %s, task: %s, %s)", ref.AgentName, ref.TaskName, fileRef.FileType)
+				} else {
+					referencedBy = fmt.Sprintf("(agent: %s, %s)", ref.AgentName, fileRef.FileType)
+				}
+			} else {
+				// Multiple references - use consolidated format
+				referencedBy = a.formatMultipleReferences(fileRef)
+			}
+
+			issues = append(issues, ValidationIssue{
+				File:    filePath,
+				Message: fmt.Sprintf("XML tag validation error: %s %s - File: %s", xmlIssue, referencedBy, filePath),
+			})
+		}
+	}
+
+	return issues
+}
+
+// formatMultipleReferences creates a consolidated reference string for files used by multiple agents/tasks
+func (a *FrameworkAnalyzer) formatMultipleReferences(fileRef *FileReference) string {
+	agentTaskMap := make(map[string][]string)
+
+	for _, ref := range fileRef.References {
+		if ref.TaskName != "" {
+			agentTaskMap[ref.AgentName] = append(agentTaskMap[ref.AgentName], ref.TaskName)
+		} else {
+			// Agent-level reference (task name is empty)
+			if _, exists := agentTaskMap[ref.AgentName]; !exists {
+				agentTaskMap[ref.AgentName] = []string{}
+			}
+		}
+	}
+
+	// Sort agent names for deterministic output
+	var agentNames []string
+	for agentName := range agentTaskMap {
+		agentNames = append(agentNames, agentName)
+	}
+	sort.Strings(agentNames)
+
+	var parts []string
+	for _, agentName := range agentNames {
+		tasks := agentTaskMap[agentName]
+		if len(tasks) == 0 {
+			parts = append(parts, agentName)
+		} else {
+			taskList := strings.Join(tasks, ", ")
+			parts = append(parts, fmt.Sprintf("%s(%s)", agentName, taskList))
+		}
+	}
+
+	return fmt.Sprintf("(%s, %s) - Referenced by: %s", fileRef.FileType, "multiple agents/tasks", strings.Join(parts, ", "))
 }
 
 // collectAgentStats collects statistics for an agent and updates usage counters
@@ -241,5 +454,6 @@ func (a *FrameworkAnalyzer) findMostUsed(usage map[string]int) *UsageStats {
 			mostUsed = &UsageStats{Path: path, Count: count}
 		}
 	}
+
 	return mostUsed
 }
