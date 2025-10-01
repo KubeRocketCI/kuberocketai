@@ -13,20 +13,22 @@ dependencies:
 
 Review and validate existing templates for variable consistency, LLM guidance effectiveness, and structural integrity. This task provides evaluation criteria to ensure templates support proper content generation and framework compliance with comprehensive quality assessment.
 
-<prerequisites>
-- Template exists: Target template file exists and is accessible for review
-- Template context: Understanding of template's intended usage and output format
-- Variable knowledge: Familiarity with `{{variable}}` placeholder system and naming conventions
-- LLM processing: Knowledge of how templates guide content generation and framework integration
-</prerequisites>
-
 <instructions>
-1. Validate variable system: Check `{{variable}}` placeholder consistency and naming patterns with type appropriateness
-2. Review XML guidance: Assess `<instructions>` tags for effective LLM processing guidance and content generation
-3. Evaluate structure: Confirm template supports intended output format and organization with logical flow
-4. Check reusability: Assess template design for use across multiple contexts with flexible adaptation
-5. Test LLM compatibility: Review template for natural language processing optimization and clarity
-6. Provide improvements: Offer specific recommendations for enhanced effectiveness with implementation examples
+Identify target template for review. Ask user for exact template file path (example: .krci-ai/templates/krci-ai/core-task-template.md). Confirm file exists and is accessible before proceeding.
+
+Run krci-ai validate to establish baseline template status. Read target template file completely. Understand template's intended usage and expected output format from context and structure.
+
+Validate variable system consistency. Check all variables use {{variable_name}} placeholder format consistently. Verify variable names are descriptive and follow consistent naming patterns. Assess variable types for appropriate mix of simple values, content lists, large sections, and optional content. Confirm variable purpose is clear from naming and context.
+
+Review XML guidance effectiveness. Assess instructions tags for effective LLM processing guidance and content generation support. Verify comments explain variable usage and formatting expectations with examples. Check that processing hints facilitate proper LLM content generation and template usage. Evaluate section organization guidance for maintaining consistent structure across outputs.
+
+Evaluate structure and organization. Confirm template uses proper markdown syntax and structure throughout. Assess logical organization and content hierarchy for natural flow. Verify section clarity with clear headings and content organization. Check that template structure effectively supports intended final output format.
+
+Check reusability and flexibility. Assess template design for use across multiple similar contexts. Evaluate variable system accommodation of diverse content needs. Verify template structure allows for customization while maintaining consistency. Confirm template follows established framework patterns and conventions.
+
+Test LLM compatibility and optimization. Review template for natural language processing optimization. Assess clarity of guidance for autonomous content generation. Verify appropriate variable placement throughout template structure. Check overall template effectiveness for LLM-driven content creation.
+
+Provide improvement recommendations. Offer specific enhancements with implementation examples and best practices. Organize feedback by variable system, XML guidance, structure, reusability, and LLM compatibility categories. Include quality assessment of framework compliance status and integration readiness.
 </instructions>
 
 ## Framework Context: Template Review Standards and Quality Assessment

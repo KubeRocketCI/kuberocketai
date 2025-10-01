@@ -13,20 +13,22 @@ dependencies:
 
 Guide user through creating framework data files that provide knowledge, standards, and constraints for agent behavior and task execution. This task covers data organization, reference patterns, and content structuring for effective framework integration and component operation.
 
-<prerequisites>
-- Framework installed: .krci-ai directory exists with data/ subdirectory structure
-- Data purpose defined: Clear understanding of what knowledge or standards data will provide
-- Usage context: Knowledge of which agents or tasks will reference this data
-- Content type identified: Understanding of appropriate file format for data content
-</prerequisites>
-
 <instructions>
-1. Determine data format: Choose appropriate format (.md, .yaml, .json, .txt, .csv) based on content type and usage
-2. Organize data structure: Create logical organization following framework patterns for reference integration
-3. Define reference context: Ensure data supports agent behavioral guidance or task technical constraints effectively
-4. Apply naming conventions: Use descriptive names that indicate data purpose and scope clearly
-5. Structure for accessibility: Organize content for easy reference and consumption by framework components
-6. Format output: Use [core-data-template.md](./.krci-ai/templates/krci-ai/core-data-template.md) as structural guide
+Define data file specification. Ask user for exact data file name, purpose, and content scope (example: technical-standards.yaml, api-guidelines.md). Clarify which agents or tasks will reference this data and what knowledge or standards it will provide.
+
+Determine appropriate data format. Choose format based on content type and usage requirements. Use markdown (.md) for documentation, guidelines, principles, and explanatory content with rich formatting. Use YAML (.yaml/.yml) for specifications, configurations, and structured standards with hierarchy. Use JSON (.json) for structured data, API schemas, and configuration formats with strict schema. Use text (.txt) for simple reference data and plain text content. Use CSV (.csv) for tabular data, metrics, lists, and comparative information.
+
+Organize data structure logically. Create organization following framework patterns for reference integration. Structure content to support frontmatter dependency patterns. Organize for agent behavioral integration or task technical integration as appropriate. Design structure compatible with framework validation processes.
+
+Define reference context and integration. Ensure data supports agent principles and behavioral guidance if referenced by agents. Structure data to provide task specifications and technical constraints if referenced by tasks. Include examples, implementations, or configuration samples as reference data. Provide standards, checklists, or compliance requirements for validation purposes.
+
+Apply naming conventions and scope indicators. Use descriptive file names clearly indicating data purpose and scope. Follow framework naming patterns for consistency. Ensure names differentiate between behavioral data (for agents) and technical data (for tasks).
+
+Structure for accessibility and consumption. Organize information for easy reference by framework components. Create clear sections with appropriate headings. Provide comprehensive, accurate information for intended purpose. Enable straightforward consumption by both agents and tasks.
+
+Format output following data organization principles. Save to ./.krci-ai/data/{category}/{data-name}.{ext} following path and naming conventions. Use core-data-template.md as structural guide where applicable. Ensure format syntax is correct and parseable.
+
+Validate data file integration. Verify file format syntax correctness. Confirm content organization follows framework patterns. Test data supports proper framework component integration. Ensure information accuracy and completeness for intended purpose.
 </instructions>
 
 ## Framework Context: Data Architecture and Integration Patterns

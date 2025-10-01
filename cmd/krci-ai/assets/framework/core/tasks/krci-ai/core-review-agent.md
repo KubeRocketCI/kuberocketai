@@ -14,6 +14,7 @@ dependencies:
 Review and validate existing agents for framework compliance, schema adherence, and behavioral consistency. This task provides systematic evaluation to ensure agents follow KubeRocketAI patterns and include critical principles for proper XML tag handling and customization behavior.
 
 <prerequisites>
+- Agent target: Specify exact agent file to review (e.g., `.krci-ai/agents/advisor.yaml`)
 - Agent exists: Target agent YAML file exists and is accessible for review
 - Schema access: Understanding of agent JSON schema requirements and validation patterns
 - Framework context: Knowledge of critical agent principles and activation prompt patterns

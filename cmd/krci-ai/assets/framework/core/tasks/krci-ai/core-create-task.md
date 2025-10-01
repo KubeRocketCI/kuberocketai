@@ -13,20 +13,24 @@ dependencies:
 
 Guide user through creating framework-compliant tasks following KubeRocketAI patterns. This task provides step-by-step instructions for creating tasks that use XML guidance tags, frontmatter dependencies, and proper structure for LLM processing within the AI-as-Code framework.
 
-<prerequisites>
-- Framework installed: .krci-ai directory exists with agents/, tasks/, templates/, data/ structure
-- Target agent identified: Specific agent that will use this new task
-- Task purpose defined: Clear understanding of what the task will accomplish
-- Framework patterns understood: Knowledge of XML tags, frontmatter dependencies, and validation requirements
-</prerequisites>
-
 <instructions>
-1. Apply XML guidance system: Use XML tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM section identification and guidance
-2. Follow naming convention: Use descriptive task names with appropriate prefixes (e.g., "core-" for framework tasks)
-3. Manage dependencies: List all referenced files in YAML frontmatter under data/templates sections
-4. Structure validation: Follow task template structure with Description, Prerequisites, Instructions, Success Criteria
-5. Ensure self-contained guidance: Include explanations of XML tag system and framework patterns for context-free usage
-6. Format output: Use ./.krci-ai/templates/krci-ai/core-task-template.md for consistent structure
+Define task specification. Ask user for exact task name, target agent, and task purpose. Clarify what the task will accomplish and which agent will reference it (example: task core-analyze-metrics.md for advisor agent).
+
+Review framework standards for task creation. Read task structure requirements from core-framework-standards.yaml. Understand required sections, XML guidance system, dependency frontmatter format, and validation requirements.
+
+Apply XML guidance system. Use instructions and success_criteria XML tags for LLM section identification and processing guidance. Structure instructions as natural paragraph flow with imperative verbs and inline HALT conditions. Define success_criteria with specific, measurable validation criteria.
+
+Follow naming conventions. Use descriptive task names with appropriate prefixes. Apply core- prefix for framework tasks. Use kebab-case for file naming. Ensure name clearly indicates task purpose and scope.
+
+Manage dependencies in frontmatter. Create YAML frontmatter at file beginning. List all referenced data files under dependencies.data section. List all referenced templates under dependencies.templates section. Verify all dependency paths resolve to existing files.
+
+Structure task following template pattern. Use core-task-template.md as structural guide. Include required sections: Title, Description, Instructions (XML), Framework Context, Output Format, Success Criteria (XML), Execution Checklist. Follow logical section progression for clear task flow.
+
+Ensure self-contained guidance. Include explanations of framework patterns and validation requirements. Provide context for XML tag system purpose and usage. Add educational content about architectural concepts relevant to task. Enable context-free usage without requiring external knowledge.
+
+Format output for framework compliance. Save to ./.krci-ai/tasks/{task-name}.md following path conventions. Populate all template variables with task-specific content. Ensure instructions use natural paragraph flow without numbered lists. Verify all framework references use correct inline format.
+
+Run framework validation. Execute krci-ai validate and resolve identified issues. Confirm all frontmatter dependencies resolve correctly. Verify task passes automated compliance checks. Test task provides sufficient guidance for autonomous execution.
 </instructions>
 
 ## Framework Context: Task Architecture and XML Tag System
@@ -34,11 +38,10 @@ Guide user through creating framework-compliant tasks following KubeRocketAI pat
 XML Tags Purpose: XML-style tags like `<instructions>` are internal metadata for LLM guidance only. They help LLMs identify section boundaries and processing requirements. These tags MUST NEVER appear in final user output - only clean Markdown should be presented to users.
 
 Task Structure Requirements: All framework tasks must follow exact section ordering from template:
-1. Title → 2. Description → 3. Prerequisites (XML) → 4. Reference Assets → 5. Instructions (XML) → 6. Framework Context → 7. Output Format → 8. Success Criteria (XML) → 9. Execution Checklist
+1. Title → 2. Description → 3. Instructions (XML) → 4. Framework Context → 5. Output Format → 6. Success Criteria (XML) → 7. Execution Checklist
 
 Common XML Tags and Usage:
-- `<prerequisites>` - Requirements before task execution with specific validation criteria
-- `<instructions>` - Step-by-step guidance for LLM processing with numbered, actionable items
+- `<instructions>` - Natural paragraph flow guidance for LLM processing with imperative verbs and inline conditionals
 - `<success_criteria>` - Validation criteria for completion with measurable outcomes
 - `<content_guidelines>` - Content quality and formatting requirements for consistency
 
@@ -76,7 +79,7 @@ Framework Integration Patterns: Tasks must be self-contained with context-free u
 - Template application: Use [core-task-template.md](./.krci-ai/templates/krci-ai/core-task-template.md) structure completely
 - Content generation: Populate all sections with framework-compliant content
 - Dependency integration: Add all required dependencies in YAML frontmatter using correct format
-- XML guidance: Include `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
+- XML guidance: Include `<instructions>`, `<success_criteria>` sections with natural paragraph flow
 - Framework context: Add educational explanations and architectural guidance
 - Self-contained context: Include XML tag explanations and framework pattern guidance
 

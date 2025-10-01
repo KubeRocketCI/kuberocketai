@@ -11,22 +11,24 @@ dependencies:
 
 Execute comprehensive framework validation using CLI tools and manual inspection to ensure component compliance, reference integrity, and operational readiness. This task provides systematic validation procedures for complete framework quality assurance.
 
-<prerequisites>
-- Framework installed: .krci-ai directory exists with complete structure (agents/, tasks/, templates/, data/)
-- CLI access: `krci-ai` command available with validate functionality
-- Component knowledge: Understanding of framework components and validation requirements
-- Issue resolution: Ability to address validation findings and implement fixes
-</prerequisites>
-
 <instructions>
-1. Execute CLI validation: Run `krci-ai validate` with appropriate verbosity for comprehensive checking
-2. Analyze validation results: Interpret automated validation findings and categorize issues
-3. Perform manual inspection: Review components for framework pattern compliance beyond automated checks
-4. Validate reference integrity: Ensure all file path references resolve to existing files
-5. Check dependency consistency: Verify YAML frontmatter dependencies match content references
-6. Check component relationships: Verify agents reference existing tasks and tasks reference existing templates/data
-7. Validate against ./.krci-ai/data/krci-ai/core-validation-checklist.md
-8. Document findings: Create comprehensive validation report with specific remediation actions
+Execute CLI validation with appropriate verbosity. Run krci-ai validate for standard framework checking. Use krci-ai validate --verbose for detailed analysis when investigating specific issues. Apply krci-ai validate --quiet for summary-only results if needed. Capture and analyze CLI output for issues and compliance status.
+
+Analyze validation results systematically. Interpret automated validation findings from CLI output. Categorize issues by component type (agents, tasks, templates, data files). Classify severity as critical, warning, or informational. Prioritize resolution order based on impact and dependencies. Understand root causes of validation failures for effective remediation.
+
+Perform manual inspection beyond automated checks. Review agent schema compliance against JSON schema requirements exactly. Confirm tasks follow framework patterns with proper XML guidance structure. Check templates for proper variable usage, naming consistency, and structure. Verify data files are accessible, properly organized, and appropriately formatted.
+
+Validate reference integrity across all components. Confirm agent tasks entries resolve to existing task files at specified paths. Verify task frontmatter dependencies resolve to existing templates under dependencies.templates section. Test task data references resolve correctly under dependencies.data section. Check agent data references to behavioral guidance files resolve properly.
+
+Check component relationship alignment. Verify agents reference tasks appropriate for their capabilities and role. Confirm tasks reference templates that match their output requirements. Test that tasks reference data files providing relevant standards or specifications. Validate command-to-task mapping follows framework patterns across agents.
+
+Assess framework pattern compliance manually. Review components for adherence to established conventions beyond automated validation. Verify agents include critical XML tag handling and customization principles exactly. Confirm tasks use natural paragraph instruction flow without numbered lists. Check self-contained context and framework pattern explanations present.
+
+Validate against framework standards and checklist. Reference core-validation-checklist.md for comprehensive quality assurance criteria. Check components against all critical validation requirements. Verify warning-level best practices are followed. Assess informational excellence criteria where applicable.
+
+Document findings comprehensively. Create validation report organized by component type and severity. List specific issues with exact file paths and line references where applicable. Provide clear remediation guidance for each finding category. Include priority ranking for resolution efforts. Document validation process and timeline for reference.
+
+Implement fixes and revalidate. Address validation failures with specific corrections per remediation guidance. Re-run krci-ai validate after implementing fixes to verify resolution. Confirm complete validation success with zero critical errors. Update validation documentation to record resolution actions and final compliance status.
 </instructions>
 
 ## Framework Context: Validation Architecture

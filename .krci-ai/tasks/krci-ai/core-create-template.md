@@ -13,20 +13,24 @@ dependencies:
 
 Guide user through creating framework-compliant templates for consistent LLM output formatting. This task provides instructions for template creation using variable placeholders, XML guidance tags, and structured content organization for effective LLM processing and reusable content generation.
 
-<prerequisites>
-- Framework installed: .krci-ai directory exists with templates/ subdirectory
-- Template purpose defined: Clear understanding of what output template will structure
-- Variable identification: Knowledge of dynamic content areas requiring `{{variable}}` placeholders
-- Usage context: Understanding of which tasks will reference this template
-</prerequisites>
-
 <instructions>
-1. Apply template structure: Use markdown format with `{{variable}}` placeholders for dynamic content substitution
-2. Include XML guidance tags: Add `<instructions>` sections for LLM processing guidance and content generation
-3. Design variable system: Create descriptive variable names using consistent naming patterns and types
-4. Provide LLM guidance: Include comments and instructions for content generation within templates
-5. Ensure reusability: Design template for use across multiple similar contexts with flexible variable system
-6. Format output: Use [core-template-template.md](./.krci-ai/templates/krci-ai/core-template-template.md) as structural guide
+Define template specification. Ask user for exact template name, purpose, and intended output structure (example: architecture-decision-template.md for ADR generation). Clarify which tasks will reference this template and what content it will structure.
+
+Review framework standards for template creation. Read template variable system requirements from core-framework-standards.yaml. Understand placeholder format, naming conventions, variable types, and XML guidance integration patterns.
+
+Apply template structure using markdown format. Use standard markdown syntax with clear heading hierarchy. Create logical organization supporting intended output structure. Design content flow for natural LLM processing and reusability across multiple contexts.
+
+Design variable system with placeholders. Use {{variable_name}} format for all dynamic content areas. Create descriptive variable names following snake_case pattern. Implement appropriate mix of simple values ({{title}}), content lists ({{requirements_list}}), large sections ({{technical_details}}), and optional content ({{additional_notes}}).
+
+Include XML guidance for LLM processing. Add instructions tags within template to guide content generation. Provide examples and formatting requirements within instruction blocks. Include comments explaining variable usage and expected content. Add processing hints facilitating effective template usage by LLMs.
+
+Provide comprehensive LLM guidance. Document variable purpose and content expectations. Include content generation examples within instruction tags. Explain section organization and formatting requirements. Guide consistent, high-quality output across different usage contexts.
+
+Ensure reusability and flexibility. Design template to work across multiple similar contexts. Create variable system accommodating diverse content needs. Allow customization while maintaining structural consistency. Follow established framework patterns for template organization.
+
+Format output using template structure guide. Apply core-template-template.md as structural reference. Save to ./.krci-ai/templates/{template-name}.md following naming conventions. Verify markdown syntax correctness and rendering compatibility.
+
+Validate template effectiveness. Check variable consistency and naming pattern compliance. Verify instruction tags are properly formatted and closed. Test template structure supports intended output format. Confirm reusability across expected usage scenarios.
 </instructions>
 
 ## Framework Context: Template Architecture and Variable System
