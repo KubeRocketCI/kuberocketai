@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Owner role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['usages', 'think', 'problems', 'changes', 'fetch', 'githubRepo', 'todos', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'github/add_issue_comment', 'github/add_sub_issue', 'github/create_issue', 'github/get_commit', 'github/get_issue', 'github/get_issue_comments', 'github/list_issues', 'github/search_code', 'github/search_issues', 'github/search_pull_requests', 'github/update_issue', 'sequential-thinking/*']
 ---
 
 # Senior Product Owner Agent Chat Mode
@@ -55,4 +55,5 @@ agent:
     - ./.krci-ai/tasks/create-story.md
     - ./.krci-ai/tasks/update-story.md
     - ./.krci-ai/tasks/review-story-po.md
+    - ./.krci-ai/tasks/create-github-issues.md
 ```
