@@ -1,3 +1,13 @@
+---
+dependencies:
+  data:
+    - ../../.github/ISSUE_TEMPLATE/enhancement.yml
+    - ../../.github/ISSUE_TEMPLATE/feature_request.yml
+    - ../../.github/ISSUE_TEMPLATE/bug_report.yml
+  mcp_servers:
+    - github
+---
+
 # Task: Create GitHub Issues
 
 ## Description
@@ -6,31 +16,25 @@ Create GitHub issues (epics, stories, bugs) for KubeRocketCI/kuberocketai reposi
 
 ## Prerequisites
 
-- [ ] **GitHub MCP Server**: Available and configured
-- [ ] **Repository Access**: KubeRocketCI/kuberocketai with issue creation permissions
-
-### Reference Assets
-
-Dependencies:
-
-- ./.github/ISSUE_TEMPLATE/enhancement.yml
-- ./.github/ISSUE_TEMPLATE/feature_request.yml
-- ./.github/ISSUE_TEMPLATE/bug_report.yml
-
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+<prerequisites>
+- GitHub MCP Server: Available and configured
+- Repository Access: KubeRocketCI/kuberocketai with issue creation permissions
+</prerequisites>
 
 ## Instructions
+
+<instructions>
 
 ### 1. Gather Requirements
 
 Ask user to specify:
 
-- **Type**: Epic, Story (Enhancement), or Bug
-- **Title**: Clear, descriptive title
-- **Repository**: Default `KubeRocketCI/kuberocketai` (allow override)
-- **Labels**: Optional extra labels
-- **Assignees**: Default `SergK` (allow override)
-- **Related Epic #**: Optional (adds a note at the end of the body)
+- Type: Epic, Story (Enhancement), or Bug
+- Title: Clear, descriptive title
+- Repository: Default `KubeRocketCI/kuberocketai` (allow override)
+- Labels: Optional extra labels
+- Assignees: Default `SergK` (allow override)
+- Related Epic #: Optional (adds a note at the end of the body)
 
 Then, based on the selected Type, prompt for fields derived from the corresponding template (see Template-Driven Rendering):
 
@@ -59,7 +63,7 @@ Then, based on the selected Type, prompt for fields derived from the correspondi
 
 ### 2. Preview & Confirm Before Creation
 
-**CRITICAL**: Always confirm with user before creating any GitHub issue:
+CRITICAL: Always confirm with user before creating any GitHub issue:
 
 - Show a full preview of the issue body rendered from the selected template and provided fields (H2 headers per textarea label, in template order)
 - Ask for explicit approval: "Should I create this issue?"
@@ -67,9 +71,9 @@ Then, based on the selected Type, prompt for fields derived from the correspondi
 
 ### 3. Label Strategy
 
-**Base Labels**: Use template defaults from `.github/ISSUE_TEMPLATE/*.yml`
+Base Labels: Use template defaults from `.github/ISSUE_TEMPLATE/*.yml`
 
-**Repository Extensions** (add if conditions match):
+Repository Extensions (add if conditions match):
 
 - All Epics → +`epic`
 - Breaking changes mentioned → +`breaking-change`
@@ -108,45 +112,49 @@ When creating issues programmatically, derive the output structure from the corr
   - Keep content concise and outcome-focused; avoid command-level testing instructions in high-level sections
   - Maintain template order and naming to match the UI form experience
 
+  </instructions>
+
 ## Output Format
 
-- **Location**: GitHub issue in the target repository (return created issue URL)
-- **Type**: Epic → Feature Request, Story → Enhancement, Bug → Bug Report
-- **Title**: Use template title prefix unless user provides an explicit title override
-- **Labels/Assignees**: Apply template defaults plus any user-provided additions
+- Location: GitHub issue in the target repository (return created issue URL)
+- Type: Epic → Feature Request, Story → Enhancement, Bug → Bug Report
+- Title: Use template title prefix unless user provides an explicit title override
+- Labels/Assignees: Apply template defaults plus any user-provided additions
 
 ## Execution Checklist
 
 ### Discovery Phase
 
-- [ ] Validate Type is one of: Epic, Story (Enhancement), Bug
-- [ ] Verify mapped template file exists for the selected Type
-- [ ] Collect required fields as defined by the template (textareas with required: true)
+- Validate Type is one of: Epic, Story (Enhancement), Bug
+- Verify mapped template file exists for the selected Type
+- Collect required fields as defined by the template (textareas with required: true)
 
 ### Planning Phase
 
-- [ ] Render preview using template labels as H2 headers, in template order
-- [ ] Validate all required fields populated; list any missing and HALT
-- [ ] Apply label strategy: template defaults + repository extensions
-- [ ] Confirm labels and assignees (template defaults + repository patterns)
+- Render preview using template labels as H2 headers, in template order
+- Validate all required fields populated; list any missing and HALT
+- Apply label strategy: template defaults + repository extensions
+- Confirm labels and assignees (template defaults + repository patterns)
 
 ### Creation Phase
 
-- [ ] Create issue via GitHub MCP server
-- [ ] Append `Relates to: #<n>` if provided
-- [ ] Return issue URL to the user
+- Create issue via GitHub MCP server
+- Append `Relates to: #<n>` if provided
+- Return issue URL to the user
 
 ## Success Criteria
 
-- [ ] **User Confirmation**: User explicitly approved issue creation
-- [ ] **Issue Created**: GitHub issue successfully created
-- [ ] **Correct Template**: Appropriate GitHub template used
-- [ ] **Proper Labels**: Template-required labels applied
-- [ ] **URL Provided**: GitHub issue URL returned to user
+<success_criteria>
+- User Confirmation: User explicitly approved issue creation
+- Issue Created: GitHub issue successfully created
+- Correct Template: Appropriate GitHub template used
+- Proper Labels: Template-required labels applied
+- URL Provided: GitHub issue URL returned to user
+</success_criteria>
 
 ## Important Notes
 
-- **Never create issues without user confirmation**
+- Never create issues without user confirmation
 - GitHub templates handle all field requirements automatically
 - To link to an epic, provide the "Related Epic #"; the agent will append `Relates to: #<number>` automatically
 - All created issues auto-assigned to SergK as repository owner

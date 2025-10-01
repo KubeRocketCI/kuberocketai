@@ -50,4 +50,5 @@ agent:
     - ./.krci-ai/tasks/create-story.md
     - ./.krci-ai/tasks/update-story.md
     - ./.krci-ai/tasks/review-story-po.md
+    - ./.krci-ai/tasks/create-github-issues.md
 ```
