@@ -1,34 +1,20 @@
 # Task: {{task_name}}
 
-<instructions>
-TASK TEMPLATE STRUCTURE: Follow this exact section ordering for framework compliance:
-1. Title (with task name) → 2. Description → 3. Prerequisites (XML) → 4. Reference Assets → 5. Instructions (XML) → 6. Framework Context → 7. Output Format → 8. Success Criteria (XML) → 9. Execution Checklist
-
-XML GUIDANCE SYSTEM: Use `<prerequisites>`, `<instructions>`, `<success_criteria>` tags for LLM processing guidance. These tags help LLMs identify section boundaries and processing requirements. CRITICAL: These XML tags are internal metadata ONLY and must never appear in final user output.
-</instructions>
-
 ## Description
 
 {{task_description}}
 
-<prerequisites>
-{{task_prerequisites}}
-</prerequisites>
-
-### Reference Assets
-
 <instructions>
-List all framework dependencies using inline reference format. Each dependency must use `[filename](./.krci-ai/path/to/file)` pattern for proper framework integration.
-</instructions>
+{{task_instructions_natural_flow}}
 
-Dependencies:
+Example instruction pattern:
+Identify target component for operation. Ask user for exact file path or component specification. Confirm existence and accessibility before proceeding.
 
-{{framework_dependencies}}
+Review framework standards for operation type. Read relevant sections from core-framework-standards.yaml. Understand requirements and validation criteria.
 
-Validation: Verify all dependencies exist at specified paths before proceeding. HALT if any missing.
+Execute primary operation steps. Perform main task actions with clear validation at each step. Verify outputs meet framework requirements. Confirm integration with framework ecosystem.
 
-<instructions>
-{{task_instructions}}
+Validate operation results. Run krci-ai validate to verify compliance. Resolve any issues identified. Confirm successful completion against success criteria.
 </instructions>
 
 ## Framework Context: {{context_area}}
@@ -72,15 +58,25 @@ Provide detailed checklist organized by execution phases. Use checkbox format wi
 <instructions>
 TEMPLATE USAGE GUIDANCE:
 
-1. **Variable Substitution**: Replace all `{{variable_name}}` placeholders with appropriate content
-2. **XML Tag Handling**: Maintain XML guidance tags for LLM processing - these provide section identification
-3. **Reference Integration**: Ensure all framework references use `[filename](./.krci-ai/path)` format
-4. **Self-Contained Context**: Include sufficient explanations for context-free usage
-5. **Validation Ready**: Structure task to pass `krci-ai validate` framework validation
+Variable Substitution: Replace all {{variable_name}} placeholders with appropriate content for specific task being created.
+
+XML Tag Handling: Maintain XML guidance tags (instructions, success_criteria) for LLM processing. These provide section identification and must never appear in final user output.
+
+Instruction Format: Use natural paragraph flow without numbered lists. Start paragraphs with imperative verbs. Include inline conditionals like "before proceeding" or "if missing" for HALT conditions.
+
+Target Identification: For review or create tasks, first instruction paragraph must ask user to specify exact component (file path, name, purpose). Confirm existence or define specification before proceeding with operation.
+
+Reference Integration: Ensure all framework references in frontmatter use correct dependency.data and dependencies.templates sections. Verify paths resolve to existing files.
+
+Self-Contained Context: Include Framework Context section explaining relevant patterns, standards, and architectural concepts. Enable context-free task usage without external knowledge requirements.
+
+Validation Ready: Structure task to pass krci-ai validate framework validation. Test all dependency paths. Confirm XML tag closure. Verify section ordering matches framework standards.
 
 CRITICAL REMINDERS:
-- XML tags (`<instructions>`, `<prerequisites>`, `<success_criteria>`) are for LLM guidance ONLY
+- XML tags (instructions, success_criteria) are for LLM guidance ONLY
 - Final user output must be clean Markdown without XML tags
 - All framework references must resolve to existing files
+- Instructions use natural paragraphs, not numbered lists
+- Target specification required as first action for component-specific tasks
 - Task structure must support autonomous execution
 </instructions>

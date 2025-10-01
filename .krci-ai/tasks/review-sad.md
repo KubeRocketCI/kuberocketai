@@ -92,7 +92,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 
 ## Content Guidelines
 
-### 📋 Review Focus Areas:
+### Review Focus Areas:
 
 <review_focus_areas>
 1. Section Completeness: All 11 sections populated with relevant, project-specific content
@@ -160,7 +160,7 @@ Key questions to evaluate during review:
 - "Is the proposed solution technically feasible within stated constraints?"
 </review_questions>
 
-### 📋 Quality Gate Checklist:
+### Quality Gate Checklist:
 
 <quality_gate_checklist>
 - Documentation Quality: Professional presentation suitable for stakeholder review

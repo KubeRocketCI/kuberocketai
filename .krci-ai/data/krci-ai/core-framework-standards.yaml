@@ -42,19 +42,18 @@ task_standards:
     required_sections:
       - title                 # Task: {name}
       - description           # What task accomplishes
-      - prerequisites         # <prerequisites> XML block
-      - instructions          # <instructions> XML block
+      - instructions          # <instructions> XML block with natural paragraph flow
       - output_format         # Expected outputs and locations
       - success_criteria      # <success_criteria> XML block
       - execution_checklist   # Detailed implementation steps
 
   xml_guidance_system:
     required_tags:
-      - prerequisites         # Requirements before execution
-      - instructions          # Step-by-step LLM guidance
+      - instructions          # Natural paragraph flow guidance with imperative verbs
       - success_criteria      # Validation criteria
     tag_purpose: "Internal metadata for LLM processing guidance ONLY - never in user output"
     processing_guidance: "XML tags help LLMs identify section boundaries and processing requirements"
+    instruction_format: "Natural paragraph flow without numbered lists, using imperative verbs and inline conditionals"
 
   dependency_frontmatter:
     format: "YAML frontmatter at beginning of task files"

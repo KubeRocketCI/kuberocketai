@@ -13,25 +13,25 @@ dependencies:
 
 Review and validate existing tasks for framework compliance, XML tag usage, and structural integrity. This task provides systematic evaluation criteria to ensure tasks follow KubeRocketAI patterns and provide proper LLM guidance with comprehensive quality assessment.
 
-<prerequisites>
-- Task exists: Target task file exists and is accessible for review
-- Framework context: Understanding of XML tag system, frontmatter dependencies, and validation requirements
-- Validation access: Ability to run `krci-ai validate` for automated checking
-- Review authority: Knowledge of framework patterns to provide actionable feedback
-</prerequisites>
-
 <instructions>
-1. Validate XML guidance system: Ensure task uses proper XML tags for LLM section identification and guidance
-2. Validate dependencies: Confirm YAML frontmatter lists all referenced files under data/templates sections
-3. Review structure compliance: Confirm task follows template pattern with required sections and ordering
-4. Assess self-contained guidance: Evaluate if task provides context-free usage explanations and framework context
-5. Test framework validation: Run `krci-ai validate` to identify automated compliance issues and resolution steps
-6. Provide improvement recommendations: Offer specific, actionable feedback for enhancement with implementation examples
+Identify target task for review. Ask user for exact task file path (example: .krci-ai/tasks/krci-ai/core-create-agent.md). Confirm file exists and is accessible before proceeding.
+
+Run krci-ai validate to establish baseline task status. Read target task file completely. Load all dependencies referenced in YAML frontmatter under data and templates sections.
+
+Validate XML guidance system. Ensure task uses proper instructions and success_criteria tags for LLM section identification. Check tags are properly opened and closed. Assess LLM guidance effectiveness within each tag for autonomous task execution.
+
+Validate dependency declarations. Confirm YAML frontmatter lists all referenced files under data and templates sections. Verify all referenced files exist at specified locations. Test that dependency paths follow framework conventions and resolve correctly.
+
+Review structure compliance. Confirm task follows template pattern with required sections in correct order. Check for self-contained guidance and framework context sections. Verify task provides context-free usage explanations without requiring external knowledge.
+
+Execute framework validation. Run krci-ai validate and document results with interpretation. Categorize issues by XML tags, references, structure, and content quality. Identify critical issues requiring immediate resolution.
+
+Provide improvement recommendations. Offer specific, actionable feedback organized by compliance areas. Include implementation examples for each recommendation. Prioritize issues by severity and impact on framework integration.
 </instructions>
 
 ## Framework Context: Task Review Standards and Quality Assessment
 
-XML Tag Evaluation: Tasks must use XML-style tags (`<prerequisites>`, `<instructions>`, `<success_criteria>`) for LLM guidance. These tags are internal metadata only and must never appear in user-facing output. Review should verify:
+XML Tag Evaluation: Tasks must use XML-style tags (`<instructions>`, `<success_criteria>`) for LLM guidance. These tags are internal metadata only and must never appear in user-facing output. Review should verify:
 
 - Proper XML tag placement and closure with correct syntax
 - Content appropriateness within tags providing clear LLM guidance
@@ -74,7 +74,7 @@ Task Structure Requirements: Tasks must follow exact template compliance with pr
 
 ### Execution Phase
 
-- XML guidance assessment: Verify task includes proper `<prerequisites>`, `<instructions>`, `<success_criteria>` sections
+- XML guidance assessment: Verify task includes proper `<instructions>`, `<success_criteria>` sections
 - XML tag validation: Check all XML tags are properly opened, closed, and provide effective LLM guidance
 - Dependency verification: Confirm all dependencies are declared in YAML frontmatter correctly
 - Reference resolution testing: Verify all referenced files exist at specified locations

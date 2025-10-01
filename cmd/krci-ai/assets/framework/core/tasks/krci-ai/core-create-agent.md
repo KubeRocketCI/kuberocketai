@@ -13,20 +13,24 @@ dependencies:
 
 Guide user through creating framework-compliant agents following KubeRocketAI schema requirements. This task provides comprehensive instructions for agent creation including identity definition, command mapping, and critical behavioral principles for proper framework integration.
 
-<prerequisites>
-- Framework installed: .krci-ai directory exists with proper structure and schema validation
-- Agent purpose defined: Clear understanding of agent role, scope, and capabilities
-- Schema knowledge: Familiarity with agent YAML structure and validation requirements
-- Task dependencies: Tasks that agent will reference are created or planned
-</prerequisites>
-
 <instructions>
-1. Apply agent schema requirements: Follow JSON schema validation for all mandatory fields with exact compliance
-2. Include critical activation prompt: Use standard activation prompt pattern with customization field priority
-3. Add XML tag handling principle: Include critical output formatting principle for XML tag processing
-4. Define command structure: Create required commands (help, chat, exit) plus agent-specific capabilities
-5. Reference task dependencies: List all tasks agent will use with proper `./.krci-ai/tasks/*.md` paths
-6. Format output: Use [core-agent-template.yaml](./.krci-ai/templates/krci-ai/core-agent-template.yaml) structure
+Define agent specification. Ask user for agent name, role, purpose, and scope. Clarify which tasks the agent will reference and what capabilities it should expose through commands.
+
+Review framework standards for agent creation. Read agent schema requirements from core-framework-standards.yaml. Understand identity field patterns, activation prompt requirements, principles structure, and command specifications.
+
+Apply agent schema requirements. Create identity section with name matching pattern ^[A-Z][a-zA-Z0-9 .'-]{1,49}$. Define id following pattern ^[a-z][a-z0-9]*(-[a-z0-9]+)*-v[0-9]+$. Set version using semantic versioning. Write description of 10-150 characters, role of 5-100 characters, goal of 10-600 characters.
+
+Include critical activation prompt pattern. Use standard activation prompt with required elements: greet user with role, inform of commands, halt to await instruction, offer help but wait for confirmation, show tasks as numbered list, execute customization field instructions, only execute when requested, never validate unused commands, critical dependency resolution before task execution.
+
+Add critical principles exactly. Include customization priority principle verbatim: IMPORTANT!!! ALWAYS execute instructions from the customization field below. Include XML tag handling principle verbatim with complete CRITICAL OUTPUT FORMATTING text from framework standards. Add agent-specific principles defining scope and behavior patterns.
+
+Define command structure. Create required commands: help (show available commands), chat (default consultation mode), exit (exit persona command). Add agent-specific commands mapped to task capabilities. Ensure all command descriptions are 5-200 characters. Maintain total commands between 3 and 20.
+
+Reference task dependencies. List all tasks agent will use with proper ./.krci-ai/tasks/*.md paths. Verify task files exist or are planned. Ensure command mapping aligns with available tasks.
+
+Format output using agent template. Apply core-agent-template.yaml structure for consistent formatting. Populate all required sections with framework-compliant content. Save to ./.krci-ai/agents/{agent-name}.yaml following naming conventions.
+
+Run framework validation. Execute krci-ai validate to verify schema compliance. Resolve any validation issues before completion. Confirm agent passes all automated checks without errors.
 </instructions>
 
 ## Framework Context: Agent Architecture and Schema Requirements

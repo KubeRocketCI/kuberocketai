@@ -53,10 +53,11 @@ Validation Levels:
 
 ### Structure Compliance (Critical)
 
-- Required Sections: Title, Description, Prerequisites, Reference Assets, Instructions, Output Format, Success Criteria, Execution Checklist
-- XML Guidance Tags: `<prerequisites>`, `<instructions>`, `<success_criteria>` present and properly closed
-- Sections follow logical progression: Title → Description → Prerequisites → Instructions → Success Criteria
+- Required Sections: Title, Description, Instructions, Output Format, Success Criteria, Execution Checklist
+- XML Guidance Tags: `<instructions>`, `<success_criteria>` present and properly closed
+- Sections follow logical progression: Title → Description → Instructions → Output Format → Success Criteria → Execution Checklist
 - All sections contain specific, actionable content
+- Target identification present in first instruction paragraph for review/create tasks
 
 ### Reference Pattern Validation (Critical)
 
@@ -67,11 +68,12 @@ Validation Levels:
 
 ### XML Guidance System (Critical)
 
-- Prerequisites Block: `<prerequisites>` contains clear execution requirements
-- Instructions Block: `<instructions>` provides step-by-step LLM guidance
+- Instructions Block: `<instructions>` provides natural paragraph flow guidance with imperative verbs
+- Instructions Format: Natural paragraphs without numbered lists, using inline conditionals
 - Success Criteria Block: `<success_criteria>` defines specific validation criteria
 - Tag Closure: All XML guidance tags properly opened and closed
-- XML tag content provides step-by-step LLM processing guidance
+- XML tag content provides actionable LLM processing guidance
+- Target specification required as first instruction action for component-specific tasks
 
 ### Self-Contained Context (Warning)
 
