@@ -1,62 +1,75 @@
+## KubeRocketAI CLI Release
+
+Welcome to this releases of KubeRocketAI CLI!
+
+## Installation
+
+### Homebrew (macOS)
+
+```bash
+brew tap KubeRocketCI/homebrew-tap
+brew install krci-ai
+```
+
 {{ if .Versions -}}
 <a name="unreleased"></a>
 
-## [Unreleased]
+### [Unreleased]
 
 {{ if .Unreleased.CommitGroups -}}
 {{ range .Unreleased.CommitGroups -}}
 
-### {{ .Title }}
+#### {{ .Title }}
 
 {{ range .Commits -}}
 
-- {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}
+* {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}
 {{ end }}
 {{ end -}}
 {{ end -}}
 {{ end -}}
 
-{{ range .Versions }}
+{{ range .Versions -}}
 <a name="{{ .Tag.Name }}"></a>
 
-## {{ if .Tag.Previous }}[{{ .Tag.Name }}]{{ else }}{{ .Tag.Name }}{{ end }} - {{ datetime "2006-01-02" .Tag.Date }}
+### {{ if .Tag.Previous }}[{{ .Tag.Name }}]{{ else }}{{ .Tag.Name }}{{ end }} - {{ datetime "2006-01-02" .Tag.Date }}
 
 {{ if .CommitGroups -}}
 {{ range .CommitGroups -}}
 
-### {{ .Title }}
+#### {{ .Title }}
 
 {{ range .Commits -}}
 
-- {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}{{ if .Notes }} ({{ range .Notes }}{{ .Body }}{{ end }}){{ end }}
+* {{ .Hash.Short }} {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}{{ if .Notes }} ({{ range .Notes }}{{ .Body }}{{ end }}){{ end }}
 {{ end }}
 {{ end -}}
 {{ end -}}
 
 {{- if .RevertCommits -}}
 
-### Reverts
+#### Reverts
 
 {{ range .RevertCommits -}}
 
-- {{ .Revert.Header }}
+* {{ .Revert.Header }}
 {{ end }}
 {{ end -}}
 
 {{- if .MergeCommits -}}
 
-### Pull Requests
+#### Pull Requests
 
 {{ range .MergeCommits -}}
 
-- {{ .Header }}
+* {{ .Header }}
 {{ end }}
 {{ end -}}
 
 {{- if .NoteGroups -}}
 {{ range .NoteGroups -}}
 
-### {{ .Title }}
+#### {{ .Title }}
 
 {{ range .Notes }}
 {{ .Body }}
