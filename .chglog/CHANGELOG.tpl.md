@@ -1,6 +1,6 @@
 ## KubeRocketAI CLI Release
 
-Welcome to this releases of KubeRocketAI CLI!
+Welcome to this release of KubeRocketAI CLI!
 
 ## Installation
 
@@ -23,7 +23,7 @@ brew install krci-ai
 
 {{ range .Commits -}}
 
-* {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}
+* [{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Long }}) {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}
 {{ end }}
 {{ end -}}
 {{ end -}}
@@ -41,7 +41,7 @@ brew install krci-ai
 
 {{ range .Commits -}}
 
-* {{ .Hash.Short }} {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}{{ if .Notes }} ({{ range .Notes }}{{ .Body }}{{ end }}){{ end }}
+* [{{ .Hash.Short }}]({{ $.Info.RepositoryURL }}/commit/{{ .Hash.Long }}) {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Subject }}{{ if .Notes }} ({{ range .Notes }}{{ .Body }}{{ end }}){{ end }}
 {{ end }}
 {{ end -}}
 {{ end -}}
