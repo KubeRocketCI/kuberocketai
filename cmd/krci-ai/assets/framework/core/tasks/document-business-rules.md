@@ -12,22 +12,12 @@ dependencies:
 
 Systematically document business rules and constraints that govern system behavior, supporting PRD requirements and Epic implementation with clear business logic specifications. This task translates business policies, regulatory requirements, and operational constraints into structured rules that guide system design and development decisions, ensuring compliance and consistency in rule application across all Epic features.
 
-## Prerequisites
-
-<prerequisites>
-- PRD foundation: PRD exists at `/docs/prd/prd.md` with basic business and system requirements
-- Business process understanding: Current workflows and decision points identified
-- Stakeholder access: Subject matter experts and decision makers available for rule validation
-- Regulatory context: Compliance requirements and organizational policies understood
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for business rule documentation dependencies and workflow
-2. Apply analysis methodologies: Use approaches from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
-3. Format output: Use [business-rules.md](./.krci-ai/templates/business-rules.md) template for structured documentation
-4. Link to PRD: Ensure business rules support and clarify PRD requirements (BR/NFR)
+Confirm the exact output path `/docs/business-rules.md` you will create. Verify the PRD at `/docs/prd/prd.md` is accessible with business and system requirements, current workflows and decision points are identified, subject matter experts are available for rule validation, and compliance requirements and organizational policies are understood. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for business rule documentation workflow. Apply analysis methodologies from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md). Use [business-rules.md](./.krci-ai/templates/business-rules.md) template for structured documentation and ensure business rules support and clarify PRD requirements (BR/NFR) with clear traceability.
 </instructions>
 
 ## Output Format

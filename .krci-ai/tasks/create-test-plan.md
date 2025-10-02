@@ -15,22 +15,12 @@ dependencies:
 
 Create comprehensive test plan and strategy for Stories and Epic features, ensuring quality coverage and risk-based testing approach. This task translates Story acceptance criteria and Epic business requirements into systematic testing strategy that validates functionality, performance, and compliance requirements while supporting development quality gates and release readiness.
 
-## Prerequisites
-
-<prerequisites>
-- Story/Epic available: Stories with acceptance criteria or Epics with defined features exist for testing
-- Requirements clarity: Story acceptance criteria and Epic business requirements are well-defined
-- Testing standards: Understanding of testing methodologies and quality standards from [testing-strategy.md](./.krci-ai/data/testing-strategy.md)
-- Quality metrics: Familiarity with quality benchmarks from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing dependencies and quality gates
-2. Apply testing methodologies: Use approaches from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
-3. Format output: Use [test-plan.md](./.krci-ai/templates/test-plan.md) for structured test planning
-4. Ensure coverage: Address all Story acceptance criteria and Epic business requirements
+Confirm the target Stories/Epics and the exact output document you will create using [test-plan.md](./.krci-ai/templates/test-plan.md). Ensure dependencies declared in the YAML frontmatter are accessible, including testing strategy, methodologies, and quality metrics.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing workflow and quality gates. Apply approaches from [test-methodologies.md](./.krci-ai/data/test-methodologies.md). Address all Story acceptance criteria and Epic requirements with a risk-based strategy, and define clear entry/exit criteria and success metrics.
 </instructions>
 
 ## Output Format
@@ -85,23 +75,23 @@ Test Plan Documentation - Create comprehensive testing strategy:
 
 ## Content Guidelines
 
-### 🎯 Test Planning Focus Areas:
+### Test Planning Focus Areas
 
-#### Story-Level Testing (Primary Focus):
+#### Story-Level Testing (Primary Focus)
 
 - Acceptance Criteria: Map each Story acceptance criterion to specific test scenarios
 - Functional Testing: Validate business functionality meets Story requirements
 - Edge Cases: Identify boundary conditions and error scenarios
 - User Experience: Test user workflows and interaction patterns
 
-#### Epic-Level Testing (Integration Focus):
+#### Epic-Level Testing (Integration Focus)
 
 - Feature Integration: Validate Epic features work together seamlessly
 - Business Process: Test end-to-end business workflows across multiple Stories
 - Performance Requirements: Address Epic-level performance and scalability needs
 - Cross-Story Dependencies: Test interactions between related Stories
 
-### ✅ Quality Standards:
+### Quality Standards
 
 - Requirements Coverage: All Story acceptance criteria and Epic requirements addressed
 - Risk-Based Approach: Testing prioritizes high-risk and critical functionality areas
@@ -110,7 +100,7 @@ Test Plan Documentation - Create comprehensive testing strategy:
 - Quality Metrics: Success criteria and quality thresholds are measurable
 - Stakeholder Aligned: Test plan approved by development and product teams
 
-### ❌ Common Pitfalls to Avoid:
+### Common Pitfalls to Avoid
 
 - Creating test plans without analyzing actual Story acceptance criteria
 - Over-engineering test strategy beyond Epic and Story scope
@@ -119,7 +109,7 @@ Test Plan Documentation - Create comprehensive testing strategy:
 - Poor traceability between requirements and test scenarios
 - Creating test plans that don't align with development workflow
 
-### 🎯 Epic/Story Testing Integration:
+### Epic/Story Testing Integration
 
 This test planning should enable systematic quality assurance by providing:
 

@@ -10,23 +10,12 @@ dependencies:
 
 Review and enhance user story against the story template to ensure completeness and implementation readiness. This task can be used by Product Owners, Developers, and Architects to collaboratively shape stories with appropriate level of detail. Focus on validation, clarification, and enhancement - NO IMPLEMENTATION.
 
-## Prerequisites
-
-<prerequisites>
-- Story exists: Target story file exists in `/docs/stories/` requiring review and enhancement
-- Template available: Story template at `./.krci-ai/templates/story.md` for reference
-- Role context: Understanding appropriate to your role (PO: business clarity, Dev: technical details, Architect: system design)
-- Story knowledge: Familiarity with story structure and requirements for implementation readiness
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Validate against template: Check story against [story.md](./.krci-ai/templates/story.md) template structure
-2. Role-based review: Assess story from your role perspective (PO: business clarity, Dev: technical details, Architect: design)
-3. Identify gaps: Find missing details needed for implementation readiness
-4. Provide feedback: Document what's unclear, missing, or needs enhancement
-5. Enhance story: Add appropriate details while preserving business requirements and Epic alignment
+Confirm the target story file exists in `/docs/stories/` requiring review and enhancement, story template at `./.krci-ai/templates/story.md` is available for reference, you understand the appropriate role context (PO: business clarity, Dev: technical details, Architect: system design), and you are familiar with story structure and requirements for implementation readiness. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Validate against template by checking story against [story.md](./.krci-ai/templates/story.md) template structure. Assess story from your role perspective (PO: business clarity, Dev: technical details, Architect: design). Find missing details needed for implementation readiness. Document what's unclear, missing, or needs enhancement. Add appropriate details while preserving business requirements and Epic alignment.
 </instructions>
 
 ### Template Compliance Check

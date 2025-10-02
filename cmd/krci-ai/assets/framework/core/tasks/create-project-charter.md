@@ -14,98 +14,20 @@ dependencies:
 
 Create a comprehensive project charter that formally authorizes the project and provides the Project Manager with the authority to apply organizational resources to project activities. As defined in PMBoK, the project charter is a document issued by the project initiator or sponsor that formally authorizes the existence of a project and provides the Project Manager with the authority to apply organizational resources to project activities.
 
-## Prerequisites
-
-<prerequisites>
-- Business case or project request available
-- High-level requirements identified
-- Initial stakeholder list prepared
-- Preliminary budget and timeline estimates
-- Project sponsor identified and committed
-</prerequisites>
-
-## Reference Assets
-
-Primary Dependencies:
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [project-charter-template.md](./.krci-ai/templates/project-charter-template.md)
-- SDLC framework: [13-sdlc-framework.md](./docs/architecture/13-sdlc-framework.md) (if available)
-
-Optional Supporting Materials:
-- Business analysis standards: [business-frameworks.md](./.krci-ai/data/business-frameworks.md) (if available)
-- Organizational standards: [best-practices.md](./.krci-ai/data/best-practices.md) (if available)
-
 ## Instructions
 
 <instructions>
-### 1. Project Initiation Analysis
+Confirm the exact output document you will create using [project-charter-template.md](./.krci-ai/templates/project-charter-template.md) and verify that dependencies declared in the YAML frontmatter are accessible. Do not proceed until initiating inputs (business case, stakeholders, budget/timeline context) are available or explicitly provided.
 
-Gather Charter Requirements:
-- Review business case, project request, or initiating documentation
-- Identify project purpose, business need, and strategic alignment
-- Document high-level scope and deliverables
-- Identify key stakeholders and their roles
-- Establish preliminary success criteria
+Reference [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) for PMBoK standards and charter best practices. Review business case, project request, or initiating documentation to identify project purpose, business need, strategic alignment, high-level scope and deliverables, key stakeholders and their roles, and preliminary success criteria. Identify project sponsor, key decision makers, primary stakeholders and their interests, stakeholder expectations and requirements, and potential resistance or support factors.
 
-Stakeholder Identification:
-- Identify project sponsor and key decision makers
-- List primary stakeholders and their interests
-- Document stakeholder expectations and requirements
-- Identify potential resistance or support factors
+Define project purpose and business justification by articulating the problem or opportunity being addressed, establishing strategic alignment with organizational objectives, and documenting expected business value and benefits. Define high-level project scope and boundaries, list major deliverables and milestones, identify what is explicitly excluded from scope, and document assumptions and constraints.
 
-### 2. Charter Development
+Define measurable project success criteria, establish acceptance criteria for major deliverables, document key performance indicators, and identify quality standards and expectations. Define Project Manager authority and responsibilities, document preliminary resource requirements, establish budget parameters and financial authority, and identify organizational support and governance structure.
 
-Project Overview Section:
-- Define project purpose and business justification
-- Articulate the problem or opportunity being addressed
-- Establish strategic alignment with organizational objectives
-- Document expected business value and benefits
+Identify high-level project risks and uncertainties, document key assumptions and dependencies, assess potential impact on project success, and outline initial risk mitigation strategies. Document time, cost, and resource constraints, identify regulatory or compliance requirements, note technology or environmental limitations, and address stakeholder or organizational constraints.
 
-Scope and Deliverables:
-- Define high-level project scope and boundaries
-- List major deliverables and milestones
-- Identify what is explicitly excluded from scope
-- Document assumptions and constraints
-
-Success Criteria and Metrics:
-- Define measurable project success criteria
-- Establish acceptance criteria for major deliverables
-- Document key performance indicators (KPIs)
-- Identify quality standards and expectations
-
-Resource and Authority Framework:
-- Define Project Manager authority and responsibilities
-- Document preliminary resource requirements
-- Establish budget parameters and financial authority
-- Identify organizational support and governance structure
-
-### 3. Risk and Assumption Documentation
-
-Initial Risk Assessment:
-- Identify high-level project risks and uncertainties
-- Document key assumptions and dependencies
-- Assess potential impact on project success
-- Outline initial risk mitigation strategies
-
-Constraint Analysis:
-- Document time, cost, and resource constraints
-- Identify regulatory or compliance requirements
-- Note technology or environmental limitations
-- Address stakeholder or organizational constraints
-
-### 4. Charter Formalization
-
-Document Structure:
-- Use the project charter template for consistent formatting
-- Ensure all required sections are completed thoroughly
-- Include appropriate level of detail for charter audience
-- Format for executive-level review and approval
-
-Review and Validation:
-- Review charter with key stakeholders for accuracy
-- Validate alignment with business objectives and strategy
-- Confirm resource commitments and expectations
-- Ensure all critical elements are addressed
+Use the [project-charter-template.md](./.krci-ai/templates/project-charter-template.md) for consistent formatting and ensure all required sections are completed thoroughly with appropriate level of detail for charter audience formatted for executive-level review and approval. Review charter with key stakeholders for accuracy, validate alignment with business objectives and strategy, confirm resource commitments and expectations, and ensure all critical elements are addressed.
 </instructions>
 
 ## Output Format

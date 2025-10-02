@@ -13,23 +13,12 @@ dependencies:
 
 Create a comprehensive go-to-market strategy and marketing brief that transforms PRD features into compelling market positioning, identifies target audiences, and establishes the foundation for all promotional materials. This brief serves as the strategic foundation for pitch decks, sales materials, and launch campaigns that drive product adoption and sales results.
 
-## Prerequisites
-
-<prerequisites>
-- Completed and approved PRD at `/docs/prd/prd.md`
-- MVP or product features available for marketing
-- Market research and competitive landscape analysis completed
-- Target audience personas and customer insights available
-- Brand guidelines and positioning strategy defined
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Marketing Brief dependencies and artifact flow
-2. Apply business frameworks: Use methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. Format output: Use [marketing-brief-template.md](./.krci-ai/templates/marketing-brief-template.md) for structure
-4. Focus on WOW factor: Create strategies that generate emotional impact and market excitement
+Confirm the exact output path `/docs/marketing/marketing-brief.md` you will create or update and verify that inputs referenced by the YAML frontmatter are accessible. Do not proceed if the PRD at `/docs/prd/prd.md` or required research inputs are unavailable.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for artifact flow. Apply methods from [business-frameworks.md](./.krci-ai/data/business-frameworks.md). Use [marketing-brief-template.md](./.krci-ai/templates/marketing-brief-template.md) and populate all variables precisely while emphasizing differentiated positioning and measurable outcomes.
 </instructions>
 
 ## Output Format

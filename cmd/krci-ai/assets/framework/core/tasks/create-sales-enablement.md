@@ -13,23 +13,12 @@ dependencies:
 
 Create comprehensive sales enablement package including sales scripts, objection handling guides, competitive battle cards, ROI calculators, and customer success stories that empower sales teams to effectively communicate value propositions and close deals. Transform marketing messages into practical sales tools that drive revenue results.
 
-## Prerequisites
-
-<prerequisites>
-- Completed Marketing Brief at `/docs/marketing/marketing-brief.md`
-- Pitch Deck available for sales presentation adaptation
-- Sales team feedback and common objections identified
-- Customer testimonials and case studies available
-- Competitive landscape analysis completed
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Sales Enablement dependencies
-2. Apply sales methodologies: Use proven sales frameworks for maximum conversion impact
-3. Format output: Use [sales-enablement-template.md](./.krci-ai/templates/sales-enablement-template.md) for structure
-4. Focus on conversion: Create tools that directly increase close rates and deal velocity
+Confirm the exact output path `/docs/marketing/sales-enablement.md` and verify that dependencies declared in the YAML frontmatter and required inputs (marketing brief, pitch deck, objections, testimonials) are accessible before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Sales Enablement dependencies and apply proven sales frameworks for maximum conversion impact. Use [sales-enablement-template.md](./.krci-ai/templates/sales-enablement-template.md) for structure and create tools that directly increase close rates and deal velocity.
 </instructions>
 
 ## Output Format

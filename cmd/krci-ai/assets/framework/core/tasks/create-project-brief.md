@@ -13,21 +13,12 @@ dependencies:
 
 Create a comprehensive project brief defining the foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. This document serves as the root artifact in the SDLC framework that defines the essential foundation for all downstream artifacts, answers fundamental questions before solution development begins, and provides strategic context for PRD creation.
 
-## Prerequisites
-
-<prerequisites>
-- Business opportunity or problem identified
-- Initial stakeholder discussions completed
-- Market context and user insights available
-- Strategic goals and constraints understood
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for role responsibilities and artifact flow
-2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. Format output: Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) for consistent structure
+Confirm the exact output path `/docs/prd/project-brief.md` you will create or update and ensure dependencies declared in the YAML frontmatter are accessible. Do not proceed if required inputs are missing.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) to align with artifact flow. Apply relevant methods from [business-frameworks.md](./.krci-ai/data/business-frameworks.md). Use [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) and populate all variables precisely.
 </instructions>
 
 ## Output Format

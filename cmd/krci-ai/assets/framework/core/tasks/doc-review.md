@@ -8,23 +8,12 @@ dependencies:
 
 Review a certain page requested by a user, applying professional technical writing standards and ensuring consistency with project documentation style.
 
-## Prerequisites
-
-<prerequisites>
-- Page exists: Page for review is presented as a file or text in the chat
-- Page is allowed to read: The file has read permissions for everyone
-- Technical Writing standards available: Microsoft Writing Style Guide accessible for reference
-- Project context: Understanding of project documentation style and standards
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Get data to review: Read a page user provided you with
-2. Review data: Based on the rules and best practices outlined in the [Microsoft Writing Style Guide](https://docs.microsoft.com/en-us/style-guide/), review the page
-3. Refer to source: Examine the project structure you work in. If this is a documentation project, read a number of pages to understand the project style and report to the user that you refer to these pages as examples
-4. Be professional: Respond as a Senior Technical Writer. Notify the user about what you have changed and why
-5. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for documentation review standards
+Confirm the exact file to review and its path or inline content. Do not proceed until the file is accessible. Load the dependencies declared in the YAML frontmatter and ensure access to the Microsoft Writing Style Guide.
+
+Read the target content fully. Apply the Microsoft Writing Style Guide and align with this project's documentation style. Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for review standards. Produce a professional review summary stating what was changed and why.
 </instructions>
 
 ## Output Format

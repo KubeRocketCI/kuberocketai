@@ -35,83 +35,20 @@ Use Advanced Flow When:
 - Stakeholder validation and evidence-based decision making required
 - Competitive or complex market environment
 
-## Prerequisites
-
-<prerequisites>
-- Project requires comprehensive validation and evidence-based decision making
-- Time available for multi-session validation process (2-4 weeks)
-- Access to stakeholders for interviews and validation
-- Budget/timeline justifies enhanced validation effort
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-### Phase 1: Context Gathering (Advanced)
+Confirm this advanced validation flow is justified (high-stakes project >$100K, executive approval needed, market uncertainty, or stakeholder validation required). Ensure 2-4 weeks are available for the multi-session validation process, stakeholders are accessible for interviews, and dependencies declared in the YAML frontmatter are readable before proceeding.
 
-Execute comprehensive context gathering using business frameworks:
+Execute comprehensive context gathering using business frameworks by running [gather-project-context](./.krci-ai/tasks/gather-project-context.md) task for systematic evidence collection. Conduct structured stakeholder interviews using the [context gathering guide](./.krci-ai/templates/context-gathering-guide-template.md) and build comprehensive evidence base with confidence assessments. Create detailed assumption tracking using the [assumption tracker template](./.krci-ai/templates/assumption-tracker-template.md) and output results to `/docs/prd/project-context.md` with supporting evidence and assumption documentation.
 
-#### Context Collection Process
+Create initial brief using advanced template with validation checkpoints including built-in validation status tracking for each section, confidence levels with evidence source documentation, systematic assumption identification and risk assessment, methodology citations with validation approach, and professional standards with executive-ready formatting. Output initial `/docs/prd/project-brief.md` with validation placeholders and checkpoint system.
 
-1. Execute Context Gathering: Run [gather-project-context](./.krci-ai/tasks/gather-project-context.md) task for systematic evidence collection
-2. Stakeholder Interview Program: Conduct structured interviews using the [context gathering guide](./.krci-ai/templates/context-gathering-guide-template.md)
-3. Evidence Library Creation: Build comprehensive evidence base with confidence assessments
-4. Assumption Inventory Development: Create detailed assumption tracking using the [assumption tracker template](./.krci-ai/templates/assumption-tracker-template.md)
+Apply systematic validation using established business methodologies by executing [validate-problem-statement](./.krci-ai/tasks/validate-problem-statement.md) using Lean Startup Problem-Solution Fit, then execute [validate-target-users](./.krci-ai/tasks/validate-target-users.md) using Jobs-to-be-Done framework, followed by [validate-success-metrics](./.krci-ai/tasks/validate-success-metrics.md) using SMART criteria and OKR alignment, and complete with [validate-business-value](./.krci-ai/tasks/validate-business-value.md) using Value Proposition Canvas. Output validation reports to `/docs/prd/brief-validation-*.md` using the [validation report template](./.krci-ai/templates/validation-report-template.md) with evidence and confidence assessments.
 
-Output: `/docs/prd/project-context.md` with supporting evidence and assumption documentation
+Integrate validation results into enhanced project brief by running [refine-project-brief](./.krci-ai/tasks/refine-project-brief.md) to integrate validation findings. Update section confidence based on validation evidence quality, modify assumption tracker with validation results, and incorporate validated evidence into brief sections. Output enhanced `/docs/prd/project-brief.md` with validated evidence and reduced assumptions.
 
-### Phase 2: Advanced Brief Creation
-
-Create initial brief using advanced template with validation checkpoints:
-
-#### Advanced Template Features
-
-- Validation Checkpoints: Built-in validation status tracking for each section
-- Evidence Integration: Confidence levels and evidence source documentation
-- Assumption Tracking: Systematic assumption identification and risk assessment
-- Business Framework References: Methodology citations and validation approach
-- Quality Assurance: Professional standards with executive-ready formatting
-
-Output: Initial `/docs/prd/project-brief.md` with validation placeholders and checkpoint system
-
-### Phase 3: Business Framework Validation Cycle
-
-Apply systematic validation using established business methodologies:
-
-#### Validation Sequence
-
-1. Problem Validation: Execute [validate-problem-statement](./.krci-ai/tasks/validate-problem-statement.md) using Lean Startup Problem-Solution Fit
-2. User Validation: Execute [validate-target-users](./.krci-ai/tasks/validate-target-users.md) using Jobs-to-be-Done framework
-3. Metrics Validation: Execute [validate-success-metrics](./.krci-ai/tasks/validate-success-metrics.md) using SMART criteria and OKR alignment
-4. Value Validation: Execute [validate-business-value](./.krci-ai/tasks/validate-business-value.md) using Value Proposition Canvas
-
-Outputs: Validation reports at `/docs/prd/brief-validation-*.md` using the [validation report template](./.krci-ai/templates/validation-report-template.md) with evidence and confidence assessments
-
-### Phase 4: Brief Refinement and Integration
-
-Integrate validation results into enhanced project brief:
-
-#### Refinement Process
-
-1. Execute Brief Refinement: Run [refine-project-brief](./.krci-ai/tasks/refine-project-brief.md) to integrate validation findings
-2. Confidence Level Updates: Update section confidence based on validation evidence quality
-3. Assumption Status Updates: Modify assumption tracker with validation results
-4. Evidence Integration: Incorporate validated evidence into brief sections
-
-Output: Enhanced `/docs/prd/project-brief.md` with validated evidence and reduced assumptions
-
-### Phase 5: Quality Assurance and Finalization
-
-Complete quality gates and stakeholder approval for production readiness:
-
-#### Finalization Process
-
-1. Execute Finalization: Run [finalize-project-brief](./.krci-ai/tasks/finalize-project-brief.md) for comprehensive quality review
-2. Stakeholder Approval: Obtain sign-off from key decision makers
-3. Quality Gate Verification: Confirm all advanced flow standards met
-4. SDLC Readiness: Verify enablement for downstream PRD development
-
-Output: Production-ready project brief with comprehensive validation documentation
+Complete quality gates and stakeholder approval for production readiness by running [finalize-project-brief](./.krci-ai/tasks/finalize-project-brief.md) for comprehensive quality review. Obtain sign-off from key decision makers, confirm all advanced flow standards are met, and verify enablement for downstream PRD development. Output production-ready project brief with comprehensive validation documentation.
 </instructions>
 
 ## Output Format

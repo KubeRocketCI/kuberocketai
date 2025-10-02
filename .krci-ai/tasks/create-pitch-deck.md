@@ -13,42 +13,14 @@ dependencies:
 
 Create a concise, high-impact pitch deck (3-5 slides) that transforms product features into an emotional story driving immediate action. Focus on maximum "WOW factor" through powerful visuals, compelling problem-solution narrative, and professional design that makes audiences stop and say "I need this product" within minutes, not hours.
 
-## Prerequisites
-
-<prerequisites>
-Core Requirements (PRD-First + Interactive):
-
-- Completed PRD at `/docs/prd/prd.md` containing product information (primary source)
-- Product demo or MVP available for showcasing
-- User available to answer interactive questions for gaps not covered in PRD:
-  - Target audience specifics
-  - Desired presentation tone
-  - Competitive context
-  - Presentation objectives
-
-Optional (For Advanced Marketing Scenarios):
-
-- Marketing Brief at `/docs/marketing/marketing-brief.md` (for sophisticated positioning)
-- Competitive analysis and market research (for differentiation focus)
-- Visual assets and brand guidelines (for brand-consistent presentations)
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-EXECUTION SEQUENCE (Follow in Order):
+Confirm the exact output path `/docs/marketing/pitch-deck.md` you will create. Verify the PRD at `/docs/prd/prd.md` is accessible as primary source and product demo or MVP is available for showcasing. Ensure dependencies declared in the YAML frontmatter are readable. Plan to ask the user interactive questions for any gaps not covered in the PRD including target audience specifics, presentation tone, competitive context, and presentation objectives. Optional marketing brief and brand guidelines enhance output but are not required.
 
-1. Load Context: Read all reference assets to load framework knowledge and templates
-2. Gather Information: Collect all prerequisites and analyze PRD/MVP content
-3. Select Framework: Choose optimal presentation framework based on audience and content strategy
-4. Structure Content: Apply chosen framework to organize pitch deck slides
-5. Create Output: Generate final pitch deck using template structure with visual design guidance
+Load context by reading all reference assets to gain framework knowledge and templates. Gather information by collecting prerequisites and analyzing PRD and MVP content. Select optimal presentation framework based on audience and content strategy from available options including Pain-Gains-Reveals, PAS, BAB, and SCRAP which all adapt to 3-5 slides.
 
-Framework Application Requirements:
-
-- Mandatory: Use presentation frameworks from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-- Available Frameworks: Pain-Gains-Reveals, PAS, BAB, SCRAP (all adapt to 3-5 slides)
-- Template Structure: Use [pitch-deck-template.md](./.krci-ai/templates/pitch-deck-template.md) for formatting
+Structure content by applying chosen framework to organize pitch deck slides and integrate persuasion elements. Use presentation frameworks from [business-frameworks.md](./.krci-ai/data/business-frameworks.md) as mandatory requirement. Generate final pitch deck using [pitch-deck-template.md](./.krci-ai/templates/pitch-deck-template.md) structure with visual design guidance and populate all template variables precisely.
 </instructions>
 
 ## Output Format

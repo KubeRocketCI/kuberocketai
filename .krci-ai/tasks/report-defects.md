@@ -13,22 +13,12 @@ dependencies:
 
 Create comprehensive defect reports and quality assessments based on testing execution results, ensuring systematic documentation of issues and quality observations. This task translates testing findings into actionable defect reports with clear reproduction steps, impact assessment, and quality recommendations that enable development teams to address issues and stakeholders to make informed release decisions.
 
-## Prerequisites
-
-<prerequisites>
-- Test execution completed: Testing execution finished with documented results and identified issues
-- Testing evidence: Screenshots, logs, and supporting documentation collected during test execution
-- Quality standards: Understanding of defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
-- Reporting tools: Access to defect tracking system and reporting templates
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for defect reporting workflow and quality gates
-2. Apply quality standards: Use defect classification approaches from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
-3. Format output: Use [defect-report.md](./.krci-ai/templates/defect-report.md) for structured defect documentation
-4. Ensure traceability: Link defects to specific test cases, Story acceptance criteria, and Epic requirements
+Confirm testing execution is finished with documented results and identified issues, screenshots, logs, and supporting documentation are collected during test execution, defect classification and severity standards from [quality-metrics.md](./.krci-ai/data/quality-metrics.md) are understood, and access to defect tracking system and reporting templates is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for defect reporting workflow and quality gates. Apply defect classification approaches from [quality-metrics.md](./.krci-ai/data/quality-metrics.md). Use [defect-report.md](./.krci-ai/templates/defect-report.md) for structured defect documentation and link defects to specific test cases, Story acceptance criteria, and Epic requirements.
 </instructions>
 
 ## Output Format
@@ -83,23 +73,23 @@ Defect Reports and Quality Assessment - Create comprehensive quality documentati
 
 ## Content Guidelines
 
-### 🎯 Defect Reporting Focus Areas:
+### Defect Reporting Focus Areas
 
-#### Defect Documentation (Primary Focus):
+#### Defect Documentation (Primary Focus)
 
 - Clear Reproduction: Step-by-step instructions that enable consistent defect reproduction
 - Impact Assessment: Business impact evaluation and effect on Story acceptance criteria
 - Evidence Support: Screenshots, logs, and data supporting defect identification
 - Environment Context: Specific environment, browser, device, and configuration details
 
-#### Quality Assessment (Decision Support):
+#### Quality Assessment (Decision Support)
 
 - Story Readiness: Evaluation of Story completion readiness based on defect impact
 - Risk Analysis: Assessment of risks associated with releasing despite known defects
 - Priority Guidance: Recommendations for defect resolution priority and timeline
 - Release Decision Support: Quality-based recommendations for stakeholder decision making
 
-### ✅ Quality Standards:
+### Quality Standards
 
 - Defect Reproducible: All defects include sufficient detail for consistent reproduction
 - Impact Assessed: Business and technical impact clearly evaluated for each defect
@@ -108,7 +98,7 @@ Defect Reports and Quality Assessment - Create comprehensive quality documentati
 - Traceability Maintained: Clear links to affected test cases and acceptance criteria
 - Stakeholder Communicated: Quality findings clearly communicated to relevant teams
 
-### ❌ Common Pitfalls to Avoid:
+### Common Pitfalls to Avoid
 
 - Reporting defects without sufficient reproduction steps or supporting evidence
 - Missing impact assessment and business context for identified issues
@@ -117,7 +107,7 @@ Defect Reports and Quality Assessment - Create comprehensive quality documentati
 - Reporting defects without linking to specific Story acceptance criteria or test cases
 - Missing follow-up planning for defect resolution verification
 
-### 🎯 Story/Epic Quality Integration:
+### Story/Epic Quality Integration
 
 This defect reporting should enable informed decision making by providing:
 

@@ -11,22 +11,12 @@ dependencies:
 
 Provide guidance/review/improve for a PowerPoint presentation requested by the user.
 
-## Prerequisites
-
-<prerequisites>
-- Presentation exists: Presentation for review is presented as a file path or attached to the chat
-- Page is allowed to read: The file has read permissions for everyone
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Check dependencies: Check if the "Office-PowerPoint-MCP-Server" MCP server is installed. If it is not installed, notify the user that you need to install a dependency (Office-PowerPoint-MCP-Server). If user accepts, install it. GitHub reference with package and instructions: `https://github.com/GongRzhe/Office-PowerPoint-MCP-Server`
-2. Read presentation: Read the presentation user provided you with by specifying a file path or attaching it to the chat. If nothing is specified, ask him for it
-3. Create venv: Create a Python virtual environment. Call it `venv` if this name is not already taken. Notify user about creating a virtual environment
-4. Perform commands: Fulfill the user's request. Notify the user that to you need to create a number of scripts in the `presentation-processing` folder in the root folder of the project. If user provided you with a PowerPoint presentation, create create a copy of this presentation in the `presentation-processing`, name the copy as `presentation-name-edited.pptx`
-5. Clean up environment: Clean up the virtual environment
-6. Notify about completion: Tell the user that all the edited version is located in the `presentation-name-edited.pptx` file of the `presentation-processing` folder in the root of the project
+Confirm the presentation for review is presented as a file path or attached to the chat, and the file has read permissions. Ensure dependencies declared in the YAML frontmatter (Office-PowerPoint-MCP-Server MCP server) are available before proceeding. If not installed, notify the user about the dependency requirement and install if accepted (GitHub reference: `https://github.com/GongRzhe/Office-PowerPoint-MCP-Server`).
+
+Read the presentation user provided by file path or attachment. Ask user for it if nothing is specified. Create a Python virtual environment named `venv` if not already taken and notify user. Fulfill the user's request by creating scripts in the `presentation-processing` folder in the root. Create a copy of the presentation in `presentation-processing` named `presentation-name-edited.pptx`. Clean up the virtual environment after completion and notify the user that the edited version is located in the `presentation-name-edited.pptx` file.
 </instructions>
 
 ## Output Format

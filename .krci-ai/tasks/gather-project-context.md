@@ -16,18 +16,11 @@ Systematically collect and structure project context using business frameworks a
 
 This task leverages [validation frameworks](./.krci-ai/data/validation-frameworks.md) and the [context gathering guide template](./.krci-ai/templates/context-gathering-guide-template.md) for systematic context collection.
 
-## Prerequisites
-
-<prerequisites>
-- Business opportunity or problem area identified
-- Stakeholder access available for interviews/input
-- Initial project scope or direction defined
-- Access to existing research, documentation, or data sources
-</prerequisites>
-
 ## Instructions
 
 <instructions>
+Confirm business opportunity or problem area is identified, stakeholder access is available for interviews and input, initial project scope or direction is defined, and access to existing research, documentation, or data sources is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
 Systematically collect and structure project context using business frameworks and established methodologies. This provides comprehensive information needed for evidence-based project brief creation.
 
 ### Phase 1: Input Method Selection

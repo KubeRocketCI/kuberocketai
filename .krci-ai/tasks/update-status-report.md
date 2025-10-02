@@ -12,43 +12,15 @@ dependencies:
 
 Update an existing project status report to reflect current project performance, new developments, and changed conditions while maintaining consistency in reporting format and stakeholder communication. Status report updates ensure continuous visibility into project progress and enable timely decision-making.
 
-## Prerequisites
-
-<prerequisites>
-- Previous status report available for reference
-- Current project performance data collected
-- Performance measurement systems updated
-- Stakeholder feedback on previous reports received
-- Reporting schedule and requirements confirmed
-</prerequisites>
-
-## Reference Assets
-
-Primary Dependencies:
-- Previous status report document
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [status-report-template.md](./.krci-ai/templates/status-report-template.md)
-- Current project performance data and metrics
-
 ## Instructions
 
 <instructions>
+Confirm previous status report is available for reference, current project performance data is collected, performance measurement systems are updated, stakeholder feedback on previous reports is received, and reporting schedule and requirements are confirmed. Ensure dependencies declared in the YAML frontmatter ([project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) and [status-report-template.md](./.krci-ai/templates/status-report-template.md)) are readable along with previous status report document and current project performance data and metrics before proceeding.
 
-### 1. Performance Data Update
+Collect latest schedule, cost, and scope performance data. Calculate updated performance indices and variances. Compare current performance with previous reporting period. Identify significant changes or trends in project performance. Analyze performance trends across multiple reporting periods. Identify patterns in schedule, cost, and quality metrics. Assess effectiveness of previous corrective actions. Project future performance based on current trends.
+</instructions>
 
-Current Period Analysis:
-- Collect latest schedule, cost, and scope performance data
-- Calculate updated performance indices and variances
-- Compare current performance with previous reporting period
-- Identify significant changes or trends in project performance
-
-Trend Analysis:
-- Analyze performance trends across multiple reporting periods
-- Identify patterns in schedule, cost, and quality metrics
-- Assess effectiveness of previous corrective actions
-- Project future performance based on current trends
-
-### 2. Progress and Achievement Updates
+## Progress and Achievement Updates
 
 Accomplishments Update:
 - Document new achievements since last report
@@ -89,7 +61,6 @@ Recommendations Update:
 - Identify new corrective actions required
 - Modify resource allocation or approach recommendations
 - Update stakeholder decision requirements and timing
-</instructions>
 
 ## Output Format
 

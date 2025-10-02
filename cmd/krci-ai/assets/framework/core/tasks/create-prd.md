@@ -13,22 +13,12 @@ dependencies:
 
 Create a streamlined PRD that drives team alignment on what to build and why, following the proven 6-8 page structure focused on user needs and business value rather than technical specifications. This PRD includes epic-level feature definitions while maintaining clear traceability from Project Brief.
 
-## Prerequisites
-
-<prerequisites>
-- Required: Completed and approved Project Brief at `/docs/prd/project-brief.md`
-- Market research and user insights available
-- Stakeholder requirements gathered and prioritized
-- Technical feasibility assessment completed (if complex features)
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for PRD dependencies and quality gates
-2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. Format output: Use [prd-template.md](./.krci-ai/templates/prd-template.md) for structure
-4. Ensure traceability: Link back to Project Brief and include epic-level feature definitions
+Confirm the exact output path `/docs/prd/prd.md` you will create or update. Verify that the Project Brief at `/docs/prd/project-brief.md` is accessible, along with market research, user insights, stakeholder requirements, and dependencies declared in the YAML frontmatter. Do not proceed if required inputs are missing.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for PRD workflow and quality gates. Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md). Use [prd-template.md](./.krci-ai/templates/prd-template.md) and populate all variables precisely, maintaining traceability to the Project Brief and including epic-level feature definitions with BR/NFR numbering and P0/P1/P2 priorities.
 </instructions>
 
 ## Output Format

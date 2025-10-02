@@ -21,25 +21,30 @@ Interactive, first-run setup that initializes your testing workspace. This wizar
 - On a fresh installation where `src/main/resources/README.md` or `src/main/resources/features/` is missing
 - When reconfiguring your testing strategy, providers, or tagging conventions
 
-## Validation (HALT if missing)
+## Instructions
 
-- Write permissions for `src/main/resources/`
+<instructions>
+Confirm write permissions for `src/main/resources/` are available. HALT if missing. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Execute interactive wizard setup by asking questions in sequence with HALT checkpoints. HALT before starting with intro explaining wizard flow and expected outputs. For each question, ask, HALT for answer, echo back interpreted value, and HALT for confirmation or edits. Gather configuration including domain name for features, test types to include (UI/API), tagging approach (provider-agnostic families or domain-specific), utilities/cleanup flows inclusion, naming convention for feature files, and whether to create starter example file.
+
+Follow wizard contract with HALT checkpoints at critical decision points. Ask about existing features and offer to place them into `src/main/resources/features/` with confirmation. Present concise plan after gathering inputs (directories to create, README sections, files to import/move) and HALT for approval. Show preview of new README (first 20-30 lines and customized sections) plus file/folder actions, and HALT for final confirmation. Allow user to revise inputs or cancel without writing on any negative confirmation. Offer to build local Gherkin index only if at least one non-starter `.feature` file is present.
+
+Create directory structure for `src/main/resources/features/` with domain and provider subfolders based on test types selected. Generate `src/main/resources/README.md` from [template](./.krci-ai/templates/testing-readme.md) by replacing placeholders with user selections, using block-by-block prompting with HALT after each section. Optionally create starter example feature file if requested. Optionally build local Gherkin indexes (FAISS semantic and JSON/SQLite lexical) if non-starter features are present.
+</instructions>
 
 ## Interactive Questions (Wizard)
 
 Ask the following in sequence. After each answer, confirm or offer a recommended default.
 
-1) Domain name for UI/API test features (e.g., `core`, `payments`)
-   - Example: `core`, `payments`, `orders`
+1. Domain name for UI/API test features (e.g., `core`, `payments`)
+2. Test types to include (multi-select; default: `UI, API`)
+3. Tagging approach (default: provider-agnostic families; optional: domain-specific tags)
+4. Include utilities/cleanup flows? (default: `yes`)
+5. Naming convention for feature files (default: `PascalCase`, e.g., `PromoteApplication.feature`)
+6. Create starter example feature file? (default: `no`)
 
-2) Test types to include (multi-select; default: `UI, API`)
-   - Allowed values: `UI`, `API`
-
-3) Tagging approach
-   - Default: provider-agnostic families (Type, Scope/Suite, Non-functional, Lifecycle)
-   - Optional: domain-specific tags (free-form), e.g., `@Payments`, `@Orders`
-
-### Recommended default tags
+### Recommended Default Tags
 
 Provider-agnostic families (recommended for most projects):
 
@@ -49,28 +54,19 @@ Provider-agnostic families (recommended for most projects):
 - Lifecycle/Utilities: `@Cleanup`, `@DataSetup`, `@Migration`, `@Flaky`
 
 Optional domain/subdomain tags (enable only if relevant):
+
 - Domain: `@{{DomainPascal}}`
 - Subdomains (examples): `@{{DomainPascal}}Create`, `@{{DomainPascal}}Deploy`, `@{{DomainPascal}}Promote`
 
-Wizard behavior:
-- Offer provider-agnostic defaults first; only add domain/subdomain tags if enabled.
-- Allow the user to accept defaults, enter custom tag families, or ask the agent to propose tags based on a brief description.
+### Wizard HALT Checkpoints
 
-6) Include utilities/cleanup flows? (default: `yes`)
-
-7) Naming convention for feature files (default: `PascalCase`, e.g., `PromoteApplication.feature`)
-
-8) Create starter example feature file? (default: `no`)
-
-### Wizard contract (HALT checkpoints)
-
-- Before starting: HALT with a short intro explaining the wizard flow and expected outputs.
-- For each question above: ask → HALT for the answer → echo back the interpreted value → HALT for confirmation or edits.
-- Existing features: recommend the user to place `.feature` files directly into `src/main/resources/features/` (next to the future `src/main/resources/README.md`) with desired subfolders; alternatively offer to accept explicit paths or to scan typical paths (`docs/`, `test/`, `/*.feature`) and HALT to confirm which to import and where they will be placed under `src/main/resources/features/`.
-- Plan summary: after gathering all inputs, present a concise plan (directories to create, README sections to include/customize, files to import/move) and HALT for approval.
-- Diff/preview: before writing, show a short preview of the new `src/main/resources/README.md` (first 20–30 lines and any customized sections) plus the file/folder actions list, and HALT for final confirmation.
-- On any "no" at confirmation points: allow the user to revise inputs or cancel without writing.
-- Optional local index: offer to build a local Gherkin index only if at least one non-starter `.feature` file is present (imported or detected). If only starter example(s) were created by the wizard, skip this prompt entirely.
+- Before starting: HALT with intro explaining wizard flow and expected outputs
+- For each question: ask → HALT for answer → echo back → HALT for confirmation
+- Existing features: recommend placement and HALT for confirmation
+- Plan summary: present directories, README sections, files to import/move and HALT for approval
+- Diff/preview: show README preview and file/folder actions, HALT for final confirmation
+- On any "no": allow user to revise inputs or cancel without writing
+- Optional local index: offer only if non-starter `.feature` files present
 
 ## Actions
 

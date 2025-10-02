@@ -13,84 +13,20 @@ dependencies:
 
 Create a comprehensive project plan that integrates all subsidiary plans and serves as the primary document for project execution, monitoring, and control. The project plan consolidates scope, schedule, cost, quality, resource, communication, risk, and procurement plans into a cohesive management framework following PMBoK standards.
 
-## Prerequisites
-
-<prerequisites>
-- Project charter approved and SOW finalized
-- Work breakdown structure (WBS) completed
-- Resource requirements identified and validated
-- Risk assessment and stakeholder analysis completed
-- Quality standards and acceptance criteria defined
-</prerequisites>
-
-## Reference Assets
-
-Primary Dependencies:
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [project-plan-template.md](./.krci-ai/templates/project-plan-template.md)
-- Project charter and SOW documents
-- Risk register and stakeholder documentation
-
-Optional Supporting Materials:
-- SDLC framework: [13-sdlc-framework.md](./docs/architecture/13-sdlc-framework.md) (if available)
-- Quality metrics: [quality-metrics.md](./.krci-ai/data/quality-metrics.md) (if available)
-
 ## Instructions
 
 <instructions>
-### 1. Integrated Planning Development
+Confirm the exact output document you will create using [project-plan-template.md](./.krci-ai/templates/project-plan-template.md). Ensure all dependencies declared in the YAML frontmatter and prerequisite artifacts (charter, WBS, stakeholder analysis) are accessible before proceeding.
 
-Scope Management Plan:
-- Define scope management processes and procedures
-- Establish change control processes for scope modifications
-- Document scope validation and acceptance procedures
-- Create work breakdown structure with detailed work packages
+Reference [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) for PMBoK standards and integrated planning best practices. Define scope management processes and procedures, establish change control processes for scope modifications, document scope validation and acceptance procedures, and create work breakdown structure with detailed work packages.
 
-Schedule Management Plan:
-- Develop detailed project schedule with critical path analysis
-- Define activity sequencing and dependency relationships
-- Establish milestone schedule and progress measurement
-- Create resource loading and leveling plans
+Develop detailed project schedule with critical path analysis, define activity sequencing and dependency relationships, establish milestone schedule and progress measurement, and create resource loading and leveling plans. Develop comprehensive project budget with cost baselines, establish cost control procedures and variance thresholds, define earned value management approach, and create cost reporting and forecasting procedures.
 
-Cost Management Plan:
-- Develop comprehensive project budget with cost baselines
-- Establish cost control procedures and variance thresholds
-- Define earned value management approach
-- Create cost reporting and forecasting procedures
+Define organizational structure and role assignments, establish resource acquisition and release procedures, create team development and performance management plans, and document resource optimization and conflict resolution processes. Define quality standards and acceptance criteria, establish quality assurance and control procedures, create testing, review, and validation processes, and document continuous improvement and lessons learned procedures.
 
-### 2. Resource and Quality Planning
+Define stakeholder communication requirements and methods, establish reporting frequency, format, and distribution, create meeting schedules and decision-making procedures, and document information management and storage protocols. Integrate risk register with detailed response strategies, establish risk monitoring and control procedures, define risk escalation and reporting processes, and create contingency and fallback planning approaches.
 
-Resource Management Plan:
-- Define organizational structure and role assignments
-- Establish resource acquisition and release procedures
-- Create team development and performance management plans
-- Document resource optimization and conflict resolution processes
-
-Quality Management Plan:
-- Define quality standards and acceptance criteria
-- Establish quality assurance and control procedures
-- Create testing, review, and validation processes
-- Document continuous improvement and lessons learned procedures
-
-### 3. Communication and Risk Planning
-
-Communications Management Plan:
-- Define stakeholder communication requirements and methods
-- Establish reporting frequency, format, and distribution
-- Create meeting schedules and decision-making procedures
-- Document information management and storage protocols
-
-Risk Management Plan:
-- Integrate risk register with detailed response strategies
-- Establish risk monitoring and control procedures
-- Define risk escalation and reporting processes
-- Create contingency and fallback planning approaches
-
-Procurement Management Plan (if applicable):
-- Define procurement approach and vendor selection criteria
-- Establish contract management and performance monitoring
-- Create procurement timeline and milestone schedule
-- Document vendor relationship and conflict resolution procedures
+If procurement is applicable, define procurement approach and vendor selection criteria, establish contract management and performance monitoring, create procurement timeline and milestone schedule, and document vendor relationship and conflict resolution procedures. Use the [project-plan-template.md](./.krci-ai/templates/project-plan-template.md) to integrate all subsidiary plans into a cohesive management framework.
 </instructions>
 
 ## Output Format
@@ -139,6 +75,7 @@ Stakeholder Acceptance:
 ## Execution Checklist
 
 <execution_checklist>
+
 ### Planning Preparation
 - Gather all prerequisite documents and information
 - Assemble planning team with appropriate expertise

@@ -13,18 +13,11 @@ Complete the project brief creation process by ensuring all validations are sati
 
 This task may reference [validation frameworks](./.krci-ai/data/validation-frameworks.md) for final quality checks.
 
-## Prerequisites
-
-<prerequisites>
-- Project brief exists with validation checkpoints completed
-- All required validations completed with satisfactory results
-- Stakeholder review and feedback incorporated
-- Assumption tracker updated with current status
-</prerequisites>
-
 ## Instructions
 
 <instructions>
+Confirm the project brief exists with validation checkpoints completed, all required validations are completed with satisfactory results, stakeholder review and feedback is incorporated, and assumption tracker is updated with current status. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
 Complete the project brief creation process by ensuring all validations are satisfied, stakeholders have approved content, and the brief meets all quality standards for downstream SDLC artifact creation.
 
 ### Phase 1: Quality Gate Assessment

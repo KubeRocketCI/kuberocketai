@@ -13,23 +13,12 @@ dependencies:
 
 Create comprehensive visual identity and brand guidelines that establish consistent, professional, and emotionally engaging visual language across all marketing materials. Focus on developing visual systems that create immediate impact, build credibility, and support the "WOW factor" needed for modern marketing success.
 
-## Prerequisites
-
-<prerequisites>
-- Completed Marketing Brief at `/docs/marketing/marketing-brief.md`
-- Brand positioning and personality defined from marketing strategy
-- Target audience preferences and design trends researched
-- Competitive visual landscape analysis completed
-- Technical requirements for various media formats identified
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Visual Identity dependencies
-2. Apply design principles: Use proven visual design methodologies for maximum impact
-3. Format output: Use [visual-identity-template.md](./.krci-ai/templates/visual-identity-template.md) for structure
-4. Maximize visual impact: Create design systems that immediately capture attention and build credibility
+Confirm the exact output path `/docs/marketing/visual-identity.md` and verify that dependencies declared in the YAML frontmatter and required inputs (marketing brief, brand positioning, audience research) are accessible before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Visual Identity dependencies. Apply proven visual design methodologies for maximum impact. Use [visual-identity-template.md](./.krci-ai/templates/visual-identity-template.md) for structure and create design systems that immediately capture attention and build credibility, maximizing visual impact across all marketing materials.
 </instructions>
 
 ## Output Format

@@ -12,23 +12,12 @@ dependencies:
 
 Implement Story requirements according to Architecture specifications and coding standards, ensuring quality and maintaining system consistency. This task enables developers to systematically transform user stories into working code while maintaining Epic alignment and architectural compliance.
 
-## Prerequisites
-
-<prerequisites>
-- Story ready: Story has been reviewed and validated with complete Tasks/Subtasks
-- Technical requirements clear: All implementation details, file paths, and commands specified
-- Development environment: Project codebase access and development tools configured
-- Dependencies available: Required libraries, tools, and systems accessible
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for implementation dependencies and handoff requirements
-2. Apply coding standards: Use guidelines from [coding-standards.md](./.krci-ai/data/coding-standards.md) and [best-practices.md](./.krci-ai/data/best-practices.md)
-3. Document progress: Update Story file with implementation progress and results
-4. Ensure Story compliance: Implement all Story acceptance criteria following Architecture specifications
-5. Maintain Epic traceability: Preserve Story's Epic alignment and contribute to Epic completion
+Identify the exact Story file you will implement (path in `/docs/stories/{epic_number}.{story_number}.story.md`) and confirm it is accessible with complete Tasks/Subtasks. Ensure dependencies declared in the YAML frontmatter for this task are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for implementation flow and handoff requirements. Apply [coding-standards.md](./.krci-ai/data/coding-standards.md) and [best-practices.md](./.krci-ai/data/best-practices.md). Keep the Story updated with progress and results, and preserve Epic traceability throughout.
 </instructions>
 
 ### Ready to Implement

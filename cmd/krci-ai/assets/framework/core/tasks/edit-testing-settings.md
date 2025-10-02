@@ -13,14 +13,11 @@ Interactively edit testing settings stored in `src/main/resources/README.md`. Th
 - You already have `src/main/resources/README.md` and want to adjust providers, tags, structure, or guidance
 - After onboarding or setup, to refine details without regenerating from scratch
 
-## Prerequisites (HALT if missing)
+## Instructions
 
-- `src/main/resources/README.md` must exist
-- Write permissions for `src/main/resources/`
-
-If README is missing:
-- If `src/main/resources/features/` exists → propose running `onboard-testing`
-- If both missing → propose `setup-testing`
+<instructions>
+Confirm `src/main/resources/README.md` exists and write permissions for `src/main/resources/` are available. HALT if missing. If README is missing but `src/main/resources/features/` exists, propose running `onboard-testing`. If both missing, propose `setup-testing`. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+</instructions>
 
 ## Modes
 
@@ -73,7 +70,6 @@ The wizard should detect headings by `##`/`###` and operate on those blocks. If 
   - Domain: `@{{DomainPascal}}`
   - Subdomains: `@{{DomainPascal}}Create`, `@{{DomainPascal}}Deploy`, `@{{DomainPascal}}Promote`
 - Present suggested lists and ask to insert/update in the Tagging system section
-- Present suggested lists and ask to insert/update in the Tagging system section
 
 ## Safety and Backups
 
@@ -91,5 +87,3 @@ The wizard should detect headings by `##`/`###` and operate on those blocks. If 
 - Requested sections updated exactly as confirmed by the user
 - README structure and headings preserved or improved
 - Tagging guidance consistent with selected providers and domain
-
-

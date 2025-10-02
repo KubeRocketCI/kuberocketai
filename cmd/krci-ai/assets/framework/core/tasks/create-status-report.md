@@ -5,20 +5,23 @@ dependencies:
   templates:
     - status-report-template.md
 ---
-
 # Task: Create Project Status Report
 
 ## Description
 
 Create a comprehensive project status report that provides stakeholders with clear visibility into project progress, performance, risks, and upcoming activities. The status report serves as the primary communication vehicle for project performance information and supports informed decision-making throughout the project lifecycle.
 
-<prerequisites>
-- Project plan and baseline established
-- Performance measurement systems operational
-- Current project data and metrics available
-- Stakeholder communication requirements defined
-- Reporting templates and standards established
-</prerequisites>
+## Instructions
+
+<instructions>
+Confirm the exact output format and distribution targets using [status-report-template.md](./.krci-ai/templates/status-report-template.md). Ensure all dependencies declared in the YAML frontmatter and required project data sources are accessible before proceeding.
+
+Collect current performance data across schedule, cost, and scope, including SPI/CPI metrics, milestone progress, and variance details with clear data sources. Analyze progress objectively against baselines, documenting achievements, current status, and significant variances with root causes and corrective actions.
+
+Update risk and issue status with trends, response effectiveness, and required decisions. Prepare the future outlook by listing upcoming activities, critical milestones, resource needs, and updated forecasts with assumptions and confidence.
+
+Use the approved template structure and ensure clarity, accuracy, and completeness suitable for the intended stakeholders. Populate all template sections precisely.
+</instructions>
 
 ## Reference Assets
 
@@ -32,26 +35,6 @@ Optional Supporting Materials:
 - Earned value management data
 - Stakeholder communication plan
 - Previous status reports for trend analysis
-
-<instructions>
-1. Performance Data Collection:
-   - Schedule Performance: Collect current schedule status and milestone progress, calculate schedule performance index (SPI) and variance, identify completed, in-progress, and upcoming activities, analyze critical path status and potential delays
-   - Cost Performance: Gather current budget status and expenditure data, calculate cost performance index (CPI) and variance, prepare earned value analysis and forecasting, identify cost trends and potential budget impacts
-   - Scope Performance: Review deliverable completion status and quality, document scope changes and their impact, assess stakeholder satisfaction with deliverables, identify scope-related issues or concerns
-
-2. Progress Analysis and Reporting:
-   - Accomplishments Summary: Document key achievements since last reporting period, highlight completed milestones and deliverables, recognize team accomplishments and successes, present positive project outcomes and value delivered
-   - Current Status Assessment: Provide clear picture of current project position, analyze performance against planned baselines, identify areas of strong performance and concern, present objective assessment of project health
-   - Variance Analysis: Identify significant variances from planned performance, analyze root causes of schedule or cost deviations, assess impact of variances on project objectives, present corrective actions and recovery plans
-
-3. Risk and Issue Management:
-   - Risk Status Update: Review current risk register and priority changes, report on risk response implementation and effectiveness, identify new risks and their potential impact, present risk trend analysis and outlook
-   - Issue Resolution: Document current issues and their resolution status, report on issue escalation and decision requirements, identify blocking issues requiring stakeholder intervention, present issue trends and patterns
-
-4. Future Outlook and Planning:
-   - Upcoming Activities: Present planned activities for next reporting period, highlight critical milestones and deliverables, identify resource requirements and dependencies, communicate stakeholder involvement needs
-   - Forecast and Projections: Provide updated project completion forecasts, present budget and resource requirement projections, analyze potential risks and their impact on forecasts, communicate confidence levels and assumptions
-</instructions>
 
 ## Output Format
 

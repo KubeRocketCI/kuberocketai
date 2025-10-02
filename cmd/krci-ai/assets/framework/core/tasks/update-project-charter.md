@@ -12,49 +12,15 @@ dependencies:
 
 Update an existing project charter to reflect approved changes, new information, or evolving project requirements while maintaining the charter's role as the formal project authorization document. Charter updates follow integrated change control processes per PMBoK standards and require appropriate stakeholder review and approval.
 
-## Prerequisites
-
-<prerequisites>
-- Existing project charter available for modification
-- Change request or update rationale documented
-- Stakeholder approval for charter modifications
-- Impact assessment of proposed changes completed
-- Version control process established
-</prerequisites>
-
-## Reference Assets
-
-<reference_assets>
-Primary Dependencies:
-- Current project charter document
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [project-charter-template.md](./.krci-ai/templates/project-charter-template.md)
-- Change control procedures from methodology
-
-Optional Supporting Materials:
-- Change request documentation
-- Stakeholder feedback and requirements updates
-- Updated business case or strategic direction
-- Revised resource or timeline information
-</reference_assets>
-
 ## Instructions
 
-### 1. Change Analysis and Impact Assessment
+<instructions>
+Confirm existing project charter is available for modification, change request or update rationale is documented, stakeholder approval for charter modifications is obtained, impact assessment of proposed changes is completed, and version control process is established. Ensure dependencies declared in the YAML frontmatter ([project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) and [project-charter-template.md](./.krci-ai/templates/project-charter-template.md)) are readable before proceeding.
 
-Review Update Requirements:
-- Analyze change request or update rationale thoroughly
-- Identify specific charter sections requiring modification
-- Assess impact on project scope, timeline, budget, and resources
-- Determine stakeholder communication and approval requirements
+Analyze change request or update rationale thoroughly. Identify specific charter sections requiring modification. Assess impact on project scope, timeline, budget, and resources. Determine stakeholder communication and approval requirements. Evaluate effect on project objectives and success criteria. Assess impact on stakeholder roles and responsibilities. Review implications for resource allocation and Project Manager authority. Identify cascading effects on project planning and execution.
+</instructions>
 
-Impact Assessment:
-- Evaluate effect on project objectives and success criteria
-- Assess impact on stakeholder roles and responsibilities
-- Review implications for resource allocation and Project Manager authority
-- Identify cascading effects on project planning and execution
-
-### 2. Charter Revision Process
+## Charter Revision Process
 
 Document Review:
 - Review current charter for accuracy and completeness

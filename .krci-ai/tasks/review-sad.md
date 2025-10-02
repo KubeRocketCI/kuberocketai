@@ -14,22 +14,12 @@ dependencies:
 
 Conduct comprehensive review of multi-file architecture documentation to ensure technical quality, PRD requirement compliance, and readiness for development implementation. This review validates that architecture meets enterprise standards and enables successful Epic/Story development across all architecture sections.
 
-## Prerequisites
-
-<prerequisites>
-- Completed architecture: Architecture documentation exists in `/docs/architecture/` with sections following [sad-template.md](./.krci-ai/templates/sad-template.md) structure
-- Reference documents: Access to PRD (`/docs/prd/prd.md`) and Epics (`/docs/epics/`) for validation
-- Architecture standards: Understanding of organizational architecture principles and guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md)
-- Review criteria: Clear understanding of quality gates and acceptance criteria
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for quality gate requirements and review criteria
-2. Apply review standards: Use [architecture-principles.md](./.krci-ai/data/architecture-principles.md) for quality assessment
-3. Format output: Use [architecture-review.md](./.krci-ai/templates/architecture-review.md) for review documentation
-4. Validate traceability: Ensure all PRD requirements and Epic features are addressed across architecture sections
+Confirm architecture documentation exists in `/docs/architecture/` with sections following [sad-template.md](./.krci-ai/templates/sad-template.md) structure, access to PRD (`/docs/prd/prd.md`) and Epics (`/docs/epics/`) for validation is available, organizational architecture principles from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) are understood, and quality gates and acceptance criteria are clear. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for quality gate requirements and review criteria. Apply review standards from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) for quality assessment. Use [architecture-review.md](./.krci-ai/templates/architecture-review.md) for review documentation and ensure all PRD requirements and Epic features are addressed across architecture sections.
 </instructions>
 
 ## Output Format
@@ -92,7 +82,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 
 ## Content Guidelines
 
-### Review Focus Areas:
+### Review Focus Areas
 
 <review_focus_areas>
 1. Section Completeness: All 11 sections populated with relevant, project-specific content
@@ -103,7 +93,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 6. Professional Standards: Document meets enterprise architecture documentation standards
 </review_focus_areas>
 
-### ✅ PASS Criteria:
+### PASS Criteria
 
 <pass_criteria>
 - Complete Documentation: All 11 sections fully populated without template variables
@@ -114,7 +104,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Decision Quality: Architectural decisions are well-reasoned with clear alternatives
 </pass_criteria>
 
-### ❌ FAIL Criteria:
+### FAIL Criteria
 
 <fail_criteria>
 - Missing or incomplete sections in SAD document
@@ -125,7 +115,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Documentation quality below professional standards
 </fail_criteria>
 
-### 🔍 Common Review Issues:
+### Common Review Issues
 
 <common_review_issues>
 
@@ -148,7 +138,7 @@ Conduct comprehensive review of multi-file architecture documentation to ensure 
 - Solutions that don't address stated constraints or limitations
 </common_review_issues>
 
-### 🎯 Review Questions:
+### Review Questions
 
 <review_questions>
 Key questions to evaluate during review:
@@ -160,7 +150,7 @@ Key questions to evaluate during review:
 - "Is the proposed solution technically feasible within stated constraints?"
 </review_questions>
 
-### Quality Gate Checklist:
+### Quality Gate Checklist
 
 <quality_gate_checklist>
 - Documentation Quality: Professional presentation suitable for stakeholder review

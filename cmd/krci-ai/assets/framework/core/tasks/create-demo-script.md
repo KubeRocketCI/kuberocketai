@@ -13,34 +13,12 @@ dependencies:
 
 Create compelling product demonstration script that showcases product value through engaging storytelling, interactive scenarios, and "wow moments" that convert prospects into customers. Focus on creating memorable demonstrations that highlight key benefits and address specific customer use cases with emotional impact.
 
-## Prerequisites
-
-<prerequisites>
-Core Requirements (Industry Standard):
-
-- Completed PRD at `/docs/prd/prd.md` with feature specifications and use cases
-- Product or MVP available for demonstration
-- Key product features and capabilities identified for showcase
-- Target audience use cases and pain points documented
-- Technical requirements and demo environment setup completed
-
-Optional (For Advanced Marketing Scenarios):
-
-- Marketing Brief at `/docs/marketing/marketing-brief.md` (for sophisticated positioning)
-- Competitive differentiation points (for competitive demo scenarios)
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Demo Script dependencies
-2. Apply demonstration best practices: Use proven demo methodologies for maximum conversion impact
-3. Format output: Use [demo-script-template.md](./.krci-ai/templates/demo-script-template.md) for structure
-4. Create engagement moments: Design specific points where audience participation and excitement peak
-5. Create comprehensive demo script: Generate detailed demonstration content with extensive storytelling and strategic reasoning
-6. Provide conversion optimization: Include specific techniques for maximum audience engagement and conversion
-7. Integrate with framework: Ensure demo scripts support sales enablement and customer onboarding workflows
-8. Template compliance: Follow demo-script-template.md structure and populate all variables correctly
+Confirm the exact output path `/docs/marketing/demo-script.md` you will create or update. Ensure the PRD at `/docs/prd/prd.md` and any inputs implied by the YAML frontmatter are accessible and the demo environment is ready before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) to align with dependencies. Use [demo-script-template.md](./.krci-ai/templates/demo-script-template.md) for structure. Design engaging moments, clearly connect scenarios to product value, and populate all template variables precisely.
 </instructions>
 
 ## Output Format

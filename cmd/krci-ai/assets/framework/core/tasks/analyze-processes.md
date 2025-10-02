@@ -12,26 +12,14 @@ dependencies:
 
 Analyze current business processes and workflows to identify improvement opportunities and document process requirements that support PRD enhancement and Epic definition. This task bridges current state operations with future state system requirements, providing process insights that inform business requirements (BR) and system design decisions for Epic implementation and Story development.
 
-## Prerequisites
-
-<prerequisites>
-- PRD foundation: PRD exists at `/docs/prd/prd.md` with initial business context and objectives
-- Process scope defined: Business process boundaries and analysis objectives established
-- Stakeholder access: Process participants and process owners available for interviews
-- Analysis tools: Process mapping tools and performance measurement capabilities prepared
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for process analysis dependencies and workflow
-2. Apply analysis methodologies: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
-3. Format output: Use [process-map.md](./.krci-ai/templates/process-map.md) for workflow documentation
-4. Connect to PRD: Identify how process improvements map to PRD requirements and Epic features
-5. Create comprehensive analysis: Generate detailed process insights with extensive business context and strategic reasoning
-6. Provide implementation guidance: Include specific recommendations for process optimization and system integration
-7. Integrate with framework: Ensure process improvements support Epic development and Story creation
-8. Template compliance: Follow process-map.md template structure and populate all variables correctly
+Confirm the exact process analysis scope and the output location you will create or update. Do not proceed until the PRD at `/docs/prd/prd.md` is accessible and the dependencies declared in the YAML frontmatter are readable.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) to align with the analysis workflow and dependencies. Review applicable techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md) and select those appropriate for the scope.
+
+Use [process-map.md](./.krci-ai/templates/process-map.md) as the structure for documentation. Connect identified improvements directly to PRD requirements and Epic features. Produce comprehensive analysis with clear rationale and implementation guidance, ensuring all template variables are populated and the structure is followed exactly.
 </instructions>
 
 ## Output Format

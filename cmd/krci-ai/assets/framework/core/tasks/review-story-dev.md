@@ -12,23 +12,12 @@ dependencies:
 
 Review and validate user story from Developer perspective to ensure technical implementation readiness, task/subtask executability, and complete technical specifications. Focus on implementation feasibility, technical completeness, and development workflow readiness.
 
-## Prerequisites
-
-<prerequisites>
-- Story exists: Target story file exists in `/docs/stories/` requiring developer technical review
-- Technical context: Understanding of existing codebase, architecture, and technical standards
-- Implementation authority: Developer expertise to validate technical feasibility and approach
-- Development environment: Access to existing codebase and technical documentation
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Validate technical completeness: Ensure story has sufficient detail for autonomous implementation
-2. Review task/subtask specificity: Verify implementation steps are atomic, executable, and well-defined
-3. Check technical specifications: Validate libraries, file paths, verification methods/commands, and dependencies are complete
-4. Assess implementation feasibility: Confirm technical approach is viable and follows project standards
-5. Verify validation completeness: Ensure testing and verification steps are comprehensive and executable
+Confirm the target story file exists in `/docs/stories/` requiring developer technical review, existing codebase, architecture, and technical standards are understood, you have developer expertise to validate technical feasibility and approach, and access to existing codebase and technical documentation is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Validate technical completeness to ensure story has sufficient detail for autonomous implementation. Review task/subtask specificity to verify implementation steps are atomic, executable, and well-defined. Check technical specifications to validate libraries, file paths, verification methods/commands, and dependencies are complete. Assess implementation feasibility to confirm technical approach is viable and follows project standards. Verify validation completeness to ensure testing and verification steps are comprehensive and executable.
 </instructions>
 
 ## Output Format

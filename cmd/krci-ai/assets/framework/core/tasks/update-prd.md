@@ -13,36 +13,14 @@ dependencies:
 
 Update an existing PRD with new requirements, scope changes, or refined business needs while maintaining traceability to Project Brief. Focus on change impact assessment and clear documentation to ensure requirements remain aligned with strategic objectives while defining epic-level features within the PRD.
 
-## Prerequisites
-
-<prerequisites>
-- Existing PRD: `/docs/prd/prd.md` exists and is properly accessible
-- Change trigger: Clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback)
-- Stakeholder input: Understanding of what specifically needs to change and why
-- Epic/Story review: Current understanding of feature groupings and requirements structure
-</prerequisites>
-
 ## Instructions
 
-### CRITICAL: MANDATORY USER CONSULTATION FIRST
-
-<user_consultation>
-Before making ANY changes to the PRD, you MUST:
-
-1. Ask the user what specific updates they want to make to the PRD
-2. Understand the trigger for the changes (new requirements, stakeholder feedback, market changes, etc.)
-3. Clarify scope which sections need updating and why
-4. Get approval for the proposed changes before implementation
-5. Wait for explicit confirmation before proceeding with any edits
-</user_consultation>
-
-### ONLY AFTER USER CONFIRMATION
-
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change management process
-2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. Format output: Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure
-4. Maintain traceability: Update BR/NFR numbering and include epic-level feature definitions
+Confirm `/docs/prd/prd.md` exists and is properly accessible, there is clear reason for update (Project Brief changes, user research, business priorities, technical constraints, stakeholder feedback), you understand what specifically needs to change and why, and you have current understanding of feature groupings and requirements structure. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+CRITICAL: MANDATORY USER CONSULTATION FIRST - Before making ANY changes to the PRD, you MUST ask the user what specific updates they want to make, understand the trigger for the changes (new requirements, stakeholder feedback, market changes, etc.), clarify scope which sections need updating and why, get approval for the proposed changes before implementation, and wait for explicit confirmation before proceeding with any edits.
+
+ONLY AFTER USER CONFIRMATION: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change management process. Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md). Maintain [prd-template.md](./.krci-ai/templates/prd-template.md) structure. Update BR/NFR numbering and include epic-level feature definitions.
 </instructions>
 
 ## Output Format
