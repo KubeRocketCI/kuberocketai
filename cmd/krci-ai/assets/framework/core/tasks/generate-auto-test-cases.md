@@ -13,81 +13,26 @@ dependencies:
 
 Generate detailed test cases and scenarios based on test plan strategy and Story acceptance criteria, ensuring comprehensive coverage of functional and non-functional requirements. This task translates test plan scenarios into executable test cases with clear steps, expected results, and validation criteria that enable systematic testing execution and quality validation.
 
-## Prerequisites
-
-- Test plan available: Approved test plan exists with defined test scenarios and strategy
-- Story clarity: Stories with well-defined acceptance criteria available for test case generation
-- Testing standards: Understanding of test case writing standards from [testing-standards.md](./.krci-ai/data/testing-standards.md)
-- Quality metrics: Familiarity with test coverage requirements from [quality-metrics.md](./.krci-ai/data/quality-metrics.md)
-
-### Reference Assets
-
-Dependencies (BDD-only):
-
-- ./src/main/resources/README.md
-- ./src/main/resources/features/
-- ./.krci-ai/data/test-methodologies.md (optional)
-- ./.krci-ai/data/testing-standards.md (optional)
-- ./.krci-ai/data/quality-metrics.md (optional)
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md (optional)
-
-Validation (HALT if missing):
-- Require ./src/main/resources/README.md and ./src/main/resources/features/
-
-Prechecks (route user appropriately):
-- If `./src/main/resources/features/` exists and `./src/main/resources/README.md` is missing → propose running `onboard-testing` instead; HALT until user confirms.
-- If both `./src/main/resources/README.md` and `./src/main/resources/features/` are missing → propose running `setup-testing` instead; HALT until user confirms.
-
 ## Instructions
 
-0. Select input source (HALT until resolved):
-   - Ask the user: "Where should I get the task text?"
-   - Options:
-     a) Scan repository for available stories under `docs/stories/` (list with numbers, then HALT to pick)
-     b) Use a specific story file (user provides path like `docs/stories/NN.MM.story.md`; validate exists)
-     c) User will paste the task context here in chat (do not scan until provided)
-1. Intent confirmation (HALT):
-   - Summarize planned actions before any search:
-     - What will be searched (keywords/themes)
-     - Where (directories/namespace priority)
-     - Expected action (extend existing vs create new)
-     - Open questions/assumptions
-   - Proceed only after user confirms or refines the intent.
-2. Discovery phase (universal search for candidates):
-   - Build normalized keyword variants (hyphen/underscore/space/camelCase; add common prefixes/suffixes like `-remote`, `sast`, `security`).
-   - Detect domain/context hints (e.g., UI vs API, module/subsystem names) from the task; prioritize likely directories/namespaces in this repository.
-   - ALWAYS PROMPT before search: "Rebuild semantic index now (ALL .feature files) to ensure up-to-date results? [yes/no]".
-     - On yes: prefer FAISS vector index (`./.krci-ai/indexes/gherkin-faiss.index` + `.meta.json`) using sentence-transformers; fallback to JSON index under `./.krci-ai/indexes/` if FAISS is unavailable.
-     - On no: use existing FAISS/JSON index if present; otherwise scan files directly.
-     - If user approves rebuild, propose and run (upon approval) one of the following commands:
+<instructions>
+Confirm approved test plan exists with defined test scenarios and strategy, Stories with well-defined acceptance criteria are available for test case generation, and BDD dependencies are accessible including `./src/main/resources/README.md` and `./src/main/resources/features/`. HALT if missing. Run prechecks to route user appropriately: if `./src/main/resources/features/` exists but README is missing, propose `onboard-testing`; if both are missing, propose `setup-testing`. Ensure dependencies declared in the YAML frontmatter (testing-standards.md, quality-metrics.md, test-methodologies.md, sdlc-framework.md) are readable before proceeding.
 
-```bash
-pwsh -NoProfile -Command "python ./.krci-ai/scripts/build_gherkin_faiss.py --root . --model sentence-transformers/all-MiniLM-L6-v2 --out-index ./.krci-ai/indexes/gherkin-faiss.index --out-meta ./.krci-ai/indexes/gherkin-faiss.meta.json"
-```
+Ask user for input source: available stories under `docs/stories/` to scan and select, specific story file path like `docs/stories/NN.MM.story.md`, or user will paste task context in chat. HALT until input source confirmed and task context obtained.
 
-```bash
-pwsh -NoProfile -Command "python ./.krci-ai/scripts/build_gherkin_index.py --root . --out-json ./.krci-ai/indexes/gherkin-lex.json --out-sqlite ./.krci-ai/indexes/gherkin-lex.sqlite"
-```
-   - FAISS-first if available: encode intent → top-K (e.g., 10) → post-filter lexically (anchors: steps/tags/artifacts) and re-rank.
-   - Search across: scenario titles, steps, tags, Examples. Include characteristic artifacts discovered in this repo (avoid vendor-specific hardcoding).
-   - Present top 3–5 candidates (file path + short snippet) and HALT for user choice (extend vs reject).
-3. Read testing README: Review `./src/main/resources/README.md` for process, directory structure, and tagging rules (single source of truth)
-4. Scan existing coverage: Analyze `./src/main/resources/features/` per README to determine Covered / Partial / Not covered
-5. Decide actions: Use README decision matrix; request confirmation before creating/updating tests
-6. Generate Gherkin: Create or extend `.feature` files under `./src/main/resources/features/` with proper tags and structure
-7. Ensure traceability: Map each Story acceptance criterion to specific feature files and scenarios
-8. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for test case generation workflow and quality gates
-9. Apply testing methodologies: Use test case design techniques from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
+Summarize planned actions before any search including what will be searched (keywords/themes), where (directories/namespace priority), expected action (extend existing vs create new), and open questions or assumptions. Proceed only after user confirms or refines intent.
 
-### Extension policy (respect user intent)
+Execute discovery phase using universal search for candidates. Build normalized keyword variants (hyphen/underscore/space/camelCase, common prefixes/suffixes like `-remote`, `sast`, `security`), detect domain/context hints (UI vs API, module/subsystem names) from task, and prioritize likely directories/namespaces in repository. ALWAYS PROMPT before search: "Rebuild semantic index now (ALL .feature files) to ensure up-to-date results? [yes/no]". On yes, prefer FAISS vector index (`./.krci-ai/indexes/gherkin-faiss.index` + `.meta.json`) using sentence-transformers with fallback to JSON index under `./.krci-ai/indexes/` if FAISS unavailable. On no, use existing FAISS/JSON index if present, otherwise scan files directly. If user approves rebuild, propose and run (upon approval) appropriate index build command for either FAISS or JSON/SQLite backend.
 
-- If user requests to extend an existing test:
-  1) Ask the user to pick the target scenario or confirm best match (by exact/nearest title or a unique anchor step/tag).
-  2) Prefer in-place edits to that scenario: insert after a specified/matched step anchor; avoid duplicating the scenario header.
-  3) If the change represents a distinct flow, add a new Scenario/Scenario Outline in the same file; do not duplicate existing flows.
-  4) Create a new file only if no suitable host file exists or upon explicit user request.
-  5) Show a minimal diff preview around the anchor and ask for confirmation.
+Use FAISS-first approach if available: encode intent, retrieve top-K candidates (e.g., 10), post-filter lexically using anchors (steps/tags/artifacts), and re-rank. Search across scenario titles, steps, tags, and Examples, including characteristic artifacts discovered in repository. Present top 3-5 candidates with file path and short snippet, then HALT for user choice (extend vs reject).
 
+Review `./src/main/resources/README.md` for process, directory structure, and tagging rules (single source of truth). Analyze `./src/main/resources/features/` per README to determine coverage status (Covered / Partial / Not covered). Use README decision matrix and request confirmation before creating or updating tests.
+
+Generate Gherkin by creating or extending `.feature` files under `./src/main/resources/features/` with proper tags and structure. Ensure traceability by mapping each Story acceptance criterion to specific feature files and scenarios. Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for test case generation workflow and quality gates. Apply test case design techniques from [test-methodologies.md](./.krci-ai/data/test-methodologies.md).
+
+If user requests extending existing test, ask user to pick target scenario or confirm best match by exact/nearest title or unique anchor step/tag. Prefer in-place edits to that scenario by inserting after specified/matched step anchor and avoiding scenario header duplication. If change represents distinct flow, add new Scenario/Scenario Outline in same file without duplicating existing flows. Create new file only if no suitable host file exists or upon explicit user request. Show minimal diff preview around anchor and ask for confirmation before proceeding.
+
+</instructions>
 ## Output Format
 
 Gherkin Outputs - Create or update BDD feature specifications:
@@ -141,23 +86,23 @@ Gherkin Outputs - Create or update BDD feature specifications:
 
 ## Content Guidelines
 
-### 🎯 Test Case Generation Focus Areas:
+### Test Case Generation Focus Areas
 
-#### Story Acceptance Criteria (Primary Focus):
+#### Story Acceptance Criteria (Primary Focus)
 
 - Requirement Coverage: Each acceptance criterion must have corresponding test cases
 - Positive Scenarios: Test cases validating expected functionality and business rules
 - Negative Scenarios: Test cases for error handling and invalid input conditions
 - Edge Cases: Test cases for boundary conditions and exceptional scenarios
 
-#### Test Plan Implementation (Execution Focus):
+#### Test Plan Implementation (Execution Focus)
 
 - Scenario Translation: Convert test plan scenarios into detailed, executable test steps
 - Test Data Requirements: Specify data needed for test execution and validation
 - Environment Setup: Define required test environment configurations and dependencies
 - Validation Criteria: Clear expected results and success criteria for each test case
 
-### ✅ Quality Standards:
+### Quality Standards
 
 - Requirements Traceable: Every test case maps to specific Story acceptance criteria
 - Execution Ready: Test cases contain sufficient detail for independent execution
@@ -166,7 +111,7 @@ Gherkin Outputs - Create or update BDD feature specifications:
 - Review Approved: Test cases validated by development team and QA stakeholders
 - Maintainable: Test cases are structured for easy maintenance and updates
 
-### ❌ Common Pitfalls to Avoid:
+### Common Pitfalls to Avoid
 
 - Writing test cases without referencing specific Story acceptance criteria
 - Creating overly complex test cases that are difficult to execute and maintain
@@ -175,7 +120,7 @@ Gherkin Outputs - Create or update BDD feature specifications:
 - Poor traceability between test cases and requirements
 - Test cases that cannot be executed independently
 
-### 🎯 Story Testing Integration:
+### Story Testing Integration
 
 This test case generation should enable comprehensive quality validation by providing:
 

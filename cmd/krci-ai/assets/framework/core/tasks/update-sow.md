@@ -12,43 +12,15 @@ dependencies:
 
 Update an existing Scope of Work document to reflect approved scope changes, refined requirements, or new project information while maintaining SOW integrity as the definitive scope baseline. SOW updates follow formal change control processes to ensure stakeholder alignment and project success.
 
-## Prerequisites
-
-<prerequisites>
-- Existing SOW document available for modification
-- Approved change request or scope modification
-- Impact assessment completed
-- Stakeholder approval for changes obtained
-- Change control board authorization (if applicable)
-</prerequisites>
-
-## Reference Assets
-
-<reference_assets>
-Primary Dependencies:
-- Current SOW document
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [sow-template.md](./.krci-ai/templates/sow-template.md)
-- Change request documentation
-</reference_assets>
-
 ## Instructions
 
-### 1. Change Impact Analysis
+<instructions>
+Confirm existing SOW document is available for modification, approved change request or scope modification exists, impact assessment is completed, stakeholder approval for changes is obtained, and change control board authorization is received (if applicable). Ensure dependencies declared in the YAML frontmatter ([project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) and [sow-template.md](./.krci-ai/templates/sow-template.md)) are readable along with change request documentation before proceeding.
 
-Scope Change Assessment:
-- Analyze approved change requests thoroughly
-- Identify specific SOW sections requiring modification
-- Assess impact on deliverables, timeline, and resources
-- Evaluate effect on project success criteria
+Analyze approved change requests thoroughly. Identify specific SOW sections requiring modification. Assess impact on deliverables, timeline, and resources. Evaluate effect on project success criteria. Review impact on work breakdown structure. Assess changes to task dependencies and sequencing. Evaluate resource allocation and timeline adjustments. Identify cascading effects on other project elements.
+</instructions>
 
-Dependency Analysis:
-- Review impact on work breakdown structure
-- Assess changes to task dependencies and sequencing
-- Evaluate resource allocation and timeline adjustments
-- Identify cascading effects on other project elements
-
-### 2. SOW Revision Process
+## SOW Revision Process
 
 Content Updates:
 - Modify affected deliverables and acceptance criteria

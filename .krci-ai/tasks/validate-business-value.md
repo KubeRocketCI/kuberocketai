@@ -14,32 +14,15 @@ Apply Value Proposition Canvas and ROI calculation frameworks to validate busine
 
 This validation uses [validation frameworks](./.krci-ai/data/validation-frameworks.md) and outputs results using the [validation report template](./.krci-ai/templates/validation-report-template.md).
 
-## Prerequisites
-
-<prerequisites>
-- Project brief with opportunity/business value section exists
-- Access to customer research or feedback data
-- Financial data for cost and benefit estimation
-- Competitive analysis or market positioning data available
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-Apply Value Proposition Canvas and ROI calculation frameworks to validate business value proposition, financial justification, and market positioning.
+Confirm project brief with opportunity/business value section exists, access to customer research or feedback data is available, financial data for cost and benefit estimation is accessible, and competitive analysis or market positioning data is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-### Phase 1: Business Value Hypothesis Extraction
+Apply Value Proposition Canvas and ROI calculation frameworks from [validation-frameworks.md](./.krci-ai/data/validation-frameworks.md) to validate business value proposition, financial justification, and market positioning. Extract and structure current value proposition from project brief including customer value benefits, business value financial and strategic benefits, market value competitive advantage, and solution differentiation key differentiators from alternatives. Use [validation-report-template.md](./.krci-ai/templates/validation-report-template.md) for output.
+</instructions>
 
-Extract and structure current value proposition from project brief:
-
-#### Value Proposition Analysis
-
-1. Customer Value: Benefits delivered to target customers
-2. Business Value: Financial and strategic benefits to organization
-3. Market Value: Competitive advantage and market positioning
-4. Solution Differentiation: Key differentiators from alternatives
-
-#### Value Hypothesis Structure
+## Value Hypothesis Structure
 
 ```markdown
 Business Value Hypothesis: {{project_name}} creates value by delivering {{customer_benefit}} to {{target_customers}}, resulting in {{business_outcome}} for the organization through {{value_mechanism}}.
@@ -267,8 +250,6 @@ Benefit Estimation Quality: {{benefit_quality_score}}/10
 Overall ROI Confidence: {{roi_confidence_level}}%
 Investment Decision Recommendation: {{investment_recommendation}}
 ```
-
-</instructions>
 
 ## Output Format
 

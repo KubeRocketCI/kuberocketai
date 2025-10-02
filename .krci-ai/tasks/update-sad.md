@@ -15,22 +15,12 @@ dependencies:
 
 Update existing multi-file architecture documentation to reflect new requirements, Epic changes, or technical decisions while maintaining system consistency and development guidance. This update ensures architecture remains aligned with current PRD requirements and Epic implementations across all relevant architecture sections.
 
-## Prerequisites
-
-<prerequisites>
-- Existing architecture: Current architecture files exist in `/docs/architecture/` directory following SAD appendix structure
-- Change trigger: Clear reason for update (PRD changes, Epic updates, technical constraints)
-- Updated requirements: New or modified BR/NFR requirements from PRD updates
-- Impact scope: Understanding of which architectural sections and components are affected
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change management process and impact assessment
-2. Apply design principles: Maintain consistency with [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
-3. Update relevant sections: Modify appropriate architecture files based on change scope using [sad-template.md](./.krci-ai/templates/sad-template.md) structure
-4. Document decisions: Update 08-architectural-decisions.md with new ADR entries for significant changes
+Confirm current architecture files exist in `/docs/architecture/` directory following SAD appendix structure, there is clear reason for update (PRD changes, Epic updates, technical constraints), new or modified BR/NFR requirements from PRD updates are available, and you understand which architectural sections and components are affected. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change management process and impact assessment. Maintain consistency with [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md). Modify appropriate architecture files based on change scope using [sad-template.md](./.krci-ai/templates/sad-template.md) structure. Update 08-architectural-decisions.md with new ADR entries for significant changes.
 </instructions>
 
 ## Output Format

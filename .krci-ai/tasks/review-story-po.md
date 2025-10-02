@@ -10,23 +10,12 @@ dependencies:
 
 Review and validate user story from Product Owner perspective to ensure business value clarity, acceptance criteria completeness, and epic alignment. Focus on user value, story format correctness, and implementation readiness from business requirements standpoint.
 
-## Prerequisites
-
-<prerequisites>
-- Story exists: Target story file exists in `/docs/stories/` requiring product owner review
-- Epic context: Understanding of parent Epic's business goals and user value
-- Product requirements: Familiarity with PRD requirements and user personas
-- Business validation authority: Product Owner approval rights for story advancement
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Validate business requirements: Ensure story delivers clear user value aligned with Epic goals
-2. Check story format: Verify proper "As a/I want/so that" structure with clear user benefit
-3. Review acceptance criteria: Validate criteria are testable, specific, and business-focused; allow Verification Method (manual/semi-automated) with required Evidence when commands aren't feasible
-4. Confirm epic alignment: Ensure story supports parent Epic objectives and user outcomes
-5. Assess user value: Validate story provides measurable business value to target users
+Confirm the target story file exists in `/docs/stories/` requiring product owner review, parent Epic's business goals and user value are understood, PRD requirements and user personas are familiar, and you have Product Owner approval rights for story advancement. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Validate business requirements to ensure story delivers clear user value aligned with Epic goals. Check story format to verify proper "As a/I want/so that" structure with clear user benefit. Review acceptance criteria to validate they are testable, specific, and business-focused, allowing Verification Method (manual/semi-automated) with required Evidence when commands aren't feasible. Confirm epic alignment to ensure story supports parent Epic objectives and user outcomes. Assess user value to validate story provides measurable business value to target users.
 </instructions>
 
 ## Output Format

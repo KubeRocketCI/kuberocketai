@@ -12,43 +12,15 @@ dependencies:
 
 Update an existing risk register to reflect new risks, changed risk conditions, updated response strategies, or completed risk actions while maintaining the register's effectiveness as the central risk management tool. Risk register updates ensure continued proactive risk management throughout the project lifecycle.
 
-## Prerequisites
-
-<prerequisites>
-- Existing risk register available for modification
-- Risk review and assessment activities completed
-- New risks identified or existing risk status changes
-- Stakeholder input on risk updates obtained
-- Risk response effectiveness evaluated
-</prerequisites>
-
-## Reference Assets
-
-<reference_assets>
-Primary Dependencies:
-- Current risk register document
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [risk-register-template.md](./.krci-ai/templates/risk-register-template.md)
-- Project performance and status reports
-</reference_assets>
-
 ## Instructions
 
-### 1. Risk Status Review and Assessment
+<instructions>
+Confirm existing risk register is available for modification, risk review and assessment activities are completed, new risks are identified or existing risk status changes exist, stakeholder input on risk updates is obtained, and risk response effectiveness is evaluated. Ensure dependencies declared in the YAML frontmatter ([project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) and [risk-register-template.md](./.krci-ai/templates/risk-register-template.md)) are readable along with project performance and status reports before proceeding.
 
-Current Risk Evaluation:
-- Review status of all existing risks in register
-- Assess effectiveness of implemented risk responses
-- Evaluate changes in risk probability or impact
-- Identify risks that have materialized or been resolved
+Review status of all existing risks in register. Assess effectiveness of implemented risk responses. Evaluate changes in risk probability or impact. Identify risks that have materialized or been resolved. Conduct systematic review for new project risks. Analyze project changes and their risk implications. Consider external factors and environmental changes. Review stakeholder feedback and concerns.
+</instructions>
 
-New Risk Identification:
-- Conduct systematic review for new project risks
-- Analyze project changes and their risk implications
-- Consider external factors and environmental changes
-- Review stakeholder feedback and concerns
-
-### 2. Risk Register Updates
+## Risk Register Updates
 
 Risk Entry Modifications:
 - Update risk descriptions for clarity or changed conditions

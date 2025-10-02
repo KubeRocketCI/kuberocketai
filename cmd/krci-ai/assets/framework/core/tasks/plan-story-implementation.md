@@ -12,30 +12,12 @@ dependencies:
 
 Comprehensive technical planning task for developers to analyze, validate, and enhance story implementation details before beginning development work. This task ensures complete technical understanding, detailed task/subtask planning, and implementation readiness with source code structure, libraries, patterns, schemas, and technical specifications.
 
-## Prerequisites
-
-<prerequisites>
-- Story exists: Target story file exists in `/docs/stories/` requiring implementation planning
-- Developer role: Task executed by development team member with implementation responsibility
-- Story approved: Story has been reviewed and approved for implementation
-- Technical context: Access to architecture documentation, existing codebase, and technical standards
-
-Dependencies:
-- ./.krci-ai/templates/story.md
-- ./.krci-ai/data/krci-ai/core-sdlc-framework.md
-
-CRITICAL: Load all dependencies by reading their complete content before task execution. HALT if any missing.
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Validate story completeness: Ensure story has sufficient technical detail for implementation
-2. Analyze technical requirements: Deep dive into implementation needs, dependencies, and constraints
-3. Plan implementation approach: Define specific technical approach, libraries, patterns, and structure
-4. Enhance task/subtask sections: Create detailed, executable implementation steps
-5. Validate technical understanding: Ensure complete comprehension before implementation begins
-6. Document implementation plan: Create comprehensive technical specifications and approach
+Confirm the target story file exists in `/docs/stories/` requiring implementation planning, you are executing as a development team member with implementation responsibility, the story has been reviewed and approved for implementation, and you have access to architecture documentation, existing codebase, and technical standards. CRITICAL: Load all dependencies (./.krci-ai/templates/story.md and ./.krci-ai/data/krci-ai/core-sdlc-framework.md) by reading their complete content before task execution. HALT if any dependencies are missing.
+
+Validate story completeness to ensure it has sufficient technical detail for implementation. Analyze technical requirements through deep dive into implementation needs, dependencies, and constraints. Plan implementation approach by defining specific technical approach, libraries, patterns, and structure. Enhance task/subtask sections with detailed, executable implementation steps. Validate technical understanding to ensure complete comprehension before implementation begins. Document comprehensive technical specifications and implementation approach.
 </instructions>
 
 ## Output Format

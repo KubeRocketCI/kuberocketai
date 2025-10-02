@@ -12,22 +12,12 @@ dependencies:
 
 Systematically gather and analyze business requirements from stakeholders to enhance PRD with detailed workflows and acceptance criteria for Epic/Story creation. This task bridges stakeholder needs with technical implementation through structured elicitation techniques, ensuring all business requirements (BR) and system requirements (NFR) are comprehensively captured and documented for development guidance.
 
-## Prerequisites
-
-<prerequisites>
-- PRD foundation: Initial PRD exists at `/docs/prd/prd.md` with basic business context
-- Stakeholder access: Identified stakeholders available for engagement sessions
-- Analysis tools: Requirements documentation tools and templates prepared
-- Business context: Project scope and objectives defined from Project Brief
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for requirements gathering dependencies and workflow
-2. Apply analysis methodologies: Use techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md)
-3. Format output: Use [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) for documentation
-4. Enhance PRD: Refine existing PRD with detailed BR/NFR requirements and stakeholder insights
+Confirm the target PRD at `/docs/prd/prd.md` and the exact supporting outputs you will create or update. Ensure dependencies declared in the YAML frontmatter and stakeholder availability are confirmed before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for workflow alignment. Apply applicable techniques from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md). Use [requirements-doc.md](./.krci-ai/templates/requirements-doc.md) for structure, and integrate the resulting BR/NFR requirements and acceptance criteria into the PRD with clear traceability.
 </instructions>
 
 ## Output Format
@@ -84,21 +74,21 @@ Enhanced Requirements Documentation - Update existing PRD and create supporting 
 
 ## Content Guidelines
 
-### 🎯 Requirements Structure (BR/NFR Format):
+### Requirements Structure (BR/NFR Format)
 
-#### Business Requirements (BR):
+#### Business Requirements (BR)
 
 - BR1: [Primary business capability requirement]
 - BR2: [Secondary business process requirement]
 - BR3: [Stakeholder workflow requirement]
 
-#### Non-Functional Requirements (NFR):
+#### Non-Functional Requirements (NFR)
 
 - NFR1: [Performance/scalability requirement]
 - NFR2: [Security/compliance requirement]
 - NFR3: [Usability/accessibility requirement]
 
-### ✅ Quality Standards:
+### Quality Standards
 
 - Stakeholder Validated: All requirements reviewed and approved by business stakeholders
 - Acceptance Criteria: Each requirement has specific, testable acceptance criteria
@@ -106,7 +96,7 @@ Enhanced Requirements Documentation - Update existing PRD and create supporting 
 - Epic Enabled: Requirements structured to support Epic breakdown and Story creation
 - Traceable: Clear links from business needs to solution requirements established
 
-### ❌ Common Pitfalls to Avoid:
+### Common Pitfalls to Avoid
 
 - Documenting solutions instead of requirements
 - Missing non-functional requirements (NFR)
@@ -115,7 +105,7 @@ Enhanced Requirements Documentation - Update existing PRD and create supporting 
 - Poor requirements categorization and organization
 - Lack of business justification for requirements
 
-### 🎯 Epic Enablement Focus:
+### Epic Enablement Focus
 
 This requirements gathering should enable immediate Epic creation by providing:
 

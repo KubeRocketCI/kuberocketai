@@ -13,23 +13,12 @@ dependencies:
 
 Create clear epic with problem statement, goal, scope, and implementation approach that breaks down PRD requirements into manageable high-level features. This epic enables Story creation and provides a clear feature grouping for development teams.
 
-## Prerequisites
-
-<prerequisites>
-- Completed PRD: PRD exists at /docs/prd/prd.md with BR/NFR requirements defined
-- Epic priority identified: Clear understanding of which PRD requirements this Epic addresses
-- User context available: Target users and use cases from PRD understood
-- Epic scope defined: Boundaries of what this Epic includes and excludes
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference sdlc-framework.md for Epic dependencies and artifact flow
-2. Apply prioritization: Use methods from prioritization-frameworks.md
-3. Format output: Use epic.md template with all variables populated
-4. Ensure PRD traceability: Reference specific BR/NFR requirements from PRD
-5. Enforce agent-optimization: Follow enhanced template requirements for consistent agent-parseable structure
+Confirm the target output path in `/docs/epics/{epic_number}-epic-{slug}.md` including the next sequential epic number and slug, and verify the PRD at `/docs/prd/prd.md` is accessible. Do not proceed until dependencies from the YAML frontmatter are readable.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for artifact flow, apply methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md), and use the `epic.md` template. Maintain PRD traceability and follow the agent-optimized template requirements exactly.
 </instructions>
 
 ## Agent-Optimized Template Enforcement

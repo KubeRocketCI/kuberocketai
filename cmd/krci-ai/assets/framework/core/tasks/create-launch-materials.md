@@ -13,21 +13,12 @@ dependencies:
 
 Create comprehensive product launch campaign materials including press releases, marketing copy, social media content, website content, and promotional assets that generate buzz, drive awareness, and maximize market impact. Focus on creating cohesive launch experience that builds excitement and drives user adoption.
 
-## Prerequisites
-
-<prerequisites>
-- Required: Completed Marketing Brief at `/docs/marketing/marketing-brief.md`
-- Required: Pitch Deck available for messaging consistency
-- Launch timeline and key milestones defined
-- Target media outlets and distribution channels identified
-- Visual brand assets and guidelines available
-</prerequisites>
+## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Launch Materials dependencies
-2. Apply campaign frameworks: Use proven launch methodologies for maximum market impact
-3. Format output: Use [launch-materials-template.md](./.krci-ai/templates/launch-materials-template.md) for structure
-4. Create campaign cohesion: Ensure consistent messaging across all launch touchpoints
+Confirm the exact output path `/docs/marketing/launch-materials.md` you will create or update and ensure dependencies declared in the YAML frontmatter are accessible. Do not proceed if required inputs are missing.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) to align with dependencies. Use [launch-materials-template.md](./.krci-ai/templates/launch-materials-template.md) for structure and ensure cohesive multi-channel messaging with all template variables populated.
 </instructions>
 
 ## Output Format

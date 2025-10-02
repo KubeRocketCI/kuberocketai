@@ -13,49 +13,17 @@ dependencies:
 
 Update existing user story with new requirements, scope refinements, or implementation changes while preserving completed tasks/subtasks and maintaining epic traceability. This task enables controlled story evolution during development while protecting team progress and ensuring Epic alignment.
 
-## Prerequisites
-
-<prerequisites>
-- Story exists: Target story file exists in `/docs/stories/` with current implementation status
-- Change justification: Clear business reason for story update (new requirements, scope clarification, task feedback)
-- Impact assessment: Understanding of how changes affect in-progress or completed Tasks/Subtasks
-- Epic alignment: Product Owner confirms updates maintain Epic goals and traceability
-</prerequisites>
-
 ## Instructions
 
-### CRITICAL: MANDATORY USER CONSULTATION FIRST
-
-<user_consultation>
-Before making ANY changes to the Story, you MUST:
-
-1. Ask the user what specific updates they want to make to the Story
-2. Understand the trigger for the changes (new requirements, scope clarification, task feedback, etc.)
-3. Clarify scope which sections need updating and why
-4. Get approval for the proposed changes before implementation
-5. Wait for explicit confirmation before proceeding with any edits
-</user_consultation>
-
-### ONLY AFTER USER CONFIRMATION
-
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story update dependencies and downstream impact
-2. Assess current status: Review story status and Tasks/Subtasks before making changes
-3. Apply change control: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
-4. Maintain format: Keep [story.md](./.krci-ai/templates/story.md) template structure and populate new variables
-5. Preserve Epic traceability: Maintain existing Epic references while ensuring new changes align with Epic goals
+Confirm the target story file exists in `/docs/stories/` with current implementation status, there is clear business reason for story update (new requirements, scope clarification, task feedback), you understand how changes affect in-progress or completed Tasks/Subtasks, and Product Owner confirms updates maintain Epic goals and traceability. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+CRITICAL: MANDATORY USER CONSULTATION FIRST - Before making ANY changes to the Story, you MUST ask the user what specific updates they want to make, understand the trigger for changes (new requirements, scope clarification, task feedback, etc.), clarify scope which sections need updating and why, get approval for the proposed changes before implementation, and wait for explicit confirmation before proceeding with any edits.
+
+ONLY AFTER USER CONFIRMATION: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story update dependencies and downstream impact. Review story status and Tasks/Subtasks before making changes. Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization. Keep [story.md](./.krci-ai/templates/story.md) template structure and populate new variables. Maintain existing Epic references while ensuring new changes align with Epic goals.
+
+Before applying any update, verify no completed Tasks/Subtasks become invalid, ensure changes maintain Epic traceability and goals, calculate impact on existing acceptance criteria and validation, and record business justification for every change.
 </instructions>
-
-### Update Validation Process
-
-<update_validation>
-Before applying any update:
-
-1. Check Task Status: Verify no completed Tasks/Subtasks become invalid
-2. Validate Epic Alignment: Ensure changes maintain Epic traceability and goals
-3. Assess Acceptance Criteria: Calculate impact on existing acceptance criteria and validation
-4. Document Rationale: Record business justification for every change
-</update_validation>
 
 ## Update Types & Restrictions
 

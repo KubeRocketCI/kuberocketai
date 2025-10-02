@@ -14,22 +14,12 @@ dependencies:
 
 Create comprehensive system architecture documentation that translates PRD requirements and Epic features into technical design specifications for development teams. This SAD enables implementation guidance and provides technical foundation for all development work.
 
-## Prerequisites
-
-<prerequisites>
-- Completed PRD: PRD exists at `/docs/prd/prd.md` with BR/NFR requirements defined
-- Epic definitions: Epics available at `/docs/epics/` with business context and scope
-- Architecture principles: Understanding of organizational architecture standards
-- Technology constraints: Awareness of technology stack and platform limitations
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for architecture documentation dependencies and quality gates
-2. Apply design principles: Use guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md)
-3. Format output: Use [sad-template.md](./.krci-ai/templates/sad-template.md) for comprehensive structure
-4. Ensure traceability: Map PRD requirements (BR/NFR) and Epic features to architectural components
+Confirm the target architecture outputs in `/docs/architecture/` and verify that the PRD, epics, and YAML frontmatter dependencies are accessible. Do not proceed until these inputs are available.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for architecture documentation dependencies and quality gates. Apply design principles using guidelines from [architecture-principles.md](./.krci-ai/data/architecture-principles.md) and [design-patterns.md](./.krci-ai/data/design-patterns.md). Use [sad-template.md](./.krci-ai/templates/sad-template.md) for comprehensive structure and ensure traceability by mapping PRD requirements (BR/NFR) and Epic features to architectural components.
 </instructions>
 
 ## Output Format
@@ -111,7 +101,7 @@ Template Reference: Follow comprehensive structure and content guidelines from [
 
 ## Content Guidelines
 
-### SAD Template Sections (11 Required):
+### SAD Template Sections (11 Required)
 
 1. Executive Summary: Business-focused overview connecting architecture to business value
 2. Introduction: Foundation and context for architectural decisions
@@ -125,7 +115,7 @@ Template Reference: Follow comprehensive structure and content guidelines from [
 10. Quality Assurance: Testing strategy and quality validation approaches
 11. Appendices: Supporting documentation and reference materials
 
-### Quality Standards:
+### Quality Standards
 
 - Requirements Traceable: Every BR/NFR requirement addressed in architecture
 - Epic Enabling: Architecture provides clear guidance for Epic implementation
@@ -133,7 +123,7 @@ Template Reference: Follow comprehensive structure and content guidelines from [
 - Technology Aligned: Architecture decisions align with organizational standards
 - Implementation Ready: Sufficient detail for development team implementation
 
-### Common Pitfalls to Avoid:
+### Common Pitfalls to Avoid
 
 - Leaving template variables unfilled ({{variable}} placeholders)
 - Missing requirements traceability from PRD to architecture
@@ -141,7 +131,7 @@ Template Reference: Follow comprehensive structure and content guidelines from [
 - Insufficient implementation guidance for development teams
 - Architectural decisions without clear rationale or alternatives
 
-### 🎯 Implementation Enablement:
+### Implementation Enablement
 
 This SAD should enable immediate development by providing:
 

@@ -12,104 +12,20 @@ dependencies:
 
 Create a comprehensive risk register that identifies, analyzes, and documents project risks along with their response strategies and ownership assignments. The risk register serves as the central repository for risk management throughout the project lifecycle, following PMBoK risk management principles and organizational best practices.
 
-## Prerequisites
-
-<prerequisites>
-- Project charter and scope documentation available
-- Initial stakeholder analysis completed
-- Work breakdown structure (WBS) developed
-- Project team and key stakeholders identified
-- Risk management approach defined
-</prerequisites>
-
-## Reference Assets
-
-Primary Dependencies:
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [risk-register-template.md](./.krci-ai/templates/risk-register-template.md)
-- Project charter, SOW, and project plan documents
-
-Optional Supporting Materials:
-- Historical risk data from similar projects
-- Organizational risk categories and templates
-- Industry-specific risk frameworks
-
 ## Instructions
 
 <instructions>
-### 1. Risk Identification
+Confirm the exact output you will create using [risk-register-template.md](./.krci-ai/templates/risk-register-template.md) and verify access to inputs (charter/scope, WBS, stakeholder data). Ensure YAML frontmatter dependencies are readable before proceeding.
 
-Systematic Risk Identification:
-- Conduct brainstorming sessions with project team and stakeholders
-- Review project documentation for potential risk sources
-- Analyze work breakdown structure for activity-specific risks
-- Consider external factors and organizational constraints
-- Review lessons learned from similar projects
+Reference [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) for PMBoK risk management principles. Conduct brainstorming sessions with project team and stakeholders, review project documentation for potential risk sources, analyze work breakdown structure for activity-specific risks, consider external factors and organizational constraints, and review lessons learned from similar projects.
 
-Risk Categorization:
-- Technical Risks: Technology complexity, integration challenges, performance requirements
-- Schedule Risks: Resource availability, dependency delays, external factors
-- Cost Risks: Budget overruns, resource cost changes, scope modifications
-- Organizational Risks: Stakeholder conflicts, resource constraints, change resistance
-- External Risks: Market conditions, regulatory changes, supplier issues
-- Quality Risks: Performance standards, acceptance criteria, testing challenges
+Categorize identified risks across technical, schedule, cost, organizational, external, and quality dimensions. Assess probability of occurrence for each identified risk, evaluate potential impact on project objectives, use probability-impact matrix to prioritize risks, and consider risk interdependencies and cumulative effects using standard probability scales (Very Low 0.1 to Very High 0.9) and impact scales (Very Low to Very High).
 
-### 2. Risk Analysis and Assessment
+Develop response strategies for negative risks including avoid, mitigate, transfer, or accept approaches. For positive risks, use exploit, enhance, share, or accept strategies. Define specific response actions and activities, assign risk owners and response responsibilities, establish trigger conditions and early warning indicators, determine resource requirements and budget allocations, and set timeline for response implementation.
 
-Qualitative Risk Analysis:
-- Assess probability of occurrence for each identified risk
-- Evaluate potential impact on project objectives
-- Use probability-impact matrix to prioritize risks
-- Consider risk interdependencies and cumulative effects
+Define risk status tracking and reporting procedures, establish risk review meeting schedule and participants, create risk escalation criteria and procedures, and develop risk communication and stakeholder notification protocols. Define risk response effectiveness measurement, establish residual risk acceptance criteria, create secondary risk identification and response procedures, and document risk register update and maintenance procedures.
 
-Risk Probability Scale:
-- Very Low (0.1): Unlikely to occur (0-10% chance)
-- Low (0.3): Some chance of occurring (10-30% chance)
-- Medium (0.5): Moderately likely to occur (30-70% chance)
-- High (0.7): Likely to occur (70-90% chance)
-- Very High (0.9): Almost certain to occur (90-100% chance)
-
-Risk Impact Scale:
-- Very Low: Minimal impact on project objectives
-- Low: Small impact on project objectives
-- Medium: Moderate impact on project objectives
-- High: Significant impact on project objectives
-- Very High: Severe impact on project objectives
-
-### 3. Risk Response Planning
-
-Response Strategies for Negative Risks (Threats):
-- Avoid: Eliminate the threat by removing the cause or changing project approach
-- Mitigate: Reduce probability or impact through proactive actions
-- Transfer: Shift impact to third party through contracts, insurance, or outsourcing
-- Accept: Acknowledge risk without proactive response (active or passive acceptance)
-
-Response Strategies for Positive Risks (Opportunities):
-- Exploit: Ensure opportunity is realized through dedicated resources
-- Enhance: Increase probability or positive impact
-- Share: Allocate ownership to party best able to capture opportunity
-- Accept: Take advantage of opportunity if it occurs naturally
-
-Response Planning Elements:
-- Define specific response actions and activities
-- Assign risk owners and response responsibilities
-- Establish trigger conditions and early warning indicators
-- Determine resource requirements and budget allocations
-- Set timeline for response implementation
-
-### 4. Risk Monitoring and Control Planning
-
-Monitoring Framework:
-- Define risk status tracking and reporting procedures
-- Establish risk review meeting schedule and participants
-- Create risk escalation criteria and procedures
-- Develop risk communication and stakeholder notification protocols
-
-Control Measures:
-- Define risk response effectiveness measurement
-- Establish residual risk acceptance criteria
-- Create secondary risk identification and response procedures
-- Document risk register update and maintenance procedures
+Use the [risk-register-template.md](./.krci-ai/templates/risk-register-template.md) to create comprehensive risk register with complete risk entries including ID, description, category, probability and impact assessments, response strategies, and ownership assignments.
 </instructions>
 
 ## Output Format

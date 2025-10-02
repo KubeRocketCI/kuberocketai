@@ -15,107 +15,22 @@ Incorporate validation feedback and evidence into the project brief, updating se
 
 This task uses [validation frameworks](./.krci-ai/data/validation-frameworks.md) and may utilize the [assumption tracker template](./.krci-ai/templates/assumption-tracker-template.md) for tracking refinements.
 
-## Prerequisites
-
-<prerequisites>
-- Original project brief exists at `/docs/prd/project-brief.md`
-- One or more validation reports completed
-- Assumption tracker updated with validation results
-- Stakeholder feedback on validation results available
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-Incorporate validation feedback and evidence into the project brief, updating sections with validated information, improved confidence levels, and refined assumptions.
+Confirm the original project brief exists at `/docs/prd/project-brief.md`, one or more validation reports are completed, assumption tracker is updated with validation results, and stakeholder feedback on validation results is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-### Phase 1: Validation Results Integration
+Collect and analyze all completed validation results from `/docs/prd/brief-validation-*.md`. Review validation reports to extract key findings that impact project brief sections. Identify confidence level changes based on validation evidence and document required brief updates. Aggregate evidence quality scores across all validations, identify strongest and weakest evidence areas, update overall brief confidence based on evidence assessment, and flag areas requiring additional validation.
 
-Collect and analyze all completed validation results:
+Update project brief sections systematically with validation results. Enhance executive summary by updating problem description with validated evidence, refining solution approach based on validation findings, updating business value projections with validated metrics, and enhancing scope definition with validated constraints. Refine problem statement by integrating root cause analysis findings, adding quantified problem evidence from validation, updating problem scope based on validation boundaries, and enhancing impact assessment with validated metrics.
 
-#### Validation Report Analysis
+Enhance target users section by updating user segments with Jobs-to-be-Done validation, adding validated demographic and behavioral data, including opportunity scores and user priorities, and refining user context with journey validation insights. Improve success metrics by updating metrics with SMART criteria validation results, adding baseline data discovered during validation, refining targets based on evidence and benchmarks, and balancing leading and lagging indicators appropriately.
 
-1. Review all validation reports in `/docs/prd/brief-validation-*.md`
-2. Extract key findings that impact project brief sections
-3. Identify confidence level changes based on validation evidence
-4. Document required brief updates based on validation results
+Update constraints and risks by adding constraints discovered during validation, updating risk assessment with validation insights, including evidence-based risk probability estimates, and enhancing mitigation strategies with validated approaches. For each section, update validation checkpoints by marking completed validations as verified, updating confidence levels based on evidence quality, documenting validation methods used, and including evidence sources and quality assessments.
 
-#### Evidence Quality Assessment
+Integrate assumption tracker updates by updating assumption status based on validation results, adding new assumptions discovered during validation, removing or modifying disproven assumptions, and prioritizing remaining assumptions for future validation. Ensure 2-3 page length limit maintained, verify executive-ready language and structure, confirm all sections have appropriate evidence support, and validate SDLC integration requirements met.
 
-1. Aggregate evidence quality scores across all validations
-2. Identify strongest and weakest evidence areas
-3. Update overall brief confidence based on evidence assessment
-4. Flag areas requiring additional validation
-
-### Phase 2: Project Brief Section Updates
-
-#### Executive Summary Enhancement
-
-- Update problem description with validated evidence
-- Refine solution approach based on validation findings
-- Update business value projections with validated metrics
-- Enhance scope definition with validated constraints
-
-#### Problem Statement Refinement
-
-- Integrate root cause analysis findings
-- Add quantified problem evidence from validation
-- Update problem scope based on validation boundaries
-- Enhance impact assessment with validated metrics
-
-#### Target Users Enhancement
-
-- Update user segments with Jobs-to-be-Done validation
-- Add validated demographic and behavioral data
-- Include opportunity scores and user priorities
-- Refine user context with journey validation insights
-
-#### Success Metrics Improvement
-
-- Update metrics with SMART criteria validation results
-- Add baseline data discovered during validation
-- Refine targets based on evidence and benchmarks
-- Balance leading and lagging indicators appropriately
-
-#### Constraints and Risks Updates
-
-- Add constraints discovered during validation
-- Update risk assessment with validation insights
-- Include evidence-based risk probability estimates
-- Enhance mitigation strategies with validated approaches
-
-### Phase 3: Confidence and Assumption Updates
-
-#### Validation Checkpoint Updates
-
-For each section, update validation checkpoints:
-- Mark completed validations as verified
-- Update confidence levels based on evidence quality
-- Document validation methods used
-- Include evidence sources and quality assessments
-
-#### Assumption Tracker Integration
-
-- Update assumption status based on validation results
-- Add new assumptions discovered during validation
-- Remove or modify disproven assumptions
-- Prioritize remaining assumptions for future validation
-
-### Phase 4: Quality Assurance and Finalization
-
-#### Brief Quality Assessment
-
-- Ensure 2-3 page length limit maintained
-- Verify executive-ready language and structure
-- Confirm all sections have appropriate evidence support
-- Validate SDLC integration requirements met
-
-#### Stakeholder Review Preparation
-
-- Prepare summary of changes made based on validation
-- Highlight areas of increased/decreased confidence
-- Document remaining uncertainties and validation needs
-- Create stakeholder presentation of refined brief
+Prepare stakeholder review by creating summary of changes made based on validation, highlighting areas of increased or decreased confidence, documenting remaining uncertainties and validation needs, and creating stakeholder presentation of refined brief.
 </instructions>
 
 ## Output Format

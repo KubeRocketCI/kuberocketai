@@ -13,74 +13,18 @@ dependencies:
 
 Create a comprehensive Scope of Work document that clearly defines project deliverables, activities, timelines, and acceptance criteria. The SOW serves as a detailed contract between project stakeholders regarding what will be delivered, how it will be delivered, and the criteria for acceptance.
 
-## Prerequisites
-
-<prerequisites>
-- Project charter approved and finalized
-- Detailed requirements gathering completed
-- Stakeholder roles and responsibilities defined
-- Work breakdown structure (WBS) developed
-- Resource and timeline estimates refined
-</prerequisites>
-
-## Reference Assets
-
-<reference_assets>
-Primary Dependencies:
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [sow-template.md](./.krci-ai/templates/sow-template.md)
-- Project charter document
-- Requirements documentation
-
-Optional Supporting Materials:
-- SDLC framework: [13-sdlc-framework.md](./docs/architecture/13-sdlc-framework.md) (if available)
-- Best practices: [best-practices.md](./.krci-ai/data/best-practices.md) (if available)
-</reference_assets>
-
 ## Instructions
 
 <instructions>
-### 1. Scope Definition
+Confirm the exact output you will create using [sow-template.md](./.krci-ai/templates/sow-template.md). Verify that dependencies declared in the YAML frontmatter ([project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) and prerequisite artifacts including project charter document and requirements documentation) are accessible before proceeding. Optional supporting materials include SDLC framework and best practices documentation.
 
-Deliverable Specification:
-- Define all project deliverables with detailed descriptions
-- Specify deliverable formats, standards, and quality criteria
-- Establish clear acceptance criteria for each deliverable
-- Document dependencies between deliverables
+Define all project deliverables with detailed descriptions, formats, standards, and quality criteria. Establish clear acceptance criteria for each deliverable and document dependencies between deliverables. Develop comprehensive work breakdown structure, define specific tasks and activities required, establish task sequences and dependencies, and identify resource requirements for each work package.
 
-Work Breakdown:
-- Develop comprehensive work breakdown structure
-- Define specific tasks and activities required
-- Establish task sequences and dependencies
-- Identify resource requirements for each work package
+Define clear, measurable acceptance criteria and establish quality standards and metrics. Specify testing and validation requirements and document review and approval processes. Create detailed project schedule with milestones, define critical path activities and dependencies, establish deadline requirements and constraints, and include buffer time for risk mitigation.
 
-### 2. Performance Criteria
+Define project team roles and responsibilities, specify decision-making authority and escalation paths, document communication protocols and procedures, and establish accountability frameworks. Define stakeholder involvement requirements, specify approval authorities and sign-off procedures, document communication and reporting requirements, and establish change management procedures.
 
-Acceptance Standards:
-- Define clear, measurable acceptance criteria
-- Establish quality standards and metrics
-- Specify testing and validation requirements
-- Document review and approval processes
-
-Timeline and Milestones:
-- Create detailed project schedule with milestones
-- Define critical path activities and dependencies
-- Establish deadline requirements and constraints
-- Include buffer time for risk mitigation
-
-### 3. Roles and Responsibilities
-
-Team Structure:
-- Define project team roles and responsibilities
-- Specify decision-making authority and escalation paths
-- Document communication protocols and procedures
-- Establish accountability frameworks
-
-Stakeholder Engagement:
-- Define stakeholder involvement requirements
-- Specify approval authorities and sign-off procedures
-- Document communication and reporting requirements
-- Establish change management procedures
+Use the [sow-template.md](./.krci-ai/templates/sow-template.md) to create comprehensive SOW with executive summary, detailed scope definition, work breakdown structure, timeline and milestones, resource requirements, acceptance criteria, roles and responsibilities, change management procedures, and assumptions/constraints/exclusions.
 </instructions>
 
 ## Output Format
@@ -121,6 +65,7 @@ Stakeholder Agreement:
 ## Execution Checklist
 
 <execution_checklist>
+
 ### Planning Phase
 - Review charter and requirements documentation
 - Conduct detailed stakeholder analysis

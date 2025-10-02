@@ -15,32 +15,15 @@ Apply SMART criteria and OKR alignment frameworks to validate success metrics qu
 
 This validation uses [validation frameworks](./.krci-ai/data/validation-frameworks.md) and outputs results using the [validation report template](./.krci-ai/templates/validation-report-template.md).
 
-## Prerequisites
-
-<prerequisites>
-- Project brief with success metrics section exists
-- Baseline data or historical performance data available
-- Organizational OKR or strategic goals documented
-- Industry benchmark data accessible
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-Apply SMART criteria and OKR alignment frameworks from [validation frameworks](./.krci-ai/data/validation-frameworks.md) to validate success metrics quality, achievability, and strategic alignment.
+Confirm project brief with success metrics section exists, baseline data or historical performance data is available, organizational OKR or strategic goals are documented, and industry benchmark data is accessible. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-### Phase 1: Success Metrics Extraction and Analysis
+Apply SMART criteria and OKR alignment frameworks from [validation-frameworks.md](./.krci-ai/data/validation-frameworks.md) to validate success metrics quality, achievability, and strategic alignment. Extract current success metrics from project brief including business metrics (revenue, cost savings, market share), user metrics (adoption, engagement, satisfaction), performance metrics (system performance, reliability), and operational metrics (efficiency, productivity). Use [validation-report-template.md](./.krci-ai/templates/validation-report-template.md) for output.
+</instructions>
 
-Extract current success metrics from project brief:
-
-#### Current Metrics Analysis
-
-1. Business Metrics: Revenue, cost savings, market share goals
-2. User Metrics: Adoption, engagement, satisfaction targets
-3. Performance Metrics: System performance, reliability goals
-4. Operational Metrics: Efficiency, productivity improvements
-
-#### Metrics Hypothesis Structure
+## Metrics Hypothesis Structure
 
 ```markdown
 Success Metrics Hypothesis: {{project_name}} success measured by achieving:
@@ -200,7 +183,6 @@ Technical Validation:
 - Assess data collection cost and complexity
 - Identify measurement gaps and solutions
 - Validate measurement accuracy and reliability
-</instructions>
 
 ## Output Format
 

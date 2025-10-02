@@ -15,32 +15,15 @@ Apply Lean Startup Problem-Solution Fit Assessment framework to validate problem
 
 This validation uses [validation frameworks](./.krci-ai/data/validation-frameworks.md) and outputs results using the [validation report template](./.krci-ai/templates/validation-report-template.md).
 
-## Prerequisites
-
-<prerequisites>
-- Project brief with problem statement section exists
-- Basic problem research or stakeholder input available
-- Access to potential users or customer data
-- Competitive landscape understanding available
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-Apply Lean Startup Problem-Solution Fit Assessment framework to validate problem statement accuracy, evidence quality, and strategic alignment.
+Confirm project brief with problem statement section exists, basic problem research or stakeholder input is available, access to potential users or customer data is accessible, and competitive landscape understanding is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-### Phase 1: Problem Hypothesis Definition
+Apply Lean Startup Problem-Solution Fit Assessment framework from [validation-frameworks.md](./.krci-ai/data/validation-frameworks.md) to validate problem statement accuracy, evidence quality, and strategic alignment. Extract and structure the problem hypothesis from the current project brief including core problem statement, problem scope (included/excluded), affected user segments, and problem context (when, where, why). Use [validation-report-template.md](./.krci-ai/templates/validation-report-template.md) for output.
+</instructions>
 
-Extract and structure the problem hypothesis from the current project brief:
-
-#### Problem Hypothesis Extraction
-
-1. Core Problem Statement: Extract the main problem from project brief
-2. Problem Scope: Identify what's included/excluded in problem definition
-3. Affected User Segments: List specific user groups experiencing the problem
-4. Problem Context: Document when, where, and why the problem occurs
-
-#### Problem Hypothesis Structure
+## Problem Hypothesis Structure
 
 ```markdown
 Problem Hypothesis: {{user_segment}} experiences {{problem_description}} when {{situation_context}}, resulting in {{negative_impact}}.
@@ -167,7 +150,6 @@ Document assumption changes:
 - Update confidence levels based on validation results
 - Add new assumptions identified during validation
 - Prioritize remaining assumptions for future validation
-</instructions>
 
 ## Output Format
 

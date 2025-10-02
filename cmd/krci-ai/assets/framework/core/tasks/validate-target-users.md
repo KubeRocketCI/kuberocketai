@@ -15,32 +15,15 @@ Apply Jobs-to-be-Done framework to validate target user segments, their motivati
 
 This validation uses [validation frameworks](./.krci-ai/data/validation-frameworks.md) and outputs results using the [validation report template](./.krci-ai/templates/validation-report-template.md).
 
-## Prerequisites
-
-<prerequisites>
-- Project brief with target users section exists
-- Access to target users for interviews or surveys
-- User analytics or behavioral data available
-- Market segmentation data or competitive user research
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-Apply Jobs-to-be-Done framework from [validation frameworks](./.krci-ai/data/validation-frameworks.md) to validate target user segments, their motivations, and the value proposition alignment.
+Confirm project brief with target users section exists, access to target users for interviews or surveys is available, user analytics or behavioral data is accessible, and market segmentation data or competitive user research is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-### Phase 1: User Segment Hypothesis Extraction
+Apply Jobs-to-be-Done framework from [validation-frameworks.md](./.krci-ai/data/validation-frameworks.md) to validate target user segments, their motivations, and the value proposition alignment. Extract and structure current user segment definitions from project brief including primary user segment (demographics, behaviors, needs), secondary user segments, user context (when, where), and user goals (objectives, success criteria). Use [validation-report-template.md](./.krci-ai/templates/validation-report-template.md) for output.
+</instructions>
 
-Extract and structure current user segment definitions from project brief:
-
-#### Current User Segment Analysis
-
-1. Primary User Segment: Extract demographics, behaviors, needs
-2. Secondary User Segments: Identify additional user groups mentioned
-3. User Context: Document when and where users encounter the problem
-4. User Goals: List stated user objectives and success criteria
-
-#### User Hypothesis Structure
+## User Hypothesis Structure
 
 ```markdown
 Primary User Segment Hypothesis: {{user_demographic}} who {{user_behavior}} because they need to {{user_goal}}.
@@ -217,7 +200,6 @@ Confidence Level Updates:
 - Identify areas requiring additional validation or research
 - Update assumption tracker with validated, challenged, and new assumptions
 - Prioritize remaining user validation activities
-</instructions>
 
 ## Output Format
 

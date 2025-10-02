@@ -21,21 +21,12 @@ Upgrade an existing standard project brief to the advanced validation flow, addi
 
 This task uses the [advanced project brief template](./.krci-ai/templates/project-brief-template-advanced.md) and [validation frameworks](./.krci-ai/data/validation-frameworks.md) for comprehensive enhancement.
 
-## Prerequisites
-
-<prerequisites>
-- Existing project brief created with standard flow exists at `/docs/prd/project-brief.md`
-- Project has increased in strategic importance, budget, or risk level
-- Stakeholders requesting evidence-based validation
-- Time available for comprehensive validation process
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-Upgrade an existing standard project brief to the advanced validation flow, adding business framework validation, evidence collection, and assumption tracking.
+Confirm the existing project brief at `/docs/prd/project-brief.md` is accessible and created with standard flow. Verify the project has increased in strategic importance, budget, or risk level, stakeholders are requesting evidence-based validation, and time is available for comprehensive validation process (2-4 weeks). Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-Follow this systematic enhancement process:
+Follow this systematic enhancement process to upgrade the brief to advanced validation flow with business framework validation, evidence collection, and assumption tracking:
 
 ### Phase 1: Enhancement Assessment
 

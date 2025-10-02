@@ -13,36 +13,14 @@ dependencies:
 
 Update an existing project brief with new information, scope changes, or refined understanding while maintaining strategic alignment and enabling downstream SDLC artifacts. Focus on change impact assessment and downstream artifact management to ensure existing PRD and Epic artifacts remain aligned with strategic changes.
 
-## Prerequisites
-
-<prerequisites>
-- Existing Project Brief: `/docs/prd/project-brief.md` exists and is properly accessible
-- Change trigger: Clear reason for update (strategic shifts, market changes, new insights, stakeholder feedback, resource changes)
-- Impact assessment: Understanding of how changes affect dependent PRD and downstream artifacts
-- Stakeholder buy-in: Key stakeholders aware of planned strategic changes
-</prerequisites>
-
 ## Instructions
 
-### CRITICAL: MANDATORY USER CONSULTATION FIRST
-
-<user_consultation>
-Before making ANY changes to the Project Brief, you MUST:
-
-1. Ask the user what specific updates they want to make to the Project Brief
-2. Understand the trigger for the changes (strategic shifts, market changes, stakeholder feedback, resource changes, etc.)
-3. Clarify scope which sections need updating and why
-4. Get approval for the proposed changes before implementation
-5. Wait for explicit confirmation before proceeding with any edits
-</user_consultation>
-
-### ONLY AFTER USER CONFIRMATION
-
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change impact assessment
-2. Use business frameworks: Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md)
-3. Format output: Maintain [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure
-4. Assess downstream impact: Identify which PRD artifacts need updates
+Confirm `/docs/prd/project-brief.md` exists and is properly accessible, there is clear reason for update (strategic shifts, market changes, new insights, stakeholder feedback, resource changes), you understand how changes affect dependent PRD and downstream artifacts, and key stakeholders are aware of planned strategic changes. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+CRITICAL: MANDATORY USER CONSULTATION FIRST - Before making ANY changes to the Project Brief, you MUST ask the user what specific updates they want to make, understand the trigger for the changes (strategic shifts, market changes, stakeholder feedback, resource changes, etc.), clarify scope which sections need updating and why, get approval for the proposed changes before implementation, and wait for explicit confirmation before proceeding with any edits.
+
+ONLY AFTER USER CONFIRMATION: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for change impact assessment. Apply methodologies from [business-frameworks.md](./.krci-ai/data/business-frameworks.md). Maintain [project-brief-template.md](./.krci-ai/templates/project-brief-template.md) structure. Identify which PRD artifacts need updates.
 </instructions>
 
 ## Output Format

@@ -19,18 +19,12 @@ Analyze an existing directory of Gherkin `.feature` files and generate a `src/ma
 
 - Source directory containing `.feature` files (default: `src/main/resources/features/`)
 
-## Validation (HALT if missing)
+## Instructions
 
-- Source directory exists and contains at least one `.feature` file
-- `src/main/resources/README.md` does not already exist (otherwise use `edit-testing-settings`)
-- Write permissions for `src/main/resources/`
+<instructions>
+Confirm source directory exists and contains at least one `.feature` file, `src/main/resources/README.md` does not already exist (otherwise use `edit-testing-settings`), and write permissions for `src/main/resources/` are available. HALT if missing. If `src/main/resources/README.md` already exists, HALT and propose running `edit-testing-settings`. If no `.feature` files are present in the source directory, HALT and propose `setup-testing`. If both `.feature` files and README are present, this flow is not applicable; use `edit-testing-settings` or `generate-test-cases` as needed. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
 
-## Prechecks and Routing (HALT)
-
-- If `src/main/resources/README.md` already exists → HALT and propose running `edit-testing-settings` to modify settings interactively.
-- If no `.feature` files are present in the source directory → HALT and propose `setup-testing` to initialize the structure and README.
-- If both `.feature` files and README are present → this flow is not applicable; use `edit-testing-settings` or `generate-test-cases` as needed.
-
+</instructions>
 ## Flow (Non-interactive)
 
 1) Scan and infer domains, UI/API presence, naming convention, tag families (with frequencies and scopes), discovery hints (preferred directories, topics, artifacts).

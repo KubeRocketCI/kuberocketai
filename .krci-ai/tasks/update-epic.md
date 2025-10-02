@@ -13,50 +13,17 @@ dependencies:
 
 Update existing epic with new requirements, scope additions, or refinements while preserving completed work and maintaining story traceability. This task enables controlled epic evolution during implementation while protecting development team progress and ensuring PRD alignment.
 
-## Prerequisites
-
-<prerequisites>
-- Epic exists: Target epic file exists in `/docs/epics/` with current implementation status
-- Change justification: Clear business reason for epic update (new PRD requirements, scope clarification, story feedback)
-- Impact assessment: Understanding of how changes affect in-progress or completed Stories
-- Stakeholder approval: Product Owner and relevant stakeholders have approved the update scope
-</prerequisites>
-
 ## Instructions
 
-### CRITICAL: MANDATORY USER CONSULTATION FIRST
-
-<user_consultation>
-Before making ANY changes to the Epic, you MUST:
-
-1. Ask the user what specific updates they want to make to the Epic
-2. Understand the trigger for the changes (new PRD requirements, scope clarification, story feedback, etc.)
-3. Clarify scope which sections need updating and why
-4. Get approval for the proposed changes before implementation
-5. Wait for explicit confirmation before proceeding with any edits
-</user_consultation>
-
-### ONLY AFTER USER CONFIRMATION
-
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Epic update dependencies and downstream impact
-2. Assess current status: Review epic status and dependent Stories before making changes
-3. Apply change control: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization
-4. Maintain format: Keep [epic.md](./.krci-ai/templates/epic.md) template structure and populate new variables
-5. Preserve traceability: Maintain existing PRD references while adding new BR/NFR connections
-6. Ensure agent-optimization: Maintain enhanced template compliance during all updates
+Confirm the target epic file exists in `/docs/epics/` with current implementation status, there is clear business reason for epic update (new PRD requirements, scope clarification, story feedback), you understand how changes affect in-progress or completed Stories, and Product Owner and relevant stakeholders have approved the update scope. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+CRITICAL: MANDATORY USER CONSULTATION FIRST - Before making ANY changes to the Epic, you MUST ask the user what specific updates they want to make, understand the trigger for changes (new PRD requirements, scope clarification, story feedback, etc.), clarify scope which sections need updating and why, get approval for the proposed changes before implementation, and wait for explicit confirmation before proceeding with any edits.
+
+ONLY AFTER USER CONFIRMATION: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Epic update dependencies and downstream impact. Review epic status and dependent Stories before making changes. Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) for update prioritization. Keep [epic.md](./.krci-ai/templates/epic.md) template structure and populate new variables. Maintain existing PRD references while adding new BR/NFR connections. Ensure enhanced template compliance during all updates.
+
+Before applying any update, verify no completed Stories become invalid, ensure new dependencies don't conflict with completed work, calculate realistic timeline changes for scope additions, and record business justification for every change.
 </instructions>
-
-### Update Validation Process
-
-<update_validation>
-Before applying any update:
-
-1. Check Story Status: Verify no completed Stories become invalid
-2. Validate Dependencies: Ensure new dependencies don't conflict with completed work
-3. Assess Timeline: Calculate realistic timeline changes for scope additions
-4. Document Rationale: Record business justification for every change
-</update_validation>
 
 ## Update Types & Restrictions
 

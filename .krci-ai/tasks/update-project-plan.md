@@ -12,43 +12,15 @@ dependencies:
 
 Update an existing project plan to reflect approved changes, new information, or evolving project conditions while maintaining plan integrity and stakeholder alignment. Project plan updates follow integrated change control processes and require comprehensive impact assessment across all subsidiary plans.
 
-## Prerequisites
-
-<prerequisites>
-- Existing project plan available for modification
-- Approved change requests or update requirements
-- Change impact assessment completed
-- Stakeholder approval for plan modifications
-- Updated baseline information available
-</prerequisites>
-
-## Reference Assets
-
-<reference_assets>
-Primary Dependencies:
-- Current project plan document
-- Project management methodology: [project-management-methodology.md](./.krci-ai/data/project-management-methodology.md)
-- Template: [project-plan-template.md](./.krci-ai/templates/project-plan-template.md)
-- Change request and impact assessment documentation
-</reference_assets>
-
 ## Instructions
 
-### 1. Integrated Change Analysis
+<instructions>
+Confirm existing project plan is available for modification, approved change requests or update requirements exist, change impact assessment is completed, stakeholder approval for plan modifications is obtained, and updated baseline information is available. Ensure dependencies declared in the YAML frontmatter ([project-management-methodology.md](./.krci-ai/data/project-management-methodology.md) and [project-plan-template.md](./.krci-ai/templates/project-plan-template.md)) are readable along with change request and impact assessment documentation before proceeding.
 
-Change Impact Assessment:
-- Analyze approved changes across all plan components
-- Identify affected subsidiary plans and their interdependencies
-- Assess impact on project baselines (scope, schedule, cost)
-- Evaluate effect on resource allocation and quality standards
+Analyze approved changes across all plan components. Identify affected subsidiary plans and their interdependencies. Assess impact on project baselines (scope, schedule, cost). Evaluate effect on resource allocation and quality standards. Review changes affecting multiple subsidiary plans. Assess cascading effects across project management areas. Identify required updates to governance and control procedures. Validate consistency across all plan components.
+</instructions>
 
-Cross-Plan Integration:
-- Review changes affecting multiple subsidiary plans
-- Assess cascading effects across project management areas
-- Identify required updates to governance and control procedures
-- Validate consistency across all plan components
-
-### 2. Plan Update Process
+## Plan Update Process
 
 Subsidiary Plan Modifications:
 - Update scope management plan for scope changes

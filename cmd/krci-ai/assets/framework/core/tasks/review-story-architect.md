@@ -12,23 +12,12 @@ dependencies:
 
 Review and validate user story from Architect perspective to ensure system design alignment, component boundaries, performance implications, and architectural standards compliance. Focus on system integration, scalability, security, and technical architecture consistency.
 
-## Prerequisites
-
-<prerequisites>
-- Story exists: Target story file exists in `/docs/stories/` requiring architectural review
-- Architecture context: Understanding of system architecture, design patterns, and technical standards
-- Design authority: Architect expertise to validate system design and integration approach
-- System knowledge: Familiarity with existing system components, interfaces, and constraints
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Validate system design alignment: Ensure implementation approach aligns with overall system architecture
-2. Review component boundaries: Verify proposed components have clear responsibilities and interfaces
-3. Assess integration patterns: Validate integration approach follows established architectural patterns
-4. Check performance implications: Evaluate performance, scalability, and resource considerations
-5. Verify compliance standards: Ensure approach meets security, compliance, and technical standards; confirm AC include appropriate guardrails and that Verification Method/Evidence are adequate where commands aren't feasible
+Confirm the target story file exists in `/docs/stories/` requiring architectural review, system architecture, design patterns, and technical standards are understood, you have architect expertise to validate system design and integration approach, and you are familiar with existing system components, interfaces, and constraints. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Validate system design alignment to ensure implementation approach aligns with overall system architecture. Review component boundaries to verify proposed components have clear responsibilities and interfaces. Assess integration patterns to validate integration approach follows established architectural patterns. Check performance implications by evaluating performance, scalability, and resource considerations. Verify compliance standards to ensure approach meets security, compliance, and technical standards, confirming AC include appropriate guardrails and that Verification Method/Evidence are adequate where commands aren't feasible.
 </instructions>
 
 ## Output Format

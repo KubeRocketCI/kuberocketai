@@ -14,22 +14,12 @@ dependencies:
 
 Execute test cases systematically to validate Story acceptance criteria and Epic functionality, ensuring comprehensive quality verification through structured testing procedures. This task translates test cases into actual testing execution with documented results, defect identification, and quality assessment that supports Story completion and release readiness decisions.
 
-## Prerequisites
-
-<prerequisites>
-- Test cases available: Approved test cases exist with detailed execution steps and validation criteria
-- Implementation ready: Story implementation completed with code deployed to testing environment
-- Test environment: Testing environment configured with required test data and dependencies
-- Testing tools: Access to testing tools, browsers, and validation resources
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing execution workflow and quality gates
-2. Apply testing methodologies: Use execution practices from [test-methodologies.md](./.krci-ai/data/test-methodologies.md)
-3. Format output: Use [test-report.md](./.krci-ai/templates/test-report.md) for test execution documentation
-4. Document results: Record all test results, defects, and quality observations for stakeholder review
+Confirm approved test cases are available with detailed execution steps and validation criteria. Verify Story implementation is completed with code deployed to testing environment, testing environment is configured with required test data and dependencies, and access to testing tools, browsers, and validation resources is available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for testing execution workflow and quality gates. Apply execution practices from [test-methodologies.md](./.krci-ai/data/test-methodologies.md). Use [test-report.md](./.krci-ai/templates/test-report.md) for test execution documentation and record all test results, defects, and quality observations for stakeholder review.
 </instructions>
 
 ## Output Format
@@ -94,7 +84,7 @@ Test Execution Results - Create comprehensive testing documentation:
 
 ## Content Guidelines
 
-### 🎯 Test Execution Focus Areas:
+### Test Execution Focus Areas
 
 <test_execution_focus>
 
@@ -113,7 +103,7 @@ Test Execution Results - Create comprehensive testing documentation:
 - Improvement Recommendations: Suggest areas for quality improvement or additional testing
 </test_execution_focus>
 
-### ✅ Quality Standards:
+### Quality Standards
 
 <quality_standards>
 - Systematic Execution: All test cases executed following documented procedures
@@ -124,7 +114,7 @@ Test Execution Results - Create comprehensive testing documentation:
 - Standards Compliant: Test execution follows testing standards and quality procedures
 </quality_standards>
 
-### ❌ Common Pitfalls to Avoid:
+### Common Pitfalls to Avoid
 
 <common_pitfalls>
 - Executing tests without proper environment verification and setup
@@ -135,7 +125,7 @@ Test Execution Results - Create comprehensive testing documentation:
 - Executing tests without understanding acceptance criteria and validation requirements
 </common_pitfalls>
 
-### 🎯 Story Completion Integration:
+### Story Completion Integration
 
 <story_integration>
 This test execution should enable Story completion decisions by providing:

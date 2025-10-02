@@ -13,24 +13,16 @@ dependencies:
 
 Create user-focused requirements with implementation tasks and acceptance criteria that break down Epic features into actionable development work. This story provides specific user value and clear implementation guidance for development teams.
 
-<prerequisites>
-- Epic exists: Target Epic is defined and available in `/docs/epics/`
-- Epic context understood: Epic problem, goal, and scope are clear
-- User persona identified: Target user from Epic is specified
-- Story scope defined: Specific functionality this Story will deliver
-</prerequisites>
-
 ## Instructions
 
 <instructions>
-1. Follow SDLC workflow: Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story dependencies and naming conventions
-2. Apply prioritization: Use methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md)
-3. Format output: Use [story.md](./.krci-ai/templates/story.md) template with proper naming
-4. Ensure Epic traceability: Reference parent Epic and map to specific Epic deliverables
-5. Create comprehensive content: Generate rich, detailed stories with extensive technical context and strategic reasoning
-6. Provide technical depth: Include detailed architectural background, implementation guidance, and quality considerations
-7. Integrate strategic context: Explain the purpose, significance, and system integration aspects for all story elements
-8. Template compliance: Follow story.md template structure and populate all variables correctly
+Confirm target Epic exists in `/docs/epics/` directory and understand Epic problem, goal, and scope. Identify target user persona specified in Epic and define specific functionality this Story will deliver. Ask user for exact Epic file path and Story scope if not clear before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for Story dependencies and naming conventions throughout creation process. Apply prioritization methods from [prioritization-frameworks.md](./.krci-ai/data/prioritization-frameworks.md) to validate Story importance and sequence. Use [story.md](./.krci-ai/templates/story.md) template with proper naming pattern `/docs/stories/{epic_number}.{story_number}.story.md`.
+
+Ensure Epic traceability by referencing parent Epic and mapping to specific Epic deliverables throughout Story content. Create comprehensive content with rich, detailed stories including extensive technical context and strategic reasoning. Provide technical depth with detailed architectural background, implementation guidance, and quality considerations for all Story elements.
+
+Integrate strategic context by explaining purpose, significance, and system integration aspects for all story components. Follow story.md template structure exactly and populate all template variables correctly with complete Story definition, acceptance criteria, and implementation tasks.
 </instructions>
 
 ## Output Format
