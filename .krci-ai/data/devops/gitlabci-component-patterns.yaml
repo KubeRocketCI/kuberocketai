@@ -1,0 +1,413 @@
+# GitLab CI/CD Component Development Patterns
+# Synthesized from official GitLab documentation and community best practices
+
+component_architecture:
+  structure:
+    templates_directory: "templates/"
+    description: "Component YAML files must be in templates/ directory at repository root"
+    file_naming: "Descriptive names matching job purpose (common.yml, build.yml, review.yml, test.yml)"
+
+  spec_inputs:
+    syntax: "spec:inputs:"
+    interpolation: "$[[ inputs.input_name ]]"
+    description: "Define customizable parameters with defaults and descriptions"
+    best_practices:
+      - "Use snake_case for input names (e.g., go_image, codebase_name)"
+      - "Always provide default values to ensure components work out of the box"
+      - "Add clear descriptions explaining input purpose and valid values"
+      - "Use type hints (string, boolean, number, array) for validation"
+
+  component_composition:
+    pattern: "Use local includes to compose components from shared templates"
+    example: |
+      # review.yml includes common.yml and extends its job templates
+      include:
+        - local: 'templates/common.yml'
+          inputs:
+            stage_build: $[[ inputs.stage_build ]]
+    benefits:
+      - "DRY principle - shared job definitions in common.yml"
+      - "Consistency across review and build workflows"
+      - "Easier maintenance and updates"
+
+workflow_patterns:
+  review_pipeline:
+    purpose: "Merge request validation (linting, testing, verification)"
+    typical_stages: ["prepare", "build", "test", "verify"]
+    jobs:
+      - "Code linting and formatting"
+      - "Unit and integration tests"
+      - "Code quality analysis (SonarQube)"
+      - "Dockerfile linting"
+      - "Docker build verification (no push)"
+      - "Helm chart validation"
+    rules: "Triggered on merge_request_event"
+
+  build_pipeline:
+    purpose: "Main branch build, package, and publish"
+    typical_stages: ["prepare", "build", "test", "package", "publish"]
+    jobs:
+      - "Build application"
+      - "Run tests with coverage"
+      - "Quality analysis"
+      - "Build and push Docker image"
+      - "Create and push Git tags"
+      - "Publish artifacts"
+    rules: "Triggered on main/master branch or protected branches"
+
+component_library_pattern:
+  description: "Organize related components as a cohesive library"
+  structure:
+    common: "Reusable job templates (.build-job, .test-job, .lint-job)"
+    review: "MR validation workflow extending common templates"
+    build: "Main branch workflow extending common templates"
+  orchestration:
+    file: ".gitlab-ci.yml"
+    pattern: |
+      workflow:
+        rules:
+          - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+          - if: $CI_COMMIT_REF_PROTECTED == "true"
+
+      include:
+        - component: $CI_SERVER_FQDN/$CI_PROJECT_PATH/review@$CI_COMMIT_SHA
+          inputs: { ... }
+          rules:
+            - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+        - component: $CI_SERVER_FQDN/$CI_PROJECT_PATH/build@$CI_COMMIT_SHA
+          inputs: { ... }
+          rules:
+            - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+job_template_patterns:
+  hidden_jobs:
+    prefix: "."
+    purpose: "Reusable templates extended by actual jobs"
+    example: |
+      .build-job:
+        stage: $[[ inputs.stage_build ]]
+        image: $[[ inputs.container_image ]]
+        extends: .cache-template
+        script:
+          - make build
+          - make test
+
+  dynamic_job_names:
+    pattern: "Use inputs in job names for version-specific jobs"
+    example: '"build-$[[ inputs.language_version ]]"'
+
+  job_extension:
+    keyword: "extends"
+    purpose: "Inherit configuration from hidden job templates"
+    example: |
+      build:
+        extends: .build-job
+        # Inherits all configuration from .build-job
+
+testing_requirements:
+  local_validation:
+    method: "Test components using $CI_COMMIT_SHA reference in .gitlab-ci.yml"
+    example: "component: $CI_SERVER_FQDN/$CI_PROJECT_PATH/build@$CI_COMMIT_SHA"
+
+  source_code:
+    requirement: "Include sample source code in repository for testing"
+    rationale: "Components need actual code to validate build/test operations"
+    examples:
+      - "Go: main.go, go.mod, Makefile"
+      - "Node.js: package.json, index.js, tests/"
+      - "Python: setup.py, requirements.txt, src/, tests/"
+
+documentation_requirements:
+  readme:
+    sections:
+      - title: "Overview - Component library purpose and features"
+      - title: "Templates - List of available components"
+      - title: "Inputs - Table documenting all input parameters with defaults"
+      - title: "Usage Examples - Code snippets showing component inclusion"
+      - title: "Features - Capabilities provided by components"
+      - title: "Required CI/CD Variables - Environment variables needed"
+    format: "Markdown with code blocks and tables"
+
+  inputs_documentation:
+    format: "Table with columns: Name, Description, Default"
+    requirement: "Document every input parameter"
+
+  usage_examples:
+    requirement: "Provide multiple examples showing different configurations"
+    types:
+      - "Basic usage with defaults"
+      - "Custom configuration with input overrides"
+      - "Multi-component integration"
+
+publication_workflow:
+  catalog_requirements:
+    - "Project must be set as CI/CD Catalog project"
+    - "README.md must exist in root directory"
+    - "At least one component in templates/ directory"
+    - "Project must have a description"
+    - "Use release keyword in CI/CD job"
+
+  versioning:
+    scheme: "Semantic versioning (MAJOR.MINOR.PATCH)"
+    examples: ["1.0.0", "1.1.0", "2.0.0"]
+    git_tags: "Required for versioning and catalog discoverability"
+
+  release_job:
+    example: |
+      create-release:
+        stage: release
+        image: registry.gitlab.com/gitlab-org/release-cli:latest
+        rules:
+          - if: $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/
+        script: echo "Creating release $CI_COMMIT_TAG"
+        release:
+          tag_name: $CI_COMMIT_TAG
+          description: "Release $CI_COMMIT_TAG"
+
+input_specification_patterns:
+  basic_input:
+    example: |
+      spec:
+        inputs:
+          stage:
+            default: 'build'
+            description: 'Pipeline stage name'
+
+  typed_inputs:
+    types: ["string", "number", "boolean", "array"]
+    example: |
+      enable_caching:
+        type: boolean
+        default: true
+        description: 'Enable build caching'
+
+  input_options:
+    purpose: "Restrict allowed values to predefined list"
+    example: |
+      environment:
+        type: string
+        options: ['development', 'staging', 'production']
+        default: 'development'
+
+caching_patterns:
+  go_cache:
+    example: |
+      .go-cache:
+        variables:
+          GOCACHE: "${CI_PROJECT_DIR}/.go/cache"
+          GOMODCACHE: "${CI_PROJECT_DIR}/.go/pkg/mod"
+        cache:
+          key:
+            files: [go.sum]
+          paths:
+            - ${CI_PROJECT_DIR}/.go/pkg/mod
+            - ${CI_PROJECT_DIR}/.go/cache
+
+  npm_cache:
+    example: |
+      .npm-cache:
+        cache:
+          key:
+            files: [package-lock.json]
+          paths: [node_modules/]
+
+artifact_patterns:
+  build_artifacts:
+    paths: "Specify output directories"
+    expiration: "Set appropriate expiration time"
+    example: |
+      artifacts:
+        paths: [dist/, build/]
+        expire_in: 1 week
+
+  coverage_reports:
+    format: "Use standard coverage report formats"
+    example: |
+      artifacts:
+        reports:
+          coverage_report:
+            coverage_format: cobertura
+            path: coverage.xml
+
+pipeline_optimization:
+  job_dependencies:
+    needs_keyword:
+      description: "Define explicit job dependencies instead of relying on stage order"
+      gitlab_syntax: |
+        job-name:
+          needs: [build, test]  # Runs after these jobs complete
+      benefits:
+        - "Enable parallel execution of independent jobs"
+        - "Reduce pipeline execution time by 30-50%"
+        - "Create Directed Acyclic Graph (DAG) for optimized execution"
+        - "Jobs start as soon as dependencies complete, not waiting for entire stage"
+      comparison_github_actions: |
+        GitHub Actions: jobs.job-name.needs: [build, test]
+        GitLab CI: job-name.needs: [build, test]
+        Both use same concept of explicit dependencies
+
+    parallel_execution:
+      pattern: "Jobs without dependencies run in parallel automatically"
+      example: |
+        lint:
+          stage: test
+          script: npm run lint
+
+        type-check:
+          stage: test
+          script: npm run type-check
+
+        # Both run in parallel (no needs specified)
+
+        sonar:
+          stage: test
+          needs: [build]  # Waits only for build, can run with lint/type-check
+
+    conditional_needs:
+      description: "Jobs run only if dependencies succeed (default) or always/on_failure"
+      example: |
+        deploy:
+          needs:
+            - job: build
+              artifacts: true
+            - job: test
+              optional: true  # Deploy even if test fails
+
+    artifacts_optimization:
+      pattern: "Specify which job artifacts are needed instead of all"
+      example: |
+        deploy:
+          needs:
+            - job: build
+              artifacts: true   # Download build artifacts
+            - job: test
+              artifacts: false  # Don't download test artifacts
+
+  dag_best_practices:
+    fan_out_pattern:
+      description: "One job triggers multiple parallel jobs"
+      example: |
+        build:
+          script: make build
+
+        test-unit:
+          needs: [build]
+          script: npm test
+
+        test-e2e:
+          needs: [build]
+          script: npm run e2e
+
+        lint:
+          needs: [build]
+          script: npm run lint
+
+    fan_in_pattern:
+      description: "Multiple jobs converge into one final job"
+      example: |
+        deploy:
+          needs: [test-unit, test-e2e, lint, security-scan]
+          script: deploy.sh
+
+    diamond_pattern:
+      description: "Combination of fan-out and fan-in for complex workflows"
+      example: |
+        prepare → [build-a, build-b] → [test-a, test-b] → deploy
+
+common_integrations:
+  sonarqube:
+    job_template: ".sonar-base"
+    inputs: ["project_key", "host_url", "token"]
+    branch_vs_mr: "Different parameters for branch vs merge request analysis"
+
+  docker_build:
+    buildkit: "Prefer buildkit for modern Docker builds"
+    caching: "Use registry caching for faster builds"
+
+  helm:
+    validation: "helm lint, helm template"
+    documentation: "helm-docs for README generation"
+
+security_best_practices:
+  component_maintainers:
+    authentication:
+      - "Enable two-factor authentication (2FA) for all component project maintainers and owners"
+      - "Enforce 2FA for all users in the group containing component projects"
+
+    protected_branches:
+      - "Use protected branches for component project releases"
+      - "Protect default branch and all release branches using wildcard rules"
+      - "Set 'Allowed to push and merge' to 'No one' for protected branches"
+      - "Require merge requests for all changes to protected branches"
+      - "Block force pushes to protected branches"
+      - "Enable merge request approvals for all user-facing changes"
+
+    code_integrity:
+      - "Sign all commits to the component project"
+      - "Carefully review all changes before merging into default or release branches"
+      - "Use merge request approvals for component catalog projects"
+
+    documentation:
+      - "Avoid including examples using @latest in README.md"
+      - "Encourage users to pin component versions to specific commits or tags"
+
+    dependencies:
+      - "Limit dependency on caches and artifacts from other jobs"
+      - "Check for and apply updates to component dependencies regularly"
+      - "Only use cache and artifacts from other jobs if absolutely necessary"
+
+  component_users:
+    code_review:
+      - "Audit and review component source code before use"
+      - "Carefully examine code to ensure it's free of malicious content"
+      - "Review CI/CD component changes before updating to new versions"
+
+    credential_management:
+      - "Audit component source code to verify credentials are used appropriately"
+      - "Use minimally scoped access tokens"
+      - "Avoid using long-lived access tokens or credentials"
+      - "Audit use of credentials and tokens used by CI/CD components"
+      - "Store secrets in CI/CD variables or external secret management, never in configuration files"
+
+    version_pinning:
+      - "Pin CI/CD components to specific commit SHA (preferred) or release version tag"
+      - "Only use release tags if you trust the component maintainer"
+      - "Avoid using 'latest' or partial semantic versions in production"
+      - "Pin versions to ensure integrity of component used in pipeline"
+
+    isolation:
+      - "Run component jobs in temporary, isolated environments when possible"
+      - "Be aware of security risks with self-managed runners"
+      - "Use ephemeral, isolated runner environments"
+
+    access_control:
+      - "Restrict CI/CD job token (CI_JOB_TOKEN) project access and permissions"
+      - "Limit access to component projects and their resources"
+
+    artifact_handling:
+      - "Do not pass cache or artifacts to CI/CD component jobs unless necessary"
+      - "Securely handle cache and artifacts between jobs"
+
+    container_security:
+      - "Audit custom container images used by CI/CD components"
+      - "Review images for malicious content before use"
+
+  project_limits:
+    components_per_project: 100
+    description: "Maximum number of components per project as of GitLab 18.5"
+    note: "If a component requires different versioning, move it to a dedicated project"
+
+sources:
+  - url: "https://docs.gitlab.com/ci/components/"
+    title: "GitLab CI/CD Components Official Documentation"
+  - url: "https://docs.gitlab.com/ci/components/examples.html"
+    title: "GitLab Component Examples"
+  - url: "https://about.gitlab.com/blog/2024/11/12/tutorial-how-to-set-up-your-first-gitlab-ci-cd-component/"
+    title: "Tutorial: Set Up First GitLab Component"
+  - url: "https://handbook.gitlab.com/handbook/customer-success/professional-services-engineering/education-services/ilt-labs/gitlabcicdhandsonlab4/"
+    title: "GitLab CI/CD Components Hands-On Lab"
+  - url: "https://docs.gitlab.com/ee/ci/inputs/"
+    title: "GitLab CI/CD Inputs Documentation"
+  - url: "https://docs.gitlab.com/ee/ci/yaml/"
+    title: "GitLab CI/CD YAML Syntax Reference"
