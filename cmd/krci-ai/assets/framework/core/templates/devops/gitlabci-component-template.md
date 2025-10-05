@@ -1,10 +1,10 @@
 # GitLab CI/CD Component Library Scaffold
 
 <instructions>
-This template scaffolds a complete GitLab CI/CD component library with common, review, and build workflows.
+This template scaffolds a complete GitLab CI/CD component library with standardized 7-stage flow and critical dependencies.
 Replace all {{variable_name}} placeholders with tech-stack-specific values.
-The library provides reusable job templates, separate MR/build pipelines, and standardized patterns.
-After generating, customize job scripts, caching strategies, and quality tools for your tech stack.
+The library enforces mandatory stage sequence [prepare, test, build, verify, package, publish, release] and critical dependency patterns while allowing technology-specific job implementations.
+After generating, customize job scripts, caching strategies, and quality tools for your tech stack within the standardized architecture.
 </instructions>
 
 ## templates/common.yml
@@ -15,12 +15,12 @@ spec:
     stage_prepare:
       default: 'prepare'
       description: 'Preparation stage name'
-    stage_build:
-      default: 'build'
-      description: 'Build stage name'
     stage_test:
       default: 'test'
       description: 'Test stage name'
+    stage_build:
+      default: 'build'
+      description: 'Build stage name'
     codebase_name:
       default: '{{project_name}}'
       description: 'Project name'
@@ -38,7 +38,7 @@ spec:
     CODEBASE_NAME: "$[[ inputs.codebase_name ]]"
     CHART_DIR: "$[[ inputs.chart_dir ]]"
 
-# Dependency caching template
+# Technology-specific dependency caching template
 .dependency-cache:
   variables:
     CACHE_DIR: "${CI_PROJECT_DIR}/.cache"
@@ -51,21 +51,35 @@ spec:
     paths:
       - ${CACHE_DIR}
 
-# Build job template
+# MANDATORY: Separated test job template (NO building)
+.test-job:
+  stage: $[[ inputs.stage_test ]]
+  image: $[[ inputs.container_image ]]
+  extends: .dependency-cache
+  script:
+    - {{test_command}}   # e.g., npm test, go test, pytest
+  artifacts:
+    paths:
+      - coverage/
+    reports:
+      coverage_report:
+        coverage_format: {{coverage_format}}  # e.g., cobertura, jacoco
+        path: {{coverage_file}}  # e.g., coverage.xml
+    expire_in: 1 week
+    when: always
+
+# MANDATORY: Separated build job template (NO testing)
 .build-job:
   stage: $[[ inputs.stage_build ]]
   image: $[[ inputs.container_image ]]
   extends: .dependency-cache
   script:
-    - {{build_command}}  # e.g., make build, npm run build, python setup.py build
-    - {{test_command}}   # e.g., make test, npm test, pytest
+    - {{build_command}}  # e.g., npm run build, make build, python setup.py build
   artifacts:
     paths:
       - {{build_output_dir}}  # e.g., dist/, build/, target/
-    reports:
-      coverage_report:
-        coverage_format: {{coverage_format}}  # e.g., cobertura, jacoco
-        path: {{coverage_file}}  # e.g., coverage.xml
+    expire_in: 1 week
+    when: always
 
 # Linting job template
 .lint-job:
@@ -75,14 +89,12 @@ spec:
     - {{lint_command}}    # e.g., golangci-lint run, npm run lint, flake8
     - {{format_command}}  # e.g., go fmt, prettier --check, black --check
 
-# Quality analysis base
-.quality-base:
-  stage: $[[ inputs.stage_test ]]
+# MANDATORY: SonarQube analysis base (runs in build stage after test)
+.sonar-base:
+  stage: $[[ inputs.stage_build ]]
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
-  dependencies:
-    - build
 ```
 
 ## templates/review.yml
@@ -117,27 +129,57 @@ include:
       container_image: $[[ inputs.container_image ]]
       chart_dir: $[[ inputs.chart_dir ]]
 
-# Pipeline stages
+# MANDATORY: Standardized 7-stage pipeline
 stages:
   - $[[ inputs.stage_prepare ]]
-  - $[[ inputs.stage_build ]]
   - $[[ inputs.stage_test ]]
+  - $[[ inputs.stage_build ]]
   - $[[ inputs.stage_verify ]]
 
-# Build and test
+# MANDATORY: Initialize values (produces dotenv artifacts)
+init-values:
+  stage: $[[ inputs.stage_prepare ]]
+  image: alpine:latest
+  script:
+    - echo "BRANCH_NAME=${CI_COMMIT_REF_NAME}" > branch.env
+    - echo "PROJECT_NAME=${CODEBASE_NAME}" >> branch.env
+  artifacts:
+    reports:
+      dotenv: branch.env
+
+# MANDATORY: Run tests with coverage (NO building)
+test:
+  extends: .test-job
+  needs: []
+  dependencies: []
+
+# MANDATORY: Build application (depends on test completion)
 build:
   extends: .build-job
+  needs: [test]
+  dependencies: []
 
-# Code linting
+# Technology-specific jobs (customize as needed)
 lint:
   extends: .lint-job
+  needs: []
 
-# Quality analysis for MRs
-quality-analysis:
-  extends: .quality-base
+# MANDATORY: SonarQube analysis (depends on init-values + test)
+sonar:
+  extends: .sonar-base
+  needs: [init-values, test]
+  dependencies: [init-values, test]
   script:
-    - sonar-scanner
-      -Dsonar.projectKey=${CODEBASE_NAME}
+    - >-
+      if [ -n "$SONAR_ORG" ]; then
+        SONAR_PROJECT_KEY="${SONAR_ORG}_${CODEBASE_NAME}";
+      else
+        SONAR_PROJECT_KEY="${CODEBASE_NAME}";
+      fi
+
+      sonar-scanner
+      -Dsonar.projectKey=${SONAR_PROJECT_KEY}
+      -Dsonar.projectName=${CODEBASE_NAME}
       -Dsonar.host.url=${SONAR_HOST_URL}
       -Dsonar.token=${SONAR_TOKEN}
       -Dsonar.pullrequest.key=${CI_MERGE_REQUEST_IID}
@@ -196,40 +238,67 @@ include:
 variables:
   IMAGE_REGISTRY: $[[ inputs.image_registry ]]
 
+# MANDATORY: Standardized 7-stage pipeline
 stages:
   - $[[ inputs.stage_prepare ]]
-  - $[[ inputs.stage_build ]]
   - $[[ inputs.stage_test ]]
+  - $[[ inputs.stage_build ]]
   - $[[ inputs.stage_package ]]
   - $[[ inputs.stage_publish ]]
 
+# MANDATORY: Initialize values (produces dotenv artifacts)
 init-values:
   stage: $[[ inputs.stage_prepare ]]
   image: alpine:latest
   script:
-    - echo "BUILD_VERSION=${CI_COMMIT_SHORT_SHA}" > build.env
+    - echo "BRANCH_NAME=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-${CI_COMMIT_REF_NAME}}" > build.env
+    - echo "PROJECT_NAME=${CODEBASE_NAME}" >> build.env
+    - echo "BUILD_VERSION=${CI_COMMIT_SHORT_SHA}" >> build.env
     - echo "VCS_TAG=${CI_COMMIT_TAG:-v0.1.0-${CI_COMMIT_SHORT_SHA}}" >> build.env
     - echo "IMAGE_TAG=${CI_COMMIT_TAG:-${CI_COMMIT_SHORT_SHA}}" >> build.env
   artifacts:
     reports:
       dotenv: build.env
 
+# MANDATORY: Run tests with coverage (NO building)
+test:
+  extends: .test-job
+  needs: []
+  dependencies: []
+
+# MANDATORY: Build application (depends on test completion)
 build:
   extends: .build-job
+  needs: [test]
+  dependencies: []
 
+# Technology-specific jobs (customize as needed)
 lint:
   extends: .lint-job
+  needs: []
 
-quality-analysis:
-  extends: .quality-base
+# MANDATORY: SonarQube analysis (depends on init-values + test)
+sonar:
+  extends: .sonar-base
+  needs: [init-values, test]
+  dependencies: [init-values, test]
   script:
-    - sonar-scanner
-      -Dsonar.projectKey=${CODEBASE_NAME}
+    - >-
+      if [ -n "$SONAR_ORG" ]; then
+        SONAR_PROJECT_KEY="${SONAR_ORG}_${CODEBASE_NAME}";
+      else
+        SONAR_PROJECT_KEY="${CODEBASE_NAME}";
+      fi
+
+      sonar-scanner
+      -Dsonar.projectKey=${SONAR_PROJECT_KEY}
+      -Dsonar.projectName=${CODEBASE_NAME}
       -Dsonar.host.url=${SONAR_HOST_URL}
       -Dsonar.token=${SONAR_TOKEN}
       -Dsonar.branch.name=${CI_COMMIT_REF_NAME}
 
-docker-build-push:
+# MANDATORY: Container building (depends on init-values + build artifacts)
+buildkit-build:
   stage: $[[ inputs.stage_package ]]
   image:
     name: moby/buildkit:rootless
@@ -241,10 +310,26 @@ docker-build-push:
       --local context=.
       --local dockerfile=.
       --output type=image,name=${IMAGE_REGISTRY}/${CODEBASE_NAME}:${IMAGE_TAG},push=true
-  dependencies:
-    - build
+  needs:
     - init-values
+    - build
+    - sonar
+  dependencies:
+    - init-values
+    - build
 
+# Technology-specific package publishing (customize as needed)
+{{package_publish_job}}:
+  stage: $[[ inputs.stage_package ]]
+  image: $[[ inputs.container_image ]]
+  script:
+    - {{package_publish_command}}  # e.g., npm publish, mvn deploy
+  needs:
+    - init-values
+    - build
+  dependencies: [init-values, build]
+
+# MANDATORY: Git tagging (depends on init-values artifacts)
 git-tag:
   stage: $[[ inputs.stage_publish ]]
   image: alpine/git:latest
@@ -254,10 +339,11 @@ git-tag:
     - git remote set-url origin "https://gitlab-ci:${GITLAB_ACCESS_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
     - git tag -a "${VCS_TAG}" -m "Automated release tag"
     - git push origin "${VCS_TAG}"
+  needs:
+    - buildkit-build
+    - init-values
   dependencies:
     - init-values
-  needs:
-    - docker-build-push
 ```
 
 ## .gitlab-ci.yml
@@ -296,7 +382,8 @@ include:
     rules:
       - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_REF_PROTECTED == "true"
 
-stages: [prepare, build, test, verify, package, publish, release]
+# MANDATORY: Standardized 7-stage flow
+stages: [prepare, test, build, verify, package, publish, release]
 
 create-release:
   stage: release

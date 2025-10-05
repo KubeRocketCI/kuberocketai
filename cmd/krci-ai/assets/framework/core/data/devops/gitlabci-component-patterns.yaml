@@ -1,5 +1,6 @@
 # GitLab CI/CD Component Development Patterns
-# Synthesized from official GitLab documentation and community best practices
+# Standardized patterns for consistent multi-technology component libraries
+# Synthesized from official GitLab documentation, community best practices, and architectural requirements
 
 component_architecture:
   structure:
@@ -30,29 +31,83 @@ component_architecture:
       - "Consistency across review and build workflows"
       - "Easier maintenance and updates"
 
+# STANDARDIZED STAGE FLOW - MANDATORY FOR ALL TECH STACKS
+standardized_stage_flow:
+  mandatory_stages: ["prepare", "test", "build", "verify", "package", "publish", "release"]
+  description: "All component libraries MUST follow this 7-stage architecture for consistent user experience"
+
+  stage_purposes:
+    prepare: "Initialize environment variables and metadata (init-values job)"
+    test: "Run all testing, linting, coverage generation"
+    build: "Build application artifacts, run SonarQube analysis"
+    verify: "Docker verification, Helm validation, security checks"
+    package: "Container building, artifact publishing"
+    publish: "Git tagging, release preparation"
+    release: "Release creation and catalog publication"
+
+# CRITICAL DEPENDENCY PATTERNS - MANDATORY IMPLEMENTATION
+critical_dependencies:
+  mandatory_jobs:
+    init_values:
+      stage: "prepare"
+      purpose: "Produces dotenv artifacts (BUILD_VERSION, VCS_TAG, etc.)"
+      dependencies: []
+      artifacts: "dotenv files with metadata"
+
+    test:
+      stage: "test"
+      purpose: "Produces coverage artifacts for SonarQube"
+      dependencies: []
+      artifacts: "coverage reports, test results"
+
+    build:
+      stage: "build"
+      purpose: "Produces application artifacts for packaging"
+      needs: ["test"]
+      dependencies: []
+      artifacts: "build outputs (dist/, target/, etc.)"
+
+    sonar:
+      stage: "build"
+      purpose: "Quality analysis using test coverage and metadata"
+      needs: ["init-values", "test"]
+      dependencies: ["init-values", "test"]
+      artifacts: "none"
+
+    buildkit_build:
+      stage: "package"
+      purpose: "Container building using build artifacts"
+      needs: ["init-values", "build", "sonar"]
+      dependencies: ["init-values", "build"]
+      artifacts: "none"
+
+    git_tag:
+      stage: "publish"
+      purpose: "Git tagging using metadata from init-values"
+      needs: ["buildkit-build", "init-values"]
+      dependencies: ["init-values"]
+      artifacts: "none"
+
+  artifact_flow_rules:
+    - "Jobs consuming dotenv variables MUST include init-values in dependencies"
+    - "Build jobs MUST depend on test completion for quality gates"
+    - "SonarQube MUST consume both init-values (metadata) and test (coverage) artifacts"
+    - "Packaging jobs MUST consume build artifacts, not test artifacts"
+    - "Git tagging MUST consume init-values for version metadata"
+
 workflow_patterns:
   review_pipeline:
-    purpose: "Merge request validation (linting, testing, verification)"
-    typical_stages: ["prepare", "build", "test", "verify"]
-    jobs:
-      - "Code linting and formatting"
-      - "Unit and integration tests"
-      - "Code quality analysis (SonarQube)"
-      - "Dockerfile linting"
-      - "Docker build verification (no push)"
-      - "Helm chart validation"
+    purpose: "Merge request validation with test→build→verify flow"
+    mandatory_stages: ["prepare", "test", "build", "verify"]
+    mandatory_jobs: ["init-values", "test", "build", "sonar", "dockerbuild-verify"]
+    technology_specific_jobs: "linting, type-checking, helm validation (as needed)"
     rules: "Triggered on merge_request_event"
 
   build_pipeline:
-    purpose: "Main branch build, package, and publish"
-    typical_stages: ["prepare", "build", "test", "package", "publish"]
-    jobs:
-      - "Build application"
-      - "Run tests with coverage"
-      - "Quality analysis"
-      - "Build and push Docker image"
-      - "Create and push Git tags"
-      - "Publish artifacts"
+    purpose: "Main branch with test→build→package→publish flow"
+    mandatory_stages: ["prepare", "test", "build", "verify", "package", "publish"]
+    mandatory_jobs: ["init-values", "test", "build", "sonar", "buildkit-build", "git-tag"]
+    technology_specific_jobs: "package publishing (npm-publish, maven-deploy, etc.)"
     rules: "Triggered on main/master branch or protected branches"
 
 component_library_pattern:
@@ -84,14 +139,30 @@ job_template_patterns:
   hidden_jobs:
     prefix: "."
     purpose: "Reusable templates extended by actual jobs"
-    example: |
-      .build-job:
-        stage: $[[ inputs.stage_build ]]
-        image: $[[ inputs.container_image ]]
-        extends: .cache-template
-        script:
-          - make build
-          - make test
+    mandatory_separation: "NEVER combine build and test in single job template"
+
+  separated_job_templates:
+    test_job:
+      purpose: "Run tests and generate coverage - NO building"
+      example: |
+        .test-job:
+          stage: $[[ inputs.stage_test ]]
+          image: $[[ inputs.container_image ]]
+          script:
+            - {{test_command}}
+          artifacts:
+            paths: [coverage/]
+
+    build_job:
+      purpose: "Build application artifacts - NO testing"
+      example: |
+        .build-job:
+          stage: $[[ inputs.stage_build ]]
+          image: $[[ inputs.container_image ]]
+          script:
+            - {{build_command}}
+          artifacts:
+            paths: [dist/]
 
   dynamic_job_names:
     pattern: "Use inputs in job names for version-specific jobs"
@@ -285,23 +356,29 @@ pipeline_optimization:
               artifacts: false  # Don't download test artifacts
 
   dag_best_practices:
-    fan_out_pattern:
-      description: "One job triggers multiple parallel jobs"
+    standardized_flow_pattern:
+      description: "Mandatory test→build→package dependency flow"
       example: |
+        # MANDATORY PATTERN - ALL TECH STACKS
+        test:
+          stage: test
+          needs: []
+          dependencies: []
+
         build:
-          script: make build
+          stage: build
+          needs: [test]
+          dependencies: []
 
-        test-unit:
-          needs: [build]
-          script: npm test
+        sonar:
+          stage: build
+          needs: [init-values, test]
+          dependencies: [init-values, test]
 
-        test-e2e:
-          needs: [build]
-          script: npm run e2e
-
-        lint:
-          needs: [build]
-          script: npm run lint
+        buildkit-build:
+          stage: package
+          needs: [init-values, build, sonar]
+          dependencies: [init-values, build]
 
     fan_in_pattern:
       description: "Multiple jobs converge into one final job"
@@ -318,7 +395,9 @@ pipeline_optimization:
 common_integrations:
   sonarqube:
     job_template: ".sonar-base"
-    inputs: ["project_key", "host_url", "token"]
+    stage: "build"  # MANDATORY: Always in build stage after test
+    dependencies: ["init-values", "test"]  # MANDATORY: Needs both metadata and coverage
+    configuration: "Use sonar-project.properties for static config, minimal inline parameters"
     branch_vs_mr: "Different parameters for branch vs merge request analysis"
 
   docker_build:

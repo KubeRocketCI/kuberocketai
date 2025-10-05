@@ -15,8 +15,29 @@ brew install krci-ai
 
 ### [Unreleased]
 
+<a name="v0.41.1"></a>
+
+### [v0.41.1] - 2025-10-04
+
+#### Bug Fixes
+
+* [7150604](https://github.com/KubeRocketCI/kuberocketai/commit/7150604671918351467b843ce159d8e3dba429e3) Create agent in the assets location
+
+<a name="v0.41.0"></a>
+
+### [v0.41.0] - 2025-10-04
+
+#### Features
+
+* [9d2fa72](https://github.com/KubeRocketCI/kuberocketai/commit/9d2fa724e6d8c2e43cba931a5c2fc263efd1eed5) Add DevOps agent with task to onboard gitlab CI/CD components
+
+<a name="v0.40.0"></a>
+
+### [v0.40.0] - 2025-10-02
+
 #### Chores
 
+* [a99f962](https://github.com/KubeRocketCI/kuberocketai/commit/a99f962593f9dbf84fa31a323c0f49ed33d818a1) Align changelog file format
 * [6388c2e](https://github.com/KubeRocketCI/kuberocketai/commit/6388c2ebcf530e96aad8d0d417a8f900f7d69122) Update changelog
 
 #### Code Refactoring
@@ -982,7 +1003,10 @@ Content Guidelines sections restructured
 * [4adcbf3](https://github.com/KubeRocketCI/kuberocketai/commit/4adcbf3c5fc91698f810e47cca29b55930d14710) initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.39.0...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.41.1...HEAD
+[v0.41.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.41.0...v0.41.1
+[v0.41.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.40.0...v0.41.0
+[v0.40.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.39.0...v0.40.0
 [v0.39.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.5...v0.39.0
 [v0.38.5]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.4...v0.38.5
 [v0.38.4]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.38.3...v0.38.4
