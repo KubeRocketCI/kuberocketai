@@ -11,37 +11,41 @@ dependencies:
 
 ## Description
 
-Scaffold production-ready GitLab CI/CD component library with review and build pipelines for any tech stack. Component libraries provide reusable job templates, separate review/build workflows, and standardized CI/CD patterns that accelerate pipeline development across projects.
+Scaffold production-ready GitLab CI/CD component library with standardized stage flow and critical dependencies for any tech stack. Component libraries provide reusable job templates, separate review/build workflows, and consistent architectural patterns while allowing technology-specific job implementations.
 
 <instructions>
 Gather tech stack requirements. Ask for programming language, framework, build tool, test framework, container image, and typical build/test commands. Identify code quality tools (linters, formatters, SonarQube). Determine deployment artifacts and Helm chart requirements if applicable.
 
-Create repository structure. Initialize Git repository with templates/ directory. Create common.yml for shared job templates, review.yml for merge request pipeline, build.yml for main branch pipeline. Add README.md, LICENSE.md, .gitlab-ci.yml, and .gitignore. Include sample source code for testing components.
+Create repository structure with standardized stage flow. Initialize Git repository with templates/ directory. Create common.yml for shared job templates with MANDATORY 7-stage structure: [prepare, test, build, verify, package, publish, release]. Create review.yml for merge request pipeline, build.yml for main branch pipeline. Add README.md, LICENSE.md, .gitlab-ci.yml, and .gitignore. Include sample source code for testing components.
 
-Define shared job templates in common.yml. Create hidden jobs (prefixed with .) for build, test, lint, and quality checks. Define spec:inputs for stage names, container image, and tech-stack-specific parameters. Implement caching patterns for dependencies. Use $[[ inputs.name ]] interpolation throughout.
+Define shared job templates in common.yml with critical dependencies. Create separated .test-job and .build-job templates (never combined). Create mandatory init-values job in prepare stage producing dotenv artifacts. Implement technology-specific caching patterns. Define spec:inputs for stage names, container image, and tech-stack-specific parameters. Use $[[ inputs.name ]] interpolation throughout.
 
-Implement review pipeline in review.yml. Include common.yml with local include pattern. Extend shared job templates for MR validation. Add jobs for code formatting, linting, unit tests, quality analysis, Dockerfile validation, and Docker build verification without publishing. Configure component inputs for customization.
+Implement review pipeline in review.yml following test→build→verify flow. Include common.yml with local include pattern. Add MANDATORY jobs: init-values (prepare), test (test stage), build (build stage, depends on test), sonar (build stage, depends on init-values + test). Add technology-specific jobs as needed within appropriate stages. Configure Docker build verification without publishing in verify stage.
 
-Implement build pipeline in build.yml. Include common.yml and extend shared templates. Add initialization job for version/metadata. Include packaging stage for Docker image build and push. Add Git tagging job for version management. Configure registry and credential variables as inputs.
+Implement build pipeline in build.yml following test→build→package→publish flow. Include common.yml and extend shared templates. Add MANDATORY dependency patterns: build depends on test completion, sonar depends on init-values + test artifacts, buildkit-build depends on init-values + build artifacts, git-tag depends on init-values artifacts. Add technology-specific packaging jobs as needed.
 
-Create orchestration in main .gitlab-ci.yml. Define workflow rules for merge requests and protected branches. Include review component conditionally for merge requests. Include build component conditionally for main branch. Pass global variables as component inputs. Define all pipeline stages.
+Create orchestration in main .gitlab-ci.yml with standardized stages. Define workflow rules for merge requests and protected branches. Include review component conditionally for merge requests. Include build component conditionally for main branch. Pass global variables as component inputs. Define MANDATORY stage sequence: [prepare, test, build, verify, package, publish, release].
 
-Document component library in README.md. Explain library purpose and available components. Create inputs table documenting all parameters with defaults. Provide usage examples for including components. List required CI/CD variables. Document features and integration patterns.
+Document component library in README.md. Explain library purpose, standardized stage flow, and available components. Create inputs table documenting all parameters with defaults. Provide usage examples for including components. List required CI/CD variables. Document mandatory vs technology-specific jobs and their stage placement.
 
-Test components locally. Run pipeline with components referencing $CI_COMMIT_SHA. Verify review workflow executes on merge requests. Verify build workflow executes on main branch. Validate all inputs work with various values. Confirm caching, artifacts, and dependencies function correctly.
+Test components locally with critical dependency validation. Run pipeline with components referencing $CI_COMMIT_SHA. Verify init-values produces dotenv artifacts, test produces coverage, build depends on test, sonar consumes both init-values and test artifacts. Validate all inputs work with various values. Confirm artifact flow and dependencies function correctly.
 
-Publish component library. Enable CI/CD Catalog project setting in repository. Create semantic version tag. Add release job using release-cli image. Test component consumption from catalog. Document versioning and upgrade guidance.
+Publish component library. Enable CI/CD Catalog project setting in repository. Create semantic version tag. Add release job using release-cli image. Test component consumption from catalog. Document versioning, stage flow requirements, and upgrade guidance.
 </instructions>
 
 ## Framework Context
 
-Component Library Pattern: GitLab CI/CD component libraries organize related components (common, review, build) into cohesive units. Common templates define reusable job patterns, while review and build components extend these for specific workflow contexts. GitLab supports up to 100 components per project.
+Standardized Stage Flow: ALL component libraries MUST follow the 7-stage architecture: [prepare, test, build, verify, package, publish, release]. This ensures consistent user experience across all technology stacks while allowing technology-specific job implementations within each stage.
+
+Critical Dependencies: MANDATORY dependency patterns ensure proper artifact flow: init-values produces dotenv artifacts, test produces coverage artifacts, build depends on test completion, sonar depends on init-values + test artifacts, packaging jobs depend on build artifacts. These patterns are technology-agnostic and must be implemented consistently.
+
+Component Library Pattern: GitLab CI/CD component libraries organize related components (common, review, build) into cohesive units. Common templates define reusable job patterns with separated .test-job and .build-job templates, while review and build components extend these for specific workflow contexts. GitLab supports up to 100 components per project.
 
 Spec Inputs: Components declare inputs in spec section with defaults and descriptions. Inputs use `$[[ inputs.name ]]` interpolation syntax. Always provide defaults for usability. Document every input in README with type, default value, and description.
 
 Component Composition: Use local includes to compose components. Review and build components typically include common.yml to extend shared job templates. This promotes DRY principles and consistency across workflows.
 
-Workflow Separation: Review pipelines validate merge requests with linting, testing, and verification without publishing. Build pipelines execute on main branch with packaging, artifact publishing, and tagging. Use workflow rules and component-level rules for conditional execution. GitLab supports multiple pipeline types (branch, tag, merge request) that can run simultaneously - workflow rules prevent duplicate pipeline execution.
+Workflow Separation: Review pipelines validate merge requests with test→build→verify flow without publishing. Build pipelines execute on main branch with test→build→package→publish flow. Use workflow rules and component-level rules for conditional execution. GitLab supports multiple pipeline types (branch, tag, merge request) that can run simultaneously - workflow rules prevent duplicate pipeline execution.
 
 Testing Requirements: Component repositories must include sample source code for testing. Components are tested locally using `$CI_COMMIT_SHA` reference before publication. Validate all inputs work correctly with various configurations.
 
@@ -63,29 +67,51 @@ Repository structure:
 └── {sample-code}/      # Tech-stack-specific source code for testing
 ```
 
-Common template pattern:
+Standardized stage and job template pattern:
 
 ```yaml
 spec:
   inputs:
+    stage_prepare:
+      default: 'prepare'
+    stage_test:
+      default: 'test'
     stage_build:
       default: 'build'
     container_image:
       default: 'alpine:latest'
 ---
+# MANDATORY: Separated test and build jobs
+.test-job:
+  stage: $[[ inputs.stage_test ]]
+  image: $[[ inputs.container_image ]]
+  script:
+    - {{test_command}}
+  artifacts:
+    paths: [coverage/]
+
 .build-job:
   stage: $[[ inputs.stage_build ]]
   image: $[[ inputs.container_image ]]
   script:
-    - make build
+    - {{build_command}}
+  artifacts:
+    paths: [dist/]
 ```
 
-Orchestration pattern:
+Standardized orchestration pattern:
 
 ```yaml
+# MANDATORY: 7-stage flow
+stages: [prepare, test, build, verify, package, publish, release]
+
 include:
   - component: $CI_SERVER_FQDN/$CI_PROJECT_PATH/review@$CI_COMMIT_SHA
-    inputs: { stage_build: build, container_image: 'node:18' }
+    inputs:
+      stage_prepare: prepare
+      stage_test: test
+      stage_build: build
+      container_image: 'node:18'
     rules:
       - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 ```
