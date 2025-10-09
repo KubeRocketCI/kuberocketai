@@ -77,3 +77,32 @@ jobs:
         with:
           name: krci-ai-binaries
           path: dist/
+
+  test-windows:
+    runs-on: windows-latest
+    needs: build-cross-platform
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: krci-ai-binaries
+          path: dist/
+
+      - name: Test Windows binary
+        run: |
+          .\dist\krci-ai-windows-amd64.exe --version
+          .\dist\krci-ai-windows-amd64.exe --help
+
+      - name: Install full framework with built binary
+        run: .\dist\krci-ai-windows-amd64.exe install --all --force
+
+      - name: Run commans for testing
+        run: |
+          .\dist\krci-ai-windows-amd64.exe install --ide cursor --force
+          .\dist\krci-ai-windows-amd64.exe install --ide claude --force
+          .\dist\krci-ai-windows-amd64.exe install --ide vscode --force
+          .\dist\krci-ai-windows-amd64.exe list agents
+          .\dist\krci-ai-windows-amd64.exe tokens --all
+          .\dist\krci-ai-windows-amd64.exe bundle --agent pm
+          .\dist\krci-ai-windows-amd64.exe validate

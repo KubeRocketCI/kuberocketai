@@ -53,11 +53,11 @@ type EmbeddedFileSystem struct {
 }
 
 func (efs EmbeddedFileSystem) WalkDir(root string, fn fs.WalkDirFunc) error {
-	return fs.WalkDir(efs.fs, root, fn)
+	return fs.WalkDir(efs.fs, filepath.ToSlash(root), fn)
 }
 
 func (efs EmbeddedFileSystem) ReadFile(name string) ([]byte, error) {
-	return fs.ReadFile(efs.fs, name)
+	return fs.ReadFile(efs.fs, filepath.ToSlash(name))
 }
 
 // Agent represents basic information about an agent
@@ -179,7 +179,7 @@ func (d *Discovery) GetAgents(ctx context.Context) ([]Agent, error) {
 				return nil
 			}
 			select {
-			case paths <- agentPath:
+			case paths <- filepath.Clean(agentPath):
 			case <-ctx.Done():
 				return ctx.Err()
 			}

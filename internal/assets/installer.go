@@ -19,7 +19,6 @@ import (
 	"context"
 	"embed"
 	"fmt"
-	"io/fs"
 	"maps"
 	"os"
 	"path/filepath"
@@ -64,7 +63,7 @@ type IstallerDiscovery interface {
 type Installer struct {
 	projectDir     string
 	krciPath       string
-	embeddedAssets embed.FS
+	embeddedAssets EmbeddedFileSystem
 	discovery      IstallerDiscovery
 }
 
@@ -73,7 +72,7 @@ func NewInstaller(projectDir string, embeddedAssets embed.FS, discovery Istaller
 	return &Installer{
 		projectDir:     projectDir,
 		krciPath:       GetKrciPath(projectDir),
-		embeddedAssets: embeddedAssets,
+		embeddedAssets: EmbeddedFileSystem{fs: embeddedAssets},
 		discovery:      discovery,
 	}
 }
@@ -85,7 +84,7 @@ func (i *Installer) Install() error {
 		return fmt.Errorf("failed to get agents: %w", err)
 	}
 
-	prefix := EmbeddedPrefix + string(filepath.Separator)
+	prefix := filepath.Clean(EmbeddedPrefix + "/")
 	filesFilter := make(map[string]struct{})
 	for _, agent := range agents {
 		i.addAgentDependencies(agent, filesFilter, prefix)
@@ -109,7 +108,7 @@ func (i *Installer) InstallSelective(agentNames []string) error {
 		return err
 	}
 
-	prefix := EmbeddedPrefix + string(filepath.Separator)
+	prefix := filepath.Clean(EmbeddedPrefix + "/")
 	filesFilter := make(map[string]struct{})
 	for _, agent := range agents {
 		i.addAgentDependencies(agent, filesFilter, prefix)
@@ -188,7 +187,7 @@ func (i *Installer) copyEmbeddedFiles(ctx context.Context, filepaths map[string]
 				}
 
 				embeddedPath := filepath.Join(EmbeddedPrefix, path)
-				data, err := fs.ReadFile(i.embeddedAssets, embeddedPath)
+				data, err := i.embeddedAssets.ReadFile(embeddedPath)
 				if err != nil {
 					return fmt.Errorf("failed to read embedded file %s (target: %s): %w", embeddedPath, targetPath, err)
 				}
