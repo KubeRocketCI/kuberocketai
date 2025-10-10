@@ -204,7 +204,7 @@ func runBundle(cmd *cobra.Command, args []string) error {
 	}
 
 	// Create discovery service
-	discovery := assets.NewEmbeddedDiscovery(GetEmbeddedAssets(), assets.EmbeddedPrefix)
+	discovery := assets.NewDiscovery(assets.GetKrciPath(projectRoot))
 
 	// Parse and validate agent selection
 	selectedAgents, err := parseAndValidateAgents(cmd, discovery, output)
