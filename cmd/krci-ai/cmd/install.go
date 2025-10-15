@@ -74,7 +74,11 @@ Examples:
 
   # Force operations
   krci-ai install --ide cursor --force         # Add IDE integration to existing install
-  krci-ai install --all --force                # Force reinstall everything`,
+  krci-ai install --all --force                # Force reinstall everything
+
+  # Sync IDE files from installed agents (instead of embedded assets)
+  krci-ai install --sync-ide                   # Sync all existing IDE integrations from installed agents
+  krci-ai install --agent dev --sync-ide       # Install dev agent + sync IDE files`,
 	Run: func(cmd *cobra.Command, args []string) {
 		errorHandler := cli.NewErrorHandler()
 
@@ -111,23 +115,31 @@ Examples:
 
 		// Check aliases flag if main flag is empty
 		if agentFlag == "" {
-			if agentsFlag, err := cmd.Flags().GetString("agents"); err == nil && agentsFlag != "" {
+			agentsFlag, flagErr := cmd.Flags().GetString("agents")
+			if flagErr == nil && agentsFlag != "" {
 				agentFlag = agentsFlag
 			}
 		}
 
+		// Check sync-ide flag
+		syncIDEFlag, err := cmd.Flags().GetBool("sync-ide")
+		if err != nil {
+			errorHandler.HandleError(err, "Failed to read sync-ide flag")
+			return
+		}
+
 		if agentFlag != "" {
-			runSelectiveInstallation(cmd, agentFlag, ideFlag, output, errorHandler)
+			runSelectiveInstallation(cmd, agentFlag, ideFlag, syncIDEFlag, output, errorHandler)
 			return
 		}
 
 		// Standard full installation
-		runFullInstallation(cmd, ideFlag, output, errorHandler)
+		runFullInstallation(cmd, ideFlag, syncIDEFlag, output, errorHandler)
 	},
 }
 
 // runSelectiveInstallation handles installation of specific agents only
-func runSelectiveInstallation(_ *cobra.Command, agentFlag string, ideFlag string, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
+func runSelectiveInstallation(_ *cobra.Command, agentFlag string, ideFlag string, syncIDEFlag bool, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
 	// Parse agent list using existing bundle logic
 	agentNames := ParseAgentList(agentFlag)
 	if len(agentNames) == 0 {
@@ -161,11 +173,17 @@ func runSelectiveInstallation(_ *cobra.Command, agentFlag string, ideFlag string
 		handleIDEIntegration(installer, ideFlag, output, errorHandler)
 	}
 
+	// Handle sync-ide flag at the end
+	if syncIDEFlag {
+		output.PrintInfo("Syncing IDE integration files from installed agents...")
+		handleIDESync(installer, output, errorHandler)
+	}
+
 	output.PrintSuccess(fmt.Sprintf("Selected agents installed successfully: %v", agentNames))
 }
 
 // runFullInstallation handles standard full framework installation
-func runFullInstallation(cmd *cobra.Command, ideFlag string, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
+func runFullInstallation(cmd *cobra.Command, ideFlag string, syncIDEFlag bool, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
 	output.PrintProgress("Installing KubeRocketAI framework components...")
 
 	// Get force flag (other flags already processed upfront)
@@ -193,9 +211,27 @@ func runFullInstallation(cmd *cobra.Command, ideFlag string, output *cli.OutputH
 		assets.NewEmbeddedDiscovery(GetEmbeddedAssets(), assets.EmbeddedPrefix),
 	)
 
-	// Check installation status and force flag
-	if !handleInstallationCheck(installer, forceFlag, output) {
+	// Check installation status
+	isAlreadyInstalled := installer.IsInstalled()
+
+	// Special case: If already installed and only syncing IDE files (no reinstall needed)
+	if isAlreadyInstalled && syncIDEFlag && !forceFlag {
+		output.PrintInfo("Framework already installed. Syncing IDE integration files from installed agents...")
+		handleIDESync(installer, output, errorHandler)
+		output.PrintSuccess("IDE integration files synced successfully!")
 		return
+	}
+
+	// Check if installation should proceed
+	if isAlreadyInstalled && !forceFlag {
+		output.PrintWarning("Framework already installed in current directory")
+		output.PrintInfo("If you want to proceed with installation, use the --force flag:")
+		output.PrintInfo("  krci-ai install --force")
+		return
+	}
+
+	if isAlreadyInstalled && forceFlag {
+		output.PrintWarning("Framework already installed - proceeding with forced installation")
 	}
 
 	// Perform core installation
@@ -203,27 +239,17 @@ func runFullInstallation(cmd *cobra.Command, ideFlag string, output *cli.OutputH
 		return
 	}
 
-	// Handle IDE integration using existing function
-	handleIDEIntegration(installer, ideFlag, output, errorHandler)
+	// Handle IDE integration
+	// If sync-ide is set, use installed agents; otherwise use embedded assets
+	if syncIDEFlag {
+		output.PrintInfo("Setting up IDE integration from installed agents...")
+		handleIDESync(installer, output, errorHandler)
+	} else if ideFlag != "" {
+		handleIDEIntegration(installer, ideFlag, output, errorHandler)
+	}
 
 	// Show success and next steps
 	showInstallationSuccess(installer, ideFlag, output)
-}
-
-// handleInstallationCheck checks if installation should proceed
-func handleInstallationCheck(installer *assets.Installer, forceFlag bool, output *cli.OutputHandler) bool {
-	if installer.IsInstalled() && !forceFlag {
-		output.PrintWarning("Framework already installed in current directory")
-		output.PrintInfo("If you want to proceed with installation, use the --force flag:")
-		output.PrintInfo("  krci-ai install --force")
-		return false
-	}
-
-	if installer.IsInstalled() && forceFlag {
-		output.PrintWarning("Framework already installed - proceeding with forced installation")
-	}
-
-	return true
 }
 
 // performCoreInstallation handles the core framework installation
@@ -284,6 +310,9 @@ func init() {
 	// Add selective installation flags (following bundle command patterns)
 	installCmd.Flags().String("agent", "", "Install specific agents (comma or space separated: 'pm,architect' or 'pm architect')")
 	installCmd.Flags().String("agents", "", "Alias for --agent flag")
+
+	// Add sync-ide flag
+	installCmd.Flags().Bool("sync-ide", false, "Sync IDE integration files from installed agents")
 }
 
 // validateIDEFlag validates the IDE flag value and returns error if invalid
@@ -333,5 +362,45 @@ func handleIDEIntegration(installer *assets.Installer, ideFlag string, output *c
 			return
 		}
 		output.PrintSuccess("Windsurf IDE integration installed successfully!")
+	}
+}
+
+// handleIDESync syncs IDE integration files from installed agents
+func handleIDESync(installer *assets.Installer, output *cli.OutputHandler, errorHandler *cli.ErrorHandler) {
+	// Check which IDE directories exist and sync them
+	if installer.HasCursorIntegration() {
+		output.PrintInfo("Syncing Cursor IDE integration...")
+		if err := installer.SyncCursorIntegration(); err != nil {
+			errorHandler.HandleError(err, "Failed to sync Cursor IDE integration")
+			return
+		}
+		output.PrintSuccess("Cursor IDE integration synced successfully!")
+	}
+
+	if installer.HasClaudeIntegration() {
+		output.PrintInfo("Syncing Claude Code integration...")
+		if err := installer.SyncClaudeIntegration(); err != nil {
+			errorHandler.HandleError(err, "Failed to sync Claude Code integration")
+			return
+		}
+		output.PrintSuccess("Claude Code integration synced successfully!")
+	}
+
+	if installer.HasVSCodeIntegration() {
+		output.PrintInfo("Syncing VS Code integration...")
+		if err := installer.SyncVSCodeIntegration(); err != nil {
+			errorHandler.HandleError(err, "Failed to sync VS Code integration")
+			return
+		}
+		output.PrintSuccess("VS Code integration synced successfully!")
+	}
+
+	if installer.HasWindsurfIntegration() {
+		output.PrintInfo("Syncing Windsurf IDE integration...")
+		if err := installer.SyncWindsurfIntegration(); err != nil {
+			errorHandler.HandleError(err, "Failed to sync Windsurf IDE integration")
+			return
+		}
+		output.PrintSuccess("Windsurf IDE integration synced successfully!")
 	}
 }

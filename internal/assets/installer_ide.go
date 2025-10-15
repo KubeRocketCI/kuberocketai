@@ -253,3 +253,75 @@ func (i *Installer) GetTemplatesPath() string {
 func (i *Installer) GetDataPath() string {
 	return GetDataPath(i.krciPath)
 }
+
+// HasCursorIntegration checks if Cursor IDE integration directory exists
+func (i *Installer) HasCursorIntegration() bool {
+	cursorPath := i.GetCursorRulesPath()
+	info, err := os.Stat(cursorPath)
+	return err == nil && info.IsDir()
+}
+
+// HasClaudeIntegration checks if Claude Code integration directory exists
+func (i *Installer) HasClaudeIntegration() bool {
+	claudePath := i.GetClaudeCommandsPath()
+	info, err := os.Stat(claudePath)
+	return err == nil && info.IsDir()
+}
+
+// HasVSCodeIntegration checks if VS Code integration directory exists
+func (i *Installer) HasVSCodeIntegration() bool {
+	vscodePath := i.GetVSCodeChatmodesPath()
+	info, err := os.Stat(vscodePath)
+	return err == nil && info.IsDir()
+}
+
+// HasWindsurfIntegration checks if Windsurf IDE integration directory exists
+func (i *Installer) HasWindsurfIntegration() bool {
+	windsurfPath := i.GetWindsurfRulesPath()
+	info, err := os.Stat(windsurfPath)
+	return err == nil && info.IsDir()
+}
+
+// SyncCursorIntegration syncs Cursor IDE integration from installed agents
+func (i *Installer) SyncCursorIntegration() error {
+	integration := &CursorIntegration{projectDir: i.projectDir}
+	return i.syncIDEIntegration(integration, "Cursor IDE")
+}
+
+// SyncClaudeIntegration syncs Claude Code integration from installed agents
+func (i *Installer) SyncClaudeIntegration() error {
+	integration := &ClaudeIntegration{projectDir: i.projectDir}
+	return i.syncIDEIntegration(integration, "Claude Code")
+}
+
+// SyncVSCodeIntegration syncs VS Code integration from installed agents
+func (i *Installer) SyncVSCodeIntegration() error {
+	integration := &VSCodeIntegration{targetDir: i.projectDir}
+	return i.syncIDEIntegration(integration, "VS Code")
+}
+
+// SyncWindsurfIntegration syncs Windsurf IDE integration from installed agents
+func (i *Installer) SyncWindsurfIntegration() error {
+	integration := &WindsurfIntegration{targetDir: i.projectDir}
+	return i.syncIDEIntegration(integration, "Windsurf IDE")
+}
+
+// syncIDEIntegration is a generic method for syncing IDE integrations from installed agents
+func (i *Installer) syncIDEIntegration(integration IDEIntegration, ideName string) error {
+	// Get list of agent files from installed location (not embedded)
+	agentsPath := i.GetAgentsPath()
+	agentFiles, err := filepath.Glob(filepath.Join(agentsPath, "*.yaml"))
+	if err != nil {
+		return fmt.Errorf("failed to find agent files: %w", err)
+	}
+
+	// Generate IDE-specific files for each agent
+	for _, agentFile := range agentFiles {
+		if err := i.generateIDEFile(agentFile, integration); err != nil {
+			agentName := strings.TrimSuffix(filepath.Base(agentFile), ".yaml")
+			return fmt.Errorf("failed to generate %s file for %s: %w", ideName, agentName, err)
+		}
+	}
+
+	return nil
+}
