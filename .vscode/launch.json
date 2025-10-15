@@ -49,6 +49,17 @@
             }
         },
         {
+            "name": "install sync ide",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/krci-ai/main.go",
+            "args": ["install", "--sync-ide"],
+            "env": {
+                "KRCI_AI_PROJECT_DIR": "${workspaceFolder}"
+            }
+        },
+        {
             "name": "install krci-ai go-dev",
             "type": "go",
             "request": "launch",
