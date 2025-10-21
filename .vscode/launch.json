@@ -115,6 +115,17 @@
             }
         },
         {
+            "name": "unbundle go-dev",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/krci-ai/main.go",
+            "args": ["unbundle", "${workspaceFolder}/.krci-ai/bundle/go-dev.md"],
+            "env": {
+                "KRCI_AI_PROJECT_DIR": "${workspaceFolder}"
+            }
+        },
+        {
             "name": "bundle pm",
             "type": "go",
             "request": "launch",

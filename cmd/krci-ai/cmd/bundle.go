@@ -472,6 +472,18 @@ func generateBundleMarkdown(content *BundleContent, discovery *assets.Discovery)
 	return result.String()
 }
 
+// makeRelativePath converts an absolute path to a relative path starting from .krci-ai
+func makeRelativePath(path string) string {
+	// Find the index of .krci-ai in the path
+	krciIndex := strings.Index(path, assets.KrciAIDir)
+	if krciIndex != -1 {
+		// Return path starting from .krci-ai
+		return path[krciIndex:]
+	}
+	// If .krci-ai not found, return the original path (shouldn't happen in normal usage)
+	return path
+}
+
 // addBundleHeader adds the comprehensive bundle header with usage instructions
 func addBundleHeader(result *strings.Builder) {
 	timestamp := time.Now().Format(time.RFC3339)
@@ -504,8 +516,9 @@ func addBundleHeader(result *strings.Builder) {
 
 // addAgentSection adds an agent section with its related tasks grouped together
 func addAgentSection(result *strings.Builder, agent assets.Agent, content *BundleContent, discovery *assets.Discovery) {
-	// Add agent file
-	fmt.Fprintf(result, "==== FILE: %s ====\n", agent.FilePath)
+	// Add agent file with relative path
+	relativePath := makeRelativePath(agent.FilePath)
+	fmt.Fprintf(result, "%s%s ====\n", bundle.FileStartDelimiter, relativePath)
 
 	// Read agent file content
 	agentContent, err := discovery.ReadFile(agent.FilePath)
@@ -514,16 +527,17 @@ func addAgentSection(result *strings.Builder, agent assets.Agent, content *Bundl
 	} else {
 		result.WriteString(string(agentContent))
 	}
-	result.WriteString("\n==== END FILE ====\n\n")
+	fmt.Fprintf(result, "\n%s\n\n", bundle.FileEndDelimiter)
 
 	// Add agent-specific tasks immediately after the agent definition
 	// This improves LLM context by keeping related content together
 	agentTasks := agent.GetAllTasksPaths()
 	for _, taskPath := range agentTasks {
 		if taskContent, exists := content.Tasks[taskPath]; exists {
-			fmt.Fprintf(result, "==== FILE: %s ====\n", taskPath)
+			relativeTaskPath := makeRelativePath(taskPath)
+			fmt.Fprintf(result, "%s%s ====\n", bundle.FileStartDelimiter, relativeTaskPath)
 			result.WriteString(taskContent)
-			result.WriteString("\n==== END FILE ====\n\n")
+			fmt.Fprintf(result, "\n%s\n\n", bundle.FileEndDelimiter)
 		}
 	}
 }
@@ -534,9 +548,10 @@ func addSharedTemplates(result *strings.Builder, content *BundleContent) {
 		result.WriteString("# Shared Templates\n\n")
 
 		for templatePath, templateContent := range content.Templates {
-			fmt.Fprintf(result, "==== FILE: %s ====\n", templatePath)
+			relativeTemplatePath := makeRelativePath(templatePath)
+			fmt.Fprintf(result, "%s%s ====\n", bundle.FileStartDelimiter, relativeTemplatePath)
 			result.WriteString(templateContent)
-			result.WriteString("\n==== END FILE ====\n\n")
+			fmt.Fprintf(result, "\n%s\n\n", bundle.FileEndDelimiter)
 		}
 	}
 }
@@ -547,9 +562,10 @@ func addSharedDataFiles(result *strings.Builder, content *BundleContent) {
 		result.WriteString("# Reference Data\n\n")
 
 		for dataPath, dataContent := range content.DataFiles {
-			fmt.Fprintf(result, "==== FILE: %s ====\n", dataPath)
+			relativeDataPath := makeRelativePath(dataPath)
+			fmt.Fprintf(result, "%s%s ====\n", bundle.FileStartDelimiter, relativeDataPath)
 			result.WriteString(dataContent)
-			result.WriteString("\n==== END FILE ====\n\n")
+			fmt.Fprintf(result, "\n%s\n\n", bundle.FileEndDelimiter)
 		}
 	}
 }
