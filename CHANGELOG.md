@@ -15,6 +15,42 @@ brew install krci-ai
 
 ### [Unreleased]
 
+#### Features
+
+* [44a4da3](https://github.com/KubeRocketCI/kuberocketai/commit/44a4da3e9ed260584f7bcaf2166eb3c111277bed) Add unbundle command to extract files from bundle ([#127](https://github.com/KubeRocketCI/kuberocketai/issues/127))
+
+<a name="v0.44.0"></a>
+
+### [v0.44.0] - 2025-10-17
+
+#### Features
+
+* [44f8dda](https://github.com/KubeRocketCI/kuberocketai/commit/44f8dda68e9455dcddbc2f514027a9bbb37b91c6) Add sync-ide functionality for IDE integration
+
+<a name="v0.43.0"></a>
+
+### [v0.43.0] - 2025-10-10
+
+#### Features
+
+* [5e93b74](https://github.com/KubeRocketCI/kuberocketai/commit/5e93b7428837c85ccad4a835a5a580be89c1ee84) Use installed agents for bundle generation
+
+<a name="v0.42.0"></a>
+
+### [v0.42.0] - 2025-10-09
+
+#### Bug Fixes
+
+* [a691b4a](https://github.com/KubeRocketCI/kuberocketai/commit/a691b4a56fd2f4bda98973b0ecfd4cd1d2980183) Commands fail on Windows due to incorrect paths
+
+<a name="v0.41.2"></a>
+
+### [v0.41.2] - 2025-10-05
+
+#### Chores
+
+* [6c4b7a1](https://github.com/KubeRocketCI/kuberocketai/commit/6c4b7a129da5534e6998cc58f66751a70adf8a9a) Update devops agent task that manages GitLab CI/CD Component
+
 <a name="v0.41.1"></a>
 
 ### [v0.41.1] - 2025-10-04
@@ -1003,7 +1039,11 @@ Content Guidelines sections restructured
 * [4adcbf3](https://github.com/KubeRocketCI/kuberocketai/commit/4adcbf3c5fc91698f810e47cca29b55930d14710) initial project setup with CLI foundation and CI/CD
 
 
-[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.41.1...HEAD
+[Unreleased]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.44.0...HEAD
+[v0.44.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.43.0...v0.44.0
+[v0.43.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.42.0...v0.43.0
+[v0.42.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.41.2...v0.42.0
+[v0.41.2]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.41.1...v0.41.2
 [v0.41.1]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.41.0...v0.41.1
 [v0.41.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.40.0...v0.41.0
 [v0.40.0]: https://github.com/KubeRocketCI/kuberocketai/compare/v0.39.0...v0.40.0
