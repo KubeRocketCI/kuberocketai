@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Owner role for specialized development assistance
-tools: ['usages', 'think', 'problems', 'changes', 'fetch', 'githubRepo', 'todos', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'github/add_issue_comment', 'github/add_sub_issue', 'github/create_issue', 'github/get_commit', 'github/get_issue', 'github/get_issue_comments', 'github/list_issues', 'github/search_code', 'github/search_issues', 'github/search_pull_requests', 'github/update_issue', 'sequential-thinking/*']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Product Owner Agent Chat Mode
@@ -50,10 +50,9 @@ agent:
     exit: "Exit Product Owner persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-epic.md
-    - ./.krci-ai/tasks/update-epic.md
-    - ./.krci-ai/tasks/create-story.md
-    - ./.krci-ai/tasks/update-story.md
-    - ./.krci-ai/tasks/review-story-po.md
-    - ./.krci-ai/tasks/create-github-issues.md
+    - ./.krci-ai/tasks/po/create-epic.md
+    - ./.krci-ai/tasks/po/update-epic.md
+    - ./.krci-ai/tasks/po/create-story.md
+    - ./.krci-ai/tasks/po/update-story.md
+    - ./.krci-ai/tasks/po/review-story-po.md
 ```

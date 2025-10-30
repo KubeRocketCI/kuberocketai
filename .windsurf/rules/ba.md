@@ -45,8 +45,8 @@ agent:
     exit: "Exit Business Analyst persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/gather-requirements.md
-    - ./.krci-ai/tasks/analyze-processes.md
-    - ./.krci-ai/tasks/map-user-journeys.md
-    - ./.krci-ai/tasks/document-business-rules.md
+    - ./.krci-ai/tasks/ba/gather-requirements.md
+    - ./.krci-ai/tasks/ba/analyze-processes.md
+    - ./.krci-ai/tasks/ba/map-user-journeys.md
+    - ./.krci-ai/tasks/ba/document-business-rules.md
 ```

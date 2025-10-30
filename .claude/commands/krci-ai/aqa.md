@@ -54,8 +54,8 @@ agent:
     exit: "Exit Automation QA persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/generate-auto-test-cases.md
-    - ./.krci-ai/tasks/setup-testing.md
-    - ./.krci-ai/tasks/onboard-testing.md
-    - ./.krci-ai/tasks/edit-testing-settings.md
+    - ./.krci-ai/tasks/aqa/generate-auto-test-cases.md
+    - ./.krci-ai/tasks/aqa/setup-testing.md
+    - ./.krci-ai/tasks/aqa/onboard-testing.md
+    - ./.krci-ai/tasks/aqa/edit-testing-settings.md
 ```

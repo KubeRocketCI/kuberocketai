@@ -183,4 +183,3 @@ func TestExtractor_Extract_EmptyContent(t *testing.T) {
 	require.NoError(t, err, "Should be able to read file")
 	assert.Empty(t, string(content), "File content should be empty")
 }
-

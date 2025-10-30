@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Project Manager role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Project Manager Agent Chat Mode
@@ -56,14 +56,14 @@ agent:
     exit: "Exit Project Manager persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-project-charter.md
-    - ./.krci-ai/tasks/update-project-charter.md
-    - ./.krci-ai/tasks/create-sow.md
-    - ./.krci-ai/tasks/update-sow.md
-    - ./.krci-ai/tasks/create-project-plan.md
-    - ./.krci-ai/tasks/update-project-plan.md
-    - ./.krci-ai/tasks/create-risk-register.md
-    - ./.krci-ai/tasks/update-risk-register.md
-    - ./.krci-ai/tasks/create-status-report.md
-    - ./.krci-ai/tasks/update-status-report.md
+    - ./.krci-ai/tasks/prm/create-project-charter.md
+    - ./.krci-ai/tasks/prm/update-project-charter.md
+    - ./.krci-ai/tasks/prm/create-sow.md
+    - ./.krci-ai/tasks/prm/update-sow.md
+    - ./.krci-ai/tasks/prm/create-project-plan.md
+    - ./.krci-ai/tasks/prm/update-project-plan.md
+    - ./.krci-ai/tasks/prm/create-risk-register.md
+    - ./.krci-ai/tasks/prm/update-risk-register.md
+    - ./.krci-ai/tasks/prm/create-status-report.md
+    - ./.krci-ai/tasks/prm/update-status-report.md
 ```

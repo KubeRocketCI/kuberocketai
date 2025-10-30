@@ -1,0 +1,89 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - shared/business-frameworks.md
+  templates:
+    - pm/project-brief-template.md
+---
+
+# Task: Create Project Brief
+
+## Description
+
+Create a comprehensive project brief defining the foundation for product development by answering why, who, what success looks like, and what constraints shape the solution. This document serves as the root artifact in the SDLC framework that defines the essential foundation for all downstream artifacts, answers fundamental questions before solution development begins, and provides strategic context for PRD creation.
+
+## Instructions
+
+<instructions>
+Confirm the exact output path `/docs/prd/project-brief.md` you will create or update and ensure dependencies declared in the YAML frontmatter are accessible. Do not proceed if required inputs are missing.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) to align with artifact flow. Apply relevant methods from [business-frameworks.md](./.krci-ai/data/shared/business-frameworks.md). Use [project-brief-template.md](./.krci-ai/templates/pm/project-brief-template.md) and populate all variables precisely.
+</instructions>
+
+## Output Format
+
+- Location: `/docs/prd/project-brief.md` (EXACT path and filename)
+- Length: 2-3 pages maximum for executive consumption
+- Downstream Enable: Enables PRD creation at `/docs/prd/prd.md`
+
+## Success Criteria
+
+<success_criteria>
+- File saved to `/docs/prd/project-brief.md`
+- Length is 2-3 pages maximum
+- Problem is specific and evidence-based
+- Users are clearly defined with usage patterns
+- Success metrics are specific and testable
+- Constraints reflect actual limitations
+- Risks identified with impact levels (HIGH/MEDIUM/LOW)
+</success_criteria>
+
+## Execution Checklist
+
+### Discovery Phase
+
+<discovery_phase>
+- Stakeholder interviews: Understand business context and strategic priorities
+- Problem validation: Gather evidence that this problem is real and significant
+- User research: Identify who has this problem and how it impacts them
+- Opportunity sizing: Quantify business value and market opportunity
+</discovery_phase>
+
+### Analysis Phase
+
+<analysis_phase>
+- Problem definition: Write specific problem statement with evidence
+- User segmentation: Define target users with demographics and usage patterns
+- Success planning: Define measurable outcomes with realistic timelines
+- Constraint assessment: Identify realistic limitations and assumptions
+</analysis_phase>
+
+### Documentation Phase
+
+<documentation_phase>
+- Brief creation: Use [project-brief-template.md](./.krci-ai/templates/pm/project-brief-template.md) structure
+- Content validation: Ensure all required sections are completed
+- Length verification: Confirm document is 2-3 pages maximum
+- File placement: Save to exact location `/docs/prd/project-brief.md`
+</documentation_phase>
+
+## Content Guidelines
+
+### Quality Principles for LLM Self-Evaluation
+
+- Problem Focus: Use concrete user scenarios and quantified evidence, not solution-oriented statements
+- User Specificity: Define target users specifically enough to guide solution design decisions
+- Measurable Success: Create specific, testable outcomes with realistic timelines and evidence
+- Evidence-Based: Support all statements with data, research, and quantified metrics
+
+### LLM Error Prevention Checklist
+
+- Avoid: Solution-oriented problem statements (focus on user pain, not missing features)
+- Avoid: Vague user descriptions without usage patterns and demographics
+- Avoid: Unmeasurable success metrics or aspirational statements without evidence
+- Reference: Use [project-brief-template.md](./.krci-ai/templates/pm/project-brief-template.md) for all formatting guidance and examples
+
+### SDLC Integration Context
+
+This Project Brief enables immediate PRD creation by providing clear problem definition for PRD Problem/Opportunity section, target user clarity for PRD user research and requirements, success metrics for PRD Goals/Measurable Outcomes, and constraints for PRD MVP scope and technical requirements.

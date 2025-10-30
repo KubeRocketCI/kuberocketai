@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Software Architect role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Software Architect Agent Chat Mode
@@ -48,8 +48,8 @@ agent:
     exit: "Exit Architect persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-sad.md
-    - ./.krci-ai/tasks/update-sad.md
-    - ./.krci-ai/tasks/review-sad.md
-    - ./.krci-ai/tasks/review-story-architect.md
+    - ./.krci-ai/tasks/architect/create-sad.md
+    - ./.krci-ai/tasks/architect/update-sad.md
+    - ./.krci-ai/tasks/architect/review-sad.md
+    - ./.krci-ai/tasks/architect/review-story-architect.md
 ```

@@ -41,7 +41,7 @@ agent:
     exit: "Exit Developer persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/review-story-dev.md
-    - ./.krci-ai/tasks/plan-story-implementation.md
-    - ./.krci-ai/tasks/implement-feature.md
+    - ./.krci-ai/tasks/dev/review-story-dev.md
+    - ./.krci-ai/tasks/dev/plan-story-implementation.md
+    - ./.krci-ai/tasks/dev/implement-feature.md
 ```

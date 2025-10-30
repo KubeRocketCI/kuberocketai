@@ -1,6 +1,6 @@
 ---
 description: Activate Go Developer role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Go Developer Agent Chat Mode
@@ -45,6 +45,6 @@ agent:
     exit: "Exit Go Developer persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/go-dev-implement-new-cr.md
-    - ./.krci-ai/tasks/go-dev-review-code.md
+    - ./.krci-ai/tasks/go-dev/go-dev-implement-new-cr.md
+    - ./.krci-ai/tasks/go-dev/go-dev-review-code.md
 ```

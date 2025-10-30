@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Manager role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Product Manager Agent Chat Mode
@@ -70,26 +70,17 @@ agent:
     exit: "Exit Product Manager persona and return to normal mode"
 
   tasks:
-    # Project Brief Creation Tasks
-    - ./.krci-ai/tasks/create-project-brief.md
-    - ./.krci-ai/tasks/create-project-brief-advanced.md
-    - ./.krci-ai/tasks/update-project-brief.md
-    - ./.krci-ai/tasks/enhance-project-brief.md
-
-    # Context Gathering (Enhanced Flow)
-    - ./.krci-ai/tasks/gather-project-context.md
-
-    # Validation Tasks
-    - ./.krci-ai/tasks/validate-problem-statement.md
-    - ./.krci-ai/tasks/validate-target-users.md
-    - ./.krci-ai/tasks/validate-success-metrics.md
-    - ./.krci-ai/tasks/validate-business-value.md
-
-    # Brief Enhancement Tasks
-    - ./.krci-ai/tasks/refine-project-brief.md
-    - ./.krci-ai/tasks/finalize-project-brief.md
-
-    # PRD Tasks
-    - ./.krci-ai/tasks/create-prd.md
-    - ./.krci-ai/tasks/update-prd.md
+    - ./.krci-ai/tasks/pm/create-project-brief.md
+    - ./.krci-ai/tasks/pm/create-project-brief-advanced.md
+    - ./.krci-ai/tasks/pm/update-project-brief.md
+    - ./.krci-ai/tasks/pm/enhance-project-brief.md
+    - ./.krci-ai/tasks/pm/gather-project-context.md
+    - ./.krci-ai/tasks/pm/validate-problem-statement.md
+    - ./.krci-ai/tasks/pm/validate-target-users.md
+    - ./.krci-ai/tasks/pm/validate-success-metrics.md
+    - ./.krci-ai/tasks/pm/validate-business-value.md
+    - ./.krci-ai/tasks/pm/refine-project-brief.md
+    - ./.krci-ai/tasks/pm/finalize-project-brief.md
+    - ./.krci-ai/tasks/pm/create-prd.md
+    - ./.krci-ai/tasks/pm/update-prd.md
 ```

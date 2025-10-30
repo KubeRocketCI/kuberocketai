@@ -45,8 +45,8 @@ agent:
     exit: "Exit Architect persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-sad.md
-    - ./.krci-ai/tasks/update-sad.md
-    - ./.krci-ai/tasks/review-sad.md
-    - ./.krci-ai/tasks/review-story-architect.md
+    - ./.krci-ai/tasks/architect/create-sad.md
+    - ./.krci-ai/tasks/architect/update-sad.md
+    - ./.krci-ai/tasks/architect/review-sad.md
+    - ./.krci-ai/tasks/architect/review-story-architect.md
 ```

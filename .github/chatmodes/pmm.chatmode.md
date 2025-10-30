@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Product Marketing Manager role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Product Marketing Manager Agent Chat Mode
@@ -51,10 +51,10 @@ agent:
     exit: "Exit Product Marketing Manager persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-marketing-brief.md
-    - ./.krci-ai/tasks/create-pitch-deck.md
-    - ./.krci-ai/tasks/create-launch-materials.md
-    - ./.krci-ai/tasks/create-sales-enablement.md
-    - ./.krci-ai/tasks/create-visual-identity.md
-    - ./.krci-ai/tasks/create-demo-script.md
+    - ./.krci-ai/tasks/pmm/create-marketing-brief.md
+    - ./.krci-ai/tasks/pmm/create-pitch-deck.md
+    - ./.krci-ai/tasks/pmm/create-launch-materials.md
+    - ./.krci-ai/tasks/pmm/create-sales-enablement.md
+    - ./.krci-ai/tasks/pmm/create-visual-identity.md
+    - ./.krci-ai/tasks/pmm/create-demo-script.md
 ```

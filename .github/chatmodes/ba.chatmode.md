@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Business Analyst role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Business Analyst Agent Chat Mode
@@ -48,8 +48,8 @@ agent:
     exit: "Exit Business Analyst persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/gather-requirements.md
-    - ./.krci-ai/tasks/analyze-processes.md
-    - ./.krci-ai/tasks/map-user-journeys.md
-    - ./.krci-ai/tasks/document-business-rules.md
+    - ./.krci-ai/tasks/ba/gather-requirements.md
+    - ./.krci-ai/tasks/ba/analyze-processes.md
+    - ./.krci-ai/tasks/ba/map-user-journeys.md
+    - ./.krci-ai/tasks/ba/document-business-rules.md
 ```

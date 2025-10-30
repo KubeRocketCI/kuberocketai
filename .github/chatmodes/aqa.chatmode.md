@@ -1,6 +1,6 @@
 ---
 description: Activate Senior Automation QA Engineer role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior Automation QA Engineer Agent Chat Mode
@@ -59,8 +59,8 @@ agent:
     exit: "Exit Automation QA persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/generate-auto-test-cases.md
-    - ./.krci-ai/tasks/setup-testing.md
-    - ./.krci-ai/tasks/onboard-testing.md
-    - ./.krci-ai/tasks/edit-testing-settings.md
+    - ./.krci-ai/tasks/aqa/generate-auto-test-cases.md
+    - ./.krci-ai/tasks/aqa/setup-testing.md
+    - ./.krci-ai/tasks/aqa/onboard-testing.md
+    - ./.krci-ai/tasks/aqa/edit-testing-settings.md
 ```

@@ -45,7 +45,7 @@ const (
 	mdExtension = ".md"
 
 	// GitHub tools configuration
-	GitHubToolsList = "['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']"
+	GitHubToolsList = "['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']"
 
 	DefaultAgentIcon = "🤖"
 
@@ -249,16 +249,6 @@ func (i *Installer) ValidateInstallation() error {
 	}
 	if len(agentFiles) == 0 {
 		return fmt.Errorf("no agent files found in %s", agentsPath)
-	}
-
-	// Check that tasks directory has files
-	tasksPath := i.GetTasksPath()
-	taskFiles, err := filepath.Glob(filepath.Join(tasksPath, "*.md"))
-	if err != nil {
-		return fmt.Errorf("failed to check task files: %w", err)
-	}
-	if len(taskFiles) == 0 {
-		return fmt.Errorf("no task files found in %s", tasksPath)
 	}
 
 	return nil
