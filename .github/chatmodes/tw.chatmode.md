@@ -1,6 +1,6 @@
 ---
 description: Activate Technical Writer role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Technical Writer Agent Chat Mode
@@ -46,6 +46,6 @@ agent:
     exit: "Exit Technical Writer persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/doc-review.md
-    - ./.krci-ai/tasks/ppt-review.md
+    - ./.krci-ai/tasks/tw/doc-review.md
+    - ./.krci-ai/tasks/tw/ppt-review.md
 ```

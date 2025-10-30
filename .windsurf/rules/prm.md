@@ -53,14 +53,14 @@ agent:
     exit: "Exit Project Manager persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-project-charter.md
-    - ./.krci-ai/tasks/update-project-charter.md
-    - ./.krci-ai/tasks/create-sow.md
-    - ./.krci-ai/tasks/update-sow.md
-    - ./.krci-ai/tasks/create-project-plan.md
-    - ./.krci-ai/tasks/update-project-plan.md
-    - ./.krci-ai/tasks/create-risk-register.md
-    - ./.krci-ai/tasks/update-risk-register.md
-    - ./.krci-ai/tasks/create-status-report.md
-    - ./.krci-ai/tasks/update-status-report.md
+    - ./.krci-ai/tasks/prm/create-project-charter.md
+    - ./.krci-ai/tasks/prm/update-project-charter.md
+    - ./.krci-ai/tasks/prm/create-sow.md
+    - ./.krci-ai/tasks/prm/update-sow.md
+    - ./.krci-ai/tasks/prm/create-project-plan.md
+    - ./.krci-ai/tasks/prm/update-project-plan.md
+    - ./.krci-ai/tasks/prm/create-risk-register.md
+    - ./.krci-ai/tasks/prm/update-risk-register.md
+    - ./.krci-ai/tasks/prm/create-status-report.md
+    - ./.krci-ai/tasks/prm/update-status-report.md
 ```

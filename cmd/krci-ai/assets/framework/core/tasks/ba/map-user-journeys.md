@@ -1,0 +1,138 @@
+---
+dependencies:
+  data:
+    - krci-ai/core-sdlc-framework.md
+    - ba/analysis-methodologies.md
+  templates:
+    - ba/user-journey.md
+---
+
+# Task: Map User Journeys
+
+## Description
+
+Create comprehensive user journey maps that visualize user experiences and identify touchpoints, supporting PRD requirements and Epic feature definition with user-centric insights. This task translates user behaviors, emotions, and pain points into actionable requirements that inform business requirements (BR) and system design decisions, enabling user-focused Epic development and Story creation.
+
+## Instructions
+
+<instructions>
+Confirm the PRD at `/docs/prd/prd.md` is accessible with user and business context, customer segments or user types are identified from requirements gathering, current user workflows and touchpoints are mapped, and user feedback, analytics data, and customer insights are available. Ensure dependencies declared in the YAML frontmatter are readable before proceeding.
+
+Reference [sdlc-framework.md](./.krci-ai/data/krci-ai/core-sdlc-framework.md) for user journey mapping workflow. Apply analysis methodologies from [analysis-methodologies.md](./.krci-ai/data/analysis-methodologies.md). Use [user-journey.md](./.krci-ai/templates/user-journey.md) for structured journey documentation and ensure journey maps inform Epic features and Story acceptance criteria.
+</instructions>
+
+## Output Format
+
+<output_format>
+User Journey Documentation - Create comprehensive user experience insights:
+
+- Journey maps: Complete user journey documentation using [user-journey.md](./.krci-ai/templates/user-journey.md) template
+- Touchpoint analysis: Detailed evaluation of user interactions and experience quality
+- Pain point identification: Prioritized list of user friction areas and improvement opportunities
+- Epic guidance: Journey insights structured to inform Epic features and Story requirements
+</output_format>
+
+## Success Criteria
+
+<success_criteria>
+- Journey mapped comprehensively: End-to-end user experiences documented with all touchpoints identified
+- Pain points prioritized: User friction areas identified with business impact assessment
+- Emotional journey captured: User emotions, motivations, and satisfaction levels documented
+- Improvement opportunities defined: Actionable recommendations for experience optimization
+- Epic enablement provided: Journey insights structured to support Epic feature development
+- PRD enhanced: User journey findings integrated into PRD requirements and acceptance criteria
+</success_criteria>
+
+## Execution Checklist
+
+### Journey Preparation Phase
+
+<journey_preparation>
+- Journey scope definition: Identify specific user journeys to map with clear start and end points
+- Persona alignment: Confirm user personas and segments for journey mapping focus
+- Data collection: Gather existing user research, analytics, feedback, and support insights
+- Stakeholder engagement: Schedule sessions with customer-facing teams and user representatives
+</journey_preparation>
+
+### Journey Research Phase
+
+<journey_research>
+- User interviews: Conduct sessions with actual users to understand experiences and pain points
+- Behavioral analysis: Review usage analytics and customer interaction data
+- Touchpoint identification: Map all user interaction points across digital and physical channels
+- Experience documentation: Capture user actions, emotions, and satisfaction at each journey stage
+</journey_research>
+
+### Journey Analysis Phase
+
+<journey_analysis>
+- Experience rating: Evaluate touchpoint quality and user satisfaction scores
+- Pain point prioritization: Identify and rank user friction areas by frequency and impact
+- Emotional mapping: Document user emotional journey and critical decision moments
+- Opportunity identification: Define improvement opportunities with business impact assessment
+</journey_analysis>
+
+### Epic Integration Phase
+
+<epic_integration>
+- Requirements mapping: Connect journey insights to specific PRD BR/NFR requirements
+- Feature guidance: Structure journey findings to inform Epic features and capabilities
+- Story preparation: Provide user journey context that supports Story creation and acceptance criteria
+- PRD enhancement: Integrate journey insights into PRD to strengthen user-focused requirements
+</epic_integration>
+
+## Content Guidelines
+
+### User Journey Structure
+
+<user_journey_structure>
+
+#### Journey Documentation Components
+
+- User Persona: Primary user type and context for the journey
+- Journey Goal: What the user wants to accomplish
+- Journey Phases: Key stages from awareness through completion
+- Touchpoints: All interaction points (digital, physical, human)
+- User Emotions: Feelings and satisfaction levels throughout journey
+- Pain Points: Friction areas and barriers to success
+
+#### Experience Analysis
+
+- Satisfaction Scores: Quantitative ratings for each touchpoint
+- Effort Assessment: How difficult each step is for users
+- Moments of Truth: Critical decision points that impact user success
+- Improvement Opportunities: Prioritized recommendations for experience enhancement
+</user_journey_structure>
+
+### Quality Standards
+
+<quality_standards>
+- User Validated: Journey maps based on actual user research and behavioral data
+- Comprehensive Coverage: All touchpoints and interaction channels included
+- Emotionally Aware: User feelings and motivations captured throughout journey
+- Actionable Insights: Clear improvement opportunities with business justification
+- Epic Enabled: Journey findings structured to support Epic feature development
+- PRD Aligned: Journey insights enhance user-focused requirements in PRD
+</quality_standards>
+
+### Common Pitfalls to Avoid
+
+<common_pitfalls>
+- Mapping assumptions instead of real user behavior and feedback
+- Focusing only on digital touchpoints while ignoring offline interactions
+- Missing emotional aspects and user motivation throughout the journey
+- Creating overly complex journey maps without clear actionable insights
+- Failing to validate journey maps with actual user research and data
+- Poor connection between journey insights and Epic/Story requirements
+</common_pitfalls>
+
+### Epic Development Enablement
+
+<epic_enablement>
+This user journey mapping should enable immediate Epic creation by providing:
+
+- User experience requirements that translate into Epic features and capabilities
+- Pain point solutions that become Epic acceptance criteria and success metrics
+- Touchpoint improvements that inform Epic user interface and interaction design
+- User satisfaction targets that guide Epic prioritization and implementation approach
+</epic_enablement>

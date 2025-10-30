@@ -1,6 +1,6 @@
 ---
 description: Activate Senior QA Engineer role for specialized development assistance
-tools: ['changes', 'codebase', 'editFiles', 'fetch', 'findTestFiles', 'githubRepo', 'problems', 'runCommands', 'search', 'searchResults', 'terminalLastCommand', 'usages']
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'usages', 'problems', 'changes', 'fetch', 'githubRepo', 'todos']
 ---
 
 # Senior QA Engineer Agent Chat Mode
@@ -49,8 +49,8 @@ agent:
     exit: "Exit QA persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/create-test-plan.md
-    - ./.krci-ai/tasks/generate-test-cases.md
-    - ./.krci-ai/tasks/execute-testing.md
-    - ./.krci-ai/tasks/report-defects.md
+    - ./.krci-ai/tasks/qa/create-test-plan.md
+    - ./.krci-ai/tasks/qa/generate-test-cases.md
+    - ./.krci-ai/tasks/qa/execute-testing.md
+    - ./.krci-ai/tasks/qa/report-defects.md
 ```

@@ -47,6 +47,6 @@ agent:
     exit: "Exit Technical Writer persona and return to normal mode"
 
   tasks:
-    - ./.krci-ai/tasks/doc-review.md
-    - ./.krci-ai/tasks/ppt-review.md
+    - ./.krci-ai/tasks/tw/doc-review.md
+    - ./.krci-ai/tasks/tw/ppt-review.md
 ```
