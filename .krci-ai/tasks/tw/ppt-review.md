@@ -1,22 +1,54 @@
 ---
 dependencies:
   data:
-  mcp_servers:
-    - office-powerpoint
+    - krci-ai/core-sdlc-framework.md
 ---
 
 # Task: PowerPoint Review
 
 ## Description
 
-Provide guidance/review/improve for a PowerPoint presentation requested by the user.
+This task provides text review and basic slide creation capabilities for PowerPoint presentations. 
+
+**Purpose**: Review and improve the text content of PowerPoint slides, and create elementary slide samples without design elements.
+
+**Capabilities**:
+- Review and improve text content in PowerPoint presentations
+- Create basic slide samples with text content only (no design elements, media attachments, or advanced formatting)
+- Ensure text follows Microsoft Writing Style Guide guidelines
+
+**Limitations**:
+- Cannot design slides with visual elements or layouts
+- Cannot attach or manipulate media (images, videos, audio)
+- Cannot apply advanced formatting or styling
+- Cannot create complex slide designs or templates
+
+This task focuses solely on text review and basic text-based slide creation to manage user expectations appropriately.
+
+## Prerequisites
+
+<prerequisites>
+- Presentation exists: presentation for review is presented as a file path or attached to the chat
+- Page is allowed to read: the file has read permissions for everyone
+</prerequisites>
 
 ## Instructions
 
 <instructions>
-Confirm the presentation for review is presented as a file path or attached to the chat, and the file has read permissions. Ensure dependencies declared in the YAML frontmatter (Office-PowerPoint-MCP-Server MCP server) are available before proceeding. If not installed, notify the user about the dependency requirement and install if accepted (GitHub reference: `https://github.com/GongRzhe/Office-PowerPoint-MCP-Server`).
-
-Read the presentation user provided by file path or attachment. Ask user for it if nothing is specified. Create a Python virtual environment named `venv` if not already taken and notify user. Fulfill the user's request by creating scripts in the `presentation-processing` folder in the root. Create a copy of the presentation in `presentation-processing` named `presentation-name-edited.pptx`. Clean up the virtual environment after completion and notify the user that the edited version is located in the `presentation-name-edited.pptx` file.
+1. Check and install dependencies: 
+   - Check if the "Office-PowerPoint-MCP-Server" MCP server is installed
+   - If it is not installed, notify the user that you need to install the dependency (Office-PowerPoint-MCP-Server)
+   - If user accepts, install it following these steps:
+     a. Navigate to the GitHub repository: `https://github.com/GongRzhe/Office-PowerPoint-MCP-Server`
+     b. Follow the installation instructions provided in the repository's README
+     c. Ensure the MCP server is properly configured in your MCP settings
+     d. Verify the installation by checking that the MCP server appears in your available MCP servers list
+   - GitHub reference: `https://github.com/GongRzhe/Office-PowerPoint-MCP-Server`
+2. Read presentation: Read the presentation user provided you with by specifying a file path or attaching it to the chat. If nothing is specified, ask him for it
+3. Create venv: Create a Python virtual environment. Call it `venv` if this name is not already taken. Notify user about creating a virtual environment
+4. Perform commands: Fulfill the user's request. Notify the user that to you need to create a number of scripts in the `presentation-processing` folder in the root folder of the project. If user provided you with a PowerPoint presentation, create create a copy of this presentation in the `presentation-processing`, name the copy as `presentation-name-edited.pptx`
+5. Clean up environment: Clean up the virtual environment
+6. Notify about completion: Tell the user that all the edited version is located in the `presentation-name-edited.pptx` file of the `presentation-processing` folder in the root of the project
 </instructions>
 
 ## Output Format
